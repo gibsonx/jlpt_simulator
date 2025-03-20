@@ -1,0 +1,8 @@
+.idea/*
+.idea
+model/
+env/
+chroma_db/*
+tokenizer
+.env
+data/*
