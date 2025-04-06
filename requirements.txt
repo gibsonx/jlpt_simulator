@@ -6,3 +6,4 @@ langchain_openai
 pandas
 pygraphviz
 langchain-aws
+langchain-tavily
