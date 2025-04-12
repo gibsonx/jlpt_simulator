@@ -4,6 +4,4 @@ tavily-python
 langchain_community
 langchain_openai
 pandas
-pygraphviz
 langchain-aws
-langchain-tavily
