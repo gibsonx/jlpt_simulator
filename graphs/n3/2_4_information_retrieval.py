@@ -54,8 +54,10 @@ load_dotenv()
 teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: Your job is to provide a sentence sorting question that requires selecting the correct arrangement order.
-Ask candidate to choose the correct option from the following 4 options.
+Task: You are a japanese teacher. Your job is to write a paper for candidate to read an information retrieval article. 
+you provide a markdown format table. The content cannot be same as the Formal exam paper
+The content includes searching for advertisements, notifications, schedules, and other information, 
+Then, ask candidate to answer 2 specific questions.
 
 Instructions:
 Format: Follow the format of formal exam papers.
@@ -77,67 +79,40 @@ reviser_prompt = """you are a Japanese language educator reviewing a JLPT exam p
             """
 
 example = """
-問題 2
+問題７
 
-__★_ に入る最もよいものを、1・2・3・4から一つ選びなさい。
+ スキー教室の案内（抜粋）
+| 通勤の種類 | 通勤日、時間 | 通勤場所/内容 |
+|---|---|---|
+| 0    | 定々木の世話   | 毎週火曜日9:00-11:00 | 無料で、定々木の世話をします。初心者も歓迎。 |
+| 0    | ホームページ付け   | 毎週火曜日9:00-11:00 | 事務所でホームページの記事を書きます。PCスキルが必要。 |
+| 3    | 公園の清掃   | 毎週水曜日14:00-16:00 | 無料で公園の清掃を行います。多くの協力が必要。 |
+| 6    | 公園の案内   | 毎月第2日曜日9:00-11:00 | 無料で公園を案内します。 |
 
+応募条件
+奥山市在住・在勤者が対象。他地域の方は要確認。  
 
-（問題例）
+説明
+参加希望日の前日までに事務所へ電話連絡が必要（A・Bは同じ内容）。  
 
-つくえの __★_ あります。
-	1.	が
-	2.	に
-	3.	上
-	4.	ペン
+応募方法
+応募用紙に必要事項を記入し、事務所へ持参または郵送。◎印の活動は直接事務所へ来場（連絡不要）。  
 
-（解答のしかた）
+---
 
-正しい答えはこうなります。
+37. 次のうち、正しい活動の選択肢はどれか。
+（※問題文の具体的な選択肢が不足しているため、活動内容から推測）  
+1. **①**（定々木の世話）  
+2. ②（ホームページ付け）  
+3. ③（公園の清掃）  
+4. ④（公園の案内）  
 
-つくえの 上 に ペン が あります。
+38. 瞬時活動の魅力者になりたい人が気をつけるべきことはどれか。
+1. 機能の活躍に応募できない  
+2. 透明点（A・B）の両方に参加必須  
+3. 参加希望日の前日までに電話連絡が必要
+4. 応募用紙を事務所へ持参必須  
 
-
-問題
-
-14.
-
-山川大学では、__★_ 新入生がにアンケート調査を行っている。
-	1.	大学生活
-	2.	持っている
-	3.	に対して
-	4.	イメージ
-
-15.
-
-来週の夫の誕生日には、__★_ つもりだ。
-	1.	最近
-	2.	プレゼントする
-	3.	かばんを
-	4.	欲しがっている
-
-16.
-
-私は、健康の__★_。
-	1.	している
-	2.	ために
-	3.	毎日8時間以上寝る
-	4.	ように
-
-17.
-
-部長が__★_ クッキーがとてもおいしいので、私も東京に行くことがあったら、買おうと思う。
-	1.	たびに
-	2.	ために
-	3.	お土産の
-	4.	ように
-
-18.
-
-私はこの図書館が好きだ。広くて本の数が多い __★_ いい。
-	1.	景色を楽しみながら
-	2.	大きな窓から街が見えて
-	3.	だけでなく
-	4.	読書ができるのも
 """
 
 n3_vocab = collect_vocabulary("../../Vocab/n3.csv")
@@ -178,13 +153,12 @@ if __name__ == "__main__":
         {
             "messages": [
                 HumanMessage(
-                    content=random_word
+                    content="レストランで食べ物を注文する"
                 )
             ],
         },
         config={"configurable": {"thread_id": "1"}}
     )
-
     display(sentence_sort_question["question"])
 
 

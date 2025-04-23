@@ -54,8 +54,8 @@ load_dotenv()
 teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: You are a japanese teacher. Your job is to write a question for candidate to read a short article around 200 words.
-The article is composed as 5-6 lines. Then, give the question and ask candidate to choose the correct answer. 
+Task: Your job is to write a question for candidate to read a short article around 200 words.
+The article is composed as 5-6 lines, you must split line in the console. Then, give the question and ask candidate to choose the correct answer. 
 The content includes some emails Notification and letter articles, answer one question.
 
 Instructions:
@@ -82,9 +82,11 @@ example = """
 
 つぎの(1)から(4)の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。
 
+
 (1)
 
 これは、今川さんが後のミゲルさんに書いたメールである。
+
 
 ミゲルさん
 
@@ -102,6 +104,7 @@ example = """
 
 今川
 
+
 23. まで電車で15分で行けるし、店も多いので、緑野にしたらどうか。
 	1.	(選択肢なし)
 	2.	いろいろな店があって便利なので、北園駅の近くにしたらどうか
@@ -113,6 +116,7 @@ example = """
 友達のマキは、いいことがあったという話をよくする。だから私は、マキは運がいいのだと思っていた。しかし、最近、そうではないと気づいた。
 
 先日二人で出かけたとき、事故で電車が止まっていて、何キロも歩いて帰ることになった。嫌だなと思っている私に、マキは「知らない町を歩けるね。」と嬉しそうに言った。とても不思議だった。でも、マキは楽しめてしまうのだ。今まで私が聞いた話も、マキだから「いいこと」だと感じたのだろうと思う。
+
 
 24. 最近、「私」はマキのことをどのような人だと思うようになったか。
 	1.	「いいこと」ばかりが起きる。運がいい人
@@ -137,8 +141,6 @@ example = """
 9月8日 12:10
 原口
 
-⸻
-
 25. このメモを読んで、ミンさんはまず何をしなければならないか。
 	1.	会議の進行について口課長と確認する
 	2.	小会議室をキャンセルする
@@ -151,7 +153,6 @@ example = """
 
 暖色には食欲を感じさせる効果があるので、暖色に囲まれていると、料理がおいしそうに見える。また、暖色は、時間を実際より長く感じさせる効果もある。客は、店にいた時間が短くても、ゆっくりできたように感じるのだ。
 
-⸻
 
 26.
 

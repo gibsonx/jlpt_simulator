@@ -54,8 +54,10 @@ load_dotenv()
 teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: Your job is to provide a sentence sorting question that requires selecting the correct arrangement order.
-Ask candidate to choose the correct option from the following 4 options.
+Task: Your job is to write a listening question for candidates to prepare the original text and options for the listening dialogue based on the reference format. 
+Students need to listen to dialogues, choose options that match the meaning of the question based on the listening content, 
+listen to dialogues or monologues, choose the correct answer, listening dialogue needs 150-350 words. 
+The roll only displays options. Only refer to the format, not the content. 
 
 Instructions:
 Format: Follow the format of formal exam papers.
@@ -77,67 +79,75 @@ reviser_prompt = """you are a Japanese language educator reviewing a JLPT exam p
             """
 
 example = """
-問題 2
+ 1番 正解: 2  
+  
+朝、家の玄関で妻と夫が話しています。夫はどうしても家に戻ってきましたか。  
+  
+女:あれ？どうしたの？忘れ物？書類？    
+男:いや、バス停で待ってたんだけど、なぜかバスがなかなか来なくて。今日は車で会社に行くよ。車の鍵、取ってくれる？    
+女:えー、私、今日車使いたいんだけど・・・会社まで送ってったあげるよ。    
+男:本当？悪いね。走って戻ってきたら、喉渇いちゃった。ちょっと水飲んでくるから待ってて。    
+女:あ、机の上に切手が貼ってあるハガキがあったけど、出さなくていいの？    
+男:あぁ、忘れてた。取ってくるよ。    
+  
+夫はどうしても家に戻ってきましたか。  
+  
+---  
+  
+ 2番 正解: 4  
+  
+女の人と男の人が話しています。男の人は犬を飼って何が最もよかったと言っていますか。  
+  
+女:木村くん、犬を飼い始めたんだって？    
+男:うん、すごくかわいくて・・・すっかり家族のアイドルだよ。    
+女:毎日散歩に連れて行くの？    
+男:うん、朝は僕、夕方は母の係なんだけど、いい運動になってるよ。母は他の犬の飼い主とも仲良くなったみたい。男の人は犬を飼って何が最もよかったと言っていますか。   
+女:そうなんだ。    
+男:最初は朝早く起きるのが辛かったんだけどね、おかげで寝る時間も早くなって規則正しい生活になったよ。それに散歩では普段会話が少ない母と、それが増えたなって思ってる。散歩中に他の犬の飼い主さんとか、交流が深まって何かわかったみたいで、楽しいよ。    
+女:そっか、今度会いに行きたいな。    
+男:うん、いいよ。    
+  
+---  
+  
+ 3番 正解: 2  
+  
+雑誌を作る会社で男の人と女の人が話しています。女の人は何のためにもう一度パン屋に行きますか。女の人です。  
+  
+男:青木さん、あまり、来月、雑誌で取り上げる特集の人気のパン屋、いろいろ話聞けた？    
+女:はい。でも今日の夕方、もう一度行かなきゃならないんです。    
+男:何か聞くの忘れた？    
+女:いえ、楽しくお店が雰囲気作りをされているかという点をしゃべらなかったんです。店長さんが雑誌に写真を載せるか悩まれているそうで、いつも写真がないっておしゃってるので。    
+男:なるほど、あの店主にとって2年以上一緒に過ごしてきた店だからね。写真を載せるかどうか、新面目な意見を聞いてもらったほうが良いよね。奥さんが考えたことも聞いてよかったよ。    
+女:僕も提案にビジョン、一緒に行くよ。新聞のパンも買いたいし。    
+男:わかりました。    
+  
+女の人は何のためにもう一度パン屋に行きますか。
 
-__★_ に入る最もよいものを、1・2・3・4から一つ選びなさい。
 
+ 1ばん  
+  
+1. しょるいをわすれたから    
+2. 車で会社に行くことにしたから    
+3. のどがかわいたから    
+4. はがきをわすれたから    
+  
+---  
+  
+ 2ばん  
+  
+1. 犬のさんぽがいい運動になること    
+2. 知り合いがふえたこと    
+3. きそく正しい生活になったこと    
+4. かぞくの会話がふえたこと
 
-（問題例）
-
-つくえの __★_ あります。
-	1.	が
-	2.	に
-	3.	上
-	4.	ペン
-
-（解答のしかた）
-
-正しい答えはこうなります。
-
-つくえの 上 に ペン が あります。
-
-
-問題
-
-14.
-
-山川大学では、__★_ 新入生がにアンケート調査を行っている。
-	1.	大学生活
-	2.	持っている
-	3.	に対して
-	4.	イメージ
-
-15.
-
-来週の夫の誕生日には、__★_ つもりだ。
-	1.	最近
-	2.	プレゼントする
-	3.	かばんを
-	4.	欲しがっている
-
-16.
-
-私は、健康の__★_。
-	1.	している
-	2.	ために
-	3.	毎日8時間以上寝る
-	4.	ように
-
-17.
-
-部長が__★_ クッキーがとてもおいしいので、私も東京に行くことがあったら、買おうと思う。
-	1.	たびに
-	2.	ために
-	3.	お土産の
-	4.	ように
-
-18.
-
-私はこの図書館が好きだ。広くて本の数が多い __★_ いい。
-	1.	景色を楽しみながら
-	2.	大きな窓から街が見えて
-	3.	だけでなく
-	4.	読書ができるのも
+---  
+  
+ 3ばん  
+  
+1. おんせんに行きたい    
+2. 着物の着方を習いたい    
+3. 日本料理の作り方を習いたい    
+4. しんかんせんに乗りたい    
 """
 
 n3_vocab = collect_vocabulary("../../Vocab/n3.csv")
@@ -178,13 +188,12 @@ if __name__ == "__main__":
         {
             "messages": [
                 HumanMessage(
-                    content=random_word
+                    content="レストランで食べ物を注文する"
                 )
             ],
         },
         config={"configurable": {"thread_id": "1"}}
     )
-
     display(sentence_sort_question["question"])
 
 

@@ -54,8 +54,10 @@ load_dotenv()
 teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: Your job is to provide a sentence sorting question that requires selecting the correct arrangement order.
-Ask candidate to choose the correct option from the following 4 options.
+Task: Your job is to write a listening question for candidates to prepare  the original text and options for the listening dialogue based on the reference format. 
+Students need to listen to monologues or dialogues, summarize their understanding, and choose options that match the meaning of the question based on the listening content. 
+There will be 3-5 back and forth dialogues, containing about 150-250 words and 4 options. 
+After listening to a conversation, you often ask someone in the conversation what they are going to do next.
 
 Instructions:
 Format: Follow the format of formal exam papers.
@@ -77,67 +79,54 @@ reviser_prompt = """you are a Japanese language educator reviewing a JLPT exam p
             """
 
 example = """
-問題 2
-
-__★_ に入る最もよいものを、1・2・3・4から一つ選びなさい。
-
-
-（問題例）
-
-つくえの __★_ あります。
-	1.	が
-	2.	に
-	3.	上
-	4.	ペン
-
-（解答のしかた）
-
-正しい答えはこうなります。
-
-つくえの 上 に ペン が あります。
-
-
-問題
-
-14.
-
-山川大学では、__★_ 新入生がにアンケート調査を行っている。
-	1.	大学生活
-	2.	持っている
-	3.	に対して
-	4.	イメージ
-
-15.
-
-来週の夫の誕生日には、__★_ つもりだ。
-	1.	最近
-	2.	プレゼントする
-	3.	かばんを
-	4.	欲しがっている
-
-16.
-
-私は、健康の__★_。
-	1.	している
-	2.	ために
-	3.	毎日8時間以上寝る
-	4.	ように
-
-17.
-
-部長が__★_ クッキーがとてもおいしいので、私も東京に行くことがあったら、買おうと思う。
-	1.	たびに
-	2.	ために
-	3.	お土産の
-	4.	ように
-
-18.
-
-私はこの図書館が好きだ。広くて本の数が多い __★_ いい。
-	1.	景色を楽しみながら
-	2.	大きな窓から街が見えて
-	3.	だけでなく
-	4.	読書ができるのも
+問題3  
+  
+1番 正解: 2  
+会話内容:
+日本語学校で女の留学生と男の留学生が話しています。  
+- 女: 来月で佐藤先生、学校を辞めちゃうんだよね。  
+- 男: 寂しくなるね。  
+- 女: うん。ねえ、クラスのみんなで先生に何か記念になるものをあげたいね。  
+- 男: あ、いいね。何か身に付けるものとか?  
+- 女: 先生おしゃれだし、そういうの選ぶの難しくない? それより私たちで何か作ろうよ。  
+- 男: あ、メッセージカードは? クラスのみんなにも書いてもらおうよ。  
+- 女: じゃ、スポーツ大会の時に撮ったクラスの集合写真を真ん中に貼って、周りにメッセージを書いてもらう?  
+- 男: いいね。皆にももらえるといいね。明日、休み時間にクラスのみんなに話してみよう。  
+  
+2人は何について話していますか?  
+1. 先生が学校を辞める理由    
+2. 先生に贈る物    
+3. クラスからのメッセージ    
+4. 先生との思い出    
+  
+---  
+  
+2番 正解: 1  
+会話内容:
+ラジオでアナウンサーが女の人にインタビューしています。  
+- 男: 高橋さんのグループは20年前から緑山に関わっていらっしゃるそうですね。  
+- 女: はい、私たちは緑山の自然を未来に残したいと考えています。緑山の木は、ほとんどは自然のものなんですが、商業目的で木が切られて、その後、新しく植えられたところもあるんです。  
+- 男: そうなんですか。  
+- 女: 人の手で植えられた木は世話をしないと細く、弱くなります。根も強くないので大雨や強い風で倒れたり、流されたりしてしまうこともあって、山全体にも影響が出てきます。そうならないように細い枝を落としたり、周りの草を取ったりして1本1本世話をし、木を育てています。  
+  
+女の人は何について話していますか?  
+1. 緑山の自然を守る活動    
+2. 緑山の木が減っている原因    
+3. 自然に育った木の特徴    
+4. 山に木を植える方法   
+  
+---  
+  
+3番 正解: 2  
+会話内容:
+ラジオで男の人が話しています。  
+- 男: 僕、わさびが好きでお寿司や刺身にたくさん付けて食べるのが好きなんですよ。わさびって食べると鼻が痛くなったり、涙が出たりして苦手な人もいるかもしれませんけど、魚の匂いを消してくれたり、食べ物が悪くなるのを防いでくれたりするんですよね。最近、雑誌で読んだんですが、わさびを食べると食欲が出たり、風邪を引きにくくなったりするなど健康にもいいということが研究によってわかってきたそうです。  
+   
+男の人は何について話していますか?  
+1. わさびを好きになったわけ    
+2. わさびの効果    
+3. わさびが苦手な人が多い理由    
+4. わさびのおいしさの研究    
 """
 
 n3_vocab = collect_vocabulary("../../Vocab/n3.csv")
@@ -178,13 +167,12 @@ if __name__ == "__main__":
         {
             "messages": [
                 HumanMessage(
-                    content=random_word
+                    content="レストランで食べ物を注文する"
                 )
             ],
         },
         config={"configurable": {"thread_id": "1"}}
     )
-
     display(sentence_sort_question["question"])
 
 

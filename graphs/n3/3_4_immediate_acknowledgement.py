@@ -54,8 +54,9 @@ load_dotenv()
 teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: Your job is to provide a sentence sorting question that requires selecting the correct arrangement order.
-Ask candidate to choose the correct option from the following 4 options.
+Task:  Your job is to write a listening question for candidates to prepare the original text and options for the listening dialogue based on the reference format. Instant response. 
+students need to listen to the conversation, choose the option that matches the meaning of the question based on the listening content, select the appropriate answer for this sentence in the current context, and provide three options. 
+After listening to a conversation, you often ask someone in the conversation what they are going to do next.
 
 Instructions:
 Format: Follow the format of formal exam papers.
@@ -77,67 +78,86 @@ reviser_prompt = """you are a Japanese language educator reviewing a JLPT exam p
             """
 
 example = """
-問題 2
+問題5  
+  
+1番 正解: 1  
+会話内容:
+- 女: 足、痛そうだね。午後のテニスの練習、休んだら？  
+- 男: そうする。今日は帰るね。  
+- 女: 今日は練習、ないんだね。  
+- 男: テニス、今日は休むの?  
+  
+---  
+  
+2番 正解: 2  
+会話内容: 
+- 男: 町の花火大会、今年はやらないことになったそうだよ。  
+- 女: やらないかもしれないんだね。  
+- 男: え? なんで? 楽しみにしてたのに・・・  
+- 女: じゃ、見に行かなくきゃね。  
+  
+---  
+  
+3番 正解: 1  
+会話内容:
+- 男: 吉田さん、今回の旅行、楽しかったよ。吉田さんが案内してくれたおかげだよ。  
+  1. 喜んでもらえてよかった  
+  2. 一緒に行けなくてごめんね  
+  3. 案内してくれてありがとう  
 
-__★_ に入る最もよいものを、1・2・3・4から一つ選びなさい。
-
-
-（問題例）
-
-つくえの __★_ あります。
-	1.	が
-	2.	に
-	3.	上
-	4.	ペン
-
-（解答のしかた）
-
-正しい答えはこうなります。
-
-つくえの 上 に ペン が あります。
-
-
-問題
-
-14.
-
-山川大学では、__★_ 新入生がにアンケート調査を行っている。
-	1.	大学生活
-	2.	持っている
-	3.	に対して
-	4.	イメージ
-
-15.
-
-来週の夫の誕生日には、__★_ つもりだ。
-	1.	最近
-	2.	プレゼントする
-	3.	かばんを
-	4.	欲しがっている
-
-16.
-
-私は、健康の__★_。
-	1.	している
-	2.	ために
-	3.	毎日8時間以上寝る
-	4.	ように
-
-17.
-
-部長が__★_ クッキーがとてもおいしいので、私も東京に行くことがあったら、買おうと思う。
-	1.	たびに
-	2.	ために
-	3.	お土産の
-	4.	ように
-
-18.
-
-私はこの図書館が好きだ。広くて本の数が多い __★_ いい。
-	1.	景色を楽しみながら
-	2.	大きな窓から街が見えて
-	3.	だけでなく
-	4.	読書ができるのも
+---  
+   
+#### 4番 正解: 1  
+**会話内容:**  
+- 男: 来週の食事会、参加できるかまだわからなくて、いつまでにお返事すればいいですか?  
+  1. 今週中なら大丈夫ですよ  
+  2. 参加できそうでよかったです  
+  3. はい、返事お待ちしていますね  
+  
+---  
+  
+5番 正解: 3  
+会話内容:
+- 女: 曇ってきたね。雨が降らないうちに帰ろうか。  
+  1. え? もう降ってきた?  
+  2. 雨が止んでから帰るの?  
+  3. 降る前に帰ったほうがいいね  
+  
+---  
+  
+6番 正解: 3  
+会話内容:  
+- 女: 森さん、悪いけど、ドアの近くにあるダンボール箱、倉庫に運んでくれる?  
+  1. 倉庫にあるんですね。取ってきます  
+  2. ありがとうございます。お願いします  
+  3. あとでいいですか?  
+  
+---  
+  
+7番 正解: 1  
+会話内容:
+- 女: あの、こちらのお店、店の中の写真を撮っても構いませんか? すごく素敵なので。  
+  1. あ、写真はご遠慮ください  
+  2. 素敵な写真、ありがとうございます  
+  3. 写真は撮ってなんないですよ  
+  
+---  
+   
+8番 正解: 2  
+会話内容:
+- 男: 今、課長から電話があったんですが、訪問先から会社に戻らずに帰宅されるそうです。  
+  1. 一度会社に戻って来られるんですね  
+  2. あ、そのまま家に帰られるんですね  
+  3. え? 家に寄って来られるんですか?  
+  
+---  
+  
+9番 正解: 3  
+会話内容:
+- 男: 工事、遅れてるんだって? 課長に報告したほうがいいんじゃない?  
+  1. 遅れてるって課長が言ってたんですか?  
+  2. じゃ、報告はしないことにします  
+  3. そうですね。伝えておきます  
 """
 
 n3_vocab = collect_vocabulary("../../Vocab/n3.csv")
@@ -178,13 +198,12 @@ if __name__ == "__main__":
         {
             "messages": [
                 HumanMessage(
-                    content=random_word
+                    content="レストランで食べ物を注文する"
                 )
             ],
         },
         config={"configurable": {"thread_id": "1"}}
     )
-
     display(sentence_sort_question["question"])
 
 
