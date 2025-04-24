@@ -142,6 +142,31 @@ def reflection_node_builder(llm,  prompt_text):
 
     return reflection_node
 
+
+def formatter_node(state: QuestionState) -> QuestionState:
+    print("--- Formatter ---")
+
+    question = state["question"]
+
+    print("### I am going to format: ", question)
+
+    formatter_prompt = ChatPromptTemplate.from_messages(
+        [
+            (
+                "system",
+                """You are a AI assistance. your job is to format the following content to the structured output, don't modify the contextual meanings:
+                {question}
+                """
+            )
+        ]
+    )
+    format_pipeline = formatter_prompt | azure_llm.with_structured_output(SingleQuestionOutput)
+    res = format_pipeline.invoke(input={"question": question})
+
+    # We treat the output of this as human feedback for the generator
+    return {"formatted_output": res}
+
+
 def should_continue(state: QuestionState):
     if state["messages"]:
         if len(state["messages"]) > 6:
