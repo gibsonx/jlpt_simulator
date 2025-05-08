@@ -7,3 +7,4 @@ pandas
 pygraphviz
 langchain-aws
 langchain-tavily
+tqdm

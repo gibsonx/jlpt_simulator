@@ -1,190 +1,104 @@
-import pandas as pd
-import json
-import os
-import random
-import pickle
-import re
-import uuid
-from typing import *
-from langchain_openai import AzureOpenAI,AzureChatOpenAI
-from langchain_anthropic import ChatAnthropic
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from dotenv import load_dotenv
-from langchain_aws import ChatBedrock
-from langchain.embeddings.base import Embeddings
-from langchain.text_splitter import CharacterTextSplitter
-from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.embeddings import HuggingFaceEmbeddings
-# from langchain_community.embeddings import XinferenceEmbeddings
-from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
-from typing import Annotated, Literal, Sequence
-from typing_extensions import TypedDict
-from IPython.display import display, Markdown, Latex
-from langchain import hub
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
-from typing import Annotated, Sequence
-from typing_extensions import TypedDict
-from langchain_core.messages import BaseMessage,RemoveMessage,HumanMessage,AIMessage,ToolMessage
-from langgraph.graph.message import add_messages
-from pydantic import BaseModel, Field
-from langgraph.graph import END, StateGraph, START
-from langgraph.prebuilt import ToolNode
-from langgraph.prebuilt import tools_condition
-from langgraph.checkpoint.memory import MemorySaver
-from langchain.output_parsers import PydanticOutputParser
-from pydantic import BaseModel, Field, validator
-from typing import List, Optional
-from langchain_tavily import TavilySearch
-from langchain.schema import Document
-from langgraph.prebuilt import create_react_agent
-from langchain_community.tools.tavily_search import TavilySearchResults
-from graphs.common.state import QuestionState
-from typing_extensions import TypedDict
-from langgraph.graph import StateGraph, START, END
-from IPython.display import Image, display
 from graphs.common.node_builder import *
 from graphs.common.utils import *
-from libs.LLMs import aws_llm, azure_llm
+from graphs.common.state import *
+from libs.LLMs import azure_llm
+import random
+from langgraph.graph import StateGraph
 
 load_dotenv()
 
 teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: Your job is to provide a sentence sorting question that requires selecting the correct arrangement order.
-Ask candidate to choose the correct option from the following 4 options.
+Task: Your job is to write a paper for JLPT N3 level. 
+At this section, please write an Japanese article about 300-400 words with 4-5 lines written with markdown. 
+After that, you should give 4 related questions from the content of the article. 
+The purpose is to also test candidate the ability to identify Japanese sentence structure. 
+Candidate should fill in the gaps in the article by choosing the grammar structure that best fits the context from the following 4 options, 
 
 Instructions:
-Format: Follow the format of formal exam papers.
+Format: Follow the format of formal exam papers. Each question has 4 options in Japanese
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
+Explanation: give the correct answer and an explanation of the main challenges in simplified Chinese at each question.
+Additional Requirement: Don't show question requirement and revised submission in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
-reviser_prompt = """you are a Japanese language educator reviewing a JLPT exam paper. Generate critique and recommendations for the user's submission.
-            the review focuses on content accuracy and question quality. 
-            - For content accuracy, you must verify that the grammar and vocabulary questions accurately reflect the appropriate JLPT N3 level, ensuring the reading passages are clear, relevant, and appropriately challenging. 
-            - For question quality, you must ensure all questions are clearly worded and free from ambiguity to comprehensively assess different language skills, and confirm that the difficulty level of the questions matches the intended JLPT N3 level.
-            - During detailed refinement, you check the format and presentation of the paper, ensuring it is well-organized and the instructions are clear and concise. you also ensure the content is culturally appropriate and relevant to Japanese language and culture.
-            - Finally, you make give feedback, providing detailed recommendations, including requests.If you think the exam paper is good enough, you just say "GOOD ENOUGH"
-            """
-
 example = """
-問題 2
+夏休みの思い出  
+  
+お母さん、中学生の妹さんと住んでいます。[19] 日本人の家に泊まるのは初めてだったので、行く前は少し不安な気持ちもありました。[20] 行ってみたらとても楽しかったです。  
+  
+印象に残っているのは、巡りの畑で育てた野菜を使って、みんなで料理を作ったことです。友達のお母さんは、畑でいろいろな野菜を育てていました。私たちは、その野菜を使ってみんなで料理をしました。私は、お店に売られている野菜 [21] 食べたことがありませんでした。家で育てた野菜を食べたのは初めてでしたが、とてもおいしかったです。特に「私も野菜を育ててみたい」と、胸がいっぱ言う行ってらない。」と言ったら、それを聞いていたお母さんが、家の中でも育てることができる野菜について教えてくれました。  
+  
+お母さんに教えてもらったやり方で、私も野菜を [22]。今、２種類の野菜を育てています。  
+  
+野菜の世話をしながら、楽しかった夏休みのことをいつも思い出しています。  
+  
+--- 
 
-__★_ に入る最もよいものを、1・2・3・4から一つ選びなさい。
-
-
-（問題例）
-
-つくえの __★_ あります。
-	1.	が
-	2.	に
-	3.	上
-	4.	ペン
-
-（解答のしかた）
-
-正しい答えはこうなります。
-
-つくえの 上 に ペン が あります。
-
-
-問題
-
-14.
-
-山川大学では、__★_ 新入生がにアンケート調査を行っている。
-	1.	大学生活
-	2.	持っている
-	3.	に対して
-	4.	イメージ
-
-15.
-
-来週の夫の誕生日には、__★_ つもりだ。
-	1.	最近
-	2.	プレゼントする
-	3.	かばんを
-	4.	欲しがっている
-
-16.
-
-私は、健康の__★_。
-	1.	している
-	2.	ために
-	3.	毎日8時間以上寝る
-	4.	ように
-
-17.
-
-部長が__★_ クッキーがとてもおいしいので、私も東京に行くことがあったら、買おうと思う。
-	1.	たびに
-	2.	ために
-	3.	お土産の
-	4.	ように
-
-18.
-
-私はこの図書館が好きだ。広くて本の数が多い __★_ いい。
-	1.	景色を楽しみながら
-	2.	大きな窓から街が見えて
-	3.	だけでなく
-	4.	読書ができるのも
+1. 招待してくれたのです    
+2. 招待してくれたはずです    
+3. 招待してくれたばかりです    
+4. 招待してくれたそうです    
+  
+1. それで    
+2. でも    
+3. 実は    
+4. また    
+  
+1. は    
+2. などを    
+3. しか    
+4. だけ    
+  
+1. 育ててみてほしいです    
+2. 育ててみてもいいです    
+3. 育ててみようとしました    
+4. 育ててみることにしました     
 """
 
-n3_vocab = collect_vocabulary("../../Vocab/n3.csv")
+def structure_selection(word, vocab):
 
-generator = generation_node_builder(vocab_dict=n3_vocab,
-                                    llm=azure_llm,
-                                    prompt_text=teacher_prompt,
-                                    example=example)
+    online_search = online_search_node_builder()
 
-reflector = reflection_node_builder(llm=azure_llm,
-                                    prompt_text=reviser_prompt
-                                    )
+    generator = generation_node_builder(vocab_dict=vocab,
+                                        llm=azure_llm,
+                                        prompt_text=teacher_prompt,
+                                        example=example)
 
-# Build workflow
-builder = StateGraph(QuestionState)
+    reflector = reflection_node_builder(llm=azure_llm)
 
-builder.add_node("online_search", online_search)
-builder.add_node("generator", generator)
-builder.add_node("reflector", reflector)
-# Add nodes
+    formatter = formatter_node_builder(llm=azure_llm, OutType=MultipleQuestionOutput)
 
-# Add edges to connect nodes
-builder.add_edge(START, "online_search")
-builder.add_edge("online_search", "generator")
-builder.add_edge("generator","reflector")
-#
-builder.add_conditional_edges("reflector", should_continue)
+    nodes = {
+        "online_search": online_search,
+        "generator": generator,
+        "reflector": reflector,
+        "formatter": formatter
+    }
 
-# Compile
-sentence_sort_graph = builder.compile()
+    builder = StateGraph(SimpleQuestionState)
 
-if __name__ == "__main__":
-    random_word = random.choice(list(json.loads(n3_vocab).values()))
+    graph = build_kanji_graph(builder, nodes)
 
-    print(f"Randomly chosen definition: {random_word}")
-
-    sentence_sort_question = sentence_sort_graph.invoke(
-        {
-            "messages": [
-                HumanMessage(
-                    content=random_word
-                )
-            ],
-        },
+    instance = graph.invoke(
+        {"messages": [HumanMessage(content=word)]},
         config={"configurable": {"thread_id": "1"}}
     )
 
-    display(sentence_sort_question["question"])
+    return json.dumps(instance['formatted_output'], indent=4, ensure_ascii=False)
+
+
+
+if __name__ == "__main__":
+    n3_vocab = collect_vocabulary("../../Vocab/n3.csv")
+    random_word = random.choice(list(json.loads(n3_vocab).values()))
+    print(structure_selection(vocab=n3_vocab,
+          word=random_word))
 
 

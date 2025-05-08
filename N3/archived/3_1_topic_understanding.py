@@ -54,9 +54,11 @@ load_dotenv()
 teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task:  Your job is to write a listening question for candidates to prepare the original text and options for the listening dialogue based on the reference format. Instant response. 
-students need to listen to the conversation, choose the option that matches the meaning of the question based on the listening content, select the appropriate answer for this sentence in the current context, and provide three options. 
-After listening to a conversation, you often ask someone in the conversation what they are going to do next.
+Task: Your job is to write a listening question for candidates to prepare original text and options for the listening dialogue. 
+Students need to listen to dialogues and choose options that match the meaning of the question based on the listening content.
+Some questions have picture options, while others are mostly text options. 
+There will be 3-5 back and forth dialogues with around 200-300 words. The roll only displays options. Listen often
+After the conversation, ask one person in the conversation what they want to do next. Only refer to the format, not the content.The JLPT exam paper includes a mix of easy, moderate, and difficult questions to accurately assess the test-taker’s proficiency across different aspects of the language.
 
 Instructions:
 Format: Follow the format of formal exam papers.
@@ -78,86 +80,100 @@ reviser_prompt = """you are a Japanese language educator reviewing a JLPT exam p
             """
 
 example = """
-問題5  
-  
-1番 正解: 1  
-会話内容:
-- 女: 足、痛そうだね。午後のテニスの練習、休んだら？  
-- 男: そうする。今日は帰るね。  
-- 女: 今日は練習、ないんだね。  
-- 男: テニス、今日は休むの?  
-  
----  
-  
-2番 正解: 2  
-会話内容: 
-- 男: 町の花火大会、今年はやらないことになったそうだよ。  
-- 女: やらないかもしれないんだね。  
-- 男: え? なんで? 楽しみにしてたのに・・・  
-- 女: じゃ、見に行かなくきゃね。  
-  
----  
-  
-3番 正解: 1  
-会話内容:
-- 男: 吉田さん、今回の旅行、楽しかったよ。吉田さんが案内してくれたおかげだよ。  
-  1. 喜んでもらえてよかった  
-  2. 一緒に行けなくてごめんね  
-  3. 案内してくれてありがとう  
+1 番 
 
----  
-   
-#### 4番 正解: 1  
-**会話内容:**  
-- 男: 来週の食事会、参加できるかまだわからなくて、いつまでにお返事すればいいですか?  
-  1. 今週中なら大丈夫ですよ  
-  2. 参加できそうでよかったです  
-  3. はい、返事お待ちしていますね  
-  
----  
-  
-5番 正解: 3  
-会話内容:
-- 女: 曇ってきたね。雨が降らないうちに帰ろうか。  
-  1. え? もう降ってきた?  
-  2. 雨が止んでから帰るの?  
-  3. 降る前に帰ったほうがいいね  
-  
----  
-  
-6番 正解: 3  
-会話内容:  
-- 女: 森さん、悪いけど、ドアの近くにあるダンボール箱、倉庫に運んでくれる?  
-  1. 倉庫にあるんですね。取ってきます  
-  2. ありがとうございます。お願いします  
-  3. あとでいいですか?  
-  
----  
-  
-7番 正解: 1  
-会話内容:
-- 女: あの、こちらのお店、店の中の写真を撮っても構いませんか? すごく素敵なので。  
-  1. あ、写真はご遠慮ください  
-  2. 素敵な写真、ありがとうございます  
-  3. 写真は撮ってなんないですよ  
-  
----  
-   
-8番 正解: 2  
-会話内容:
-- 男: 今、課長から電話があったんですが、訪問先から会社に戻らずに帰宅されるそうです。  
-  1. 一度会社に戻って来られるんですね  
-  2. あ、そのまま家に帰られるんですね  
-  3. え? 家に寄って来られるんですか?  
-  
----  
-  
-9番 正解: 3  
-会話内容:
-- 男: 工事、遅れてるんだって? 課長に報告したほうがいいんじゃない?  
-  1. 遅れてるって課長が言ってたんですか?  
-  2. じゃ、報告はしないことにします  
-  3. そうですね。伝えておきます  
+> 会社で課長と男の人が話しています。男の人は出張レポートのことを国きなればなみませんか。
+>
+> 女：田中さん。初めての出張、お疲れ様でした、この出張のレポート詳みました。
+> 男：はい。
+> 女：出張の目的と訪問した会社で誰に会ったのかはこれています。ただ、話し合いについては最終的にどうなったのかがわかりくいています。そこを直してください。
+> 男：はい、わかりました。
+> 女：次の訪問日は3ヶ月後になつたんですね。
+> 男：はい。
+>
+> 男の人は出張レポートのことを直きなければなりませんか。
+
+1ばん
+
+1. しゅっちょうの　もくてき  
+2. 会った人のじょうほう  
+3. 話し合いのけっか  
+4. つぎのほうもん日
+
+正解：3  
+
+2 番
+
+> 図書館で男の学生と受付の人が話しています。男の学生は本の子をずるためにこの後、何をしますか。
+>
+> 男：すみません。昔れたし本があるんですが、図書館のパソコンで調べたら貸し出し中になっていて、子でっていう件があきけと押せんいんです。
+> 女：すみません。その本の名前は今、問題があって使えないてなっています。あの、図書館の利用カードは持っていますか。
+> 男：はい。
+> 女：それではうちの図書館に貸して出してしたければ予约できますよ。
+> 男：あ、そうですか。わかりました。
+> 女：あ、ただ、借りているつしゃの本の中に貸し出し期限を過ぎた本があると予約できるって子的できるが…。
+> 男：それは大丈夫です。ありがとうごさいます。
+
+男の学生は本の予約をするためにこの後、何をしますか。
+1. パソコンでもうしこむ  
+2. 利用カードを作る  
+3. もうしこみ用紙に書いて出す  
+4. かりている本をかえす
+
+3番
+
+> 大学の音楽クラブの部室で女の学生と男の学生が話しています。女の学生は之後、何をしますか。
+>
+> 女：遅くなってごめん。明日のコンサートの準備、もう始まってると聞いた？みんなもう会場の準備してる？
+> 男：あ、伊藤さん。みんな体育館に椅子を並べに行ったよ。伊藤さんも行ってくれる？
+> 女：今、ちょっとプログラム印刷し終わったから持って、体育館の入口で受け用的テーブルがあるからその上に置いて。
+> 男：わかりました。
+> 女：わかって。
+> 男：その後、みんなと一緒に椅子、並べくれる？
+> 女：OK。楽器を運ぶのはその後？大家い内的に今日のうちに運びだせな。
+> 男：ああ、さっき体育館に行った時に最初に運んでもらった。僕は先生に明日のこと相談して行ったから体育館に向かうね。
+> 女：わかって。
+
+女の学生はこの後、何をしますか。
+1. アイ  
+2. アイウ  
+3. アエ  
+4. イウエ 
+
+正解：1
+
+4番
+
+> 会社で女の人と男の人が話しています。女の人は之後まず何しますか。
+>
+> 女：村上さん。今年の新入社員のセミナー、来月ですが、1日目的予定表はこれでよろしいですか？
+> 男：ああ、はい。えっと、9時スタートで社長の話。その後、昼までビジネスマナーの先生の講義、去年と同じだね。あー、毎年9時スタートで朝から準備で忙しいという意見が多くて。
+> 女：そうでしたか。
+> 男：それで今年は30分遅くして9時半開始にしようという話になったんだ。終わるのは１２時じゃなくて１２時半になるけど。  
+> 女：はい。  
+> 男：会場は一応、午後１時まで使ってるから問題ないよ。社員に去年より３０分遅くなってもいいか、言合せ聞いてなくて、いちいちのは最初のところだけだから大丈夫だと思うけど。  
+> 女：わかりました。  
+> 男：先生には今日会うことになってるから確認しておくよ。全部確認取れてから予定表、直してくれる？  
+> 女：はい。
+
+女の人はこの後まず何をしますか。
+
+1. 会場のよやく時間をかえる  
+2. しゃちょうに予定を聞く  
+3. 先生に会いに行く  
+4. よていひょうをなおす  
+
+ 正解：2
+
+---
+
+
+
+
+
+ 
+
+
 """
 
 n3_vocab = collect_vocabulary("../../Vocab/n3.csv")

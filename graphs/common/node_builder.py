@@ -1,89 +1,50 @@
-import pandas as pd
-import json
-import os
-import random
-import pickle
-import re
-import uuid
 from typing import *
-from langchain_openai import AzureOpenAI,AzureChatOpenAI
-from langchain_anthropic import ChatAnthropic
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+
 from dotenv import load_dotenv
-from langchain_aws import ChatBedrock
-from langchain.embeddings.base import Embeddings
-from langchain.text_splitter import CharacterTextSplitter
-from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.embeddings import HuggingFaceEmbeddings
 # from langchain_community.embeddings import XinferenceEmbeddings
-from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
-from typing import Annotated, Literal, Sequence
-from typing_extensions import TypedDict
-from IPython.display import display, Markdown, Latex
-from langchain import hub
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import PromptTemplate
-from langchain_openai import ChatOpenAI
-from typing import Annotated, Sequence
-from typing_extensions import TypedDict
-from langchain_core.messages import BaseMessage,RemoveMessage,HumanMessage,AIMessage,ToolMessage
-from langgraph.graph.message import add_messages
-from pydantic import BaseModel, Field
-from langgraph.graph import END, StateGraph, START
-from langgraph.prebuilt import ToolNode
-from langgraph.prebuilt import tools_condition
-from langgraph.checkpoint.memory import MemorySaver
-from langchain.output_parsers import PydanticOutputParser
-from pydantic import BaseModel, Field, validator
-from typing import List, Optional
+from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_tavily import TavilySearch
-from langchain.schema import Document
-from langgraph.prebuilt import create_react_agent
-from langchain_community.tools.tavily_search import TavilySearchResults
-from graphs.common.state import QuestionState
+from langgraph.graph import START, END
 from typing_extensions import TypedDict
-from langgraph.graph import StateGraph, START, END
-from IPython.display import Image, display
 
 load_dotenv()
 
-def online_search(state):
-    """
-    Web search based on the re-phrased question.
+def online_search_node_builder():
+    def online_search(state: Type[TypedDict]):
+        """
+        Web search based on the re-phrased question.
 
-    Args:
-        state (dict): The current graph state
+        Args:
+            state (dict): The current graph state
 
-    Returns:
-        state (dict): Updates documents key with appended web results
-    """
+        Returns:
+            state (dict): Updates documents key with appended web results
+        """
 
-    print("---WEB SEARCH---")
+        # print("---WEB SEARCH---")
 
-    topic = state['messages'][-1].content
+        topic = state['messages'][-1].content
 
-    tavily_search_tool = TavilySearch(
-        max_results=20,
-        topic="news",
-        days=1
-    )
-    # Web search
-    docs = tavily_search_tool.invoke({"query": topic})
+        tavily_search_tool = TavilySearch(
+            max_results=20,
+            topic="news",
+            days=1
+        )
+        # Web search
+        docs = tavily_search_tool.invoke({"query": topic})
 
-    print(docs)
+        web_results = "\n".join([d["content"] for d in docs["results"]])
 
-    web_results = "\n".join([d["content"] for d in docs["results"]])
+        return {"documents": web_results, "topic": topic}
 
-    print("Web results: ", web_results)
-
-    return {"documents": web_results, "topic": topic}
+    return online_search
 
 # Nodes
 def generation_node_builder(vocab_dict, llm,  prompt_text, example):
-    def question_generator(state: QuestionState):
+    def question_generator(state):
         """First LLM call to generate initial question"""
-        print("---Generator----")
+        # print("---Generator----")
 
         search_result = state['documents']
 
@@ -113,9 +74,9 @@ def generation_node_builder(vocab_dict, llm,  prompt_text, example):
 
     return question_generator
 
-def reflection_node_builder(llm,  prompt_text):
-    def reflection_node(state: QuestionState) -> QuestionState:
-        print("---REVISOR---")
+def reflection_node_builder(llm):
+    def reflection_node(state):
+        # print("---REVISOR---")
 
         # Other messages we need to adjust
         cls_map = {"ai": HumanMessage, "human": AIMessage}
@@ -128,7 +89,13 @@ def reflection_node_builder(llm,  prompt_text):
             [
                 (
                     "system",
-                     prompt_text
+            """you are a Japanese language educator reviewing a JLPT exam paper. Generate critique and recommendations for the user's submission.
+               the review focuses on content accuracy and question quality. 
+               - For content accuracy, you must verify that the grammar and vocabulary questions accurately reflect the appropriate JLPT N3 level, ensuring the reading passages are clear, relevant, and appropriately challenging. 
+               - For question quality, you must ensure all questions are clearly worded and free from ambiguity to comprehensively assess different language skills, and confirm that the difficulty level of the questions matches the intended JLPT N3 level.
+               - During detailed refinement, you check the format and presentation of the paper, ensuring it is well-organized and the instructions are clear and concise. you also ensure the content is culturally appropriate and relevant to Japanese language and culture.
+               - Finally, you make give feedback, providing detailed recommendations, including requests.If you think the exam paper is good enough, you just say "GOOD ENOUGH"
+               """
                 ),
                 MessagesPlaceholder(variable_name="messages"),
             ]
@@ -143,36 +110,55 @@ def reflection_node_builder(llm,  prompt_text):
     return reflection_node
 
 
-def formatter_node(state: QuestionState) -> QuestionState:
-    print("--- Formatter ---")
+def formatter_node_builder(llm, OutType: Type[TypedDict]):
+    def formatter_node(state):
+        # print("--- Formatter ---")
 
-    question = state["question"]
+        question = state["question"]
 
-    print("### I am going to format: ", question)
+        formatter_prompt = ChatPromptTemplate.from_messages(
+            [
+                (
+                    "system",
+                    """You are a AI assistance. your job is to format the following context to the structured output,  
+                    you must translate explanation and '説明' to simplified chinese.
+                    please don't modify contextual meanings and keep markdown format for the rest of content. Context: 
+                    {question}"""
+                )
+            ]
+        )
+        format_pipeline = formatter_prompt | llm.with_structured_output(OutType)
+        res = format_pipeline.invoke(input={"question": question})
 
-    formatter_prompt = ChatPromptTemplate.from_messages(
-        [
-            (
-                "system",
-                """You are a AI assistance. your job is to format the following content to the structured output, don't modify the contextual meanings:
-                {question}
-                """
-            )
-        ]
-    )
-    format_pipeline = formatter_prompt | azure_llm.with_structured_output(SingleQuestionOutput)
-    res = format_pipeline.invoke(input={"question": question})
+        # We treat the output of this as human feedback for the generator
+        return {"formatted_output": res}
 
-    # We treat the output of this as human feedback for the generator
-    return {"formatted_output": res}
+    return formatter_node
 
-
-def should_continue(state: QuestionState):
+def should_continue(state):
     if state["messages"]:
         if len(state["messages"]) > 6:
             print("--- Reach the Maximum Round ---")
-            return END
+            return "formatter"
         elif "GOOD ENOUGH" in state["messages"][-1].content:
             print("--- AI Reviser feels Good Enough ---")
-            return END
+            return "formatter"
     return "generator"
+
+
+def build_graph(builder, nodes):
+    """Build and compile the state graph."""
+    # Add nodes
+    builder.add_node("online_search", nodes["online_search"])
+    builder.add_node("generator", nodes["generator"])
+    builder.add_node("reflector", nodes["reflector"])
+    builder.add_node("formatter", nodes["formatter"])
+
+    # Add edges to connect nodes
+    builder.add_edge(START, "online_search")
+    builder.add_edge("online_search", "generator")
+    builder.add_edge("generator", "reflector")
+    builder.add_conditional_edges("reflector", should_continue)
+    builder.add_edge("formatter", END)
+
+    return builder.compile()
