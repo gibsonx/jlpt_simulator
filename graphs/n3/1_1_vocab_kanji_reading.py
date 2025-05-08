@@ -73,7 +73,7 @@ def kanji_reading(word, vocab):
 
     builder = StateGraph(SimpleQuestionState)
 
-    graph = build_kanji_graph(builder, nodes)
+    graph = build_graph(builder, nodes)
 
     instance = graph.invoke(
         {"messages": [HumanMessage(content=word)]},

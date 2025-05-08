@@ -121,7 +121,7 @@ def topic_understanding(word, vocab):
 
     reflector = reflection_node_builder(llm=azure_llm)
 
-    formatter = formatter_node_builder(llm=azure_llm, OutType=ListenQuestionOutput)
+    formatter = formatter_node_builder(llm=azure_llm, OutType=ListenSingleChoiceOutput)
 
     nodes = {
         "online_search": online_search,
@@ -132,7 +132,7 @@ def topic_understanding(word, vocab):
 
     builder = StateGraph(SimpleQuestionState)
 
-    graph = build_kanji_graph(builder, nodes)
+    graph = build_graph(builder, nodes)
 
     instance = graph.invoke(
         {"messages": [HumanMessage(content=word)]},

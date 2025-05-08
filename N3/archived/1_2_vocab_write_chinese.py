@@ -80,7 +80,7 @@ def kanji(word, vocab):
 
     builder = StateGraph(SimpleQuestionState)
 
-    kanji_graph = build_kanji_graph(builder, nodes)
+    kanji_graph = build_graph(builder, nodes)
 
     kanji = kanji_graph.invoke(
         {"messages": [HumanMessage(content=word)]},
