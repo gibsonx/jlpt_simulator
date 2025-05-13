@@ -3,7 +3,7 @@ from graphs.common.utils import *
 from graphs.common.state import *
 from libs.LLMs import azure_llm
 import random
-from prompts import *
+from graphs.n3.prompts import *
 from langgraph.graph import StateGraph
 
 load_dotenv()
