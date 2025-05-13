@@ -20,7 +20,7 @@ Instructions:
 Format: Follow the format of formal exam papers. Each question has 4 options in Japanese
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: give the correct answer and an explanation of the main challenges in simplified Chinese at each question.
+Explanation: give the correct answer and an explanation of the main challenges  at each question.
 Additional Requirement: Don't show question requirement and revised submission in the generated content.
 
 Dictionary: {vocab_dict}

@@ -8,8 +8,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement in the generated content.
+Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -53,8 +53,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement in the generated content.
+Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -110,8 +110,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement in the generated content.
+Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -197,8 +197,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement in the generated content.
+Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -247,8 +247,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement in the generated content.
+Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -256,31 +256,31 @@ Formal exam paper: {example}
 """
 
 word_usage_example = """
-31. 内容
+内容
 	1.	修理のため、エアコンの内容を一度取り出します
 	2.	鍋の中にカレーの内容を入れて、1時間くらい煮てください
 	3.	古い財布から新しい財布へ内容を移しました
 	4.	この手紙の内容は、ほかの人には秘密にしてください
 
-32. 活動
+活動
 	1.	彼は有名なロック歌手だったが、今は活動していない
 	2.	山に登ると、新鮮な空気が活動していて気持ちがいい
 	3.	さっきまで活動していたパソコンが、急に動かなくなった
 	4.	駅前のコンビニは24時間活動しているので便利だ
 
-33. 落ち着く
+落ち着く
 	1.	この辺りは、冬になると雪が落ち着いて、春になるまで溶けません
 	2.	シャツにしみが落ち着いてしまって、洗ってもきれいになりません
 	3.	あそこの木の上に美しい鳥が落ち着いています
 	4.	大好きなこの曲を聞くと、いつも気持ちが落ち着きます
 
-34. ぐっすり
+ぐっすり
 	1.	遠慮しないで、ぐっすり食べてください
 	2.	優勝できたのは、毎日ぐっすり練習したからだと思う
 	3.	今日は疲れているので、朝までぐっすり眠れそうだ
 	4.	古い友人と久しぶりに会って、ぐっすりおしゃべりした
 
-35. 性格
+性格
 	1.	日本の古い性格に興味があるので、神社やお寺によく行きます
 	2.	森さんはおとなしい性格で、自分の意見はあまり言いません
 	3.	値段が高くても、塗装で性格のいい車を買うつもりです
@@ -296,8 +296,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement in the generated content.
+Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -305,15 +305,15 @@ Formal exam paper: {example}
 """
 
 sentence_grammar_example = """
-1.
-
 私は、自分の作ったパンを多くたくさんの人（　）食べてほしいと思って、パン屋を始めた。
 	1.	は
 	2.	に
 	3.	まで
 	4.	なら
 
-2.（学校にて）
+
+---
+（学校にて）
 
 学生：「先生、今、よろしいですか。英語の発表（　）、ちょっと相談したいのですが。」
 先生：「ええ、いいですよ。」
@@ -322,7 +322,7 @@ sentence_grammar_example = """
 	3.	のことで
 	4.	のは
 
-3.
+---
 
 いつもは勉強を2時間以上かかるが、今日は1時間（　）終わりそうだ。
 	1.	くらい
@@ -330,7 +330,7 @@ sentence_grammar_example = """
 	3.	ぐらい
 	4.	ぐらいで
 
-4.
+---
 
 母：「えっ、（　）ご飯食べたばかりなのに、もうおなかすいたの？」
 	1.	そろそろ
@@ -338,7 +338,7 @@ sentence_grammar_example = """
 	3.	さっき
 	4.	ずっと
 
-5.
+---
 
 大事なレシートをズボンのポケットに（　）洗濯してしまった。
 	1.	入れたまま
@@ -346,7 +346,8 @@ sentence_grammar_example = """
 	3.	入れている間
 	4.	入っている間
 
-6.（駅のホームにて）
+---
+（駅のホームにて）
 
 「急げ、9時の特急に間に合うかもしれないし、走ろうか。」
 「いや、（　）もう間に合わないと思う。次の電車にしよう。」
@@ -355,7 +356,7 @@ sentence_grammar_example = """
 	3.	走らさきゃ
 	4.	走っちゃって
 
-7.
+---
 
 私はよくインターネットで物を買い替えるが、掃除機は壊れたら、実際に（　）買いたいものだ。
 	1.	見てないと
@@ -363,7 +364,8 @@ sentence_grammar_example = """
 	3.	見てから
 	4.	見ておいて
 
-8.（料亭にて）
+---
+（料亭にて）
 
 （体を丸めてお辞儀をして）「おいしそうな料理ですね。」
 店員：「どうぞたくさん（　）ください。」
@@ -372,7 +374,7 @@ sentence_grammar_example = """
 	3.	なおって
 	4.	いらっし
 
-9.
+---
 
 A：「最近、寒くなって（　）ね。」
 B：「ええ、今日は特に冷えますね。」
@@ -381,7 +383,8 @@ B：「ええ、今日は特に冷えますね。」
 	3.	いきました
 	4.	きました
 
-10.（大学にて）
+---
+（大学にて）
 
 A：「日曜日の留学生交流会、どうだった？」
 B：「楽しかったよ。初めてだったからちょっと緊張したけど、新しい友達もできたし。」
@@ -390,7 +393,8 @@ B：「楽しかったよ。初めてだったからちょっと緊張したけ�
 	3.	行きたかったなあ
 	4.	行けたらいいなあ
 
-11.（大学の事務所で）
+---
+（大学の事務所で）
 
 学生：「すみません、ペンを（　）。」
 事務所の人：「あ、はい、これを使ってください。」
@@ -399,7 +403,8 @@ B：「楽しかったよ。初めてだったからちょっと緊張したけ�
 	3.	貸したらいかがですか
 	4.	貸していただけませんか
 
-12.（家にて）
+---
+（家にて）
 
 娘：「ちょっと駅前の本屋に行ってくるね。」
 父：「雨が降っているし、車で（　）？」
@@ -409,7 +414,8 @@ B：「楽しかったよ。初めてだったからちょっと緊張したけ�
 	3.	送ってあげない
 	4.	送ってあげようか
 
-13.（会社にて）
+---
+（会社にて）
 
 「中山さん、今、ちょっといいですか。」
 中山：「あ、ごめんなさい、これからABC銀行に（　）、戻ってきてからでもいいですか。」
@@ -429,8 +435,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement in the generated content.
+Explanation: Append the correct answer and an explanation of the main challengesfor the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -473,7 +479,7 @@ structure_selection_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
 Task: Your job is to write a paper for JLPT N3 level. 
-At this section, please write an Japanese article about 300-400 words with 4-5 lines written with markdown. 
+At this section, please write a Japanese article about 300-400 words with 4-5 lines written with markdown. 
 After that, you should give 4 related questions from the content of the article. 
 The purpose is to also test candidate the ability to identify Japanese sentence structure. 
 Candidate should fill in the gaps in the article by choosing the grammar structure that best fits the context from the following 4 options, 
@@ -482,8 +488,8 @@ Instructions:
 Format: Follow the format of formal exam papers. Each question has 4 options in Japanese
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: give the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement and revised submission in the generated content.
+Explanation: give the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -535,8 +541,8 @@ Instructions:
 Format: Follow the format of formal exam papers. Don't show sequence number of the questions.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement and revised submission in the generated content.
+Explanation: Append the correct answer and an explanation of the main challengesfor the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -544,7 +550,7 @@ Formal exam paper: {example}
 """
 
 short_reading_example = """
-(1)
+---
 
 これは、今川さんが後のミゲルさんに書いたメールである。
 
@@ -572,7 +578,7 @@ short_reading_example = """
 	3.	北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか
 	4.	いろいろな店があって便利なので、北園駅の近くにしたらどうか
 
-(2)
+---
 
 友達のマキは、いいことがあったという話をよくする。だから私は、マキは運がいいのだと思っていた。しかし、最近、そうではないと気づいた。
 
@@ -585,7 +591,7 @@ short_reading_example = """
 	3.	ほかの人に起こった「いいこと」を一緒に喜んであげられる人
 	4.	ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人
 
- (3)
+---
 
 (会社で)
 
@@ -608,14 +614,13 @@ short_reading_example = """
 	3.	会議室の準備をする
 	4.	会議の資料を8人分印刷する
 
-    (4)
+---
 
 日本のファミリーレストランは、店の壁やソファーなどに、赤やオレンジ色のような暖かさを感じさせる色、つまり、暖色を使うことが多い。
 
 暖色には食欲を感じさせる効果があるので、暖色に囲まれていると、料理がおいしそうに見える。また、暖色は、時間を実際より長く感じさせる効果もある。客は、店にいた時間が短くても、ゆっくりできたように感じるのだ。
 
-
-26.
+---
 
 日本のファミリーレストランで暖色が使われる理由は何か。
 	1.	店の暖房にあまりお金がかからないようにするため
@@ -627,7 +632,7 @@ short_reading_example = """
 midsize_reading_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: Your job is to write a article for candidate to read, ensuring context is around 400 words.
+Task: Your job is to write a a Japanese article for candidate to read, ensuring context is around 400 words.
 The article is composed as 10-11 lines, you must split line in the console. 
 Then, give the question and ask candidate to choose the correct answer.  
 
@@ -635,8 +640,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement and revised submission in the generated content.
+Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -644,8 +649,6 @@ Formal exam paper: {example}
 """
 
 midsize_reading_example = """
-(1)
-
 これは、今川さんが後のミゲルさんに書いたメールである。
 
 
@@ -671,7 +674,7 @@ midsize_reading_example = """
 	3.	北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか
 	4.	いろいろな店があって便利なので、北園駅の近くにしたらどうか
 
-(2)
+---
 
 友達のマキは、いいことがあったという話をよくする。だから私は、マキは運がいいのだと思っていた。しかし、最近、そうではないと気づいた。
 
@@ -683,7 +686,7 @@ midsize_reading_example = """
 	3.	ほかの人に起こった「いいこと」を一緒に喜んであげられる人
 	4.	ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人
 
- (3)
+---
 
 (会社で)
 
@@ -700,19 +703,19 @@ midsize_reading_example = """
 9月8日 12:10
 原口
 
-25. このメモを読んで、ミンさんはまず何をしなければならないか。
+このメモを読んで、ミンさんはまず何をしなければならないか。
 	1.	会議の進行について口課長と確認する
 	2.	小会議室をキャンセルする
 	3.	会議室の準備をする
 	4.	会議の資料を8人分印刷する
 
-(4)
+---
 
 日本のファミリーレストランは、店の壁やソファーなどに、赤やオレンジ色のような暖かさを感じさせる色、つまり、暖色を使うことが多い。
 
 暖色には食欲を感じさせる効果があるので、暖色に囲まれていると、料理がおいしそうに見える。また、暖色は、時間を実際より長く感じさせる効果もある。客は、店にいた時間が短くても、ゆっくりできたように感じるのだ。
 
-26.
+---
 
 日本のファミリーレストランで暖色が使われる理由は何か。
 	1.	店の暖房にあまりお金がかからないようにするため
@@ -724,7 +727,7 @@ midsize_reading_example = """
 long_reading_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: Your job is to write a article for candidate to read, ensuring context is around 400 words.
+Task: Your job is to write a Japanese article for candidate to read, ensuring context is around 400 words.
 The article is composed as 10-11 lines, you should split line in the console. Then, you give 3-4 questions from the related content of the article.
 The content includes some emails Notification and letter articles.
 
@@ -732,8 +735,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement and revised submission in the generated content.
+Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -741,8 +744,6 @@ Formal exam paper: {example}
 """
 
 long_reading_example = """
-(1)
-
 これは、今川さんが後のミゲルさんに書いたメールである。
 
 ミゲルさん
@@ -761,25 +762,25 @@ long_reading_example = """
 
 今川
 
-23. まで電車で15分で行けるし、店も多いので、緑野にしたらどうか。
+まで電車で15分で行けるし、店も多いので、緑野にしたらどうか。
 	1.	(選択肢なし)
 	2.	いろいろな店があって便利なので、北園駅の近くにしたらどうか
 	3.	北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか
 	4.	いろいろな店があって便利なので、北園駅の近くにしたらどうか
 
-(2)
+---
 
 友達のマキは、いいことがあったという話をよくする。だから私は、マキは運がいいのだと思っていた。しかし、最近、そうではないと気づいた。
 
 先日二人で出かけたとき、事故で電車が止まっていて、何キロも歩いて帰ることになった。嫌だなと思っている私に、マキは「知らない町を歩けるね。」と嬉しそうに言った。とても不思議だった。でも、マキは楽しめてしまうのだ。今まで私が聞いた話も、マキだから「いいこと」だと感じたのだろうと思う。
 
-24. 最近、「私」はマキのことをどのような人だと思うようになったか。
+最近、「私」はマキのことをどのような人だと思うようになったか。
 	1.	「いいこと」ばかりが起きる。運がいい人
 	2.	「私」と一緒に経験したことは、何でも「いいこと」だと思える人
 	3.	ほかの人に起こった「いいこと」を一緒に喜んであげられる人
 	4.	ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人
 
- (3)
+---
 
 (会社で)
 
@@ -796,19 +797,19 @@ long_reading_example = """
 9月8日 12:10
 原口
 
-25. このメモを読んで、ミンさんはまず何をしなければならないか。
+このメモを読んで、ミンさんはまず何をしなければならないか。
 	1.	会議の進行について口課長と確認する
 	2.	小会議室をキャンセルする
 	3.	会議室の準備をする
 	4.	会議の資料を8人分印刷する
 
-(4)
+---
 
 日本のファミリーレストランは、店の壁やソファーなどに、赤やオレンジ色のような暖かさを感じさせる色、つまり、暖色を使うことが多い。
 
 暖色には食欲を感じさせる効果があるので、暖色に囲まれていると、料理がおいしそうに見える。また、暖色は、時間を実際より長く感じさせる効果もある。客は、店にいた時間が短くても、ゆっくりできたように感じるのだ。
 
-26.
+---
 
 日本のファミリーレストランで暖色が使われる理由は何か。
 	1.	店の暖房にあまりお金がかからないようにするため
@@ -820,17 +821,17 @@ long_reading_example = """
 information_retrieval_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: You are a japanese teacher. Your job is to write a paper for candidate to read a Japanese information retrieval article. 
+Task: You are a japanese teacher. Your job is to write a Japanese article for candidate to retrieve information. 
 you must provide a markdown format table and clues related to the table. The content cannot be same as the Formal exam paper
-The content includes searching for advertisements, notifications, schedules, and other information, 
-Then, ask candidate to answer 2 questions from the related content of the article. 
+The content includes searching for advertisements, notifications, schedules.
+After the article, asking candidate to answer 2 questions from the related content of the article. 
 
 Instructions:
 Format: Follow the format of formal exam papers. Each question has 4 options in Japanese
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement and revised submission in the generated content.
+Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -884,8 +885,8 @@ Instructions:
 Format: Follow the format of formal exam papers. Each question has 4 options in Japanese
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement and revised submission in the generated content.
+Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -893,7 +894,7 @@ Formal exam paper: {example}
 """
 
 topic_understanding_example = """
-1 番 
+--- 
 
 > 会社で課長と男の人が話しています。男の人は出張レポートのことを国きなればなみませんか。
 >
@@ -913,9 +914,7 @@ topic_understanding_example = """
 3. 話し合いのけっか  
 4. つぎのほうもん日
 
-正解：3  
-
-2 番
+---
 
 > 図書館で男の学生と受付の人が話しています。男の学生は本の子をずるためにこの後、何をしますか。
 >
@@ -933,7 +932,7 @@ topic_understanding_example = """
 3. もうしこみ用紙に書いて出す  
 4. かりている本をかえす
 
-3番
+---
 
 > 大学の音楽クラブの部室で女の学生と男の学生が話しています。女の学生は之後、何をしますか。
 >
@@ -953,7 +952,7 @@ topic_understanding_example = """
 3. アエ  
 4. イウエ
 
-4番
+---
 
 > 会社で女の人と男の人が話しています。女の人は之後まず何しますか。
 >
@@ -987,8 +986,8 @@ Instructions:
 Format: Follow the format of formal exam papers. Each question has 4 options in Japanese
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement and revised submission in the generated content.
+Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -1062,8 +1061,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement and revised submission in the generated content.
+Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -1071,10 +1070,7 @@ Formal exam paper: {example}
 """
 
 summary_understanding_example = """
-問題3  
 
-1番 正解: 2  
-会話内容:
 日本語学校で女の留学生と男の留学生が話しています。  
 - 女: 来月で佐藤先生、学校を辞めちゃうんだよね。  
 - 男: 寂しくなるね。  
@@ -1093,8 +1089,6 @@ summary_understanding_example = """
 
 ---  
 
-2番 正解: 1  
-会話内容:
 ラジオでアナウンサーが女の人にインタビューしています。  
 - 男: 高橋さんのグループは20年前から緑山に関わっていらっしゃるそうですね。  
 - 女: はい、私たちは緑山の自然を未来に残したいと考えています。緑山の木は、ほとんどは自然のものなんですが、商業目的で木が切られて、その後、新しく植えられたところもあるんです。  
@@ -1108,9 +1102,6 @@ summary_understanding_example = """
 4. 山に木を植える方法   
 
 ---  
-
-3番 正解: 2  
-会話内容:
 ラジオで男の人が話しています。  
 - 男: 僕、わさびが好きでお寿司や刺身にたくさん付けて食べるのが好きなんですよ。わさびって食べると鼻が痛くなったり、涙が出たりして苦手な人もいるかもしれませんけど、魚の匂いを消してくれたり、食べ物が悪くなるのを防いでくれたりするんですよね。最近、雑誌で読んだんですが、わさびを食べると食欲が出たり、風邪を引きにくくなったりするなど健康にもいいということが研究によってわかってきたそうです。  
 
@@ -1135,8 +1126,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement and revised submission in the generated content.
+Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
@@ -1214,8 +1205,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the suggesting answer and an explanation of the main challenges in simplified Chinese at each question.
-Additional Requirement: Don't show question requirement and revised submission in the generated content.
+Explanation: Append the suggesting answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
+Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}

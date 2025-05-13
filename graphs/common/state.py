@@ -33,7 +33,7 @@ class ListenSingleChoiceOutput(TypedDict):
 
 class ImageListenQuestionOutput(TypedDict):
     """Listen Simple Question Formatted Output"""
-    image_background: Annotated[str, "context in English for describing the background to generate image"]
+    image_background: Annotated[str, "detail prompt words for describing the background to generate image in English"]
     questions: SimpleChoiceQuestionOutput
     conversation: List[ListenConversation]
 
@@ -46,6 +46,6 @@ class SimpleQuestionState(TypedDict):
 
 class MultipleQuestionOutput(TypedDict):
     """An Article with several Question Formatted Output"""
-    article: Annotated[str, "the article for candidate to read"]
+    article: Annotated[str, "the article in Japanese for candidate to read"]
     questions: List[SimpleChoiceQuestionOutput]
 

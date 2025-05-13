@@ -62,7 +62,7 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges in simplified Chinese at each question.
+Explanation: Append the correct answer and an explanation of the main challenges  at each question.
 
 Dictionary: {vocab_dict}
 Search result: {search_result}
