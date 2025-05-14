@@ -41,7 +41,7 @@ def online_search_node_builder():
     return online_search
 
 # Nodes
-def generation_node_builder(vocab_dict, llm,  prompt_text, example):
+def generation_node_builder(llm,  prompt_text, example):
     def question_generator(state):
         """First LLM call to generate initial question"""
         print("---Generator----")
@@ -61,7 +61,6 @@ def generation_node_builder(vocab_dict, llm,  prompt_text, example):
         params = {
             "topic": state['topic'],
             "search_result": search_result,
-            "vocab_dict": vocab_dict,
             "example": example,
             "messages": state["messages"]
         }
@@ -121,8 +120,9 @@ def formatter_node_builder(llm, OutType: Type[TypedDict]):
                 (
                     "system",
                     """You are a AI assistance. your job is to format the following context to the structured output,  
-                    you must translate explanation and '説明' to simplified chinese.
-                    please don't modify contextual meanings and keep markdown format for the rest of content. Context: 
+                    please don't modify contextual meanings and format Context in following requirements:
+                    - 1. convert html to single line and remove line change tag.
+                    Context: 
                     {question}"""
                 )
             ]

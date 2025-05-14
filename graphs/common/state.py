@@ -46,6 +46,6 @@ class SimpleQuestionState(TypedDict):
 
 class MultipleQuestionOutput(TypedDict):
     """An Article with several Question Formatted Output"""
-    article: Annotated[str, "the article in Japanese for candidate to read"]
+    html_article: Annotated[str, "the article in HTML format"]
     questions: List[SimpleChoiceQuestionOutput]
 
