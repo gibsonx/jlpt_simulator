@@ -3,9 +3,7 @@ langchain_anthropic
 tavily-python
 langchain_community
 langchain_openai
-pandas
 pygraphviz
 langchain-aws
 langchain-tavily
 tqdm
-numpy==2.0.2
