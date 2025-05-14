@@ -8,4 +8,4 @@ pygraphviz
 langchain-aws
 langchain-tavily
 tqdm
-numpy==2.2.3
+numpy==2.0.2
