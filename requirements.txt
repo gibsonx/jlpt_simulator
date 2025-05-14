@@ -4,6 +4,5 @@ tavily-python
 langchain_community
 langchain_openai
 pygraphviz
-langchain-aws
 langchain-tavily
 tqdm

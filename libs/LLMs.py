@@ -1,7 +1,6 @@
 import os
 
 from dotenv import load_dotenv
-from langchain_aws import ChatBedrock
 from langchain_openai import AzureChatOpenAI
 
 # from langchain_community.embeddings import XinferenceEmbeddings
@@ -22,13 +21,4 @@ azure_ref_llm = AzureChatOpenAI(
     model_name="gpt-4.1-mini",
     api_version="2025-01-01-preview",
     temperature=0.5,
-)
-
-aws_llm = ChatBedrock(
-    # model_id="us.anthropic.claude-3-7-sonnet-20250219-v1:0",
-     model_id="us.anthropic.claude-3-5-haiku-20241022-v1:0",
-    model_kwargs=dict(temperature=0.5),
-    region = "us-east-2",
-    aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"],
-    aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"],
 )
