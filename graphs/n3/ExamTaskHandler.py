@@ -185,9 +185,9 @@ if __name__ == "__main__":
     random_word = random.choice(list(json.loads(n3_vocab).values()))
 
     # Kanji Reading
-    # handler = ExamTaskHandler()
-    # print(handler.kanji_reading(random_word))
-    #
+    handler = ExamTaskHandler()
+    print(handler.kanji_reading(random_word))
+    
     # # Write Chinese Task
     # handler = ExamTaskHandler()
     # print(handler.write_chinese(random_word))
@@ -229,8 +229,8 @@ if __name__ == "__main__":
     # print(handler.long_passage_read(random_word))
 
     # Info Retrieval Task
-    handler = ExamTaskHandler()
-    print(handler.info_retrieval(random_word))
+    # handler = ExamTaskHandler()
+    # print(handler.info_retrieval(random_word))
 
     # # Topic Understanding Task
     # handler = ExamTaskHandler()

@@ -2,7 +2,7 @@ kanji_reading_teacher_prompt = """
 Role: You are a Japanese teacher.
 
 Task: your job is to write a kanji question for the JLPT N3 exam. 
-Your job is to provide a kanji vocabulary word and ask the candidate to choose the correct kana reading.
+Your job is to provide a kanji vocabulary word and ask the candidate to choose the correct kana reading. The word being tested needs to be underlined.
 
 Instructions:
 Format: Follow the format of formal exam papers.
@@ -11,6 +11,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -46,7 +47,7 @@ Role: You are a Japanese teacher.
 
 Task: Your job is to write a word meaning question for a JLPT N3 level exam paper, asking candidate to identify the correct kanji writing of a given word in hiragana.
 Each question contains a word in hiragana in a sentence, and candidates must choose the correct option from 4 options. 
-The options should include one correct kanji form and three distractors that are plausible. 
+The options should include one correct kanji form and three distractors that are plausible. The word being tested needs to be underlined.
 
 Instructions:
 Format: Follow the format of formal exam papers.
@@ -55,46 +56,47 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 write_chinese_example = """
 ここから じゅんばん に見てください。
-	1.	順番
-	2.	項番
-	3.	順落
-	4.	項落
+    1.  順番
+    2.  項番
+    3.  順落
+    4.  項落
 
 父は銀行に つとめて います。
-	1.	勧めて
-	2.	勤めて
-	3.	仕めて
-	4.	労めて
+    1.  勧めて
+    2.  勤めて
+    3.  仕めて
+    4.  労めて
 
 ポケットが さゆう にあるんですね。
-	1.	裏表
-	2.	右左
-	3.	表裏
-	4.	左右
+    1.  裏表
+    2.  右左
+    3.  表裏
+    4.  左右
 
 昨日の試合は まけて しまいました。
-	1.	退けて
-	2.	負けて
-	3.	失けて
-	4.	欠けて
+    1.  退けて
+    2.  負けて
+    3.  失けて
+    4.  欠けて
 
 かこの 例も調べてみましょう。
-	1.	適去
-	2.	過古
-	3.	過去
-	4.	適古
+    1.  適去
+    2.  過古
+    3.  過去
+    4.  適古
 
 この資料はページが ぎゃく になっていますよ。
-	1.	達
-	2.	変
-	3.	逆
-	4.	別
+    1.  達
+    2.  変
+    3.  逆
+    4.  別
 """
 
 word_meaning_teacher_prompt = """
@@ -102,7 +104,7 @@ Role: You are a Japanese teacher.
 
 Task: Your job is to write a vocabulary question for candidates to identify the correct kanji writing of a given word in hiragana for a JLPT N3 level exam paper.
 Each question presents a word in hiragana within a sentence, and candidates must choose the correct kanji representation from four options. 
-The options should include one correct kanji form and three distractors that are plausible but incorrect.
+The options should include one correct kanji form and three distractors that are plausible but incorrect. The pseudonym of the selected word does not need to be given in the question type. The question type of word meaning selection mainly tests the form of multiple-choice questions, requiring candidates to select the most suitable words from the options based on the context of the sentence or passage. The question type should be left blank in the sentence or dialogue, requiring the selection of semantically and grammatically appropriate words from the options.
 
 Instructions:
 Format: Follow the format of formal exam papers.
@@ -111,76 +113,77 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 word_meaning_example = """
 大雪で朝から電車が（　）している。
-	1.	縮小
-	2.	滞在
-	3.	延期
-	4.	運休
+    1.  縮小
+    2.  滞在
+    3.  延期
+    4.  運休
 
 今日は暑かったので、シャツが（　）でぬれてしまった。
-	1.	いびき
-	2.	あくび
-	3.	あせ
-	4.	いき
+    1.  いびき
+    2.  あくび
+    3.  あせ
+    4.  いき
 
 答えさんに声がよく聞こえるように、（　）を使って話してください。
-	1.	サイレン
-	2.	エンジン
-	3.	ノック
-	4.	マイク
+    1.  サイレン
+    2.  エンジン
+    3.  ノック
+    4.  マイク
 
 昨日は早く寝たが、夜中に大きな音がして目が（　）しまった。
-	1.	嫌がって
-	2.	覚めて
-	3.	驚いて
-	4.	怖がって
+    1.  嫌がって
+    2.  覚めて
+    3.  驚いて
+    4.  怖がって
 
 林さんはいつも冗談ばかり言うので、その話も本当かどうか（　）。
-	1.	あやしい
-	2.	おそろしい
-	3.	にくらしい
-	4.	まずしい
+    1.  あやしい
+    2.  おそろしい
+    3.  にくらしい
+    4.  まずしい
 
 本日の面接の結果は、1 週間以内にメールで（　）します。
-	1.	広告
-	2.	合図
-	3.	通知
-	4.	伝言
+    1.  広告
+    2.  合図
+    3.  通知
+    4.  伝言
 
 兄はいつも（　）シャツを着ているので、遠くにいてもすぐに見つかる。
-	1.	派手な
-	2.	盛んな
-	3.	わがままな
-	4.	身近な
+    1.  派手な
+    2.  盛んな
+    3.  わがままな
+    4.  身近な
 
 ここに車を止めることは規則で（　）されていますから、すぐに移動してください。
-	1.	支配
-	2.	英殺
-	3.	禁止
-	4.	批判
+    1.  支配
+    2.  英殺
+    3.  禁止
+    4.  批判
 
 このコートは古いがまだ着られるので、捨ててしまうのは（　）。
-	1.	もったいない
-	2.	しかたない
-	3.	かわいらしい
-	4.	こいかない
+    1.  もったいない
+    2.  しかたない
+    3.  かわいらしい
+    4.  こいかない
 
 弟への誕生日プレゼントは、誕生日まで弟に見つからないように、たんすの奥に（　）。
-	1.	包んだ
-	2.	隠した
-	3.	囲んだ
-	4.	閉じた
+    1.  包んだ
+    2.  隠した
+    3.  囲んだ
+    4.  閉じた
 
 山口さんは今度のパーティーには来られないかもしれないが、（　）誘うつもりだ。
-	1.	十分
-	2.	一応
-	3.	けっこう
-	4.	たいてい
+    1.  十分
+    2.  一応
+    3.  けっこう
+    4.  たいてい
 """
 
 synonym_substitution_teacher_prompt = """
@@ -188,7 +191,7 @@ Role: You are a Japanese teacher.
 
 Task: Your job is to write a synonym question for candidates to identify the most appropriate word with a similar meaning in a JLPT N3 level exam paper. 
 Each question presents a word in kanji or katakana within a sentence.
-The options should include one correct synonym and three distractors that are plausible.
+The options should include one correct synonym and three distractors that are plausible. The synonyms that need to be replaced should be indicated with underscores.
 
 Instructions:
 Format: Follow the format of formal exam papers.
@@ -197,40 +200,41 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 synonym_substitution_example = """
 さん、避難してください。
-	1.	ならんで
-	2.	入って
-	3.	にげて
-	4.	急いで
+    1.  ならんで
+    2.  入って
+    3.  にげて
+    4.  急いで
 
 来週、ここで企業の説明会があります。
-	1.	旅行
-	2.	会社
-	3.	大学
-	4.	建物
+    1.  旅行
+    2.  会社
+    3.  大学
+    4.  建物
 
 ちょっとバックしてください。
-	1.	前に進んで
-	2.	後ろに下がって
-	3.	横に動いて
-	4.	そこで止まって
+    1.  前に進んで
+    2.  後ろに下がって
+    3.  横に動いて
+    4.  そこで止まって
 
 このやり方がベストだ。
-	1.	最もよい
-	2.	最もよくない
-	3.	最も難しい
-	4.	最も難しくない
+    1.  最もよい
+    2.  最もよくない
+    3.  最も難しい
+    4.  最も難しくない
 
 田中さんがようやく来てくれました。
-	1.	笑に
-	2.	すぐに
-	3.	やっと
-	4.	初めて
+    1.  笑に
+    2.  すぐに
+    3.  やっと
+    4.  初めて
 """
 
 word_usage_teacher_prompt = """
@@ -246,40 +250,41 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 word_usage_example = """
 内容
-	1.	修理のため、エアコンの内容を一度取り出します
-	2.	鍋の中にカレーの内容を入れて、1時間くらい煮てください
-	3.	古い財布から新しい財布へ内容を移しました
-	4.	この手紙の内容は、ほかの人には秘密にしてください
+    1.  修理のため、エアコンの内容を一度取り出します
+    2.  鍋の中にカレーの内容を入れて、1時間くらい煮てください
+    3.  古い財布から新しい財布へ内容を移しました
+    4.  この手紙の内容は、ほかの人には秘密にしてください
 
 活動
-	1.	彼は有名なロック歌手だったが、今は活動していない
-	2.	山に登ると、新鮮な空気が活動していて気持ちがいい
-	3.	さっきまで活動していたパソコンが、急に動かなくなった
-	4.	駅前のコンビニは24時間活動しているので便利だ
+    1.  彼は有名なロック歌手だったが、今は活動していない
+    2.  山に登ると、新鮮な空気が活動していて気持ちがいい
+    3.  さっきまで活動していたパソコンが、急に動かなくなった
+    4.  駅前のコンビニは24時間活動しているので便利だ
 
 落ち着く
-	1.	この辺りは、冬になると雪が落ち着いて、春になるまで溶けません
-	2.	シャツにしみが落ち着いてしまって、洗ってもきれいになりません
-	3.	あそこの木の上に美しい鳥が落ち着いています
-	4.	大好きなこの曲を聞くと、いつも気持ちが落ち着きます
+    1.  この辺りは、冬になると雪が落ち着いて、春になるまで溶けません
+    2.  シャツにしみが落ち着いてしまって、洗ってもきれいになりません
+    3.  あそこの木の上に美しい鳥が落ち着いています
+    4.  大好きなこの曲を聞くと、いつも気持ちが落ち着きます
 
 ぐっすり
-	1.	遠慮しないで、ぐっすり食べてください
-	2.	優勝できたのは、毎日ぐっすり練習したからだと思う
-	3.	今日は疲れているので、朝までぐっすり眠れそうだ
-	4.	古い友人と久しぶりに会って、ぐっすりおしゃべりした
+    1.  遠慮しないで、ぐっすり食べてください
+    2.  優勝できたのは、毎日ぐっすり練習したからだと思う
+    3.  今日は疲れているので、朝までぐっすり眠れそうだ
+    4.  古い友人と久しぶりに会って、ぐっすりおしゃべりした
 
 性格
-	1.	日本の古い性格に興味があるので、神社やお寺によく行きます
-	2.	森さんはおとなしい性格で、自分の意見はあまり言いません
-	3.	値段が高くても、塗装で性格のいい車を買うつもりです
-	4.	音楽の性格を伸ばすために、5歳から専門家の指導を受けました
+    1.  日本の古い性格に興味があるので、神社やお寺によく行きます
+    2.  森さんはおとなしい性格で、自分の意見はあまり言いません
+    3.  値段が高くても、塗装で性格のいい車を買うつもりです
+    4.  音楽の性格を伸ばすために、5歳から専門家の指導を受けました
 """
 
 sentence_grammar_teacher_prompt = """
@@ -294,108 +299,108 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 sentence_grammar_example = """
 私は、自分の作ったパンを多くたくさんの人（　）食べてほしいと思って、パン屋を始めた。
-	1.	は
-	2.	に
-	3.	まで
-	4.	なら
-
+    1.  は
+    2.  に
+    3.  まで
+    4.  なら
 
 ---
 （学校にて）
 
 学生：「先生、今、よろしいですか。英語の発表（　）、ちょっと相談したいのですが。」
 先生：「ええ、いいですよ。」
-	1.	にとって
-	2.	によると
-	3.	のことで
-	4.	のは
+    1.  にとって
+    2.  によると
+    3.  のことで
+    4.  のは
 
 ---
 
 いつもは勉強を2時間以上かかるが、今日は1時間（　）終わりそうだ。
-	1.	くらい
-	2.	ころで
-	3.	ぐらい
-	4.	ぐらいで
+    1.  くらい
+    2.  ころで
+    3.  ぐらい
+    4.  ぐらいで
 
 ---
 
 母：「えっ、（　）ご飯食べたばかりなのに、もうおなかすいたの？」
-	1.	そろそろ
-	2.	だんだん
-	3.	さっき
-	4.	ずっと
+    1.  そろそろ
+    2.  だんだん
+    3.  さっき
+    4.  ずっと
 
 ---
 
 大事なレシートをズボンのポケットに（　）洗濯してしまった。
-	1.	入れたまま
-	2.	入ったまま
-	3.	入れている間
-	4.	入っている間
+    1.  入れたまま
+    2.  入ったまま
+    3.  入れている間
+    4.  入っている間
 
 ---
 （駅のホームにて）
 
 「急げ、9時の特急に間に合うかもしれないし、走ろうか。」
 「いや、（　）もう間に合わないと思う。次の電車にしよう。」
-	1.	走ってて
-	2.	走ってるよ
-	3.	走らさきゃ
-	4.	走っちゃって
+    1.  走ってて
+    2.  走ってるよ
+    3.  走らさきゃ
+    4.  走っちゃって
 
 ---
 
 私はよくインターネットで物を買い替えるが、掃除機は壊れたら、実際に（　）買いたいものだ。
-	1.	見てないと
-	2.	見ておきたくなった
-	3.	見てから
-	4.	見ておいて
+    1.  見てないと
+    2.  見ておきたくなった
+    3.  見てから
+    4.  見ておいて
 
 ---
 （料亭にて）
 
 （体を丸めてお辞儀をして）「おいしそうな料理ですね。」
 店員：「どうぞたくさん（　）ください。」
-	1.	召し上がって
-	2.	おっしゃって
-	3.	なおって
-	4.	いらっし
+    1.  召し上がって
+    2.  おっしゃって
+    3.  なおって
+    4.  いらっし
 
 ---
 
 A：「最近、寒くなって（　）ね。」
 B：「ええ、今日は特に冷えますね。」
-	1.	いました
-	2.	ありました
-	3.	いきました
-	4.	きました
+    1.  いました
+    2.  ありました
+    3.  いきました
+    4.  きました
 
 ---
 （大学にて）
 
 A：「日曜日の留学生交流会、どうだった？」
 B：「楽しかったよ。初めてだったからちょっと緊張したけど、新しい友達もできたし。」
-	1.	行ってよかったよ
-	2.	行こうかと思うよ
-	3.	行きたかったなあ
-	4.	行けたらいいなあ
+    1.  行ってよかったよ
+    2.  行こうかと思うよ
+    3.  行きたかったなあ
+    4.  行けたらいいなあ
 
 ---
 （大学の事務所で）
 
 学生：「すみません、ペンを（　）。」
 事務所の人：「あ、はい、これを使ってください。」
-	1.	お貸しできますか
-	2.	お貸しいたしますか
-	3.	貸したらいかがですか
-	4.	貸していただけませんか
+    1.  お貸しできますか
+    2.  お貸しいたしますか
+    3.  貸したらいかがですか
+    4.  貸していただけませんか
 
 ---
 （家にて）
@@ -403,20 +408,20 @@ B：「楽しかったよ。初めてだったからちょっと緊張したけ�
 娘：「ちょっと駅前の本屋に行ってくるね。」
 父：「雨が降っているし、車で（　）？」
 娘：「いいの？ありがとう。」
-	1.	送っててない
-	2.	送ってこようか
-	3.	送ってあげない
-	4.	送ってあげようか
+    1.  送っててない
+    2.  送ってこようか
+    3.  送ってあげない
+    4.  送ってあげようか
 
 ---
 （会社にて）
 
 「中山さん、今、ちょっといいですか。」
 中山：「あ、ごめんなさい、これからABC銀行に（　）、戻ってきてからでもいいですか。」
-	1.	行くところだからです
-	2.	行くとこなんです
-	3.	行っているところだからです
-	4.	行っているところなんです
+    1.  行くところだからです
+    2.  行くとこなんです
+    3.  行っているところだからです
+    4.  行っているところなんです
 """
 
 sentence_sort_teacher_prompt = """
@@ -432,40 +437,41 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challengesfor the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 sentence_sort_example = """
 山川大学では、__★_ 新入生がにアンケート調査を行っている。
-	1.	大学生活
-	2.	持っている
-	3.	に対して
-	4.	イメージ
+    1.  大学生活
+    2.  持っている
+    3.  に対して
+    4.  イメージ
 
 来週の夫の誕生日には、__★_ つもりだ。
-	1.	最近
-	2.	プレゼントする
-	3.	かばんを
-	4.	欲しがっている
+    1.  最近
+    2.  プレゼントする
+    3.  かばんを
+    4.  欲しがっている
 
 私は、健康の__★_。
-	1.	している
-	2.	ために
-	3.	毎日8時間以上寝る
-	4.	ように
+    1.  している
+    2.  ために
+    3.  毎日8時間以上寝る
+    4.  ように
 
 部長が__★_ クッキーがとてもおいしいので、私も東京に行くことがあったら、買おうと思う。
-	1.	たびに
-	2.	ために
-	3.	お土産の
-	4.	ように
+    1.  たびに
+    2.  ために
+    3.  お土産の
+    4.  ように
 
 私はこの図書館が好きだ。広くて本の数が多い __★_ いい。
-	1.	景色を楽しみながら
-	2.	大きな窓から街が見えて
-	3.	だけでなく
-	4.	読書ができるのも
+    1.  景色を楽しみながら
+    2.  大きな窓から街が見えて
+    3.  だけでなく
+    4.  読書ができるのも
 """
 
 structure_selection_teacher_prompt = """
@@ -484,6 +490,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: give the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -536,6 +543,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challengesfor the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -544,7 +552,6 @@ short_reading_example = """
 ---
 
 これは、今川さんが後のミゲルさんに書いたメールである。
-
 
 ミゲルさん
 
@@ -562,12 +569,11 @@ short_reading_example = """
 
 今川
 
-
 23. まで電車で15分で行けるし、店も多いので、緑野にしたらどうか。
-	1.	(選択肢なし)
-	2.	いろいろな店があって便利なので、北園駅の近くにしたらどうか
-	3.	北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか
-	4.	いろいろな店があって便利なので、北園駅の近くにしたらどうか
+    1.  (選択肢なし)
+    2.  いろいろな店があって便利なので、北園駅の近くにしたらどうか
+    3.  北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか
+    4.  いろいろな店があって便利なので、北園駅の近くにしたらどうか
 
 ---
 
@@ -575,12 +581,11 @@ short_reading_example = """
 
 先日二人で出かけたとき、事故で電車が止まっていて、何キロも歩いて帰ることになった。嫌だなと思っている私に、マキは「知らない町を歩けるね。」と嬉しそうに言った。とても不思議だった。でも、マキは楽しめてしまうのだ。今まで私が聞いた話も、マキだから「いいこと」だと感じたのだろうと思う。
 
-
 24. 最近、「私」はマキのことをどのような人だと思うようになったか。
-	1.	「いいこと」ばかりが起きる。運がいい人
-	2.	「私」と一緒に経験したことは、何でも「いいこと」だと思える人
-	3.	ほかの人に起こった「いいこと」を一緒に喜んであげられる人
-	4.	ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人
+    1.  「いいこと」ばかりが起きる。運がいい人
+    2.  「私」と一緒に経験したことは、何でも「いいこと」だと思える人
+    3.  ほかの人に起こった「いいこと」を一緒に喜んであげられる人
+    4.  ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人
 
 ---
 
@@ -600,10 +605,10 @@ short_reading_example = """
 原口
 
 25. このメモを読んで、ミンさんはまず何をしなければならないか。
-	1.	会議の進行について口課長と確認する
-	2.	小会議室をキャンセルする
-	3.	会議室の準備をする
-	4.	会議の資料を8人分印刷する
+    1.  会議の進行について口課長と確認する
+    2.  小会議室をキャンセルする
+    3.  会議室の準備をする
+    4.  会議の資料を8人分印刷する
 
 ---
 
@@ -614,10 +619,10 @@ short_reading_example = """
 ---
 
 日本のファミリーレストランで暖色が使われる理由は何か。
-	1.	店の暖房にあまりお金がかからないようにするため
-	2.	客に、店の料理と店で過ごす時間にいい印象を持ってもらうため
-	3.	店をおしゃれに見せて、客に店に入りたいと思ってもらうため
-	4.	客に長く店にいてもらって、料理をたくさん注文してもらうため       
+    1.  店の暖房にあまりお金がかからないようにするため
+    2.  客に、店の料理と店で過ごす時間にいい印象を持ってもらうため
+    3.  店をおしゃれに見せて、客に店に入りたいと思ってもらうため
+    4.  客に長く店にいてもらって、料理をたくさん注文してもらうため       
 """
 
 midsize_reading_teacher_prompt = """
@@ -634,13 +639,13 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 midsize_reading_example = """
 これは、今川さんが後のミゲルさんに書いたメールである。
-
 
 ミゲルさん
 
@@ -659,10 +664,10 @@ midsize_reading_example = """
 今川
 
 23. まで電車で15分で行けるし、店も多いので、緑野にしたらどうか。
-	1.	(選択肢なし)
-	2.	いろいろな店があって便利なので、北園駅の近くにしたらどうか
-	3.	北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか
-	4.	いろいろな店があって便利なので、北園駅の近くにしたらどうか
+    1.  (選択肢なし)
+    2.  いろいろな店があって便利なので、北園駅の近くにしたらどうか
+    3.  北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか
+    4.  いろいろな店があって便利なので、北園駅の近くにしたらどうか
 
 ---
 
@@ -671,10 +676,10 @@ midsize_reading_example = """
 先日二人で出かけたとき、事故で電車が止まっていて、何キロも歩いて帰ることになった。嫌だなと思っている私に、マキは「知らない町を歩けるね。」と嬉しそうに言った。とても不思議だった。でも、マキは楽しめてしまうのだ。今まで私が聞いた話も、マキだから「いいこと」だと感じたのだろうと思う。
 
 24. 最近、「私」はマキのことをどのような人だと思うようになったか。
-	1.	「いいこと」ばかりが起きる。運がいい人
-	2.	「私」と一緒に経験したことは、何でも「いいこと」だと思える人
-	3.	ほかの人に起こった「いいこと」を一緒に喜んであげられる人
-	4.	ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人
+    1.  「いいこと」ばかりが起きる。運がいい人
+    2.  「私」と一緒に経験したことは、何でも「いいこと」だと思える人
+    3.  ほかの人に起こった「いいこと」を一緒に喜んであげられる人
+    4.  ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人
 
 ---
 
@@ -694,10 +699,10 @@ midsize_reading_example = """
 原口
 
 このメモを読んで、ミンさんはまず何をしなければならないか。
-	1.	会議の進行について口課長と確認する
-	2.	小会議室をキャンセルする
-	3.	会議室の準備をする
-	4.	会議の資料を8人分印刷する
+    1.  会議の進行について口課長と確認する
+    2.  小会議室をキャンセルする
+    3.  会議室の準備をする
+    4.  会議の資料を8人分印刷する
 
 ---
 
@@ -708,10 +713,10 @@ midsize_reading_example = """
 ---
 
 日本のファミリーレストランで暖色が使われる理由は何か。
-	1.	店の暖房にあまりお金がかからないようにするため
-	2.	客に、店の料理と店で過ごす時間にいい印象を持ってもらうため
-	3.	店をおしゃれに見せて、客に店に入りたいと思ってもらうため
-	4.	客に長く店にいてもらって、料理をたくさん注文してもらうため   
+    1.  店の暖房にあまりお金がかからないようにするため
+    2.  客に、店の料理と店で過ごす時間にいい印象を持ってもらうため
+    3.  店をおしゃれに見せて、客に店に入りたいと思ってもらうため
+    4.  客に長く店にいてもらって、料理をたくさん注文してもらうため   
 """
 
 long_reading_teacher_prompt = """
@@ -728,6 +733,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -752,10 +758,10 @@ long_reading_example = """
 今川
 
 まで電車で15分で行けるし、店も多いので、緑野にしたらどうか。
-	1.	(選択肢なし)
-	2.	いろいろな店があって便利なので、北園駅の近くにしたらどうか
-	3.	北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか
-	4.	いろいろな店があって便利なので、北園駅の近くにしたらどうか
+    1.  (選択肢なし)
+    2.  いろいろな店があって便利なので、北園駅の近くにしたらどうか
+    3.  北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか
+    4.  いろいろな店があって便利なので、北園駅の近くにしたらどうか
 
 ---
 
@@ -764,10 +770,10 @@ long_reading_example = """
 先日二人で出かけたとき、事故で電車が止まっていて、何キロも歩いて帰ることになった。嫌だなと思っている私に、マキは「知らない町を歩けるね。」と嬉しそうに言った。とても不思議だった。でも、マキは楽しめてしまうのだ。今まで私が聞いた話も、マキだから「いいこと」だと感じたのだろうと思う。
 
 最近、「私」はマキのことをどのような人だと思うようになったか。
-	1.	「いいこと」ばかりが起きる。運がいい人
-	2.	「私」と一緒に経験したことは、何でも「いいこと」だと思える人
-	3.	ほかの人に起こった「いいこと」を一緒に喜んであげられる人
-	4.	ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人
+    1.  「いいこと」ばかりが起きる。運がいい人
+    2.  「私」と一緒に経験したことは、何でも「いいこと」だと思える人
+    3.  ほかの人に起こった「いいこと」を一緒に喜んであげられる人
+    4.  ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人
 
 ---
 
@@ -787,10 +793,10 @@ long_reading_example = """
 原口
 
 このメモを読んで、ミンさんはまず何をしなければならないか。
-	1.	会議の進行について口課長と確認する
-	2.	小会議室をキャンセルする
-	3.	会議室の準備をする
-	4.	会議の資料を8人分印刷する
+    1.  会議の進行について口課長と確認する
+    2.  小会議室をキャンセルする
+    3.  会議室の準備をする
+    4.  会議の資料を8人分印刷する
 
 ---
 
@@ -801,28 +807,28 @@ long_reading_example = """
 ---
 
 日本のファミリーレストランで暖色が使われる理由は何か。
-	1.	店の暖房にあまりお金がかからないようにするため
-	2.	客に、店の料理と店で過ごす時間にいい印象を持ってもらうため
-	3.	店をおしゃれに見せて、客に店に入りたいと思ってもらうため
-	4.	客に長く店にいてもらって、料理をたくさん注文してもらうため      
+    1.  店の暖房にあまりお金がかからないようにするため
+    2.  客に、店の料理と店で過ごす時間にいい印象を持ってもらうため
+    3.  店をおしゃれに見せて、客に店に入りたいと思ってもらうため
+    4.  客に長く店にいてもらって、料理をたくさん注文してもらうため      
 """
 
 information_retrieval_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
 Task: You are a japanese teacher. Your job is to write a Japanese article for candidate to retrieve information. 
-you must provide a table and clues related to the table. The content cannot be same as the Formal exam paper
+you must provide a markdown format table and clues related to the table. The content cannot be same as the Formal exam paper
 The content includes searching for advertisements, notifications, schedules.
 After the article, asking candidate to answer 2 questions from the related content of the article. 
 
 Instructions:
-Format: Follow the format of formal exam papers. Each question has 4 options in Japanese. 
+Format: Follow the format of formal exam papers. Each question has 4 options in Japanese
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
-The article must be written as html code in a single line.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -877,6 +883,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -977,6 +984,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -1051,6 +1059,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -1115,6 +1124,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -1158,7 +1168,6 @@ actively_expression_example = """
 3. きそく正しい生活になったこと    
 4. かぞくの会話がふえたこと
 
-
 3番
 
 雑誌を作る会社で男の人と女の人が話しています。女の人は何のためにもう一度パン屋に行きますか。女の人です。  
@@ -1193,6 +1202,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the suggesting answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
+Dictionary: {vocab_dict}
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -1279,3 +1289,5 @@ immediate_ack_example = """
   2. じゃ、報告はしないことにします  
   3. そうですね。伝えておきます  
 """
+
+
