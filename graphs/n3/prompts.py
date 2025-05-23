@@ -20,81 +20,93 @@ kanji_reading_example = """
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>日本語読み方問題</title>
+    <meta charset="UTF-8">
+    <title>日本語 読み方テスト</title>
 </head>
 <body>
-  <h1>問題1</h1>
-  <p>のことばの読み方として最もよいものを、1・2・3・4から一つえらびなさい。</p>
+    <h2>問題１　<u>のことばの読み方</u>として最もよいものを、１・２・３・４から一つえらびなさい。</h2>
 
-  <ol>
-    <li>山田さんがちらしを配った。
-      <ol type="1">
-        <li>ひろった</li>
-        <li>くばった</li>
-        <li>やぶった</li>
-        <li>はった</li>
-      </ol>
-    </li>
-    <li>私の国は石油を輸入しています。
-      <ol type="1">
-        <li>いしゅ</li>
-        <li>せきう</li>
-        <li>せきゆ</li>
-        <li>いしう</li>
-      </ol>
-    </li>
-    <li>卒業式には生徒の父母もたくさん来ていた。
-      <ol type="1">
-        <li>ふば</li>
-        <li>ふぼ</li>
-        <li>ふうぼ</li>
-        <li>ふうば</li>
-      </ol>
-    </li>
-    <li>この町の主要な産業は何ですか。
-      <ol type="1">
-        <li>じゅおう</li>
-        <li>しゅおう</li>
-        <li>じゅうよう</li>
-        <li>しゅよう</li>
-      </ol>
-    </li>
-    <li>これは加熱して食べてください。
-      <ol type="1">
-        <li>かねつ</li>
-        <li>かあつ</li>
-        <li>かいねつ</li>
-        <li>かいあつ</li>
-      </ol>
-    </li>
-    <li>川はあの辺りで深くなっている。
-      <ol type="1">
-        <li>ふかく</li>
-        <li>あさく</li>
-        <li>ひろく</li>
-        <li>せまく</li>
-      </ol>
-    </li>
-    <li>文句を言われたので、つい感情的になってしまった。
-      <ol type="1">
-        <li>がんじょうてき</li>
-        <li>かんしょうてき</li>
-        <li>かんじょうてき</li>
-        <li>がんしょうてき</li>
-      </ol>
-    </li>
-    <li>それは残さないでください。
-      <ol type="1">
-        <li>なくさないで</li>
-        <li>よごさないで</li>
-        <li>こぼさないで</li>
-        <li>のこさないで</li>
-      </ol>
-    </li>
-  </ol>
+    <ol>
+        <li>
+            山田さんがちらしを<u>配った</u>。
+            <ol type="1">
+                <li>ひろった</li>
+                <li>くばった</li>
+                <li>やぶった</li>
+                <li>はった</li>
+            </ol>
+        </li>
+        <li>
+            私の国は<u>石油</u>を輸入しています。
+            <ol type="1">
+                <li>いしゅ</li>
+                <li>せきう</li>
+                <li>せきゆ</li>
+                <li>いしう</li>
+            </ol>
+        </li>
+        <li>
+            卒業式には生徒の<u>父母</u>もたくさん来ていた。
+            <ol type="1">
+                <li>ふば</li>
+                <li>ふぼ</li>
+                <li>ふうぼ</li>
+                <li>ふうば</li>
+            </ol>
+        </li>
+        <li>
+            この町の<u>主要</u>な産業は何ですか。
+            <ol type="1">
+                <li>じゅおう</li>
+                <li>しゅおう</li>
+                <li>じゅうよう</li>
+                <li>しゅよう</li>
+            </ol>
+        </li>
+        <li>
+            これは<u>加熱</u>して食べてください。
+            <ol type="1">
+                <li>ねつねつ</li>
+                <li>かあつ</li>
+                <li>かいねつ</li>
+                <li>かねつ</li>
+            </ol>
+        </li>
+        <li>
+            川はあの<u>辺り</u>で<u>深く</u>なっている。
+            <ol type="1">
+                <li>ふかく</li>
+                <li>あさく</li>
+                <li>ひろく</li>
+                <li>せまく</li>
+            </ol>
+        </li>
+        <li>
+            文句を言われたので、つい<u>感情的</u>になってしまった。
+            <ol type="1">
+                <li>がんじょうてき</li>
+                <li>かんしょうてき</li>
+                <li>かんじょうてき</li>
+                <li>がんしょうてき</li>
+            </ol>
+        </li>
+        <li>
+            これは<u>残さない</u>でください。
+            <ol type="1">
+                <li>なくさないで</li>
+                <li>よごさないで</li>
+                <li>こぼさないで</li>
+                <li>のこさないで</li>
+            </ol>
+        </li>
+    </ol>
 </body>
 </html>
+
+```
+
+Each `<u>` tag wraps the kanji or phrase that is underlined in the image. Let me know if you’d like the correct answers marked or the text translated.
+
 """
 
 write_chinese_teacher_prompt = """
