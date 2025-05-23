@@ -10,7 +10,7 @@ from typing_extensions import TypedDict
 
 class SimpleChoiceQuestionOutput(TypedDict):
     """Simple Question Formatted Output"""
-    question: Annotated[str, "the question to ask candidate in Japanese"]
+    question: Annotated[str, "the question to ask candidate in Japanese in html format"]
     explanation: Annotated[str, "the key challenges and explanation in simplified Chinese"]
     correct_answer: Annotated[int, "correct option"]
     choices: Annotated[List, "options as a list for candidate to choose in Japanese"]

@@ -6,3 +6,5 @@ chroma_db/*
 tokenizer
 .env
 data/*
+*.pyc
+**/__pycache__

@@ -11,35 +11,90 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 kanji_reading_example = """
-山田さんがちらしを **配った**。
-　1 ひろった　2 くばった　3 やぶった　4 はった
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>日本語読み方問題</title>
+</head>
+<body>
+  <h1>問題1</h1>
+  <p>のことばの読み方として最もよいものを、1・2・3・4から一つえらびなさい。</p>
 
-私の国は **石油** を輸入しています。  
-　1 いしゅ　2 せきそう　3 せきゆ　4 いしう
-
-3. 卒業式には住徒の **父母** たちもたくさん来ていた。  
-　1 ふば　2 ふぼ　3 ふうぼ　4 ちちば
-
-この町の主要な産業は何ですか。  
-　1 じゅちょう　2 しゅおう　3 じゅよう　4 しゅよう
-
-これは **加熱** して食べてください。  
-　1 かわつ　2 かねつ　3 かいねつ　4 かいあつ
-
-川はあの **辺り** で **深く** なっている。  
-　1 ふかく　2 あさく　3 ひろく　4 せまく
-
-失礼なことを言われたので、つい **感情的** になってしまった。  
-　1 がんじょうてき　2 かんじょうてき　3 かんしょうてき　4 がんしょうてき
-
-これは **残さない** でください。
-　1 なさないで　2 よこさないで　3 ごぼさないで　4 のこさないで
+  <ol>
+    <li>山田さんがちらしを配った。
+      <ol type="1">
+        <li>ひろった</li>
+        <li>くばった</li>
+        <li>やぶった</li>
+        <li>はった</li>
+      </ol>
+    </li>
+    <li>私の国は石油を輸入しています。
+      <ol type="1">
+        <li>いしゅ</li>
+        <li>せきう</li>
+        <li>せきゆ</li>
+        <li>いしう</li>
+      </ol>
+    </li>
+    <li>卒業式には生徒の父母もたくさん来ていた。
+      <ol type="1">
+        <li>ふば</li>
+        <li>ふぼ</li>
+        <li>ふうぼ</li>
+        <li>ふうば</li>
+      </ol>
+    </li>
+    <li>この町の主要な産業は何ですか。
+      <ol type="1">
+        <li>じゅおう</li>
+        <li>しゅおう</li>
+        <li>じゅうよう</li>
+        <li>しゅよう</li>
+      </ol>
+    </li>
+    <li>これは加熱して食べてください。
+      <ol type="1">
+        <li>かねつ</li>
+        <li>かあつ</li>
+        <li>かいねつ</li>
+        <li>かいあつ</li>
+      </ol>
+    </li>
+    <li>川はあの辺りで深くなっている。
+      <ol type="1">
+        <li>ふかく</li>
+        <li>あさく</li>
+        <li>ひろく</li>
+        <li>せまく</li>
+      </ol>
+    </li>
+    <li>文句を言われたので、つい感情的になってしまった。
+      <ol type="1">
+        <li>がんじょうてき</li>
+        <li>かんしょうてき</li>
+        <li>かんじょうてき</li>
+        <li>がんしょうてき</li>
+      </ol>
+    </li>
+    <li>それは残さないでください。
+      <ol type="1">
+        <li>なくさないで</li>
+        <li>よごさないで</li>
+        <li>こぼさないで</li>
+        <li>のこさないで</li>
+      </ol>
+    </li>
+  </ol>
+</body>
+</html>
 """
 
 write_chinese_teacher_prompt = """
@@ -56,7 +111,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -113,7 +168,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -200,7 +255,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -241,7 +296,8 @@ word_usage_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
 Task: Your job is to write a word usage question for candidates, examining the usage of words in actual contexts.
-request candidates to select the most appropriate context, includes Japanese idiomatic expressions and fixed collocations.)
+request candidates to select the most appropriate context, includes Japanese idiomatic expressions and fixed collocations.
+The words to be examined need to be underlined in each sentence.
 
 Instructions:
 Format: Follow the format of formal exam papers.
@@ -250,7 +306,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -299,7 +355,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -437,7 +493,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challengesfor the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -490,7 +546,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: give the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -543,7 +599,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challengesfor the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -639,7 +695,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -733,7 +789,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -828,7 +884,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -883,7 +939,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -984,7 +1040,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -1059,7 +1115,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -1124,7 +1180,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -1202,7 +1258,7 @@ Reference: Get inspiration from the Search result. Only use the format as a refe
 Explanation: Append the suggesting answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
 Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
 
-Dictionary: {vocab_dict}
+
 Search result: {search_result}
 Formal exam paper: {example}
 """
@@ -1289,5 +1345,6 @@ immediate_ack_example = """
   2. じゃ、報告はしないことにします  
   3. そうですね。伝えておきます  
 """
+
 
 
