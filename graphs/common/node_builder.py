@@ -7,6 +7,9 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_tavily import TavilySearch
 from langgraph.graph import START, END
 from typing_extensions import TypedDict
+import logging
+
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 
@@ -69,6 +72,8 @@ def generation_node_builder(llm,  prompt_text, example):
 
         msg = generate.invoke(input=params)
 
+        logger.info("Generated message: {}".format(msg.content))
+
         return {"question": msg.content, "messages": [AIMessage(content=msg.content)]}
 
     return question_generator
@@ -88,12 +93,13 @@ def reflection_node_builder(llm):
             [
                 (
                     "system",
-            """ you are a Japanese language educator reviewing a JLPT exam paper. Generate critique and recommendations for the Japanese teacher's submission.
-               the review focuses on content accuracy and question quality. 
+            """  You are a Japanese language educator reviewing a JLPT exam paper. Generate critique and recommendations for the Japanese teacher's submission in English.
+                 You must read the Instructions in the previous messages and give feedback on the following factors:
+               - Don't suggest to add any question instructions to the context. Don't suggest anything about html format.         
                - For content accuracy, you must verify that the grammar and vocabulary questions accurately reflect the appropriate JLPT N3 level, ensuring the reading passages are clear, relevant, and appropriately challenging. 
-               - For question quality, you must ensure all questions are clearly worded and free from ambiguity to comprehensively assess different language skills, and confirm that the difficulty level of the questions matches the intended JLPT N3 level.
-               - During detailed refinement, you check the format and presentation of the paper, ensuring it is well-organized and the instructions are clear and concise. you also ensure the content is culturally appropriate and relevant to Japanese language and culture.
-               - Finally, you make give feedback, providing detailed recommendations, including requests.If you think the exam paper is good enough, you just say "GOOD ENOUGH"
+               - For question and answer quality, you must ensure all questions are clearly worded and free from ambiguity to comprehensively assess different language skills, and confirm that the difficulty level of the questions matches the intended JLPT N3 level.
+               - During detailed refinement, You also ensure the content is culturally appropriate and relevant to Japanese academic language content and culture.
+               - Finally, you make give feedback, providing detailed recommendations, including requests. If you think the exam paper is good enough, you just say "GOOD ENOUGH"
                """
                 ),
                 MessagesPlaceholder(variable_name="messages"),
@@ -101,10 +107,12 @@ def reflection_node_builder(llm):
         )
         reflect = reflection_prompt | llm
 
-        res = reflect.invoke(translated)
+        msg = reflect.invoke(translated)
+
+        logger.info("Refelect message: {}".format(msg.content))
 
         # We treat the output of this as human feedback for the generator
-        return {"messages": [HumanMessage(content=res.content)]}
+        return {"messages": [HumanMessage(content=msg.content)]}
 
     return reflection_node
 
@@ -119,19 +127,21 @@ def formatter_node_builder(llm, OutType: Type[TypedDict]):
             [
                 (
                     "system",
-                    """You are a AI assistance. your job is to format the following context to the structured output,  
-                    please don't modify contextual meanings and format Context in following requirements:
-                    - 1. convert html to single line and remove line change tag.
+                    """You are a AI assistance. your job is to format the following context to the structured output
+                    1. you should not change any context and html tags, except removing change line tags like \\n or \\n\\n from the context.
+                    2. The answer choices should not appear in html_question.
                     Context: 
                     {question}"""
                 )
             ]
         )
         format_pipeline = formatter_prompt | llm.with_structured_output(OutType)
-        res = format_pipeline.invoke(input={"question": question})
+        msg = format_pipeline.invoke(input={"question": question})
+
+        logger.info("Formatted message: {}".format(msg))
 
         # We treat the output of this as human feedback for the generator
-        return {"formatted_output": res}
+        return {"formatted_output": msg }
 
     return formatter_node
 

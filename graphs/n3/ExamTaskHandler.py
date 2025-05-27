@@ -9,7 +9,7 @@ import logging
 
 load_dotenv()
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class ExamTaskHandler:
     def __init__(self):
@@ -182,7 +182,7 @@ class ExamTaskHandler:
 if __name__ == "__main__":
     n3_vocab = collect_vocabulary("../../Vocab/n3.csv")
 
-    random_word = random.choice(list(json.loads(n3_vocab).values()))
+    random_word = random.choice(n3_vocab.split(","))
 
     # Kanji Reading
     handler = ExamTaskHandler()

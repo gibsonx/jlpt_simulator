@@ -1,15 +1,15 @@
 kanji_reading_teacher_prompt = """
 Role: You are a Japanese teacher.
 
-Task: your job is to write a kanji question for the JLPT N3 exam. 
-Your job is to provide a kanji vocabulary word and ask the candidate to choose the correct kana reading. The word being tested needs to be underlined.
+Task: your job is to write a kanji question for the JLPT N3 exam.
+Your job is to provide a kanji vocabulary word in a short sentence and ask the candidate to choose the correct kana reading. 
+The word being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
 
 Instructions:
-Format: Follow the format of formal exam papers.
+Format: tightly follow the format of formal exam papers. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence in the generated content.
+Additional Requirement: Don't show question instructions and question sequence in the generated content.
 
 
 Search result: {search_result}
@@ -17,15 +17,6 @@ Formal exam paper: {example}
 """
 
 kanji_reading_example = """
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>日本語 読み方テスト</title>
-</head>
-<body>
-    <h2>問題１　<u>のことばの読み方</u>として最もよいものを、１・２・３・４から一つえらびなさい。</h2>
-
     <ol>
         <li>
             山田さんがちらしを<u>配った</u>。
@@ -100,9 +91,6 @@ kanji_reading_example = """
             </ol>
         </li>
     </ol>
-</body>
-</html>
-
 ```
 
 Each `<u>` tag wraps the kanji or phrase that is underlined in the image. Let me know if you’d like the correct answers marked or the text translated.
@@ -120,8 +108,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence in the generated content.
+
+Additional Requirement: Don't show question instructions and question sequence in the generated content.
 
 
 Search result: {search_result}
@@ -177,8 +165,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence in the generated content.
+
+Additional Requirement: Don't show question instructions and question sequence in the generated content.
 
 
 Search result: {search_result}
@@ -264,8 +252,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence in the generated content.
+
+Additional Requirement: Don't show question instructions and question sequence in the generated content.
 
 
 Search result: {search_result}
@@ -315,8 +303,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence in the generated content.
+
+Additional Requirement: Don't show question instructions and question sequence in the generated content.
 
 
 Search result: {search_result}
@@ -364,8 +352,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence in the generated content.
+
+Additional Requirement: Don't show question instructions and question sequence in the generated content.
 
 
 Search result: {search_result}
@@ -503,7 +491,7 @@ Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
 Explanation: Append the correct answer and an explanation of the main challengesfor the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence in the generated content.
+Additional Requirement: Don't show question instructions and question sequence in the generated content.
 
 
 Search result: {search_result}
@@ -556,7 +544,7 @@ Format: Follow the format of formal exam papers. Each question has 4 options in 
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
 Explanation: give the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
+Additional Requirement: Don't show question instructions and question sequence and revised submission in the generated content.
 
 
 Search result: {search_result}
@@ -609,7 +597,7 @@ Format: Follow the format of formal exam papers. Don't show sequence number of t
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
 Explanation: Append the correct answer and an explanation of the main challengesfor the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
+Additional Requirement: Don't show question instructions and question sequence and revised submission in the generated content.
 
 
 Search result: {search_result}
@@ -704,8 +692,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
+
+Additional Requirement: Don't show question instructions and question sequence and revised submission in the generated content.
 
 
 Search result: {search_result}
@@ -798,8 +786,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
+
+Additional Requirement: Don't show question instructions and question sequence and revised submission in the generated content.
 
 
 Search result: {search_result}
@@ -893,8 +881,8 @@ Instructions:
 Format: Follow the format of formal exam papers. Each question has 4 options in Japanese
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
+
+Additional Requirement: Don't show question instructions and question sequence and revised submission in the generated content.
 
 
 Search result: {search_result}
@@ -948,8 +936,8 @@ Instructions:
 Format: Follow the format of formal exam papers. Each question has 4 options in Japanese
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
+
+Additional Requirement: Don't show question instructions and question sequence and revised submission in the generated content.
 
 
 Search result: {search_result}
@@ -1049,8 +1037,8 @@ Instructions:
 Format: Follow the format of formal exam papers. Each question has 4 options in Japanese
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
+
+Additional Requirement: Don't show question instructions and question sequence and revised submission in the generated content.
 
 
 Search result: {search_result}
@@ -1124,8 +1112,8 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
+
+Additional Requirement: Don't show question instructions and question sequence and revised submission in the generated content.
 
 
 Search result: {search_result}
@@ -1189,8 +1177,7 @@ Instructions:
 Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
+Additional Requirement: Don't show question instructions and question sequence and revised submission in the generated content.
 
 
 Search result: {search_result}
@@ -1268,7 +1255,7 @@ Format: Follow the format of formal exam papers.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
 Explanation: Append the suggesting answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question requirement and question sequence and revised submission in the generated content.
+Additional Requirement: Don't show question instructions and question sequence and revised submission in the generated content.
 
 
 Search result: {search_result}

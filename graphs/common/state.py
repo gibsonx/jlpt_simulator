@@ -10,10 +10,9 @@ from typing_extensions import TypedDict
 
 class SimpleChoiceQuestionOutput(TypedDict):
     """Simple Question Formatted Output"""
-    question: Annotated[str, "the question to ask candidate in Japanese in html format"]
-    explanation: Annotated[str, "the key challenges and explanation in simplified Chinese"]
+    html_question: Annotated[str, "the question to ask in html format at a single line, no choices"]
     correct_answer: Annotated[int, "correct option"]
-    choices: Annotated[List, "options as a list for candidate to choose in Japanese"]
+    choices: Annotated[List, "answer options as a list for candidate to choose in Japanese"]
 
 class ListenConversation(TypedDict):
     gender: Literal['male','female']
@@ -21,14 +20,13 @@ class ListenConversation(TypedDict):
 
 class ListenOpenQuestionOutput(TypedDict):
     """Simple Question Formatted Output"""
-    question: Annotated[str, "the question to ask candidate in Japanese"]
-    explanation: Annotated[str, "the key challenges and explanation in simplified Chinese"]
+    html_question: Annotated[str, "the question to ask candidate in html format at a single line"]
     suggestion: Annotated[str, "the suggesting answer in Japanese"]
     conversation: List[ListenConversation]
 
 class ListenSingleChoiceOutput(TypedDict):
     """Listen Simple Question Formatted Output"""
-    questions: SimpleChoiceQuestionOutput
+    question: SimpleChoiceQuestionOutput
     conversation: List[ListenConversation]
 
 class ImageListenQuestionOutput(TypedDict):
@@ -41,11 +39,11 @@ class SimpleQuestionState(TypedDict):
     topic: str
     question: str
     documents: str
-    formatted_output: SimpleChoiceQuestionOutput
+    formatted_output: dict
     messages: Annotated[list, add_messages]
 
 class MultipleQuestionOutput(TypedDict):
     """An Article with several Question Formatted Output"""
-    html_article: Annotated[str, "the article in HTML format"]
+    html_article: Annotated[str, "the article in HTML format at a single line"]
     questions: List[SimpleChoiceQuestionOutput]
 
