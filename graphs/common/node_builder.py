@@ -147,7 +147,7 @@ def formatter_node_builder(llm, OutType: Type[TypedDict]):
 
 def should_continue(state):
     if state["messages"]:
-        if len(state["messages"]) > 6:
+        if len(state["messages"]) > 3:
             print("--- Reach the Maximum Round ---")
             return "formatter"
         elif "GOOD ENOUGH" in state["messages"][-1].content:
