@@ -8,7 +8,7 @@ The word being tested needs to be underlined with <u></u>, no other tags can app
 Instructions:
 Format: tightly follow the format of formal exam papers. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
-Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation.
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
 
 
@@ -102,9 +102,9 @@ You should write a short sentence and ask candidate to identify the correct kanj
 The word being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
 
 Instructions:
-Format: Follow the format of formal exam papers.
+Format: tightly follow the format of formal exam papers. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
-Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
 
 
