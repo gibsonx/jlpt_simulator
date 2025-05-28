@@ -18,11 +18,8 @@ expression,reading,meaning,tags
 氏,し,"family name, lineage",JLPT JLPT_2 JLPT_3
 詩,し,poem; poetry,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.13
 幸せ,しあわせ,"happiness, blessing",JLPT JLPT_2 JLPT_3
-ジーンズ,ジーンズ,jeans,JLPT JLPT_3 JLPT_2 Genki_Ln.2 Genki
-ジェット機,ジェットき,jet plane,JLPT JLPT_2 JLPT_3
 四角,しかく,square,JLPT JLPT_2 JLPT_3
 直に,じかに,"immediately, readily, directly",JLPT JLPT_2 JLPT_3
-しかも,しかも,"moreover, furthermore, besides, plus",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.9 Intermediate_Japanese_Ln.2
 四季,しき,four seasons,JLPT JLPT_2 JLPT_3
 直,じき,"immediately, soon, shortly",JLPT JLPT_2 JLPT_3
 時期,じき,"time, season, period",JLPT JLPT_2 JLPT_3
@@ -45,7 +42,6 @@ expression,reading,meaning,tags
 舌,した,tongue,JLPT JLPT_2 JLPT_3
 次第,しだい,order; circumstances; immediate(ly),JLPT JLPT_2 JLPT_3
 従う,したがう,"to abide (by the rules), to obey",JLPT JLPT_2 JLPT_3
-したがって,したがって,"therefore, consequently",JLPT JLPT_2 JLPT_3
 親しい,したしい,"intimate, close (e.g., friend)",JLPT JLPT_2 JLPT_3
 質,しつ,"quality, nature (of person)",JLPT JLPT_2 JLPT_3
 失業,しつぎょう,unemployment,JLPT JLPT_2 JLPT_3
@@ -56,7 +52,6 @@ expression,reading,meaning,tags
 実際,じっさい,in fact; in actuality,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.15
 実施,じっし,"enforcement, carry out, operation",JLPT JLPT_2 JLPT_3
 湿度,しつど,humidity,JLPT JLPT_2 JLPT_3
-じっと,じっと,"patiently, quietly",JLPT JLPT_2 JLPT_3
 実に,じつに,"indeed, truly, surely",JLPT JLPT_2 JLPT_3
 実は,じつは,actually; in fact,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.1
 失望,しつぼう,"disappointment, despair",JLPT JLPT_2 JLPT_3
@@ -68,14 +63,12 @@ expression,reading,meaning,tags
 品,しな,"thing, article, goods",JLPT JLPT_2 JLPT_3
 支配,しはい,"rule, control, direction",JLPT JLPT_2 JLPT_3
 芝居,しばい,"play, drama",JLPT JLPT_2 JLPT_3
-しばしば,しばしば,"often, again and again, frequently",JLPT JLPT_2 JLPT_3
 芝生,しばふ,lawn,JLPT JLPT_2 JLPT_3
 支払,しはらい,payment,JLPT JLPT_2 JLPT_3
 支払う,しはらう,to pay,JLPT JLPT_2 JLPT_3
 死亡,しぼう,death,JLPT JLPT_2 JLPT_3
 資本,しほん,"funds, capital",JLPT JLPT_2 JLPT_3
 姉妹,しまい,sisters,JLPT JLPT_2 JLPT_3
-しまった (かん),しまった (かん),Damn it!,JLPT JLPT_2 JLPT_3
 自慢,じまん,"pride, boast",JLPT JLPT_2 JLPT_3
 地味,じみ,"quiet, plain, conservative",JLPT JLPT_2 JLPT_3
 示す,しめす,"to show, to indicate",JLPT JLPT_2 JLPT_3
@@ -84,7 +77,6 @@ expression,reading,meaning,tags
 下,しも,"under, below, beneath",JLPT JLPT_2 JLPT_3
 霜,しも,frost,JLPT JLPT_2 JLPT_3
 借金,しゃっきん,"debt, loan, liabilities",JLPT JLPT_2 JLPT_3
-しゃべる,しゃべる,"to talk, to chat, to chatter (same as 話す (はなす))",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.8
 週,しゅう,week,JLPT JLPT_2 JLPT_3
 州,しゅう,"state, province",JLPT JLPT_2 JLPT_3
 銃,じゅう,gun,JLPT JLPT_2 JLPT_3
@@ -93,7 +85,6 @@ expression,reading,meaning,tags
 宗教,しゅうきょう,religion,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.3
 重視,じゅうし,"importance, stress",JLPT JLPT_2 JLPT_3
 就職,しゅうしょく,finding employment,JLPT JLPT_2 JLPT_3
-ジュース,ジュース,"juice, soft drink; deuce",JLPT Genki_Ln.12 JLPT_3 JLPT_2 Genki
 修正,しゅうせい,"amendment, correction",JLPT JLPT_2 JLPT_3
 重体,じゅうたい,"seriously ill, critical state",JLPT JLPT_2 JLPT_3
 渋滞,じゅうたい,"congestion (e.g., traffic), delay",JLPT JLPT_2 JLPT_3
@@ -211,46 +202,30 @@ expression,reading,meaning,tags
 図,ず,"figure, drawing, illustration",JLPT JLPT_2 JLPT_3
 水準,すいじゅん,"level, standard",JLPT JLPT_2 JLPT_3
 推薦,すいせん,recommendation,JLPT JLPT_2 JLPT_3
-スイッチ,スイッチ,switch,JLPT Genki_Ln.18 JLPT_3 JLPT_2 Genki
 睡眠,すいみん,sleep,JLPT JLPT_2 JLPT_3
 数,すう,"number, figure",JLPT JLPT_2 JLPT_3
 数字,すうじ,"numeral, figure",JLPT JLPT_2 JLPT_3
-スープ,スープ,(Western) soup,JLPT JLPT_2 JLPT_3
 末,すえ,"the end of, powder",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.4
 姿,すがた,"figure, shape, appearance",JLPT JLPT_2 JLPT_3
-スキー,スキー,ski,JLPT JLPT_3 JLPT_2 Genki_Ln.9 Genki
 救う,すくう,"to rescue from, to help out of",JLPT JLPT_2 JLPT_3
-すくなくとも,すくなくとも,at least,JLPT JLPT_2 JLPT_3
 優れる,すぐれる,"to surpass, to outstrip, to excel",JLPT JLPT_2 JLPT_3
-スケート,スケート,"skate(s), skating",JLPT JLPT_2 JLPT_3
-スケジュール,スケジュール,schedule,JLPT JLPT_2 JLPT_3
 少しも,すこしも,"anything of, not one bit",JLPT JLPT_2 JLPT_3
 過ごす,すごす,"to pass, to spend (time)",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.11
 筋,すじ,"muscle, string, line",JLPT JLPT_2 JLPT_3
 進める,すすめる,"to advance, to promote, to hasten",JLPT JLPT_2 JLPT_3
 勧める,すすめる,"to urge (someone) to do (something), to recommend",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.13
-スター,スター,star,JLPT JLPT_2 JLPT_3
-スタイル,スタイル,style,JLPT JLPT_2 JLPT_3
-スタンド,スタンド,stand,JLPT JLPT_2 JLPT_3
 頭痛,ずつう,headache,JLPT JLPT_2 JLPT_3
-ずっと,ずっと,for a long time; all the time; consecutively,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.5 Genki_Ln.22 Genki
-すっぱい,すっぱい,"sour, acid",JLPT JLPT_2 JLPT_3
-すてき,すてき,"lovely, great",JLPT JLPT_2 JLPT_3
 既に,すでに,already (same as もう),JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.13
-すなわち,すなわち,"that is, namely, e.g.",JLPT JLPT_2 JLPT_3
-スピーチ,スピーチ,speech,JLPT JLPT_3 JLPT_2 Genki Genki_Ln.21
 全て,すべて,"all, the whole, entirely",JLPT JLPT_2 JLPT_3
 済ませる,すませる,to be finished,JLPT JLPT_2 JLPT_3
 角,すみ,corner,JLPT JLPT_2 JLPT_3
 墨,すみ,ink,JLPT JLPT_2 JLPT_3
-すみません (かん),すみません (かん),"sorry, excuse me",JLPT JLPT_2 JLPT_3
 澄む,すむ,"to clear (e.g., weather), to become transparent",JLPT JLPT_2 JLPT_3
 清む,すむ,"to clear (e.g., weather), to become transparent",JLPT JLPT_2 JLPT_3
 刷る,する,to print,JLPT JLPT_2 JLPT_3
 為る,する,"to do, to attempt",JLPT JLPT_2 JLPT_3
 鋭い,するどい,"pointed, sharp",JLPT JLPT_2 JLPT_3
 すれ違う,すれちがう,to pass by one another,JLPT JLPT_2 JLPT_3
-ずれる,ずれる,"move, off the point",JLPT JLPT_2 JLPT_3
 正,せい,"(logical) true, regular",JLPT JLPT_2 JLPT_3
 生,せい,birth,JLPT JLPT_2 JLPT_3
 性,せい,"sex, gender",JLPT JLPT_2 JLPT_3
@@ -292,17 +267,13 @@ expression,reading,meaning,tags
 積極的,せっきょくてき,"positive, active, proactive",JLPT JLPT_2 JLPT_3
 設計,せっけい,"plan, design",JLPT JLPT_2 JLPT_3
 絶対,ぜったい,"definitely, without fail, absoluteness",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.7
-セット,セット,set,JLPT JLPT_2 JLPT_3
 愛,あい,love,JLPT JLPT_2 JLPT_3
 相変わらず,あいかわらず,"as ever, as usual",JLPT JLPT_2 JLPT_3
 愛情,あいじょう,"love, affection",JLPT JLPT_2 JLPT_3
 合図,あいず,"sign, signal",JLPT JLPT_2 JLPT_3
-アイスクリーム,アイスクリーム,ice cream,JLPT JLPT_2 JLPT_3
 愛する,あいする,to love,JLPT JLPT_2 JLPT_3
 相手,あいて,partner; addressee; the person you are talking to,Genki Genki_Ln.22 Intermediate_Japanese Intermediate_Japanese_Ln.2 JLPT JLPT_2 JLPT_3
-あいにく,あいにく,unfortunately,JLPT JLPT_2 JLPT_3
 遭う,あう,"to meet, to encounter (undesirable nuance)",JLPT JLPT_2 JLPT_3
-アウト,アウト,out,JLPT JLPT_2 JLPT_3
 明かり,あかり,"lamplight, light (in general)",JLPT JLPT_2 JLPT_3
 空き,あき,"vacancy, opening, space",JLPT JLPT_2 JLPT_3
 明らか,あきらか,"obvious, clear",JLPT JLPT_2 JLPT_3
@@ -348,7 +319,6 @@ expression,reading,meaning,tags
 在る; 有る,ある,"to live, to be, to exist",JLPT JLPT_2 JLPT_3
 或,ある,"a certain..., some...",JLPT JLPT_2 JLPT_3
 あるいは,あるいは,"or, perhaps",JLPT JLPT_2 JLPT_3
-アルバム,アルバム,album,JLPT JLPT_2 JLPT_3
 泡,あわ,"bubble, foam",JLPT JLPT_2 JLPT_3
 合わせる,あわせる,to combine,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.14
 慌てる,あわてる,to become confused、to panic,JLPT JLPT_2 JLPT_3
@@ -357,8 +327,6 @@ expression,reading,meaning,tags
 案外,あんがい,unexpectedly,JLPT JLPT_2 JLPT_3
 暗記,あんき,"memorization, learning by heart",JLPT JLPT_2 JLPT_3
 安定,あんてい,"stability, equilibrium",JLPT JLPT_2 JLPT_3
-あんなに,あんなに,"to that extent, to that degree",JLPT JLPT_2 JLPT_3
-あんまり,あんまり,"not very, not much",JLPT JLPT_2 JLPT_3
 胃,い,stomach,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.12
 委員,いいん,committee member,JLPT JLPT_2 JLPT_3
 意外,いがい,"unexpected, surprising",JLPT JLPT_2 JLPT_3
@@ -367,7 +335,6 @@ expression,reading,meaning,tags
 息,いき,breath,JLPT JLPT_2 JLPT_3
 勢い,いきおい,"force, vigor, momentum",JLPT JLPT_2 JLPT_3
 生き物,いきもの,"living thing, creature",JLPT JLPT_2 JLPT_3
-いけない,いけない,"must not do, bad, wrong",JLPT JLPT_2 JLPT_3
 医師,いし,"doctor, physician",JLPT JLPT_2 JLPT_3
 意思,いし,"intention, purpose",JLPT JLPT_2 JLPT_3
 意志,いし,"will, volition",JLPT JLPT_2 JLPT_3
@@ -376,13 +343,10 @@ expression,reading,meaning,tags
 異常,いじょう,"strangeness, abnormality, disorder",JLPT JLPT_2 JLPT_3
 意地悪,いじわる,"malicious, mean, unkind",JLPT JLPT_2 JLPT_3
 泉,いずみ,"spring, fountain",JLPT JLPT_2 JLPT_3
-いずれ,いずれ,"where, which, who",JLPT JLPT_2 JLPT_3
 以前,いぜん,in the past; before,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.15
 板,いた,"board, plank",JLPT JLPT_2 JLPT_3
 偉大,いだい,greatness,JLPT JLPT_2 JLPT_3
 抱く,いだく,"to hold (v.t.) (written expression), to embrace, to harbor",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.8
-いたずら,いたずら,"trick, practical joke",JLPT JLPT_2 JLPT_3
-いただきます,いただきます,expression of gratitude before meals,JLPT JLPT_2 JLPT_3
 痛み,いたみ,"pain, ache, sore",JLPT JLPT_2 JLPT_3
 至る,いたる,"to come, to arrive",JLPT JLPT_2 JLPT_3
 市,いち,"market, fair",JLPT_1 JLPT JLPT_2 JLPT_3
@@ -390,7 +354,6 @@ expression,reading,meaning,tags
 一時,いちじ,"for a time, temporarily",JLPT JLPT_2 JLPT_3
 一度に,いちどに,all at once,JLPT JLPT_2 JLPT_3
 市場,いちば,"market, bazaar",JLPT JLPT_2 JLPT_3
-いつか,いつか,"sometime, one day",JLPT JLPT_2 JLPT_3
 一家,いっか,"family, clan",JLPT JLPT_2 JLPT_3
 一種,いっしゅ,"a species, a kind, a variety",JLPT JLPT_2 JLPT_3
 一瞬,いっしゅん,"a moment, an instant",JLPT JLPT_2 JLPT_3
@@ -398,11 +361,8 @@ expression,reading,meaning,tags
 一層,いっそう,"much more, still more",JLPT JLPT_2 JLPT_3
 一体,いったい,one object; body; what on earth?; generally,JLPT JLPT_2 JLPT_3
 一致,いっち,agreement; conformity,JLPT JLPT_2 JLPT_3
-いつでも,いつでも,"(at) any time, always",JLPT JLPT_2 JLPT_3
-いつのまにか,いつのまにか,before one knows,JLPT JLPT_2 JLPT_3
 一般,いっぱん,"general, average",JLPT JLPT_2 JLPT_3
 一方,いっぽう,on the other hand; meanwhile,JLPT JLPT_2 JLPT_3
-いつまでも,いつまでも,"forever, for good, eternally",JLPT JLPT_2 JLPT_3
 移動,いどう,"migration, movement",JLPT JLPT_2 JLPT_3
 従兄弟,いとこ,cousin (male),JLPT JLPT_2 JLPT_3
 従姉妹,いとこ,cousin (female),JLPT JLPT_2 JLPT_3
@@ -414,28 +374,21 @@ expression,reading,meaning,tags
 居間,いま,living room,JLPT JLPT_2 JLPT_3
 今に,いまに,"before long, soon",JLPT JLPT_2 JLPT_3
 今にも,いまにも,"at any time, soon",JLPT JLPT_2 JLPT_3
-イメージ,イメージ,one's image,JLPT JLPT_2 JLPT_3
+ジェット機,ジェットき,jet plane,JLPT JLPT_2 JLPT_3
 否,いや,"no, the noes",JLPT JLPT_2 JLPT_3
 以来,いらい,"since, henceforth",JLPT JLPT_2 JLPT_3
 依頼,いらい,request; dependence,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.15
-いらいら,いらいら,"getting nervous, irritation",JLPT JLPT_2 JLPT_3
-いらっしゃい,いらっしゃい,welcome,JLPT JLPT_2 JLPT_3
 医療,いりょう,"medical care, medical treatment",JLPT JLPT_2 JLPT_3
 岩,いわ,rock,JLPT JLPT_2 JLPT_3
 祝い,いわい,"celebration, festival",JLPT JLPT_2 JLPT_3
 祝う,いわう,"to congratulate, to celebrate",JLPT JLPT_2 JLPT_3
 言わば,いわば,so to speak,JLPT JLPT_2 JLPT_3
-いわゆる,いわゆる,"the so-called, so-to-speak",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.14
-インク,インク,ink,JLPT JLPT_2 JLPT_3
 印刷,いんさつ,printing,JLPT JLPT_2 JLPT_3
 印象,いんしょう,impression,JLPT JLPT_2 JLPT_3
 引退,いんたい,retirement,JLPT JLPT_2 JLPT_3
-インタビュー,インタビュー,interview,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.15
 引用,いんよう,"quotation, citation",JLPT JLPT_2 JLPT_3
-ウイスキー,ウイスキー,whiskey,JLPT JLPT_2 JLPT_3
 上,うわ,"upper, outer, surface",JLPT JLPT_2 JLPT_3
 魚,うお,fish,JLPT JLPT_2 JLPT_3
-うがい,うがい,gargling,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.12
 受け取る,うけとる,"to receive, to get, to accept",JLPT JLPT_2 JLPT_3
 動かす,うごかす,"to move, to shift",JLPT JLPT_2 JLPT_3
 兎,うさぎ,"rabbit, hare",JLPT JLPT_2 JLPT_3
@@ -473,14 +426,12 @@ expression,reading,meaning,tags
 笑顔,えがお,smile (on one's face),JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.11
 描く,えがく,"to draw, to depict, to describe",JLPT JLPT_2 JLPT_3
 餌,えさ,"feed, bait",JLPT JLPT_2 JLPT_3
-エネルギー,エネルギー,energy (GER: energie),JLPT JLPT_2 JLPT_3
 得る,える,"to get, to gain, to win, to learn",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.11
 得る,うる,"to get, to gain, to win",JLPT JLPT_2 JLPT_3
 円,えん,"circle, yen",JLPT JLPT_2 JLPT_3
 延期,えんき,"postponement, adjournment",JLPT JLPT_2 JLPT_3
 演技,えんぎ,"acting, performance",JLPT JLPT_2 JLPT_3
 援助,えんじょ,"assistance, aid, support",JLPT JLPT_2 JLPT_3
-エンジン,エンジン,engine,JLPT JLPT_2 JLPT_3
 演説,えんぜつ,"speech, address",JLPT JLPT_2 JLPT_3
 演奏,えんそう,musical performance,JLPT JLPT_2 JLPT_3
 老い,おい,"old age, the aged",JLPT JLPT_2 JLPT_3
@@ -532,7 +483,6 @@ expression,reading,meaning,tags
 主に,おもに,"mainly, primarily",JLPT JLPT_2 JLPT_3
 思わず,おもわず,"unintentional, spontaneous",JLPT JLPT_2 JLPT_3
 泳ぎ,およぎ,swimming,JLPT JLPT_2 JLPT_3
-およそ,およそ,"about, roughly, approximately",JLPT JLPT_2 JLPT_3
 及ぼす,およぼす,"to exert, to cause, to exercise",JLPT JLPT_2 JLPT_3
 下す,おろす,"to lower, to let go down",JLPT JLPT_2 JLPT_3
 降ろす,おろす,"to take down, to launch, to drop",JLPT JLPT_2 JLPT_3
@@ -544,8 +494,6 @@ expression,reading,meaning,tags
 可,か,passable,JLPT JLPT_2 JLPT_3
 蚊,か,mosquito,JLPT JLPT_3 JLPT_2 Genki Genki_Ln.21
 課,か,"department, division",JLPT JLPT_2 JLPT_3
-カー,カー,car,JLPT JLPT_2 JLPT_3
-カード,カード,"card, curd",JLPT JLPT_2 JLPT_3
 貝,かい,"shell, shellfish",JLPT JLPT_2 JLPT_3
 害,がい,"harm, damage",JLPT JLPT_2 JLPT_3
 会員,かいいん,"member, the membership",JLPT JLPT_2 JLPT_3
@@ -620,7 +568,6 @@ expression,reading,meaning,tags
 語る,かたる,"to talk, to tell, to recite",JLPT JLPT_2 JLPT_3
 勝ち,かち,"win, victory",JLPT JLPT_2 JLPT_3
 価値,かち,"value, worth, merit",JLPT JLPT_2 JLPT_3
-がっかり,がっかり,"feel disappointed, be dejected, lose heart",JLPT JLPT_2 JLPT_3
 活気,かっき,vigor; liveliness; vitality; energy,JLPT Intermediate_Japanese JLPT_1 JLPT_3 JLPT_2 Intermediate_Japanese_Ln.10
 楽器,がっき,musical instrument,JLPT Genki_Ln.13 JLPT_3 JLPT_2 Genki
 学期,がっき,term (school),JLPT JLPT_2 JLPT_3
@@ -644,8 +591,6 @@ expression,reading,meaning,tags
 雷,かみなり,thunder,JLPT JLPT_2 JLPT_3
 髪の毛,かみのけ,hair (head),JLPT JLPT_2 JLPT_3
 科目,かもく,"(school) subject, curriculum, course",JLPT JLPT_2 JLPT_3
-かもしれない,かもしれない,"maybe, perhaps",JLPT JLPT_2 JLPT_3
-かゆい,かゆい,"itchy, itching",JLPT JLPT_2 JLPT_3
 歌謡,かよう,"song, ballad",JLPT JLPT_2 JLPT_3
 空,から,empty,JLPT JLPT_2 JLPT_3
 殻,から,"shell, husk, hull",JLPT JLPT_2 JLPT_3
@@ -711,8 +656,6 @@ expression,reading,meaning,tags
 帰宅,きたく,returning home,JLPT JLPT_2 JLPT_3
 貴重,きちょう,"precious, valuable",JLPT JLPT_2 JLPT_3
 議長,ぎちょう,chairman,JLPT JLPT_2 JLPT_3
-きちんと,きちんと,"precisely, accurately",JLPT JLPT_2 JLPT_3
-きつい,きつい,"tight, close, intense",JLPT JLPT_2 JLPT_3
 気付く,きづく,"to notice, to recognize, to become aware of",JLPT JLPT_2 JLPT_3
 気に入る,きにいる,"to like, to be please",JLPT JLPT_2 JLPT_3
 記入,きにゅう,"entry, filling in of forms",JLPT JLPT_2 JLPT_3
@@ -728,8 +671,6 @@ expression,reading,meaning,tags
 義務,ぎむ,"duty, obligation, responsibility",JLPT JLPT_2 JLPT_3
 疑問,ぎもん,"question, problem, doubt",JLPT JLPT_2 JLPT_3
 逆,ぎゃく,"reverse, opposite",JLPT JLPT_2 JLPT_3
-キャプテン,キャプテン,captain,JLPT JLPT_2 JLPT_3
-キャンプ,キャンプ,camp,JLPT Genki_Ln.11 JLPT_3 JLPT_2 Genki
 旧,きゅう,ex-,JLPT JLPT_2 JLPT_3
 級,きゅう,"class, grade, rank",JLPT JLPT_2 JLPT_3
 球,きゅう,"globe, sphere, ball",JLPT JLPT_2 JLPT_3
@@ -787,7 +728,6 @@ expression,reading,meaning,tags
 下り,くだり,down-train (going away from Tokyo),JLPT JLPT_2 JLPT_3
 下る,くだる,"to get down, to descend",JLPT JLPT_2 JLPT_3
 苦痛,くつう,"pain, agony",JLPT JLPT_2 JLPT_3
-ぐっすり,ぐっすり,"sound asleep, fast asleep",JLPT JLPT_2 JLPT_3
 区別,くべつ,"distinction, differentiation, classification",JLPT JLPT_2 JLPT_3
 組,くみ,"class, team, set",JLPT JLPT_2 JLPT_3
 組合,くみあい,"association, union",JLPT JLPT_2 JLPT_3
@@ -797,15 +737,9 @@ expression,reading,meaning,tags
 悔しい,くやしい,"regrettable, mortifying, vexing",JLPT JLPT_2 JLPT_3
 位,くらい,"grade, rank, about",JLPT JLPT_2 JLPT_3
 暮らし,くらし,living; life style,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.13
-クラシック,クラシック,classic(s),JLPT JLPT_2 JLPT_3
 暮らす,くらす,"to live, to get along",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.11
-グラス,グラス,glass; grass,JLPT JLPT_2 JLPT_3
-グランド,グランド,"gland, grand, (electrical) ground",JLPT JLPT_2 JLPT_3
-クリーム,クリーム,cream,JLPT JLPT_2 JLPT_3
 繰り返す,くりかえす,"to repeat, to do something over again",JLPT JLPT_2 JLPT_3
-クリスマス,クリスマス,Christmas,JLPT Genki_Ln.14 JLPT_3 JLPT_2 Genki
 狂う,くるう,"to go mad, to get out of order",JLPT JLPT_2 JLPT_3
-グループ,グループ,group,JLPT JLPT_2 JLPT_3
 苦しい,くるしい,tough; physically strenuous,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.15
 苦しむ,くるしむ,"to suffer, to groan, to be worried",JLPT JLPT_2 JLPT_3
 暮れ,くれ,"year end,",JLPT JLPT_2 JLPT_3
@@ -832,12 +766,9 @@ expression,reading,meaning,tags
 芸術,げいじゅつ,"(fine) art, the arts",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.10
 契約,けいやく,"contract, compact, agreement",JLPT JLPT_2 JLPT_3
 経由,けいゆ,"go by the way, via",JLPT JLPT_2 JLPT_3
-ケース,ケース,case,JLPT_1 JLPT JLPT_2 JLPT_3
-ゲーム,ゲーム,game,JLPT JLPT_2 JLPT_3
 劇,げき,"drama, play",JLPT JLPT_2 JLPT_3
 劇場,げきじょう,"theater, playhouse",JLPT JLPT_2 JLPT_3
 化粧,けしょう,make-up (cosmetic),JLPT JLPT_2 JLPT_3
-けち,けち,"stinginess, miser",JLPT JLPT_2 JLPT_3
 血液,けつえき,blood,JLPT JLPT_2 JLPT_3
 結果,けっか,"result, consequence",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.5
 欠陥,けっかん,"defect, fault, deficiency",JLPT JLPT_2 JLPT_3
@@ -904,11 +835,8 @@ expression,reading,meaning,tags
 考慮,こうりょ,"consideration, taking into account",JLPT JLPT_2 JLPT_3
 越える,こえる,"to exceed, to cross over, to cross",JLPT JLPT_2 JLPT_3
 超える,こえる,"to exceed, to cross over, to cross",JLPT JLPT_2 JLPT_3
-コーチ,コーチ,coach,JLPT JLPT_2 JLPT_3
-コード,コード,code; cord; chord,JLPT JLPT_2 JLPT_3
 氷,こおり,"ice, hail",JLPT JLPT_2 JLPT_3
 凍る,こおる,"to freeze, to be frozen over, to congeal",JLPT JLPT_2 JLPT_3
-ゴール,ゴール,goal,JLPT JLPT_2 JLPT_3
 誤解,ごかい,misunderstanding,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.15
 語学,ごがく,language study,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.8
 呼吸,こきゅう,"breath, respiration",JLPT JLPT_2 JLPT_3
@@ -937,26 +865,19 @@ expression,reading,meaning,tags
 粉,こな,"flour, powder",JLPT JLPT_2 JLPT_3
 好み,このみ,"liking, taste, choice",JLPT JLPT_2 JLPT_3
 好む,このむ,"to like, to prefer",JLPT JLPT_2 JLPT_3
-こぼす,こぼす,to spill,JLPT JLPT_2 JLPT_3
-こぼれる,こぼれる,"to overflow, to spill",JLPT JLPT_2 JLPT_3
 塵,ごみ,"garbage, litter",JLPT JLPT_2 JLPT_3
 小麦,こむぎ,wheat,JLPT JLPT_2 JLPT_3
-ごめんなさい,ごめんなさい,"I beg your pardon, excuse me, I'm sorry",JLPT JLPT_3 JLPT_2 Genki_Ln.4 Genki
 小屋,こや,"hut, cabin, shed",JLPT JLPT_2 JLPT_3
-これら,これら,these,JLPT JLPT_2 JLPT_3
 殺す,ころす,to kill,JLPT JLPT_2 JLPT_3
 転ぶ,ころぶ,"to fall down, to fall over",JLPT Genki_Ln.18 JLPT_3 JLPT_2 Genki
 今回,こんかい,"now, this time, lately",JLPT JLPT_2 JLPT_3
 今後,こんご,"from now on, hereafter",JLPT JLPT_2 JLPT_3
 混雑,こんざつ,"confusion, congestion",JLPT JLPT_2 JLPT_3
-こんなに,こんなに,"so, like this, in this way",JLPT JLPT_2 JLPT_3
 困難,こんなん,"difficulty, distress",JLPT JLPT_2 JLPT_3
 今日,こんにち,"today, this day",JLPT JLPT_2 JLPT_3
-こんにちは,こんにちは,"hello, good day (daytime greeting)",JLPT JLPT_2 JLPT_3
 婚約,こんやく,"engagement, betrothal",JLPT JLPT_2 JLPT_3
 混乱,こんらん,"chaos, confusion, mayhem",JLPT JLPT_2 JLPT_3
 差,さ,"difference, variation",JLPT JLPT_2 JLPT_3
-サービス,サービス,"service, support system; goods or services without charge",JLPT JLPT_2 JLPT_3
 際,さい,"on the occasion of, circumstances",JLPT JLPT_2 JLPT_3
 最高,さいこう,"highest, supreme, the most",JLPT JLPT_2 JLPT_3
 財産,ざいさん,"property, fortune, assets",JLPT JLPT_2 JLPT_3
@@ -967,7 +888,6 @@ expression,reading,meaning,tags
 裁判,さいばん,"trial, judgment",JLPT JLPT_2 JLPT_3
 材料,ざいりょう,"ingredients, material",JLPT JLPT_2 JLPT_3
 幸い,さいわい,fortunately; luckily,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.8
-サイン,サイン,autograph; sign; sine,JLPT JLPT_2 JLPT_3
 境,さかい,"border, boundary, mental state",JLPT JLPT_2 JLPT_3
 逆らう,さからう,"to go against, to oppose, to disobey",JLPT JLPT_2 JLPT_3
 盛り,さかり,"helping, serving",JLPT JLPT_2 JLPT_3
@@ -992,12 +912,8 @@ expression,reading,meaning,tags
 札,さつ,"bill, note",JLPT JLPT_2 JLPT_3
 作家,さっか,"author, writer, novelist",JLPT JLPT_2 JLPT_3
 作曲,さっきょく,composition (of music),JLPT JLPT_2 JLPT_3
-ざっと,ざっと,"roughly, in round numbers",JLPT JLPT_2 JLPT_3
-さっぱり,さっぱり,"feeling refreshed, neat",JLPT JLPT_2 JLPT_3
-さて,さて,"well; now (typically used when switching to a new, usually more important topic)",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.12
 砂漠,さばく,desert,JLPT JLPT_2 JLPT_3
 差別,さべつ,"discrimination, differentiation",JLPT JLPT_2 JLPT_3
-ママ,ママ,Mama,JLPT JLPT_2 JLPT_3
 豆,まめ,"beans, peas",JLPT JLPT_2 JLPT_3
 守る,まもる,to protect; to abide (by the rules),JLPT JLPT_2 JLPT_3
 迷う,まよう,"to be puzzled, to be perplexed, to lose one's way",JLPT JLPT_2 JLPT_3
@@ -1011,7 +927,6 @@ expression,reading,meaning,tags
 見送り,みおくり,seeing one off,JLPT JLPT_2 JLPT_3
 味方,みかた,"ally, supporter",JLPT JLPT_2 JLPT_3
 見事,みごと,"splendid, magnificent",JLPT JLPT_2 JLPT_3
-ミス,ミス,"miss (mistake, error, failure), Miss",JLPT_1 JLPT JLPT_2 JLPT_3
 満ちる,みちる,"to be full, to mature",JLPT JLPT_2 JLPT_3
 密,みつ,"thick, close",JLPT JLPT_2 JLPT_3
 認める,みとめる,"to recognize, to notice; to approve",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.13 Intermediate_Japanese_Ln.3
@@ -1023,7 +938,6 @@ expression,reading,meaning,tags
 未来,みらい,future (life tense),JLPT JLPT_2 JLPT_3
 魅力,みりょく,"charm, fascination, appeal",JLPT JLPT_2 JLPT_3
 診る,みる,to examine (a patient),JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.12
-ミルク,ミルク,milk,JLPT JLPT_2 JLPT_3
 無,む,"nothing, naught, zero",JLPT JLPT_2 JLPT_3
 向かい,むかい,"facing, opposite, across",JLPT JLPT_2 JLPT_3
 迎え,むかえ,"meeting, person sent to pick up an arrival",JLPT JLPT_2 JLPT_3
@@ -1051,13 +965,11 @@ expression,reading,meaning,tags
 目上,めうえ,person of higher status; one's senior,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.2
 飯,めし,"meals, food",JLPT JLPT_2 JLPT_3
 滅多に,めったに,"rarely (with neg. verb), seldom",JLPT JLPT_2 JLPT_3
-メモ,メモ,"memorandum, note",JLPT JLPT_2 JLPT_3
 面,めん,"face, mug, surface, side or facet, corner, page",JLPT JLPT_2 JLPT_3
 綿,めん,cotton,JLPT JLPT_2 JLPT_3
 免許,めんきょ,"license, permit, certificate",JLPT JLPT_3 JLPT_2 Genki_Ln.22 Genki
 面接,めんせつ,interview,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Genki Genki_Ln.23 Intermediate_Japanese_Ln.3
 面倒,めんどう,"trouble, attention",JLPT JLPT_2 JLPT_3
-メンバー,メンバー,member,JLPT JLPT_2 JLPT_3
 申し込む,もうしこむ,"to apply for, to make an application",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.3
 申し訳,もうしわけ,"apology, excuse",JLPT JLPT_2 JLPT_3
 毛布,もうふ,blanket,JLPT JLPT_2 JLPT_3
@@ -1066,11 +978,8 @@ expression,reading,meaning,tags
 目標,もくひょう,"mark, objective, target",JLPT JLPT_2 JLPT_3
 文字,もじ,"letter (of alphabet), character",JLPT JLPT_2 JLPT_3
 文字,もんじ,"letter (of alphabet), character",JLPT JLPT_2 JLPT_3
-もしかすると,もしかすると,"perhaps, maybe, by some chance",JLPT JLPT_2 JLPT_3
-もしも,もしも,if,JLPT JLPT_2 JLPT_3
 持ち上げる,もちあげる,"to raise, to lift up, to flatter",JLPT JLPT_2 JLPT_3
 用いる,もちいる,"to use, to make use of",JLPT JLPT_2 JLPT_3
-もったいない,もったいない,"wasteful; more than one deserves, unworthy of",JLPT JLPT_2 JLPT_3
 尤も,もっとも,"quite right, plausible, natural",JLPT JLPT_2 JLPT_3
 元,もと,"origin, original; former",JLPT JLPT_2 JLPT_3
 基,もと,basis,JLPT JLPT_2 JLPT_3
@@ -1085,7 +994,6 @@ expression,reading,meaning,tags
 燃やす,もやす,to burn,JLPT JLPT_2 JLPT_3
 模様,もよう,"pattern, figure, design",JLPT JLPT_2 JLPT_3
 文句,もんく,a complaint,JLPT Intermediate_Japanese Genki JLPT_3 JLPT_2 Intermediate_Japanese_Ln.14 Genki_Ln.21 Intermediate_Japanese_Ln.11
-やがて,やがて,"before long, soon, at length",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.8
 役,やく,"role, position",JLPT JLPT_2 JLPT_3
 約,やく,"approximately, about, some",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.11
 訳,やく,translation,JLPT JLPT_2 JLPT_3
@@ -1099,7 +1007,6 @@ expression,reading,meaning,tags
 破る,やぶる,to tear; to violate; to defeat,JLPT JLPT_2 JLPT_3
 破れる,やぶれる,"to get torn, to wear out",JLPT JLPT_2 JLPT_3
 辞める,やめる,to retire,JLPT JLPT_2 JLPT_3
-やや,やや,"a little, partially, somewhat",JLPT JLPT_2 JLPT_3
 唯一,ゆいいつ,"only, sole, unique",JLPT JLPT_2 JLPT_3
 勇気,ゆうき,"courage, bravery, boldness",JLPT JLPT_2 JLPT_3
 友好,ゆうこう,friendship,JLPT JLPT_2 JLPT_3
@@ -1110,7 +1017,6 @@ expression,reading,meaning,tags
 友人,ゆうじん,friend (formal),JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.15 Intermediate_Japanese_Ln.2
 有能,ゆうのう,"able, capable, efficient",JLPT JLPT_2 JLPT_3
 郵便,ゆうびん,"mail, postal service",JLPT JLPT_2 JLPT_3
-ユーモア,ユーモア,humor,JLPT JLPT_2 JLPT_3
 有利,ゆうり,"advantageous, better",JLPT JLPT_2 JLPT_3
 床,ゆか,floor,JLPT JLPT_2 JLPT_3
 愉快,ゆかい,"pleasant, happy",JLPT JLPT_2 JLPT_3
@@ -1131,7 +1037,6 @@ expression,reading,meaning,tags
 要素,ようそ,element,JLPT JLPT_2 JLPT_3
 要点,ようてん,"gist, main point",JLPT JLPT_2 JLPT_3
 曜日,ようび,day of the week,JLPT JLPT_2 JLPT_3
-ヨーロッパ,ヨーロッパ,Europe,JLPT JLPT_2 JLPT_3
 予期,よき,"expectation, forecast",JLPT JLPT_2 JLPT_3
 横切る,よこぎる,"to cross (e.g., arms), to traverse",JLPT JLPT_2 JLPT_3
 汚す,よごす,"to pollute, to make dirty",JLPT JLPT_2 JLPT_3
@@ -1139,7 +1044,6 @@ expression,reading,meaning,tags
 止す,よす,"to cease, to give up",JLPT JLPT_2 JLPT_3
 寄せる,よせる,"to collect, to gather, to put aside",JLPT JLPT_2 JLPT_3
 予測,よそく,"prediction, estimation",JLPT JLPT_2 JLPT_3
-ヨット,ヨット,yacht,JLPT JLPT_2 JLPT_3
 夜中,よなか,"midnight, dead of night",JLPT JLPT_2 JLPT_3
 世の中,よのなか,"society, the world",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.14
 余分,よぶん,"extra, excess, surplus",JLPT JLPT_2 JLPT_3
@@ -1148,15 +1052,11 @@ expression,reading,meaning,tags
 読み,よみ,reading,JLPT JLPT_2 JLPT_3
 嫁,よめ,"bride, daughter-in-law",JLPT JLPT_2 JLPT_3
 余裕,よゆう,excess; surplus,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.15
-より,より,"twist, ply",JLPT JLPT_2 JLPT_3
 因る,よる,to come from,JLPT JLPT_2 JLPT_3
 喜び,よろこび,"joy, pleasure, rejoicing",JLPT JLPT_2 JLPT_3
-よろしく (かん),よろしく (かん),"best regards, please remember me",JLPT JLPT_2 JLPT_3
 四,よん,four,JLPT JLPT_2 JLPT_3
 来,らい～,next ~,JLPT JLPT_2 JLPT_3
-ライター,ライター,lighter; writer,JLPT JLPT_2 JLPT_3
 楽,らく,"comfort, ease",JLPT JLPT_2 JLPT_3
-ラケット,ラケット,racket,JLPT JLPT_2 JLPT_3
 利益,りえき,"profits, gains",JLPT JLPT_2 JLPT_3
 理解,りかい,"understanding, comprehension",JLPT JLPT_2 JLPT_3
 陸,りく,"land, shore",JLPT JLPT_2 JLPT_3
@@ -1177,24 +1077,19 @@ expression,reading,meaning,tags
 冷静,れいせい,"calm, coolness",JLPT JLPT_2 JLPT_3
 列,れつ,"queue, line, row",JLPT JLPT_2 JLPT_3
 列車,れっしゃ,train (ordinary),JLPT JLPT_2 JLPT_3
-レベル,レベル,level,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.5
 連想,れんそう,"association (of ideas), suggestion",JLPT JLPT_2 JLPT_3
 連続,れんぞく,"consecutive, continuity, continuing",JLPT JLPT_2 JLPT_3
 老人,ろうじん,"the aged, old person",JLPT JLPT_2 JLPT_3
 労働,ろうどう,"labor, work",JLPT JLPT_2 JLPT_3
-ロケット,ロケット,"locket, rocket",JLPT JLPT_2 JLPT_3
 論じる,ろんじる,"to argue, to discuss",JLPT JLPT_2 JLPT_3
 論争,ろんそう,"controversy, dispute",JLPT JLPT_2 JLPT_3
 論文,ろんぶん,"thesis, paper",JLPT JLPT_2 JLPT_3
 輪,わ,"ring, hoop, circle",JLPT JLPT_2 JLPT_3
-ワイン,ワイン,wine,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.9
-わがまま,わがまま,"selfishness, egoism, willfulness",JLPT JLPT_2 JLPT_3
 別れ,わかれ,"parting, separation, farewell",JLPT JLPT_2 JLPT_3
 分かれる,わかれる,"to branch off, to diverge from",JLPT JLPT_2 JLPT_3
 脇,わき,side,JLPT JLPT_2 JLPT_3
 湧く,わく,"to boil, to grow hot",JLPT JLPT_2 JLPT_3
 分ける,わける,"to divide, to separate",JLPT JLPT_2 JLPT_3
-わざと,わざと,on purpose,JLPT JLPT_2 JLPT_3
 僅か,わずか,"only, merely, a little",JLPT JLPT_2 JLPT_3
 綿,わた,cotton,JLPT JLPT_2 JLPT_3
 話題,わだい,"topic, subject",JLPT JLPT_2 JLPT_3
@@ -1207,9 +1102,7 @@ expression,reading,meaning,tags
 碗,わん,bowl,JLPT JLPT_2 JLPT_3
 悪,あく,"evil, vice",JLPT_1 JLPT JLPT_3
 当り,あたり,"hit, success, reaching the mark",JLPT_1 JLPT JLPT_3
-アップ,アップ,up,JLPT_1 JLPT JLPT_3
 宛てる,あてる,"to address, to put",JLPT_1 JLPT JLPT_3
-アンケート,アンケート,"questionnaire (FRE: enquete), survey",JLPT_1 JLPT JLPT_3
 異,い,objection,JLPT_1 JLPT JLPT_3
 意,い,will,JLPT_1 JLPT JLPT_3
 医院,いいん,"doctor's office (surgery), clinic",JLPT_1 JLPT JLPT_3
@@ -1287,8 +1180,6 @@ expression,reading,meaning,tags
 個々,ここ,"individual, one by one",JLPT_1 JLPT JLPT_3
 故人,こじん,the deceased,JLPT_1 JLPT JLPT_3
 小銭,こぜに,"coins, small change",JLPT_1 JLPT JLPT_3
-ことによると,ことによると,(depending on the circumstances),JLPT_1 JLPT JLPT_3
-コンテスト,コンテスト,contest,JLPT_1 JLPT JLPT_3
 採集,さいしゅう,"collecting, gathering",JLPT_1 JLPT JLPT_3
 作,さく,"a work, a harvest",JLPT_1 JLPT JLPT_3
 策,さく,"plan, policy",JLPT_1 JLPT JLPT_3
@@ -1322,26 +1213,14 @@ expression,reading,meaning,tags
 相当,そうとう,"considerably, fairly; worth ~",JLPT JLPT_2 JLPT_3
 速度,そくど,"speed, velocity, rate",JLPT JLPT_2 JLPT_3
 底,そこ,"bottom, sole",JLPT JLPT_2 JLPT_3
-そこで,そこで,"so (conj.), accordingly",JLPT JLPT_2 JLPT_3
 組織,そしき,organization; structure; tissue,JLPT JLPT_2 JLPT_3
-そして,そして,and then,JLPT Genki_Ln.11 JLPT_3 JLPT_2 Genki
 注ぐ,そそぐ,to pour (into),JLPT JLPT_2 JLPT_3
 育つ,そだつ,"to be brought up, to grow (up)",JLPT JLPT_2 JLPT_3
-そっくり,そっくり,the splitting image of; entirely,JLPT JLPT_2 JLPT_3
-そっと,そっと,"softly, gently",JLPT JLPT_2 JLPT_3
 袖,そで,sleeve,JLPT JLPT_2 JLPT_3
 備える,そなえる,"to prepare, to furnish, to store",JLPT JLPT_2 JLPT_3
 具える,そなえる,to be furnished with,JLPT JLPT_2 JLPT_3
-そのうえ,そのうえ,"in addition, furthermore",JLPT JLPT_2 JLPT_3
-そのうち,そのうち,"before long, eventually, sooner or later",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.1
-そのまま,そのまま,"without change, as it is (e.g., now)",JLPT JLPT_2 JLPT_3
 蕎麦,そば,soba (buckwheat noodles),JLPT JLPT_2 JLPT_3
-ソファー,ソファー,"sofa, couch",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.12
 粗末,そまつ,"humble, miserable, crude",JLPT JLPT_2 JLPT_3
-それぞれ,それぞれ,"each, every, respectively",JLPT JLPT_2 JLPT_3
-それでも,それでも,"but (still), and yet, nevertheless",JLPT JLPT_2 JLPT_3
-それと,それと,and,JLPT JLPT_2 JLPT_3
-それとも,それとも,"or, or else",JLPT JLPT_2 JLPT_3
 揃う,そろう,"to become complete, to be equal",JLPT JLPT_2 JLPT_3
 揃える,そろえる,"to put things in order, to arrange",JLPT JLPT_2 JLPT_3
 損,そん,"loss, disadvantage",JLPT JLPT_2 JLPT_3
@@ -1374,17 +1253,13 @@ expression,reading,meaning,tags
 大半,たいはん,"most of, majority, mostly",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.13
 代表,だいひょう,"representative, delegation",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.7
 大部分,だいぶぶん,"most part, majority",JLPT JLPT_2 JLPT_3
-タイプライター,タイプライター,typewriter,JLPT JLPT_2 JLPT_3
 逮捕,たいほ,"arrest, apprehension, capture",JLPT JLPT_2 JLPT_3
 題名,だいめい,title,JLPT JLPT_2 JLPT_3
-ダイヤ,ダイヤ,(railway) schedule; diamond,JLPT JLPT_2 JLPT_3
 太陽,たいよう,sun,JLPT JLPT_2 JLPT_3
 平ら,たいら,"flatness, level, smooth",JLPT JLPT_2 JLPT_3
 代理,だいり,"representation, proxy, deputy",JLPT JLPT_2 JLPT_3
 大陸,たいりく,continent,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.8
 倒す,たおす,"to throw down, to beat",JLPT JLPT_2 JLPT_3
-タオル,タオル,(hand) towel,JLPT Genki_Ln.18 JLPT_3 JLPT_2 Genki
-だが,だが,"but, however",JLPT JLPT_2 JLPT_3
 互い,たがい,"mutual, each other",JLPT JLPT_2 JLPT_3
 高める,たかめる,"to raise, to lift, to boost",JLPT JLPT_2 JLPT_3
 宝,たから,treasure,JLPT JLPT_2 JLPT_3
@@ -1392,13 +1267,10 @@ expression,reading,meaning,tags
 炊く,たく,"to boil, to cook",JLPT JLPT_2 JLPT_3
 焚く,たく,"to burn, to kindle, to build a fire",JLPT JLPT_2 JLPT_3
 抱く,だく,"to embrace, to hug",JLPT JLPT_2 JLPT_3
-だけど,だけど,however,JLPT JLPT_2 JLPT_3
-たしか,たしか,"certain, sure, if I remember correctly",JLPT JLPT_2 JLPT_3
 確かめる,たしかめる,"to ascertain, to make sure",JLPT JLPT_2 JLPT_3
 多少,たしょう,a little (same as 少し (すこし)),JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.13
 助かる,たすかる,to be saved; (something) helps (v.i.),JLPT Intermediate_Japanese Genki_Ln.18 JLPT_3 JLPT_2 Intermediate_Japanese_Ln.4 Genki
 助ける,たすける,"to help (v.t.), to save, to rescue",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Genki Genki_Ln.22 Intermediate_Japanese_Ln.3
-ただ,ただ,free of charge; just (~); only (~),JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.9 Genki_Ln.23 Genki
 只,ただ,"free of charge, mere, only",JLPT JLPT_2 JLPT_3
 唯,ただ,"mere, sole, plain",JLPT JLPT_2 JLPT_3
 戦い,たたかい,"battle, fight",JLPT JLPT_2 JLPT_3
@@ -1412,9 +1284,6 @@ expression,reading,meaning,tags
 経つ,たつ,(time) passes,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.4
 達する,たっする,"to reach, to get to",JLPT JLPT_2 JLPT_3
 唯,たった,"only, just",JLPT JLPT_2 JLPT_3
-だって,だって,"but, because, even",JLPT JLPT_2 JLPT_3
-たっぷり,たっぷり,"full, in plenty, ample",JLPT JLPT_2 JLPT_3
-たとえ,たとえ,"even if, no matter, though",JLPT JLPT_2 JLPT_3
 谷,たに,valley,JLPT JLPT_2 JLPT_3
 他人,たにん,"unrelated person, stranger",JLPT JLPT_2 JLPT_3
 種,たね,seed; material; cause,JLPT JLPT_2 JLPT_3
@@ -1422,7 +1291,6 @@ expression,reading,meaning,tags
 足袋,たび,Japanese socks (with split toe),JLPT JLPT_2 JLPT_3
 度,たび,counter for occurrences,JLPT JLPT_2 JLPT_3
 旅,たび,"travel, trip, journey",JLPT JLPT_2 JLPT_3
-たびたび,たびたび,"often, repeatedly, frequently",JLPT JLPT_2 JLPT_3
 玉,たま,"ball, sphere, coin",JLPT JLPT_2 JLPT_3
 球,たま,"globe, sphere, ball",JLPT JLPT_2 JLPT_3
 弾,たま,"bullet, shot",JLPT JLPT_2 JLPT_3
@@ -1443,7 +1311,6 @@ expression,reading,meaning,tags
 男子,だんし,young man,JLPT JLPT_2 JLPT_3
 単純,たんじゅん,simplicity,JLPT JLPT_2 JLPT_3
 誕生,たんじょう,birth,JLPT JLPT_2 JLPT_3
-ダンス,ダンス,dance,JLPT JLPT_2 JLPT_3
 団体,だんたい,"organization, association",JLPT JLPT_2 JLPT_3
 担当,たんとう,(in) charge,JLPT JLPT_2 JLPT_3
 単なる,たんなる,"mere, simple, sheer",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.15
@@ -1451,8 +1318,6 @@ expression,reading,meaning,tags
 地,ち,earth,JLPT JLPT_2 JLPT_3
 地位,ちい,"(social) position, status",JLPT JLPT_2 JLPT_3
 地域,ちいき,"area, region",JLPT JLPT_2 JLPT_3
-チーズ,チーズ,cheese,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.9
-チーム,チーム,team,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.7
 知恵,ちえ,"wisdom, wit, intelligence",JLPT JLPT_2 JLPT_3
 地下,ちか,"basement, underground",JLPT JLPT_2 JLPT_3
 違い,ちがい,"difference, discrepancy",Genki_Ln.17 JLPT JLPT_3 JLPT_2 Genki
@@ -1468,8 +1333,6 @@ expression,reading,meaning,tags
 地平線,ちへいせん,horizon,JLPT JLPT_2 JLPT_3
 地方,ちほう,"area, locality, region",JLPT JLPT_2 JLPT_3
 茶,ちゃ,tea,JLPT JLPT_2 JLPT_3
-チャンス,チャンス,"chance, opportunity",JLPT JLPT_2 JLPT_3
-ちゃんと,ちゃんと,"perfectly, properly, exactly",JLPT JLPT_2 JLPT_3
 中,ちゅう,"inside, middle, among",JLPT JLPT_2 JLPT_3
 注,ちゅう,"annotation, explanatory note",JLPT JLPT_2 JLPT_3
 中央,ちゅうおう,"central, center, middle",JLPT JLPT_2 JLPT_3
@@ -1485,7 +1348,6 @@ expression,reading,meaning,tags
 調査,ちょうさ,survey; investigation,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.5
 調子,ちょうし,"condition, state, tune, tone",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.5
 頂上,ちょうじょう,"top, summit, peak",JLPT JLPT_2 JLPT_3
-ちょうだい,ちょうだい,-- colloquial form of ください; typically used by children or women --,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.11
 貯金,ちょきん,(bank) savings,JLPT JLPT_2 JLPT_3
 直接,ちょくせつ,"direct, immediate, firsthand",JLPT JLPT_2 JLPT_3
 著者,ちょしゃ,"author, writer",JLPT JLPT_2 JLPT_3
@@ -1524,7 +1386,6 @@ expression,reading,meaning,tags
 繋げる,つなげる,to connect,JLPT JLPT_2 JLPT_3
 常に,つねに,always (same as いつも) (written expression),JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.11
 翼,つばさ,wings,JLPT JLPT_2 JLPT_3
-つまり,つまり,namely; in other words; in short,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.2
 罪,つみ,"crime, fault, indiscretion",JLPT JLPT_2 JLPT_3
 積む,つむ,"to pile up, to stack",JLPT JLPT_2 JLPT_3
 詰める,つめる,"to pack, to shorten, to work out (details)",JLPT JLPT_2 JLPT_3
@@ -1544,16 +1405,13 @@ expression,reading,meaning,tags
 停電,ていでん,failure of electricity,JLPT JLPT_2 JLPT_3
 程度,ていど,"degree, amount, level",JLPT JLPT_2 JLPT_3
 停留所,ていりゅうじょ,bus or tram stop,JLPT JLPT_2 JLPT_3
-デート,デート,date (in the sense of 'social engagement' only),JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.5 Genki_Ln.3 Genki
 敵,てき,"enemy, rival",JLPT JLPT_2 JLPT_3
 出来事,できごと,"incident happening, event",JLPT JLPT_2 JLPT_3
 適する,てきする,"to fit, to suit",JLPT JLPT_2 JLPT_3
 適切,てきせつ,"appropriate, adequate, relevance",JLPT JLPT_2 JLPT_3
 適度,てきど,moderate,JLPT JLPT_2 JLPT_3
 適用,てきよう,applying,JLPT JLPT_2 JLPT_3
-できれば,できれば,if possible…,JLPT JLPT_2 JLPT_3
 手品,てじな,"conjuring trick, magic",JLPT JLPT_2 JLPT_3
-ですから,ですから,therefore,JLPT JLPT_2 JLPT_3
 鉄,てつ,iron,JLPT JLPT_2 JLPT_3
 哲学,てつがく,philosophy,JLPT JLPT_2 JLPT_3
 手伝い,てつだい,"help, helper, assistant",JLPT JLPT_2 JLPT_3
@@ -1565,7 +1423,6 @@ expression,reading,meaning,tags
 典型,てんけい,"type, pattern, archetypal",JLPT JLPT_2 JLPT_3
 天候,てんこう,weather,JLPT JLPT_2 JLPT_3
 電子,でんし,electron; electronic,JLPT JLPT_2 JLPT_3
-テント,テント,tent,JLPT JLPT_2 JLPT_3
 伝統,でんとう,"tradition, convention",JLPT JLPT_2 JLPT_3
 天然,てんねん,"nature, spontaneity",JLPT JLPT_2 JLPT_3
 問い,とい,"question, query",JLPT JLPT_2 JLPT_3
@@ -1577,8 +1434,6 @@ expression,reading,meaning,tags
 当時,とうじ,"at that time, in those days (same as そのころ)",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.13
 動詞,どうし,verb,JLPT JLPT_2 JLPT_3
 同時,どうじ,"simultaneous(ly), same time",JLPT JLPT_2 JLPT_3
-どうしても,どうしても,"at any cost, no matter what, no matter how hard one tries",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.11
-どうぞよろしく,どうぞよろしく,pleased to meet you,JLPT JLPT_2 JLPT_3
 到着,とうちゃく,arrival,JLPT JLPT_2 JLPT_3
 道徳,どうとく,morals,JLPT JLPT_2 JLPT_3
 投票,とうひょう,"voting, poll",JLPT JLPT_2 JLPT_3
@@ -1603,9 +1458,6 @@ expression,reading,meaning,tags
 独立,どくりつ,"independence (e.g., Ind. Day), self-support",JLPT JLPT_2 JLPT_3
 溶ける,とける,"to melt, to thaw, to dissolve",JLPT JLPT_2 JLPT_3
 解ける,とける,"to come untied, to come apart",JLPT JLPT_2 JLPT_3
-どこか,どこか,"somewhere, anywhere",JLPT JLPT_2 JLPT_3
-ところが,ところが,"however, while, even if",JLPT JLPT_2 JLPT_3
-ところで,ところで,by the way; even if,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.1
 登山,とざん,mountain-climbing,JLPT JLPT_2 JLPT_3
 都市,とし,"town, city, urban",JLPT JLPT_2 JLPT_3
 年月,としつき,months and years,JLPT JLPT_2 JLPT_3
@@ -1615,9 +1467,7 @@ expression,reading,meaning,tags
 途端,とたん,"just (now, at the moment, etc.)",JLPT JLPT_2 JLPT_3
 土地,とち,"plot of land, lot, soil",JLPT JLPT_2 JLPT_3
 突然,とつぜん,"abruptly, suddenly, unexpectedly",JLPT JLPT_2 JLPT_3
-トップ,トップ,top,JLPT JLPT_2 JLPT_3
 届く,とどく,to reach,JLPT JLPT_2 JLPT_3
-とにかく,とにかく,"anyhow, at any rate, anyway",JLPT JLPT_3 JLPT_2 Genki Genki_Ln.21
 飛ばす,とばす,"to skip over, to omit",JLPT JLPT_2 JLPT_3
 飛び出す,とびだす,"to jump out, to rush out, to fly out",JLPT JLPT_2 JLPT_3
 留める,とめる,"to fasten, to turn off, to detain",JLPT JLPT_2 JLPT_3
@@ -1625,23 +1475,12 @@ expression,reading,meaning,tags
 友,とも,"friend, companion, pal",JLPT JLPT_2 JLPT_3
 共に,ともに,"sharing with, participate in",JLPT JLPT_2 JLPT_3
 虎,とら,tiger,JLPT JLPT_2 JLPT_3
-ドライブ,ドライブ,"drive, driving",JLPT Genki_Ln.11 JLPT_3 JLPT_2 Genki
-トラック,トラック,truck; (running) track,JLPT JLPT_2 JLPT_3
-ドラマ,ドラマ,drama,JLPT JLPT_2 JLPT_3
-トランプ,トランプ,playing cards (lit: trump),JLPT JLPT_2 JLPT_3
 取り上げる,とりあげる,"to take up, to pick up; to confiscate",JLPT JLPT_2 JLPT_3
 努力,どりょく,"great effort, exertion, endeavor",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.14
-トレーニング,トレーニング,training,JLPT JLPT_2 JLPT_3
-ドレス,ドレス,dress,JLPT JLPT_2 JLPT_3
 取れる,とれる,"to come off, to be taken off",JLPT JLPT_2 JLPT_3
 泥,どろ,mud,JLPT JLPT_2 JLPT_3
-トン,トン,ton (1000 lbs.),JLPT JLPT_2 JLPT_3
-とんでもない,とんでもない,"outrageous, No way!",JLPT JLPT_2 JLPT_3
-どんなに,どんなに,"how, how much",JLPT JLPT_2 JLPT_3
-トンネル,トンネル,tunnel,JLPT JLPT_2 JLPT_3
 名,な,"name, reputation",JLPT JLPT_2 JLPT_3
 内容,ないよう,"subject, contents, detail",JLPT JLPT_2 JLPT_3
-なお,なお,"still, yet",JLPT JLPT_2 JLPT_3
 仲,なか,"relation, relationship",JLPT JLPT_2 JLPT_3
 流す,ながす,"to drain, to float, to shed (e.g., blood, tears)",JLPT JLPT_2 JLPT_3
 半ば,なかば,"middle, halfway",JLPT JLPT_2 JLPT_3
@@ -1655,11 +1494,9 @@ expression,reading,meaning,tags
 亡くす,なくす,to lose someone,JLPT JLPT_2 JLPT_3
 殴る,なぐる,to strike; to hit; to punch,JLPT JLPT_3 JLPT_2 Genki Genki_Ln.21
 無し,なし,without,JLPT JLPT_2 JLPT_3
-なぜなら,なぜなら,because,JLPT JLPT_2 JLPT_3
 謎,なぞ,"riddle, puzzle, enigma",JLPT JLPT_2 JLPT_3
 納得,なっとく,"consent, assent, understanding",JLPT JLPT_2 JLPT_3
 何か,なにか,something,JLPT JLPT_3 JLPT_2 Genki_Ln.8 Genki
-なにも,なにも,nothing,JLPT JLPT_2 JLPT_3
 鍋,なべ,"saucepan, pot",JLPT JLPT_2 JLPT_3
 生,なま,"raw, unprocessed",JLPT JLPT_2 JLPT_3
 怠ける,なまける,"to be idle, to neglect",JLPT JLPT_2 JLPT_3
@@ -1682,9 +1519,6 @@ expression,reading,meaning,tags
 日常,にちじょう,"ordinary, regular, everyday",JLPT JLPT_2 JLPT_3
 日光,にっこう,sunlight,JLPT JLPT_2 JLPT_3
 日中,にっちゅう,"daytime, broad daylight",JLPT JLPT_2 JLPT_3
-にっこり,にっこり,"smile sweetly, smile, grin",JLPT JLPT_2 JLPT_3
-日本,にっぽん,Japan,JLPT JLPT_2 JLPT_3
-日本,にほん,Japan,JLPT JLPT_3 JLPT_2 Genki_Ln.1 Genki
 入場,にゅうじょう,"entrance, admission, entering",JLPT JLPT_2 JLPT_3
 煮る,にる,"to boil, to cook",JLPT JLPT_2 JLPT_3
 人気,にんき,popularity,JLPT JLPT_2 JLPT_3
@@ -1711,7 +1545,6 @@ expression,reading,meaning,tags
 農業,のうぎょう,agriculture,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.10
 農民,のうみん,"farmers, peasants",JLPT JLPT_2 JLPT_3
 能力,のうりょく,"ability, faculty",JLPT JLPT_2 JLPT_3
-ノー,ノー,no,JLPT JLPT_2 JLPT_3
 軒,のき,eaves,JLPT JLPT_2 JLPT_3
 残す,のこす,"to leave (behind, over), to save, to reserve",JLPT JLPT_2 JLPT_3
 残り,のこり,"remaining, left-over",JLPT JLPT_2 JLPT_3
@@ -1722,7 +1555,6 @@ expression,reading,meaning,tags
 望み,のぞみ,"wish, desire, (a) hope",JLPT JLPT_2 JLPT_3
 望む,のぞむ,"to desire, to wish for; to view",JLPT JLPT_2 JLPT_3
 後,のち,"afterwards, since then",JLPT JLPT_2 JLPT_3
-ノック,ノック,knock; fungo (baseball),JLPT JLPT_2 JLPT_3
 伸ばす,のばす,"to extend, to stretch, to reach out",JLPT JLPT_2 JLPT_3
 延ばす,のばす,"to extend, to stretch, to reach out",JLPT JLPT_2 JLPT_3
 伸びる,のびる,"to extend, to make progress, to grow",JLPT JLPT_2 JLPT_3
@@ -1734,16 +1566,10 @@ expression,reading,meaning,tags
 のんびり,のんびり,"carefree, at leisure",JLPT JLPT_3 JLPT_2 Genki_Ln.22 Genki
 場,ば,"place, field (physics)",JLPT JLPT_2 JLPT_3
 はあ (かん),はあ (かん),(sigh),JLPT JLPT_2 JLPT_3
-パーセント,パーセント,percent,JLPT JLPT_2 JLPT_3
 灰,はい,ash,JLPT JLPT_2 JLPT_3
 梅雨,ばいう,rainy season,JLPT JLPT_2 JLPT_3
-バイオリン,バイオリン,violin,JLPT Genki_Ln.13 JLPT_3 JLPT_2 Genki
-ハイキング,ハイキング,hiking,JLPT JLPT_2 JLPT_3
 配達,はいたつ,"delivery, distribution",JLPT JLPT_2 JLPT_3
-パイプ,パイプ,pipe; channels official or otherwise,JLPT JLPT_2 JLPT_3
 俳優,はいゆう,"actor, actress, performer",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.13
-パイロット,パイロット,pilot,JLPT JLPT_2 JLPT_3
-生える,はえる,"to grow, to spring up; to cut (teeth)",JLPT JLPT_2 JLPT_3
 墓,はか,"grave, tomb",JLPT JLPT_2 JLPT_3
 馬鹿,ばか,"fool, idiot",JLPT JLPT_2 JLPT_3
 博士,はかせ,"doctorate, PhD., doctor",JLPT JLPT_2 JLPT_3
@@ -1757,20 +1583,14 @@ expression,reading,meaning,tags
 爆発,ばくはつ,"explosion, detonation, eruption",JLPT JLPT_2 JLPT_3
 博物館,はくぶつかん,museum,JLPT JLPT_2 JLPT_3
 激しい,はげしい,"violent, vehement, intense",JLPT JLPT_2 JLPT_3
-はさみ,はさみ,scissors,JLPT JLPT_2 JLPT_3
 破産,はさん,(personal) bankruptcy,JLPT JLPT_2 JLPT_3
 端,はし,"end (e.g., of street), edge, margin",JLPT JLPT_2 JLPT_3
 始まり,はじまり,"origin, beginning",JLPT JLPT_2 JLPT_3
-パス,パス,"path, pass (in games)",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.10
-外す,はずす,"to unfasten, to remove",JLPT JLPT_2 JLPT_3
-パスポート,パスポート,passport,JLPT JLPT_2 JLPT_3
-外れる,はずれる,"to be disconnected, to be out (e.g., of gear)",JLPT JLPT_2 JLPT_3
 旗,はた,flag,JLPT JLPT_2 JLPT_3
 肌,はだ,skin,JLPT JLPT_2 JLPT_3
 裸,はだか,"naked, nude",JLPT JLPT_2 JLPT_3
 畑,はたけ,"field, patch",JLPT JLPT_2 JLPT_3
 働き,はたらき,"work, labor",JLPT JLPT_2 JLPT_3
-バッグ,バッグ,bag,JLPT JLPT_2 JLPT_3
 発見,はっけん,"discovery, detection, finding",JLPT JLPT_2 JLPT_3
 発行,はっこう,issue (publications),JLPT JLPT_2 JLPT_3
 発車,はっしゃ,departure of a vehicle,JLPT JLPT_2 JLPT_3
@@ -1796,21 +1616,17 @@ expression,reading,meaning,tags
 流行る,はやる,"to be popular, to come into fashion",JLPT JLPT_2 JLPT_3
 腹,はら,"abdomen, belly, stomach",JLPT JLPT_2 JLPT_3
 原,はら,"field, plain",JLPT JLPT_2 JLPT_3
-バランス,バランス,balance,JLPT JLPT_2 JLPT_3
 針,はり,"needle, hand (e.g., clock)",JLPT JLPT_2 JLPT_3
 範囲,はんい,"extent, scope, range",JLPT JLPT_2 JLPT_3
 反抗,はんこう,"opposition, resistance",JLPT JLPT_2 JLPT_3
 犯罪,はんざい,crime,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.10
-ハンサム,ハンサム,handsome,JLPT JLPT_2 JLPT_3
 反省,はんせい,"reflection, reconsideration, regret",JLPT JLPT_2 JLPT_3
 判断,はんだん,"judgment, decision",JLPT JLPT_2 JLPT_3
 犯人,はんにん,"offender, criminal",JLPT JLPT_3 JLPT_2 Genki Genki_Ln.21
 販売,はんばい,"sale, selling, marketing",JLPT JLPT_2 JLPT_3
 灯,ひ,light,JLPT JLPT_2 JLPT_3
-ビール,ビール,beer,JLPT Genki_Ln.11 JLPT_3 JLPT_2 Genki
 被害,ひがい,damage,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.10
 比較,ひかく,comparison,JLPT JLPT_2 JLPT_3
-ピクニック,ピクニック,picnic,JLPT JLPT_2 JLPT_3
 悲劇,ひげき,tragedy,JLPT JLPT_2 JLPT_3
 飛行,ひこう,"aviation, flight",JLPT JLPT_2 JLPT_3
 膝,ひざ,"knee, lap",JLPT JLPT_2 JLPT_3
@@ -1820,10 +1636,8 @@ expression,reading,meaning,tags
 日付,ひづけ,"date, dating",JLPT JLPT_2 JLPT_3
 引越し,ひっこし,"moving, changing residence",JLPT JLPT_2 JLPT_3
 必死,ひっし,"desperation, frantic, inevitable result",JLPT JLPT_2 JLPT_3
-ぴったり,ぴったり,"exactly, neatly, sharp",JLPT JLPT_2 JLPT_3
 引っ張る,ひっぱる,"to pull, to stretch, to drag",JLPT JLPT_2 JLPT_3
 否定,ひてい,"negation, denial",JLPT JLPT_2 JLPT_3
-ビデオ,ビデオ,video tape; VCR,JLPT JLPT_3 JLPT_2 Genki_Ln.3 Genki
 一言,ひとこと,one word,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.12
 人込み,ひとごみ,crowd of people,JLPT JLPT_2 JLPT_3
 等しい,ひとしい,equal,JLPT JLPT_2 JLPT_3
@@ -1850,7 +1664,6 @@ expression,reading,meaning,tags
 品,ひん,"goods; taste, elegance",JLPT JLPT_2 JLPT_3
 瓶,びん,bottle,JLPT JLPT_2 JLPT_3
 便,びん,"way, means; flight",JLPT Genki_Ln.10 JLPT_3 JLPT_2 Genki
-ピン,ピン,pin,JLPT JLPT_2 JLPT_3
 不,ふ,"un(~), non(~), negative prefix",JLPT JLPT_2 JLPT_3
 不,ぶ,"un(~), non(~), negative prefix",JLPT JLPT_2 JLPT_3
 無,ぶ,"nothing, naught, nil, zero",JLPT JLPT_2 JLPT_3
@@ -1885,26 +1698,18 @@ expression,reading,meaning,tags
 打つ,ぶつ,"to hit, to strike",JLPT JLPT_2 JLPT_3
 不通,ふつう,"blockade, interruption, stoppage",JLPT JLPT_2 JLPT_3
 物価,ぶっか,(commodity/consumer) prices,JLPT Genki_Ln.13 Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.6 Genki
-ぶつかる,ぶつかる,"to strike, to collide with",JLPT JLPT_2 JLPT_3
-ぶつける,ぶつける,"to knock, to strike hard, to hit and attack",JLPT JLPT_2 JLPT_3
 物質,ぶっしつ,"material, substance",JLPT JLPT_2 JLPT_3
 物理,ぶつり,physics,JLPT JLPT_2 JLPT_3
 筆,ふで,writing brush,JLPT JLPT_2 JLPT_3
-ふと,ふと,"suddenly, accidentally, incidentally",JLPT JLPT_2 JLPT_3
 部分,ぶぶん,"portion, section, part",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.12
 不平,ふへい,"complaint, discontent, dissatisfaction",JLPT JLPT_2 JLPT_3
 不満,ふまん,"dissatisfaction, discontent, complaints",JLPT JLPT_2 JLPT_3
 増やす,ふやす,"to increase (v.t.), to add to",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.14
 殖やす,ふやす,"to increase, to add to",JLPT JLPT_2 JLPT_3
-プラス,プラス,plus,JLPT JLPT_2 JLPT_3
-プラスチック,プラスチック,plastic,JLPT JLPT_2 JLPT_3
-プラン,プラン,plan,JLPT JLPT_2 JLPT_3
 不利,ふり,"disadvantage, drawback",JLPT JLPT_2 JLPT_3
 振る,ふる,"to wave, to shake; to sprinkle; to cast (actor)",JLPT JLPT_2 JLPT_3
 震える,ふるえる,"to shiver, to shake, to quake",JLPT JLPT_2 JLPT_3
-ブレーキ,ブレーキ,a brake,JLPT JLPT_2 JLPT_3
 触れる,ふれる,"to touch, to feel, to violate",JLPT JLPT_2 JLPT_3
-プロ,プロ,professional,JLPT JLPT_2 JLPT_3
 分,ぶん,"dividing, part, segment",JLPT JLPT_2 JLPT_3
 文,ぶん,sentence,JLPT JLPT_2 JLPT_3
 雰囲気,ふんいき,"atmosphere (e.g., musical), mood, ambiance",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.12
@@ -1917,11 +1722,8 @@ expression,reading,meaning,tags
 別に,べつに,"(not) particularly, nothing",JLPT JLPT_2 JLPT_3
 減らす,へらす,"to decrease, to diminish",JLPT JLPT_2 JLPT_3
 減る,へる,"to decrease (in size or number), to diminish",JLPT JLPT_2 JLPT_3
-ベルト,ベルト,Belt for western clothes,JLPT JLPT_2 JLPT_3
 変化,へんか,"change, variation, shift",JLPT JLPT_2 JLPT_3
-ペンキ,ペンキ,paint,JLPT JLPT_2 JLPT_3
 変更,へんこう,"change, modification, alteration",JLPT JLPT_2 JLPT_3
-ベンチ,ベンチ,bench,JLPT JLPT_2 JLPT_3
 弁当,べんとう,box lunch,JLPT JLPT_2 JLPT_3
 方,ほう,side,JLPT JLPT_2 JLPT_3
 法,ほう,Act (law: the X Act),JLPT JLPT_2 JLPT_3
@@ -1936,10 +1738,6 @@ expression,reading,meaning,tags
 方々,ほうぼう,"here and there, everywhere",JLPT JLPT_2 JLPT_3
 訪問,ほうもん,"call, visit",JLPT JLPT_2 JLPT_3
 吠える,ほえる,"to bark, to howl",JLPT JLPT_2 JLPT_3
-ボーイ,ボーイ,porter; boy,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.6
-ボート,ボート,rowing boat,JLPT JLPT_2 JLPT_3
-ホーム,ホーム,platform; home,JLPT JLPT_2 JLPT_3
-ボール,ボール,ball; bowl,JLPT JLPT_3 JLPT_2 Genki_Ln.22 Genki
 他,ほか,other (esp. places and things),JLPT JLPT_2 JLPT_3
 誇り,ほこり,pride,JLPT JLPT_2 JLPT_3
 埃,ほこり,dust,JLPT JLPT_2 JLPT_3
@@ -1958,13 +1756,6 @@ expression,reading,meaning,tags
 本当,ほんと,"truth, reality",JLPT JLPT_2 JLPT_3
 本人,ほんにん,the person himself,JLPT JLPT_2 JLPT_3
 本物,ほんもの,genuine article,JLPT JLPT_2 JLPT_3
-ぼんやり,ぼんやり,"dim, faint, vague",JLPT JLPT_2 JLPT_3
-間,ま,"space, room, pause",JLPT JLPT_2 JLPT_3
-まあ,まあ,well (used when making a modest or hesitant statement),JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.13
-マーケット,マーケット,market,JLPT JLPT_2 JLPT_3
-マイク,マイク,mic,JLPT JLPT_2 JLPT_3
-迷子,まいご,lost (stray) child,JLPT JLPT_2 JLPT_3
-マイナス,マイナス,minus,JLPT JLPT_2 JLPT_3
 任せる,まかせる,"to entrust to another, to leave to",JLPT JLPT_2 JLPT_3
 巻く,まく,"to wind, to coil, to roll",JLPT JLPT_2 JLPT_3
 蒔く,まく,to sow (seeds),JLPT JLPT_2 JLPT_3
@@ -1980,8 +1771,6 @@ expression,reading,meaning,tags
 交じる,まじる,"to be mixed, to mingle with",JLPT JLPT_2 JLPT_3
 増す,ます,"to increase, to gain",JLPT JLPT_2 JLPT_3
 貧しい,まずしい,"poor, needy",JLPT JLPT_2 JLPT_3
-マスター,マスター,"bar owner, master (e.g., arts, science)",JLPT JLPT_2 JLPT_3
-ますます,ますます,"increasingly (same as もっと), more and more",JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.9
 混ぜる,まぜる,"to mix, to stir",JLPT JLPT_2 JLPT_3
 交ぜる,まぜる,"to be mixed, to be blended with",JLPT JLPT_2 JLPT_3
 街,まち,"town; street, road",JLPT JLPT_2 JLPT_3
@@ -1990,12 +1779,9 @@ expression,reading,meaning,tags
 真っ赤,まっか,"deep red, flushed (of face)",JLPT JLPT_2 JLPT_3
 全く,まったく,"really, completely",JLPT JLPT_2 JLPT_3
 祭,まつり,"festival, feast",JLPT JLPT_2 JLPT_3
-まとまる,まとまる,"to be collected, to be settled, to be in order",JLPT JLPT_2 JLPT_3
-まとめる,まとめる,"to put in order, to collect, to bring to a conclusion",JLPT JLPT_2 JLPT_3
 学ぶ,まなぶ,to learn; to study,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.8
 真似,まね,"mimicry, imitation, behavior",JLPT JLPT_2 JLPT_3
 招く,まねく,to invite,JLPT Intermediate_Japanese JLPT_3 JLPT_2 Intermediate_Japanese_Ln.13
-まぶしい,まぶしい,"dazzling, radiant",JLPT JLPT_2 JLPT_3
 柵,さく,"fence, paling",JLPT_1 JLPT JLPT_3
 裂ける,さける,"to split, to tear, to burst",JLPT_1 JLPT JLPT_3
 裁く,さばく,to judge,JLPT_1 JLPT JLPT_3
@@ -2024,14 +1810,12 @@ expression,reading,meaning,tags
 照明,しょうめい,illumination,JLPT_1 JLPT JLPT_3
 女史,じょし,Ms.,JLPT_1 JLPT JLPT_3
 助詞,じょし,"(gram) particle(s), postposition",JLPT Intermediate_Japanese JLPT_1 JLPT_3 Intermediate_Japanese_Ln.13
-ショック,ショック,shock,JLPT Intermediate_Japanese JLPT_1 JLPT_3 Intermediate_Japanese_Ln.4
 進行,しんこう,advance,JLPT_1 JLPT JLPT_3
 新興,しんこう,"rising, developing, emergent",JLPT_1 JLPT JLPT_3
 振興,しんこう,"promotion, encouragement",JLPT_1 JLPT JLPT_3
 申告,しんこく,"report, statement",JLPT_1 JLPT JLPT_3
 真理,しんり,truth,JLPT_1 JLPT JLPT_3
 水洗,すいせん,flushing,JLPT_1 JLPT JLPT_3
-ストレス,ストレス,stress,JLPT_1 JLPT JLPT_3
 擦る,する,"to rub, to chafe",JLPT_1 JLPT JLPT_3
 正規,せいき,"regular, legitimate",JLPT_1 JLPT JLPT_3
 精巧,せいこう,"elaborate, delicate, exquisite",JLPT_1 JLPT JLPT_3
@@ -2056,13 +1840,10 @@ expression,reading,meaning,tags
 創造,そうぞう,creation,JLPT_1 JLPT JLPT_3
 隊,たい,"party, troops",JLPT_1 JLPT JLPT_3
 退学,たいがく,dropping out of school,JLPT_1 JLPT JLPT_3
-タイトル,タイトル,title,JLPT_1 JLPT JLPT_3
-ダウン,ダウン,down,JLPT_1 JLPT JLPT_3
 高まる,たかまる,to rise; to grow; to mount (v.i.),JLPT Intermediate_Japanese JLPT_1 JLPT_3 Intermediate_Japanese_Ln.14
 断つ,たつ,"to sever, to cut off",JLPT_1 JLPT JLPT_3
 盾,たて,shield,JLPT_1 JLPT JLPT_3
 例え,たとえ,example; even though,JLPT_1 JLPT JLPT_3
-チャイム,チャイム,chime,JLPT_1 JLPT JLPT_3
 挑戦,ちょうせん,"challenge, defiance",JLPT_1 JLPT JLPT_3
 治療,ちりょう,medical treatment,JLPT_1 JLPT JLPT_3
 対,つい,"pair, couple, set",JLPT_1 JLPT JLPT_3
@@ -2072,12 +1853,8 @@ expression,reading,meaning,tags
 露,つゆ,dew,JLPT_1 JLPT JLPT_3
 強まる,つよまる,"to get strong, to gain strength",JLPT_1 JLPT JLPT_3
 強める,つよめる,"to strengthen, to emphasize",JLPT_1 JLPT JLPT_3
-データ,データ,data,JLPT_1 JLPT JLPT_3
-デザイン,デザイン,design,JLPT_1 JLPT JLPT_3
-デザート,デザート,dessert,JLPT_1 JLPT JLPT_3
 転校,てんこう,change schools,JLPT_1 JLPT JLPT_3
 伝言,でんごん,verbal message,JLPT_1 JLPT JLPT_3
-と,と,and,JLPT_1 JLPT JLPT_3
 問う,とう,"to ask, to question",JLPT_1 JLPT JLPT_3
 棟,とう,ridge (of roof,JLPT_1 JLPT JLPT_3
 倒産,とうさん,"(corporate) bankruptcy, insolvency",JLPT_1 JLPT JLPT_3
@@ -2116,16 +1893,12 @@ expression,reading,meaning,tags
 保護,ほご,"care, protection, shelter",JLPT_1 JLPT JLPT_3
 保障,ほしょう,"guarantee, security, warranty",JLPT_1 JLPT JLPT_3
 補償,ほしょう,"compensation, reparation",JLPT_1 JLPT JLPT_3
-ほっと,ほっと,feel relieved,JLPT_1 JLPT JLPT_3
 前もって,まえもって,"in advance, beforehand, previously",JLPT_1 JLPT JLPT_3
 膜,まく,"membrane, film",JLPT_1 JLPT JLPT_3
-マスコミ,マスコミ,mass communication,JLPT_1 JLPT JLPT_3
 股,また,"thigh, crotch",JLPT_1 JLPT JLPT_3
 末,まつ,the end of,JLPT_1 JLPT JLPT_3
-マッサージ,マッサージ,massage,JLPT_1 JLPT JLPT_3
 見掛ける,みかける,"to (happen to see), to notice, to catch sight of",JLPT_1 JLPT JLPT_3
 捲る,めくる,"to turn over, to turn pages of a book",JLPT_1 JLPT JLPT_3
-メッセージ,メッセージ,message,JLPT_1 JLPT JLPT_3
 野党,やとう,opposition party,JLPT_1 JLPT JLPT_3
 優,ゆう,"superiority, high grade",JLPT_1 JLPT JLPT_3
 有機,ゆうき,organic,JLPT_1 JLPT JLPT_3
@@ -2134,6 +1907,4 @@ expression,reading,meaning,tags
 予想,よそう,"expectation, anticipation, prediction",JLPT_1 JLPT JLPT_3
 弱まる,よわまる,"to weaken, to be emaciated, to be dejected",JLPT_1 JLPT JLPT_3
 弱める,よわめる,to weaken,JLPT_1 JLPT JLPT_3
-ラベル,ラベル,label,JLPT_1 JLPT JLPT_3
-ルール,ルール,rule,JLPT_1 JLPT JLPT_3
 枠,わく,"frame, slide",JLPT_1 JLPT JLPT_3

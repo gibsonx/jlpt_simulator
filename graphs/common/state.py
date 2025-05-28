@@ -11,7 +11,7 @@ from typing_extensions import TypedDict
 class SimpleChoiceQuestionOutput(TypedDict):
     """Simple Question Formatted Output"""
     html_question: Annotated[str, "the question to ask in html format at a single line, no choices"]
-    correct_answer: Annotated[int, "correct option"]
+    correct_answer: Annotated[int, "correct option in 1,2,3,4"]
     choices: Annotated[List, "answer options as a list for candidate to choose in Japanese"]
 
 class ListenConversation(TypedDict):

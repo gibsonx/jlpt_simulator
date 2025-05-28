@@ -4,93 +4,93 @@ Role: You are a Japanese teacher.
 Task: your job is to write a kanji question for the JLPT N3 exam.
 Your job is to provide a kanji vocabulary word in a short sentence and ask the candidate to choose the correct kana reading. 
 The word being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
+give the correct answer number in 1,2,3,4
 
 Instructions:
-Format: tightly follow the format of formal exam papers. The output must be in html format and remove line change tag.
+Format: tightly follow the format of 8 examples in the formal exam paper. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation.
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-
+Additional Requirement: Don't show question instructions and question sequence number in the generated content. 
 
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 kanji_reading_example = """
-    <ol>
+    <ul>
         <li>
             山田さんがちらしを<u>配った</u>。
-            <ol>
+            <ul>
                 <li>ひろった</li>
                 <li>くばった</li>
                 <li>やぶった</li>
                 <li>はった</li>
-            </ol>
+            </ul>
         </li>
         <li>
             私の国は<u>石油</u>を輸入しています。
-            <ol>
+            <ul>
                 <li>いしゅ</li>
                 <li>せきう</li>
                 <li>せきゆ</li>
                 <li>いしう</li>
-            </ol>
+            </ul>
         </li>
         <li>
             卒業式には生徒の<u>父母</u>もたくさん来ていた。
-            <ol>
+            <ul>
                 <li>ふば</li>
                 <li>ふぼ</li>
                 <li>ふうぼ</li>
                 <li>ふうば</li>
-            </ol>
+            </ul>
         </li>
         <li>
             この町の<u>主要</u>な産業は何ですか。
-            <ol>
+            <ul>
                 <li>じゅおう</li>
                 <li>しゅおう</li>
                 <li>じゅうよう</li>
                 <li>しゅよう</li>
-            </ol>
+            </ul>
         </li>
         <li>
             これは<u>加熱</u>して食べてください。
-            <ol>
+            <ul>
                 <li>ねつねつ</li>
                 <li>かあつ</li>
                 <li>かいねつ</li>
                 <li>かねつ</li>
-            </ol>
+            </ul>
         </li>
         <li>
             川はあの<u>辺り</u>で<u>深く</u>なっている。
-            <ol>
+            <ul>
                 <li>ふかく</li>
                 <li>あさく</li>
                 <li>ひろく</li>
                 <li>せまく</li>
-            </ol>
+            </ul>
         </li>
         <li>
             文句を言われたので、つい<u>感情的</u>になってしまった。
-            <ol>
+            <ul>
                 <li>がんじょうてき</li>
                 <li>かんしょうてき</li>
                 <li>かんじょうてき</li>
                 <li>がんしょうてき</li>
-            </ol>
+            </ul>
         </li>
         <li>
             これは<u>残さない</u>でください。
-            <ol>
+            <ul>
                 <li>なくさないで</li>
                 <li>よごさないで</li>
                 <li>こぼさないで</li>
                 <li>のこさないで</li>
-            </ol>
+            </ul>
         </li>
-    </ol>
+    </ul>
 ```
 """
 
@@ -100,9 +100,10 @@ Role: You are a Japanese teacher.
 Task: Your job is to write a word meaning question for a JLPT N3 level exam paper.
 You should write a short sentence and ask candidate to identify the correct kanji writing of a given word in hiragana.
 The word being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
+give the correct answer number in 1,2,3,4
 
 Instructions:
-Format: tightly follow the format of formal exam papers. The output must be in html format and remove line change tag.
+Format: tightly follow the format of 6 examples in the formal exam paper. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
@@ -113,61 +114,61 @@ Formal exam paper: {example}
 """
 
 write_chinese_example = """
-<ol>
+<ul>
   <li>ここから<u>じゅんばん</u>に見てください。
-    <ol type="1">
+    <ul>
       <li>順番</li>
       <li>項番</li>
       <li>順審</li>
       <li>項審</li>
-    </ol>
+    </ul>
   </li>
 
   <li>父は銀行に<u>つとめて</u>います。
-    <ol type="1">
+    <ul>
       <li>勤めて</li>
       <li>働めて</li>
       <li>仕めて</li>
       <li>労めて</li>
-    </ol>
+    </ul>
   </li>
 
   <li>ポケットが<u>さゆう</u>にあるんですね。
-    <ol type="1">
+    <ul>
       <li>裏表</li>
       <li>右左</li>
       <li>表裏</li>
       <li>左右</li>
-    </ol>
+    </ul>
   </li>
 
   <li>昨日の試合は<u>まけて</u>しまいました。
-    <ol type="1">
+    <ul>
       <li>退けて</li>
       <li>負けて</li>
       <li>失けて</li>
       <li>欠けて</li>
-    </ol>
+    </ul>
   </li>
 
   <li><u>かこの</u>例も調べてみましょう。
-    <ol type="1">
+    <ul>
       <li>適去</li>
       <li>過古</li>
       <li>過去</li>
       <li>適古</li>
-    </ol>
+    </ul>
   </li>
 
   <li>この資料はページが<u>ぎゃく</u>になっていますよ。
-    <ol type="1">
+    <ul>
       <li>達</li>
       <li>変</li>
       <li>逆</li>
       <li>別</li>
-    </ol>
+    </ul>
   </li>
-</ol>
+</ul>
 """
 
 word_meaning_teacher_prompt = """
