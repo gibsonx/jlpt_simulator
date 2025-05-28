@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 class ExamTaskHandler:
     def __init__(self):
         self.llm = azure_llm
-        self.ref_llm = azure_ref_llm
+        self.ref_llm = azure_llm
         self.nodes = {
             "online_search": None,
             "generator": None,

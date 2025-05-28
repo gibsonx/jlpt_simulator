@@ -4,7 +4,7 @@ Role: You are a Japanese teacher.
 Task: your job is to write a kanji question for the JLPT N3 exam.
 Your job is to provide a kanji vocabulary word in a short sentence and ask the candidate to choose the correct kana reading. 
 The word being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
-give the correct answer number in 1,2,3,4
+You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Instructions:
 Format: tightly follow the format of 8 examples in the formal exam paper. The output must be in html format and remove line change tag.
@@ -16,82 +16,14 @@ Search result: {search_result}
 Formal exam paper: {example}
 """
 
-kanji_reading_example = """
-    <ul>
-        <li>
-            山田さんがちらしを<u>配った</u>。
-            <ul>
-                <li>ひろった</li>
-                <li>くばった</li>
-                <li>やぶった</li>
-                <li>はった</li>
-            </ul>
-        </li>
-        <li>
-            私の国は<u>石油</u>を輸入しています。
-            <ul>
-                <li>いしゅ</li>
-                <li>せきう</li>
-                <li>せきゆ</li>
-                <li>いしう</li>
-            </ul>
-        </li>
-        <li>
-            卒業式には生徒の<u>父母</u>もたくさん来ていた。
-            <ul>
-                <li>ふば</li>
-                <li>ふぼ</li>
-                <li>ふうぼ</li>
-                <li>ふうば</li>
-            </ul>
-        </li>
-        <li>
-            この町の<u>主要</u>な産業は何ですか。
-            <ul>
-                <li>じゅおう</li>
-                <li>しゅおう</li>
-                <li>じゅうよう</li>
-                <li>しゅよう</li>
-            </ul>
-        </li>
-        <li>
-            これは<u>加熱</u>して食べてください。
-            <ul>
-                <li>ねつねつ</li>
-                <li>かあつ</li>
-                <li>かいねつ</li>
-                <li>かねつ</li>
-            </ul>
-        </li>
-        <li>
-            川はあの<u>辺り</u>で<u>深く</u>なっている。
-            <ul>
-                <li>ふかく</li>
-                <li>あさく</li>
-                <li>ひろく</li>
-                <li>せまく</li>
-            </ul>
-        </li>
-        <li>
-            文句を言われたので、つい<u>感情的</u>になってしまった。
-            <ul>
-                <li>がんじょうてき</li>
-                <li>かんしょうてき</li>
-                <li>かんじょうてき</li>
-                <li>がんしょうてき</li>
-            </ul>
-        </li>
-        <li>
-            これは<u>残さない</u>でください。
-            <ul>
-                <li>なくさないで</li>
-                <li>よごさないで</li>
-                <li>こぼさないで</li>
-                <li>のこさないで</li>
-            </ul>
-        </li>
-    </ul>
-```
+kanji_reading_example = """  
+<a>この町の<u>主要</u>な産業は何ですか。</a>
+<ul>
+    <li>じゅおう</li>
+    <li>しゅおう</li>
+    <li>じゅうよう</li>
+    <li>しゅよう</li>
+</ul>
 """
 
 write_chinese_teacher_prompt = """
@@ -100,7 +32,7 @@ Role: You are a Japanese teacher.
 Task: Your job is to write a word meaning question for a JLPT N3 level exam paper.
 You should write a short sentence and ask candidate to identify the correct kanji writing of a given word in hiragana.
 The word being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
-give the correct answer number in 1,2,3,4
+You must show the correct answer number in the output, the options are 1,2,3,4
 
 Instructions:
 Format: tightly follow the format of 6 examples in the formal exam paper. The output must be in html format and remove line change tag.
@@ -114,60 +46,12 @@ Formal exam paper: {example}
 """
 
 write_chinese_example = """
+<a>ここから<u>じゅんばん</u>に見てください。 </a>
 <ul>
-  <li>ここから<u>じゅんばん</u>に見てください。
-    <ul>
-      <li>順番</li>
-      <li>項番</li>
-      <li>順審</li>
-      <li>項審</li>
-    </ul>
-  </li>
-
-  <li>父は銀行に<u>つとめて</u>います。
-    <ul>
-      <li>勤めて</li>
-      <li>働めて</li>
-      <li>仕めて</li>
-      <li>労めて</li>
-    </ul>
-  </li>
-
-  <li>ポケットが<u>さゆう</u>にあるんですね。
-    <ul>
-      <li>裏表</li>
-      <li>右左</li>
-      <li>表裏</li>
-      <li>左右</li>
-    </ul>
-  </li>
-
-  <li>昨日の試合は<u>まけて</u>しまいました。
-    <ul>
-      <li>退けて</li>
-      <li>負けて</li>
-      <li>失けて</li>
-      <li>欠けて</li>
-    </ul>
-  </li>
-
-  <li><u>かこの</u>例も調べてみましょう。
-    <ul>
-      <li>適去</li>
-      <li>過古</li>
-      <li>過去</li>
-      <li>適古</li>
-    </ul>
-  </li>
-
-  <li>この資料はページが<u>ぎゃく</u>になっていますよ。
-    <ul>
-      <li>達</li>
-      <li>変</li>
-      <li>逆</li>
-      <li>別</li>
-    </ul>
-  </li>
+  <li>順番</li>
+  <li>項番</li>
+  <li>順審</li>
+  <li>項審</li>
 </ul>
 """
 

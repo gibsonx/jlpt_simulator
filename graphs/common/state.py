@@ -10,7 +10,7 @@ from typing_extensions import TypedDict
 
 class SimpleChoiceQuestionOutput(TypedDict):
     """Simple Question Formatted Output"""
-    html_question: Annotated[str, "the question to ask in html format at a single line, no choices"]
+    html_question: Annotated[str, "the question in html format at a single line"]
     correct_answer: Annotated[int, "correct option in 1,2,3,4"]
     choices: Annotated[List, "answer options as a list for candidate to choose in Japanese"]
 
@@ -20,7 +20,7 @@ class ListenConversation(TypedDict):
 
 class ListenOpenQuestionOutput(TypedDict):
     """Simple Question Formatted Output"""
-    html_question: Annotated[str, "the question to ask candidate in html format at a single line"]
+    html_question: Annotated[str, "the question in html format at a single line"]
     suggestion: Annotated[str, "the suggesting answer in Japanese"]
     conversation: List[ListenConversation]
 
