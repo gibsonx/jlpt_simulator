@@ -8,7 +8,7 @@ The word in the sentence should not be used in the options
 You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Instructions:
-Format: tightly follow the format of the example in the formal exam paper. The output must be in html format and remove line change tag.
+Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation.
 Additional Requirement: Don't show question instructions and question sequence number in the generated content. 
@@ -37,7 +37,7 @@ The word in the sentence should not be used in the options.
 The word being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
 
 Instructions:
-Format: tightly follow the format of the example in the formal exam paper. The output must be in html format and remove line change tag.
+Format: follow the format of the example in the formal exam paper but not the content.  The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
@@ -70,7 +70,7 @@ Each option is either written entirely in kanji or entirely in kana.
 
 
 Instructions:
-Format: tightly follow the format of 2 examples in the formal exam paper. The output must be in html format and remove line change tag.
+Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
@@ -111,7 +111,7 @@ The word in the sentence should not be used in the options
 The words to be examined need to be underlined in each sentence.
 
 Instructions:
-Format: tightly follow the format of the example in the formal exam paper. The output must be in html format and remove line change tag.
+Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
@@ -140,7 +140,7 @@ the word in the sentence should not be used in the options
 The words to be examined need to be underlined in each sentence.
 
 Instructions:
-Format: tightly follow the format of the example in the formal exam paper. The output must be in html format and remove line change tag.
+Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
@@ -163,188 +163,82 @@ word_usage_example = """
 sentence_grammar_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: Your job is to provide a sentence with a blank space and ask the candidate to fill in the most appropriate grammatical structure.
+Task: You should write a short sentence and give a parenthesis in the sentence,
+Next, require candidates to fill the most semantically and grammatically appropriate word from the options based on the context of the sentence in the parenthesis 
+This mainly tests students the ability to identify the stucture in a sentence.
+The word in the sentence should not be used in the options
 
 Instructions:
-Format: Follow the format of formal exam papers.
+Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
-Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-
+You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 sentence_grammar_example = """
-私は、自分の作ったパンを多くたくさんの人（　）食べてほしいと思って、パン屋を始めた。
-    1.  は
-    2.  に
-    3.  まで
-    4.  なら
+<a>私は、自分の作ったパンをたくさんの人（　　　）食べてほしいと思って、パン屋を始めた。</a>
+<ul class='options'>
+  <li>は</li>
+  <li>に</li>
+  <li>まで</li>
+  <li>なら</li>
+</ul>
 
----
-（学校にて）
+<a>（研究室で）<br>
+学生「先生、今、よろしいですか。来週の発表（　　　）、ちょっとご相談したいのですが。」<br>
+先生「ええ、いいですよ。」
+</a>
+<ul class='options'>
+  <li>にとって</li>
+  <li>によると</li>
+  <li>のことで</li>
+  <li>のほか</li>
+</ul>
 
-学生：「先生、今、よろしいですか。英語の発表（　）、ちょっと相談したいのですが。」
-先生：「ええ、いいですよ。」
-    1.  にとって
-    2.  によると
-    3.  のことで
-    4.  のは
 
----
-
-いつもは勉強を2時間以上かかるが、今日は1時間（　）終わりそうだ。
-    1.  くらい
-    2.  ころで
-    3.  ぐらい
-    4.  ぐらいで
-
----
-
-母：「えっ、（　）ご飯食べたばかりなのに、もうおなかすいたの？」
-    1.  そろそろ
-    2.  だんだん
-    3.  さっき
-    4.  ずっと
-
----
-
-大事なレシートをズボンのポケットに（　）洗濯してしまった。
-    1.  入れたまま
-    2.  入ったまま
-    3.  入れている間
-    4.  入っている間
-
----
-（駅のホームにて）
-
-「急げ、9時の特急に間に合うかもしれないし、走ろうか。」
-「いや、（　）もう間に合わないと思う。次の電車にしよう。」
-    1.  走ってて
-    2.  走ってるよ
-    3.  走らさきゃ
-    4.  走っちゃって
-
----
-
-私はよくインターネットで物を買い替えるが、掃除機は壊れたら、実際に（　）買いたいものだ。
-    1.  見てないと
-    2.  見ておきたくなった
-    3.  見てから
-    4.  見ておいて
-
----
-（料亭にて）
-
-（体を丸めてお辞儀をして）「おいしそうな料理ですね。」
-店員：「どうぞたくさん（　）ください。」
-    1.  召し上がって
-    2.  おっしゃって
-    3.  なおって
-    4.  いらっし
-
----
-
-A：「最近、寒くなって（　）ね。」
-B：「ええ、今日は特に冷えますね。」
-    1.  いました
-    2.  ありました
-    3.  いきました
-    4.  きました
-
----
-（大学にて）
-
-A：「日曜日の留学生交流会、どうだった？」
-B：「楽しかったよ。初めてだったからちょっと緊張したけど、新しい友達もできたし。」
-    1.  行ってよかったよ
-    2.  行こうかと思うよ
-    3.  行きたかったなあ
-    4.  行けたらいいなあ
-
----
-（大学の事務所で）
-
-学生：「すみません、ペンを（　）。」
-事務所の人：「あ、はい、これを使ってください。」
-    1.  お貸しできますか
-    2.  お貸しいたしますか
-    3.  貸したらいかがですか
-    4.  貸していただけませんか
-
----
-（家にて）
-
-娘：「ちょっと駅前の本屋に行ってくるね。」
-父：「雨が降っているし、車で（　）？」
-娘：「いいの？ありがとう。」
-    1.  送っててない
-    2.  送ってこようか
-    3.  送ってあげない
-    4.  送ってあげようか
-
----
-（会社にて）
-
-「中山さん、今、ちょっといいですか。」
-中山：「あ、ごめんなさい、これからABC銀行に（　）、戻ってきてからでもいいですか。」
-    1.  行くところだからです
-    2.  行くとこなんです
-    3.  行っているところだからです
-    4.  行っているところなんです
 """
 
 sentence_sort_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: Your job is to provide a sentence sorting question that requires selecting the correct arrangement order.
-Ask candidate to choose the correct option from the following 4 options.
+Task: You should write a sentence with one blank marked by a ★ symbol. the symbol expression in html: <u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;</u><u>★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>  
+Next, require candidates to fill the most semantically and grammatically appropriate word from the options based on the context of the sentence in the blank. 
+This mainly test sutdent grammar or expression usage appropriate.
+The word in the sentence should not be used in the options
 
 Instructions:
-Format: Follow the format of formal exam papers.
+Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
-Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challengesfor the question from Japanese teacher's pespective.
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-
+You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 sentence_sort_example = """
-山川大学では、__★_ 新入生がにアンケート調査を行っている。
-    1.  大学生活
-    2.  持っている
-    3.  に対して
-    4.  イメージ
+<a>山川大学では、<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;</u><u>★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u> 新入生がにアンケート調査を行っている。</a>
+<ul class='options'>
+  <li>大学生活</li>
+  <li>持っている</li>
+  <li>に対して</li>
+  <li>イメージ</li>
+</ul>
 
-来週の夫の誕生日には、__★_ つもりだ。
-    1.  最近
-    2.  プレゼントする
-    3.  かばんを
-    4.  欲しがっている
 
-私は、健康の__★_。
-    1.  している
-    2.  ために
-    3.  毎日8時間以上寝る
-    4.  ように
+<a>来週の夫の誕生日には、<u>＿＿</u> <u>＿＿</u> ★ <u>＿＿</u> <u>＿＿</u> つもりだ。</a>
+<ul class='options'>
+  <li>最近</li>
+  <li>プレゼントする</li>
+  <li>かばんを</li>
+  <li>欲しがっている</li>
+</ul>
 
-部長が__★_ クッキーがとてもおいしいので、私も東京に行くことがあったら、買おうと思う。
-    1.  たびに
-    2.  ために
-    3.  お土産の
-    4.  ように
-
-私はこの図書館が好きだ。広くて本の数が多い __★_ いい。
-    1.  景色を楽しみながら
-    2.  大きな窓から街が見えて
-    3.  だけでなく
-    4.  読書ができるのも
 """
 
 structure_selection_teacher_prompt = """
