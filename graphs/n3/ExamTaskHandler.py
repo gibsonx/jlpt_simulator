@@ -51,8 +51,8 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def write_chinese(self, word):
-        graph = self.build_agent(write_chinese_teacher_prompt, write_chinese_example, SimpleChoiceQuestionOutput)
+    def write_kanji(self, word):
+        graph = self.build_agent(write_kanji_teacher_prompt, write_kanji_example, SimpleChoiceQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=word)]},
             config={"configurable": {"thread_id": "1"}}
@@ -185,13 +185,13 @@ if __name__ == "__main__":
     random_word = random.choice(n3_vocab.split(","))
 
     # Kanji Reading
-    handler = ExamTaskHandler()
-    print(handler.kanji_reading(random_word))
+    # handler = ExamTaskHandler()
+    # print(handler.kanji_reading(random_word))
     
     # # Write Chinese Task
-    # handler = ExamTaskHandler()
-    # print(handler.write_chinese(random_word))
-    #
+    handler = ExamTaskHandler()
+    print(handler.write_kanji(random_word))
+
     # # Word Meaning Task
     # handler = ExamTaskHandler()
     # print(handler.word_meaning(random_word))
@@ -200,9 +200,9 @@ if __name__ == "__main__":
     # handler = ExamTaskHandler()
     # print(handler.synonym_substitution(random_word))
     #
-    # # Word Usage Task
-    # handler = ExamTaskHandler()
-    # print(handler.word_usage(random_word))
+    # Word Usage Task
+    handler = ExamTaskHandler()
+    print(handler.word_usage(random_word))
     #
     # # Sentence Grammar Task
     # handler = ExamTaskHandler()

@@ -2,12 +2,13 @@ kanji_reading_teacher_prompt = """
 Role: You are a Japanese teacher.
 
 Task: your job is to write a kanji question for the JLPT N3 exam.
-Your job is to provide a kanji vocabulary word in a short sentence and ask the candidate to choose the correct kana reading. 
+Your job is to provide a kanji vocabulary word in a short sentence and ask the candidate to choose the correct kana words.
 The word being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
+The word in the sentence should not be used in the options
 You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Instructions:
-Format: tightly follow the format of 8 examples in the formal exam paper. The output must be in html format and remove line change tag.
+Format: tightly follow the format of the example in the formal exam paper. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation.
 Additional Requirement: Don't show question instructions and question sequence number in the generated content. 
@@ -26,28 +27,29 @@ kanji_reading_example = """
 </ul>
 """
 
-write_chinese_teacher_prompt = """
+write_kanji_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: Your job is to write a word meaning question for a JLPT N3 level exam paper.
+Task: Your job is to write a question for a JLPT N3 level exam paper.
 You should write a short sentence and ask candidate to identify the correct kanji writing of a given word in hiragana.
+The number of kanji characters in the options must be the same.
+The word in the sentence should not be used in the options.
 The word being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
-You must show the correct answer number in the output, the options are 1,2,3,4
 
 Instructions:
-Format: tightly follow the format of 6 examples in the formal exam paper. The output must be in html format and remove line change tag.
+Format: tightly follow the format of the example in the formal exam paper. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-
+You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
-write_chinese_example = """
+write_kanji_example = """
 <a>ここから<u>じゅんばん</u>に見てください。 </a>
-<ul>
+<ul class='options'>
   <li>順番</li>
   <li>項番</li>
   <li>順審</li>
@@ -58,16 +60,21 @@ write_chinese_example = """
 word_meaning_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: Your job is to write a vocabulary question for candidates to identify the correct kanji writing of a given word in hiragana for a JLPT N3 level exam paper.
-Each question presents a word in hiragana within a sentence, and candidates must choose the correct kanji representation from four options. 
-The options should include one correct kanji form and three distractors that are plausible but incorrect. The pseudonym of the selected word does not need to be given in the question type. The question type of word meaning selection mainly tests the form of multiple-choice questions, requiring candidates to select the most suitable words from the options based on the context of the sentence or passage. The question type should be left blank in the sentence or dialogue, requiring the selection of semantically and grammatically appropriate words from the options.
+Task:
+Task: Your job is to write a question for a JLPT N3 level exam paper.
+You should write a short sentence and give a parenthesis in the sentence,
+Next, require candidates to fill the most semantically and grammatically appropriate word from the options based on the context of the sentence in the parenthesis 
+This mainly tests students the ability to identify the part of speech of a word in a sentence.
+The word in the sentence should not be used in the options
+Each option is either written entirely in kanji or entirely in kana.
+
 
 Instructions:
-Format: Follow the format of formal exam papers.
+Format: tightly follow the format of 2 examples in the formal exam paper. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
-Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
+You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Search result: {search_result}
@@ -75,71 +82,22 @@ Formal exam paper: {example}
 """
 
 word_meaning_example = """
-大雪で朝から電車が（　）している。
-    1.  縮小
-    2.  滞在
-    3.  延期
-    4.  運休
+<a>大雪で朝から電車が（　）している。</a>
+<ul class='options'>
+  <li>縮小</li>
+  <li>滞在</li>
+  <li>延期</li>
+  <li>運休</li>
+</ul>
 
-今日は暑かったので、シャツが（　）でぬれてしまった。
-    1.  いびき
-    2.  あくび
-    3.  あせ
-    4.  いき
+<a>今日は暑かったので、シャツが（　）でぬれてしまった。</a>
+<ul class='options'>
+  <li>いびき</li>
+  <li>あくび</li>
+  <li>あせ</li>
+  <li>いき</li>
+</ul>
 
-答えさんに声がよく聞こえるように、（　）を使って話してください。
-    1.  サイレン
-    2.  エンジン
-    3.  ノック
-    4.  マイク
-
-昨日は早く寝たが、夜中に大きな音がして目が（　）しまった。
-    1.  嫌がって
-    2.  覚めて
-    3.  驚いて
-    4.  怖がって
-
-林さんはいつも冗談ばかり言うので、その話も本当かどうか（　）。
-    1.  あやしい
-    2.  おそろしい
-    3.  にくらしい
-    4.  まずしい
-
-本日の面接の結果は、1 週間以内にメールで（　）します。
-    1.  広告
-    2.  合図
-    3.  通知
-    4.  伝言
-
-兄はいつも（　）シャツを着ているので、遠くにいてもすぐに見つかる。
-    1.  派手な
-    2.  盛んな
-    3.  わがままな
-    4.  身近な
-
-ここに車を止めることは規則で（　）されていますから、すぐに移動してください。
-    1.  支配
-    2.  英殺
-    3.  禁止
-    4.  批判
-
-このコートは古いがまだ着られるので、捨ててしまうのは（　）。
-    1.  もったいない
-    2.  しかたない
-    3.  かわいらしい
-    4.  こいかない
-
-弟への誕生日プレゼントは、誕生日まで弟に見つからないように、たんすの奥に（　）。
-    1.  包んだ
-    2.  隠した
-    3.  囲んだ
-    4.  閉じた
-
-山口さんは今度のパーティーには来られないかもしれないが、（　）誘うつもりだ。
-    1.  十分
-    2.  一応
-    3.  けっこう
-    4.  たいてい
 """
 
 synonym_substitution_teacher_prompt = """
@@ -147,50 +105,30 @@ Role: You are a Japanese teacher.
 
 Task: Your job is to write a synonym question for candidates to identify the most appropriate word with a similar meaning in a JLPT N3 level exam paper. 
 Each question presents a word in kanji or katakana within a sentence.
-The options should include one correct synonym and three distractors that are plausible. The synonyms that need to be replaced should be indicated with underscores.
+The options should include one correct synonym and three distractors that are plausible. 
+The synonyms that need to be replaced should be indicated with underscores.
+The word in the sentence should not be used in the options
+The words to be examined need to be underlined in each sentence.
 
 Instructions:
-Format: Follow the format of formal exam papers.
+Format: tightly follow the format of the example in the formal exam paper. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
-Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-
+You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 synonym_substitution_example = """
-さん、避難してください。
-    1.  ならんで
-    2.  入って
-    3.  にげて
-    4.  急いで
-
-来週、ここで企業の説明会があります。
-    1.  旅行
-    2.  会社
-    3.  大学
-    4.  建物
-
-ちょっとバックしてください。
-    1.  前に進んで
-    2.  後ろに下がって
-    3.  横に動いて
-    4.  そこで止まって
-
-このやり方がベストだ。
-    1.  最もよい
-    2.  最もよくない
-    3.  最も難しい
-    4.  最も難しくない
-
-田中さんがようやく来てくれました。
-    1.  笑に
-    2.  すぐに
-    3.  やっと
-    4.  初めて
+<a>さん、<u>避難</u>してください。</a>
+<ul class='options'>
+  <li>ならんで</li>
+  <li>入って</li>
+  <li>にげて</li>
+  <li>急いで</li>
+</ul>
 """
 
 word_usage_teacher_prompt = """
@@ -198,50 +136,28 @@ Role: You are a Japanese teacher.
 
 Task: Your job is to write a word usage question for candidates, examining the usage of words in actual contexts.
 request candidates to select the most appropriate context, includes Japanese idiomatic expressions and fixed collocations.
+the word in the sentence should not be used in the options
 The words to be examined need to be underlined in each sentence.
 
 Instructions:
-Format: Follow the format of formal exam papers.
+Format: tightly follow the format of the example in the formal exam paper. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
-Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-
+You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 word_usage_example = """
-内容
-    1.  修理のため、エアコンの内容を一度取り出します
-    2.  鍋の中にカレーの内容を入れて、1時間くらい煮てください
-    3.  古い財布から新しい財布へ内容を移しました
-    4.  この手紙の内容は、ほかの人には秘密にしてください
-
-活動
-    1.  彼は有名なロック歌手だったが、今は活動していない
-    2.  山に登ると、新鮮な空気が活動していて気持ちがいい
-    3.  さっきまで活動していたパソコンが、急に動かなくなった
-    4.  駅前のコンビニは24時間活動しているので便利だ
-
-落ち着く
-    1.  この辺りは、冬になると雪が落ち着いて、春になるまで溶けません
-    2.  シャツにしみが落ち着いてしまって、洗ってもきれいになりません
-    3.  あそこの木の上に美しい鳥が落ち着いています
-    4.  大好きなこの曲を聞くと、いつも気持ちが落ち着きます
-
-ぐっすり
-    1.  遠慮しないで、ぐっすり食べてください
-    2.  優勝できたのは、毎日ぐっすり練習したからだと思う
-    3.  今日は疲れているので、朝までぐっすり眠れそうだ
-    4.  古い友人と久しぶりに会って、ぐっすりおしゃべりした
-
-性格
-    1.  日本の古い性格に興味があるので、神社やお寺によく行きます
-    2.  森さんはおとなしい性格で、自分の意見はあまり言いません
-    3.  値段が高くても、塗装で性格のいい車を買うつもりです
-    4.  音楽の性格を伸ばすために、5歳から専門家の指導を受けました
+<a>内容</a>
+<ul class='options'>
+  <li>修理のため、エアコンの<u>内容</u>を一度取り出します</li>
+  <li>鍋の中にカレーの<u>内容</u>を入れて、１時間くらい煮てください</li>
+  <li>古い財布から新しい財布へ<u>内容</u>を移しました</li>
+  <li>この手紙の<u>内容</u>は、ほかの人には秘密にしてください</li>
+</ul>
 """
 
 sentence_grammar_teacher_prompt = """

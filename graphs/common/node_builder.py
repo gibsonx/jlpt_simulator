@@ -95,11 +95,11 @@ def reflection_node_builder(llm):
                     "system",
             """  You are a Japanese language educator reviewing a JLPT exam paper. Generate critique and recommendations for the Japanese teacher's submission in English.
                  You must read the Instructions in the previous messages and give feedback on the following factors:
-               - Don't suggest to add any question instructions to the context. Don't suggest anything about html format.         
+               - Don't suggest to add any question instructions to the context. Don't suggest anything about html format. Do not suggest to include instructions in the question about whether it's testing meaning, kanji, or context.      
                - For content accuracy, you must verify that the grammar and vocabulary questions accurately reflect the appropriate JLPT N3 level, ensuring the reading passages are clear, relevant, and appropriately challenging. 
                - For question and answer quality, you must ensure all questions are clearly worded and free from ambiguity to comprehensively assess different language skills, and confirm that the difficulty level of the questions matches the intended JLPT N3 level.
                - During detailed refinement, You also ensure the content is culturally appropriate and relevant to Japanese academic language content and culture.
-               - Finally, you make give feedback, providing detailed recommendations, including requests. If you think the exam paper is good enough, you just say "GOOD ENOUGH"
+               - Finally, you make give feedback, providing detailed recommendations, including requests. If you think the exam paper is good enough to challenge student, you just say "GOOD ENOUGH"
                """
                 ),
                 MessagesPlaceholder(variable_name="messages"),
@@ -127,11 +127,14 @@ def formatter_node_builder(llm, OutType: Type[TypedDict]):
             [
                 (
                     "system",
-                    """You are a AI assistance. your job is to format the following context to the structured output
-                    1. you should not change any context and html tags, except removing change line tags like \\n or \\n\\n from the context.
-                    2. The answer choices should not appear in html_question.
-                    Context: 
-                    {question}"""
+                    """You are a AI assistance. your job is to format the Context to the structured output following 
+                    the instruction below: 
+                    1. you should not change any context and html tags, except removing change 
+                    line tags like \\n or \\n\\n from the context. 
+                    2. use the content inside <li></li> as choices and keep html format, but <li></li> tags should be excluded.
+                    3. The content in the <ul class='options'></ul>, choices should not write in html_question.
+                    4. question requirement and correct answer should not write in the html_question.
+                    Context: {question}"""
                 )
             ]
         )

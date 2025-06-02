@@ -12,7 +12,7 @@ class SimpleChoiceQuestionOutput(TypedDict):
     """Simple Question Formatted Output"""
     html_question: Annotated[str, "the question in html format at a single line"]
     correct_answer: Annotated[int, "correct option in 1,2,3,4"]
-    choices: Annotated[List, "answer options as a list for candidate to choose in Japanese"]
+    choices: Annotated[List, "answer options as a list, each option is in html format"]
 
 class ListenConversation(TypedDict):
     gender: Literal['male','female']
