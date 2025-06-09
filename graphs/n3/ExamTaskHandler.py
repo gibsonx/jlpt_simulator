@@ -32,7 +32,7 @@ class ExamTaskHandler:
         )
         self.nodes["reflector"] = reflection_node_builder(llm=self.ref_llm)
         self.nodes["formatter"] = formatter_node_builder(llm=self.ref_llm, OutType=OutType)
-        graph = build_graph(StateGraph(SimpleQuestionState), self.nodes)
+        graph = build_graph(StateGraph(GraphState), self.nodes)
 
         return graph
 
@@ -108,7 +108,7 @@ class ExamTaskHandler:
         return instance['formatted_output']
 
     def short_passage_read(self, word):
-        graph = self.build_agent(short_reading_teacher_prompt, short_reading_example, SimpleChoiceQuestionOutput)
+        graph = self.build_agent(short_reading_teacher_prompt, short_reading_example, MultipleQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=word)]},
             config={"configurable": {"thread_id": "1"}}
@@ -116,7 +116,7 @@ class ExamTaskHandler:
         return instance['formatted_output']
 
     def midsize_passage_read(self, word):
-        graph = self.build_agent(midsize_reading_teacher_prompt, midsize_reading_example, SimpleChoiceQuestionOutput)
+        graph = self.build_agent(midsize_reading_teacher_prompt, midsize_reading_example, MultipleQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=word)]},
             config={"configurable": {"thread_id": "1"}}
@@ -181,16 +181,19 @@ class ExamTaskHandler:
 
 if __name__ == "__main__":
     n3_vocab = collect_vocabulary("../../Vocab/n3.csv")
-
+    with open("../../Vocab/topics.txt", "r", encoding="utf-8") as file:
+        topics_list = [line.strip() for line in file]
     random_word = random.choice(n3_vocab.split(","))
+    random_topic = random.choice(topics_list)
+    # ra
 
     # Kanji Reading
     # handler = ExamTaskHandler()
     # print(handler.kanji_reading(random_word))
     
     # # Write Chinese Task
-    handler = ExamTaskHandler()
-    print(handler.write_kanji(random_word))
+    # handler = ExamTaskHandler()
+    # print(handler.write_kanji(random_word))
 
     # # Word Meaning Task
     # handler = ExamTaskHandler()
@@ -201,21 +204,21 @@ if __name__ == "__main__":
     # print(handler.synonym_substitution(random_word))
     #
     # Word Usage Task
-    handler = ExamTaskHandler()
-    print(handler.word_usage(random_word))
+    # handler = ExamTaskHandler()
+    # print(handler.word_usage(random_word))
     #
     # # Sentence Grammar Task
     # handler = ExamTaskHandler()
     # print(handler.sentence_grammar(random_word))
     #
     # # Sentence Sort Task
-    # handler = ExamTaskHandler()
-    # print(handler.sentence_sort(random_word))
+    handler = ExamTaskHandler()
+    print(handler.sentence_sort(random_word))
     #
-    # # Sentence Structure Task
+    # Sentence Structure Task
     # handler = ExamTaskHandler()
-    # print(handler.sentence_structure(random_word))
-    #
+    # print(handler.sentence_structure(random_topic))
+
     # # Short Passage Read Task
     # handler = ExamTaskHandler()
     # print(handler.short_passage_read(random_word))

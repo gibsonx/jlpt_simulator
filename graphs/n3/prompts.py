@@ -2,7 +2,7 @@ kanji_reading_teacher_prompt = """
 Role: You are a Japanese teacher.
 
 Task: your job is to write a kanji question for the JLPT N3 exam.
-Your job is to provide a kanji vocabulary word in a short sentence and ask the candidate to choose the correct kana words.
+Your job is to provide a kanji vocabulary word in a short sentence and ask the candidate to choose the correct kana words
 The word being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
 The word in the sentence should not be used in the options
 You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
@@ -70,7 +70,7 @@ Each option is either written entirely in kanji or entirely in kana.
 
 
 Instructions:
-Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
@@ -82,6 +82,7 @@ Formal exam paper: {example}
 """
 
 word_meaning_example = """
+--- example 1 ---
 <a>大雪で朝から電車が（　）している。</a>
 <ul class='options'>
   <li>縮小</li>
@@ -90,6 +91,7 @@ word_meaning_example = """
   <li>運休</li>
 </ul>
 
+--- example 2 ---
 <a>今日は暑かったので、シャツが（　）でぬれてしまった。</a>
 <ul class='options'>
   <li>いびき</li>
@@ -134,9 +136,8 @@ synonym_substitution_example = """
 word_usage_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: Your job is to write a word usage question for candidates, examining the usage of words in actual contexts.
+Task: Your job is to write a kanji usage question for candidates, examining the usage of words in actual contexts.
 request candidates to select the most appropriate context, includes Japanese idiomatic expressions and fixed collocations.
-the word in the sentence should not be used in the options
 The words to be examined need to be underlined in each sentence.
 
 Instructions:
@@ -169,7 +170,7 @@ This mainly tests students the ability to identify the stucture in a sentence.
 The word in the sentence should not be used in the options
 
 Instructions:
-Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
@@ -180,6 +181,7 @@ Formal exam paper: {example}
 """
 
 sentence_grammar_example = """
+--- example 1 ---
 <a>私は、自分の作ったパンをたくさんの人（　　　）食べてほしいと思って、パン屋を始めた。</a>
 <ul class='options'>
   <li>は</li>
@@ -188,6 +190,7 @@ sentence_grammar_example = """
   <li>なら</li>
 </ul>
 
+--- example 2 ---
 <a>（研究室で）<br>
 学生「先生、今、よろしいですか。来週の発表（　　　）、ちょっとご相談したいのですが。」<br>
 先生「ええ、いいですよ。」
@@ -202,27 +205,36 @@ sentence_grammar_example = """
 
 """
 
-sentence_sort_teacher_prompt = """
-Role: You are a Japanese teacher. 
+# The candidate must re-arrange words (don't change options order) and identify the third word according to the word positions for a sentence.
+# When the third word is identified, point out its sequence number in the options.
 
-Task: You should write a sentence with one blank marked by a ★ symbol. the symbol expression in html: <u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;</u><u>★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>  
-Next, require candidates to fill the most semantically and grammatically appropriate word from the options based on the context of the sentence in the blank. 
-This mainly test sutdent grammar or expression usage appropriate.
-The word in the sentence should not be used in the options
+sentence_sort_teacher_prompt = """
+Role: You are a Japanese teacher who create a sentence sort question for JLPT n3 level exam. 
+
+Task: You should write a sentence around 30-40 words and cut sequential 4 words as options. Next, mix the options sequence up, avoiding to use the third words as the third option. 
+the candidate needs to rearrange the word order according to the positions of the sentence. write in the section named 'Queue'. for example. Queue: 2 → 1 → 4 → 3
+After that, take the third number in the Queue as the correct answer.
+You must show the correct answer and the original sentence in the output, the options are 1,2,3,4. for example: 正解: 1
+
+make 4 underlines for cut words and the third one is marked by a symbol. the symbol expression in html: <u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>   
+This mainly tests student grammar ability of sentence structure at collocations and idiomatic expressions, 
+vocabulary combinations and set phrases, lexical collocations and idioms.
+The word in the sentence should not be used in the options.
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+
 
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
 sentence_sort_example = """
-<a>山川大学では、<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;</u><u>★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u> 新入生がにアンケート調査を行っている。</a>
+--- example 1 ---
+<a>山川大学では、<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u> 新入生がにアンケート調査を行っている。</a>
 <ul class='options'>
   <li>大学生活</li>
   <li>持っている</li>
@@ -230,7 +242,7 @@ sentence_sort_example = """
   <li>イメージ</li>
 </ul>
 
-
+--- example 2 ---
 <a>来週の夫の誕生日には、<u>＿＿</u> <u>＿＿</u> ★ <u>＿＿</u> <u>＿＿</u> つもりだ。</a>
 <ul class='options'>
   <li>最近</li>
@@ -245,17 +257,18 @@ structure_selection_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
 Task: Your job is to write a paper for JLPT N3 level. 
-At this section, please write a Japanese article about 300-400 words with 4-5 lines written with markdown. 
-After that, you should give 4 related questions from the content of the article. 
-The purpose is to also test candidate the ability to identify Japanese sentence structure. 
+At this section, please write a Japanese article about 400-500 words with 4-5 lines written in html format. 
+After that, you should give 4 related questions (19-22) from the content of the article. 
+The purpose is to test candidate the ability to identify Japanese sentence structure. 
 Candidate should fill in the gaps in the article by choosing the grammar structure that best fits the context from the following 4 options, 
+You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Instructions:
-Format: Follow the format of formal exam papers. Each question has 4 options in Japanese
+Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
-Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: give the correct answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question instructions and question sequence number and revised submission in the generated content.
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Additional Requirement: Don't show question instructions and question sequence number in the generated content.
+You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Search result: {search_result}
@@ -263,52 +276,78 @@ Formal exam paper: {example}
 """
 
 structure_selection_example = """
-夏休みの思い出  
+<div class='article'>
+<h3>夏休みの思い出</h3>
+<p>
+お母さん、中学生の妹さんと住んでいます。日本人の家に泊まるのは初めてだったので、
+行く前は少し不安な気持ちもありました。<strong>【20】</strong>、行ってみたらとても楽しかったです。
+</p>
+<p>
+印象に残っているのは、巡の畑で育てた野菜を使って、みんなで料理を作ったことです。
+友達のお母さんは、畑でいろいろな野菜を育てていました。私たちは、その野菜を使ってみんなで料理をしました。
+私は、お店で売られている野菜 <strong>【21】</strong> 食べたことがありませんでした。
+</p>
+<p>
+家で育てた野菜を食べたのは初めてでしたが、とてもおいしかったです。
+注に「私も野菜を育ててみたいけど、頭がないから育てられない。」と言ったら、
+それを聞いていたお母さんが、家の中でも育てることができる野菜について教えてくれました。
+</p>
+<p>
+お母さんに教えてもらったやり方で、私も野菜を <strong>【22】</strong>。
+今、２種類の野菜を育てています。
+</p>
+<p>
+野菜の世話をしながら、楽しかった夏休みのことをいつも思い出しています。
+</p>
+</div>
 
-お母さん、中学生の妹さんと住んでいます。[19] 日本人の家に泊まるのは初めてだったので、行く前は少し不安な気持ちもありました。[20] 行ってみたらとても楽しかったです。  
-
-印象に残っているのは、巡りの畑で育てた野菜を使って、みんなで料理を作ったことです。友達のお母さんは、畑でいろいろな野菜を育てていました。私たちは、その野菜を使ってみんなで料理をしました。私は、お店に売られている野菜 [21] 食べたことがありませんでした。家で育てた野菜を食べたのは初めてでしたが、とてもおいしかったです。特に「私も野菜を育ててみたい」と、胸がいっぱ言う行ってらない。」と言ったら、それを聞いていたお母さんが、家の中でも育てることができる野菜について教えてくれました。  
-
-お母さんに教えてもらったやり方で、私も野菜を [22]。今、２種類の野菜を育てています。  
-
-野菜の世話をしながら、楽しかった夏休みのことをいつも思い出しています。  
-
---- 
-
-1. 招待してくれたのです    
-2. 招待してくれたはずです    
-3. 招待してくれたばかりです    
-4. 招待してくれたそうです    
-
-1. それで    
-2. でも    
-3. 実は    
-4. また    
-
-1. は    
-2. などを    
-3. しか    
-4. だけ    
-
-1. 育ててみてほしいです    
-2. 育ててみてもいいです    
-3. 育ててみようとしました    
-4. 育ててみることにしました     
+<a>19.</a>  
+<ul>  
+    <li>招待してくれたのです</li>  
+    <li>招待してくれたはずです</li>  
+    <li>招待してくれたばかりです</li>  
+    <li>招待してくれたそうです</li>  
+</ul>  
+  
+<a>20.</a>  
+<ul>  
+    <li>それで</li>  
+    <li>でも</li>  
+    <li>実は</li>  
+    <li>また</li>  
+</ul>
+    
+<a>21.</a>  
+<ul>  
+    <li>は</li>  
+    <li>などを</li>  
+    <li>しか</li>  
+    <li>だけ</li>  
+</ul>  
+  
+<a>22.</a>  
+<ul>  
+    <li>育ててみてほしいです</li>  
+    <li>育ててみてもいいです</li>  
+    <li>育ててみようとしました</li>  
+    <li>育ててみることにしました</li>  
+</ul>      
 """
 
 short_reading_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: Your job is to write a question for candidate to read a short article around 200 words.
-The article is composed as 5-6 lines, you must split lines. Then, you give a question from the related content of the article.
-The content is specific for emails Notification and letter articles.
+Task: Your job is to write a reading question for candidate.
+First you need to write a short more than 300 words article for student to read. 
+Then, you give a question by the related content in the article.
+The purpose is to ensure the students are able to understand the meaning of the artile.
 
 Instructions:
-Format: Follow the format of formal exam papers. Don't show sequence number of the questions.
+Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
-Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the correct answer and an explanation of the main challengesfor the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question instructions and question sequence number and revised submission in the generated content.
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Additional Requirement: Don't show question instructions and question sequence number in the generated content.
+You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Search result: {search_result}
@@ -316,80 +355,48 @@ Formal exam paper: {example}
 """
 
 short_reading_example = """
----
+--- example 1 ---
+<div class='article'>
+    <p>これは、今川さんが後のミゲルさんに書いたメールである。</p>  
+      
+    <p><strong>ミゲルさん</strong></p>  
+    <p>メールをありがとう。</p>  
+    <p>同じ会社で働くことになって、うれしいです。</p>  
+    <p>住む所についてアドバイスをくださいと書いてあったので、お答えします。</p>  
+    <p>会社まで歩いて行きたいと書いてありましたが、会社のりはオフィスばかりで、アパートはほとんどありません。電車通勤になりますが、私が以前住んでいた緑野という町はいいですよ。</p>  
+    <p>緑野駅から会社のある北駅まで電車で15分だし、いろいろなお店があって便利です。</p>  
+    <p>いい所が見つかるといいですね。会えるのを楽しみにしています。</p>  
+    
+    <p>今川</p>
+</div>
+    
+<a>まで電車で15分で行けるし、店も多いので、緑野にしたらどうか。</a>  
+<ul class='options'>
+    <li>(選択肢なし)</li>
+    <li>いろいろな店があって便利なので、北駅駅の近くにしたらどうか</li>  
+    <li>北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか</li>  
+    <li>いろいろな店があって便利なので、北駅駅の近くにしたらどうか</li>  
+</ul> 
 
-これは、今川さんが後のミゲルさんに書いたメールである。
+--- example 2 ---
+<div class='article'>
+<p><strong>(会社で)</strong></p>  
+<p>ミンさんが席に戻ると、机の上に、原口課長からのメモが置いてあった。</p>  
 
-ミゲルさん
+<p><strong>ミンさん</strong></p>  
+<p>子どもが熱を出したので、早退します。午後、明日の会議の進行について確認する約束だったのに、すみません。午後の話し合いのために予約していた小会議室はキャンセルしてくれますか。席に戻ったら、すぐにお願いします。会議の進行については、明日の朝、最初に確認して、そのあとに会議室の準備をしましょう。</p>  
+<p>それから、ミンさんの作った資料ですが、問題ないので、今日中に8人分印刷しておいてください。</p>  
+<p>よろしくお願いします。</p>  
+<p>9月8日 12:10</p>  
+<p>原口</p>  
 
-メールをありがとう。
-
-同じ会社で働くことになって、うれしいです。
-
-住む所についてアドバイスをくださいと書いてあったので、お答えします。
-
-会社まで歩いて行きたいと書いてありましたが、会社の周りはオフィスばかりで、アパートはほとんどありません。電車通勤になりますが、私が以前住んでいた緑野という町はいいですよ。
-
-緑野駅から会社のある北駅まで電車で15分だし、いろいろなお店があって便利です。
-
-いい所が見つかるといいですね。会えるのを楽しみにしています。
-
-今川
-
-23. まで電車で15分で行けるし、店も多いので、緑野にしたらどうか。
-    1.  (選択肢なし)
-    2.  いろいろな店があって便利なので、北園駅の近くにしたらどうか
-    3.  北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか
-    4.  いろいろな店があって便利なので、北園駅の近くにしたらどうか
-
----
-
-友達のマキは、いいことがあったという話をよくする。だから私は、マキは運がいいのだと思っていた。しかし、最近、そうではないと気づいた。
-
-先日二人で出かけたとき、事故で電車が止まっていて、何キロも歩いて帰ることになった。嫌だなと思っている私に、マキは「知らない町を歩けるね。」と嬉しそうに言った。とても不思議だった。でも、マキは楽しめてしまうのだ。今まで私が聞いた話も、マキだから「いいこと」だと感じたのだろうと思う。
-
-24. 最近、「私」はマキのことをどのような人だと思うようになったか。
-    1.  「いいこと」ばかりが起きる。運がいい人
-    2.  「私」と一緒に経験したことは、何でも「いいこと」だと思える人
-    3.  ほかの人に起こった「いいこと」を一緒に喜んであげられる人
-    4.  ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人
-
----
-
-(会社で)
-
-ミンさんが席に戻ると、机の上に、原口課長からのメモが置いてあった。
-
-ミンさん
-
-子どもが熱を出したので、早退します。午後、明日の会議の進行について確認する約束だったのに、すみません。午後の話し合いのために予約していた小会議室はキャンセルしてくれますか。席に戻ったら、すぐにお願いします。会議の進行については、明日の朝、最初に確認して、そのあとに会議室の準備をしましょう。
-
-それから、ミンさんの作った資料ですが、問題ないので、今日中に8人分印刷しておいてください。
-
-よろしくお願いします。
-
-9月8日 12:10
-原口
-
-25. このメモを読んで、ミンさんはまず何をしなければならないか。
-    1.  会議の進行について口課長と確認する
-    2.  小会議室をキャンセルする
-    3.  会議室の準備をする
-    4.  会議の資料を8人分印刷する
-
----
-
-日本のファミリーレストランは、店の壁やソファーなどに、赤やオレンジ色のような暖かさを感じさせる色、つまり、暖色を使うことが多い。
-
-暖色には食欲を感じさせる効果があるので、暖色に囲まれていると、料理がおいしそうに見える。また、暖色は、時間を実際より長く感じさせる効果もある。客は、店にいた時間が短くても、ゆっくりできたように感じるのだ。
-
----
-
-日本のファミリーレストランで暖色が使われる理由は何か。
-    1.  店の暖房にあまりお金がかからないようにするため
-    2.  客に、店の料理と店で過ごす時間にいい印象を持ってもらうため
-    3.  店をおしゃれに見せて、客に店に入りたいと思ってもらうため
-    4.  客に長く店にいてもらって、料理をたくさん注文してもらうため       
+<a>25. このメモを読んで、ミンさんはまず何をしなければならないか。</a>  
+<ul class='options'>
+    <li>会議の進行について口課長と確認する</li>  
+    <li>小会議室をキャンセルする</li>  
+    <li>会議室の準備をする</li>  
+    <li>会議の資料を8人分印刷する</li>  
+</ul>
 """
 
 midsize_reading_teacher_prompt = """
@@ -506,94 +513,25 @@ Formal exam paper: {example}
 """
 
 long_reading_example = """
-これは、今川さんが後のミゲルさんに書いたメールである。
-
-ミゲルさん
-
-メールをありがとう。
-
-同じ会社で働くことになって、うれしいです。
-
-住む所についてアドバイスをくださいと書いてあったので、お答えします。
-
-会社まで歩いて行きたいと書いてありましたが、会社の周りはオフィスばかりで、アパートはほとんどありません。電車通勤になりますが、私が以前住んでいた緑野という町はいいですよ。
-
-緑野駅から会社のある北駅まで電車で15分だし、いろいろなお店があって便利です。
-
-いい所が見つかるといいですね。会えるのを楽しみにしています。
-
-今川
-
-まで電車で15分で行けるし、店も多いので、緑野にしたらどうか。
-    1.  (選択肢なし)
-    2.  いろいろな店があって便利なので、北園駅の近くにしたらどうか
-    3.  北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか
-    4.  いろいろな店があって便利なので、北園駅の近くにしたらどうか
-
----
-
-友達のマキは、いいことがあったという話をよくする。だから私は、マキは運がいいのだと思っていた。しかし、最近、そうではないと気づいた。
-
-先日二人で出かけたとき、事故で電車が止まっていて、何キロも歩いて帰ることになった。嫌だなと思っている私に、マキは「知らない町を歩けるね。」と嬉しそうに言った。とても不思議だった。でも、マキは楽しめてしまうのだ。今まで私が聞いた話も、マキだから「いいこと」だと感じたのだろうと思う。
-
-最近、「私」はマキのことをどのような人だと思うようになったか。
-    1.  「いいこと」ばかりが起きる。運がいい人
-    2.  「私」と一緒に経験したことは、何でも「いいこと」だと思える人
-    3.  ほかの人に起こった「いいこと」を一緒に喜んであげられる人
-    4.  ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人
-
----
-
-(会社で)
-
-ミンさんが席に戻ると、机の上に、原口課長からのメモが置いてあった。
-
-ミンさん
-
-子どもが熱を出したので、早退します。午後、明日の会議の進行について確認する約束だったのに、すみません。午後の話し合いのために予約していた小会議室はキャンセルしてくれますか。席に戻ったら、すぐにお願いします。会議の進行については、明日の朝、最初に確認して、そのあとに会議室の準備をしましょう。
-
-それから、ミンさんの作った資料ですが、問題ないので、今日中に8人分印刷しておいてください。
-
-よろしくお願いします。
-
-9月8日 12:10
-原口
-
-このメモを読んで、ミンさんはまず何をしなければならないか。
-    1.  会議の進行について口課長と確認する
-    2.  小会議室をキャンセルする
-    3.  会議室の準備をする
-    4.  会議の資料を8人分印刷する
-
----
-
-日本のファミリーレストランは、店の壁やソファーなどに、赤やオレンジ色のような暖かさを感じさせる色、つまり、暖色を使うことが多い。
-
-暖色には食欲を感じさせる効果があるので、暖色に囲まれていると、料理がおいしそうに見える。また、暖色は、時間を実際より長く感じさせる効果もある。客は、店にいた時間が短くても、ゆっくりできたように感じるのだ。
-
----
-
-日本のファミリーレストランで暖色が使われる理由は何か。
-    1.  店の暖房にあまりお金がかからないようにするため
-    2.  客に、店の料理と店で過ごす時間にいい印象を持ってもらうため
-    3.  店をおしゃれに見せて、客に店に入りたいと思ってもらうため
-    4.  客に長く店にいてもらって、料理をたくさん注文してもらうため      
+     
 """
 
 information_retrieval_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
 Task: You are a japanese teacher. Your job is to write a Japanese article for candidate to retrieve information. 
-you must provide a markdown format table and clues related to the table. The content cannot be same as the Formal exam paper
-The content includes searching for advertisements, notifications, schedules.
-After the article, asking candidate to answer 2 questions from the related content of the article. 
+you must provide a html format table and clues related to the table. The content and clues must be hard enough for JLPT n3 level.
+After the article, asking candidate to answer 2 questions from the related content of the article.
+ 
+This section is designed to simulate real-life scenarios where you need to quickly find relevant information, 
+such as train schedules, event flyers, or advertisements.
 
 Instructions:
-Format: Follow the format of formal exam papers. Each question has 4 options in Japanese
+Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
-Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-
-Additional Requirement: Don't show question instructions and question sequence number and revised submission in the generated content.
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Additional Requirement: Don't show question instructions and question sequence number in the generated content.
+You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Search result: {search_result}
