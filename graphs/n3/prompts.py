@@ -103,17 +103,16 @@ word_meaning_example = """
 """
 
 synonym_substitution_teacher_prompt = """
-Role: You are a Japanese teacher.
+Role: You are a Japanese teacher. 
 
 Task: Your job is to write a synonym question for candidates to identify the most appropriate word with a similar meaning in a JLPT N3 level exam paper. 
 Each question presents a word in kanji or katakana within a sentence.
-The options should include one correct synonym and three distractors that are plausible. 
+The options should include one correct synonym and three distractions. 
 The synonyms that need to be replaced should be indicated with underscores.
-The word in the sentence should not be used in the options
-The words to be examined need to be underlined in each sentence.
+The word in the sentence should not be used in the options, The words to be examined need to be underlined in each sentence.
 
 Instructions:
-Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in the `Dictionary` as much as possible.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
@@ -131,6 +130,14 @@ synonym_substitution_example = """
   <li>にげて</li>
   <li>急いで</li>
 </ul>
+
+<a>来週、ここで<u>企業</u>の説明会があります。
+<ul class='options'>
+  <li>旅行</li>
+  <li>会社</li>
+  <li>大学</li>
+  <li>建物</li>
+</ul>
 """
 
 word_usage_teacher_prompt = """
@@ -138,7 +145,7 @@ Role: You are a Japanese teacher.
 
 Task: Your job is to write a kanji usage question for candidates, examining the usage of words in actual contexts.
 request candidates to select the most appropriate context, includes Japanese idiomatic expressions and fixed collocations.
-The words to be examined need to be underlined in each sentence.
+The words to be examined need to be underlined in each sentence. the question must be kanji only, don't show kana inside the <a></a> 
 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
@@ -164,9 +171,14 @@ word_usage_example = """
 sentence_grammar_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
-Task: You should write a short sentence and give a parenthesis in the sentence,
+Task: You should write a short sentence and give a parenthesis in the sentence for the missing grammar or expression.
+Everyday situations, dialogues, or short explanatory contexts.
+Use grammar points and expressions common at the JLPT N3 level.
+The number of characters must be same of all options. 
+If choose kanji as options, all options should be kanji, vice verse for kana. 
+
 Next, require candidates to fill the most semantically and grammatically appropriate word from the options based on the context of the sentence in the parenthesis 
-This mainly tests students the ability to identify the stucture in a sentence.
+This mainly tests students the ability to identify the sentence grammar but not word meaning.
 The word in the sentence should not be used in the options
 
 Instructions:
@@ -211,13 +223,15 @@ sentence_grammar_example = """
 sentence_sort_teacher_prompt = """
 Role: You are a Japanese teacher who create a sentence sort question for JLPT n3 level exam. 
 
-Task: You should write a sentence around 30-40 words and cut sequential 4 words as options. Next, mix the options sequence up, avoiding to use the third words as the third option. 
+Task: You should write a sentence around 30-40 words and cut a sequential 4 words as options. 
+Next, mix the options sequence up, avoiding to use the third words as the third option. 
 the candidate needs to rearrange the word order according to the positions of the sentence. write in the section named 'Queue'. for example. Queue: 2 → 1 → 4 → 3
 After that, take the third number in the Queue as the correct answer.
 You must show the correct answer and the original sentence in the output, the options are 1,2,3,4. for example: 正解: 1
 
-make 4 underlines for cut words and the third one is marked by a symbol. the symbol expression in html: <u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>   
-This mainly tests student grammar ability of sentence structure at collocations and idiomatic expressions, 
+make 4 underlines to replace cut words and the third underline is marked by a ★ symbol. don't make it twice.  
+The full expression of this in html is: <u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>   
+This mainly tests student grammar ability of sentence structure at collocations and idiomatic expressions. 
 vocabulary combinations and set phrases, lexical collocations and idioms.
 The word in the sentence should not be used in the options.
 
@@ -338,9 +352,9 @@ short_reading_teacher_prompt = """
 Role: You are a Japanese teacher. 
 
 Task: Your job is to write a reading question for candidate.
-First you need to write a short more than 300 words article for student to read. 
+First you need to write a short article around 250 words for student to read. 
 Then, you give a question by the related content in the article.
-The purpose is to ensure the students are able to understand the meaning of the artile.
+The purpose is to ensure the students are able to understand the meaning of the article.
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
@@ -348,7 +362,6 @@ Content: Ensure the vocabulary is restricted to N3 level. Use the vocabulary in 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
 You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
-
 
 Search result: {search_result}
 Formal exam paper: {example}
