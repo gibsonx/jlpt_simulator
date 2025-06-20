@@ -822,7 +822,21 @@ Formal exam paper: {example}
 """
 
 actively_expression_example = """
-
+--- example 1 ---
+<a>おいしいお菓子を買って来ました。会社の人にあげます。何と言いますか？</a>
+<ul class='options'>  
+    <li>お味はいかがですか？</li>     
+    <li>では、いただきますね</li>    
+    <li>1つ召し上がりませんか？</li>
+</ul>    
+  
+--- example 2 ---  
+<a>映画館で自分の席に他の人が座っています。何と言いますか？</a>
+<ul class='options'>  
+    <li>あの、隣空いてますか？</li>    
+    <li>あの、ここ私の席なんですけど</li>  
+    <li>あの、どうぞ座ってください</li>
+</ul>    
 """
 
 immediate_ack_teacher_prompt = """
