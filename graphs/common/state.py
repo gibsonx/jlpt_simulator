@@ -30,15 +30,17 @@ class ListenConversation(TypedDict):
     gender: Literal['male','female']
     context: Annotated[str, "context for the conversation in Japanese"]
 
+class ListenSingleChoiceOutput(TypedDict):
+    """Listen Simple Question Formatted Output"""
+    background: Annotated[str, "the background introduction of the conversation"]
+    conversation: List[ListenConversation]
+    html_question: Annotated[str, "the question in html format at a single line"]
+    choices: Annotated[List, "answer options as a list, each option is in html format"]
+    correct_answer: Annotated[int, "correct option in 1,2,3,4"]
+
 class ListenOpenQuestionOutput(TypedDict):
     """Simple Question Formatted Output"""
     html_question: Annotated[str, "the question in html format at a single line"]
-    suggestion: Annotated[str, "the suggesting answer in Japanese"]
-    conversation: List[ListenConversation]
-
-class ListenSingleChoiceOutput(TypedDict):
-    """Listen Simple Question Formatted Output"""
-    question: SimpleChoiceQuestionOutput
     conversation: List[ListenConversation]
 
 class ImageListenQuestionOutput(TypedDict):
