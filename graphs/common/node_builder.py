@@ -25,7 +25,7 @@ def online_search_node_builder():
             state (dict): Updates documents key with appended web results
         """
 
-        print("---WEB SEARCH---")
+        logger.info("---WEB SEARCH---")
 
         topic = state['messages'][-1].content
 
@@ -47,7 +47,7 @@ def online_search_node_builder():
 def generation_node_builder(llm,  prompt_text, example):
     def question_generator(state):
         """First LLM call to generate initial question"""
-        print("---Generator----")
+        logger.info("---Generator----")
 
         search_result = state['documents']
 
@@ -80,7 +80,7 @@ def generation_node_builder(llm,  prompt_text, example):
 
 def reflection_node_builder(llm):
     def reflection_node(state):
-        print("---REVISOR---")
+        logger.info("---REVISOR---")
 
         # Other messages we need to adjust
         cls_map = {"ai": HumanMessage, "human": AIMessage}
@@ -119,7 +119,7 @@ def reflection_node_builder(llm):
 
 def formatter_node_builder(llm, OutType: Type[TypedDict]):
     def formatter_node(state):
-        print("--- Formatter ---")
+        logger.info("--- Formatter ---")
 
         question = state["question"]
 
@@ -152,10 +152,10 @@ def formatter_node_builder(llm, OutType: Type[TypedDict]):
 def should_continue(state):
     if state["messages"]:
         if len(state["messages"]) > 7:
-            print("--- Reach the Maximum Round ---")
+            logger.info("--- Reach the Maximum Round ---")
             return "formatter"
         elif "GOOD ENOUGH" in state["messages"][-1].content:
-            print("--- AI Reviser feels Good Enough ---")
+            logger.info("--- AI Reviser feels Good Enough ---")
             return "formatter"
     return "generator"
 

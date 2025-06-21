@@ -38,14 +38,10 @@ class ListenSingleChoiceOutput(TypedDict):
     choices: Annotated[List, "answer options as a list, each option is in html format"]
     correct_answer: Annotated[int, "correct option in 1,2,3,4"]
 
-class ListenOpenQuestionOutput(TypedDict):
-    """Simple Question Formatted Output"""
-    html_question: Annotated[str, "the question in html format at a single line"]
-    conversation: List[ListenConversation]
-
 class ImageListenQuestionOutput(TypedDict):
     """Listen Simple Question Formatted Output"""
-    image_background: Annotated[str, "detail prompt words for describing the background to generate image in English"]
-    questions: SimpleChoiceQuestionOutput
-    conversation: List[ListenConversation]
+    background: Annotated[str, "detail prompt strings for describing the background to generate image"]
+    html_question: Annotated[str, "the question in html format at a single line"]
+    choices: Annotated[List, "answer options as a list, each option is in html format"]
+    correct_answer: Annotated[int, "correct option in 1,2,3,4"]
 

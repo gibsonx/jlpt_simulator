@@ -501,11 +501,11 @@ The purpose is to ensure the students are able to understand the meaning of the 
 
 
 Instructions:
-Format: Follow the format of formal exam papers.
+Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-
-Additional Requirement: Don't show question instructions and question sequence number and revised submission in the generated content.
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Additional Requirement: Don't show question instructions and question sequence number in the generated content.
+You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Search result: {search_result}
@@ -610,14 +610,14 @@ information_retrieval_example = """
 topic_understanding_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: Your job is to write a listening question conversation for candidates and options for the listening dialogue. 
-Students need to listen to dialogues and choose options that match the meaning of the question based on the listening content.
-Some questions have picture options, while others are mostly text options. 
-There will be 6-7 back and forth dialogues between around man and woman in around 200-300 words.
-After the conversation, ask a follow-up question related to the topic of conversation, which is about the next action. 
+Task: Your job is to write a natural-sounding conversation between a man and a woman.
+The dialogue should consist of 6–7 exchanges (back-and-forth turns). The total length should be approximately 200–300 words.
+The topic should be appropriate for language learners and reflect everyday situations.
+Next, provide multiple-choice options based on the listening content. These options should test comprehension of the conversation’s meaning.
+After the conversation, ask a follow-up question related to the conversation and focusing on the man or woman's next action.
 
 Instructions:
-Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
@@ -674,15 +674,17 @@ topic_understanding_example = """
 keypoint_understanding_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: Your job is to write a listening question conversation for candidates and options for the listening dialogue. 
-Students need to listen to dialogues and choose options that match the meaning of the question based on the listening content.
-Some questions have picture options, while others are mostly text options. 
-There will be 6-7 back and forth dialogues between around man and woman in around 200-300 words.
-After the conversation, ask a follow-up question focusing on why the man or woman does it.
+Task: Your job is to write a natural-sounding conversation between a man and a woman.
+The dialogue should consist of 6–7 exchanges (back-and-forth turns). The total length should be approximately 200–300 words.
+The topic should be appropriate for language learners and reflect everyday situations.
+Next, provide multiple-choice options based on the listening content. These options should test comprehension of the conversation’s meaning.
+After the conversation, ask a follow-up question focusing on why the man or woman does it, 
+encouraging deeper understanding of the motivation or reasoning behind it.
+The question should prompt students to choose the best option that matches the overall message or key point of the dialogue.
 
 
 Instructions:
-Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
@@ -739,15 +741,15 @@ keypoint_understanding_example = """
 summary_understanding_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: Your job is to write a listening question conversation for candidates and options for the listening dialogue. 
-Students need to listen to dialogues and choose options that match the meaning of the question based on the listening content.
-Some questions have picture options, while others are mostly text options. 
-There will be 4-7 back and forth dialogues between around man and woman in around 200-300 words.
+Task: Your job is to write a natural-sounding conversation between a man and a woman.
+The dialogue should consist of 6–7 exchanges (back-and-forth turns). The total length should be approximately 200–300 words.
+The topic should be appropriate for language learners and reflect everyday situations.
+Next, provide multiple-choice options based on the listening content. These options should test comprehension of the conversation’s meaning.
 After the conversation, ask a follow-up question focusing on what the conversation is about.
 
 
 Instructions:
-Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: Don't show question instructions and question sequence number in the generated content.
@@ -803,19 +805,20 @@ summary_understanding_example = """
 actively_expression_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: Your job is to write a listening question for candidates to prepare the original text and options for the listening dialogue based on the reference format. 
-Looking at the picture and listening to the recording, students need to listen to the dialogue. 
-Based on the listening content, choose the option that matches the question meaning. 
-Choose what the person pointed by the arrow in the picture, will say next in the background given in the picture and recording, 
-and provide three options. After listening to a conversation, you often ask someone in the conversation what they are going to do next. 
-must include a background context that describes the picture in English.
+Task: your job is to generate a picture prompt that visually describes a situation involving two people of random genders in the scene (e.g., a man and a woman, two men, two women).
+In the picture, include an arrow symbol (➔) pointing to one of the two people. This indicates the person who will speak next. 
+Based on the context of the scene, write a realistic question that the pointed person (with the arrow) would ask. Only the pointed person can ask a quesiton.
+After that, provide three answers for what the other person might reply as options
+One of the options should be the most appropriate or natural response
+
+The picture description must be in a dedicated section named: background
 
 Instructions:
-Format: Follow the format of formal exam papers.
+Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Additional Requirement: Don't show question instructions and question sequence number and revised submission in the generated content.
-
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Additional Requirement: Don't show question instructions and question sequence number in the generated content.
+You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
@@ -823,7 +826,7 @@ Formal exam paper: {example}
 
 actively_expression_example = """
 --- example 1 ---
-<a>おいしいお菓子を買って来ました。会社の人にあげます。何と言いますか？</a>
+<a class='question'>男: おいしいお菓子を買って来ました。会社の人にあげます。何と言いますか？</a>
 <ul class='options'>  
     <li>お味はいかがですか？</li>     
     <li>では、いただきますね</li>    
@@ -831,7 +834,7 @@ actively_expression_example = """
 </ul>    
   
 --- example 2 ---  
-<a>映画館で自分の席に他の人が座っています。何と言いますか？</a>
+<a class='question'>女: 映画館で自分の席に他の人が座っています。何と言いますか？</a>
 <ul class='options'>  
     <li>あの、隣空いてますか？</li>    
     <li>あの、ここ私の席なんですけど</li>  
@@ -842,16 +845,16 @@ actively_expression_example = """
 immediate_ack_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task:  Your job is to write a listening question for candidates to prepare the original text and options for the listening dialogue based on the reference format. Instant response. 
-students need to listen to the conversation, choose the option that matches the meaning of the question based on the listening content, select the appropriate answer for this sentence in the current context, and provide three options. 
-After listening to a conversation, you often ask someone in the conversation what they are going to do next. 
+Task: your job is to write a realistic question that a person (either man or woman randomly) will ask. 
+After that, provide three options (1–3) for what the other person might reply as options
+One of the options should be the most appropriate or natural response
 
 Instructions:
-Format: Follow the format of formal exam papers.
+Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Only use the format as a reference; do not use any specific content from existing exams.
-Explanation: Append the suggesting answer and an explanation of the main challenges for the question from Japanese teacher's pespective.
-Additional Requirement: Don't show question instructions and question sequence number and revised submission in the generated content.
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Additional Requirement: Don't show question instructions and question sequence number in the generated content.
+You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
 
 
 Search result: {search_result}
@@ -859,86 +862,20 @@ Formal exam paper: {example}
 """
 
 immediate_ack_example = """
-問題5  
+--- example 1 ---
+<a class='question'> 女：足、痛そうだね。年後のテニスの練習、休んだら？</a>
+<ul class='options'>  
+　<li>そうです、今日は帰るね</li>
+　<li>今日は練習、ないんだね</li>
+　<li>テニス、今日は休むの？</li>
+</ul> 
 
-1番 正解: 1  
-会話内容:
-- 女: 足、痛そうだね。午後のテニスの練習、休んだら？  
-- 男: そうする。今日は帰るね。  
-- 女: 今日は練習、ないんだね。  
-- 男: テニス、今日は休むの?  
-
----  
-
-2番 正解: 2  
-会話内容: 
-- 男: 町の花火大会、今年はやらないことになったそうだよ。  
-- 女: やらないかもしれないんだね。  
-- 男: え? なんで? 楽しみにしてたのに・・・  
-- 女: じゃ、見に行かなくきゃね。  
-
----  `
-
-3番 正解: 1  
-会話内容:
-- 男: 吉田さん、今回の旅行、楽しかったよ。吉田さんが案内してくれたおかげだよ。  
-  1. 喜んでもらえてよかった  
-  2. 一緒に行けなくてごめんね  
-  3. 案内してくれてありがとう  
-
----  
-
-#### 4番 正解: 1  
-**会話内容:**  
-- 男: 来週の食事会、参加できるかまだわからなくて、いつまでにお返事すればいいですか?  
-  1. 今週中なら大丈夫ですよ  
-  2. 参加できそうでよかったです  
-  3. はい、返事お待ちしていますね  
-
----  
-
-5番 正解: 3  
-会話内容:
-- 女: 曇ってきたね。雨が降らないうちに帰ろうか。  
-  1. え? もう降ってきた?  
-  2. 雨が止んでから帰るの?  
-  3. 降る前に帰ったほうがいいね  
-
----  
-
-6番 正解: 3  
-会話内容:  
-- 女: 森さん、悪いけど、ドアの近くにあるダンボール箱、倉庫に運んでくれる?  
-  1. 倉庫にあるんですね。取ってきます  
-  2. ありがとうございます。お願いします  
-  3. あとでいいですか?  
-
----  
-
-7番 正解: 1  
-会話内容:
-- 女: あの、こちらのお店、店の中の写真を撮っても構いませんか? すごく素敵なので。  
-  1. あ、写真はご遠慮ください  
-  2. 素敵な写真、ありがとうございます  
-  3. 写真は撮ってなんないですよ  
-
----  
-
-8番 正解: 2  
-会話内容:
-- 男: 今、課長から電話があったんですが、訪問先から会社に戻らずに帰宅されるそうです。  
-  1. 一度会社に戻って来られるんですね  
-  2. あ、そのまま家に帰られるんですね  
-  3. え? 家に寄って来られるんですか?  
-
----  
-
-9番 正解: 3  
-会話内容:
-- 男: 工事、遅れてるんだって? 課長に報告したほうがいいんじゃない?  
-  1. 遅れてるって課長が言ってたんですか?  
-  2. じゃ、報告はしないことにします  
-  3. そうですね。伝えておきます  
+--- example 2 ---
+<a class='question'>男：町の花火大会、今年はやらないことになったそうだよ。</a>
+<ul class='options'> 
+　<li>やらないもしれなかったね</li>
+　<li>え？なんて？楽しみにしていたのに…</li>
+　<li>じゃ、見に行かなきゃね</li>
 """
 
 

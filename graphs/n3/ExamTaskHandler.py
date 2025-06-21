@@ -172,7 +172,7 @@ class ExamTaskHandler:
         return instance['formatted_output']
 
     def immediate_ack(self, word):
-        graph = self.build_agent(immediate_ack_teacher_prompt, immediate_ack_example, ListenOpenQuestionOutput)
+        graph = self.build_agent(immediate_ack_teacher_prompt, immediate_ack_example, ImageListenQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=word)]},
             config={"configurable": {"thread_id": "1"}}
@@ -212,8 +212,8 @@ if __name__ == "__main__":
     # print(handler.sentence_grammar(random_word))
     #
     # # Sentence Sort Task
-    handler = ExamTaskHandler()
-    print(handler.sentence_sort(random_word))
+    # handler = ExamTaskHandler()
+    # print(handler.sentence_sort(random_word))
     #
     # Sentence Structure Task
     # handler = ExamTaskHandler()
@@ -251,6 +251,6 @@ if __name__ == "__main__":
     # handler = ExamTaskHandler()
     # print(handler.active_expression(random_word))
     #
-    # # Immediate Ack Task
-    # handler = ExamTaskHandler()
-    # print(handler.immediate_ack(random_word))
+    # Immediate Ack Task
+    handler = ExamTaskHandler()
+    print(handler.immediate_ack(random_word))
