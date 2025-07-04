@@ -11,7 +11,7 @@ Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation.
-Additional Requirement: Don't show question instructions and question sequence number in the generated content. 
+Additional Requirement: Don't show question instructions and sequence number in the generated content. 
 
 Search result: {search_result}
 Formal exam paper: {example}
@@ -33,15 +33,16 @@ Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level.
 Task: Your job is to write a question for a JLPT N3 level exam paper.
 You should write a short sentence and ask candidate to identify the correct kanji writing of a given word in hiragana.
 The number of kanji characters in the options must be the same.
-The word in the sentence should not be used in the options.
-The word being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
+The word in hiragana being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content.  The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
@@ -73,9 +74,10 @@ Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
-
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
@@ -110,14 +112,19 @@ Wrap the target word in <u> tags and the full sentence in an <a> tag.
 Follow the sentence with a list of four <li> options, only one of which is a correct synonym or meaning-equivalent of the target word.
 The incorrect options (distractions) must be reasonable but clearly different in meaning
 The synonyms that need to be replaced should be indicated with underscores.
-The word in the sentence should not be used in the options, The words to be examined need to be underlined in each sentence.
+If a word written in Kanji is chosen as the target word, try to use its Hiragana reading in the answer options. Vice Verse.
+If a Katakana is chosen as the target word (e.g., サービス, パソコン), then use the corresponding Japanese Kanji or native Japanese expression in the answer choices whenever possible.
+Avoid mixing inconsistent formats (e.g., don't include both a Kanji form and a Hiragana form of the same word in different options).
+All choices should be written in Japanese only
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
@@ -148,13 +155,13 @@ Task: Your job is to write a kanji for examining the usage of words in actual co
 Ask the student to choose the sentence that best matches the true meaning or usage of the word from 4 options,
 which exam student the knowledge of Japanese idiomatic expressions and fixed collocations.
 The words to be examined need to be underlined in each sentence. the question must be written in kanji, like <a>内容</a> <a>落ち着く</a>
-Make only one option correct (the one using the word naturally), and ensure the other 3 sound plausible but are semantically incorrect or subtly off.
+Make only one option correct (the one using the word naturally), and ensure the other 3 sound plausible but are semantically incorrect.
 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
+Additional Requirement: Don't show question instructions and sequence number in the generated content.
 You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Search result: {search_result}
@@ -175,9 +182,8 @@ sentence_grammar_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
 Task: Your job is to write a sentence grammar question for examining the usage of words in actual contexts for a JLPT N3 level exam paper.
-You should write a short sentence and give a parenthesis in the sentence.
+You should write a short sentence (reference: example 1) or a conversation with 2 sentences (reference: example 2) around 40-60 words and give a parenthesis in the sentence.
 the content is ranging from everyday situations, dialogues, to short explanatory contexts.
-The sentences should sound natural and include common JLPT N3 grammar points (e.g., 〜てしまう, 〜ようにする, particles like に・は・を・と etc.).
 
 Next, require candidates to fill the most semantically and grammatically appropriate word from the options based on the context of the sentence in the parenthesis 
 The word in the sentence should not be used in the options
@@ -186,8 +192,10 @@ Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
@@ -222,7 +230,8 @@ sentence_grammar_example = """
 sentence_sort_teacher_prompt = """
 Role: You are a Japanese teacher who create a sentence sort question for JLPT n3 level exam. 
 
-Task: You should write a sentence around 30-40 words and cut a sequential 4 words as options. 
+Task: You should write a sentence around 40-60 words and cut a sequential 4 words as options. 
+4 words must be fixed grammatical expression whose word order and structure cannot be reversed or altered 
 Next, mix the options sequence up, avoiding to use the third words as the third option. 
 the candidate needs to rearrange the word order according to the positions of the sentence. write in the section named 'Queue'. for example. Queue: 2 → 1 → 4 → 3
 After that, take the third number in the Queue as the correct answer.
@@ -230,15 +239,16 @@ You must show the correct answer and the original sentence in the output, the op
 
 make 4 underlines to replace cut words and the third underline is marked by a ★ symbol. don't make it twice.  
 The full expression of this in html is: <u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>   
-This mainly tests student grammar ability of sentence structure at collocations and idiomatic expressions. 
-vocabulary combinations and set phrases, lexical collocations and idioms.
 The word in the sentence should not be used in the options.
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Search result: {search_result}
@@ -275,12 +285,15 @@ After that, you should give 4 related questions (19-22) from the content of the 
 The purpose is to test candidate the ability to identify Japanese sentence structure. 
 Candidate should fill in the gaps in the article by choosing the grammar structure that best fits the context from the following 4 options, 
 
+
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Search result: {search_result}
@@ -358,8 +371,10 @@ Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
@@ -415,15 +430,19 @@ Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level.
 
 Task: Your job is to write a reading question for a JLPT N3 level exam.
 First you need to write a mid-size article around 400 words for student to read. 
-Then, you give 3 questions by the related content in the article.
-The purpose is to ensure the students are able to understand the meaning of the article.
+The keypoints being tested in each question needs to be underlined with <u></u>
+Then, you give 3 questions by the related content in the article. the meaning of keypoint cannot be found in the article.
+instead, students needs to find the answer by understanding the context in the article. 
+
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Search result: {search_result}
@@ -460,7 +479,7 @@ midsize_reading_example = """
         <li>次の留学生交流会に、どんな料理を持っていけばいいと思うか</li>  
     </ul> 
 
---- example 1 ---
+--- example 2 ---
 <div class='article'>
 <p>重大な影響が出ている。このような問題に関心を持つ企業や消費者は、日本でも海外でも増えている。</p>  
     <p>服や靴を作っている、ある海外のファッションの会社が始めた活動がある。まず、漁師たち、つまり魚をとって生活している人たちに組んで、魚をとるときに絡むごみを、港に持ち帰ってもらう。そして、会社がそのごみを回収、分類し、その中のプラスチックを繊維に変え、服や靴にして売るというリサイクル活動である。</p>  
@@ -504,8 +523,10 @@ Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Search result: {search_result}
@@ -555,18 +576,22 @@ information_retrieval_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
 Task: You are a Japanese teacher writing an exam paper for the JLPT N3 level. Your job is to write a Japanese article for candidate to retrieve information. 
-you must provide a html format table and clues related to the table. The content and clues must be hard enough for JLPT n3 level.
-After the article, asking candidate to answer 2 questions from the related content of the article.
+you must provide a html format table and clues related to the table. The content and clues must be complex enough for JLPT n3 level.
+After the article, asking candidate to answer 2 questions from the related content of the article. 
+The questions should require reasoning beyond direct lookup; 
+the true answer must be inferred through understanding the context and meaning of the key points, rather than being easily found in the article.
  
-This section is designed to simulate real-life scenarios where you need to quickly find relevant information, 
+This section is designed to simulate real-life scenarios where students need to quickly find relevant information, 
 such as train schedules, event flyers, or advertisements.
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Search result: {search_result}
@@ -620,8 +645,10 @@ Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Search result: {search_result}
@@ -687,8 +714,10 @@ Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Search result: {search_result}
@@ -752,8 +781,10 @@ Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+Additional Requirement:
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Search result: {search_result}
@@ -817,8 +848,10 @@ Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
@@ -853,9 +886,10 @@ Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
-Additional Requirement: Don't show question instructions and question sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
-
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
