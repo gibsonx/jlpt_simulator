@@ -21,15 +21,26 @@ class ExamTaskHandler:
             "reflector": None,
             "formatter": None
         }
+        with open("Vocab/sentence_grammar.txt", "r", encoding="utf-8") as file:
+            self.ss = [line.strip() for line in file]
 
 
-    def build_agent(self, prompt_text, example, OutType):
+    def build_agent(self, prompt_text, example, OutType, sentence=None):
         self.nodes["online_search"] = online_search_node_builder()
-        self.nodes["generator"] = generation_node_builder(
-            llm=self.llm,
-            prompt_text=prompt_text,
-            example=example
-        )
+
+        if sentence:
+            self.nodes["generator"] = generation_node_builder(
+                llm=self.llm,
+                prompt_text=prompt_text,
+                example=example,
+                sentence=sentence
+            )
+        else:
+            self.nodes["generator"] = generation_node_builder(
+                llm=self.llm,
+                prompt_text=prompt_text,
+                example=example
+            )
         self.nodes["reflector"] = reflection_node_builder(llm=self.ref_llm)
         self.nodes["formatter"] = formatter_node_builder(llm=self.ref_llm, OutType=OutType)
         graph = build_graph(StateGraph(GraphState), self.nodes)
@@ -84,7 +95,7 @@ class ExamTaskHandler:
         return instance['formatted_output']
 
     def sentence_grammar(self, word):
-        graph = self.build_agent(sentence_grammar_teacher_prompt, sentence_grammar_example, SimpleChoiceQuestionOutput)
+        graph = self.build_agent(sentence_grammar_teacher_prompt, sentence_grammar_example, SimpleChoiceQuestionOutput, self.ss)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=word)]},
             config={"configurable": {"thread_id": "1"}}
@@ -92,7 +103,7 @@ class ExamTaskHandler:
         return instance['formatted_output']
 
     def sentence_sort(self, word):
-        graph = self.build_agent(sentence_sort_teacher_prompt, sentence_sort_example, SimpleChoiceQuestionOutput)
+        graph = self.build_agent(sentence_sort_teacher_prompt, sentence_sort_example, SimpleChoiceQuestionOutput, self.ss)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=word)]},
             config={"configurable": {"thread_id": "1"}}
@@ -100,15 +111,31 @@ class ExamTaskHandler:
         return instance['formatted_output']
 
     def sentence_structure(self, word):
-        graph = self.build_agent(structure_selection_teacher_prompt, structure_selection_example, MultipleQuestionOutput)
+        graph = self.build_agent(structure_selection_teacher_prompt, structure_selection_example, MultipleQuestionOutput, self.ss)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=word)]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def short_passage_read(self, word):
-        graph = self.build_agent(short_reading_teacher_prompt, short_reading_example, MultipleQuestionOutput)
+    def short_passage_narrative_read(self, word):
+        graph = self.build_agent(short_reading_narrative_teacher_prompt, short_reading_narrative_example, MultipleQuestionOutput)
+        instance = graph.invoke(
+            {"messages": [HumanMessage(content=word)]},
+            config={"configurable": {"thread_id": "1"}}
+        )
+        return instance['formatted_output']
+
+    def short_passage_mail_read(self, word):
+        graph = self.build_agent(short_reading_mail_teacher_prompt, short_reading_mail_example, MultipleQuestionOutput)
+        instance = graph.invoke(
+            {"messages": [HumanMessage(content=word)]},
+            config={"configurable": {"thread_id": "1"}}
+        )
+        return instance['formatted_output']
+
+    def short_passage_notification_read(self, word):
+        graph = self.build_agent(short_reading_notification_teacher_prompt, short_reading_notification_example, MultipleQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=word)]},
             config={"configurable": {"thread_id": "1"}}

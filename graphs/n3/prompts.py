@@ -190,8 +190,8 @@ The word in the sentence should not be used in the options
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
-Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Content: Ensure the vocabulary is restricted to N3 level. Keep the sentence grammar question time tense strictly consistent.
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. Use one of the sentence grammars in the Grammar Reference List.
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
@@ -199,6 +199,7 @@ Additional Requirement:
 
 Search result: {search_result}
 Formal exam paper: {example}
+Grammar Reference List: {sentence}
 """
 
 sentence_grammar_example = """
@@ -243,16 +244,16 @@ The word in the sentence should not be used in the options.
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
-Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Content: Ensure the vocabulary is restricted to N3 level. Keep the sentence grammar question time tense strictly consistent.
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. Use one of the sentence grammars in the Grammar Reference List.
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-
 Search result: {search_result}
 Formal exam paper: {example}
+Grammar Reference List: {sentence}
 """
 
 sentence_sort_example = """
@@ -283,21 +284,21 @@ Task: Your job is to write a paper for JLPT N3 level.
 At this section, please write a Japanese article about 400-500 words with 4-5 lines written in html format. 
 After that, you should give 4 related questions (19-22) from the content of the article. 
 The purpose is to test candidate the ability to identify Japanese sentence structure. 
-Candidate should fill in the gaps in the article by choosing the grammar structure that best fits the context from the following 4 options, 
+Candidate should fill in the gaps in the article by choosing the grammar structure that best fits the context from the following 4 options. 
 
 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
-Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Content: Ensure the vocabulary is restricted to N3 level. Keep the sentence grammar question time tense strictly consistent.
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. Use one of the sentence grammars in the Grammar Reference List.
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-
 Search result: {search_result}
 Formal exam paper: {example}
+Grammar Reference List: {sentence}
 """
 
 structure_selection_example = """
@@ -331,7 +332,7 @@ structure_selection_example = """
     <li>招待してくれたのです</li>  
     <li>招待してくれたはずです</li>  
     <li>招待してくれたばかりです</li>  
-    <li>招待してくれたそうです</li>  
+    <li>招待してくれたそうです</li>
 </ul>  
   
 <a>20.</a>  
@@ -359,28 +360,74 @@ structure_selection_example = """
 </ul>      
 """
 
-short_reading_teacher_prompt = """
+short_reading_narrative_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
 Task: Your job is to write a reading question for JLPT N3 level exam. 
-First you need to write a short article around 250 words for student to read. 
-Then, you give a question by the related content in the article.
-The purpose is to ensure the students are able to understand the meaning of the article.
+First you need to write a narrative article around 250 words for student to read.  
+Then, you give a question by the related content in the article. Most importantly, the correct answer must not be stated directly in the article. 
+Instead, it should require the test-taker to infer, summarize, or understand the context or intent of the passage.
+The passage should reflect a real-life topic (e.g., daily life, work, study, travel, opinions).
 
 Instructions:
-Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
-- The word in the sentence can neither be used in the question nor options.
+- The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 Search result: {search_result}
 Formal exam paper: {example}
 """
 
-short_reading_example = """
+
+short_reading_narrative_example = """
+<div class='article'>
+    <p>
+      友達のマキは、いいことがあったという話をよくする。だから私は、マキは運がいいのだと思っていた。しかし、最近、そうではないと気づいた。<br><br>
+      先日二人で出かけたとき、事故で電車が止まっていて、何キロも歩いて帰ることになった。<br>
+      嫌だなと思っている私に、マキは「知らない町を歩けるね。」とうれしそうに言った。<br>
+      こんなことでも、マキは楽しめてしまうのだ。今まで私が聞いた話も、マキだから「いいこと」だと感じたのだろうと思う。
+    </p>
+  </div>
+
+<a>24. 最近、「私」はマキのことをどのような人だと思うようになったか。</a>
+<ul class='options'>
+      <li>「いいこと」ばかりが起きる、運がいい人</li>
+       <li>「私」と一緒に経験したことは、何でも「いいこと」だと思える人</li>
+      <li> ほかの人に起こった「いいこと」を一緒に喜んであげられる人</li>
+      <li> ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人</li>
+    </div>
+"""
+
+short_reading_mail_teacher_prompt = """
+Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
+
+Task: Your job is to write a reading question for JLPT N3 level exam.
+First you need to write a letter or mail around 250 words for student to read, including several keigo expressions. The content is about:
+"Requests, Gratitude, Appreciation, Apologies, Notices, Announcements, Confirmation, Reporting, Invitations"
+
+Then, you give a question by the related content in the article. Most importantly, the correct answer must not be stated directly in the article. 
+Instead, it should require the test-taker to infer, summarize, or understand the context or intent of the passage.
+The passage should reflect a real-life topic (e.g., daily life, work, study, travel, opinions).
+
+Instructions:
+Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Content: Ensure the vocabulary is restricted to N3 level. 
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the article can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+
+Search result: {search_result}
+Formal exam paper: {example}
+"""
+
+
+short_reading_mail_example="""
 --- example 1 ---
 <div class='article'>
     <p>これは、今川さんが後のミゲルさんに書いたメールである。</p>  
@@ -403,8 +450,31 @@ short_reading_example = """
     <li>北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか</li>  
     <li>いろいろな店があって便利なので、北駅駅の近くにしたらどうか</li>  
 </ul> 
+"""
 
---- example 2 ---
+short_reading_notification_teacher_prompt = """
+Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
+
+Task: Your job is to write a reading question for JLPT N3 level exam. 
+First you need to write a notification around 250 words for student to read, including several keigo expressions
+Then, you give a question by the related content in the article. Most importantly, the correct answer must not be stated directly in the article. 
+Instead, it should require the test-taker to infer, summarize, or understand the context or intent of the passage.
+The passage should reflect a real-life topic (e.g., daily life, work, study, travel, opinions).
+
+Instructions:
+Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Content: Ensure the vocabulary is restricted to N3 level. 
+Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the article can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+
+Search result: {search_result}
+Formal exam paper: {example}
+"""
+
+short_reading_notification_example="""
 <div class='article'>
 <p><strong>(会社で)</strong></p>  
 <p>ミンさんが席に戻ると、机の上に、原口課長からのメモが置いてあった。</p>  
@@ -429,11 +499,11 @@ midsize_reading_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
 Task: Your job is to write a reading question for a JLPT N3 level exam.
-First you need to write a mid-size article around 400 words for student to read. 
+First you need to write a mid-size article around 400 words for student to read.
 The keypoints being tested in each question needs to be underlined with <u></u>
 Then, you give 3 questions by the related content in the article. the meaning of keypoint cannot be found in the article.
-instead, students needs to find the answer by understanding the context in the article. 
-
+Then, you give a question by the related content in the article.
+Instead, it should require the test-taker to infer, summarize, or understand the context or intent of the passage.
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
@@ -441,7 +511,7 @@ Content: Ensure the vocabulary is restricted to N3 level.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
-- The word in the sentence can neither be used in the question nor options.
+- The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
@@ -514,8 +584,8 @@ long_reading_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level.
 
 Task: Task: Your job is to write a reading question for a JLPT N3 level exam. 
-First you need to write a long article around 400 words for student to read. 
-Then, you give 4 questions by the related content in the article.
+First you need to write a long article around 450 words for student to read. 
+Then, you give 4 questions by the related content in the article. 
 The purpose is to ensure the students are able to understand the meaning of the article.
 
 
@@ -525,7 +595,7 @@ Content: Ensure the vocabulary is restricted to N3 level.
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
-- The word in the sentence can neither be used in the question nor options.
+- The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
@@ -575,22 +645,21 @@ long_reading_example = """
 information_retrieval_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: You are a Japanese teacher writing an exam paper for the JLPT N3 level. Your job is to write a Japanese article for candidate to retrieve information. 
-you must provide a html format table and clues related to the table. The content and clues must be complex enough for JLPT n3 level.
-After the article, asking candidate to answer 2 questions from the related content of the article. 
-The questions should require reasoning beyond direct lookup; 
-the true answer must be inferred through understanding the context and meaning of the key points, rather than being easily found in the article.
- 
-This section is designed to simulate real-life scenarios where students need to quickly find relevant information, 
-such as train schedules, event flyers, or advertisements.
+Task: You are a Japanese teacher writing a retrieve information question on an exam paper for the JLPT N3 level.
+you must provide a html format table and append 2-3 clues related to the table. The content and clues should be more than 300 words and complex enough for JLPT n3 level.
+After that, asking candidate to answer 2 questions from the related content in the table.
+Most importantly, the question and answer must not be stated directly in the table or clues. 
+Instead, it should require the test-taker to infer, summarize, or understand the context.
+This section is designed to simulate real-life scenarios where students need to quickly find relevant information. 
+such as train or flight schedules, event, or advertisements.
 
 Instructions:
-Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
-- The word in the sentence can neither be used in the question nor options.
+- The word in the table and clues can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 

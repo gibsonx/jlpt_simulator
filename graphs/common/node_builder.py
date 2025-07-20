@@ -44,7 +44,7 @@ def online_search_node_builder():
     return online_search
 
 # Nodes
-def generation_node_builder(llm,  prompt_text, example):
+def generation_node_builder(llm,  prompt_text, example, sentence=None):
     def question_generator(state):
         """First LLM call to generate initial question"""
         logger.info("---Generator----")
@@ -67,6 +67,9 @@ def generation_node_builder(llm,  prompt_text, example):
             "example": example,
             "messages": state["messages"]
         }
+
+        if sentence:
+            params["sentence"] = sentence
 
         generate = prompt | llm
 
