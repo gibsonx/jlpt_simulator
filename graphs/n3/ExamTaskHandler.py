@@ -24,7 +24,6 @@ class ExamTaskHandler:
         with open("Vocab/sentence_grammar.txt", "r", encoding="utf-8") as file:
             self.ss = [line.strip() for line in file]
 
-
     def build_agent(self, prompt_text, example, OutType, sentence=None):
         self.nodes["online_search"] = online_search_node_builder()
 
