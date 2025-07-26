@@ -7,3 +7,6 @@ pygraphviz
 langchain-tavily
 tqdm
 spire-doc
+html-for-docx
+azure-cognitiveservices-speech
+pydub
