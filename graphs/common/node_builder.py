@@ -62,6 +62,7 @@ def generation_node_builder(llm,  prompt_text, example, sentence=None):
         )
 
         params = {
+            "grammar": state['grammar'],
             "topic": state['topic'],
             "search_result": search_result,
             "example": example,
