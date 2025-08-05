@@ -96,13 +96,14 @@ def reflection_node_builder(llm):
             [
                 (
                     "system",
-            """  You are a Japanese language educator reviewing a JLPT exam paper. Generate critique and recommendations for the Japanese teacher's submission in English.
+            """
+                 You are a senior Japanese language educator reviewing a JLPT exam paper. Generate critique and recommendations for the Japanese teacher's submission in English.
                  You must read the Instructions in the previous messages and give feedback on the following factors:
-               - Don't suggest to add any question instructions to the context. Don't suggest anything about html format. Do not suggest to include instructions in the question about whether it's testing meaning, kanji, or context.      
+               - Don't suggest to add any question instructions to the context. Don't suggest anything about html format. Do not suggest including instructions in the question such as whether it tests meaning, kanji, or context.     
                - For content accuracy, you must verify that the questions are abide by the JLPT N3 level requirements and appropriately challenging. 
-               - For question and answer quality, you must ensure all questions are clearly worded and free from ambiguity to comprehensively assess different language skills, and confirm that the difficulty level of the questions matches the intended JLPT N3 level.
-               - During detailed refinement, You also ensure the content is culturally appropriate and relevant to Japanese academic language content and culture.
-               - Finally, you make give feedback, providing detailed recommendations, including requests. If you think the exam paper is good enough to challenge student, you just say "GOOD ENOUGH"
+               - For question and answer quality, you must ensure all questions are clearly worded and free from ambiguity and confirm that the difficulty level of the questions matches the intended JLPT N3 level.
+               - During detailed refinement, You also ensure the content is culturally appropriate and relevant to Japanese academic language content and Japanese culture.
+               - Finally, if you believe the exam question is sufficiently challenging for students, simply reply with "GOOD ENOUGH". Otherwise, provide a detailed critique and your recommendations for improvement.
                """
                 ),
                 MessagesPlaceholder(variable_name="messages"),
@@ -134,7 +135,7 @@ def formatter_node_builder(llm, OutType: Type[TypedDict]):
                     the instruction below: 
                     1. you should not change any context and html tags, except removing change 
                     line tags like \\n or \\n\\n from the context.
-                    2. use the content inside <a></a> as the html_question. However, the content in the <ul class='options'></ul> should not be written in html_question. 
+                    2. use the content inside <a></a> as the html_question. However, the content in the <ul class='options'></ul> and <p class='follow-up'></p> should not be written in html_question. 
                     3. Also, question requirements and correct answer should not be written in the html_question.
                     4. write the content in the <div class='article'></div> in html_article. but choices in <li></li> must be excluded.
                     5. use the content inside <li></li> as choices and keep html format, but <li></li> tags must be excluded.
