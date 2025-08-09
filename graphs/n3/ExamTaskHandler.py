@@ -1,15 +1,15 @@
 from graphs.common.node_builder import *
 from graphs.common.utils import *
 from graphs.common.state import *
-from libs.LLMs import azure_llm, azure_ref_llm
+from libs.LLMs import azure_llm
 import random
 from graphs.n3.prompts import *
 from langgraph.graph import StateGraph
 import logging
 
 load_dotenv()
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+#
+# logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class ExamTaskHandler:
     def __init__(self):
@@ -21,18 +21,18 @@ class ExamTaskHandler:
             "reflector": None,
             "formatter": None
         }
-        with open("Vocab/sentence_grammar.txt", "r", encoding="utf-8") as file:
-            self.ss = [line.strip() for line in file]
+        # with open("Vocab/sentence_grammar.txt", "r", encoding="utf-8") as file:
+        #     self.ss = [line.strip() for line in file]
 
-    def build_agent(self, prompt_text, example, OutType, sentence=None):
+    def build_agent(self, prompt_text, example, OutType, grammar=None):
         self.nodes["online_search"] = online_search_node_builder()
 
-        if sentence:
+        if grammar:
             self.nodes["generator"] = generation_node_builder(
                 llm=self.llm,
                 prompt_text=prompt_text,
                 example=example,
-                sentence=sentence
+                grammar=grammar
             )
         else:
             self.nodes["generator"] = generation_node_builder(
@@ -46,12 +46,12 @@ class ExamTaskHandler:
 
         return graph
 
-    def invoke(self, word):
-        instance = self.build_agent().invoke(
-            {"messages": [HumanMessage(content=word)]},
-            config={"configurable": {"thread_id": "1"}}
-        )
-        return instance['formatted_output']
+    # def invoke(self, word):
+    #     instance = self.build_agent().invoke(
+    #         {"messages": [HumanMessage(content=word)]},
+    #         config={"configurable": {"thread_id": "1"}}
+    #     )
+    #     return instance['formatted_output']
 
     def kanji_reading(self, word):
         graph = self.build_agent(kanji_reading_teacher_prompt, kanji_reading_example, SimpleChoiceQuestionOutput)
@@ -93,24 +93,24 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def sentence_grammar(self, word):
-        graph = self.build_agent(sentence_grammar_teacher_prompt, sentence_grammar_example, SimpleChoiceQuestionOutput, self.ss)
+    def sentence_grammar(self, word, grammar):
+        graph = self.build_agent(sentence_grammar_teacher_prompt, sentence_grammar_example, SimpleChoiceQuestionOutput, grammar)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=word)]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def sentence_sort(self, word):
-        graph = self.build_agent(sentence_sort_teacher_prompt, sentence_sort_example, SimpleChoiceQuestionOutput, self.ss)
+    def sentence_sort(self, word, grammar):
+        graph = self.build_agent(sentence_sort_teacher_prompt, sentence_sort_example, SimpleChoiceQuestionOutput, grammar)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=word)]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def sentence_structure(self, word):
-        graph = self.build_agent(structure_selection_teacher_prompt, structure_selection_example, MultipleQuestionOutput, self.ss)
+    def sentence_structure(self, word, grammar):
+        graph = self.build_agent(structure_selection_teacher_prompt, structure_selection_example, MultipleQuestionOutput, grammar)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=word)]},
             config={"configurable": {"thread_id": "1"}}

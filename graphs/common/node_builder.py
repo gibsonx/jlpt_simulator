@@ -2,14 +2,12 @@ from typing import *
 
 from dotenv import load_dotenv
 # from langchain_community.embeddings import XinferenceEmbeddings
-from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_tavily import TavilySearch
 from langgraph.graph import START, END
 from typing_extensions import TypedDict
-import logging
-
-logger = logging.getLogger(__name__)
+from libs.Logger import logger
 
 load_dotenv()
 
@@ -44,12 +42,13 @@ def online_search_node_builder():
     return online_search
 
 # Nodes
-def generation_node_builder(llm,  prompt_text, example, sentence=None):
+def generation_node_builder(llm,  prompt_text, example, grammar=None):
     def question_generator(state):
         """First LLM call to generate initial question"""
         logger.info("---Generator----")
 
-        search_result = state['documents']
+        topic = state['messages'][-1].content
+        # search_result = state['documents']
 
         prompt = ChatPromptTemplate.from_messages(
             [
@@ -62,20 +61,24 @@ def generation_node_builder(llm,  prompt_text, example, sentence=None):
         )
 
         params = {
-            "topic": state['topic'],
-            "search_result": search_result,
+            # "search_result": search_result,
+            # "topic": state['topic'],
+            "topic": topic,
             "example": example,
-            "messages": state["messages"]
+            "messages": state["messages"],
         }
 
-        if sentence:
-            params["sentence"] = sentence
+        if grammar:
+            params["grammar"] = grammar
+
+        # Format the prompt to get the actual text
+        resolved_prompt = prompt.format_messages(**params)
+
+        state["messages"].insert(0, resolved_prompt[0])
 
         generate = prompt | llm
 
         msg = generate.invoke(input=params)
-
-        logger.info("Generated message: {}".format(msg.content))
 
         return {"question": msg.content, "messages": [AIMessage(content=msg.content)]}
 
@@ -84,7 +87,6 @@ def generation_node_builder(llm,  prompt_text, example, sentence=None):
 def reflection_node_builder(llm):
     def reflection_node(state):
         logger.info("---REVISOR---")
-
         # Other messages we need to adjust
         cls_map = {"ai": HumanMessage, "human": AIMessage}
         # First message is the original user request. We hold it the same for all nodes
@@ -96,13 +98,14 @@ def reflection_node_builder(llm):
             [
                 (
                     "system",
-            """  You are a Japanese language educator reviewing a JLPT exam paper. Generate critique and recommendations for the Japanese teacher's submission in English.
+            """
+                 You are a senior Japanese language educator reviewing a JLPT exam paper. Generate critique and recommendations for the Japanese teacher's submission in English.
                  You must read the Instructions in the previous messages and give feedback on the following factors:
-               - Don't suggest to add any question instructions to the context. Don't suggest anything about html format. Do not suggest to include instructions in the question about whether it's testing meaning, kanji, or context.      
+               - Don't suggest to add any question instructions to the context. Don't suggest anything about html format. Do not suggest including instructions in the question such as whether it tests meaning, kanji, or context.     
                - For content accuracy, you must verify that the questions are abide by the JLPT N3 level requirements and appropriately challenging. 
-               - For question and answer quality, you must ensure all questions are clearly worded and free from ambiguity to comprehensively assess different language skills, and confirm that the difficulty level of the questions matches the intended JLPT N3 level.
-               - During detailed refinement, You also ensure the content is culturally appropriate and relevant to Japanese academic language content and culture.
-               - Finally, you make give feedback, providing detailed recommendations, including requests. If you think the exam paper is good enough to challenge student, you just say "GOOD ENOUGH"
+               - For question and answer quality, you must ensure all questions are clearly worded and free from ambiguity and confirm that the difficulty level of the questions matches the intended JLPT N3 level.
+               - During detailed refinement, You also ensure the content is culturally appropriate and relevant to Japanese academic language content and Japanese culture.
+               - Finally, if you believe the exam question is sufficiently challenging for students, simply reply with "GOOD ENOUGH". Otherwise, provide a detailed critique and your recommendations for improvement.
                """
                 ),
                 MessagesPlaceholder(variable_name="messages"),
@@ -112,7 +115,7 @@ def reflection_node_builder(llm):
 
         msg = reflect.invoke(translated)
 
-        logger.info("Refelect message: {}".format(msg.content))
+        # logger.info("Refelect message: {}".format(msg.content))
 
         # We treat the output of this as human feedback for the generator
         return {"messages": [HumanMessage(content=msg.content)]}
@@ -124,6 +127,14 @@ def formatter_node_builder(llm, OutType: Type[TypedDict]):
     def formatter_node(state):
         logger.info("--- Formatter ---")
 
+        logger.info(
+            "Final Conversation:\n" +
+            "\n".join(
+                f"{msg.type.upper()}: {msg.content}"
+                for msg in state["messages"]
+            )
+        )
+
         question = state["question"]
 
         formatter_prompt = ChatPromptTemplate.from_messages(
@@ -134,7 +145,7 @@ def formatter_node_builder(llm, OutType: Type[TypedDict]):
                     the instruction below: 
                     1. you should not change any context and html tags, except removing change 
                     line tags like \\n or \\n\\n from the context.
-                    2. use the content inside <a></a> as the html_question. However, the content in the <ul class='options'></ul> should not be written in html_question. 
+                    2. use the content inside <a></a> as the html_question. However, the content in the <ul class='options'></ul> and <p class='follow-up'></p> should not be written in html_question. 
                     3. Also, question requirements and correct answer should not be written in the html_question.
                     4. write the content in the <div class='article'></div> in html_article. but choices in <li></li> must be excluded.
                     5. use the content inside <li></li> as choices and keep html format, but <li></li> tags must be excluded.
@@ -143,6 +154,7 @@ def formatter_node_builder(llm, OutType: Type[TypedDict]):
             ]
         )
         format_pipeline = formatter_prompt | llm.with_structured_output(OutType)
+
         msg = format_pipeline.invoke(input={"question": question})
 
         logger.info("Formatted message: {}".format(msg))
@@ -166,14 +178,14 @@ def should_continue(state):
 def build_graph(builder, nodes):
     """Build and compile the state graph."""
     # Add nodes
-    builder.add_node("online_search", nodes["online_search"])
+    # builder.add_node("online_search", nodes["online_search"])
     builder.add_node("generator", nodes["generator"])
     builder.add_node("reflector", nodes["reflector"])
     builder.add_node("formatter", nodes["formatter"])
 
     # Add edges to connect nodes
-    builder.add_edge(START, "online_search")
-    builder.add_edge("online_search", "generator")
+    builder.add_edge(START, "generator")
+    # builder.add_edge("online_search", "generator")
     builder.add_edge("generator", "reflector")
     builder.add_conditional_edges("reflector", should_continue)
     builder.add_edge("formatter", END)

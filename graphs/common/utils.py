@@ -1,5 +1,9 @@
 import pandas as pd
 import json
+from pydub import AudioSegment
+
+import os
+
 def collect_vocabulary(file_path):
     # Read the CSV file
     data = pd.read_csv(file_path)
@@ -86,6 +90,8 @@ def _render_result(result, idx=1):
                 context = turn.get("context", "")
                 html += f'<p><strong>{gender.capitalize()}:</strong> {context}</p>\n'
             html += '</div>\n'
+        if "follow_up" in result:
+            html += f'<p><strong>follow-up question: </strong>{result["follow_up"]}</p>\n'
         if "questions" in result and isinstance(result["questions"], list):
             for idx, q in enumerate(result["questions"],1):
                 html += f'<p><strong>{idx}.{q["html_question"]}</strong></p>\n'
@@ -101,3 +107,4 @@ def _render_result(result, idx=1):
 
         html += '</body></html>'
         return html
+
