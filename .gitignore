@@ -8,4 +8,5 @@ tokenizer
 data/*
 *.pyc
 **/__pycache__
-logs/**
+logs/*
+output/*
