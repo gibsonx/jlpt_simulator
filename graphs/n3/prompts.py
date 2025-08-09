@@ -10,10 +10,10 @@ You must show the correct answer in the output, the options are 1,2,3,4. for exa
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation.
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists
 Additional Requirement: Don't show question instructions and sequence number in the generated content. 
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -38,13 +38,13 @@ The word in hiragana being tested needs to be underlined with <u></u>, no other 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content.  The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -73,13 +73,13 @@ Options are written either entirely in kanji or entirely in kana.
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -120,13 +120,13 @@ All choices should be written in Japanese only
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -160,11 +160,11 @@ Make only one option correct (the one using the word naturally), and ensure the 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: Don't show question instructions and sequence number in the generated content.
 You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -178,13 +178,13 @@ word_usage_example = """
 </ul>
 """
 
-sentence_grammar_teacher_prompt = """
+sentence_grammar_teacher_prompt =  """
 职位：你是一名日语老师，正在为JLPT N3水平写试卷。
 
 任务：按照以下步骤为JLPT N3级别试卷生成一道语法题，测试考生在实际语境中对语法的掌握程度。
 
 步骤1：生成1-2个短句，或者两个人对话的两句句子。要求：
-- 问题的灵感来源：参考搜索结果寻找想法，内容应涵盖日常生活场景、对话或简短的解释性语境。
+- 问题的灵感来源主题,内容应涵盖日常生活场景、对话或简短的解释性语境。
 - 生成的句子可以包含两种形式：1-2句短句；或者为2个人之间每人1-2句的对话，只需要1个对话回合
 - 题目的总字数在40-60个单词之间
 - 使用JLPT N3中的词汇；语法正确，语义通顺
@@ -195,7 +195,7 @@ sentence_grammar_teacher_prompt = """
 - 短文通篇语义通顺、连贯，表达流畅。
 - 短文的语法正确、时态正确
 
-步骤3：将步骤2优化后的句子中，提取句子中的1个语法点，作为题目的正确选项。
+步骤3：将步骤2优化后的句子中，提取句子中的语法点，作为题目的正确选项。
 对被提取的短语的附加要求：
 - 被提取的短语不能再出现在题干中，题干中不能保留被提取的短语
 
@@ -215,9 +215,9 @@ sentence_grammar_teacher_prompt = """
 - 在输出中显示正确答案，选项为1,2,3,4.例如：正解：1
 - 不要在生成的内容中显示问题说明和序列号。
 
-搜索结果：｛search_result｝
 正式测试问题示例：{example}
-语法点：{sentence}
+语法点：{grammar}
+主题: {topic}
 """
 
 sentence_grammar_example = """
@@ -252,9 +252,9 @@ Role: You are a Japanese teacher who designs a sentence sorting problem for the 
 Task: You should write a sentence of approximately 25-60 words and cut out four consecutive phrases as options for the question. The following are the specific execution steps:
 
 The first step is to generate sentences. The generated sentence needs to meet the following conditions:
--The content of the sentence draws inspiration from search results. Consider the feedback given in the previous conversation. Use a sentence grammar from the grammar reference list.
+-The content of the sentence draws inspiration from search results. Consider the feedback given in the previous conversation if it exists Use a sentence grammar from the grammar reference list.
 -A sentence can be a semantically coherent complete long sentence or a combination of one simple sentence and one long sentence.
--The generated sentence uses one or two sentence grammars from the grammar reference list, and the word usage is generally limited to the N3 level.
+-The generated sentence using the grammar from the grammar reference, and the word usage is generally limited to the N3 level.
 
 The second step is to analyze and optimize the sentences generated in the first step. Make the optimized sentence meet the following conditions:
 -The semantics of the sentence are smooth, coherent, and the expression is fluent.
@@ -287,9 +287,9 @@ Additional requirements:
 -The output question must have 4 options, neither too many nor too few
 -Replace the cut option with four underscores, and do not display the content of the option directly in the question stem.
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
-Grammar reference list: {sentence}
+Grammar reference: {grammar}
 """
 
 sentence_sort_example = """
@@ -318,10 +318,10 @@ structure_selection_teacher_prompt = """
 
 任务：你的工作是按照以下步骤为JLPT N3级别出一道填入正确内容的语法题。
 
-步骤1：从搜索结果中获得灵感。写一篇日语短文。短文需要符合以下要求：
+步骤1：问题的灵感来源"主题"。写一篇日语短文。短文需要符合以下要求：
 - 短文需要有1-3个段落，350-500个词。
 - 确保短文中的词汇95%限制在N3级别。
-- 整段内容需要保证语义通顺，没有语法错误。短文需要包含“语法参考列表”中的语法点，至少7-15。
+- 整段内容需要保证语义通顺，没有语法错误。短文需要包含“语法参考列表”中的语法点。
 
 步骤2：辨析并优化步骤1中生成的短文。使优化后的短文符合以下几个条件：
 - 短文通篇语义通顺、连贯，表达流畅。
@@ -351,9 +351,9 @@ structure_selection_teacher_prompt = """
 - 在输出中显示正确答案，选项为1,2,3,4.例如：正解：1
 - 不要在生成的内容中显示问题说明和序列号。
 
-搜索结果：｛search_result｝
+主题：｛topic｝
 正式试卷：{example}
-语法参考列表：{sentence}
+语法参考列表：{grammar}
 """
 
 structure_selection_example = """
@@ -462,13 +462,13 @@ The passage should reflect a real-life topic (e.g., daily life, work, study, tra
 Instructions:
 Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -506,13 +506,13 @@ The passage should reflect a real-life topic (e.g., daily life, work, study, tra
 Instructions:
 Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -554,13 +554,13 @@ The passage should reflect a real-life topic (e.g., daily life, work, study, tra
 Instructions:
 Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -598,14 +598,14 @@ Instead, it should require the test-taker to infer, summarize, or understand the
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -682,14 +682,14 @@ The purpose is to ensure the students are able to understand the meaning of the 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -746,14 +746,14 @@ such as train or flight schedules, event, or advertisements.
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the table and clues can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -865,14 +865,14 @@ Step 4, provide multiple-choice options based on the listening content. These op
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -945,14 +945,14 @@ Step 4, provide multiple-choice options based on the listening content. These op
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -1014,14 +1014,14 @@ After the conversation, ask a follow-up question focusing on what the conversati
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement:
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -1081,13 +1081,13 @@ The picture description must be in a dedicated section named: background
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -1119,13 +1119,13 @@ One of the options should be the most appropriate or natural response
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the Search result. Consider the feedback given in the previous conversation. 
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
 
-Search result: {search_result}
+Topic: {topic}
 Formal exam paper: {example}
 """
 

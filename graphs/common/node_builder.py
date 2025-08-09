@@ -2,14 +2,12 @@ from typing import *
 
 from dotenv import load_dotenv
 # from langchain_community.embeddings import XinferenceEmbeddings
-from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_tavily import TavilySearch
 from langgraph.graph import START, END
 from typing_extensions import TypedDict
-import logging
-
-logger = logging.getLogger(__name__)
+from libs.Logger import logger
 
 load_dotenv()
 
@@ -44,12 +42,13 @@ def online_search_node_builder():
     return online_search
 
 # Nodes
-def generation_node_builder(llm,  prompt_text, example, sentence=None):
+def generation_node_builder(llm,  prompt_text, example, grammar=None):
     def question_generator(state):
         """First LLM call to generate initial question"""
         logger.info("---Generator----")
 
-        search_result = state['documents']
+        topic = state['messages'][-1].content
+        # search_result = state['documents']
 
         prompt = ChatPromptTemplate.from_messages(
             [
@@ -62,21 +61,24 @@ def generation_node_builder(llm,  prompt_text, example, sentence=None):
         )
 
         params = {
-            "grammar": state['grammar'],
-            "topic": state['topic'],
-            "search_result": search_result,
+            # "search_result": search_result,
+            # "topic": state['topic'],
+            "topic": topic,
             "example": example,
-            "messages": state["messages"]
+            "messages": state["messages"],
         }
 
-        if sentence:
-            params["sentence"] = sentence
+        if grammar:
+            params["grammar"] = grammar
+
+        # Format the prompt to get the actual text
+        resolved_prompt = prompt.format_messages(**params)
+
+        state["messages"].insert(0, resolved_prompt[0])
 
         generate = prompt | llm
 
         msg = generate.invoke(input=params)
-
-        logger.info("Generated message: {}".format(msg.content))
 
         return {"question": msg.content, "messages": [AIMessage(content=msg.content)]}
 
@@ -85,7 +87,6 @@ def generation_node_builder(llm,  prompt_text, example, sentence=None):
 def reflection_node_builder(llm):
     def reflection_node(state):
         logger.info("---REVISOR---")
-
         # Other messages we need to adjust
         cls_map = {"ai": HumanMessage, "human": AIMessage}
         # First message is the original user request. We hold it the same for all nodes
@@ -114,7 +115,7 @@ def reflection_node_builder(llm):
 
         msg = reflect.invoke(translated)
 
-        logger.info("Refelect message: {}".format(msg.content))
+        # logger.info("Refelect message: {}".format(msg.content))
 
         # We treat the output of this as human feedback for the generator
         return {"messages": [HumanMessage(content=msg.content)]}
@@ -125,6 +126,14 @@ def reflection_node_builder(llm):
 def formatter_node_builder(llm, OutType: Type[TypedDict]):
     def formatter_node(state):
         logger.info("--- Formatter ---")
+
+        logger.info(
+            "Final Conversation:\n" +
+            "\n".join(
+                f"{msg.type.upper()}: {msg.content}"
+                for msg in state["messages"]
+            )
+        )
 
         question = state["question"]
 
@@ -145,6 +154,7 @@ def formatter_node_builder(llm, OutType: Type[TypedDict]):
             ]
         )
         format_pipeline = formatter_prompt | llm.with_structured_output(OutType)
+
         msg = format_pipeline.invoke(input={"question": question})
 
         logger.info("Formatted message: {}".format(msg))
@@ -168,14 +178,14 @@ def should_continue(state):
 def build_graph(builder, nodes):
     """Build and compile the state graph."""
     # Add nodes
-    builder.add_node("online_search", nodes["online_search"])
+    # builder.add_node("online_search", nodes["online_search"])
     builder.add_node("generator", nodes["generator"])
     builder.add_node("reflector", nodes["reflector"])
     builder.add_node("formatter", nodes["formatter"])
 
     # Add edges to connect nodes
-    builder.add_edge(START, "online_search")
-    builder.add_edge("online_search", "generator")
+    builder.add_edge(START, "generator")
+    # builder.add_edge("online_search", "generator")
     builder.add_edge("generator", "reflector")
     builder.add_conditional_edges("reflector", should_continue)
     builder.add_edge("formatter", END)
