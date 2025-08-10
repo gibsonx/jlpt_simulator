@@ -215,8 +215,8 @@ sentence_grammar_teacher_prompt =  """
 - 在输出中显示正确答案，选项为1,2,3,4.例如：正解：1
 - 不要在生成的内容中显示问题说明和序列号。
 
-正式测试问题示例：{example}
-语法点：{grammar}
+正式测试问题示例: {example}
+语法点: {grammar}
 主题: {topic}
 """
 
@@ -247,45 +247,48 @@ sentence_grammar_example = """
 # When the third word is identified, point out its sequence number in the options.
 
 sentence_sort_teacher_prompt = """
-Role: You are a Japanese teacher who designs a sentence sorting problem for the JLPT N3 level exam.
+Role: You are a Japanese teacher who designed a sentence sorting question for the JLPT N3 exam.
 
-Task: You should write a sentence of approximately 25-60 words and cut out four consecutive phrases as options for the question. The following are the specific execution steps:
+Task: You should write a sentence of approximately 25-60 words and cut out four consecutive phrases as options for the question. The specific execution steps are as follows:
 
-The first step is to generate sentences. The generated sentence needs to meet the following conditions:
--The content of the sentence draws inspiration from search results. Consider the feedback given in the previous conversation if it exists Use a sentence grammar from the grammar reference list.
--A sentence can be a semantically coherent complete long sentence or a combination of one simple sentence and one long sentence.
--The generated sentence using the grammar from the grammar reference, and the word usage is generally limited to the N3 level.
+Step 1: Generate sentences. The generated sentence needs to meet the following conditions:
+-The content of the sentence draws inspiration from the "Topic". Consider the feedback given in the previous conversation. Use sentence grammar from the 'Grammar reference'.
+-The generated sentence can be a semantically coherent complete long sentence, or a combination of a simple sentence and a long sentence.
+-The generated sentences use one or two sentence grammars from the grammar reference list, with word usage typically limited to N3 level.
+-Output printed sentences in the debugging log.
 
-The second step is to analyze and optimize the sentences generated in the first step. Make the optimized sentence meet the following conditions:
--The semantics of the sentence are smooth, coherent, and the expression is fluent.
--Sentence grammar and tense are correct
+Step 2: Analyze and optimize the sentences generated in Step 1. Make the optimized sentence meet the following conditions:
+-The semantics of the sentence are fluent, coherent, and the expression is fluent.
+-Correct sentence grammar and tense.
+-No repeated phrases used multiple times.
+-Print optimized sentences in the debugging log.
 
-Step three, extract four consecutive phrases from the sentence optimized in step two as options for the question. The four extracted options can be in the following situations:
--Connective words or phrases used for connection
--Adverbial phrases or attributive phrases describing time, place, and state
--The predicate phrase that explains the action, or the predicate phrase that serves as an attributive
--Nouns
-Additional requirements for the four extracted options:
--There can be no more than one word as an option in a question, and the rest must be phrases.
+Step 3: Extract 4 consecutive phrases from the optimized sentence in Step 2 as options for the question. The four extracted phrases can meet the following situations:
+-Connective words or phrases used for linking
+-Adverbial or attributive phrases describing time, place, and state
+-The predicate phrase used to explain an action, or the predicate phrase used as an attributive
+-Nouns or noun phrases
+Additional requirements for the 4 extracted options:
+-The extracted phrases must be 4, neither too many nor too few.
+-There can be at most one word as an option in one question, and the rest must be phrases.
 -Each phrase used as an option should be no less than 2 characters but no more than 12 characters.
--The four extracted phrases cannot appear again in the question stem, and the extracted phrases cannot be retained in the question stem.
--The four extracted options must be four consecutive phrases in the sentence and cannot be extracted in order.
+-The four extracted phrases cannot appear again in the question stem.
+-The four extracted options must be four consecutive phrases in the sentence, and this phrase must exist in the original sentence.
 
-Step four, make 4 underlines to replace cut words and the third underline is marked by a ★ symbol. don't make it twice.  
-The full expression of this in html is: <u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>   
+Step 4: Replace the 4 phrases extracted from the question with 4 underscores, with the third underline marked as a ★ symbol. Do not repeat.    
+In HTML, the complete expression for this is:<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>
 
-Step five, label the four extracted phrases in the order they appear in the sentence, and then shuffle them as options for the question.  
-You need to rearrange the order according to the position of the sentences. Fill in the section called 'Queue'. For example, queue: 2 → 1 → 4 → 3
-Afterwards, take the third number in the queue as the correct answer.
-You must display the correct answer and the sentence optimized in the second step in the output. For example, the correct answer is 4.
+Step 5: Allocate the phrases extracted in step 3 to four variables: a, b, c, d, while maintaining their original order. This queue is called sequence x. Reorder sequence x and assign new sequence numbers 1, 2, 3, 4. This queue is called sequence y.
+Then, take the number in sequence y that is exactly the same as the value of variable c in sequence x as the correct answer. This correct answer is called "g_answer"
+Output sequence x, y in the debugging log.
 
-Step six, generate questions.
+Step 6: Generate questions according to the requirements and format.
 Question format: Follow the format of the two examples in the formal exam paper, but do not require the same content. The output result must be in HTML format and the line break tag must be removed.
 Additional requirements:
--Do not display problem descriptions and serial numbers in the generated content.  
--You must display the correct answer in the output, with options 1, 2, 3, and 4. The position of the third blank is the correct answer.
--The output question must have 4 options, neither too many nor too few
--Replace the cut option with four underscores, and do not display the content of the option directly in the question stem.
+-Do not display problem descriptions and serial numbers in the generated content.   
+-Output 4 options in the order of sequence y.
+-Mark "g_answer" as correct answer.
+
 
 Topic: {topic}
 Formal exam paper: {example}

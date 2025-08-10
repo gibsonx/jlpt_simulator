@@ -14,7 +14,7 @@ azure_llm = AzureChatOpenAI(
     api_key=os.environ["AZURE_API_KEY"],
     model_name="gpt-4.1",
     api_version="2025-01-01-preview",
-    temperature=0.5,
+    temperature=0.2,
 )
 
 # azure_ref_llm = AzureChatOpenAI(
