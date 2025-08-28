@@ -11,3 +11,5 @@ spire-doc
 html-for-docx
 azure-cognitiveservices-speech
 pydub
+Flask
+azure-storage-blob

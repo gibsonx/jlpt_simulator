@@ -1,11 +1,10 @@
 from graphs.common.node_builder import *
-from graphs.common.utils import *
+from libs.Utils import _generate_dialogue,_generate_express,_generate_image,collect_vocabulary
 from graphs.common.state import *
 from libs.LLMs import azure_llm
 import random
 from graphs.n3.prompts import *
 from langgraph.graph import StateGraph
-import logging
 
 load_dotenv()
 #
@@ -48,162 +47,173 @@ class ExamTaskHandler:
 
     # def invoke(self, word):
     #     instance = self.build_agent().invoke(
-    #         {"messages": [HumanMessage(content=word)]},
+    #         {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
     #         config={"configurable": {"thread_id": "1"}}
     #     )
     #     return instance['formatted_output']
 
-    def kanji_reading(self, word):
+    def kanji_reading(self, word, seq=1):
         graph = self.build_agent(kanji_reading_teacher_prompt, kanji_reading_example, SimpleChoiceQuestionOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def write_kanji(self, word):
+    def write_kanji(self, word, seq=1):
         graph = self.build_agent(write_kanji_teacher_prompt, write_kanji_example, SimpleChoiceQuestionOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def word_meaning(self, word):
+    def word_meaning(self, word, seq=1):
         graph = self.build_agent(word_meaning_teacher_prompt, word_meaning_example, SimpleChoiceQuestionOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def synonym_substitution(self, word):
+    def synonym_substitution(self, word, seq=1):
         graph = self.build_agent(synonym_substitution_teacher_prompt, synonym_substitution_example, SimpleChoiceQuestionOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def word_usage(self, word):
+    def word_usage(self, word, seq=1):
         graph = self.build_agent(word_usage_teacher_prompt, word_usage_example, SimpleChoiceQuestionOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def sentence_grammar(self, word, grammar):
+    def sentence_grammar(self, word, grammar, seq=1):
         graph = self.build_agent(sentence_grammar_teacher_prompt, sentence_grammar_example, SimpleChoiceQuestionOutput, grammar)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def sentence_sort(self, word, grammar):
+    def sentence_sort(self, word, grammar, seq=1):
         graph = self.build_agent(sentence_sort_teacher_prompt, sentence_sort_example, SimpleChoiceQuestionOutput, grammar)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def sentence_structure(self, word, grammar):
+    def sentence_structure(self, word, grammar, seq):
         graph = self.build_agent(structure_selection_teacher_prompt, structure_selection_example, MultipleQuestionOutput, grammar)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def short_passage_narrative_read(self, word):
+    def short_passage_narrative_read(self, word, seq):
         graph = self.build_agent(short_reading_narrative_teacher_prompt, short_reading_narrative_example, MultipleQuestionOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def short_passage_mail_read(self, word):
+    def short_passage_mail_read(self, word, seq):
         graph = self.build_agent(short_reading_mail_teacher_prompt, short_reading_mail_example, MultipleQuestionOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def short_passage_notification_read(self, word):
+    def short_passage_notification_read(self, word, seq):
         graph = self.build_agent(short_reading_notification_teacher_prompt, short_reading_notification_example, MultipleQuestionOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def midsize_passage_read(self, word):
+    def midsize_passage_read(self, word, seq):
         graph = self.build_agent(midsize_reading_teacher_prompt, midsize_reading_example, MultipleQuestionOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def long_passage_read(self, word):
+    def long_passage_read(self, word, seq):
         graph = self.build_agent(long_reading_teacher_prompt, long_reading_example, MultipleQuestionOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def info_retrieval(self, word):
+    def info_retrieval(self, word, seq):
         graph = self.build_agent(information_retrieval_teacher_prompt, information_retrieval_example, MultipleQuestionOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
         return instance['formatted_output']
 
-    def topic_understanding(self, word):
+    def topic_understanding(self, word, seq):
         graph = self.build_agent(topic_understanding_teacher_prompt, topic_understanding_example, ListenSingleChoiceOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
-        return instance['formatted_output']
+        obj = instance['formatted_output']
+        obj['audio'] = _generate_dialogue(content=obj, type="topic_understanding", seq=seq)
+        return obj
 
-    def keypoint_understanding(self, word):
+    def keypoint_understanding(self, word, seq):
         graph = self.build_agent(keypoint_understanding_teacher_prompt, keypoint_understanding_example, ListenSingleChoiceOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
-        return instance['formatted_output']
+        obj = instance['formatted_output']
+        obj['audio'] = _generate_dialogue(content=obj, type="keypoint_understanding", seq=seq)
+        return obj
 
-    def summary_understanding(self, word):
+    def summary_understanding(self, word, seq):
         graph = self.build_agent(summary_understanding_teacher_prompt, summary_understanding_example, ListenSingleChoiceOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
-        return instance['formatted_output']
+        obj = instance['formatted_output']
+        obj['audio'] = _generate_dialogue(content=obj, type="summary_understanding", seq=seq)
+        return obj
 
-    def active_expression(self, word):
+    def active_expression(self, word, seq):
         graph = self.build_agent(actively_expression_teacher_prompt, actively_expression_example, ImageListenQuestionOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
-        return instance['formatted_output']
+        obj = instance['formatted_output']
+        obj['audio'] = _generate_express(content=obj, type="active_expression", seq=seq)
+        obj['image'] = _generate_image(obj['background'])
+        return obj
 
-    def immediate_ack(self, word):
-        graph = self.build_agent(immediate_ack_teacher_prompt, immediate_ack_example, ImageListenQuestionOutput)
+    def immediate_ack(self, word, seq):
+        graph = self.build_agent(immediate_ack_teacher_prompt, immediate_ack_example, ListenImmediateQuestionOutput)
         instance = graph.invoke(
-            {"messages": [HumanMessage(content=word)]},
+            {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
             config={"configurable": {"thread_id": "1"}}
         )
-        return instance['formatted_output']
+        obj = instance['formatted_output']
+        obj['audio'] = _generate_express(content=obj, type="active_expression", seq=seq)
+        return obj
 
 if __name__ == "__main__":
     n3_vocab = collect_vocabulary("../../Vocab/n3.csv")

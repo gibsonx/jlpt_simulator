@@ -17,6 +17,7 @@ class SimpleChoiceQuestionOutput(TypedDict):
 class GraphState(TypedDict):
     topic: str
     question: str
+    requirement: str
     documents: str
     formatted_output: dict
     messages: Annotated[list, add_messages]
@@ -36,13 +37,21 @@ class ListenSingleChoiceOutput(TypedDict):
     follow_up: Annotated[str, "the follow-up question"]
     conversation: List[ListenConversation]
     html_question: Annotated[str, "the question in html format at a single line"]
-    choices: Annotated[List, "answer options as a list, each option is in html format"]
+    choices: Annotated[List, "answer options as a list, each option is in string format"]
     correct_answer: Annotated[int, "correct option in 1,2,3,4"]
 
 class ImageListenQuestionOutput(TypedDict):
     """Listen Simple Question Formatted Output"""
     background: Annotated[str, "detail prompt strings for describing the background to generate image"]
-    html_question: Annotated[str, "the question in html format at a single line"]
-    choices: Annotated[List, "answer options as a list, each option is in html format"]
-    correct_answer: Annotated[int, "correct option in 1,2,3,4"]
+    follow_up: Annotated[str, "the follow-up question"]
+    conversation: List[ListenConversation]
+    choices: Annotated[List, "answer options as a list, each option is in string format"]
+    correct_answer: Annotated[int, "correct option in 1,2,3"]
+
+class ListenImmediateQuestionOutput(TypedDict):
+    """Listen Simple Question Formatted Output"""
+    follow_up: Annotated[str, "the follow-up question"]
+    conversation: List[ListenConversation]
+    choices: Annotated[List, "answer options as a list, each option is in string format"]
+    correct_answer: Annotated[int, "correct option in 1,2,3"]
 
