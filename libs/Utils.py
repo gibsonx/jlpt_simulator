@@ -1,20 +1,31 @@
 import pandas as pd
-import json
+import platform
 from pydub import AudioSegment
 import requests
 import os
 import azure.cognitiveservices.speech as speechsdk
-
+from azure.storage.blob import BlobServiceClient
 from dotenv import load_dotenv
 load_dotenv()
 
+system = platform.system().lower()
+
+if system == "windows":
+    # Merge audio files using pydub
+    print("ffmpeg.exe will be used as running in Windows OS")
+    AudioSegment.converter = r"libs\ffmpeg.exe"
+
 # Voice mappings
 voices = {
-    "nanami": "ja-JP-NanamiNeural",   # Standard Nanami
-    "masaru": "ja-JP-MasaruNeural",   # Standard Masaru
-    "shiori": "ja-JP-ShioriNeural",   # Standard Shiori
-    "mayu": "ja-JP-MayuNeural"        # Standard Mayu
+    "nanami": "ja-JP-NanamiNeural",
+    "masaru": "ja-JP-KeitaNeural",
+    "shiori": "ja-JP-ShioriNeural",
+    "mayu": "ja-JP-NanamiNeural"
 }
+
+# Initialize Blob client
+blob_service_client = BlobServiceClient.from_connection_string(os.getenv("AZURE_STORAGE_CONNECTION_STRING"))
+container_client = blob_service_client.get_container_client(os.getenv("AZURE_VOICE_CONTAINER", "voice"))
 
 def collect_vocabulary(file_path):
     # Read the CSV file
@@ -121,11 +132,6 @@ def _generate_dialogue(content, type, seq):
         'female': 'nanami',
     }
 
-    # Convert to dialogue format
-    # [
-    #     ("nanami", "こんにちは、マサルさん。週末は何をする予定ですか？"),
-    #     ("masaru", "こんにちは、ナナミさん。まだ決めていませんが、ハイキングに行くかもしれません。")
-    # ]
     dialogue = [(voice_map[line['gender']], line['context']) for line in content['conversation']]
 
     output_files = []
@@ -168,19 +174,34 @@ def _generate_dialogue(content, type, seq):
             output_files.append(option_seq)
             output_files.append(option)
 
-    # Merge audio files using pydub
+
     combined = AudioSegment.empty()
     for file in output_files:
         print(file)
         combined += AudioSegment.from_wav(file)
 
-    target_file = os.path.join(voice_output, f"{type}_{seq}_conversation_output.wav")
+    filename = f"{type}_{seq}_conversation_output.mp3"
+    target_file = os.path.join(voice_output, filename)
 
     # Export final conversation
-    combined.export(target_file, format="wav")
+    combined.export(target_file, format="mp3", bitrate="96k")
     print(f"Conversation audio saved as {target_file}")
 
-    return target_file
+    try:
+        # Upload file
+        with open(target_file, "rb") as data:
+            container_client.upload_blob(
+                name=filename,
+                data=data,
+                overwrite=True,  # set True if you want to replace existing file
+                timeout=300,  # seconds
+            )
+
+        print(f"✅ Uploaded {target_file} size: {os.path.getsize(target_file)} to container {container_client.container_name} as blob {filename}")
+    except Exception as e:
+        print(f"Image upload failed: {e}")
+
+    return f"{os.environ['AZURE_CONTAINER_URL']}/{os.environ['AZURE_VOICE_CONTAINER']}/{filename}"
 
 def _generate_express(content, type, seq):
 
@@ -229,19 +250,34 @@ def _generate_express(content, type, seq):
         output_files.append(option_seq)
         output_files.append(option)
 
-        # Merge audio files using pydub
+    # Merge audio files using pydub
     combined = AudioSegment.empty()
     for file in output_files:
         print(file)
         combined += AudioSegment.from_wav(file)
 
-    target_file = os.path.join(voice_output, f"{type}_{seq}_conversation_output.wav")
+    filename = f"{type}_{seq}_conversation_output.mp3"
+    target_file = os.path.join(voice_output, filename)
 
     # Export final conversation
-    combined.export(target_file, format="wav")
+    combined.export(target_file, format="mp3", bitrate="96k")
     print(f"Conversation audio saved as {target_file}")
 
-    return target_file
+    try:
+        # Upload file
+        with open(target_file, "rb") as data:
+            container_client.upload_blob(
+                name=filename,
+                data=data,
+                overwrite=True,  # set True if you want to replace existing file
+                timeout=300,  # seconds
+            )
+
+        print(f"✅ Uploaded {target_file} size: {os.path.getsize(target_file)} to container {container_client.container_name} as blob {filename}")
+    except Exception as e:
+        print(f"Image upload failed: {e}")
+
+    return f"{os.environ['AZURE_CONTAINER_URL']}/{os.environ['AZURE_VOICE_CONTAINER']}/{filename}"
 
 def _generate_image(prompt="a woman is talking to a man."):
 
@@ -259,7 +295,7 @@ def _generate_image(prompt="a woman is talking to a man."):
                   "you can refer to the style of uploaded pictures."
                   "Write an arrow symbol pointing to the person who speaks first. The image describes the following scenario: \n\n" + prompt,
         "size": "3:2",
-        "callBackUrl": "http://172.190.115.70:3000/4o-image-callback",
+        "callBackUrl": os.environ["IMAGE_CALLBACK_URL"],
         "isEnhance": False,
         "uploadCn": False,
         "nVariants": 1,
@@ -272,11 +308,7 @@ def _generate_image(prompt="a woman is talking to a man."):
     }
 
     response = requests.post(url, json=payload, headers=headers)
-
     task_id = response.json()['data']['taskId']
-
     image_url = os.environ["AZURE_CONTAINER_URL"] + f"4o_images_{task_id}_image_1.png"
-
-    print(image_url)
 
     return  image_url
