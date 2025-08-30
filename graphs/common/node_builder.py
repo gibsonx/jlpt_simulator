@@ -1,6 +1,5 @@
 from typing import *
 
-from dotenv import load_dotenv
 # from langchain_community.embeddings import XinferenceEmbeddings
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -9,6 +8,7 @@ from langgraph.graph import START, END
 from typing_extensions import TypedDict
 from libs.Logger import logger
 
+from dotenv import load_dotenv
 load_dotenv()
 
 def online_search_node_builder():
@@ -63,7 +63,7 @@ def generation_node_builder(llm,  prompt_text, example, grammar=None):
         params = {
             # "search_result": search_result,
             # "topic": state['topic'],
-            "topic": topic,
+            # "topic": topic,
             "example": example,
             "messages": state["messages"],
         }
@@ -87,37 +87,49 @@ def generation_node_builder(llm,  prompt_text, example, grammar=None):
 def reflection_node_builder(llm):
     def reflection_node(state):
         logger.info("---REVISOR---")
-        # Other messages we need to adjust
+
         cls_map = {"ai": HumanMessage, "human": AIMessage}
-        # First message is the original user request. We hold it the same for all nodes
-        translated = [state["messages"][0]] + [
-            cls_map[msg.type](content=msg.content) for msg in state["messages"][1:]
-        ]
+
+        # Check for a system message in state["messages"]
+        system_msg = next((msg for msg in state["messages"] if msg.type == "system"), None)
+
+        # Build translated list
+        translated = []
+        if system_msg:
+            translated.append(system_msg)  # system message first
+
+        # Always add the original user request (state["messages"][0]) next
+        translated.append(state["messages"][0])
+
+        # Then add the rest, excluding the first and system messages if already added
+        for msg in state["messages"][1:]:
+            if msg != system_msg:
+                translated.append(cls_map.get(msg.type, HumanMessage)(content=msg.content))
 
         reflection_prompt = ChatPromptTemplate.from_messages(
             [
                 (
                     "system",
-            """
-                 You are a senior Japanese language educator reviewing a JLPT exam paper. Generate critique and recommendations for the Japanese teacher's submission in English.
-                 You must read the Instructions in the previous messages and give feedback on the following factors:
-               - Don't suggest to add any question instructions to the context. Don't suggest anything about html format. Do not suggest including instructions in the question such as whether it tests meaning, kanji, or context.     
-               - For content accuracy, you must verify that the questions are abide by the JLPT N3 level requirements and appropriately challenging. 
-               - For question and answer quality, you must ensure all questions are clearly worded and free from ambiguity and confirm that the difficulty level of the questions matches the intended JLPT N3 level.
-               - During detailed refinement, You also ensure the content is culturally appropriate and relevant to Japanese academic language content and Japanese culture.
-               - Finally, if you believe the exam question is sufficiently challenging for students, simply reply with "GOOD ENOUGH". Otherwise, provide a detailed critique and your recommendations for improvement.
-               """
+                    """
+                    You are a senior Japanese language educator reviewing a JLPT exam paper. Generate critique and recommendations for the Japanese teacher's submission in English.
+                    Please think deeply and give feedback on the following factors:
+                      - For content accuracy, you must verify that the questions are abide by the JLPT N3 level requirements and appropriately challenging. 
+                      - For question and answer options quality, you must ensure all questions are clearly worded and free from ambiguity and confirm that the difficulty level of the questions matches the intended JLPT N3 level.
+                      - During detailed refinement, You also ensure the content is culturally appropriate and relevant to Japanese culture and native expression.
+                    However, Don't suggest to add any question instructions to the context. Don't suggest anything about html format. Do not suggest including instructions in the question such as whether it tests meaning, kanji, or context.     
+                    Finally, if you believe the submission is qualified, simply reply with "GOOD ENOUGH". Otherwise, provide a detailed critique and your recommendations for improvement.
+                    """
                 ),
                 MessagesPlaceholder(variable_name="messages"),
             ]
         )
-        reflect = reflection_prompt | llm
 
+        reflect = reflection_prompt | llm
         msg = reflect.invoke(translated)
 
-        # logger.info("Refelect message: {}".format(msg.content))
+        logger.info("Reflect Feedback: {}".format(msg.content))
 
-        # We treat the output of this as human feedback for the generator
+        # Return as human feedback for the generator
         return {"messages": [HumanMessage(content=msg.content)]}
 
     return reflection_node
@@ -157,7 +169,7 @@ def formatter_node_builder(llm, OutType: Type[TypedDict]):
 
         msg = format_pipeline.invoke(input={"question": question})
 
-        logger.info("Formatted message: {}".format(msg))
+        logger.info("Formatter: {}".format(msg))
 
         # We treat the output of this as human feedback for the generator
         return {"formatted_output": msg }
@@ -172,6 +184,8 @@ def should_continue(state):
         elif "GOOD ENOUGH" in state["messages"][-1].content:
             logger.info("--- AI Reviser feels Good Enough ---")
             return "formatter"
+        else:
+            logger.info("--- To be improved by regeneration ---")
     return "generator"
 
 

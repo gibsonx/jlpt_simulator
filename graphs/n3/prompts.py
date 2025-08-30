@@ -10,10 +10,10 @@ You must show the correct answer in the output, the options are 1,2,3,4. for exa
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists
 Additional Requirement: Don't show question instructions and sequence number in the generated content. 
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
@@ -38,13 +38,13 @@ The word in hiragana being tested needs to be underlined with <u></u>, no other 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content.  The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
@@ -73,13 +73,13 @@ Options are written either entirely in kanji or entirely in kana.
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
@@ -120,13 +120,13 @@ All choices should be written in Japanese only
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
@@ -160,11 +160,11 @@ Make only one option correct (the one using the word naturally), and ensure the 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: Don't show question instructions and sequence number in the generated content.
 You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
@@ -178,7 +178,7 @@ word_usage_example = """
 </ul>
 """
 
-sentence_grammar_teacher_prompt =  """
+sentence_grammar_teacher_prompt = """
 职位：你是一名日语老师，正在为JLPT N3水平写试卷。
 
 任务：按照以下步骤为JLPT N3级别试卷生成一道语法题，测试考生在实际语境中对语法的掌握程度。
@@ -215,9 +215,8 @@ sentence_grammar_teacher_prompt =  """
 - 在输出中显示正确答案，选项为1,2,3,4.例如：正解：1
 - 不要在生成的内容中显示问题说明和序列号。
 
-正式测试问题示例：{example}
-语法点：{grammar}
-主题: {topic}
+正式测试问题示例: {example}
+语法点: {grammar}
 """
 
 sentence_grammar_example = """
@@ -247,54 +246,57 @@ sentence_grammar_example = """
 # When the third word is identified, point out its sequence number in the options.
 
 sentence_sort_teacher_prompt = """
-Role: You are a Japanese teacher who designs a sentence sorting problem for the JLPT N3 level exam.
+Role: You are a Japanese teacher who designed a sentence sorting question for the JLPT N3 exam.
 
-Task: You should write a sentence of approximately 25-60 words and cut out four consecutive phrases as options for the question. The following are the specific execution steps:
+Task: You should write a sentence of approximately 60 words and cut out four consecutive phrases as options for the question. The specific execution steps are as follows:
 
-The first step is to generate sentences. The generated sentence needs to meet the following conditions:
--The content of the sentence draws inspiration from search results. Consider the feedback given in the previous conversation if it exists Use a sentence grammar from the grammar reference list.
--A sentence can be a semantically coherent complete long sentence or a combination of one simple sentence and one long sentence.
--The generated sentence using the grammar from the grammar reference, and the word usage is generally limited to the N3 level.
+Step 1: Generate sentences. The generated sentence needs to meet the following conditions:
+-The content of the sentence draws inspiration from the "Topic". Consider the feedback given in the previous conversation. Use sentence grammar from the 'Grammar reference'.
+-The generated sentence can be a semantically coherent complete long sentence, or a combination of a simple sentence and a long sentence.
+-The generated sentences use one or two sentence grammars from the grammar reference list, with word usage typically limited to N3 level.
+-Output printed sentences in the debugging log.
 
-The second step is to analyze and optimize the sentences generated in the first step. Make the optimized sentence meet the following conditions:
--The semantics of the sentence are smooth, coherent, and the expression is fluent.
--Sentence grammar and tense are correct
+Step 2: Analyze and optimize the sentences generated in Step 1. Make the optimized sentence meet the following conditions:
+-The semantics of the sentence are fluent, coherent, and the expression is fluent.
+-Correct sentence grammar and tense.
+-No repeated phrases used multiple times.
+-Print optimized sentences in the debugging log.
 
-Step three, extract four consecutive phrases from the sentence optimized in step two as options for the question. The four extracted options can be in the following situations:
--Connective words or phrases used for connection
--Adverbial phrases or attributive phrases describing time, place, and state
--The predicate phrase that explains the action, or the predicate phrase that serves as an attributive
--Nouns
-Additional requirements for the four extracted options:
--There can be no more than one word as an option in a question, and the rest must be phrases.
+Step 3: Extract 4 consecutive phrases from the optimized sentence in Step 2 as options for the question. The four extracted phrases can meet the following situations:
+-Connective words or phrases used for linking
+-Adverbial or attributive phrases describing time, place, and state
+-The predicate phrase used to explain an action, or the predicate phrase used as an attributive
+-Nouns or noun phrases
+Additional requirements for the 4 extracted options:
+-The extracted phrases must be 4, neither too many nor too few.
+-There can be at most one word as an option in one question, and the rest must be phrases.
 -Each phrase used as an option should be no less than 2 characters but no more than 12 characters.
--The four extracted phrases cannot appear again in the question stem, and the extracted phrases cannot be retained in the question stem.
--The four extracted options must be four consecutive phrases in the sentence and cannot be extracted in order.
+-The four extracted phrases cannot appear again in the question stem.
+-The four extracted options must be four consecutive phrases in the sentence, and this phrase must exist in the original sentence.
 
-Step four, make 4 underlines to replace cut words and the third underline is marked by a ★ symbol. don't make it twice.  
-The full expression of this in html is: <u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>   
+Step 4: Replace the 4 phrases extracted from the question with 4 underscores, with the third underline marked as a ★ symbol. Do not repeat.    
+In HTML, the complete expression for this is: <u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>
 
-Step five, label the four extracted phrases in the order they appear in the sentence, and then shuffle them as options for the question.  
-You need to rearrange the order according to the position of the sentences. Fill in the section called 'Queue'. For example, queue: 2 → 1 → 4 → 3
-Afterwards, take the third number in the queue as the correct answer.
-You must display the correct answer and the sentence optimized in the second step in the output. For example, the correct answer is 4.
+Step 5: Allocate the phrases extracted in step 3 to four variables: a, b, c, d, while maintaining their original order. This queue is called sequence x. Reorder sequence x and assign new sequence numbers 1, 2, 3, 4. This queue is called sequence y.
+Then, take the number in sequence y that is exactly the same as the value of variable c in sequence x as the correct answer. This correct answer is called "g_answer"
+Output sequence x, y in the debugging log.
 
-Step six, generate questions.
+Step 6: Generate questions according to the requirements and format.
 Question format: Follow the format of the two examples in the formal exam paper, but do not require the same content. The output result must be in HTML format and the line break tag must be removed.
 Additional requirements:
--Do not display problem descriptions and serial numbers in the generated content.  
--You must display the correct answer in the output, with options 1, 2, 3, and 4. The position of the third blank is the correct answer.
--The output question must have 4 options, neither too many nor too few
--Replace the cut option with four underscores, and do not display the content of the option directly in the question stem.
+-Do not display problem descriptions and serial numbers in the generated content.   
+-Output 4 options in the order of sequence y.
+-Mark "g_answer" as correct answer.
 
-Topic: {topic}
+
+
 Formal exam paper: {example}
 Grammar reference: {grammar}
 """
 
 sentence_sort_example = """
 --- example 1 ---
-<a>山川大学では、<u>＿＿</u> <u>＿＿</u> ★ <u>＿＿</u> <u>＿＿</u> について新入生がにアンケート調査を行っている。</a>
+<a>山川大学では、<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u> について新入生がにアンケート調査を行っている。</a>
 <ul class='options'>
   <li>大学生活</li>
   <li>持っている</li>
@@ -303,7 +305,7 @@ sentence_sort_example = """
 </ul>
 
 --- example 2 ---
-<a>来週の夫の誕生日には、<u>＿＿</u> <u>＿＿</u> ★ <u>＿＿</u> <u>＿＿</u> つもりだ。</a>
+<a>来週の夫の誕生日には、<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u> つもりだ。</a>
 <ul class='options'>
   <li>最近</li>
   <li>プレゼントする</li>
@@ -351,7 +353,6 @@ structure_selection_teacher_prompt = """
 - 在输出中显示正确答案，选项为1,2,3,4.例如：正解：1
 - 不要在生成的内容中显示问题说明和序列号。
 
-主题：｛topic｝
 正式试卷：{example}
 语法参考列表：{grammar}
 """
@@ -447,7 +448,6 @@ structure_selection_example = """
 
 </body>
 </html>
-    
 """
 
 short_reading_narrative_teacher_prompt = """
@@ -462,13 +462,13 @@ The passage should reflect a real-life topic (e.g., daily life, work, study, tra
 Instructions:
 Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
@@ -506,13 +506,13 @@ The passage should reflect a real-life topic (e.g., daily life, work, study, tra
 Instructions:
 Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
@@ -554,13 +554,13 @@ The passage should reflect a real-life topic (e.g., daily life, work, study, tra
 Instructions:
 Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
@@ -598,14 +598,14 @@ Instead, it should require the test-taker to infer, summarize, or understand the
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
@@ -682,14 +682,14 @@ The purpose is to ensure the students are able to understand the meaning of the 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
@@ -736,7 +736,7 @@ information_retrieval_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
 Task: You are a Japanese teacher writing a retrieve information question on an exam paper for the JLPT N3 level.
-you must provide a html format table and append 2-3 additional conditions below. The content and conditions combined should be more than 300 words and complex enough for JLPT n3 level.
+you must provide 1 or 2 html format tables and with additional information for retrieve below. The content and conditions combined should be more than 300 words and complex enough for JLPT n3 level.
 After that, asking candidate to answer 2 questions from the related content in the table.
 Most importantly, the question and answer must not be stated directly in the table or clues. 
 Instead, it should require the test-taker to infer, summarize, or understand the context.
@@ -746,14 +746,13 @@ such as train or flight schedules, event, or advertisements.
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the table and clues can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
-Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -851,34 +850,37 @@ Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level.
 
 Task: Your job is to write a natural-sounding conversation between a man and a woman. 
 
-Step 1, give the man and the woman first names respectively, depending on their relationship, level of formality, and context.
-Use names appropriate for natural Japanese conversation. do not refer to them as Mr. or Miss.
-Be polite and culturally appropriate in how they address each other.
+Step 1, write a concise background about the dialogue introduction, which exclude the follow-up question and character name.
 
-Step 2, write dialogue, the dialogue should consist of 6–7 exchanges (back-and-forth turns). The total length should be approximately 200–300 words.
+Step 2, Give characters names during the conversation. They should call each name during the conversation depending on their relationship, level of formality.
+Do not refer to them as Mr. or Miss in the conversation context. Be polite and culturally appropriate in how they address each other.
+女：conversation context
+男：conversation context
 
-Step 3, after the conversation, ask a follow-up question related to the conversation and focusing on the man or woman's next action, such as 
+Step 3, write dialogue, the dialogue should consist of 6–7 exchanges (back-and-forth turns). The total length should be approximately 200–300 words.
+
+Step 4, after the conversation, ask a follow-up question related to the conversation and focusing on the man or woman's next action, such as 
 What,When,Where,Who,How,Why,Which,Whose,How long,How often,How much,How many.
 
-Step 4, provide multiple-choice options based on the listening content. These options should test comprehension of the conversation’s meaning.
+Step 5, provide multiple-choice options based on the listening content. These options should test comprehension of the conversation’s meaning.
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
 topic_understanding_example = """
 --- example 1 ---
-<p class='background'>会社で課長と男の人が話しています。男の人は出張レポートのことを国きなればなみませんか。</p>
+<p class='background'>会社で課長と男の人が話しています。</p>
 
 <div class='conversation'>
 女：田中さん。初めての出張、お疲れ様でした、この出張のレポート詳みました。
@@ -887,7 +889,7 @@ topic_understanding_example = """
 男：はい、わかりました。
 女：次の訪問日は3ヶ月後になつたんですね。
 男：はい。
-<p class='follow-up'>男の人は出張レポートのことを直きなければなりませんか。</p>
+<p class='follow-up'>男の人は出張レポートのことを直きなければなりませんか？</p>
 </div>
 
 <a> 番 </a>
@@ -899,7 +901,7 @@ topic_understanding_example = """
 </ul>  
 
 --- example 2 ---
-<p class='background'>図書館で男の学生と受付の人が話しています。男の学生は本の子をずるためにこの後、何をしますか。</p>
+<p class='background'>図書館で男の学生と受付の人が話しています。</p>
 
 <div class='conversation'>
 男：すみません。昔れたし本があるんですが、図書館のパソコンで調べたら貸し出し中になっていて、子でっていう件があきけと押せんいんです。
@@ -909,7 +911,7 @@ topic_understanding_example = """
 男：あ、そうですか。わかりました。
 女：あ、ただ、借りているつしゃの本の中に貸し出し期限を過ぎた本があると予約できるって子的できるが…。
 男：それは大丈夫です。ありがとうごさいます。
-<p class='follow-up'>男の学生は本の予約をするためにこの後、何をしますか。</p>
+<p class='follow-up'>男の学生は本の予約をするためにこの後、何をしますか？</p>
 </div>
 
 <a class='question'> 番 </a>
@@ -926,14 +928,19 @@ Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level.
 
 Task: Your job is to write a natural-sounding conversation between a man and a woman.
 
-Step 1, give the man and the woman first names respectively, depending on their relationship, level of formality, and context.
-Use names appropriate for natural Japanese conversation. do not refer to them as Mr. or Miss.
-Be polite and culturally appropriate in how they address each other.
+Step 1, write a concise background about the dialogue introduction, which exclude the follow-up question and character name.
 
-Step 2, write dialogue, the dialogue should consist of 6–7 exchanges (back-and-forth turns). The total length should be approximately 200–300 words.
+Step 2, Give characters names during the conversation. They should call each name during the conversation depending on their relationship, level of formality.
+Do not refer to them as Mr. or Miss in the conversation context. Be polite and culturally appropriate in how they address each other.
+女：conversation context
+男：conversation context
+
+Step 3, write dialogue, the dialogue should consist of 6–7 exchanges (back-and-forth turns). The total length should be approximately 200–300 words.
+
+Step 4, write dialogue, the dialogue should consist of 6–7 exchanges (back-and-forth turns). The total length should be approximately 200–300 words.
 The topic should be appropriate for language learners and reflect everyday situations.
 
-Step 3, after the conversation, ask a follow-up question focusing on understanding of the motivation or reasoning behind it, encouraging students to think deeply.
+Step 5, after the conversation, ask a follow-up question focusing on understanding of the motivation or reasoning behind it, encouraging students to think deeply.
 The question should prompt students to choose the best option that matches the overall conversation or key point of the dialogue, examples:
 What is the man's reason for joining this company?
 Why is this tourist spot famous?
@@ -945,20 +952,20 @@ Step 4, provide multiple-choice options based on the listening content. These op
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
 keypoint_understanding_example = """
 --- example 1 ---
-<p class='background'>朝、家の玄関で妻と夫が話しています。夫はどうしても家に戻ってきましたか。</p>
+<p class='background'>朝、家の玄関で妻と夫が話しています。</p>
 
 <div class='conversation'>
 女:あれ？どうしたの？忘れ物？書類？    
@@ -967,7 +974,7 @@ keypoint_understanding_example = """
 男:本当？悪いね。走って戻ってきたら、喉渇いちゃった。ちょっと水飲んでくるから待ってて。    
 女:あ、机の上に切手が貼ってあるハガキがあったけど、出さなくていいの？    
 男:あぁ、忘れてた。取ってくるよ。 
-<p class='follow-up'>夫はどうしても家に戻ってきましたか。</p> 
+<p class='follow-up'>夫はどうしても家に戻ってきましたか？</p> 
 </div>
 
 <a class='question'> 番 </a> 
@@ -979,7 +986,7 @@ keypoint_understanding_example = """
 </ul>
 
 --- example 2 ---
-<p class='background'>雑誌を作る会社で男の人と女の人が話しています。女の人は何のためにもう一度パン屋に行きますか。女の人です。</p>  
+<p class='background'>雑誌を作る会社で男の人と女の人が話しています。</p>  
 
 <div class='conversation'>
 男:青木さん、あまり、来月、雑誌で取り上げる特集の人気のパン屋、いろいろ話聞けた？    
@@ -989,7 +996,7 @@ keypoint_understanding_example = """
 男:なるほど、あの店主にとって2年以上一緒に過ごしてきた店だからね。写真を載せるかどうか、新面目な意見を聞いてもらったほうが良いよね。奥さんが考えたことも聞いてよかったよ。    
 女:僕も提案にビジョン、一緒に行くよ。新聞のパンも買いたいし。    
 男:わかりました。
-<p class='follow-up'>女の人は何のためにもう一度パン屋に行きますか。</p>
+<p class='follow-up'>女の人は何のためにもう一度パン屋に行きますか。女の人です？</p>
 </div>    
 
 <a class='question'> 番 </a> 
@@ -1005,23 +1012,23 @@ summary_understanding_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
 Task: Your job is to write a natural-sounding conversation between a man and a woman.
-The dialogue should consist of 6–7 exchanges (back-and-forth turns). The total length should be approximately 200–300 words.
+First, you should introduce the background of the dialogue.
+Next, you write a dialogue which consists of 6–7 exchanges (back-and-forth turns). The total length should be approximately 200–300 words.
+After the conversation, ask a follow-up question focusing on what the conversation is about.
 The topic should be appropriate for language learners and reflect everyday situations.
 Next, provide multiple-choice options based on the listening content. These options should test comprehension of the conversation’s meaning.
-After the conversation, ask a follow-up question focusing on what the conversation is about.
 
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement:
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
-Topic: {topic}
 Formal exam paper: {example}
 """
 
@@ -1070,43 +1077,64 @@ summary_understanding_example = """
 actively_expression_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: your job is to generate a picture prompt that visually describes a situation involving two people of random genders in the scene (e.g., a man and a woman, two men, two women).
-In the picture, include an arrow symbol (➔) pointing to one of the two people. This indicates the person who will speak next. 
-Based on the context of the scene, write a realistic question that the pointed person (with the arrow) would ask. Only the pointed person can ask a quesiton.
-After that, provide three answers for what the other person might reply as options
-One of the options should be the most appropriate or natural response
+Task: your job is to generate a picture prompt that visually describes a situation.
+Generate Japanese language test questions similar to JLPT situational questions. 
+For each question, describe a real-life situation in Japanese and then ask what the person should say in that situation. 
+Provide three possible answers in Japanese, 
+only one of which is appropriate or most natural for the situation. 
+Keep the situations practical and relevant to everyday life in Japan. Do not mention or refer to blurred faces.
 
 The picture description must be in a dedicated section named: background
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
 actively_expression_example = """
 --- example 1 ---
-<a class='question'>男: おいしいお菓子を買って来ました。会社の人にあげます。何と言いますか？</a>
+<p class='background'>
+The scene shows a young person standing at the entrance of a house, holding a bag and facing three adults who are standing together inside the house. 
+The setting is indoors and feels polite and formal, as if the young person is greeting or saying goodbye to the adults. 
+Include a vase with flowers on a shelf or table near the entrance. 
+</p>
+
+<div class='conversation'>
+- 男: 休みの間、友達の家に泊めてもらいました。帰る時、友達の両親に挨拶します。何と言いますか？
+</div>
+
+<a class='follow_up'>休みの間、友達の家に泊めてもらいました。帰る時、友達の両親に挨拶します。何と言いますか？</a>
+<ul class='options'>
+    <li>お世話になりました</li>     
+    <li>お邪魔します</li>    
+    <li>気をつけて帰ってください</li>
+</ul>
+
+--- example 2 ---
+<p class='background'>
+The scene takes place in a café or restaurant. 
+A woman is sitting at a table with drinks in front of her, speaking to a server who stands beside her table holding a tray with a glass. 
+There are additional tables and chairs in the background, with drinks and utensils visible. 
+</p>
+
+<div class='conversation'>
+- 女: カフェで窓側の席が空きました。席を変われるかどうか聞きたいです。店員に何と言いますか？
+</div>
+
+<a class='follow_up'>カフェで窓側の席が空きました。席を変われるかどうか聞きたいです。店員に何と言いますか？</a>
 <ul class='options'>  
-    <li>お味はいかがですか？</li>     
-    <li>では、いただきますね</li>    
-    <li>1つ召し上がりませんか？</li>
-</ul>    
-  
---- example 2 ---  
-<a class='question'>女: 映画館で自分の席に他の人が座っています。何と言いますか？</a>
-<ul class='options'>  
-    <li>あの、隣空いてますか？</li>    
-    <li>あの、ここ私の席なんですけど</li>  
-    <li>あの、どうぞ座ってください</li>
-</ul>    
+    <li>あの席に変わってもらえますか</li>    
+    <li>窓側の席に座らないといけませんか</li>  
+    <li>あっちの席に移れますか</li>
+</ul>
 """
 
 immediate_ack_teacher_prompt = """
@@ -1119,19 +1147,19 @@ One of the options should be the most appropriate or natural response
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation if it exists 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
 
-Topic: {topic}
+
 Formal exam paper: {example}
 """
 
 immediate_ack_example = """
 --- example 1 ---
-<a class='question'> 女：足、痛そうだね。年後のテニスの練習、休んだら？</a>
+<a class='follow_up'> 女：足、痛そうだね。年後のテニスの練習、休んだら？</a>
 <ul class='options'>  
 　<li>そうです、今日は帰るね</li>
 　<li>今日は練習、ないんだね</li>
@@ -1139,7 +1167,7 @@ immediate_ack_example = """
 </ul> 
 
 --- example 2 ---
-<a class='question'>男：町の花火大会、今年はやらないことになったそうだよ。</a>
+<a class='follow_up'>男：町の花火大会、今年はやらないことになったそうだよ。</a>
 <ul class='options'> 
 　<li>やらないもしれなかったね</li>
 　<li>え？なんて？楽しみにしていたのに…</li>
