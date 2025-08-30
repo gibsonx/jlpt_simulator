@@ -8,13 +8,6 @@ from azure.storage.blob import BlobServiceClient
 from dotenv import load_dotenv
 load_dotenv()
 
-system = platform.system().lower()
-
-if system == "windows":
-    # Merge audio files using pydub
-    print("ffmpeg.exe will be used as running in Windows OS")
-    AudioSegment.converter = r"libs\ffmpeg.exe"
-
 # Voice mappings
 voices = {
     "nanami": "ja-JP-NanamiNeural",
