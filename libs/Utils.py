@@ -302,6 +302,5 @@ def _generate_image(prompt="a woman is talking to a man."):
 
     response = requests.post(url, json=payload, headers=headers)
     task_id = response.json()['data']['taskId']
-    image_url = os.environ["AZURE_CONTAINER_URL"] + f"4o_images_{task_id}_image_1.png"
 
-    return  image_url
+    return  f"{os.environ['AZURE_CONTAINER_URL']}/{os.environ['AZURE_IMAGE_CONTAINER']}/4o_images_{task_id}_image_1.png"
