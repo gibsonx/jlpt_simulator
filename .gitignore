@@ -10,3 +10,4 @@ data/*
 **/__pycache__
 logs/*
 output/*
+.nohup
