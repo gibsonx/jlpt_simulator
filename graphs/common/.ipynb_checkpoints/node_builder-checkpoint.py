@@ -111,7 +111,7 @@ def reflection_node_builder(llm):
                 (
                     "system",
                     """
-                    You are a senior Japanese language educator reviewing a JLPT exam paper. Generate an English critique and recommendations for the Japanese teacher's submission.
+                    You are a senior Japanese language educator reviewing a JLPT exam paper. Generate critique and recommendations for the Japanese teacher's submission in English.
                     Please think deeply and give feedback on the following factors:
                       - For content accuracy, you must verify that the questions are abide by the JLPT N3 level requirements and appropriately challenging. 
                       - For question and answer options quality, you must ensure all questions are clearly worded and free from ambiguity and confirm that the difficulty level of the questions matches the intended JLPT N3 level.

@@ -2944,3 +2944,1268 @@
 [I 2025-08-10 13:02:12.288 ServerApp] Connecting to kernel 254bbb81-66a0-4807-9917-b7d3fc340634.
 [I 2025-08-10 13:02:14.061 ServerApp] Connecting to kernel b1f49b9c-ff39-412f-bee3-507f215a4ae2.
 [I 2025-08-10 13:02:14.950 ServerApp] Connecting to kernel 254bbb81-66a0-4807-9917-b7d3fc340634.
+[I 2025-08-30 09:11:18.026 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2025-08-30 09:11:18.030 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2025-08-30 09:11:18.034 ServerApp] jupyterlab | extension was successfully linked.
+[I 2025-08-30 09:11:18.553 ServerApp] notebook_shim | extension was successfully linked.
+[I 2025-08-30 09:11:18.580 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2025-08-30 09:11:18.582 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2025-08-30 09:11:18.583 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2025-08-30 09:11:18.586 LabApp] JupyterLab extension loaded from /root/jlpt_venv/lib/python3.12/site-packages/jupyterlab
+[I 2025-08-30 09:11:18.586 LabApp] JupyterLab application directory is /root/jlpt_venv/share/jupyter/lab
+[I 2025-08-30 09:11:18.587 LabApp] Extension Manager is 'pypi'.
+[I 2025-08-30 09:11:18.667 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2025-08-30 09:11:18.668 ServerApp] Serving notebooks from local directory: /root/jlpt_simulator
+[I 2025-08-30 09:11:18.668 ServerApp] Jupyter Server 2.16.0 is running at:
+[I 2025-08-30 09:11:18.668 ServerApp] http://notebook:18080/lab?token=be0dd4a7f671d505268e5d8e7f10e4cad6b4f73a9819c1ae
+[I 2025-08-30 09:11:18.668 ServerApp]     http://127.0.0.1:18080/lab?token=be0dd4a7f671d505268e5d8e7f10e4cad6b4f73a9819c1ae
+[I 2025-08-30 09:11:18.668 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 2025-08-30 09:11:18.672 ServerApp] 
+    
+    To access the server, open this file in a browser:
+        file:///root/.local/share/jupyter/runtime/jpserver-296951-open.html
+    Or copy and paste one of these URLs:
+        http://notebook:18080/lab?token=be0dd4a7f671d505268e5d8e7f10e4cad6b4f73a9819c1ae
+        http://127.0.0.1:18080/lab?token=be0dd4a7f671d505268e5d8e7f10e4cad6b4f73a9819c1ae
+[I 2025-08-30 09:11:18.692 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[I 2025-08-30 09:11:31.812 ServerApp] 302 GET / (@185.36.195.199) 0.53ms
+[I 2025-08-30 09:11:32.084 LabApp] 302 GET /lab? (@185.36.195.199) 0.71ms
+[I 2025-08-30 09:11:45.306 ServerApp] User 0420e75a33474b2a8f76a14390bfc651 logged in.
+[I 2025-08-30 09:11:45.306 ServerApp] 302 POST /login?next=%2Flab%3F (0420e75a33474b2a8f76a14390bfc651@185.36.195.199) 1.41ms
+[W 2025-08-30 09:11:47.503 LabApp] Could not determine jupyterlab build status without nodejs
+[W 2025-08-30 09:11:48.153 ServerApp] 404 GET /api/contents/logs?content=0&hash=0&1756545107739 (0420e75a33474b2a8f76a14390bfc651@185.36.195.199) 1.15ms referer=http://172.190.115.70:18080/lab?
+[W 2025-08-30 09:11:48.153 ServerApp] 404 GET /api/contents/logs?content=0&hash=0&1756545107739 (185.36.195.199): No such file or directory: logs
+[W 2025-08-30 09:11:48.156 ServerApp] 404 GET /api/contents/logs/jlpt.log.2025-08-09?content=0&hash=0&1756545107739 (0420e75a33474b2a8f76a14390bfc651@185.36.195.206) 2.31ms referer=http://172.190.115.70:18080/lab?
+[W 2025-08-30 09:11:48.157 ServerApp] 404 GET /api/contents/logs/jlpt.log.2025-08-09?content=0&hash=0&1756545107739 (185.36.195.206): No such file or directory: logs/jlpt.log.2025-08-09
+[W 2025-08-30 09:11:48.163 ServerApp] 404 GET /api/contents/logs/jlpt.log?content=0&hash=0&1756545107739 (0420e75a33474b2a8f76a14390bfc651@185.36.195.199) 0.66ms referer=http://172.190.115.70:18080/lab?
+[W 2025-08-30 09:11:48.163 ServerApp] 404 GET /api/contents/logs/jlpt.log?content=0&hash=0&1756545107739 (185.36.195.199): No such file or directory: logs/jlpt.log
+[W 2025-08-30 09:11:48.898 ServerApp] 404 GET /api/contents/N3/README.md?content=0&hash=0&1756545107741 (0420e75a33474b2a8f76a14390bfc651@185.36.195.206) 1.10ms referer=http://172.190.115.70:18080/lab?
+[W 2025-08-30 09:11:48.898 ServerApp] 404 GET /api/contents/N3/README.md?content=0&hash=0&1756545107741 (185.36.195.206): No such file or directory: N3/README.md
+[W 2025-08-30 09:11:48.942 ServerApp] 404 GET /api/contents/logs/jlpt.log.2025-08-09?content=0&hash=0&1756545107743 (0420e75a33474b2a8f76a14390bfc651@185.36.195.203) 0.67ms referer=http://172.190.115.70:18080/lab?
+[W 2025-08-30 09:11:48.942 ServerApp] 404 GET /api/contents/logs/jlpt.log.2025-08-09?content=0&hash=0&1756545107743 (185.36.195.203): No such file or directory: logs/jlpt.log.2025-08-09
+[W 2025-08-30 09:11:49.145 ServerApp] 404 GET /api/contents/logs/jlpt.log?content=0&hash=0&1756545107743 (0420e75a33474b2a8f76a14390bfc651@185.36.195.206) 1.10ms referer=http://172.190.115.70:18080/lab?
+[W 2025-08-30 09:11:49.145 ServerApp] 404 GET /api/contents/logs/jlpt.log?content=0&hash=0&1756545107743 (185.36.195.206): No such file or directory: logs/jlpt.log
+[W 2025-08-30 09:11:49.595 ServerApp] Notebook debug_n3.ipynb is not trusted
+[I 2025-08-30 09:11:51.270 ServerApp] Kernel started: 819c2bf9-53ab-410a-865b-0a05dd84fefe
+[I 2025-08-30 09:11:52.154 ServerApp] Connecting to kernel 819c2bf9-53ab-410a-865b-0a05dd84fefe.
+[W 2025-08-30 09:11:52.157 ServerApp] The websocket_ping_timeout (90000) cannot be longer than the websocket_ping_interval (30000).
+    Setting websocket_ping_timeout=30000
+[I 2025-08-30 09:11:52.767 ServerApp] Connecting to kernel 819c2bf9-53ab-410a-865b-0a05dd84fefe.
+[I 2025-08-30 09:11:53.381 ServerApp] Connecting to kernel 819c2bf9-53ab-410a-865b-0a05dd84fefe.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[I 2025-08-30 09:13:28.543 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2025-08-30 09:13:28.547 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2025-08-30 09:13:28.551 ServerApp] jupyterlab | extension was successfully linked.
+[I 2025-08-30 09:13:28.841 ServerApp] notebook_shim | extension was successfully linked.
+[I 2025-08-30 09:13:28.854 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2025-08-30 09:13:28.856 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2025-08-30 09:13:28.857 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2025-08-30 09:13:28.859 LabApp] JupyterLab extension loaded from /root/jlpt_venv/lib/python3.12/site-packages/jupyterlab
+[I 2025-08-30 09:13:28.859 LabApp] JupyterLab application directory is /root/jlpt_venv/share/jupyter/lab
+[I 2025-08-30 09:13:28.859 LabApp] Extension Manager is 'pypi'.
+[I 2025-08-30 09:13:28.914 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2025-08-30 09:13:28.915 ServerApp] Serving notebooks from local directory: /root/jlpt_simulator
+[I 2025-08-30 09:13:28.915 ServerApp] Jupyter Server 2.16.0 is running at:
+[I 2025-08-30 09:13:28.915 ServerApp] http://notebook:18080/lab?token=6b8633eaa2b9872d83f0760586740ffdf58816e8e218d931
+[I 2025-08-30 09:13:28.915 ServerApp]     http://127.0.0.1:18080/lab?token=6b8633eaa2b9872d83f0760586740ffdf58816e8e218d931
+[I 2025-08-30 09:13:28.915 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 2025-08-30 09:13:28.918 ServerApp] 
+    
+    To access the server, open this file in a browser:
+        file:///root/.local/share/jupyter/runtime/jpserver-297012-open.html
+    Or copy and paste one of these URLs:
+        http://notebook:18080/lab?token=6b8633eaa2b9872d83f0760586740ffdf58816e8e218d931
+        http://127.0.0.1:18080/lab?token=6b8633eaa2b9872d83f0760586740ffdf58816e8e218d931
+[I 2025-08-30 09:13:28.934 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[W 2025-08-30 09:13:31.203 ServerApp] 404 GET /api/kernels/819c2bf9-53ab-410a-865b-0a05dd84fefe?1756545210425 (185.36.195.202): Kernel does not exist: 819c2bf9-53ab-410a-865b-0a05dd84fefe
+[W 2025-08-30 09:13:31.204 ServerApp] wrote error: 'Kernel does not exist: 819c2bf9-53ab-410a-865b-0a05dd84fefe'
+    Traceback (most recent call last):
+      File "/root/jlpt_venv/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 819c2bf9-53ab-410a-865b-0a05dd84fefe)
+[W 2025-08-30 09:13:31.208 ServerApp] 404 GET /api/kernels/819c2bf9-53ab-410a-865b-0a05dd84fefe?1756545210425 (0420e75a33474b2a8f76a14390bfc651@185.36.195.202) 5.52ms referer=http://172.190.115.70:18080/lab/tree/debug_n3.ipynb
+[W 2025-08-30 09:13:32.176 ServerApp] 404 GET /api/kernels/819c2bf9-53ab-410a-865b-0a05dd84fefe/channels?session_id=46f17018-59c9-4132-ad62-cbd8adcd7b79 (185.36.195.198): Kernel does not exist: 819c2bf9-53ab-410a-865b-0a05dd84fefe
+[W 2025-08-30 09:13:32.192 ServerApp] 404 GET /api/kernels/819c2bf9-53ab-410a-865b-0a05dd84fefe/channels?session_id=46f17018-59c9-4132-ad62-cbd8adcd7b79 (0420e75a33474b2a8f76a14390bfc651@185.36.195.198) 17.05ms referer=None
+[W 2025-08-30 09:13:32.440 ServerApp] 404 GET /api/kernels/819c2bf9-53ab-410a-865b-0a05dd84fefe?1756545212030 (185.36.195.202): Kernel does not exist: 819c2bf9-53ab-410a-865b-0a05dd84fefe
+[W 2025-08-30 09:13:32.440 ServerApp] wrote error: 'Kernel does not exist: 819c2bf9-53ab-410a-865b-0a05dd84fefe'
+    Traceback (most recent call last):
+      File "/root/jlpt_venv/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 819c2bf9-53ab-410a-865b-0a05dd84fefe)
+[W 2025-08-30 09:13:32.441 ServerApp] 404 GET /api/kernels/819c2bf9-53ab-410a-865b-0a05dd84fefe?1756545212030 (0420e75a33474b2a8f76a14390bfc651@185.36.195.202) 1.58ms referer=http://172.190.115.70:18080/lab/tree/debug_n3.ipynb
+[W 2025-08-30 09:13:35.186 ServerApp] 404 GET /api/kernels/819c2bf9-53ab-410a-865b-0a05dd84fefe/channels?session_id=46f17018-59c9-4132-ad62-cbd8adcd7b79 (185.36.195.211): Kernel does not exist: 819c2bf9-53ab-410a-865b-0a05dd84fefe
+[W 2025-08-30 09:13:35.187 ServerApp] 404 GET /api/kernels/819c2bf9-53ab-410a-865b-0a05dd84fefe/channels?session_id=46f17018-59c9-4132-ad62-cbd8adcd7b79 (0420e75a33474b2a8f76a14390bfc651@185.36.195.211) 1.36ms referer=None
+[W 2025-08-30 09:13:35.444 ServerApp] 404 GET /api/kernels/819c2bf9-53ab-410a-865b-0a05dd84fefe?1756545215034 (185.36.195.202): Kernel does not exist: 819c2bf9-53ab-410a-865b-0a05dd84fefe
+[W 2025-08-30 09:13:35.445 ServerApp] wrote error: 'Kernel does not exist: 819c2bf9-53ab-410a-865b-0a05dd84fefe'
+    Traceback (most recent call last):
+      File "/root/jlpt_venv/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: 819c2bf9-53ab-410a-865b-0a05dd84fefe)
+[W 2025-08-30 09:13:35.445 ServerApp] 404 GET /api/kernels/819c2bf9-53ab-410a-865b-0a05dd84fefe?1756545215034 (0420e75a33474b2a8f76a14390bfc651@185.36.195.202) 1.48ms referer=http://172.190.115.70:18080/lab/tree/debug_n3.ipynb
+[W 2025-08-30 09:13:38.998 LabApp] Could not determine jupyterlab build status without nodejs
+[W 2025-08-30 09:13:40.760 ServerApp] Notebook debug_n3.ipynb is not trusted
+[I 2025-08-30 09:13:41.833 ServerApp] Kernel started: 425c55cf-9e10-46f1-aa89-2ca4ee88daf9
+[I 2025-08-30 09:13:42.517 ServerApp] Connecting to kernel 425c55cf-9e10-46f1-aa89-2ca4ee88daf9.
+[W 2025-08-30 09:13:42.520 ServerApp] The websocket_ping_timeout (90000) cannot be longer than the websocket_ping_interval (30000).
+    Setting websocket_ping_timeout=30000
+[I 2025-08-30 09:13:43.164 ServerApp] Connecting to kernel 425c55cf-9e10-46f1-aa89-2ca4ee88daf9.
+[I 2025-08-30 09:13:43.782 ServerApp] Connecting to kernel 425c55cf-9e10-46f1-aa89-2ca4ee88daf9.
+[I 2025-08-30 09:13:52.411 ServerApp] Kernel interrupted: 425c55cf-9e10-46f1-aa89-2ca4ee88daf9
+[I 2025-08-30 09:13:54.919 ServerApp] Kernel restarted: 425c55cf-9e10-46f1-aa89-2ca4ee88daf9
+[I 2025-08-30 09:13:55.172 ServerApp] Starting buffering for 425c55cf-9e10-46f1-aa89-2ca4ee88daf9:b6c0dde5-c77e-4121-aaab-e3992e51591c
+[I 2025-08-30 09:13:55.527 ServerApp] Connecting to kernel 425c55cf-9e10-46f1-aa89-2ca4ee88daf9.
+[I 2025-08-30 09:13:55.527 ServerApp] Restoring connection for 425c55cf-9e10-46f1-aa89-2ca4ee88daf9:b6c0dde5-c77e-4121-aaab-e3992e51591c
+[I 2025-08-30 09:14:27.176 ServerApp] Kernel restarted: 425c55cf-9e10-46f1-aa89-2ca4ee88daf9
+[I 2025-08-30 09:14:27.432 ServerApp] Starting buffering for 425c55cf-9e10-46f1-aa89-2ca4ee88daf9:b6c0dde5-c77e-4121-aaab-e3992e51591c
+[I 2025-08-30 09:14:27.801 ServerApp] Connecting to kernel 425c55cf-9e10-46f1-aa89-2ca4ee88daf9.
+[I 2025-08-30 09:14:27.801 ServerApp] Restoring connection for 425c55cf-9e10-46f1-aa89-2ca4ee88daf9:b6c0dde5-c77e-4121-aaab-e3992e51591c
+[I 2025-08-30 09:14:29.944 ServerApp] Kernel restarted: 425c55cf-9e10-46f1-aa89-2ca4ee88daf9
+[I 2025-08-30 09:14:30.198 ServerApp] Starting buffering for 425c55cf-9e10-46f1-aa89-2ca4ee88daf9:b6c0dde5-c77e-4121-aaab-e3992e51591c
+[I 2025-08-30 09:14:30.567 ServerApp] Connecting to kernel 425c55cf-9e10-46f1-aa89-2ca4ee88daf9.
+[I 2025-08-30 09:14:30.567 ServerApp] Restoring connection for 425c55cf-9e10-46f1-aa89-2ca4ee88daf9:b6c0dde5-c77e-4121-aaab-e3992e51591c
+[I 2025-08-30 09:14:30.575 ServerApp] Replaying 2 buffered messages
+[I 2025-08-30 09:15:42.310 ServerApp] Saving file at /debug_n3.ipynb
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[I 2025-08-30 09:17:02.108 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2025-08-30 09:17:02.111 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2025-08-30 09:17:02.116 ServerApp] jupyterlab | extension was successfully linked.
+[I 2025-08-30 09:17:02.404 ServerApp] notebook_shim | extension was successfully linked.
+[I 2025-08-30 09:17:02.427 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2025-08-30 09:17:02.429 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2025-08-30 09:17:02.430 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2025-08-30 09:17:02.434 LabApp] JupyterLab extension loaded from /root/jlpt_venv/lib/python3.12/site-packages/jupyterlab
+[I 2025-08-30 09:17:02.434 LabApp] JupyterLab application directory is /root/jlpt_venv/share/jupyter/lab
+[I 2025-08-30 09:17:02.434 LabApp] Extension Manager is 'pypi'.
+[I 2025-08-30 09:17:02.508 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2025-08-30 09:17:02.508 ServerApp] Serving notebooks from local directory: /root/jlpt_simulator
+[I 2025-08-30 09:17:02.509 ServerApp] Jupyter Server 2.16.0 is running at:
+[I 2025-08-30 09:17:02.509 ServerApp] http://notebook:18080/lab?token=de926e9e590ba5a04f61d74863a9f29c7773892677088145
+[I 2025-08-30 09:17:02.509 ServerApp]     http://127.0.0.1:18080/lab?token=de926e9e590ba5a04f61d74863a9f29c7773892677088145
+[I 2025-08-30 09:17:02.509 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 2025-08-30 09:17:02.512 ServerApp] 
+    
+    To access the server, open this file in a browser:
+        file:///root/.local/share/jupyter/runtime/jpserver-297148-open.html
+    Or copy and paste one of these URLs:
+        http://notebook:18080/lab?token=de926e9e590ba5a04f61d74863a9f29c7773892677088145
+        http://127.0.0.1:18080/lab?token=de926e9e590ba5a04f61d74863a9f29c7773892677088145
+[I 2025-08-30 09:17:02.532 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[W 2025-08-30 09:17:17.862 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2025-08-30 09:17:20.718 ServerApp] Kernel started: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[I 2025-08-30 09:17:21.588 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[W 2025-08-30 09:17:21.591 ServerApp] The websocket_ping_timeout (90000) cannot be longer than the websocket_ping_interval (30000).
+    Setting websocket_ping_timeout=30000
+[I 2025-08-30 09:17:22.231 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 09:17:22.853 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 09:17:36.261 ServerApp] Kernel restarted: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[I 2025-08-30 09:17:36.516 ServerApp] Starting buffering for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:17:36.875 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 09:17:36.875 ServerApp] Restoring connection for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:17:36.883 ServerApp] Replaying 3 buffered messages
+[I 2025-08-30 09:17:41.863 ServerApp] Kernel restarted: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[I 2025-08-30 09:17:42.118 ServerApp] Starting buffering for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:17:42.498 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 09:17:42.498 ServerApp] Restoring connection for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:18:09.483 ServerApp] Creating new file in 
+[W 2025-08-30 09:18:14.246 ServerApp] 400 PATCH /api/contents/untitled.txt?1756545493830 (185.36.195.200): Cannot rename file or directory '/untitled.txt'
+[W 2025-08-30 09:18:14.246 ServerApp] wrote error: "Cannot rename file or directory '/untitled.txt'"
+    Traceback (most recent call last):
+      File "/root/jlpt_venv/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/contents/handlers.py", line 204, in patch
+        raise web.HTTPError(400, f"Cannot rename file or directory {path!r}")
+    tornado.web.HTTPError: HTTP 400: Bad Request (Cannot rename file or directory '/untitled.txt')
+[W 2025-08-30 09:18:14.249 ServerApp] 400 PATCH /api/contents/untitled.txt?1756545493830 (0420e75a33474b2a8f76a14390bfc651@185.36.195.200) 4.28ms referer=http://172.190.115.70:18080/lab/tree/debug_n3.ipynb
+[W 2025-08-30 09:18:23.683 ServerApp] delete /untitled.txt
+[I 2025-08-30 09:18:43.655 ServerApp] Kernel restarted: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[I 2025-08-30 09:18:43.919 ServerApp] Starting buffering for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:18:44.303 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 09:18:44.303 ServerApp] Restoring connection for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:18:44.310 ServerApp] Replaying 4 buffered messages
+[I 2025-08-30 09:19:20.842 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-30 09:20:37.627 ServerApp] Kernel restarted: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[I 2025-08-30 09:20:37.885 ServerApp] Starting buffering for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:20:38.255 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 09:20:38.255 ServerApp] Restoring connection for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:21:21.742 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-30 09:22:55.850 ServerApp] Kernel restarted: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[I 2025-08-30 09:22:56.103 ServerApp] Starting buffering for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:22:56.467 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 09:22:56.467 ServerApp] Restoring connection for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:22:56.474 ServerApp] Replaying 3 buffered messages
+[I 2025-08-30 09:23:22.816 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-30 09:25:44.012 ServerApp] Kernel restarted: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[I 2025-08-30 09:25:44.263 ServerApp] Starting buffering for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:25:44.624 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 09:25:44.625 ServerApp] Restoring connection for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:27:04.850 ServerApp] Kernel restarted: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[I 2025-08-30 09:27:05.107 ServerApp] Starting buffering for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:27:05.478 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 09:27:05.478 ServerApp] Restoring connection for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:27:23.698 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-30 09:27:36.912 ServerApp] Kernel restarted: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[I 2025-08-30 09:27:37.170 ServerApp] Starting buffering for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:27:37.540 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 09:27:37.541 ServerApp] Restoring connection for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:28:32.045 ServerApp] Kernel restarted: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[I 2025-08-30 09:28:32.302 ServerApp] Starting buffering for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:28:32.667 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 09:28:32.667 ServerApp] Restoring connection for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:29:25.174 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-30 09:57:47.692 ServerApp] Kernel restarted: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[I 2025-08-30 09:57:47.945 ServerApp] Starting buffering for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:57:48.545 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 09:57:48.546 ServerApp] Restoring connection for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 09:58:05.940 ServerApp] Starting buffering for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:9e1f1efb-8cda-4a19-af36-b7005b8ff7b1
+[I 2025-08-30 10:11:14.365 ServerApp] 302 GET / (@87.236.176.188) 0.48ms
+[I 2025-08-30 10:11:14.540 LabApp] 302 GET /lab? (@87.236.176.188) 0.61ms
+[I 2025-08-30 11:10:02.342 ServerApp] 302 GET / (@198.235.24.29) 0.38ms
+[I 2025-08-30 11:10:02.721 LabApp] 302 GET /lab? (@198.235.24.29) 0.51ms
+[I 2025-08-30 13:02:38.456 ServerApp] 302 GET / (@206.168.34.76) 0.39ms
+[I 2025-08-30 13:03:18.031 LabApp] 302 GET /lab (@162.142.125.192) 0.51ms
+[W 2025-08-30 15:01:00.983 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2025-08-30 15:01:01.438 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 15:01:02.178 ServerApp] Starting buffering for f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:f035d5a7-1d5e-4b13-bd83-9f623604edaf
+[I 2025-08-30 15:01:05.525 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[W 2025-08-30 15:03:32.253 ServerApp] 400 GET /api/contents/voice/ding.wav?type=file&content=1&hash=1&format=text&contentProviderId=undefined&1756566211924 (104.234.233.176): /root/jlpt_simulator/voice/ding.wav is not UTF-8 encoded
+[W 2025-08-30 15:03:32.253 ServerApp] wrote error: '/root/jlpt_simulator/voice/ding.wav is not UTF-8 encoded'
+    Traceback (most recent call last):
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/contents/fileio.py", line 562, in _read_file
+        (bcontent.decode("utf8"), "text", bcontent)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+    UnicodeDecodeError: 'utf-8' codec can't decode byte 0xf2 in position 4: invalid continuation byte
+    
+    The above exception was the direct cause of the following exception:
+    
+    Traceback (most recent call last):
+      File "/root/jlpt_venv/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/contents/handlers.py", line 156, in get
+        model = await ensure_async(
+                ^^^^^^^^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 197, in ensure_async
+        result = await obj
+                 ^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/contents/filemanager.py", line 926, in get
+        model = await self._file_model(
+                ^^^^^^^^^^^^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/contents/filemanager.py", line 835, in _file_model
+        content, format, bytes_content = await self._read_file(os_path, format, raw=True)  # type: ignore[misc]
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/contents/fileio.py", line 571, in _read_file
+        raise HTTPError(
+    tornado.web.HTTPError: HTTP 400: bad format (/root/jlpt_simulator/voice/ding.wav is not UTF-8 encoded)
+[W 2025-08-30 15:03:32.261 ServerApp] 400 GET /api/contents/voice/ding.wav?type=file&content=1&hash=1&format=text&contentProviderId=undefined&1756566211924 (3dab218690984c33a37cf8545d0b2bb7@104.234.233.176) 11.31ms referer=http://172.190.115.70:18080/lab/tree/voice/ding.wav
+[W 2025-08-30 15:17:47.859 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2025-08-30 15:17:48.268 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 15:17:50.874 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 15:23:50.515 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-30 15:25:51.599 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-30 15:27:53.521 ServerApp] Saving file at /debug_n3.ipynb
+[W 2025-08-30 15:32:07.018 ServerApp] Notebook outliner_n3.ipynb is not trusted
+[I 2025-08-30 15:32:09.057 ServerApp] Kernel started: 5c6f793a-4a8e-4827-9437-a62aff10b07f
+[I 2025-08-30 15:32:12.717 ServerApp] Connecting to kernel 5c6f793a-4a8e-4827-9437-a62aff10b07f.
+[I 2025-08-30 15:33:52.869 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[I 2025-08-30 15:36:36.718 ServerApp] Saving file at /libs/LLMs.py
+[I 2025-08-30 15:39:01.282 ServerApp] Saving file at /graphs/common/node_builder.py
+[I 2025-08-30 15:40:14.674 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-30 15:40:58.448 ServerApp] Kernel restarted: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[I 2025-08-30 15:40:59.097 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[W 2025-08-30 15:45:45.821 ServerApp] Replacing stale connection: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd:5bb323fb-24c5-4322-9722-cf79c809ee02
+[I 2025-08-30 15:47:04.969 ServerApp] Connecting to kernel f9e7fdd5-5904-45c1-8e75-8b35ba2122dd.
+[E 2025-08-30 15:48:23.271 ServerApp] 
+[I 2025-08-30 15:54:32.138 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2025-08-30 15:54:32.147 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2025-08-30 15:54:32.151 ServerApp] jupyterlab | extension was successfully linked.
+[I 2025-08-30 15:54:33.119 ServerApp] notebook_shim | extension was successfully linked.
+[I 2025-08-30 15:54:33.193 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2025-08-30 15:54:33.195 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2025-08-30 15:54:33.195 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2025-08-30 15:54:33.198 LabApp] JupyterLab extension loaded from /root/jlpt_venv/lib/python3.12/site-packages/jupyterlab
+[I 2025-08-30 15:54:33.198 LabApp] JupyterLab application directory is /root/jlpt_venv/share/jupyter/lab
+[I 2025-08-30 15:54:33.199 LabApp] Extension Manager is 'pypi'.
+[I 2025-08-30 15:54:33.305 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2025-08-30 15:54:33.306 ServerApp] Serving notebooks from local directory: /root/jlpt_simulator
+[I 2025-08-30 15:54:33.306 ServerApp] Jupyter Server 2.16.0 is running at:
+[I 2025-08-30 15:54:33.306 ServerApp] http://notebook:18080/lab?token=6fee4e7acc6649cdefcbd3260eb0cb13357ab0ea56fbc3c0
+[I 2025-08-30 15:54:33.306 ServerApp]     http://127.0.0.1:18080/lab?token=6fee4e7acc6649cdefcbd3260eb0cb13357ab0ea56fbc3c0
+[I 2025-08-30 15:54:33.306 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 2025-08-30 15:54:33.312 ServerApp] 
+    
+    To access the server, open this file in a browser:
+        file:///root/.local/share/jupyter/runtime/jpserver-1254-open.html
+    Or copy and paste one of these URLs:
+        http://notebook:18080/lab?token=6fee4e7acc6649cdefcbd3260eb0cb13357ab0ea56fbc3c0
+        http://127.0.0.1:18080/lab?token=6fee4e7acc6649cdefcbd3260eb0cb13357ab0ea56fbc3c0
+[I 2025-08-30 15:54:33.329 ServerApp] Skipped non-installed server(s): bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[W 2025-08-30 15:54:34.425 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd?1756569273338 (103.97.2.47): Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[W 2025-08-30 15:54:34.426 ServerApp] wrote error: 'Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd'
+    Traceback (most recent call last):
+      File "/root/jlpt_venv/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd)
+[W 2025-08-30 15:54:34.441 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd?1756569273338 (0420e75a33474b2a8f76a14390bfc651@103.97.2.47) 16.18ms referer=http://172.190.115.70:18080/lab/tree/debug_n3.ipynb
+[W 2025-08-30 15:54:36.407 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd/channels?session_id=9309b142-2be5-45b3-b00b-54879c5c1fb7 (103.97.2.50): Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[W 2025-08-30 15:54:36.446 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd/channels?session_id=9309b142-2be5-45b3-b00b-54879c5c1fb7 (0420e75a33474b2a8f76a14390bfc651@103.97.2.50) 39.33ms referer=None
+[W 2025-08-30 15:54:36.700 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd?1756569275995 (103.97.2.47): Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[W 2025-08-30 15:54:36.700 ServerApp] wrote error: 'Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd'
+    Traceback (most recent call last):
+      File "/root/jlpt_venv/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd)
+[W 2025-08-30 15:54:36.701 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd?1756569275995 (0420e75a33474b2a8f76a14390bfc651@103.97.2.47) 1.54ms referer=http://172.190.115.70:18080/lab/tree/debug_n3.ipynb
+[W 2025-08-30 15:54:38.433 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd/channels?session_id=9309b142-2be5-45b3-b00b-54879c5c1fb7 (103.97.2.50): Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[W 2025-08-30 15:54:38.434 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd/channels?session_id=9309b142-2be5-45b3-b00b-54879c5c1fb7 (0420e75a33474b2a8f76a14390bfc651@103.97.2.50) 1.29ms referer=None
+[W 2025-08-30 15:54:38.688 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd?1756569277981 (103.97.2.47): Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[W 2025-08-30 15:54:38.688 ServerApp] wrote error: 'Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd'
+    Traceback (most recent call last):
+      File "/root/jlpt_venv/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd)
+[W 2025-08-30 15:54:38.689 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd?1756569277981 (0420e75a33474b2a8f76a14390bfc651@103.97.2.47) 1.45ms referer=http://172.190.115.70:18080/lab/tree/debug_n3.ipynb
+[W 2025-08-30 15:54:41.413 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd/channels?session_id=9309b142-2be5-45b3-b00b-54879c5c1fb7 (103.97.2.47): Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[W 2025-08-30 15:54:41.414 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd/channels?session_id=9309b142-2be5-45b3-b00b-54879c5c1fb7 (0420e75a33474b2a8f76a14390bfc651@103.97.2.47) 1.23ms referer=None
+[W 2025-08-30 15:54:41.673 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd?1756569280967 (103.97.2.47): Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd
+[W 2025-08-30 15:54:41.673 ServerApp] wrote error: 'Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd'
+    Traceback (most recent call last):
+      File "/root/jlpt_venv/lib/python3.12/site-packages/tornado/web.py", line 1848, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/auth/decorator.py", line 73, in inner
+        return await out
+               ^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/handlers.py", line 75, in get
+        model = await ensure_async(km.kernel_model(kernel_id))
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 508, in kernel_model
+        self._check_kernel_id(kernel_id)
+      File "/root/jlpt_venv/lib/python3.12/site-packages/jupyter_server/services/kernels/kernelmanager.py", line 539, in _check_kernel_id
+        raise web.HTTPError(404, "Kernel does not exist: %s" % kernel_id)
+    tornado.web.HTTPError: HTTP 404: Not Found (Kernel does not exist: f9e7fdd5-5904-45c1-8e75-8b35ba2122dd)
+[W 2025-08-30 15:54:41.674 ServerApp] 404 GET /api/kernels/f9e7fdd5-5904-45c1-8e75-8b35ba2122dd?1756569280967 (0420e75a33474b2a8f76a14390bfc651@103.97.2.47) 1.42ms referer=http://172.190.115.70:18080/lab/tree/debug_n3.ipynb
+[W 2025-08-30 15:54:48.086 LabApp] Could not determine jupyterlab build status without nodejs
+[W 2025-08-30 15:54:50.566 ServerApp] Notebook outliner_n3.ipynb is not trusted
+[I 2025-08-30 15:54:52.052 ServerApp] Kernel started: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-30 15:54:52.326 ServerApp] Kernel started: db0d71ec-d120-4b88-8833-a9943b7754bc
+[I 2025-08-30 15:54:53.181 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-30 15:54:53.186 ServerApp] The websocket_ping_timeout (90000) cannot be longer than the websocket_ping_interval (30000).
+    Setting websocket_ping_timeout=30000
+[I 2025-08-30 15:54:53.809 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 15:54:54.444 ServerApp] Connecting to kernel db0d71ec-d120-4b88-8833-a9943b7754bc.
+[I 2025-08-30 15:54:55.076 ServerApp] Connecting to kernel db0d71ec-d120-4b88-8833-a9943b7754bc.
+[I 2025-08-30 15:54:55.719 ServerApp] Connecting to kernel db0d71ec-d120-4b88-8833-a9943b7754bc.
+[I 2025-08-30 15:54:59.870 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-30 15:55:00.126 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:0195e9a2-5135-42f3-ba28-13d9c7eb7320
+[I 2025-08-30 15:55:00.497 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 15:55:00.497 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:0195e9a2-5135-42f3-ba28-13d9c7eb7320
+[I 2025-08-30 15:56:05.247 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-30 15:56:05.500 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:0195e9a2-5135-42f3-ba28-13d9c7eb7320
+[I 2025-08-30 15:56:05.871 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 15:56:05.871 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:0195e9a2-5135-42f3-ba28-13d9c7eb7320
+[I 2025-08-30 15:56:05.879 ServerApp] Replaying 3 buffered messages
+[I 2025-08-30 15:56:51.225 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-30 16:02:32.063 ServerApp] Starting buffering for db0d71ec-d120-4b88-8833-a9943b7754bc:8fa9983c-0f87-428b-a64c-934673a406ff
+[I 2025-08-30 16:02:48.669 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-30 16:02:48.927 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:0195e9a2-5135-42f3-ba28-13d9c7eb7320
+[I 2025-08-30 16:02:49.308 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 16:02:49.308 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:0195e9a2-5135-42f3-ba28-13d9c7eb7320
+[I 2025-08-30 16:02:49.315 ServerApp] Replaying 3 buffered messages
+[I 2025-08-30 16:02:50.162 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-30 16:02:50.414 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:0195e9a2-5135-42f3-ba28-13d9c7eb7320
+[I 2025-08-30 16:02:50.794 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 16:02:50.794 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:0195e9a2-5135-42f3-ba28-13d9c7eb7320
+[I 2025-08-30 16:02:50.800 ServerApp] Replaying 3 buffered messages
+[I 2025-08-30 16:02:52.317 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-30 16:04:02.152 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-30 16:04:02.411 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:0195e9a2-5135-42f3-ba28-13d9c7eb7320
+[I 2025-08-30 16:04:02.774 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 16:04:02.774 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:0195e9a2-5135-42f3-ba28-13d9c7eb7320
+[I 2025-08-30 16:04:02.781 ServerApp] Replaying 3 buffered messages
+[I 2025-08-30 16:04:53.203 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-30 16:05:13.414 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-30 16:05:13.679 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:0195e9a2-5135-42f3-ba28-13d9c7eb7320
+[I 2025-08-30 16:05:14.077 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 16:05:14.077 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:0195e9a2-5135-42f3-ba28-13d9c7eb7320
+[I 2025-08-30 16:05:14.085 ServerApp] Replaying 7 buffered messages
+[I 2025-08-30 16:06:54.318 ServerApp] Saving file at /debug_n3.ipynb
+[W 2025-08-30 16:08:24.409 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2025-08-30 16:08:24.813 ServerApp] Connecting to kernel db0d71ec-d120-4b88-8833-a9943b7754bc.
+[I 2025-08-30 16:08:24.903 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 16:08:25.565 ServerApp] Starting buffering for db0d71ec-d120-4b88-8833-a9943b7754bc:04a6a415-58aa-416c-b133-5fb7ac7af7ca
+[I 2025-08-30 16:08:28.437 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 16:10:27.831 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-30 16:10:36.839 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-30 16:10:37.546 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 16:13:49.190 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-30 16:13:49.884 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 16:14:29.398 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-30 16:17:05.622 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-30 16:17:06.341 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 16:18:31.093 ServerApp] Saving file at /debug_n3.ipynb
+[W 2025-08-30 16:19:28.253 ServerApp] 404 GET /swagger (@13.91.4.178) 1.14ms referer=None
+[W 2025-08-30 16:19:28.318 ServerApp] 404 GET /api/swagger (@13.91.4.178) 0.94ms referer=None
+[W 2025-08-30 16:19:28.383 ServerApp] 404 GET /swagger (@13.91.4.178) 0.98ms referer=None
+[W 2025-08-30 16:19:28.448 ServerApp] 404 GET /api/swagger (@13.91.4.178) 1.01ms referer=None
+[W 2025-08-30 16:19:28.513 ServerApp] 404 GET /swagger (@13.91.4.178) 1.01ms referer=None
+[W 2025-08-30 16:19:28.579 ServerApp] 404 GET /api/swagger (@13.91.4.178) 0.99ms referer=None
+[W 2025-08-30 16:19:43.885 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 16:19:43.886 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-30 16:19:43.894 ServerApp] 
+[W 2025-08-30 16:19:43.895 ServerApp] 
+[W 2025-08-30 16:19:43.897 ServerApp] 
+[W 2025-08-30 16:19:43.898 ServerApp] 
+[W 2025-08-30 16:19:44.191 ServerApp] 
+[W 2025-08-30 16:19:44.193 ServerApp] 
+[W 2025-08-30 16:19:51.020 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 16:19:51.021 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-30 16:19:51.027 ServerApp] 
+[W 2025-08-30 16:19:51.030 ServerApp] 
+[W 2025-08-30 16:19:51.031 ServerApp] 
+[W 2025-08-30 16:19:51.032 ServerApp] 
+[W 2025-08-30 16:19:51.343 ServerApp] 
+[W 2025-08-30 16:19:51.344 ServerApp] 
+[W 2025-08-30 16:20:28.589 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 16:20:28.590 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-30 16:20:28.597 ServerApp] 
+[W 2025-08-30 16:20:28.598 ServerApp] 
+[W 2025-08-30 16:20:28.600 ServerApp] 
+[W 2025-08-30 16:20:28.601 ServerApp] 
+[W 2025-08-30 16:20:28.900 ServerApp] 
+[W 2025-08-30 16:20:28.902 ServerApp] 
+[W 2025-08-30 16:21:58.591 ServerApp] WebSocket ping timeout after 90000 ms.
+[I 2025-08-30 16:39:58.053 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-30 16:48:28.056 ServerApp] WebSocket ping timeout after 119685 ms.
+[I 2025-08-30 16:48:33.057 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 17:06:39.130 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 17:06:39.130 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-30 17:09:09.131 ServerApp] WebSocket ping timeout after 119471 ms.
+[I 2025-08-30 17:09:14.135 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 17:35:19.360 ServerApp] 302 GET / (@20.245.194.248) 0.38ms
+[I 2025-08-30 17:35:19.438 LabApp] 302 GET /lab? (@20.245.194.248) 0.56ms
+[I 2025-08-30 17:35:19.583 ServerApp] 302 GET / (@20.245.194.248) 0.41ms
+[I 2025-08-30 17:35:19.652 LabApp] 302 GET /lab? (@20.245.194.248) 0.52ms
+[I 2025-08-30 17:35:19.797 ServerApp] 302 GET / (@20.245.194.248) 0.38ms
+[I 2025-08-30 17:35:19.868 LabApp] 302 GET /lab? (@20.245.194.248) 0.53ms
+[I 2025-08-30 17:50:13.343 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 17:50:13.343 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-30 17:53:13.343 ServerApp] WebSocket ping timeout after 119669 ms.
+[I 2025-08-30 17:53:18.345 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 18:08:49.350 ServerApp] 302 GET / (@206.168.34.214) 0.37ms
+[I 2025-08-30 18:08:59.432 ServerApp] 302 GET / (@206.168.34.214) 0.39ms
+[I 2025-08-30 18:08:59.806 ServerApp] Malformed HTTP message from 206.168.34.214: Unexpected HTTP version 'HTTP/2.0'
+[I 2025-08-30 18:09:04.129 LabApp] 302 GET /lab (@206.168.34.214) 0.50ms
+[I 2025-08-30 18:09:05.631 ServerApp] Malformed HTTP message from 206.168.34.214: Unexpected HTTP version 'HTTP/2.0'
+[I 2025-08-30 18:09:17.694 ServerApp] Malformed HTTP message from 206.168.34.214: Unexpected HTTP version 'HTTP/2.0'
+[W 2025-08-30 18:09:21.318 ServerApp] 404 GET /robots.txt (@206.168.34.214) 1.16ms referer=None
+[W 2025-08-30 18:10:50.631 ServerApp] 404 GET /mcp (@20.245.246.79) 1.05ms referer=None
+[W 2025-08-30 18:10:50.700 ServerApp] 404 GET /api/mcp (@20.245.246.79) 1.02ms referer=None
+[W 2025-08-30 18:10:50.770 ServerApp] 404 GET /v1/mcp (@20.245.246.79) 1.02ms referer=None
+[W 2025-08-30 18:10:50.839 ServerApp] 404 GET /jsonrpc (@20.245.246.79) 0.99ms referer=None
+[W 2025-08-30 18:10:50.910 ServerApp] 404 GET /mcp (@20.245.246.79) 0.99ms referer=None
+[W 2025-08-30 18:10:50.998 ServerApp] 404 GET /api/mcp (@20.245.246.79) 1.00ms referer=None
+[W 2025-08-30 18:10:51.067 ServerApp] 404 GET /v1/mcp (@20.245.246.79) 0.98ms referer=None
+[W 2025-08-30 18:10:51.139 ServerApp] 404 GET /jsonrpc (@20.245.246.79) 1.00ms referer=None
+[W 2025-08-30 18:10:51.208 ServerApp] 404 GET /mcp (@20.245.246.79) 1.01ms referer=None
+[W 2025-08-30 18:10:51.300 ServerApp] 404 GET /api/mcp (@20.245.246.79) 0.99ms referer=None
+[W 2025-08-30 18:10:51.369 ServerApp] 404 GET /v1/mcp (@20.245.246.79) 1.01ms referer=None
+[W 2025-08-30 18:10:51.439 ServerApp] 404 GET /jsonrpc (@20.245.246.79) 1.00ms referer=None
+[I 2025-08-30 18:19:13.327 ServerApp] 302 GET / (@104.234.115.218) 0.37ms
+[W 2025-08-30 18:19:36.158 ServerApp] 404 GET /manage/account/login (@104.234.115.218) 0.99ms referer=None
+[W 2025-08-30 18:19:44.864 ServerApp] 404 GET /admin/index.html (@104.234.115.218) 0.99ms referer=None
+[W 2025-08-30 18:19:49.089 ServerApp] 404 GET /index.html (@104.234.115.218) 0.99ms referer=None
+[W 2025-08-30 18:19:53.226 ServerApp] 404 GET /+CSCOE+/logon.html (@104.234.115.218) 0.99ms referer=None
+[W 2025-08-30 18:20:15.732 ServerApp] 404 GET /cgi-bin/login.cgi (@104.234.115.218) 0.98ms referer=None
+[W 2025-08-30 18:20:28.920 ServerApp] 404 GET /login.htm (@104.234.115.218) 0.98ms referer=None
+[W 2025-08-30 18:20:33.531 ServerApp] 404 GET /login.html (@104.234.115.218) 0.99ms referer=None
+[W 2025-08-30 18:20:45.461 ServerApp] 404 GET /login.jsp (@104.234.115.218) 0.98ms referer=None
+[I 2025-08-30 18:23:14.865 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 18:23:14.865 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-30 18:25:44.866 ServerApp] WebSocket ping timeout after 119710 ms.
+[I 2025-08-30 18:25:49.868 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 18:59:05.665 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 18:59:05.665 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-30 19:02:05.667 ServerApp] WebSocket ping timeout after 119652 ms.
+[I 2025-08-30 19:02:10.669 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 19:24:19.813 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 19:24:19.813 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-30 19:36:19.814 ServerApp] WebSocket ping timeout after 119694 ms.
+[I 2025-08-30 19:36:24.816 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 19:54:30.647 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 19:54:30.647 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-30 20:00:00.649 ServerApp] WebSocket ping timeout after 119695 ms.
+[I 2025-08-30 20:00:05.651 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 20:24:59.730 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 20:24:59.731 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-30 20:29:59.731 ServerApp] WebSocket ping timeout after 119505 ms.
+[I 2025-08-30 20:30:04.733 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 21:02:18.868 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 21:02:18.868 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-30 21:18:18.870 ServerApp] WebSocket ping timeout after 119645 ms.
+[I 2025-08-30 21:18:23.871 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 21:28:48.771 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 21:28:48.771 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-30 21:56:18.773 ServerApp] WebSocket ping timeout after 119656 ms.
+[I 2025-08-30 21:56:23.775 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 22:27:37.384 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 22:27:37.384 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-30 22:29:07.385 ServerApp] WebSocket ping timeout after 90000 ms.
+[I 2025-08-30 22:29:12.387 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 23:02:56.227 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 23:02:56.228 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-30 23:05:26.230 ServerApp] WebSocket ping timeout after 119704 ms.
+[I 2025-08-30 23:05:31.233 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-30 23:16:20.946 ServerApp] 302 GET / (@205.210.31.31) 0.37ms
+[I 2025-08-30 23:16:21.036 LabApp] 302 GET /lab? (@205.210.31.31) 0.73ms
+[I 2025-08-30 23:28:10.947 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-30 23:28:10.947 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-30 23:30:40.948 ServerApp] WebSocket ping timeout after 119629 ms.
+[I 2025-08-30 23:30:45.951 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 00:03:53.834 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 00:03:53.834 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-31 00:05:23.835 ServerApp] WebSocket ping timeout after 90001 ms.
+[I 2025-08-31 00:05:28.837 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 01:29:27.981 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 01:29:27.981 ServerApp] Restoring connection for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-31 01:30:57.983 ServerApp] WebSocket ping timeout after 90002 ms.
+[I 2025-08-31 01:31:02.984 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-31 03:15:14.900 LabApp] Could not determine jupyterlab build status without nodejs
+[I 2025-08-31 03:15:15.554 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 03:15:16.400 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:9c52307a-8e65-4b7c-898e-bae65272b0c4
+[I 2025-08-31 03:15:16.439 ServerApp] Connecting to kernel db0d71ec-d120-4b88-8833-a9943b7754bc.
+[I 2025-08-31 03:15:17.147 ServerApp] Starting buffering for db0d71ec-d120-4b88-8833-a9943b7754bc:cf81c24b-05be-41d0-a53b-aa3029e9c2d7
+[I 2025-08-31 03:15:18.542 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 03:27:38.908 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 03:31:38.909 ServerApp] WebSocket ping timeout after 114501 ms.
+[I 2025-08-31 03:32:52.841 ServerApp] 302 GET / (@45.79.207.111) 0.45ms
+[I 2025-08-31 03:32:58.560 ServerApp] 302 GET / (@172.236.228.222) 0.42ms
+[I 2025-08-31 03:45:24.183 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 03:45:24.958 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 03:46:11.998 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 03:56:13.293 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:20:03.958 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:20:04.763 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:20:45.818 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:20:46.509 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:21:12.071 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:22:11.924 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 04:22:47.322 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:22:48.086 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:23:01.473 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:23:02.169 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:23:14.424 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:23:15.114 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:24:13.671 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 04:24:59.038 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:24:59.737 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:25:50.539 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:25:52.290 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:25:55.171 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:25:55.965 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:26:15.034 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 04:27:51.828 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:30:42.979 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:30:44.559 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:30:48.770 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:30:49.646 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:31:12.394 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:31:13.095 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:32:16.362 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 04:35:53.260 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:37:37.876 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:37:38.571 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:37:49.537 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:37:50.228 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:37:54.639 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:38:17.801 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 04:39:46.327 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:39:46.990 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:39:56.370 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:40:01.019 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:40:01.713 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:40:18.823 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 04:41:27.602 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:41:28.367 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:42:20.016 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 04:42:20.328 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:42:21.018 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:42:33.736 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:42:34.429 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:43:58.055 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:44:21.478 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 04:45:59.587 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:46:21.783 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:46:22.472 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:46:37.719 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:46:38.400 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:46:47.585 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:46:48.348 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:48:00.946 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:48:22.851 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 04:48:47.622 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 04:48:51.667 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:48:52.348 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:49:02.958 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 04:49:03.952 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 04:50:24.176 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 04:52:27.958 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 05:00:31.796 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 05:02:32.233 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 05:02:32.924 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 05:02:33.068 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 05:02:44.821 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 05:02:45.604 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 05:04:34.620 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 05:06:51.184 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 05:07:24.231 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 05:07:24.929 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 05:07:37.091 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 05:07:38.124 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 05:08:36.140 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 05:08:52.456 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 05:12:55.888 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 05:14:57.405 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 05:17:00.015 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 05:18:25.332 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 05:18:26.078 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 05:18:47.490 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 05:18:48.183 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 05:19:02.622 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 05:20:14.625 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 05:20:15.451 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 05:20:37.938 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 05:28:10.027 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 05:28:10.795 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 05:28:39.170 ServerApp] Saving file at /debug_n3.ipynb
+[W 2025-08-31 05:30:21.602 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 05:30:21.603 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 05:30:21.609 ServerApp] 
+[W 2025-08-31 05:30:21.611 ServerApp] 
+[W 2025-08-31 05:30:21.612 ServerApp] 
+[W 2025-08-31 05:30:21.613 ServerApp] 
+[W 2025-08-31 05:30:21.900 ServerApp] 
+[W 2025-08-31 05:30:21.902 ServerApp] 
+[W 2025-08-31 05:33:51.604 ServerApp] WebSocket ping timeout after 111783 ms.
+[I 2025-08-31 05:33:59.376 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 05:36:20.452 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 05:36:21.174 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 05:36:41.779 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 05:36:42.444 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 05:37:32.413 ServerApp] Saving file at /debug_n3.ipynb
+[W 2025-08-31 05:43:09.675 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 05:43:09.676 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 05:43:09.683 ServerApp] 
+[W 2025-08-31 05:43:09.684 ServerApp] 
+[W 2025-08-31 05:43:09.687 ServerApp] 
+[W 2025-08-31 05:43:09.688 ServerApp] 
+[W 2025-08-31 05:43:09.992 ServerApp] 
+[W 2025-08-31 05:43:09.994 ServerApp] 
+[W 2025-08-31 05:44:39.678 ServerApp] WebSocket ping timeout after 90001 ms.
+[I 2025-08-31 05:55:20.798 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 06:11:37.864 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 06:11:37.865 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 06:11:37.871 ServerApp] 
+[W 2025-08-31 06:11:37.873 ServerApp] 
+[W 2025-08-31 06:11:37.875 ServerApp] 
+[W 2025-08-31 06:11:37.875 ServerApp] 
+[W 2025-08-31 06:11:38.279 ServerApp] 
+[W 2025-08-31 06:11:38.282 ServerApp] 
+[W 2025-08-31 06:15:53.263 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 06:15:53.264 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 06:15:53.270 ServerApp] 
+[W 2025-08-31 06:15:53.272 ServerApp] 
+[W 2025-08-31 06:15:53.273 ServerApp] 
+[W 2025-08-31 06:15:53.274 ServerApp] 
+[W 2025-08-31 06:15:53.667 ServerApp] 
+[W 2025-08-31 06:15:53.669 ServerApp] 
+[W 2025-08-31 06:17:23.266 ServerApp] WebSocket ping timeout after 90002 ms.
+[I 2025-08-31 06:29:34.081 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 06:31:04.084 ServerApp] WebSocket ping timeout after 90002 ms.
+[I 2025-08-31 06:34:38.284 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 06:38:20.933 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 06:40:22.944 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 06:50:29.055 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 06:52:31.318 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 06:58:32.842 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 06:58:42.041 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 06:58:42.762 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:00:34.384 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 07:02:29.092 ServerApp] 302 GET / (@147.185.132.54) 0.38ms
+[I 2025-08-31 07:02:29.131 LabApp] 302 GET /lab? (@147.185.132.54) 0.51ms
+[I 2025-08-31 07:02:36.355 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 07:04:37.811 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 07:05:04.696 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 07:05:09.393 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:05:10.123 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:05:40.276 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:05:40.966 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:07:19.822 ServerApp] Saving file at /debug_n3.ipynb
+[W 2025-08-31 07:07:50.766 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 07:07:50.767 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 07:07:50.773 ServerApp] 
+[W 2025-08-31 07:07:50.775 ServerApp] 
+[W 2025-08-31 07:07:50.775 ServerApp] 
+[W 2025-08-31 07:07:50.776 ServerApp] 
+[W 2025-08-31 07:07:51.071 ServerApp] 
+[W 2025-08-31 07:07:51.073 ServerApp] 
+[I 2025-08-31 07:09:34.120 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:09:34.899 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:09:45.913 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 07:11:32.871 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:11:33.577 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:11:47.098 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 07:12:12.870 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:12:13.650 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:13:48.725 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 07:14:29.626 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:14:30.579 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:14:57.443 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:14:58.141 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:15:32.151 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 07:16:02.227 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[W 2025-08-31 07:16:03.013 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 07:16:03.014 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 07:16:03.023 ServerApp] 
+[W 2025-08-31 07:16:03.025 ServerApp] 
+[W 2025-08-31 07:16:03.026 ServerApp] 
+[W 2025-08-31 07:16:03.027 ServerApp] 
+[W 2025-08-31 07:16:03.343 ServerApp] 
+[W 2025-08-31 07:16:03.345 ServerApp] 
+[W 2025-08-31 07:16:03.764 ServerApp] 
+[W 2025-08-31 07:16:03.769 ServerApp] 
+[W 2025-08-31 07:16:03.771 ServerApp] 
+[W 2025-08-31 07:16:03.775 ServerApp] 
+[W 2025-08-31 07:16:03.777 ServerApp] 
+[W 2025-08-31 07:16:03.781 ServerApp] 
+[W 2025-08-31 07:16:03.782 ServerApp] 
+[W 2025-08-31 07:16:03.783 ServerApp] 
+[W 2025-08-31 07:16:04.086 ServerApp] 
+[W 2025-08-31 07:16:04.092 ServerApp] 
+[W 2025-08-31 07:16:04.529 ServerApp] 
+[W 2025-08-31 07:16:04.533 ServerApp] 
+[W 2025-08-31 07:16:05.062 ServerApp] 
+[W 2025-08-31 07:16:05.067 ServerApp] 
+[W 2025-08-31 07:16:05.816 ServerApp] 
+[W 2025-08-31 07:16:05.822 ServerApp] 
+[W 2025-08-31 07:16:05.825 ServerApp] 
+[W 2025-08-31 07:16:05.826 ServerApp] 
+[W 2025-08-31 07:16:05.836 ServerApp] 
+[W 2025-08-31 07:16:05.838 ServerApp] 
+[W 2025-08-31 07:16:05.840 ServerApp] 
+[W 2025-08-31 07:16:05.854 ServerApp] 
+[W 2025-08-31 07:16:05.855 ServerApp] 
+[W 2025-08-31 07:16:05.855 ServerApp] 
+[W 2025-08-31 07:16:05.874 ServerApp] 
+[W 2025-08-31 07:16:05.876 ServerApp] 
+[W 2025-08-31 07:16:05.877 ServerApp] 
+[W 2025-08-31 07:16:05.896 ServerApp] 
+[W 2025-08-31 07:16:05.898 ServerApp] 
+[W 2025-08-31 07:16:05.898 ServerApp] 
+[W 2025-08-31 07:16:05.920 ServerApp] 
+[W 2025-08-31 07:16:05.920 ServerApp] 
+[W 2025-08-31 07:16:05.920 ServerApp] 
+[W 2025-08-31 07:16:05.947 ServerApp] 
+[W 2025-08-31 07:16:05.948 ServerApp] 
+[W 2025-08-31 07:16:05.949 ServerApp] 
+[W 2025-08-31 07:16:05.968 ServerApp] 
+[W 2025-08-31 07:16:05.970 ServerApp] 
+[W 2025-08-31 07:16:05.971 ServerApp] 
+[W 2025-08-31 07:16:05.994 ServerApp] 
+[W 2025-08-31 07:16:05.994 ServerApp] 
+[W 2025-08-31 07:16:05.995 ServerApp] 
+[W 2025-08-31 07:16:06.017 ServerApp] 
+[W 2025-08-31 07:16:06.018 ServerApp] 
+[W 2025-08-31 07:16:06.019 ServerApp] 
+[W 2025-08-31 07:16:06.036 ServerApp] 
+[W 2025-08-31 07:16:06.037 ServerApp] 
+[W 2025-08-31 07:16:06.038 ServerApp] 
+[W 2025-08-31 07:16:06.060 ServerApp] 
+[W 2025-08-31 07:16:06.061 ServerApp] 
+[W 2025-08-31 07:16:06.061 ServerApp] 
+[W 2025-08-31 07:16:06.081 ServerApp] 
+[W 2025-08-31 07:16:06.082 ServerApp] 
+[W 2025-08-31 07:16:06.082 ServerApp] 
+[W 2025-08-31 07:16:06.100 ServerApp] 
+[W 2025-08-31 07:16:06.101 ServerApp] 
+[W 2025-08-31 07:16:06.101 ServerApp] 
+[W 2025-08-31 07:16:06.120 ServerApp] 
+[W 2025-08-31 07:16:06.122 ServerApp] 
+[W 2025-08-31 07:16:06.123 ServerApp] 
+[W 2025-08-31 07:16:06.141 ServerApp] 
+[W 2025-08-31 07:16:06.141 ServerApp] 
+[W 2025-08-31 07:16:06.142 ServerApp] 
+[W 2025-08-31 07:16:06.162 ServerApp] 
+[W 2025-08-31 07:16:06.163 ServerApp] 
+[W 2025-08-31 07:16:06.164 ServerApp] 
+[W 2025-08-31 07:16:06.194 ServerApp] 
+[I 2025-08-31 07:16:28.440 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[W 2025-08-31 07:16:29.307 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 07:16:29.307 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 07:16:29.315 ServerApp] 
+[W 2025-08-31 07:16:29.318 ServerApp] 
+[W 2025-08-31 07:16:29.319 ServerApp] 
+[W 2025-08-31 07:16:29.320 ServerApp] 
+[W 2025-08-31 07:16:29.678 ServerApp] 
+[W 2025-08-31 07:16:29.680 ServerApp] 
+[W 2025-08-31 07:16:30.178 ServerApp] 
+[W 2025-08-31 07:16:30.182 ServerApp] 
+[W 2025-08-31 07:16:30.183 ServerApp] 
+[W 2025-08-31 07:16:30.186 ServerApp] 
+[W 2025-08-31 07:16:30.188 ServerApp] 
+[W 2025-08-31 07:16:30.191 ServerApp] 
+[W 2025-08-31 07:16:30.195 ServerApp] 
+[W 2025-08-31 07:16:30.197 ServerApp] 
+[W 2025-08-31 07:16:30.581 ServerApp] 
+[W 2025-08-31 07:16:30.599 ServerApp] 
+[W 2025-08-31 07:16:31.005 ServerApp] 
+[W 2025-08-31 07:16:31.008 ServerApp] 
+[W 2025-08-31 07:16:31.605 ServerApp] 
+[W 2025-08-31 07:16:31.610 ServerApp] 
+[W 2025-08-31 07:16:32.196 ServerApp] 
+[W 2025-08-31 07:16:32.198 ServerApp] 
+[W 2025-08-31 07:16:32.200 ServerApp] 
+[W 2025-08-31 07:16:32.203 ServerApp] 
+[W 2025-08-31 07:16:32.214 ServerApp] 
+[W 2025-08-31 07:16:32.217 ServerApp] 
+[W 2025-08-31 07:16:32.217 ServerApp] 
+[W 2025-08-31 07:16:32.229 ServerApp] 
+[W 2025-08-31 07:16:32.229 ServerApp] 
+[W 2025-08-31 07:16:32.230 ServerApp] 
+[W 2025-08-31 07:16:32.249 ServerApp] 
+[W 2025-08-31 07:16:32.250 ServerApp] 
+[W 2025-08-31 07:16:32.251 ServerApp] 
+[W 2025-08-31 07:16:32.270 ServerApp] 
+[W 2025-08-31 07:16:32.270 ServerApp] 
+[W 2025-08-31 07:16:32.270 ServerApp] 
+[W 2025-08-31 07:16:32.289 ServerApp] 
+[W 2025-08-31 07:16:32.291 ServerApp] 
+[W 2025-08-31 07:16:32.293 ServerApp] 
+[W 2025-08-31 07:16:32.312 ServerApp] 
+[W 2025-08-31 07:16:32.312 ServerApp] 
+[W 2025-08-31 07:16:32.312 ServerApp] 
+[W 2025-08-31 07:16:32.337 ServerApp] 
+[W 2025-08-31 07:16:32.338 ServerApp] 
+[W 2025-08-31 07:16:32.338 ServerApp] 
+[W 2025-08-31 07:16:32.358 ServerApp] 
+[W 2025-08-31 07:16:32.358 ServerApp] 
+[W 2025-08-31 07:16:32.359 ServerApp] 
+[W 2025-08-31 07:16:32.378 ServerApp] 
+[W 2025-08-31 07:16:32.378 ServerApp] 
+[W 2025-08-31 07:16:32.378 ServerApp] 
+[W 2025-08-31 07:16:32.398 ServerApp] 
+[W 2025-08-31 07:16:32.400 ServerApp] 
+[W 2025-08-31 07:16:32.401 ServerApp] 
+[W 2025-08-31 07:16:32.423 ServerApp] 
+[W 2025-08-31 07:16:32.425 ServerApp] 
+[W 2025-08-31 07:16:32.426 ServerApp] 
+[W 2025-08-31 07:16:32.445 ServerApp] 
+[W 2025-08-31 07:16:32.445 ServerApp] 
+[W 2025-08-31 07:16:32.446 ServerApp] 
+[W 2025-08-31 07:16:32.463 ServerApp] 
+[W 2025-08-31 07:16:32.465 ServerApp] 
+[W 2025-08-31 07:16:32.466 ServerApp] 
+[W 2025-08-31 07:16:32.483 ServerApp] 
+[W 2025-08-31 07:16:32.485 ServerApp] 
+[W 2025-08-31 07:16:32.486 ServerApp] 
+[W 2025-08-31 07:16:32.504 ServerApp] 
+[W 2025-08-31 07:16:32.505 ServerApp] 
+[W 2025-08-31 07:16:32.505 ServerApp] 
+[W 2025-08-31 07:16:32.522 ServerApp] 
+[W 2025-08-31 07:16:32.525 ServerApp] 
+[W 2025-08-31 07:16:32.526 ServerApp] 
+[W 2025-08-31 07:16:32.546 ServerApp] 
+[I 2025-08-31 07:17:50.648 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 07:22:50.118 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 07:23:09.948 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:23:10.758 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:23:55.870 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:23:56.623 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:25:53.731 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 07:26:31.568 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:26:32.371 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:27:55.468 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 07:29:40.476 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:29:41.270 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:29:57.328 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 07:30:31.044 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:30:31.867 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:31:58.572 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 07:32:20.758 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:32:21.452 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:33:17.926 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:33:18.695 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:33:27.615 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:33:28.328 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:33:59.876 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 07:35:04.665 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:35:05.425 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:35:35.062 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:35:35.765 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:36:01.417 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 07:36:03.829 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:36:04.573 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:39:29.850 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:40:03.602 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 07:41:39.886 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:41:41.165 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:41:50.370 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 07:41:51.090 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 07:42:04.925 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 07:44:06.124 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 07:56:06.333 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 07:58:07.918 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 08:04:11.013 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 08:05:08.022 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:05:08.726 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:05:36.866 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:05:37.600 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:06:12.466 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 08:06:44.464 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 08:07:23.930 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:07:24.604 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:07:53.082 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:07:54.066 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 08:08:11.829 ServerApp] 404 GET /api/contents/tmp/summary_understanding_2_follow_up.wav.?content=0&hash=0&1756627691444 (3dab218690984c33a37cf8545d0b2bb7@104.234.233.59) 1.10ms referer=http://172.190.115.70:18080/lab/tree/debug_n3.ipynb
+[W 2025-08-31 08:08:11.829 ServerApp] 404 GET /api/contents/tmp/summary_understanding_2_follow_up.wav.?content=0&hash=0&1756627691444 (104.234.233.59): No such file or directory: tmp/summary_understanding_2_follow_up.wav.
+[I 2025-08-31 08:08:24.079 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:08:24.770 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:08:45.785 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 08:08:55.451 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:08:56.258 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 08:09:13.493 ServerApp] 404 GET /api/contents/tmp/summary_understanding_2_follow_up.wav.?content=0&hash=0&1756627753188 (3dab218690984c33a37cf8545d0b2bb7@104.234.233.59) 1.02ms referer=http://172.190.115.70:18080/lab/tree/debug_n3.ipynb
+[W 2025-08-31 08:09:13.493 ServerApp] 404 GET /api/contents/tmp/summary_understanding_2_follow_up.wav.?content=0&hash=0&1756627753188 (104.234.233.59): No such file or directory: tmp/summary_understanding_2_follow_up.wav.
+[I 2025-08-31 08:09:35.613 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:09:36.593 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 08:09:54.248 ServerApp] 404 GET /api/contents/tmp/summary_understanding_2_follow_up.wav.?content=0&hash=0&1756627793942 (3dab218690984c33a37cf8545d0b2bb7@104.234.233.59) 1.01ms referer=http://172.190.115.70:18080/lab/tree/debug_n3.ipynb
+[W 2025-08-31 08:09:54.248 ServerApp] 404 GET /api/contents/tmp/summary_understanding_2_follow_up.wav.?content=0&hash=0&1756627793942 (104.234.233.59): No such file or directory: tmp/summary_understanding_2_follow_up.wav.
+[I 2025-08-31 08:10:18.596 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:10:19.274 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:10:30.035 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:10:30.731 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 08:10:46.880 ServerApp] 404 GET /api/contents/tmp/summary_understanding_2_follow_up.wav.?content=0&hash=0&1756627846576 (3dab218690984c33a37cf8545d0b2bb7@104.234.233.59) 1.00ms referer=http://172.190.115.70:18080/lab/tree/debug_n3.ipynb
+[W 2025-08-31 08:10:46.880 ServerApp] 404 GET /api/contents/tmp/summary_understanding_2_follow_up.wav.?content=0&hash=0&1756627846576 (104.234.233.59): No such file or directory: tmp/summary_understanding_2_follow_up.wav.
+[I 2025-08-31 08:10:46.960 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 08:12:16.753 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:12:17.703 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:12:48.056 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 08:13:03.934 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:13:04.739 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:14:49.600 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 08:16:13.910 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 08:16:21.828 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:16:22.847 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:16:45.693 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:16:46.396 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:16:50.711 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 08:18:15.221 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 08:18:51.959 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 08:20:16.661 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 08:20:46.005 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:20:46.705 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:21:00.580 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:21:01.750 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 08:21:18.297 ServerApp] 404 GET /api/contents/tmp/summary_understanding_2_follow_up.wav.?content=0&hash=0&1756628477991 (3dab218690984c33a37cf8545d0b2bb7@104.234.233.59) 1.01ms referer=http://172.190.115.70:18080/lab/tree/debug_n3.ipynb
+[W 2025-08-31 08:21:18.297 ServerApp] 404 GET /api/contents/tmp/summary_understanding_2_follow_up.wav.?content=0&hash=0&1756628477991 (104.234.233.59): No such file or directory: tmp/summary_understanding_2_follow_up.wav.
+[I 2025-08-31 08:21:24.288 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:21:25.003 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:22:18.265 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 08:22:53.391 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 08:24:20.013 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 08:25:47.404 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:25:48.096 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:25:59.907 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:26:01.017 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:26:21.793 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 08:26:54.903 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 08:28:11.724 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:28:12.438 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:28:56.097 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 08:30:35.755 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:30:36.650 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:30:57.358 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 08:30:59.711 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 08:31:00.469 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 08:32:58.813 ServerApp] Saving file at /debug_n3.ipynb
+[W 2025-08-31 08:35:22.387 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 08:35:22.388 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 08:35:22.395 ServerApp] 
+[W 2025-08-31 08:35:22.396 ServerApp] 
+[W 2025-08-31 08:35:22.397 ServerApp] 
+[W 2025-08-31 08:35:22.399 ServerApp] 
+[W 2025-08-31 08:35:22.715 ServerApp] 
+[W 2025-08-31 08:35:22.716 ServerApp] 
+[W 2025-08-31 08:39:22.389 ServerApp] WebSocket ping timeout after 111571 ms.
+[I 2025-08-31 08:39:37.532 ServerApp] 302 GET / (@59.173.133.96) 0.38ms
+[I 2025-08-31 08:40:18.572 ServerApp] 302 GET / (@218.104.149.27) 0.41ms
+[I 2025-08-31 08:41:33.149 ServerApp] 302 GET / (@124.66.76.208) 0.36ms
+[I 2025-08-31 08:41:36.781 LabApp] 302 GET /lab? (@223.167.169.147) 0.67ms
+[I 2025-08-31 09:37:36.457 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 09:41:06.143 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 09:41:06.931 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 09:42:16.507 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 09:43:42.310 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 09:43:43.062 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 09:44:00.501 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 09:44:01.206 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 09:44:17.884 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 09:52:12.693 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 09:52:13.432 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 09:53:59.755 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 09:54:13.505 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 09:54:14.195 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 09:54:23.559 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 09:54:24.284 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 09:55:35.267 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 09:55:35.979 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 09:56:01.161 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 09:56:20.431 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 09:59:23.560 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 09:59:24.246 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 09:59:33.127 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 09:59:33.825 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:00:03.143 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:00:22.516 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:01:38.411 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:01:39.101 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:02:23.909 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:04:04.712 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:05:31.107 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:05:31.794 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:05:41.719 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:05:42.427 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:06:06.180 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:06:25.018 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:06:39.316 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:06:40.378 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:07:41.026 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:07:41.738 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:08:26.292 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:09:12.050 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:09:12.745 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:10:01.092 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:10:01.795 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:10:27.668 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:12:29.448 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:14:51.685 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:14:52.376 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:15:00.656 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:15:01.404 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:16:31.650 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:18:08.141 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:19:31.847 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:19:32.543 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:19:49.351 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:19:50.062 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:20:33.449 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:20:50.330 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:20:51.049 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:21:32.779 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:21:33.505 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:22:34.688 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:24:09.653 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:24:28.475 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:24:29.222 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:24:39.266 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:24:42.570 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:26:11.182 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:26:17.728 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:26:18.421 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:26:35.944 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:28:12.606 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:28:58.013 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:28:58.720 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:29:07.983 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:29:08.703 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:30:13.935 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:30:37.510 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:33:09.568 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:33:10.272 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:34:39.448 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:35:24.662 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:35:25.353 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:35:34.890 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:35:35.602 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:36:15.717 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:36:40.823 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:37:33.173 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:37:33.950 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:38:42.461 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:43:19.239 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:43:19.918 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:43:27.589 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:43:28.286 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:44:02.153 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:44:04.026 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:44:18.763 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:44:45.489 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:46:20.167 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:48:21.683 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:50:23.206 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:52:24.975 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:54:26.919 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:54:52.003 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:54:52.782 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:55:00.546 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:55:01.240 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:55:27.432 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:55:34.222 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:55:34.945 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:55:46.299 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:55:47.001 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:56:46.661 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:57:15.284 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:57:16.089 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:57:25.784 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:57:26.504 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:57:28.792 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 10:58:47.898 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 10:58:56.025 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:58:56.992 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:59:05.881 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 10:59:06.684 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 10:59:30.272 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 11:00:00.591 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 11:00:03.872 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 11:00:04.621 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 11:00:14.546 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 11:00:15.236 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 11:00:49.078 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 11:01:25.108 ServerApp] Saving file at /graphs/n3/prompts.py
+[I 2025-08-31 11:01:30.066 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 11:01:30.744 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 11:01:40.650 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 11:01:41.349 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 11:02:50.568 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 11:13:26.896 ServerApp] Saving file at /graphs/n3/prompts.py
+[W 2025-08-31 11:38:09.779 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 11:38:09.780 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 11:38:09.787 ServerApp] 
+[W 2025-08-31 11:38:09.789 ServerApp] 
+[W 2025-08-31 11:38:09.790 ServerApp] 
+[W 2025-08-31 11:38:09.791 ServerApp] 
+[W 2025-08-31 11:38:10.096 ServerApp] 
+[W 2025-08-31 11:38:10.098 ServerApp] 
+[W 2025-08-31 11:40:23.071 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 11:40:23.071 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 11:40:23.078 ServerApp] 
+[W 2025-08-31 11:40:23.080 ServerApp] 
+[W 2025-08-31 11:40:23.081 ServerApp] 
+[W 2025-08-31 11:40:23.082 ServerApp] 
+[W 2025-08-31 11:40:23.378 ServerApp] 
+[W 2025-08-31 11:40:23.380 ServerApp] 
+[W 2025-08-31 11:41:53.072 ServerApp] WebSocket ping timeout after 90000 ms.
+[I 2025-08-31 11:46:57.479 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 11:50:46.133 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 11:50:46.134 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 11:50:46.141 ServerApp] 
+[W 2025-08-31 11:50:46.141 ServerApp] 
+[W 2025-08-31 11:50:46.143 ServerApp] 
+[W 2025-08-31 11:50:46.144 ServerApp] 
+[W 2025-08-31 11:50:46.494 ServerApp] 
+[W 2025-08-31 11:50:46.496 ServerApp] 
+[W 2025-08-31 11:52:16.136 ServerApp] WebSocket ping timeout after 90001 ms.
+[I 2025-08-31 12:50:56.066 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 12:55:47.954 ServerApp] 302 GET / (@206.168.34.51) 0.66ms
+[I 2025-08-31 12:55:59.809 ServerApp] 302 GET / (@206.168.34.51) 0.39ms
+[I 2025-08-31 12:56:00.946 ServerApp] Malformed HTTP message from 206.168.34.51: Unexpected HTTP version 'HTTP/2.0'
+[I 2025-08-31 12:56:08.314 LabApp] 302 GET /lab (@206.168.34.51) 0.67ms
+[I 2025-08-31 12:56:10.726 ServerApp] Malformed HTTP message from 206.168.34.51: Unexpected HTTP version 'HTTP/2.0'
+[I 2025-08-31 12:56:23.769 ServerApp] Malformed HTTP message from 206.168.34.51: Unexpected HTTP version 'HTTP/2.0'
+[W 2025-08-31 12:56:30.511 ServerApp] 404 GET /security.txt (@206.168.34.51) 1.03ms referer=None
+[W 2025-08-31 13:26:25.367 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 13:26:25.368 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 13:26:25.375 ServerApp] 
+[W 2025-08-31 13:26:25.375 ServerApp] 
+[W 2025-08-31 13:26:25.377 ServerApp] 
+[W 2025-08-31 13:26:25.378 ServerApp] 
+[W 2025-08-31 13:26:25.675 ServerApp] 
+[W 2025-08-31 13:26:25.677 ServerApp] 
+[W 2025-08-31 13:30:40.429 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 13:30:40.430 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 13:30:40.437 ServerApp] 
+[W 2025-08-31 13:30:40.438 ServerApp] 
+[W 2025-08-31 13:30:40.439 ServerApp] 
+[W 2025-08-31 13:30:40.440 ServerApp] 
+[W 2025-08-31 13:30:40.739 ServerApp] 
+[W 2025-08-31 13:30:40.740 ServerApp] 
+[W 2025-08-31 14:54:29.659 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[I 2025-08-31 14:54:29.660 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 14:54:29.668 ServerApp] 
+[W 2025-08-31 14:54:29.670 ServerApp] 
+[W 2025-08-31 14:54:29.671 ServerApp] 
+[W 2025-08-31 14:54:29.672 ServerApp] 
+[W 2025-08-31 14:54:29.986 ServerApp] 
+[W 2025-08-31 14:54:29.988 ServerApp] 

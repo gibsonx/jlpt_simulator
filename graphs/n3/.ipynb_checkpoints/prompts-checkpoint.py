@@ -32,7 +32,7 @@ Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level.
 
 Task: Your job is to write a question for a JLPT N3 level exam paper.
 You should write a short sentence and ask candidate to identify the correct kanji writing of a given word in hiragana.
-The number of kanji characters in the options must be the same. The kanji characters must be usded in Japanese daily life.
+The number of kanji characters in the options must be the same.
 The word in hiragana being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
 
 Instructions:
