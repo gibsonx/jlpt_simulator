@@ -279,9 +279,9 @@ def _generate_image(prompt="a woman is talking to a man."):
     url = "https://api.kie.ai/api/v1/gpt4o-image/generate"
 
     payload = {
-        "filesUrl": ["https://strolandaws8409947751408.blob.core.windows.net/exjlpt/jlpt_refer01.png",
-                     "https://strolandaws8409947751408.blob.core.windows.net/exjlpt/jlpt_refer02.png",
-                     "https://strolandaws8409947751408.blob.core.windows.net/exjlpt/jlpt_refer03.png"],
+        "filesUrl": ["https://strolandaws8409947751408.blob.core.windows.net/$web/jlpt_refer01.png",
+                     "https://strolandaws8409947751408.blob.core.windows.net/$web/jlpt_refer02.png",
+                     "https://strolandaws8409947751408.blob.core.windows.net/$web/jlpt_refer03.png"],
         "prompt": "Draw a simple black-and-white line illustration in the style of JLPT exam pictures."
                   "The style should be minimal, with clean outlines"
                   "and look like an educational test question picture. Ensure no English and Japanese words appear on the generated picture."
