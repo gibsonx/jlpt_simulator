@@ -1,0 +1,30 @@
+ * Serving Flask app 'picture_server'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:3000
+ * Running on http://10.0.0.4:3000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 641-272-029
+96.126.104.20 - - [30/Aug/2025 09:57:49] code 400, message Bad request version ('À\x13À')
+96.126.104.20 - - [30/Aug/2025 09:57:49] "[31m[1m\x16\x03\x01\x00ò\x01\x00\x00î\x03\x03Ny¯Rzñ®Ï¨ñ\x01\x1a¾ý\x95\x94\x0fUÍd4Q\x0f\x0e\x0f5[7vÏL¸ \x9eµÕ5ÿ\x88Ê¶W\x85Õ\x0e\x7f\x9b\x05\x8fÐÀDKÍXÿK\x96Î\x94Ð)\\Oã\x00&À+À/À,À0Ì©Ì¨À\x09À\x13À[0m" 400 -
+96.126.104.20 - - [30/Aug/2025 09:57:49] "[33mGET /signin HTTP/1.1[0m" 404 -
+198.235.24.65 - - [30/Aug/2025 10:45:08] "[33mGET / HTTP/1.1[0m" 404 -
+64.62.156.24 - - [30/Aug/2025 13:22:46] "[33mGET / HTTP/1.1[0m" 404 -
+64.62.156.30 - - [30/Aug/2025 13:22:57] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+96.126.104.20 - - [30/Aug/2025 13:54:16] code 400, message Bad request version ('À\x13À')
+96.126.104.20 - - [30/Aug/2025 13:54:16] "[31m[1m\x16\x03\x01\x00ò\x01\x00\x00î\x03\x03nmÀ^¿\x9ea].¢\x1c&îj\x97\x14\x19ù\x10k\x0e\x0eXoªxú\x9c\x97Ä«i Ó\x0cüÕV¼\x93UùÀ\x7fÅÊëíðIôDè=\x8bý\x93ÒÿW\x09\x95ºOþ\x00&À+À/À,À0Ì©Ì¨À\x09À\x13À[0m" 400 -
+96.126.104.20 - - [30/Aug/2025 13:54:16] "[33mGET /signin HTTP/1.1[0m" 404 -
+3.132.23.201 - - [30/Aug/2025 15:18:24] "[33mGET / HTTP/1.1[0m" 404 -
+3.132.23.201 - - [30/Aug/2025 15:20:36] code 400, message Bad request syntax ('\x16\x03\x01\x00{\x01\x00\x00w\x03\x03\x94ükª\x95NL\x832\x84©i¬\x14«=\x966M\x19%')
+3.132.23.201 - - [30/Aug/2025 15:20:36] "[31m[1m\x16\x03\x01\x00{\x01\x00\x00w\x03\x03\x94ükª\x95NL\x832\x84©i¬\x14«=\x966M\x19%[0m" 400 -
+3.132.23.201 - - [30/Aug/2025 15:22:39] code 400, message Bad request syntax ('SSH-2.0-Go')
+3.132.23.201 - - [30/Aug/2025 15:22:39] "[31m[1mSSH-2.0-Go[0m" 400 -
+3.132.23.201 - - [30/Aug/2025 15:25:12] code 400, message Bad request version ('À\x14À')
+3.132.23.201 - - [30/Aug/2025 15:25:12] "[31m[1m\x16\x03\x01\x00{\x01\x00\x00w\x03\x03\x09\x8f\x8fAË\x06Åj,ä¦\x8f;ÚTu\x89u\x8ebpiU\x15\x95hß`â"ov\x00\x00\x1aÀ/À+À\x11À\x07À\x13À\x09À\x14À[0m" 400 -
+47.254.71.23 - - [30/Aug/2025 15:25:20] "POST /4o-image-callback HTTP/1.1" 200 -
+47.254.126.95 - - [30/Aug/2025 15:26:14] "POST /4o-image-callback HTTP/1.1" 200 -
+80.66.75.63 - - [30/Aug/2025 15:47:38] code 400, message Bad request syntax ('\x01\x01æ')
+80.66.75.63 - - [30/Aug/2025 15:47:41] "[31m[1m\x01\x01æ[0m" 400 -
