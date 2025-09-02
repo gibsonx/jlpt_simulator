@@ -4209,3 +4209,146 @@
 [W 2025-08-31 14:54:29.672 ServerApp] 
 [W 2025-08-31 14:54:29.986 ServerApp] 
 [W 2025-08-31 14:54:29.988 ServerApp] 
+[I 2025-08-31 15:58:00.771 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 15:58:01.416 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 15:58:02.611 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 15:58:03.219 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 15:59:13.362 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 15:59:16.788 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 15:59:17.425 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 16:01:05.142 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 16:01:18.649 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 16:01:19.275 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 16:01:42.368 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:5772bacd-363f-468c-9187-5ad9fa559514
+[I 2025-08-31 16:01:42.369 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 16:01:42.377 ServerApp] 
+[W 2025-08-31 16:01:42.379 ServerApp] 
+[W 2025-08-31 16:01:42.381 ServerApp] 
+[W 2025-08-31 16:01:42.382 ServerApp] 
+[W 2025-08-31 16:01:42.632 ServerApp] 
+[W 2025-08-31 16:01:42.634 ServerApp] 
+[I 2025-08-31 16:02:07.953 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 16:02:08.596 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 16:02:31.406 ServerApp] Replacing stale connection: c8a67922-b8ea-4c8e-82fe-97a881e47525:5772bacd-363f-468c-9187-5ad9fa559514
+[I 2025-08-31 16:02:31.407 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[W 2025-08-31 16:02:31.418 ServerApp] 
+[W 2025-08-31 16:02:31.419 ServerApp] 
+[W 2025-08-31 16:02:31.421 ServerApp] 
+[W 2025-08-31 16:02:31.422 ServerApp] 
+[W 2025-08-31 16:02:31.666 ServerApp] 
+[W 2025-08-31 16:02:31.668 ServerApp] 
+[I 2025-08-31 16:03:04.509 ServerApp] Saving file at /debug_n3.ipynb
+[I 2025-08-31 16:03:09.392 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 16:03:16.468 ServerApp] Kernel restarted: c8a67922-b8ea-4c8e-82fe-97a881e47525
+[I 2025-08-31 16:03:17.108 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 16:03:20.824 ServerApp] Connecting to kernel c8a67922-b8ea-4c8e-82fe-97a881e47525.
+[I 2025-08-31 16:13:36.957 ServerApp] Starting buffering for c8a67922-b8ea-4c8e-82fe-97a881e47525:76c7a640-6feb-417b-9f1c-13dbe6ea5dd0
+[W 2025-08-31 16:36:51.697 ServerApp] 404 GET /swagger (@20.66.110.172) 1.10ms referer=None
+[W 2025-08-31 16:36:51.771 ServerApp] 404 GET /api/swagger (@20.66.110.172) 1.01ms referer=None
+[W 2025-08-31 16:36:51.846 ServerApp] 404 GET /swagger (@20.66.110.172) 1.00ms referer=None
+[W 2025-08-31 16:36:51.920 ServerApp] 404 GET /api/swagger (@20.66.110.172) 1.01ms referer=None
+[W 2025-08-31 16:36:51.994 ServerApp] 404 GET /swagger (@20.66.110.172) 1.00ms referer=None
+[W 2025-08-31 16:36:52.068 ServerApp] 404 GET /api/swagger (@20.66.110.172) 1.00ms referer=None
+[I 2025-08-31 17:23:21.013 ServerApp] 302 GET / (@20.66.109.206) 0.40ms
+[I 2025-08-31 17:23:21.102 LabApp] 302 GET /lab? (@20.66.109.206) 0.55ms
+[I 2025-08-31 17:23:21.240 ServerApp] 302 GET / (@20.66.109.206) 0.40ms
+[I 2025-08-31 17:23:21.309 LabApp] 302 GET /lab? (@20.66.109.206) 0.50ms
+[I 2025-08-31 17:23:21.453 ServerApp] 302 GET / (@20.66.109.206) 0.39ms
+[I 2025-08-31 17:23:21.523 LabApp] 302 GET /lab? (@20.66.109.206) 0.52ms
+[W 2025-08-31 18:49:28.854 ServerApp] 404 GET /mcp (@20.66.68.22) 1.02ms referer=None
+[W 2025-08-31 18:49:28.925 ServerApp] 404 GET /api/mcp (@20.66.68.22) 1.01ms referer=None
+[W 2025-08-31 18:49:28.995 ServerApp] 404 GET /v1/mcp (@20.66.68.22) 1.02ms referer=None
+[W 2025-08-31 18:49:29.066 ServerApp] 404 GET /jsonrpc (@20.66.68.22) 1.02ms referer=None
+[W 2025-08-31 18:49:29.136 ServerApp] 404 GET /mcp (@20.66.68.22) 1.01ms referer=None
+[W 2025-08-31 18:49:29.206 ServerApp] 404 GET /api/mcp (@20.66.68.22) 1.00ms referer=None
+[W 2025-08-31 18:49:29.277 ServerApp] 404 GET /v1/mcp (@20.66.68.22) 0.99ms referer=None
+[W 2025-08-31 18:49:29.347 ServerApp] 404 GET /jsonrpc (@20.66.68.22) 1.00ms referer=None
+[W 2025-08-31 18:49:29.417 ServerApp] 404 GET /mcp (@20.66.68.22) 1.01ms referer=None
+[W 2025-08-31 18:49:29.487 ServerApp] 404 GET /api/mcp (@20.66.68.22) 0.99ms referer=None
+[W 2025-08-31 18:49:29.557 ServerApp] 404 GET /v1/mcp (@20.66.68.22) 0.99ms referer=None
+[W 2025-08-31 18:49:29.628 ServerApp] 404 GET /jsonrpc (@20.66.68.22) 0.99ms referer=None
+[I 2025-08-31 18:50:40.871 ServerApp] 302 GET / (@206.168.34.197) 0.37ms
+[I 2025-08-31 18:50:57.806 ServerApp] 302 GET / (@206.168.34.197) 0.36ms
+[I 2025-08-31 18:50:59.673 ServerApp] Malformed HTTP message from 206.168.34.197: Unexpected HTTP version 'HTTP/2.0'
+[I 2025-08-31 18:51:14.133 LabApp] 302 GET /lab (@206.168.34.197) 0.49ms
+[I 2025-08-31 18:51:21.859 ServerApp] Malformed HTTP message from 206.168.34.197: Unexpected HTTP version 'HTTP/2.0'
+[I 2025-08-31 18:51:45.474 ServerApp] Malformed HTTP message from 206.168.34.197: Unexpected HTTP version 'HTTP/2.0'
+[W 2025-08-31 18:51:59.280 ServerApp] 404 GET /security.txt (@206.168.34.197) 0.99ms referer=None
+[I 2025-08-31 21:14:54.836 ServerApp] 302 GET / (@104.234.115.122) 0.36ms
+[W 2025-08-31 21:15:17.049 ServerApp] 404 GET /manage/account/login (@104.234.115.122) 1.00ms referer=None
+[W 2025-08-31 21:15:27.085 ServerApp] 404 GET /admin/index.html (@104.234.115.122) 0.97ms referer=None
+[W 2025-08-31 21:15:31.939 ServerApp] 404 GET /index.html (@104.234.115.122) 0.99ms referer=None
+[W 2025-08-31 21:15:37.636 ServerApp] 404 GET /+CSCOE+/logon.html (@104.234.115.122) 1.00ms referer=None
+[W 2025-08-31 21:15:42.967 ServerApp] 404 GET /cgi-bin/login.cgi (@104.234.115.122) 0.99ms referer=None
+[W 2025-08-31 21:15:48.388 ServerApp] 404 GET /login.htm (@104.234.115.122) 0.98ms referer=None
+[W 2025-08-31 21:15:53.539 ServerApp] 404 GET /login.html (@104.234.115.122) 0.98ms referer=None
+[W 2025-08-31 21:15:58.554 ServerApp] 404 GET /login.jsp (@104.234.115.122) 0.92ms referer=None
+[I 2025-08-31 22:29:22.719 ServerApp] 302 GET / (@45.156.128.103) 0.36ms
+[I 2025-08-31 22:29:22.800 LabApp] 302 GET /lab? (@45.156.128.103) 0.53ms
+[I 2025-09-01 02:50:25.861 ServerApp] 302 GET / (@198.235.24.136) 0.40ms
+[I 2025-09-01 02:50:26.034 LabApp] 302 GET /lab? (@198.235.24.136) 0.53ms
+[I 2025-09-01 03:55:39.302 ServerApp] 302 GET / (@45.142.154.12) 0.37ms
+[I 2025-09-01 03:55:40.019 ServerApp] 302 GET / (@152.32.131.118) 0.44ms
+[I 2025-09-01 03:55:40.464 LabApp] 302 GET /lab? (@152.32.131.118) 0.49ms
+[I 2025-09-01 04:06:18.714 LabApp] 302 GET /lab (@202.59.232.60) 0.47ms
+[W 2025-09-01 04:06:28.617 ServerApp] 401 POST /login?next=%2Flab (@202.59.232.60) 1.10ms referer=http://172.190.115.70:18080/login?next=%2Flab
+[W 2025-09-01 06:03:13.708 ServerApp] 401 POST /login?next=%2Flab (@202.59.232.60) 1.05ms referer=http://172.190.115.70:18080/login?next=%2Flab
+[W 2025-09-01 06:03:25.040 ServerApp] 401 POST /login?next=%2Flab (@202.59.232.60) 1.12ms referer=http://172.190.115.70:18080/login?next=%2Flab
+[I 2025-09-01 06:20:57.716 ServerApp] 302 GET / (@205.210.31.195) 0.41ms
+[I 2025-09-01 06:20:57.947 LabApp] 302 GET /lab? (@205.210.31.195) 0.52ms
+[I 2025-09-01 06:35:28.704 ServerApp] 302 GET / (@138.199.24.13) 0.46ms
+[I 2025-09-01 06:35:40.989 ServerApp] Malformed HTTP message from 138.199.24.13: Malformed HTTP request line
+[I 2025-09-01 06:35:46.292 ServerApp] 302 GET / (@138.199.24.13) 0.42ms
+[I 2025-09-01 07:12:39.256 ServerApp] 302 GET / (@45.133.193.46) 0.45ms
+[I 2025-09-01 07:12:52.216 ServerApp] Malformed HTTP message from 45.133.193.46: Malformed HTTP request line
+[I 2025-09-01 07:12:57.909 ServerApp] 302 GET / (@45.133.193.46) 0.41ms
+[I 2025-09-01 08:39:50.979 ServerApp] 302 GET / (@149.88.103.82) 0.45ms
+[I 2025-09-01 08:40:03.060 ServerApp] Malformed HTTP message from 149.88.103.82: Malformed HTTP request line
+[I 2025-09-01 08:40:08.246 ServerApp] 302 GET / (@149.88.103.82) 0.36ms
+[W 2025-09-01 16:31:42.895 ServerApp] 404 GET /swagger (@13.91.108.50) 1.00ms referer=None
+[W 2025-09-01 16:31:42.969 ServerApp] 404 GET /api/swagger (@13.91.108.50) 1.02ms referer=None
+[W 2025-09-01 16:31:43.043 ServerApp] 404 GET /swagger (@13.91.108.50) 0.99ms referer=None
+[W 2025-09-01 16:31:43.117 ServerApp] 404 GET /api/swagger (@13.91.108.50) 0.98ms referer=None
+[W 2025-09-01 16:31:43.191 ServerApp] 404 GET /swagger (@13.91.108.50) 1.01ms referer=None
+[W 2025-09-01 16:31:43.266 ServerApp] 404 GET /api/swagger (@13.91.108.50) 1.00ms referer=None
+[I 2025-09-01 18:01:13.862 ServerApp] 302 GET / (@40.125.47.204) 0.39ms
+[I 2025-09-01 18:01:13.932 LabApp] 302 GET /lab? (@40.125.47.204) 0.52ms
+[I 2025-09-01 18:01:14.072 ServerApp] 302 GET / (@40.125.47.204) 0.37ms
+[I 2025-09-01 18:01:14.142 LabApp] 302 GET /lab? (@40.125.47.204) 0.50ms
+[I 2025-09-01 18:01:14.284 ServerApp] 302 GET / (@40.125.47.204) 0.37ms
+[I 2025-09-01 18:01:14.353 LabApp] 302 GET /lab? (@40.125.47.204) 0.53ms
+[W 2025-09-01 18:54:06.752 ServerApp] 404 GET /mcp (@13.93.164.106) 0.97ms referer=None
+[W 2025-09-01 18:54:06.826 ServerApp] 404 GET /api/mcp (@13.93.164.106) 1.00ms referer=None
+[W 2025-09-01 18:54:06.899 ServerApp] 404 GET /v1/mcp (@13.93.164.106) 0.99ms referer=None
+[W 2025-09-01 18:54:06.973 ServerApp] 404 GET /jsonrpc (@13.93.164.106) 0.98ms referer=None
+[W 2025-09-01 18:54:07.047 ServerApp] 404 GET /mcp (@13.93.164.106) 0.99ms referer=None
+[W 2025-09-01 18:54:07.120 ServerApp] 404 GET /api/mcp (@13.93.164.106) 0.98ms referer=None
+[W 2025-09-01 18:54:07.194 ServerApp] 404 GET /v1/mcp (@13.93.164.106) 0.99ms referer=None
+[W 2025-09-01 18:54:07.267 ServerApp] 404 GET /jsonrpc (@13.93.164.106) 0.98ms referer=None
+[W 2025-09-01 18:54:07.340 ServerApp] 404 GET /mcp (@13.93.164.106) 0.98ms referer=None
+[W 2025-09-01 18:54:07.414 ServerApp] 404 GET /api/mcp (@13.93.164.106) 1.37ms referer=None
+[W 2025-09-01 18:54:07.487 ServerApp] 404 GET /v1/mcp (@13.93.164.106) 0.97ms referer=None
+[W 2025-09-01 18:54:07.561 ServerApp] 404 GET /jsonrpc (@13.93.164.106) 0.99ms referer=None
+[I 2025-09-01 20:03:11.135 LabApp] 302 GET /lab (@167.94.138.191) 0.51ms
+[I 2025-09-01 20:03:23.965 ServerApp] 302 GET / (@162.142.125.121) 0.37ms
+[I 2025-09-01 21:58:13.320 ServerApp] 302 GET / (@205.210.31.42) 0.33ms
+[I 2025-09-01 21:58:13.380 LabApp] 302 GET /lab? (@205.210.31.42) 0.52ms
+[I 2025-09-02 01:33:07.569 ServerApp] 302 GET / (@185.247.137.232) 0.43ms
+[I 2025-09-02 01:33:08.751 LabApp] 302 GET /lab? (@185.247.137.232) 0.56ms
+[I 2025-09-02 02:25:57.029 ServerApp] 302 GET / (@47.254.33.164) 0.38ms
+[I 2025-09-02 02:26:48.991 ServerApp] 302 GET / (@45.92.19.139) 0.40ms
+[I 2025-09-02 02:26:50.565 ServerApp] 302 GET / (@45.92.19.139) 0.39ms
+[I 2025-09-02 02:26:52.261 LabApp] 302 GET /lab? (@45.92.19.139) 0.44ms
+[I 2025-09-02 02:50:51.985 ServerApp] 302 GET / (@167.94.138.189) 0.37ms
+[I 2025-09-02 02:51:03.953 ServerApp] 302 GET / (@167.94.138.189) 0.39ms
+[I 2025-09-02 02:51:04.493 ServerApp] Malformed HTTP message from 167.94.138.189: Unexpected HTTP version 'HTTP/2.0'
+[I 2025-09-02 02:51:09.359 LabApp] 302 GET /lab (@167.94.138.189) 0.48ms
+[I 2025-09-02 02:51:11.288 ServerApp] Malformed HTTP message from 167.94.138.189: Unexpected HTTP version 'HTTP/2.0'
+[I 2025-09-02 02:51:20.911 ServerApp] Malformed HTTP message from 167.94.138.189: Unexpected HTTP version 'HTTP/2.0'
+[W 2025-09-02 02:51:24.936 ServerApp] 404 GET /.well-known/security.txt (@167.94.138.189) 0.98ms referer=None
+[I 2025-09-02 03:42:27.134 ServerApp] 302 GET / (@206.168.34.219) 0.37ms
+[I 2025-09-02 03:42:39.215 ServerApp] 302 GET / (@206.168.34.219) 0.35ms
+[I 2025-09-02 03:42:39.402 ServerApp] Malformed HTTP message from 206.168.34.219: Unexpected HTTP version 'HTTP/2.0'
+[I 2025-09-02 03:42:42.988 LabApp] 302 GET /lab (@206.168.34.219) 0.49ms
+[I 2025-09-02 03:42:43.135 ServerApp] Malformed HTTP message from 206.168.34.219: Unexpected HTTP version 'HTTP/2.0'
+[I 2025-09-02 03:42:47.530 ServerApp] Malformed HTTP message from 206.168.34.219: Unexpected HTTP version 'HTTP/2.0'
