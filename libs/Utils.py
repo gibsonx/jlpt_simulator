@@ -58,7 +58,7 @@ def _render_result(result, idx=1):
             for turn in result["conversation"]:
                 gender = turn.get("gender", "unknown")
                 context = turn.get("context", "")
-                html += f'<p>{gender}: </p><p>{context}</p>\n'
+                html += f'<p><strong>{gender.capitalize()}:</strong> {context}</p>\n'
             html += '</div>\n'
         if "follow_up" in result:
             html += f'<p><strong>follow-up question: </strong>{result["follow_up"]}</p>\n'
@@ -288,8 +288,8 @@ def _generate_image(prompt="a woman is talking to a man."):
                      "https://strolandaws8409947751408.blob.core.windows.net/$web/jlpt_refer03.png"],
         "prompt": "Draw a simple black-and-white line illustration in the style of JLPT exam pictures."
                   "The style should be minimal, with clean outlines"
-                  "and look like an educational test question picture. The scene should be illustrated without any background text. "
-                  "If any word or text appear in the picture, please remove them."
+                  "and look like an educational test question picture."
+                  "Please ensure that no text appears in the picture"
                   "you can refer to the style of uploaded pictures."
                   "Write an arrow symbol pointing to the person who speaks first. The image describes the following scene: \n\n" + prompt,
         "size": "3:2",

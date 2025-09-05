@@ -212,7 +212,7 @@ class ExamTaskHandler:
             config={"configurable": {"thread_id": "1"}}
         )
         obj = instance['formatted_output']
-        obj['audio'] = _generate_express(content=obj, type="active_expression", seq=seq)
+        obj['audio'] = _generate_express(content=obj, type="immediate_ack", seq=seq)
         return obj
 
 if __name__ == "__main__":
