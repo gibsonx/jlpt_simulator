@@ -26,7 +26,6 @@ chroma_db/*
 tokenizer/
 output/
 logs/
-tmp/
 .nohup
 *.h5
 *.ckpt

@@ -30,7 +30,16 @@ def collect_vocabulary(file_path):
     return vocab_string
 
 def render_to_html(sections):
-    html = '<html><body style="text-align: left;">\n'
+    html = """
+    <!DOCTYPE html>
+        <html lang="ja">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="Content-Language" content="ja">
+            <title>日本語ページ</title>
+        </head>
+        <body style="text-align: left;">\n
+    """
     for section in sections:
         html += f'<h1>{section.get("section_title", "")}</h1>\n'
         for subsection in section.get("subsections", []):
