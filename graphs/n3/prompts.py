@@ -894,7 +894,6 @@ topic_understanding_example = """
 <p class='follow-up'>男の人は出張レポートのことを直きなければなりませんか？</p>
 </div>
 
-<a> 番 </a>
 <ul class='options'>
     <li>しゅっちょうの　もくてき</li>
     <li>会った人のじょうほう</li>  
@@ -913,7 +912,6 @@ topic_understanding_example = """
 <p class='follow-up'>女の人は、何時から会議があると言われましたか。</p>
 </div>
 
-<a class='question'> 番 </a>
 <ul class='options'>
     <li>午前10時</li>  
     <li>午後1時</li> 
@@ -992,7 +990,7 @@ keypoint_understanding_example = """
 <p class='follow-up'>夫はどうしても家に戻ってきましたか？</p> 
 </div>
 
-<a class='question'> 番 </a> 
+<a class='question'></a> 
 <ul class='options'>
     <li>しょるいをわすれたから</li>
     <li>車で会社に行くことにしたから</li>    
@@ -1008,7 +1006,6 @@ keypoint_understanding_example = """
 <p class='follow-up'>男の人は、このスーパーについてどう思っていますか。</p>
 </div>    
 
-<a class='question'> 番 </a> 
 <ul class='options'>
     <li>場所が遠くて不便だと思っている</li>    
     <li>品物が高いと思っている</li>     
@@ -1087,13 +1084,17 @@ summary_understanding_example = """
 actively_expression_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: your job is to generate a picture prompt that visually describes a situation.
-Generate Japanese language test questions similar to JLPT situational questions. 
+Task: Create an AI-friendly picture prompt that visually depicts a scene where a question is being asked. 
+Indicate clearly who speaks first: if a woman asks the question, a man should be shown answering, and if a man asks, a woman should answer. 
+The scene should be illustrated without any background text.
+
+Generate Japanese language test questions similar to JLPT situational questions.
 For each question, describe a real-life situation in Japanese and then ask what the person should say in that situation. 
-Provide three possible answers in Japanese, 
+Provide three possible answers in Japanese.
 only one of which is appropriate or most natural for the situation. 
 The correct answer must be highly relevant to the question and logical. The answer needs to maintain coherence with the previous question and not be too abrupt. For example, according to different scenarios, it is best to add a "あのう〜／へ〜／すみません／わ〜" connector as a buffer.
-The language used in the correct answer needs to match the identity of both interlocutors. For example, students must use respectful language towards their teachers, and subordinates must also use respectful language towards their superiors.
+The language used in the correct answer needs to match the identity of both interlocutors. 
+For example, students must use respectful language towards their teachers, and subordinates must also use respectful language towards their superiors.
 Keep the situations practical and relevant to everyday life in Japan. Do not mention or refer to blurred faces.
 
 The picture description must be in a dedicated section named: background

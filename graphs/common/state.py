@@ -36,7 +36,6 @@ class ListenSingleChoiceOutput(TypedDict):
     background: Annotated[str, "the background introduction of the conversation"]
     follow_up: Annotated[str, "the follow-up question"]
     conversation: List[ListenConversation]
-    html_question: Annotated[str, "the question in html format at a single line"]
     choices: Annotated[List, "answer options as a list, each option is in string format"]
     correct_answer: Annotated[int, "correct option in 1,2,3,4"]
 

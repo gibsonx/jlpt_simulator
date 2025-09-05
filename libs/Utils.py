@@ -40,28 +40,17 @@ def render_to_html(sections):
             for idx, qtopic in enumerate(subsection.get("question_topics", []), 1):
                 result = qtopic.get("result", {})
                 if isinstance(result, dict):
-                    html += _render_result(result, idx=1)
+                    html += _render_result(result, idx)
     html += '</body></html>'
     return html
 
 def _render_result(result, idx=1):
-    html = ''
+    html = f'<strong>{idx}番.</strong></br></br>'
     if isinstance(result, dict):
         if "html_article" in result:
             html += result["html_article"] + "\n"
         if "html_question" in result:
-            html += '<div>\n'
-            html += f'<p><strong>{idx}. </strong>{result["html_question"]}</p>'
-        if "choices" in result:
-            correct = result.get("correct_answer", -1)
-            html += '<ul>\n'
-            for idx, choice in enumerate(result["choices"], 1):
-                if idx == correct:
-                    html += f"<li>{idx}. <b>{choice}</b> <span style='color:green;'>(correct)</span></li>\n"
-                else:
-                    html += f"<li>{idx}. {choice}</li>\n"
-            html += '</ul>\n'
-        html += '</div>\n'
+            html += f'<p>{result["html_question"]}</p>'
         if "background" in result:
             html += f'<p><strong>Background: </strong>{result["background"]}</p>\n'
         if "conversation" in result and isinstance(result["conversation"], list):
@@ -69,7 +58,7 @@ def _render_result(result, idx=1):
             for turn in result["conversation"]:
                 gender = turn.get("gender", "unknown")
                 context = turn.get("context", "")
-                html += f'<p><strong>{gender.capitalize()}:</strong> {context}</p>\n'
+                html += f'<p>{gender}: </p><p>{context}</p>\n'
             html += '</div>\n'
         if "follow_up" in result:
             html += f'<p><strong>follow-up question: </strong>{result["follow_up"]}</p>\n'
@@ -82,6 +71,15 @@ def _render_result(result, idx=1):
             html += f'<div style="margin:1em 0;">\n'
             html += f'  <img src="{result["image"]}" alt="Result image" style="max-width:30%; border:1px solid #ccc; border-radius:8px;">\n'
             html += '</div>\n'
+        if "choices" in result:
+            correct = result.get("correct_answer", -1)
+            html += '<ul>\n'
+            for idx, choice in enumerate(result["choices"], 1):
+                if idx == correct:
+                    html += f"<li>{idx}. <b>{choice}</b> <span style='color:green;'>(correct)</span></li>\n"
+                else:
+                    html += f"<li>{idx}. {choice}</li>\n"
+            html += '</ul>\n'
         if "questions" in result and isinstance(result["questions"], list):
             for idx, q in enumerate(result["questions"],1):
                 html += f'<p><strong>{idx}.{q["html_question"]}</strong></p>\n'
@@ -105,9 +103,9 @@ def AzureAIVoice(text, voice_name, filename, speed="0%"):
 
     # Wrap the text in SSML with prosody rate
     ssml = f"""
-    <speak version='1.0' xml:lang='en-US'>
+    <speak xmlns="http://www.w3.org/2001/10/synthesis" version="1.0" xml:lang="ja-JP">
         <voice name='{voice_name}'>
-            <prosody rate='{speed}'>{text}</prosody>
+            <prosody rate='{speed}' pitch="medium">{text}</prosody>
         </voice>
     </speak>
     """
@@ -134,16 +132,20 @@ def _generate_dialogue(content, type, seq):
     seq_file = os.path.join(voice_tmp, f"{type}_{seq}.wav")
     AzureAIVoice(f"{seq}番", voices['masaru'], seq_file, speed="0%")
     output_files.append(seq_file)
+    output_files.append(os.path.join(voice_source, f"empty_1s.wav"))
 
+    # Generate audio for the background
     background_file = os.path.join(voice_tmp, f"{type}_{seq}_background.wav")
     AzureAIVoice(content['background'], voices['nanami'], background_file, speed="-5%")
     output_files.append(background_file)
     output_files.append(os.path.join(voice_source, f"empty_1s.wav"))
 
-    follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_follow_up.wav")
-    AzureAIVoice(content['follow_up'], voices['nanami'], follow_up_file, speed="-5%")
-    output_files.append(follow_up_file)
-    output_files.append(os.path.join(voice_source, f"empty_1s.wav"))
+    if type != "summary_understanding":
+        # Generate audio for the follow-up question
+        follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_follow_up.wav")
+        AzureAIVoice(content['follow_up'], voices['nanami'], follow_up_file, speed="-5%")
+        output_files.append(follow_up_file)
+        output_files.append(os.path.join(voice_source, f"empty_1s.wav"))
 
     # Generate audio for the conversation
     for i, (speaker, text) in enumerate(dialogue):
@@ -216,6 +218,7 @@ def _generate_express(content, type, seq):
     seq_file = os.path.join(voice_tmp, f"{type}_{seq}.wav")
     AzureAIVoice(f"{seq}番", voices['masaru'], seq_file, speed="0%")
     output_files.append(seq_file)
+    output_files.append(os.path.join(voice_source, f"empty_1s.wav"))
 
     # Generate audio for the conversation
     speaker, text = dialogue[0]
@@ -225,12 +228,13 @@ def _generate_express(content, type, seq):
     output_files.append(os.path.join(voice_source, f"empty_1s.wav"))
 
     # Determine speakers based on dialogue[0]
+    print("Active Speaker is : {}".format(speaker))
     if speaker == 'nanami':
-        seq_speaker = 'masaru'
-        option_speaker = 'nanami'
-    else:
         seq_speaker = 'mayu'
         option_speaker = 'masaru'
+    else:
+        seq_speaker = 'masaru'
+        option_speaker = 'nanami'
 
    # Generate audio for the choices
     for i, text in enumerate(content['choices'],start=1):
@@ -284,9 +288,10 @@ def _generate_image(prompt="a woman is talking to a man."):
                      "https://strolandaws8409947751408.blob.core.windows.net/$web/jlpt_refer03.png"],
         "prompt": "Draw a simple black-and-white line illustration in the style of JLPT exam pictures."
                   "The style should be minimal, with clean outlines"
-                  "and look like an educational test question picture. Ensure no English and Japanese words appear on the generated picture."
+                  "and look like an educational test question picture. The scene should be illustrated without any background text. "
+                  "If any word or text appear in the picture, please remove them."
                   "you can refer to the style of uploaded pictures."
-                  "Write an arrow symbol pointing to the person who speaks first. The image describes the following scenario: \n\n" + prompt,
+                  "Write an arrow symbol pointing to the person who speaks first. The image describes the following scene: \n\n" + prompt,
         "size": "3:2",
         "callBackUrl": os.environ["IMAGE_CALLBACK_URL"],
         "isEnhance": False,
