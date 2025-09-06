@@ -49,4 +49,4 @@ desktop.ini
 *.out
 nohup.out
 *.nohup.out
-
+tmp/*
