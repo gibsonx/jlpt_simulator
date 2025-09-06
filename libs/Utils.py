@@ -149,10 +149,11 @@ def _generate_dialogue(content, type, seq):
     output_files.append(background_file)
     output_files.append(os.path.join(voice_source, f"empty_1s.wav"))
 
+    follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_follow_up.wav")
+    AzureAIVoice(content['follow_up'], voices['nanami'], follow_up_file, speed="-5%")
+
     if type != "summary_understanding":
         # Generate audio for the follow-up question
-        follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_follow_up.wav")
-        AzureAIVoice(content['follow_up'], voices['nanami'], follow_up_file, speed="-5%")
         output_files.append(follow_up_file)
         output_files.append(os.path.join(voice_source, f"empty_1s.wav"))
 
@@ -162,7 +163,7 @@ def _generate_dialogue(content, type, seq):
         AzureAIVoice(text, voices[speaker], filename, speed="-5%")
         output_files.append(filename)
 
-    follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_follow_up.wav")
+    # follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_follow_up.wav")
     output_files.append(os.path.join(voice_source, f"ding.wav"))
     output_files.append(follow_up_file)
 
