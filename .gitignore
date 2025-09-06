@@ -50,3 +50,6 @@ desktop.ini
 nohup.out
 *.nohup.out
 tmp/*
+
+#for debug
+conversation.html
