@@ -1,29 +1,53 @@
 kanji_reading_teacher_prompt = """
-Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level.
+Role: You are a Japanese teacher writing a test paper for JLPT N3 level.
 
-Task: your job is to write a kanji question for a JLPT N3 level exam paper.
-Your must provide a kanji word in a short sentence and ask the candidate to choose the correct kana words
-The word being tested needs to be underlined with <u></u>, like <u>主要</u>, no other tags can appear in the sentence.
-The word in the sentence should not be used in the options
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+Task: Your job is to write a pronunciation question corresponding to Japanes kanji for the JLPT N3 level exam paper.
 
-Instructions:
-Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
-Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists
-Additional Requirement: Don't show question instructions and sequence number in the generated content. 
+Step 1: Generate a short sentence within 30 words as the question stem. And select a Japanese kanji word to mark as a
+-A must contain at least one Japanese kanji, not every character is a hiragana
 
+Step 2: For word a, underline it.
+The selected words need to be marked with<u></u>, such as<u>主要</u>, and no other tags should appear in the sentence.
+Additional requirements:
+-Words in sentences should not be used in options
+-You must display the correct answer in the output with options 1, 2, 3, 4. For example: Correct solution: 1
+
+Step 3: Generate 4 options for this question. Require all of the following conditions:
+-These 4 options must be different from each other.
+-Only one option is the correct answer.
+-The generated options need to comply with Japanese pronunciation rules and should not generate non-existent pronunciations
+-Assuming that word a consists of 2-3 characters, set them in order as x[0],y[0],z[0] (if a variable is a Japanese kanji, do not display it as hiragana pronunciation). There are four options, including option 1: x[1],y[1],z[1]; Option 2: x[2],y[2],z[2]; Option 3: x[3],y[3],z[3]; Option 4: x[4],y[4],z[4]
+-If x[0] is Japanese hiragana, then: x[1]=x[2]=x[3]=x[4]=x[0]
+-If y[0] is Japanese hiragana, then: y[1]=y[2]=y[3]=y[4]=y[0]
+-If z[0] is Japanese hiragana, then: z[1]=z[2]=z[3]=z[4]=z[0]
+-Print a,x[0],y[0],z[0],x[1],y[1],z[1],x[2],y[2],z[2],x[3],y[3],z[3],x[4],y[4],z[4] in the debugging log; And print the judgment of whether x[0],y[0],z[0] are Japanese hiragana or not
+
+Step 4: output a question.
+Format: Follow the format of the 2 examples in the formal exam paper, not the content. The output must be in HTML format and the line change tag must be removed.
+Content: Ensure vocabulary is limited to N3 level.  
+Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation (if any)
+Additional requirement: Do not display problem descriptions and serial numbers in the generated content.  
 
 Formal exam paper: {example}
 """
 
 kanji_reading_example = """  
+--- example 1 ---
 <a>この町の<u>主要</u>な産業は何ですか。</a>
 <ul>
     <li>じゅおう</li>
     <li>しゅおう</li>
     <li>じゅうよう</li>
     <li>しゅよう</li>
+</ul>
+
+--- example 2 ---
+<a>今日とても<u>嬉しい</u>ですね。</a>
+<ul>
+    <li>うれしい</li>
+    <li>はれしい</li>
+    <li>まぶしい</li>
+    <li>きびしい</li>
 </ul>
 """
 
