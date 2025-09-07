@@ -13,3 +13,4 @@ azure-cognitiveservices-speech
 pydub
 Flask
 azure-storage-blob
+pymongo

@@ -1,6 +1,6 @@
-from graphs.common.node_builder import *
+from graphs.common.NodeBuilder import *
 from libs.Utils import _generate_dialogue,_generate_express,_generate_image,collect_vocabulary
-from graphs.common.state import *
+from graphs.common.State import *
 from libs.LLMs import azure_llm
 import random
 from graphs.n3.prompts import *
@@ -11,7 +11,8 @@ load_dotenv()
 # logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class ExamTaskHandler:
-    def __init__(self):
+    def __init__(self,level,exam_id):
+        self.exam_uid = f"{level + '_' + exam_id}"
         self.llm = azure_llm
         self.ref_llm = azure_llm
         self.nodes = {
@@ -20,8 +21,6 @@ class ExamTaskHandler:
             "reflector": None,
             "formatter": None
         }
-        # with open("Vocab/sentence_grammar.txt", "r", encoding="utf-8") as file:
-        #     self.ss = [line.strip() for line in file]
 
     def build_agent(self, prompt_text, example, OutType, grammar=None):
         self.nodes["online_search"] = online_search_node_builder()
@@ -45,14 +44,7 @@ class ExamTaskHandler:
 
         return graph
 
-    # def invoke(self, word):
-    #     instance = self.build_agent().invoke(
-    #         {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
-    #         config={"configurable": {"thread_id": "1"}}
-    #     )
-    #     return instance['formatted_output']
-
-    def kanji_reading(self, word, seq=1):
+    def kanji_reading(self, word):
         graph = self.build_agent(kanji_reading_teacher_prompt, kanji_reading_example, SimpleChoiceQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -60,7 +52,7 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def write_kanji(self, word, seq=1):
+    def write_kanji(self, word):
         graph = self.build_agent(write_kanji_teacher_prompt, write_kanji_example, SimpleChoiceQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -68,7 +60,7 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def word_meaning(self, word, seq=1):
+    def word_meaning(self, word):
         graph = self.build_agent(word_meaning_teacher_prompt, word_meaning_example, SimpleChoiceQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -76,7 +68,7 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def synonym_substitution(self, word, seq=1):
+    def synonym_substitution(self, word):
         graph = self.build_agent(synonym_substitution_teacher_prompt, synonym_substitution_example, SimpleChoiceQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -84,7 +76,7 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def word_usage(self, word, seq=1):
+    def word_usage(self, word):
         graph = self.build_agent(word_usage_teacher_prompt, word_usage_example, SimpleChoiceQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -92,7 +84,7 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def sentence_grammar(self, word, grammar, seq=1):
+    def sentence_grammar(self, word, grammar):
         graph = self.build_agent(sentence_grammar_teacher_prompt, sentence_grammar_example, SimpleChoiceQuestionOutput, grammar)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -100,7 +92,7 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def sentence_sort(self, word, grammar, seq=1):
+    def sentence_sort(self, word, grammar):
         graph = self.build_agent(sentence_sort_teacher_prompt, sentence_sort_example, SimpleChoiceQuestionOutput, grammar)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -108,7 +100,7 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def sentence_structure(self, word, grammar, seq):
+    def sentence_structure(self, word, grammar):
         graph = self.build_agent(structure_selection_teacher_prompt, structure_selection_example, MultipleQuestionOutput, grammar)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -116,7 +108,7 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def short_passage_narrative_read(self, word, seq):
+    def short_passage_narrative_read(self, word):
         graph = self.build_agent(short_reading_narrative_teacher_prompt, short_reading_narrative_example, MultipleQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -124,7 +116,7 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def short_passage_mail_read(self, word, seq):
+    def short_passage_mail_read(self, word):
         graph = self.build_agent(short_reading_mail_teacher_prompt, short_reading_mail_example, MultipleQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -132,7 +124,7 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def short_passage_notification_read(self, word, seq):
+    def short_passage_notification_read(self, word):
         graph = self.build_agent(short_reading_notification_teacher_prompt, short_reading_notification_example, MultipleQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -140,7 +132,7 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def midsize_passage_read(self, word, seq):
+    def midsize_passage_read(self, word):
         graph = self.build_agent(midsize_reading_teacher_prompt, midsize_reading_example, MultipleQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -148,7 +140,7 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def long_passage_read(self, word, seq):
+    def long_passage_read(self, word):
         graph = self.build_agent(long_reading_teacher_prompt, long_reading_example, MultipleQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -156,7 +148,7 @@ class ExamTaskHandler:
         )
         return instance['formatted_output']
 
-    def info_retrieval(self, word, seq):
+    def info_retrieval(self, word):
         graph = self.build_agent(information_retrieval_teacher_prompt, information_retrieval_example, MultipleQuestionOutput)
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regrading Topic: {word}")]},
@@ -171,7 +163,7 @@ class ExamTaskHandler:
             config={"configurable": {"thread_id": "1"}}
         )
         obj = instance['formatted_output']
-        obj['audio'] = _generate_dialogue(content=obj, type="topic_understanding", seq=seq)
+        obj['audio'] = _generate_dialogue(content=obj, type="topic_understanding", seq=seq, uid=self.exam_uid)
         return obj
 
     def keypoint_understanding(self, word, seq):
@@ -181,7 +173,7 @@ class ExamTaskHandler:
             config={"configurable": {"thread_id": "1"}}
         )
         obj = instance['formatted_output']
-        obj['audio'] = _generate_dialogue(content=obj, type="keypoint_understanding", seq=seq)
+        obj['audio'] = _generate_dialogue(content=obj, type="keypoint_understanding", seq=seq, uid=self.exam_uid)
         return obj
 
     def summary_understanding(self, word, seq):
@@ -191,7 +183,7 @@ class ExamTaskHandler:
             config={"configurable": {"thread_id": "1"}}
         )
         obj = instance['formatted_output']
-        obj['audio'] = _generate_dialogue(content=obj, type="summary_understanding", seq=seq)
+        obj['audio'] = _generate_dialogue(content=obj, type="summary_understanding", seq=seq, uid=self.exam_uid)
         return obj
 
     def active_expression(self, word, seq):
@@ -201,7 +193,7 @@ class ExamTaskHandler:
             config={"configurable": {"thread_id": "1"}}
         )
         obj = instance['formatted_output']
-        obj['audio'] = _generate_express(content=obj, type="active_expression", seq=seq)
+        obj['audio'] = _generate_express(content=obj, type="active_expression", seq=seq, uid=self.exam_uid)
         obj['image'] = _generate_image(obj['background'])
         return obj
 
@@ -212,7 +204,7 @@ class ExamTaskHandler:
             config={"configurable": {"thread_id": "1"}}
         )
         obj = instance['formatted_output']
-        obj['audio'] = _generate_express(content=obj, type="immediate_ack", seq=seq)
+        obj['audio'] = _generate_express(content=obj, type="immediate_ack", seq=seq, uid=self.exam_uid)
         return obj
 
 if __name__ == "__main__":

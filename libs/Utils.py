@@ -121,133 +121,155 @@ def AzureAIVoice(text, voice_name, filename, speed="0%"):
 
     synthesizer.speak_ssml_async(ssml).get()
 
-def _generate_dialogue(content, type, seq):
+def _generate_dialogue(content, type, seq, uid):
+    import os
+    from pydub import AudioSegment
 
-    voice_tmp = os.path.join(os.environ["PROJECT_PATH"],'tmp')
-    voice_source = os.path.join(os.environ["PROJECT_PATH"],'voice')
-    voice_output = os.path.join(os.environ["PROJECT_PATH"],'output')
+    base_path = os.environ["PROJECT_PATH"]
+
+    # UID-specific subfolders
+    voice_tmp = os.path.join(base_path, "tmp", uid)
+    voice_source = os.path.join(base_path, "voice")
+    voice_output = os.path.join(base_path, "output", uid)
+
+    os.makedirs(voice_tmp, exist_ok=True)
+    os.makedirs(voice_output, exist_ok=True)
 
     voice_map = {
-        'male': 'masaru',
-        'female': 'nanami',
+        "male": "masaru",
+        "female": "nanami",
     }
 
-    dialogue = [(voice_map[line['gender']], line['context']) for line in content['conversation']]
+    dialogue = [
+        (voice_map[line["gender"]], line["context"])
+        for line in content["conversation"]
+    ]
 
     output_files = []
 
-    output_files.append(os.path.join(voice_source, f"ding.wav"))
+    # Common sounds
+    output_files.append(os.path.join(voice_source, "ding.wav"))
 
+    # Sequence intro
     seq_file = os.path.join(voice_tmp, f"{type}_{seq}.wav")
-    AzureAIVoice(f"{seq}番", voices['masaru'], seq_file, speed="0%")
+    AzureAIVoice(f"{seq}番", voices["masaru"], seq_file, speed="0%")
     output_files.append(seq_file)
-    output_files.append(os.path.join(voice_source, f"empty_1s.wav"))
+    output_files.append(os.path.join(voice_source, "empty_1s.wav"))
 
-    # Generate audio for the background
+    # Background
     background_file = os.path.join(voice_tmp, f"{type}_{seq}_background.wav")
-    AzureAIVoice(content['background'], voices['nanami'], background_file, speed="-5%")
+    AzureAIVoice(content["background"], voices["nanami"], background_file, speed="-5%")
     output_files.append(background_file)
-    output_files.append(os.path.join(voice_source, f"empty_1s.wav"))
+    output_files.append(os.path.join(voice_source, "empty_1s.wav"))
 
+    # Follow-up
     follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_follow_up.wav")
-    AzureAIVoice(content['follow_up'], voices['nanami'], follow_up_file, speed="-5%")
+    AzureAIVoice(content["follow_up"], voices["nanami"], follow_up_file, speed="-5%")
 
     if type != "summary_understanding":
-        # Generate audio for the follow-up question
         output_files.append(follow_up_file)
-        output_files.append(os.path.join(voice_source, f"empty_1s.wav"))
+        output_files.append(os.path.join(voice_source, "empty_1s.wav"))
 
-    # Generate audio for the conversation
+    # Conversation
     for i, (speaker, text) in enumerate(dialogue):
         filename = os.path.join(voice_tmp, f"{type}_{seq}_{i}_speaker.wav")
         AzureAIVoice(text, voices[speaker], filename, speed="-5%")
         output_files.append(filename)
 
-    # follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_follow_up.wav")
-    output_files.append(os.path.join(voice_source, f"ding.wav"))
+    output_files.append(os.path.join(voice_source, "ding.wav"))
     output_files.append(follow_up_file)
 
-    # Generate audio for the choices
+    # Choices for summary_understanding
     if type == "summary_understanding":
-        for i, text in enumerate(content['choices'],start=1):
+        for i, text in enumerate(content["choices"], start=1):
             option_seq = os.path.join(voice_tmp, f"{type}_{seq}_{i}_seq.wav")
-            AzureAIVoice(f"{i}", voices['masaru'], option_seq, speed="-5%")
+            AzureAIVoice(f"{i}", voices["masaru"], option_seq, speed="-5%")
 
             option = os.path.join(voice_tmp, f"{type}_{seq}_{i}_option.wav")
-            AzureAIVoice(text, voices['nanami'], option, speed="-5%")
+            AzureAIVoice(text, voices["nanami"], option, speed="-5%")
 
             output_files.append(option_seq)
             output_files.append(option)
 
-
+    # Combine audio
     combined = AudioSegment.empty()
     for file in output_files:
         print(file)
         combined += AudioSegment.from_wav(file)
 
+    # Final output
     filename = f"{type}_{seq}_conversation_output.mp3"
     target_file = os.path.join(voice_output, filename)
 
-    # Export final conversation
     combined.export(target_file, format="mp3", bitrate="96k")
     print(f"Conversation audio saved as {target_file}")
 
+    # Upload to blob with UID subfolder
+    blob_name = f"{uid}/{filename}"
     try:
-        # Upload file
         with open(target_file, "rb") as data:
             container_client.upload_blob(
-                name=filename,
+                name=blob_name,
                 data=data,
-                overwrite=True,  # set True if you want to replace existing file
-                timeout=300,  # seconds
+                overwrite=True,
+                timeout=300,
             )
-
-        print(f"✅ Uploaded {target_file} size: {os.path.getsize(target_file)} to container {container_client.container_name} as blob {filename}")
+        print(f"✅ Uploaded {target_file} as blob {blob_name}")
     except Exception as e:
-        print(f"Image upload failed: {e}")
+        print(f"Upload failed: {e}")
 
-    return f"{os.environ['AZURE_CONTAINER_URL']}/{os.environ['AZURE_VOICE_CONTAINER']}/{filename}"
+    # Return full blob path
+    return f"{os.environ['AZURE_CONTAINER_URL']}/{os.environ['AZURE_VOICE_CONTAINER']}/{blob_name}"
 
-def _generate_express(content, type, seq):
+def _generate_express(content, type, seq, uid):
+    import os
+    from pydub import AudioSegment
 
-    voice_tmp = os.path.join(os.environ["PROJECT_PATH"], 'tmp')
-    voice_source = os.path.join(os.environ["PROJECT_PATH"], 'voice')
-    voice_output = os.path.join(os.environ["PROJECT_PATH"], 'output')
+    base_path = os.environ["PROJECT_PATH"]
+
+    # UID-specific subfolders
+    voice_tmp = os.path.join(base_path, "tmp", uid)
+    voice_source = os.path.join(base_path, "voice")
+    voice_output = os.path.join(base_path, "output", uid)
+
+    os.makedirs(voice_tmp, exist_ok=True)
+    os.makedirs(voice_output, exist_ok=True)
 
     voice_map = {
-        'male': 'masaru',
-        'female': 'nanami',
+        "male": "masaru",
+        "female": "nanami",
     }
 
-    dialogue = [(voice_map[line['gender']], line['context']) for line in content['conversation']]
+    dialogue = [(voice_map[line["gender"]], line["context"]) for line in content["conversation"]]
 
     output_files = []
 
-    output_files.append(os.path.join(voice_source, f"ding.wav"))
+    # Common sound
+    output_files.append(os.path.join(voice_source, "ding.wav"))
 
+    # Sequence intro
     seq_file = os.path.join(voice_tmp, f"{type}_{seq}.wav")
-    AzureAIVoice(f"{seq}番", voices['masaru'], seq_file, speed="0%")
+    AzureAIVoice(f"{seq}番", voices["masaru"], seq_file, speed="0%")
     output_files.append(seq_file)
-    output_files.append(os.path.join(voice_source, f"empty_1s.wav"))
+    output_files.append(os.path.join(voice_source, "empty_1s.wav"))
 
-    # Generate audio for the conversation
+    # Generate audio for the first dialogue line
     speaker, text = dialogue[0]
     filename = os.path.join(voice_tmp, f"{type}_{seq}_0_speaker.wav")
     AzureAIVoice(text, voices[speaker], filename, speed="-10%")
     output_files.append(filename)
-    output_files.append(os.path.join(voice_source, f"empty_1s.wav"))
+    output_files.append(os.path.join(voice_source, "empty_1s.wav"))
 
-    # Determine speakers based on dialogue[0]
-    print("Active Speaker is : {}".format(speaker))
-    if speaker == 'nanami':
-        seq_speaker = 'mayu'
-        option_speaker = 'masaru'
+    # Determine speakers for choices
+    if speaker == "nanami":
+        seq_speaker = "mayu"
+        option_speaker = "masaru"
     else:
-        seq_speaker = 'masaru'
-        option_speaker = 'nanami'
+        seq_speaker = "masaru"
+        option_speaker = "nanami"
 
-   # Generate audio for the choices
-    for i, text in enumerate(content['choices'],start=1):
+    # Generate audio for the choices
+    for i, text in enumerate(content["choices"], start=1):
         option_seq = os.path.join(voice_tmp, f"{type}_{seq}_{i}_seq.wav")
         AzureAIVoice(f"{i}", voices[seq_speaker], option_seq, speed="-10%")
 
@@ -257,36 +279,37 @@ def _generate_express(content, type, seq):
         output_files.append(option_seq)
         output_files.append(option)
 
-    # Merge audio files using pydub
+    # Merge audio files
     combined = AudioSegment.empty()
     for file in output_files:
         print(file)
         combined += AudioSegment.from_wav(file)
 
+    # Final output file (no UID prefix in filename)
     filename = f"{type}_{seq}_conversation_output.mp3"
     target_file = os.path.join(voice_output, filename)
-
-    # Export final conversation
     combined.export(target_file, format="mp3", bitrate="96k")
     print(f"Conversation audio saved as {target_file}")
 
+    # Upload to blob with UID subfolder
+    blob_name = f"{uid}/{filename}"
     try:
-        # Upload file
         with open(target_file, "rb") as data:
             container_client.upload_blob(
-                name=filename,
+                name=blob_name,
                 data=data,
-                overwrite=True,  # set True if you want to replace existing file
-                timeout=300,  # seconds
+                overwrite=True,
+                timeout=300,
             )
-
-        print(f"✅ Uploaded {target_file} size: {os.path.getsize(target_file)} to container {container_client.container_name} as blob {filename}")
+        print(f"✅ Uploaded {target_file} as blob {blob_name}")
     except Exception as e:
-        print(f"Image upload failed: {e}")
+        print(f"Upload failed: {e}")
 
-    return f"{os.environ['AZURE_CONTAINER_URL']}/{os.environ['AZURE_VOICE_CONTAINER']}/{filename}"
+    # Return full blob path
+    return f"{os.environ['AZURE_CONTAINER_URL']}/{os.environ['AZURE_VOICE_CONTAINER']}/{blob_name}"
 
-def _generate_image(prompt="a woman is talking to a man."):
+
+def _generate_image(prompt=""):
 
     KIA_API_KEY = os.environ["KIA_API_KEY"]
 

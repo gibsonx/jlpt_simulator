@@ -1,7 +1,7 @@
 # from langchain_community.embeddings import XinferenceEmbeddings
 from typing import Annotated,Literal
-from typing import List
-
+from typing import List, Optional
+from pydantic import BaseModel, Field
 from langgraph.graph.message import add_messages
 from typing_extensions import TypedDict
 
@@ -54,3 +54,48 @@ class ListenImmediateQuestionOutput(TypedDict):
     choices: Annotated[List, "answer options as a list, each option is in string format"]
     correct_answer: Annotated[int, "correct option in 1,2,3"]
 
+# Outline Structure
+class QuestionTopic(BaseModel):
+    topic: str = Field(..., title="a vocabulary or topic hint for a question")
+    grammar: str = Field(None, title="a grammar used for this question")
+
+class Subsection(BaseModel):
+    subsection_title: str = Field(..., title="subsection English name in () from the Instruction. example: kanji_reading")
+    description: str = Field(..., title="giving the number of questions and requirements")
+    question_topics: List[QuestionTopic] = Field(
+        default_factory=list
+    )
+
+    @property
+    def as_str(self) -> str:
+        question_topics_str = "\n".join(
+            f"- **{qt.topic}**{qt.grammar}" for qt in self.question_topics
+        )
+        return f"### {self.subsection_title}\n\n{self.description}\n\n{question_topics_str}".strip()
+
+class Section(BaseModel):
+    section_title: str = Field(..., title="Title of the section")
+    subsections: Optional[List[Subsection]] = Field(
+        default_factory=list,
+        title="Titles and reason for each subsection of the JLPT exam page.",
+    )
+
+    @property
+    def as_str(self) -> str:
+        subsections = "\n\n".join(
+            subsection.as_str for subsection in self.subsections or []
+        )
+        return f"## {self.section_title}\n\n{subsections}".strip()
+
+
+class Outline(BaseModel):
+    page_title: str = Field(..., title="Title of the JLPT exam page")
+    sections: List[Section] = Field(
+        default_factory=list,
+        title="Titles and descriptions for each section of the JLPT exam paper.",
+    )
+
+    @property
+    def as_str(self) -> str:
+        sections = "\n\n".join(section.as_str for section in self.sections)
+        return f"# {self.page_title}\n\n{sections}".strip()
