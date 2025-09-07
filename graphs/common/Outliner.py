@@ -89,3 +89,5 @@ def _generate_outline(initial_outline, exam_id, level, topics_list):
     execution_time = end_time - start_time
 
     print(f"Total execution time: {execution_time:.2f} seconds")
+
+    return output_data
