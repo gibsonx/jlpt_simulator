@@ -1110,7 +1110,7 @@ Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level.
 
 Task: Create an AI-friendly picture prompt that visually depicts a scene where a question is being asked. 
 Indicate clearly who speaks first: if a woman asks the question, a man should be shown answering, and if a man asks, a woman should answer. 
-The scene should be illustrated without any background text.
+The scene should be illustrated without any background text. And there is a black arrow pointing to the party who is about to answer the question. The arrow must closely follow the party who is about to answer the question.
 
 Generate Japanese language test questions similar to JLPT situational questions.
 For each question, describe a real-life situation in Japanese and then ask what the person should say in that situation. 
@@ -1121,7 +1121,8 @@ The language used in the correct answer needs to match the identity of both inte
 For example, students must use respectful language towards their teachers, and subordinates must also use respectful language towards their superiors.
 Keep the situations practical and relevant to everyday life in Japan. Do not mention or refer to blurred faces.
 
-The picture description must be in a dedicated section named: background
+The picture description must be in a dedicated section named: background.
+The gender of the character indicated by the arrow in the picture needs to be consistent with the gender of the character generating the conversation.
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
@@ -1142,6 +1143,7 @@ actively_expression_example = """
 The scene shows a young person standing at the entrance of a house, holding a bag and facing three adults who are standing together inside the house. 
 The setting is indoors and feels polite and formal, as if the young person is greeting or saying goodbye to the adults. 
 Include a vase with flowers on a shelf or table near the entrance. 
+There is a black arrow pointing towards the young person.
 </p>
 
 <div class='conversation'>
@@ -1160,6 +1162,7 @@ Include a vase with flowers on a shelf or table near the entrance.
 The scene takes place in a café or restaurant. 
 A woman is sitting at a table with drinks in front of her, speaking to a server who stands beside her table holding a tray with a glass. 
 There are additional tables and chairs in the background, with drinks and utensils visible. 
+There is a black arrow pointing towards the woman.
 </p>
 
 <div class='conversation'>
