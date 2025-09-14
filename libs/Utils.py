@@ -43,7 +43,7 @@ def _load_vocab_and_resources(level: str):
         topics_list = [line.strip() for line in file]
 
     # grammar
-    grammar_file = os.path.join(project_path, "vocab", "sentence_grammar.txt")
+    grammar_file = os.path.join(project_path, "vocab", f"{level}_sentence_grammar.txt")
     with open(grammar_file, "r", encoding="utf-8") as file:
         grammar_list = [line.strip() for line in file]
 
