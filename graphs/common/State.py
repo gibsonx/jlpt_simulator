@@ -4,8 +4,6 @@ from typing import List, Optional
 from pydantic import BaseModel, Field
 from langgraph.graph.message import add_messages
 from typing_extensions import TypedDict
-
-
 # Graph state
 
 class SimpleChoiceQuestionOutput(TypedDict):
@@ -86,7 +84,6 @@ class Section(BaseModel):
             subsection.as_str for subsection in self.subsections or []
         )
         return f"## {self.section_title}\n\n{subsections}".strip()
-
 
 class Outline(BaseModel):
     page_title: str = Field(..., title="Title of the JLPT exam page")

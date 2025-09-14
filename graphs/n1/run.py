@@ -18,7 +18,7 @@ from libs.Utils import render_to_html,collect_vocabulary
 from typing import List, Optional
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
-from graphs.n3.ExamTaskHandler import ExamTaskHandler
+from graphs.n3.inventory import ExamTaskHandler
 
 load_dotenv()
 import logging
@@ -33,13 +33,13 @@ from libs.Utils import render_to_html,collect_vocabulary
 
 load_dotenv()
 
-# Import N3 Vocabulary
-file_path = 'Vocab/n3.csv'
+# Import N3 vocabulary
+file_path = 'vocab/n3.csv'
 # Display the content of the CSV file
 vocab_dict = collect_vocabulary(file_path)
-with open("Vocab/topics.txt", "r", encoding="utf-8") as file:
+with open("vocab/topics.txt", "r", encoding="utf-8") as file:
     topics_list = [line.strip() for line in file]
-with open("Vocab/sentence_grammar.txt", "r", encoding="utf-8") as file:
+with open("vocab/sentence_grammar.txt", "r", encoding="utf-8") as file:
     grammar_list = [line.strip() for line in file]
 
 exam_id = str(uuid.uuid1())
@@ -47,7 +47,7 @@ level = 'n3'
 
 
 instruction = """
-Section 1: Vocabulary
+Section 1: vocabulary
 - 問題1 のことばの読み方として最もよいものを、1・2・3・4から一つえらびなさい (kanji_reading) 8 questions in total: 3 are nouns, 3 are verbs, 1 is an adjective,  adjective.
 - 問題5 つぎのことばの使い方として最もよいものを、1・2・3・4から一つえらびなさい。 (word_usage) 5 questions in total: 3 noun, and 2 verbs.
 
@@ -71,8 +71,8 @@ direct_gen_outline_prompt = ChatPromptTemplate.from_messages(
                 "The exam paper should include a mix of moderately difficult and very difficult topics to accurately assess proficiency.\n\n"
                 "Please ensure the following requirements are met:\n\n"
                 "subsection_title in Subsection must be written in English.\n\n"
-                "For Section 1 - Vocabulary:\n"
-                "- Select vocabulary words from the 'Vocabulary' list, ensuring that 80% of the topics are very difficult.\n"
+                "For Section 1 - vocabulary:\n"
+                "- Select vocabulary words from the 'vocabulary' list, ensuring that 80% of the topics are very difficult.\n"
                 "- The topic words in 問題1 (kanji_reading) and 問題5 (word_usage) must be written in Kanji while other topic words use Japanese kana.\n"
                 "For Section 2 - Grammar:\n"
                 "- Randomly select topics from 'TopicList' and grammars from 'GrammarList'.\n"
@@ -89,6 +89,6 @@ direct_gen_outline_prompt = ChatPromptTemplate.from_messages(
                 f"Instruction: {instruction}"
             ),
         ),
-        ("user", "TopicList: {topic_list}, Vocabulary: {vocab_dict}, GrammarList: {grammar_list}"),
+        ("user", "TopicList: {topic_list}, vocabulary: {vocab_dict}, GrammarList: {grammar_list}"),
     ]
 )

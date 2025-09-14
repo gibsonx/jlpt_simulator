@@ -29,6 +29,26 @@ def collect_vocabulary(file_path):
     vocab_string = ','.join(words.iloc[:, 1].astype(str).tolist())
     return vocab_string
 
+
+def _load_vocab_and_resources(level: str):
+    project_path = os.getenv("PROJECT_PATH")
+
+    # vocab
+    vocab_file = os.path.join(project_path, f"vocab/{level}.csv")
+    vocab = collect_vocabulary(vocab_file)
+
+    # topics
+    topics_file = os.path.join(project_path, "vocab", "topics.txt")
+    with open(topics_file, "r", encoding="utf-8") as file:
+        topics_list = [line.strip() for line in file]
+
+    # grammar
+    grammar_file = os.path.join(project_path, "vocab", "sentence_grammar.txt")
+    with open(grammar_file, "r", encoding="utf-8") as file:
+        grammar_list = [line.strip() for line in file]
+
+    return vocab, topics_list, grammar_list
+
 def render_to_html(sections):
     html = """
     <!DOCTYPE html>

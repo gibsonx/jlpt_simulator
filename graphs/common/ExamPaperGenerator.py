@@ -18,14 +18,14 @@ from libs.Utils import render_to_html,collect_vocabulary
 from typing import List, Optional
 from langchain_core.prompts import ChatPromptTemplate
 from pydantic import BaseModel, Field
-from graphs.n3.ExamTaskHandler import ExamTaskHandler
-
-def _generate_outline(initial_outline, exam_id, level, topics_list):
+from graphs.common.JLPTTaskFactory import JLPTTaskFactory
+from graphs.common.GraphBuilder import GraphBuilder
+def _generate_outline(initial_outline, exam_uid, level, topics_list):
 
     outliner_json = initial_outline.model_dump_json()
     data = json.loads(outliner_json)  # Replace with your actual JSON data
     output_data = {
-        "_id": exam_id,
+        "_id": exam_uid,
         "level": level,
         'sections': []
     }
@@ -42,7 +42,8 @@ def _generate_outline(initial_outline, exam_id, level, topics_list):
             questions = subsection['question_topics']
             seq = 1  # Initialize sequence counter
             for question in tqdm(questions, desc=f"Processing {subsection['subsection_title']}"):
-                handler = ExamTaskHandler(level=level, exam_id=exam_id)
+                graph = GraphBuilder(exam_uid=exam_uid)
+                handler = JLPTTaskFactory(graph=graph, level=level)
                 func = getattr(handler, function_name, None)
 
                 if func:

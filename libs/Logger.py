@@ -2,8 +2,11 @@ import logging
 import os
 from logging.handlers import TimedRotatingFileHandler
 
+from dotenv import load_dotenv
+load_dotenv()
+
 # Create logs folder
-LOG_FOLDER = "logs"
+LOG_FOLDER = os.path.join(os.getenv("PROJECT_PATH"),"logs")
 os.makedirs(LOG_FOLDER, exist_ok=True)
 
 # Log file path
