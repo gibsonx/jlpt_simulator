@@ -4,8 +4,10 @@ from typing import List, Optional
 from pydantic import BaseModel, Field
 from langgraph.graph.message import add_messages
 from typing_extensions import TypedDict
-# Graph state
 
+# ----------------------------
+# Question Output Structures
+# ----------------------------
 class SimpleChoiceQuestionOutput(TypedDict):
     """Simple Question Formatted Output"""
     html_question: Annotated[str, "the question in html format at a single line"]
@@ -52,7 +54,9 @@ class ListenImmediateQuestionOutput(TypedDict):
     choices: Annotated[List, "answer options as a list, each option is in string format"]
     correct_answer: Annotated[int, "correct option in 1,2,3"]
 
-# Outline Structure
+# ----------------------------
+# Outline Structures
+# ----------------------------
 class QuestionTopic(BaseModel):
     topic: str = Field(..., title="a vocabulary or topic hint for a question")
     grammar: str = Field(None, title="a grammar used for this question")
@@ -96,3 +100,6 @@ class Outline(BaseModel):
     def as_str(self) -> str:
         sections = "\n\n".join(section.as_str for section in self.sections)
         return f"# {self.page_title}\n\n{sections}".strip()
+
+ExamType = Literal["full_exam","fast_exam","vocabulary","grammar","reading","listening"]
+ExamLevel = Literal["n1","n2","n3","n4","n5"]

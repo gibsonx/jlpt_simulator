@@ -31,7 +31,7 @@ Additional requirement: Do not display problem descriptions and serial numbers i
 Formal exam paper: {example}
 """
 
-kanji_reading_example = """  
+kanji_reading_example = """
 --- example 1 ---
 <a>この町の<u>主要</u>な産業は何ですか。</a>
 <ul>

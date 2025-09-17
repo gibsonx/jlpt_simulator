@@ -1,6 +1,6 @@
 from graphs.common.GraphBuilder import *
 from libs.Utils import _generate_dialogue,_generate_express,_generate_image,collect_vocabulary
-from graphs.common.State import *
+from graphs.common.Schema import *
 load_dotenv()
 
 class JLPTTaskFactory:
@@ -145,11 +145,30 @@ class JLPTTaskFactory:
         return obj
 
     def active_expression(self, word, seq: int):
-        obj = self._run_task(self.prompts_module.actively_expression_teacher_prompt,
-                             self.prompts_module.actively_expression_example,
-                             ImageListenQuestionOutput, word)
+        obj = self._run_task(
+            self.prompts_module.actively_expression_teacher_prompt,
+            self.prompts_module.actively_expression_example,
+            ImageListenQuestionOutput,
+            word
+        )
+
         obj["audio"] = _generate_express(content=obj, type="active_expression", seq=seq, uid=self.graph.exam_uid)
-        obj["image"] = _generate_image(obj["background"])
+
+        # Retry logic for image generation
+        max_attempts = 3
+        for attempt in range(max_attempts):
+            try:
+                obj["image"] = _generate_image(obj["background"])
+                break  # success, exit loop
+            except Exception as e:
+                print(f"Attempt {attempt + 1} failed: {e}")
+                if attempt == max_attempts - 1:
+                    # Last attempt failed, propagate the exception
+                    raise
+                else:
+                    # wait a bit before retrying
+                    import time
+                    time.sleep(5)  # optional delay between retries
         return obj
 
     def immediate_ack(self, word, seq: int):
