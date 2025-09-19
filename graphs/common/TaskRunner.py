@@ -1,47 +1,96 @@
 from graphs.common.ExamGenerator import ExamGenerator
-from langchain_core.prompts import ChatPromptTemplate
+from typing import *
 import importlib
+from libs.Logger import logger
+from graphs.common.Schema import ExamType
 
-def run(level: str, exam_type: str):
+
+class TaskRunner:
     """
-    Generate exam outline for a given level and exam_type.
-    Prompts are selected dynamically based on level.
+    Class-based handler for generating and storing exam outlines and papers.
     """
-    try:
-        # Dynamically import the module for the given level
-        module_name = f"graphs.{level.lower()}.run"
-        level_module = importlib.import_module(module_name)
-    except ModuleNotFoundError:
-        raise ValueError(f"No module found for level '{level}'. Expected module: {module_name}")
 
-    # Build the prompt registry dynamically from the imported module
-    PROMPT_REGISTRY: dict[str, ChatPromptTemplate] = {
-        "full_exam": getattr(level_module, "full_exam_prompt", None),
-        "fast_exam": getattr(level_module, "fast_exam_prompt", None),
-        "reading": getattr(level_module, "reading_prompt", None),
-        "listening": getattr(level_module, "listening_prompt", None),
-        "grammar": getattr(level_module, "grammar_prompt", None),
-        "vocab": getattr(level_module, "vocab_prompt", None),
-    }
+    def __init__(self, level: str, exam_type: ExamType):
+        self.level = level.lower()
+        self.exam_type = exam_type
+        self.level_lower = level.lower()
+        self.exam_type_lower = exam_type.lower()
+        self.module_name = f"graphs.{self.level_lower}.outliner"
+        self.level_module = self._import_level_module()
 
-    # Case-insensitive exam_type lookup
-    prompt = PROMPT_REGISTRY.get(exam_type.lower())
-    if not prompt:
-        raise ValueError(f"No prompt defined for exam_type: {exam_type}")
+    def _import_level_module(self):
+        try:
+            module = importlib.import_module(self.module_name)
+            logger.info("Module '%s' imported successfully.", self.module_name)
+            return module
+        except ModuleNotFoundError:
+            logger.exception(
+                "Module not found for level '%s'. Expected module: '%s'",
+                self.level,
+                self.module_name,
+            )
+            raise ValueError(
+                f"No module found for level '{self.level}'. "
+                f"Expected module: {self.module_name}"
+            )
 
-    # Generate and store exam
-    exam_generator = ExamGenerator(level=level, exam_type=exam_type, db_collection=f"{level}_{exam_type}")
-    inserted_id, outline = exam_generator._generate_and_store_paper(instruction=prompt)
+    def _get_prompt(self) -> Any:
+        prompt_registry: dict[str, Optional[Any]] = {
+            "full_exam": getattr(self.level_module, "full_exam_prompt", None),
+            "fast_exam": getattr(self.level_module, "fast_exam_prompt", None),
+            "reading": getattr(self.level_module, "reading_prompt", None),
+            "listening": getattr(self.level_module, "listening_prompt", None),
+            "grammar": getattr(self.level_module, "grammar_prompt", None),
+            "vocab": getattr(self.level_module, "vocab_prompt", None),
+        }
 
-    if inserted_id:
-        print(f"✅ Exam outline stored successfully! Document ID: {inserted_id}")
-    else:
-        print("❌ Failed to generate or store exam outline. Check logs for details.")
+        prompt = prompt_registry.get(self.exam_type_lower)
+        if not prompt:
+            available = [k for k, v in prompt_registry.items() if v is not None]
+            logger.error(
+                "No prompt defined for exam_type '%s'. Available prompts: %s",
+                self.exam_type,
+                available,
+            )
+            raise ValueError(
+                f"No prompt defined for exam_type '{self.exam_type}'. "
+                f"Available: {available}"
+            )
+        return prompt
 
-    # Optionally inspect the outline object
-    if outline:
-        print("\nGenerated Outline:")
-        print(outline)
+    def run(self) -> Tuple[Optional[str], Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
+        """
+        Run exam generation pipeline.
+        Returns:
+            - (inserted_id, outline, exam_paper) if success.
+            - (None, outline, None) if paper storage failed but outline was generated.
+        """
+        prompt = self._get_prompt()
 
-if __name__ == "__main__":
-    run(level="n2",exam_type="fast_exam")
+        try:
+            exam_generator = ExamGenerator(
+                level=self.level,
+                exam_type=self.exam_type,
+                db_collection=f"{self.level_lower}_{self.exam_type_lower}",
+            )
+            outline = exam_generator._generate_outline(instruction=prompt)
+        except Exception as e:
+            logger.exception(
+                "Failed to generate exam outline for level '%s' and exam_type '%s'",
+                self.level,
+                self.exam_type,
+            )
+            raise ValueError("Failed to generate exam outline. Check logs for details.") from e
+
+        try:
+            inserted_id, exam_paper = exam_generator._generate_and_store_paper(outline=outline)
+        except Exception as e:
+            logger.warning("Failed to store exam paper. Returning outline only. Error: %s", e)
+            return None, outline, None
+
+        if inserted_id:
+            logger.info("Exam outline stored successfully! Document ID: %s", inserted_id)
+            return inserted_id, outline, exam_paper
+        else:
+            logger.warning("Exam paper storage failed, but outline was generated successfully.")
+            return None, outline, None

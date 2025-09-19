@@ -40,7 +40,7 @@ full_exam_prompt = ChatPromptTemplate.from_messages(
                 "The overall difficulty should be appropriate for the N1 level.\n"
                 "The exam paper should include a mix of moderately difficult and very difficult topics to accurately assess proficiency.\n\n"
                 "Please ensure the following requirements are met:\n\n"
-                "subsection_title in Subsection must be written in English.\n\n"
+                "subsection_title in Subsection must be written in English.\n\n only keep English name in () from the Instruction as subsection_title"
                 "For Section 1 - vocabulary:\n"
                 "- Select vocabulary words from the 'vocabulary' list, ensuring that 80% of the topics are very difficult.\n"
                 "- The topic words in 問題1 (kanji_reading) and 問題5 (word_usage) must be written in Kanji while other topic words use Japanese kana.\n"
@@ -101,7 +101,7 @@ fast_exam_prompt = ChatPromptTemplate.from_messages(
                 "The overall difficulty should be appropriate for the N1 level.\n"
                 "The exam paper should include a mix of moderately difficult and very difficult topics to accurately assess proficiency.\n\n"
                 "Please ensure the following requirements are met:\n\n"
-                "subsection_title in Subsection must be written in English.\n\n"
+                "subsection_title in Subsection must be written in English.\n\n only keep English name in () from the Instruction as subsection_title"
                 "For Section 1 - vocabulary:\n"
                 "- Select vocabulary words from the 'vocabulary' list, ensuring that 80% of the topics are very difficult.\n"
                 "- The topic words in 問題1 (kanji_reading) and 問題5 (word_usage) must be written in Kanji while other topic words use Japanese kana.\n"
@@ -142,7 +142,7 @@ vocab_prompt = ChatPromptTemplate.from_messages(
                 "The overall difficulty should be appropriate for the N1 level.\n"
                 "The exam paper should include a mix of moderately difficult and very difficult topics to accurately assess proficiency.\n\n"
                 "Please ensure the following requirements are met:\n\n"
-                "subsection_title in Subsection must be written in English.\n\n"
+                "subsection_title in Subsection must be written in English.\n\n only keep English name in () from the Instruction as subsection_title"
                 "For Section 1 - vocabulary:\n"
                 "- Select vocabulary words from the 'vocabulary' list, ensuring that 80% of the topics are very difficult.\n"
                 "- The topic words in 問題1 (kanji_reading) and 問題5 (word_usage) must be written in Kanji while other topic words use Japanese kana.\n"
@@ -173,7 +173,7 @@ grammar_prompt = ChatPromptTemplate.from_messages(
                 "The overall difficulty should be appropriate for the N1 level.\n"
                 "The exam paper should include a mix of moderately difficult and very difficult topics to accurately assess proficiency.\n\n"
                 "Please ensure the following requirements are met:\n\n"
-                "subsection_title in Subsection must be written in English.\n\n"
+                "subsection_title in Subsection must be written in English.\n\n only keep English name in () from the Instruction as subsection_title"
                 "For Section 2 - Grammar:\n"
                 "- Randomly select topics from 'TopicList' and grammars from 'GrammarList'.\n"
                 "- For 問題8, include one question that integrates 4 different grammar points.\n"
@@ -208,7 +208,7 @@ reading_prompt = ChatPromptTemplate.from_messages(
                 "The overall difficulty should be appropriate for the N1 level.\n"
                 "The exam paper should include a mix of moderately difficult and very difficult topics to accurately assess proficiency.\n\n"
                 "Please ensure the following requirements are met:\n\n"
-                "subsection_title in Subsection must be written in English.\n\n"
+                "subsection_title in Subsection must be written in English.\n\n only keep English name in () from the Instruction as subsection_title"
                 "For Section 3 - Reading Comprehension and Listening Comprehension:\n"
                 "- Randomly choose topics from 'TopicList'.\n\n"
                 "Additionally:\n"
@@ -240,7 +240,7 @@ listening_prompt = ChatPromptTemplate.from_messages(
                 "The overall difficulty should be appropriate for the N1 level.\n"
                 "The exam paper should include a mix of moderately difficult and very difficult topics to accurately assess proficiency.\n\n"
                 "Please ensure the following requirements are met:\n\n"
-                "subsection_title in Subsection must be written in English.\n\n"
+                "subsection_title in Subsection must be written in English.\n\n only keep English name in () from the Instruction as subsection_title"
                 "For Section 4: Listening Comprehension:\n"
                 "- Randomly choose topics from 'TopicList'.\n\n"
                 "Additionally:\n"
@@ -254,30 +254,30 @@ listening_prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-def run(level: str, exam_type: ExamType):
-
-    PROMPT_REGISTRY: dict[str, ChatPromptTemplate] = {
-        "full_exam": full_exam_prompt,
-        "fast_exam": fast_exam_prompt,
-        "reading": reading_prompt,
-        "listening": listening_prompt,
-        "grammar": grammar_prompt,
-        "vocab": vocab_prompt,
-    }
-
-    prompt = PROMPT_REGISTRY.get(exam_type.lower())  # make it case-insensitive
-    if not prompt:
-        raise ValueError(f"No prompt defined for exam_type: {exam_type}")
-
-    exam_generator = ExamGenerator(level=level, exam_type=exam_type, db_collection=f"{level}_{exam_type}")
-    inserted_id, outline = exam_generator._generate_and_store_paper(instruction=prompt)
-
-    if inserted_id:
-        print(f"✅ Exam outline stored successfully! Document ID: {inserted_id}")
-    else:
-        print("❌ Failed to generate or store exam outline. Check logs for details.")
-
-    # Optionally inspect the outline object
-    if outline:
-        print("\nGenerated Outline:")
-        print(outline)
+# def run(level: str, exam_type: ExamType):
+# 
+#     PROMPT_REGISTRY: dict[str, ChatPromptTemplate] = {
+#         "full_exam": full_exam_prompt,
+#         "fast_exam": fast_exam_prompt,
+#         "reading": reading_prompt,
+#         "listening": listening_prompt,
+#         "grammar": grammar_prompt,
+#         "vocab": vocab_prompt,
+#     }
+# 
+#     prompt = PROMPT_REGISTRY.get(exam_type.lower())  # make it case-insensitive
+#     if not prompt:
+#         raise ValueError(f"No prompt defined for exam_type: {exam_type}")
+# 
+#     exam_generator = ExamGenerator(level=level, exam_type=exam_type, db_collection=f"{level}_{exam_type}")
+#     inserted_id, outline = exam_generator._generate_and_store_paper(instruction=prompt)
+# 
+#     if inserted_id:
+#         print(f"✅ Exam outline stored successfully! Document ID: {inserted_id}")
+#     else:
+#         print("❌ Failed to generate or store exam outline. Check logs for details.")
+# 
+#     # Optionally inspect the outline object
+#     if outline:
+#         print("\nGenerated Outline:")
+#         print(outline)

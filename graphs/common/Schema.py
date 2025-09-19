@@ -101,5 +101,6 @@ class Outline(BaseModel):
         sections = "\n\n".join(section.as_str for section in self.sections)
         return f"# {self.page_title}\n\n{sections}".strip()
 
-ExamType = Literal["full_exam","fast_exam","vocabulary","grammar","reading","listening"]
+ExamType = Literal["full_exam","fast_exam","vocab","grammar","reading","listening"]
+
 ExamLevel = Literal["n1","n2","n3","n4","n5"]

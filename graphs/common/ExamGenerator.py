@@ -15,13 +15,8 @@ from libs.LLMs import *
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 from libs.Utils import _load_vocab_and_resources
-from graphs.common.Schema import Outline
+from graphs.common.Schema import Outline,ExamType
 from libs.Logger import logger
-
-
-ExamType = Literal["full_exam", "quick_test", "vocabulary", "grammar", "listening", "reading"]
-
-
 
 class ExamGenerator:
     def __init__(self, level: str, exam_type: ExamType, db_collection: str):
@@ -29,6 +24,7 @@ class ExamGenerator:
         self.exam_type = exam_type
         self.db_collection = db_collection
         self.exam_uid = str(uuid.uuid1())
+        self.vocab, self.topics, self.grammar = self._load_resources()
 
     def _write_paper(self, initial_outline: Any, topics_list: List[str]) -> Dict[str, Any]:
         outliner_json = initial_outline.model_dump_json()
@@ -62,7 +58,6 @@ class ExamGenerator:
                             try:
                                 sig = inspect.signature(func)
                                 params = sig.parameters
-
                                 args = [question['topic']]
                                 if 'grammar' in question and question['grammar']:
                                     args.append(question['grammar'])
@@ -94,40 +89,53 @@ class ExamGenerator:
 
         return output_data
 
-    def _generate_and_store_paper(self, instruction: Any) -> Tuple[Optional[str], Optional[Dict[str, Any]]]:
-        try:
-            vocab, topics, grammar = _load_vocab_and_resources(self.level)
-        except Exception as e:
-            logger.error("Failed to load resources for level %s: %s", self.level, e, exc_info=True)
-            return None, None
+    def _load_resources(self) -> Tuple[Dict[str, Any], list, list]:
+        """Load vocab, topics, and grammar for the exam level."""
+        return _load_vocab_and_resources(self.level)
 
-        try:
-            generate_outline_direct = instruction | azure_llm.with_structured_output(Outline)
-            initial_outline = generate_outline_direct.invoke({
-                "topic_list": topics,
-                "vocab_dict": vocab,
-                "grammar_list": grammar
-            })
-            logger.info("Outline of the exam:\n\n%s", initial_outline.as_str)
-        except Exception as e:
-            logger.error("Failed to generate outline for exam_uid=%s: %s", self.exam_uid, e, exc_info=True)
-            return None, None
+    def _generate_outline(
+        self, instruction: Any
+    ) -> str:
+        """Generate structured exam outline using LLM."""
+        generate_outline = instruction | azure_llm.with_structured_output(Outline)
+        outline = generate_outline.invoke({
+            "topic_list": self.topics,
+            "vocab_dict": self.vocab,
+            "grammar_list": self.grammar
+        })
+        logger.info("Outline of the exam:\n\n%s", outline.as_str)
+        return outline
 
-        try:
-            output_data = self._write_paper(initial_outline, topics)
-        except Exception as e:
-            logger.error("Failed to build output data for exam_uid=%s: %s", self.exam_uid, e, exc_info=True)
-            return None, None
+    def _build_output(self, outline: Any) -> Dict[str, Any]:
+        """Build the final exam paper data."""
+        return self._write_paper(outline, self.topics)
 
+    def _insert_to_db(self, output_data: Dict[str, Any]) -> str:
+        """Insert exam data into Cosmos MongoDB."""
+        db_client = CosmosMongoDB(
+            os.environ['AZURE_MONGO_CONNECTION'],
+            os.environ['AZURE_MONGO_DBNAME'],
+            self.db_collection
+        )
+        inserted_id = db_client.insert_one(output_data)
+        logger.info("Inserted document ID: %s", inserted_id)
+        return inserted_id
+
+    # ---------------- Main Function ---------------- #
+
+    def _generate_and_store_paper(
+        self, outline: Any
+    ) -> Tuple[Optional[str], Optional[Dict[str, Any]]]:
+        """
+        Generate an exam outline, build paper, and store it in DB.
+        Returns: (inserted_id, outline_str, output_data)
+        """
         try:
-            db_client = CosmosMongoDB(
-                os.environ['AZURE_MONGO_CONNECTION'],
-                os.environ['AZURE_MONGO_DBNAME'],
-                self.db_collection
-            )
-            inserted_id = db_client.insert_one(output_data)
-            logger.info("Inserted document ID: %s", inserted_id)
+            # outline = self._generate_outline(instruction, vocab, topics, grammar)
+            output_data = self._build_output(outline)
+            inserted_id = self._insert_to_db(output_data)
             return inserted_id, output_data
         except Exception as e:
-            logger.error("Failed to insert document for exam_uid=%s: %s", self.exam_uid, e, exc_info=True)
+            logger.error("Failed to generate and store paper for exam_uid=%s: %s", self.exam_uid, e, exc_info=True)
+            # Return a consistent tuple on error
             return None, output_data
