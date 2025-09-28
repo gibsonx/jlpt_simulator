@@ -15,7 +15,9 @@ SAS_KEY = os.environ['MQ_SAS_KEY']
 broker_url = f"azureservicebus://{SAS_POLICY}:{SAS_KEY}@{NAMESPACE}/{QUEUE_NAME}?ssl=True"
 
 # For results, still use Redis (or DB) – Service Bus does not store results
-backend_url = "db+sqlite:///celery_results.sqlite"
+RESULTS_DB = os.path.join(os.environ['PROJECT_PATH'], "celery_results.sqlite")
+
+backend_url = f"db+sqlite:///{RESULTS_DB}"
 
 celery = Celery(
     "exam_runner",

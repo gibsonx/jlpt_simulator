@@ -107,6 +107,5 @@ def get_status(task_id):
     else:
         return jsonify({"state": task.state, "result": task.result}), 200
 
-
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=3000, debug=True)
