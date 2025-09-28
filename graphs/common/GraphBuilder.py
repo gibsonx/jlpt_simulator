@@ -175,12 +175,12 @@ class GraphBuilder:
                         "system",
                         """You are a AI assistance. your job is to format the Context to the structured output following 
                         the instruction below: 
-                        1. you should not change any context and html tags, except removing change 
-                        line tags like \\n or \\n\\n from the context.
+                        1. you should not change any context and html tags, except removing change line tags like \\n or \\n\\n from the context.
                         2. use the content inside <a></a> as the html_question. However, the content in the <ul class='options'></ul> and <p class='follow-up'></p> should not be written in html_question. 
                         3. Also, question requirements and correct answer should not be written in the html_question.
                         4. write the content in the <div class='article'></div> in html_article. but choices in <li></li> must be excluded.
                         5. use the content inside <li></li> as choices and keep html format, but <li></li> tags must be excluded.
+                        6. write the content in the <div class='background'></div> in background if it exists, no modification.
                         Context: {question}"""
                     )
                 ]

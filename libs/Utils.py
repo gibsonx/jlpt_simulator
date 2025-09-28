@@ -8,6 +8,8 @@ import azure.cognitiveservices.speech as speechsdk
 from azure.storage.blob import BlobServiceClient
 from dotenv import load_dotenv
 from libs.Logger import logger
+import os
+from pydub import AudioSegment
 
 load_dotenv()
 
@@ -245,8 +247,6 @@ def _generate_dialogue(content, type, seq, uid):
     return f"{os.environ['AZURE_CONTAINER_URL']}/{os.environ['AZURE_VOICE_CONTAINER']}/{blob_name}"
 
 def _generate_express(content, type, seq, uid):
-    import os
-    from pydub import AudioSegment
 
     base_path = os.environ["PROJECT_PATH"]
 
@@ -331,41 +331,6 @@ def _generate_express(content, type, seq, uid):
     # Return full blob path
     return f"{os.environ['AZURE_CONTAINER_URL']}/{os.environ['AZURE_VOICE_CONTAINER']}/{blob_name}"
 
-
-# def _generate_image(prompt=""):
-#
-#     KIA_API_KEY = os.environ["KIA_API_KEY"]
-#
-#     url = "https://api.kie.ai/api/v1/gpt4o-image/generate"
-#
-#     payload = {
-#         "filesUrl": ["https://strolandaws8409947751408.blob.core.windows.net/$web/jlpt_refer01.png",
-#                      "https://strolandaws8409947751408.blob.core.windows.net/$web/jlpt_refer02.png",
-#                      "https://strolandaws8409947751408.blob.core.windows.net/$web/jlpt_refer03.png"],
-#         "prompt": "Draw a simple black-and-white line illustration in the style of JLPT exam pictures."
-#                   "The style should be minimal, with clean outlines"
-#                   "and look like an educational test question picture."
-#                   "Please ensure that no text appears in the picture"
-#                   "you can refer to the style of uploaded pictures."
-#                   "Write an arrow symbol pointing to the person who speaks first. The image describes the following scene: \n\n" + prompt,
-#         "size": "3:2",
-#         "callBackUrl": os.environ["IMAGE_CALLBACK_URL"],
-#         "isEnhance": False,
-#         "uploadCn": False,
-#         "nVariants": 1,
-#         "enableFallback": False,
-#         "fallbackModel": "GPT_IMAGE_1"
-#     }
-#     headers = {
-#         "Authorization": f"Bearer {KIA_API_KEY}",
-#         "Content-Type": "application/json"
-#     }
-#
-#     response = requests.post(url, json=payload, headers=headers)
-#     task_id = response.json()['data']['taskId']
-#
-#     return  f"{os.environ['AZURE_CONTAINER_URL']}/{os.environ['AZURE_IMAGE_CONTAINER']}/4o_images_{task_id}_image_1.png"
-
 def _generate_image(prompt: str, retry: int=10):
 
     KIA_API_KEY = os.environ["KIA_API_KEY"]
@@ -384,6 +349,64 @@ def _generate_image(prompt: str, retry: int=10):
                 "You can refer to the style of uploaded pictures. "
                 "Write an arrow symbol pointing to the person who speaks first. "
                 "The image describes the following scene:\n\n" + prompt
+        ),
+        "size": "3:2",
+        "callBackUrl": os.environ["IMAGE_CALLBACK_URL"],
+        "isEnhance": False,
+        "uploadCn": False,
+        "nVariants": 1,
+        "enableFallback": False,
+        "fallbackModel": "GPT_IMAGE_1"
+    }
+
+    headers = {
+        "Authorization": f"Bearer {KIA_API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    # Submit generation request
+    response = requests.post(url, json=payload, headers=headers)
+    response.raise_for_status()
+    task_id = response.json()['data']['taskId']
+
+    # Construct image URL
+    image_url = f"{os.environ['AZURE_CONTAINER_URL']}/{os.environ['AZURE_IMAGE_CONTAINER']}/4o_images_{task_id}_image_1.png"
+
+    # Poll up to 5 times, 15 seconds apart
+    logger.info("pause 60 sec to wait for task {} completion".format(task_id))
+    time.sleep(60)
+    for attempt in range(retry):
+        time.sleep(15)
+        try:
+            r = requests.head(image_url)
+            if r.status_code == 200:
+                return image_url
+        except requests.RequestException:
+            pass
+        logger.info(f"Attempt {attempt + 1}: Image not ready yet.")
+
+    # Raise exception if not ready after retries
+    raise RuntimeError(f"Failed to generate image after 5 attempts: {image_url}")
+
+
+def _generate_comic_strip(prompt: str, retry: int=10):
+
+    KIA_API_KEY = os.environ["KIA_API_KEY"]
+    url = "https://api.kie.ai/api/v1/gpt4o-image/generate"
+
+    payload = {
+        "filesUrl": [
+            "https://strolandaws8409947751408.blob.core.windows.net/$web/jlpt_refer04.png",
+            "https://strolandaws8409947751408.blob.core.windows.net/$web/jlpt_refer05.png",
+            "https://strolandaws8409947751408.blob.core.windows.net/$web/jlpt_refer06.png"
+        ],
+        "prompt": (
+                "Create a 4-panel black-and-white manga-style comic strip in a simple instructional illustration style. "
+                "Arrange the panels in a 2×2 grid. show sequence number on the left-up conner at each panel"
+                "The style should be minimal, with clean outlines and look like an educational test question picture."
+                "No text, no words, no signage."
+                "You can refer to the style of uploaded pictures."
+                "The image describes the following 4 scenes:\n\n" + prompt
         ),
         "size": "3:2",
         "callBackUrl": os.environ["IMAGE_CALLBACK_URL"],

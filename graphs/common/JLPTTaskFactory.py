@@ -1,5 +1,5 @@
 from graphs.common.GraphBuilder import *
-from libs.Utils import _generate_dialogue,_generate_express,_generate_image,collect_vocabulary
+from libs.Utils import _generate_dialogue,_generate_express,_generate_image, _generate_comic_strip
 from graphs.common.Schema import *
 load_dotenv()
 
@@ -122,21 +122,58 @@ class JLPTTaskFactory:
     # Listening Tasks
     # =====================
 
-    def topic_understanding(self, word, seq: int):
-        obj = self._run_task(self.prompts_module.topic_understanding_teacher_prompt,
-                             self.prompts_module.topic_understanding_example,
+    def topic_understanding_img(self, word, seq: int):
+        obj = self._run_task(self.prompts_module.topic_understanding_img_teacher_prompt,
+                             self.prompts_module.topic_understanding_img_example,
+                             ListenSingleChoiceOutput, word)
+        obj["audio"] = _generate_dialogue(content=obj, type="topic_understanding", seq=seq, uid=self.graph.exam_uid)
+        # Retry logic for image generation
+        max_attempts = 3
+        for attempt in range(max_attempts):
+            try:
+                obj["image"] = _generate_comic_strip(",".join(obj["choices"]))
+                break  # success, exit loop
+            except Exception as e:
+                print(f"Attempt {attempt + 1} failed: {e}")
+                if attempt == max_attempts - 1:
+                    # Last attempt failed, propagate the exception
+                    raise
+                else:
+                    # wait a bit before retrying
+                    import time
+                    time.sleep(5)  # optional delay between retries
+        return obj
+
+    def topic_understanding_txt(self, word, seq: int):
+        obj = self._run_task(self.prompts_module.topic_understanding_txt_teacher_prompt,
+                             self.prompts_module.topic_understanding_txt_example,
                              ListenSingleChoiceOutput, word)
         obj["audio"] = _generate_dialogue(content=obj, type="topic_understanding", seq=seq, uid=self.graph.exam_uid)
         return obj
 
-    def keypoint_understanding(self, word, seq: int):
+    def keypoint_understanding_img(self, word, seq: int):
         obj = self._run_task(self.prompts_module.keypoint_understanding_teacher_prompt,
                              self.prompts_module.keypoint_understanding_example,
                              ListenSingleChoiceOutput, word)
-        obj["audio"] = _generate_dialogue(content=obj, type="keypoint_understanding", seq=seq,
-                                          uid=self.graph.exam_uid)
-        return obj
 
+        obj["audio"] = _generate_express(content=obj, type="active_expression", seq=seq, uid=self.graph.exam_uid)
+
+        # Retry logic for image generation
+        max_attempts = 3
+        for attempt in range(max_attempts):
+            try:
+                obj["image"] =_generate_comic_strip(obj["choices"])
+                break  # success, exit loop
+            except Exception as e:
+                print(f"Attempt {attempt + 1} failed: {e}")
+                if attempt == max_attempts - 1:
+                    # Last attempt failed, propagate the exception
+                    raise
+                else:
+                    # wait a bit before retrying
+                    import time
+                    time.sleep(5)  # optional delay between retries
+        return obj
     def summary_understanding(self, word, seq: int):
         obj = self._run_task(self.prompts_module.summary_understanding_teacher_prompt,
                              self.prompts_module.summary_understanding_example,

@@ -869,7 +869,7 @@ information_retrieval_example = """
     </ul>
 """
 
-topic_understanding_teacher_prompt = """
+topic_understanding_txt_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
 Task: Your job is to write a natural-sounding conversation between a man and a woman. 
@@ -904,7 +904,7 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
-topic_understanding_example = """
+topic_understanding_txt_example = """
 --- example 1 ---
 <p class='background'>会社で課長と男の人が話しています。</p>
 

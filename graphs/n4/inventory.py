@@ -121,8 +121,8 @@ def kanji_reading(graph: JLPTTaskFactory, word: str):
 #     return instance['formatted_output']
 #
 #
-# def topic_understanding(graph: ExamTaskgraph, word: str, seq: int):
-#     graph = graph.build_agent(topic_understanding_teacher_prompt, topic_understanding_example, ListenSingleChoiceOutput)
+# def topic_understanding_txt(graph: ExamTaskgraph, word: str, seq: int):
+#     graph = graph.build_agent(topic_understanding_txt_teacher_prompt, topic_understanding_txt_example, ListenSingleChoiceOutput)
 #     instance = graph.invoke({"messages": [HumanMessage(content=f"Generate a JLPT question regarding Topic: {word}")]},
 #                             config={"configurable": {"thread_id": "1"}})
 #     obj = instance['formatted_output']
