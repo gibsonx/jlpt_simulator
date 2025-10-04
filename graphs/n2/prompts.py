@@ -1224,5 +1224,65 @@ immediate_ack_example = """
 　<li>じゃ、見に行かなきゃね</li>
 """
 
+kanji_reading_reflection_prompt = """
+"""
+
+write_kanji_reflection_prompt = """
+"""
+
+word_meaning_reflection_prompt = """
+"""
+
+synonym_substitution_reflection_prompt = """
+"""
+
+word_usage_reflection_prompt = """
+"""
+
+sentence_grammar_reflection_prompt = """
+"""
+
+sentence_sort_reflection_prompt = """
+"""
+
+structure_selection_reflection_prompt = """
+"""
+
+short_reading_narrative_reflection_prompt = """
+"""
+
+short_reading_mail_reflection_prompt = """
+"""
+
+short_reading_notification_reflection_prompt = """
+"""
+
+midsize_reading_reflection_prompt = """
+"""
+
+long_reading_reflection_prompt = """
+"""
+
+information_retrieval_reflection_prompt = """
+"""
+
+topic_understanding_img_reflection_prompt = """
+"""
+
+topic_understanding_txt_reflection_prompt = """
+"""
+
+keypoint_understanding_reflection_prompt = """
+"""
+
+summary_understanding_reflection_prompt = """
+"""
+
+actively_expression_reflection_prompt = """
+"""
+
+immediate_ack_reflection_prompt = """
+"""
+
 
 

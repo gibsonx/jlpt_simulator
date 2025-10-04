@@ -3,6 +3,8 @@ import os
 from celery import Celery
 from graphs.common.TaskRunner import TaskRunner
 from kombu import Queue
+from graphs.common.Schema import ExamType
+
 
 # Azure Service Bus connection (Basic/Standard)
 # Replace with your values
@@ -32,7 +34,7 @@ celery.conf.task_annotations = {
 }
 
 @celery.task(bind=True)
-def run_exam_task(self, level: str, exam_type: str):
+def run_exam_task(self, level: str, exam_type:ExamType ):
     """
     Celery task wrapping the run_exam function.
     """

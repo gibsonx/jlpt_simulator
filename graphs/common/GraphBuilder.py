@@ -67,7 +67,7 @@ class GraphBuilder:
             """First LLM call to generate initial question"""
             logger.info("---Generator----")
 
-            topic = state['messages'][-1].content
+            # topic = state['messages'][-1].content
             # search_result = state['documents']
 
             prompt = ChatPromptTemplate.from_messages(
@@ -104,7 +104,7 @@ class GraphBuilder:
 
         return question_generator
 
-    def reflection_node_builder(self, llm):
+    def reflection_node_builder(self, llm, reflection_prompt_text: str = None):
         def reflection_node(state):
             logger.info("---REVISOR---")
 
@@ -126,26 +126,28 @@ class GraphBuilder:
                 if msg != system_msg:
                     translated.append(cls_map.get(msg.type, HumanMessage)(content=msg.content))
 
+            # Use provided reflection prompt text if given, otherwise fall back to the original default.
+            system_content = f"""
+               You are a senior Japanese language educator reviewing a JLPT exam paper. Generate an English critique and recommendations for the Japanese teacher's submission.
+               Please think deeply and give feedback on the following factors:
+                 - For content accuracy, you must verify that the questions are abide by the corresponding JLPT level exam requirements and appropriately challenging. 
+                 - For question and answer options quality, you must ensure all questions are clearly worded and free from ambiguity and confirm that the difficulty level of the questions.
+                 - During detailed refinement, You also ensure the content is culturally appropriate and relevant to Japanese culture and native expression.\n\n
+                 {reflection_prompt_text}
+               However, Don't suggest to add any question instructions to the context. Don't suggest anything about html format. Do not suggest including instructions in the question such as whether it tests meaning, kanji, or context.     
+               Finally, if you believe the submission is qualified, simply reply with "GOOD ENOUGH". Otherwise, provide a detailed critique and your recommendations for improvement.
+               """
+
             reflection_prompt = ChatPromptTemplate.from_messages(
                 [
-                    (
-                        "system",
-                        """
-                        You are a senior Japanese language educator reviewing a JLPT exam paper. Generate an English critique and recommendations for the Japanese teacher's submission.
-                        Please think deeply and give feedback on the following factors:
-                          - For content accuracy, you must verify that the questions are abide by the JLPT N3 level requirements and appropriately challenging. 
-                          - For question and answer options quality, you must ensure all questions are clearly worded and free from ambiguity and confirm that the difficulty level of the questions.
-                          - During detailed refinement, You also ensure the content is culturally appropriate and relevant to Japanese culture and native expression.
-                        However, Don't suggest to add any question instructions to the context. Don't suggest anything about html format. Do not suggest including instructions in the question such as whether it tests meaning, kanji, or context.     
-                        Finally, if you believe the submission is qualified, simply reply with "GOOD ENOUGH". Otherwise, provide a detailed critique and your recommendations for improvement.
-                        """
-                    ),
+                    ("system", system_content),
                     MessagesPlaceholder(variable_name="messages"),
                 ]
             )
 
             reflect = reflection_prompt | llm
-            msg = reflect.invoke(translated)
+            # explicit input mapping for clarity
+            msg = reflect.invoke(input={"messages": translated})
 
             logger.info("Reflect Feedback: {}".format(msg.content))
 
@@ -226,7 +228,7 @@ class GraphBuilder:
 
         return builder.compile()
 
-    def build_agent(self, prompt_text, example, OutType, grammar=None):
+    def build_agent(self, prompt_text, example, reflection_prompt, OutType, grammar=None):
         self.nodes["online_search"] = self.online_search_node_builder()
         if grammar:
             self.nodes["generator"] = self.generation_node_builder(
@@ -242,7 +244,12 @@ class GraphBuilder:
                 example=example
             )
 
-        self.nodes["reflector"] = self.reflection_node_builder(llm=self.ref_llm)
+        # Pass the reflection_prompt to the reflection node builder
+        self.nodes["reflector"] = self.reflection_node_builder(
+            llm=self.ref_llm,
+            reflection_prompt_text=reflection_prompt
+        )
+        self.nodes["formatter"] = self.formatter_node_builder(llm=self.ref_llm, OutType=OutType)
         self.nodes["formatter"] = self.formatter_node_builder(llm=self.ref_llm, OutType=OutType)
 
         graph = self.build_graph(StateGraph(GraphState), self.nodes)
