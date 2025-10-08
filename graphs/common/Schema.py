@@ -29,7 +29,7 @@ class MultipleQuestionOutput(TypedDict):
 
 class ListenConversation(TypedDict):
     gender: Literal['male','female']
-    context: Annotated[str, "context for the conversation in Japanese"]
+    context: Annotated[str, "context for the conversation in Japanese, excluding gender"]
 
 class ListenSingleChoiceOutput(TypedDict):
     """Listen Simple Question Formatted Output"""

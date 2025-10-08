@@ -209,7 +209,7 @@ class JLPTTaskFactory:
         obj["audio"] = _generate_dialogue(content=obj, type="topic_understanding", seq=seq, uid=self.graph.exam_uid)
         return obj
 
-    def keypoint_understanding_img(self, word, seq: int):
+    def keypoint_understanding(self, word, seq: int):
         obj = self._run_task(
             self.prompts_module.keypoint_understanding_teacher_prompt,
             self.prompts_module.keypoint_understanding_example,
@@ -217,20 +217,8 @@ class JLPTTaskFactory:
             ListenSingleChoiceOutput,
             word
         )
-        obj["audio"] = _generate_express(content=obj, type="active_expression", seq=seq, uid=self.graph.exam_uid)
+        obj["audio"] = _generate_express(content=obj, type="keypoint_understanding", seq=seq, uid=self.graph.exam_uid)
 
-        # Retry logic for image generation
-        max_attempts = 3
-        for attempt in range(max_attempts):
-            try:
-                obj["image"] = _generate_comic_strip(obj["choices"])
-                break
-            except Exception as e:
-                print(f"Attempt {attempt + 1} failed: {e}")
-                if attempt == max_attempts - 1:
-                    raise
-                import time
-                time.sleep(5)
         return obj
 
     def summary_understanding(self, word, seq: int):
