@@ -156,7 +156,6 @@ class GraphBuilder:
 
         return reflection_node
 
-
     def formatter_node_builder(self, llm, OutType: Type[TypedDict]):
         def formatter_node(state):
             logger.info("--- Formatter ---")
