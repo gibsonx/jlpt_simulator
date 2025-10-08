@@ -3,6 +3,8 @@ import requests
 from flask import Flask, request, jsonify
 from azure.storage.blob import BlobServiceClient
 from dotenv import load_dotenv
+from libs.CeleryHelper import run_exam_task
+
 
 # Load environment variables from .env
 load_dotenv()
@@ -68,6 +70,42 @@ def handle_callback():
     # Always acknowledge callback
     return jsonify({'status': 'received'}), 200
 
+
+@app.route("/run_exam", methods=["POST"])
+def run_exam_endpoint():
+    """
+    Run exam job asynchronously via Celery.
+    Body example: { "level": "N3", "exam_type": "fast_exam", "count": 5 }
+    """
+    data = request.get_json()
+    if not data or "level" not in data or "exam_type" not in data:
+        return jsonify({"error": "Missing 'level' or 'exam_type'"}), 400
+
+    level = data["level"]
+    exam_type = data["exam_type"]
+    count = data.get("count", 1)  # run how many times
+
+    # Queue multiple jobs
+    task_ids = []
+    for _ in range(count):
+        task = run_exam_task.delay(level, exam_type)
+        task_ids.append(task.id)
+
+    return jsonify({"status": "queued", "task_ids": task_ids}), 202
+
+
+@app.route("/status/<task_id>", methods=["GET"])
+def get_status(task_id):
+    """
+    Get status and result of a Celery job by ID.
+    """
+    task = run_exam_task.AsyncResult(task_id)
+    if task.state == "PENDING":
+        return jsonify({"state": task.state, "result": None}), 200
+    elif task.state == "FAILURE":
+        return jsonify({"state": task.state, "error": str(task.info)}), 500
+    else:
+        return jsonify({"state": task.state, "result": task.result}), 200
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=3000, debug=True)

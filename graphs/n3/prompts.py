@@ -869,7 +869,64 @@ information_retrieval_example = """
     </ul>
 """
 
-topic_understanding_teacher_prompt = """
+topic_understanding_img_teacher_prompt = """
+Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
+
+Task: Your job is to write a natural-sounding conversation between a man and a woman. 
+
+Step 1, write a concise background about the dialogue introduction, which exclude the follow-up question and character names.
+
+Step 2, Give characters names during the conversation. They should call each name during the conversation depending on their relationship, level of formality.
+Do not refer to them as Mr. or Miss in the conversation context. Be polite and culturally appropriate in how they address each other.
+女：conversation context
+男：conversation context
+Besides, the name at the end of a sentence can be omitted.
+For example: "ありがとう、佐藤さん。" the name at the end of a sentence can be omitted, like "ありがとう。"
+
+Step 3, write dialogue, the dialogue should consist of 1-3 exchanges (back-and-forth turns). The total length should be approximately 100–200 words.
+
+Step 4, after the conversation, ask a follow-up question related to the conversation and focusing on the man or woman's next action, such as 
+What,When,Where,Who,How,Which,Whose,How long,How often,How much,How many.
+
+Step 5, provide multiple-choice options based on the listening content. These options should be written in English for creating picture scenes.
+
+Instructions:
+Format: follow the format of the example in the formal exam paper but not the content.
+Content: Ensure the vocabulary is restricted to N3 level. 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+
+Formal exam paper: {example}
+"""
+
+topic_understanding_img_example = """
+--- example 1 ---
+<p class='background'>台所で男の留学生とホストファミリーのお母さんが話しています。</p>
+
+<div class='conversation'>
+男：お昼ご飯の準備、何かお手伝いできることありますか。
+女：ありがとう。お昼、ピザでいい？チーズとピザのソースがあるから。
+男：いいですね。薄く伸ばして丸い形にするのやってみたいです。
+女：あ、それは冷凍のうちできてるのがあるから、これに何か載せて焼くだけなんだ。えっと、ピザソース、先に塗ってくれる？
+男：はい、何のピザにするんですか？
+女：えっと、ソーセージとピーマンにしよう。私、切るね。切ったの載せていってくれる？
+男：はい。
+<p class='follow-up'>男の留学生はこの後まず、何をしますか？</p>
+</div>
+
+<ul class='options'>
+    <li>しゅっちょうの　もくてき</li>
+    <li>会った人のじょうほう</li>  
+    <li>話し合いのけっか</li>  
+    <li>つぎのほうもん日/li> 
+</ul>
+"""
+
+
+topic_understanding_txt_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
 Task: Your job is to write a natural-sounding conversation between a man and a woman. 
@@ -904,7 +961,7 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
-topic_understanding_example = """
+topic_understanding_txt_example = """
 --- example 1 ---
 <p class='background'>会社で課長と男の人が話しています。</p>
 
@@ -1222,6 +1279,66 @@ immediate_ack_example = """
 　<li>やらないもしれなかったね</li>
 　<li>え？なんて？楽しみにしていたのに…</li>
 　<li>じゃ、見に行かなきゃね</li>
+"""
+
+kanji_reading_reflection_prompt = """
+"""
+
+write_kanji_reflection_prompt = """
+"""
+
+word_meaning_reflection_prompt = """
+"""
+
+synonym_substitution_reflection_prompt = """
+"""
+
+word_usage_reflection_prompt = """
+"""
+
+sentence_grammar_reflection_prompt = """
+"""
+
+sentence_sort_reflection_prompt = """
+"""
+
+structure_selection_reflection_prompt = """
+"""
+
+short_reading_narrative_reflection_prompt = """
+"""
+
+short_reading_mail_reflection_prompt = """
+"""
+
+short_reading_notification_reflection_prompt = """
+"""
+
+midsize_reading_reflection_prompt = """
+"""
+
+long_reading_reflection_prompt = """
+"""
+
+information_retrieval_reflection_prompt = """
+"""
+
+topic_understanding_img_reflection_prompt = """
+"""
+
+topic_understanding_txt_reflection_prompt = """
+"""
+
+keypoint_understanding_reflection_prompt = """
+"""
+
+summary_understanding_reflection_prompt = """
+"""
+
+actively_expression_reflection_prompt = """
+"""
+
+immediate_ack_reflection_prompt = """
 """
 
 

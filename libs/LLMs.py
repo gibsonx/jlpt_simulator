@@ -14,7 +14,7 @@ azure_llm = AzureChatOpenAI(
     model_name="gpt-4.1",
     api_version="2025-01-01-preview",
     temperature=0.3,
-    top_p=0.9
+    top_p=0.95
 )
 
 # azure_ref_llm = AzureChatOpenAI(

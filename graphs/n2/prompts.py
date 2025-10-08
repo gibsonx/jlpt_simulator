@@ -869,7 +869,7 @@ information_retrieval_example = """
     </ul>
 """
 
-topic_understanding_teacher_prompt = """
+topic_understanding_txt_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
 Task: Your job is to write a natural-sounding conversation between a man and a woman. 
@@ -904,7 +904,7 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
-topic_understanding_example = """
+topic_understanding_txt_example = """
 --- example 1 ---
 <p class='background'>会社で課長と男の人が話しています。</p>
 
@@ -1222,6 +1222,66 @@ immediate_ack_example = """
 　<li>やらないもしれなかったね</li>
 　<li>え？なんて？楽しみにしていたのに…</li>
 　<li>じゃ、見に行かなきゃね</li>
+"""
+
+kanji_reading_reflection_prompt = """
+"""
+
+write_kanji_reflection_prompt = """
+"""
+
+word_meaning_reflection_prompt = """
+"""
+
+synonym_substitution_reflection_prompt = """
+"""
+
+word_usage_reflection_prompt = """
+"""
+
+sentence_grammar_reflection_prompt = """
+"""
+
+sentence_sort_reflection_prompt = """
+"""
+
+structure_selection_reflection_prompt = """
+"""
+
+short_reading_narrative_reflection_prompt = """
+"""
+
+short_reading_mail_reflection_prompt = """
+"""
+
+short_reading_notification_reflection_prompt = """
+"""
+
+midsize_reading_reflection_prompt = """
+"""
+
+long_reading_reflection_prompt = """
+"""
+
+information_retrieval_reflection_prompt = """
+"""
+
+topic_understanding_img_reflection_prompt = """
+"""
+
+topic_understanding_txt_reflection_prompt = """
+"""
+
+keypoint_understanding_reflection_prompt = """
+"""
+
+summary_understanding_reflection_prompt = """
+"""
+
+actively_expression_reflection_prompt = """
+"""
+
+immediate_ack_reflection_prompt = """
 """
 
 

@@ -1,5 +1,5 @@
 from graphs.common.GraphBuilder import *
-from libs.Utils import _generate_dialogue,_generate_express,_generate_image,collect_vocabulary
+from libs.Utils import _generate_dialogue,_generate_express,_generate_image, _generate_comic_strip
 from graphs.common.Schema import *
 load_dotenv()
 
@@ -23,12 +23,12 @@ class JLPTTaskFactory:
         import importlib
         return importlib.import_module(f"graphs.{level}.prompts")
 
-    def _run_task(self, prompt, example, output_cls, word, grammar=None):
+    def _run_task(self, prompt, example, reflection_prompt, output_cls, word, grammar=None):
         """Generic task runner."""
         if grammar:
-            graph = self.graph.build_agent(prompt, example, output_cls, grammar)
+            graph = self.graph.build_agent(prompt, example, reflection_prompt, output_cls, grammar)
         else:
-            graph = self.graph.build_agent(prompt, example, output_cls)
+            graph = self.graph.build_agent(prompt, example, reflection_prompt, output_cls)
 
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regarding Topic: {word}")]},
@@ -37,110 +37,198 @@ class JLPTTaskFactory:
         return instance["formatted_output"]
 
     # =====================
-    # Core Task Wrappers
-    # =====================
-
-    # =====================
-    # Basic Task Wrappers
+    # Vocabulary Tasks
     # =====================
 
     def kanji_reading(self, word):
-        return self._run_task(self.prompts_module.kanji_reading_teacher_prompt,
-                              self.prompts_module.kanji_reading_example,
-                              SimpleChoiceQuestionOutput, word)
+        return self._run_task(
+            self.prompts_module.kanji_reading_teacher_prompt,
+            self.prompts_module.kanji_reading_example,
+            self.prompts_module.kanji_reading_reflection_prompt,
+            SimpleChoiceQuestionOutput,
+            word
+        )
 
     def write_kanji(self, word):
-        return self._run_task(self.prompts_module.write_kanji_teacher_prompt,
-                              self.prompts_module.write_kanji_example,
-                              SimpleChoiceQuestionOutput, word)
+        return self._run_task(
+            self.prompts_module.write_kanji_teacher_prompt,
+            self.prompts_module.write_kanji_example,
+            self.prompts_module.write_kanji_reflection_prompt,
+            SimpleChoiceQuestionOutput,
+            word
+        )
 
     def word_meaning(self, word):
-        return self._run_task(self.prompts_module.word_meaning_teacher_prompt,
-                              self.prompts_module.word_meaning_example,
-                              SimpleChoiceQuestionOutput, word)
+        return self._run_task(
+            self.prompts_module.word_meaning_teacher_prompt,
+            self.prompts_module.word_meaning_example,
+            self.prompts_module.word_meaning_reflection_prompt,
+            SimpleChoiceQuestionOutput,
+            word
+        )
 
     def synonym_substitution(self, word):
-        return self._run_task(self.prompts_module.synonym_substitution_teacher_prompt,
-                              self.prompts_module.synonym_substitution_example,
-                              SimpleChoiceQuestionOutput, word)
+        return self._run_task(
+            self.prompts_module.synonym_substitution_teacher_prompt,
+            self.prompts_module.synonym_substitution_example,
+            self.prompts_module.synonym_substitution_reflection_prompt,
+            SimpleChoiceQuestionOutput,
+            word
+        )
 
     def word_usage(self, word):
-        return self._run_task(self.prompts_module.word_usage_teacher_prompt,
-                              self.prompts_module.word_usage_example,
-                              SimpleChoiceQuestionOutput, word)
+        return self._run_task(
+            self.prompts_module.word_usage_teacher_prompt,
+            self.prompts_module.word_usage_example,
+            self.prompts_module.word_usage_reflection_prompt,
+            SimpleChoiceQuestionOutput,
+            word
+        )
 
     def sentence_grammar(self, word, grammar):
-        return self._run_task(self.prompts_module.sentence_grammar_teacher_prompt,
-                              self.prompts_module.sentence_grammar_example,
-                              SimpleChoiceQuestionOutput, word, grammar)
+        return self._run_task(
+            self.prompts_module.sentence_grammar_teacher_prompt,
+            self.prompts_module.sentence_grammar_example,
+            self.prompts_module.sentence_grammar_reflection_prompt,
+            SimpleChoiceQuestionOutput,
+            word, grammar
+        )
 
     def sentence_sort(self, word, grammar):
-        return self._run_task(self.prompts_module.sentence_sort_teacher_prompt,
-                              self.prompts_module.sentence_sort_example,
-                              SimpleChoiceQuestionOutput, word, grammar)
+        return self._run_task(
+            self.prompts_module.sentence_sort_teacher_prompt,
+            self.prompts_module.sentence_sort_example,
+            self.prompts_module.sentence_sort_reflection_prompt,
+            SimpleChoiceQuestionOutput,
+            word, grammar
+        )
 
     def sentence_structure(self, word, grammar):
-        return self._run_task(self.prompts_module.structure_selection_teacher_prompt,
-                              self.prompts_module.structure_selection_example,
-                              MultipleQuestionOutput, word, grammar)
+        return self._run_task(
+            self.prompts_module.structure_selection_teacher_prompt,
+            self.prompts_module.structure_selection_example,
+            self.prompts_module.structure_selection_reflection_prompt,
+            MultipleQuestionOutput,
+            word, grammar
+        )
 
     # =====================
     # Reading Tasks
     # =====================
 
     def short_passage_narrative_read(self, word):
-        return self._run_task(self.prompts_module.short_reading_narrative_teacher_prompt,
-                              self.prompts_module.short_reading_narrative_example,
-                              MultipleQuestionOutput, word)
+        return self._run_task(
+            self.prompts_module.short_reading_narrative_teacher_prompt,
+            self.prompts_module.short_reading_narrative_example,
+            self.prompts_module.short_reading_narrative_reflection_prompt,
+            MultipleQuestionOutput,
+            word
+        )
 
     def short_passage_mail_read(self, word):
-        return self._run_task(self.prompts_module.short_reading_mail_teacher_prompt,
-                              self.prompts_module.short_reading_mail_example,
-                              MultipleQuestionOutput, word)
+        return self._run_task(
+            self.prompts_module.short_reading_mail_teacher_prompt,
+            self.prompts_module.short_reading_mail_example,
+            self.prompts_module.short_reading_mail_reflection_prompt,
+            MultipleQuestionOutput,
+            word
+        )
 
     def short_passage_notification_read(self, word):
-        return self._run_task(self.prompts_module.short_reading_notification_teacher_prompt,
-                              self.prompts_module.short_reading_notification_example,
-                              MultipleQuestionOutput, word)
+        return self._run_task(
+            self.prompts_module.short_reading_notification_teacher_prompt,
+            self.prompts_module.short_reading_notification_example,
+            self.prompts_module.short_reading_notification_reflection_prompt,
+            MultipleQuestionOutput,
+            word
+        )
 
     def midsize_passage_read(self, word):
-        return self._run_task(self.prompts_module.midsize_reading_teacher_prompt,
-                              self.prompts_module.midsize_reading_example,
-                              MultipleQuestionOutput, word)
+        return self._run_task(
+            self.prompts_module.midsize_reading_teacher_prompt,
+            self.prompts_module.midsize_reading_example,
+            self.prompts_module.midsize_reading_reflection_prompt,
+            MultipleQuestionOutput,
+            word
+        )
 
     def long_passage_read(self, word):
-        return self._run_task(self.prompts_module.long_reading_teacher_prompt,
-                              self.prompts_module.long_reading_example,
-                              MultipleQuestionOutput, word)
+        return self._run_task(
+            self.prompts_module.long_reading_teacher_prompt,
+            self.prompts_module.long_reading_example,
+            self.prompts_module.long_reading_reflection_prompt,
+            MultipleQuestionOutput,
+            word
+        )
 
     def info_retrieval(self, word):
-        return self._run_task(self.prompts_module.information_retrieval_teacher_prompt,
-                              self.prompts_module.information_retrieval_example,
-                              MultipleQuestionOutput, word)
+        return self._run_task(
+            self.prompts_module.information_retrieval_teacher_prompt,
+            self.prompts_module.information_retrieval_example,
+            self.prompts_module.information_retrieval_reflection_prompt,
+            MultipleQuestionOutput,
+            word
+        )
 
     # =====================
     # Listening Tasks
     # =====================
 
-    def topic_understanding(self, word, seq: int):
-        obj = self._run_task(self.prompts_module.topic_understanding_teacher_prompt,
-                             self.prompts_module.topic_understanding_example,
-                             ListenSingleChoiceOutput, word)
+    def topic_understanding_img(self, word, seq: int):
+        obj = self._run_task(
+            self.prompts_module.topic_understanding_img_teacher_prompt,
+            self.prompts_module.topic_understanding_img_example,
+            self.prompts_module.topic_understanding_img_reflection_prompt,
+            ListenSingleChoiceOutput,
+            word
+        )
+        obj["audio"] = _generate_dialogue(content=obj, type="topic_understanding", seq=seq, uid=self.graph.exam_uid)
+
+        # Retry logic for image generation
+        max_attempts = 3
+        for attempt in range(max_attempts):
+            try:
+                obj["image"] = _generate_comic_strip(",".join(obj["choices"]))
+                break
+            except Exception as e:
+                print(f"Attempt {attempt + 1} failed: {e}")
+                if attempt == max_attempts - 1:
+                    raise
+                import time
+                time.sleep(5)
+        return obj
+
+    def topic_understanding_txt(self, word, seq: int):
+        obj = self._run_task(
+            self.prompts_module.topic_understanding_txt_teacher_prompt,
+            self.prompts_module.topic_understanding_txt_example,
+            self.prompts_module.topic_understanding_txt_reflection_prompt,
+            ListenSingleChoiceOutput,
+            word
+        )
         obj["audio"] = _generate_dialogue(content=obj, type="topic_understanding", seq=seq, uid=self.graph.exam_uid)
         return obj
 
     def keypoint_understanding(self, word, seq: int):
-        obj = self._run_task(self.prompts_module.keypoint_understanding_teacher_prompt,
-                             self.prompts_module.keypoint_understanding_example,
-                             ListenSingleChoiceOutput, word)
-        obj["audio"] = _generate_dialogue(content=obj, type="keypoint_understanding", seq=seq,
-                                          uid=self.graph.exam_uid)
+        obj = self._run_task(
+            self.prompts_module.keypoint_understanding_teacher_prompt,
+            self.prompts_module.keypoint_understanding_example,
+            self.prompts_module.keypoint_understanding_reflection_prompt,
+            ListenSingleChoiceOutput,
+            word
+        )
+        obj["audio"] = _generate_express(content=obj, type="keypoint_understanding", seq=seq, uid=self.graph.exam_uid)
+
         return obj
 
     def summary_understanding(self, word, seq: int):
-        obj = self._run_task(self.prompts_module.summary_understanding_teacher_prompt,
-                             self.prompts_module.summary_understanding_example,
-                             ListenSingleChoiceOutput, word)
+        obj = self._run_task(
+            self.prompts_module.summary_understanding_teacher_prompt,
+            self.prompts_module.summary_understanding_example,
+            self.prompts_module.summary_understanding_reflection_prompt,
+            ListenSingleChoiceOutput,
+            word
+        )
         obj["audio"] = _generate_dialogue(content=obj, type="summary_understanding", seq=seq, uid=self.graph.exam_uid)
         return obj
 
@@ -148,10 +236,10 @@ class JLPTTaskFactory:
         obj = self._run_task(
             self.prompts_module.actively_expression_teacher_prompt,
             self.prompts_module.actively_expression_example,
+            self.prompts_module.actively_expression_reflection_prompt,
             ImageListenQuestionOutput,
             word
         )
-
         obj["audio"] = _generate_express(content=obj, type="active_expression", seq=seq, uid=self.graph.exam_uid)
 
         # Retry logic for image generation
@@ -159,21 +247,22 @@ class JLPTTaskFactory:
         for attempt in range(max_attempts):
             try:
                 obj["image"] = _generate_image(obj["background"])
-                break  # success, exit loop
+                break
             except Exception as e:
                 print(f"Attempt {attempt + 1} failed: {e}")
                 if attempt == max_attempts - 1:
-                    # Last attempt failed, propagate the exception
                     raise
-                else:
-                    # wait a bit before retrying
-                    import time
-                    time.sleep(5)  # optional delay between retries
+                import time
+                time.sleep(5)
         return obj
 
     def immediate_ack(self, word, seq: int):
-        obj = self._run_task(self.prompts_module.immediate_ack_teacher_prompt,
-                             self.prompts_module.immediate_ack_example,
-                             ListenImmediateQuestionOutput, word)
+        obj = self._run_task(
+            self.prompts_module.immediate_ack_teacher_prompt,
+            self.prompts_module.immediate_ack_example,
+            self.prompts_module.immediate_ack_reflection_prompt,
+            ListenImmediateQuestionOutput,
+            word
+        )
         obj["audio"] = _generate_express(content=obj, type="immediate_ack", seq=seq, uid=self.graph.exam_uid)
         return obj

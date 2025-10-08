@@ -1,6 +1,7 @@
 import logging
 import os
 from logging.handlers import TimedRotatingFileHandler
+from concurrent_log_handler import ConcurrentTimedRotatingFileHandler
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -13,7 +14,7 @@ os.makedirs(LOG_FOLDER, exist_ok=True)
 LOG_FILE = os.path.join(LOG_FOLDER, "jlpt.log")
 
 # Create a rotating file handler (daily rotation)
-file_handler = TimedRotatingFileHandler(
+file_handler = ConcurrentTimedRotatingFileHandler(
     LOG_FILE,
     when="midnight",
     interval=1,
