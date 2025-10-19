@@ -302,7 +302,8 @@ Step 4: Replace the 4 phrases extracted from the question with 4 underscores, wi
 In HTML, the complete expression for this is: <u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>
 
 Step 5: Allocate the phrases extracted in step 3 to four variables: a, b, c, d, while maintaining their original order. This queue is called sequence x. Reorder sequence x and assign new sequence numbers 1, 2, 3, 4. This queue is called sequence y.
-Then, take the number in sequence y that is exactly the same as the value of variable c in sequence x as the correct answer. This correct answer is called "g_answer"
+Then, remember the variable t in sequence y that has exactly the same value as variable c in sequence x, and take the sequence number of t in sequence y as the correct answer.
+This correct answer is called "g_answer"
 Output sequence x, y in the debugging log.
 
 Step 6: Generate questions according to the requirements and format.
@@ -615,9 +616,8 @@ Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level.
 Task: Your job is to write a reading question for a JLPT N3 level exam.
 First you need to write a mid-size article around 400 words for student to read.
 The keypoints being tested in each question needs to be underlined with <u></u>
-Then, you give 3 questions by the related content in the article. the meaning of keypoint cannot be found in the article.
-Then, you give a question by the related content in the article.
-Instead, it should require the test-taker to infer, summarize, or understand the context or intent of the passage.
+Then, you give 3 questions by the related content in the article.
+The answers of these 3 questions should require the test-taker to infer, summarize, or understand the context or intent of the passage.
 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
@@ -940,7 +940,7 @@ Do not refer to them as Mr. or Miss in the conversation context. Be polite and c
 Besides, the name at the end of a sentence can be omitted.
 For example: "ありがとう、佐藤さん。" the name at the end of a sentence can be omitted, like "ありがとう。"
 
-Step 3, write dialogue, the dialogue should consist of 1-3 exchanges (back-and-forth turns). The total length should be approximately 100–200 words.
+Step 3, write dialogue, the dialogue should consist of 4-6 exchanges (back-and-forth turns). The total length should be approximately 300–400 words.
 
 Step 4, after the conversation, ask a follow-up question related to the conversation and focusing on the man or woman's next action, such as 
 What,When,Where,Who,How,Which,Whose,How long,How often,How much,How many.
@@ -1017,7 +1017,7 @@ Do not refer to them as Mr. or Miss in the conversation context. Be polite and c
 Besides, the name at the end of a sentence can be omitted.
 For example: "ありがとう、佐藤さん。" the name at the end of a sentence can be omitted, like "ありがとう。"
 
-Step 3, write dialogue, the dialogue should consist of 3-4 exchanges (back-and-forth turns). The total length should be approximately 150–180 words.
+Step 3, write dialogue, the dialogue should consist of 7-9 exchanges (back-and-forth turns). The total length should be approximately 400–550 words.
 The topic should be appropriate for language learners and reflect everyday situations.
 
 Step 4, after the conversation, ask a follow-up question focusing on understanding of the motivation or reasoning behind it, encouraging students to think deeply.
@@ -1030,7 +1030,7 @@ Step 5, provide multiple-choice options based on the listening content. These op
 
 If it's a monologue:
 
-Step 1, write a personal monologue of approximately 150-200 words. The following requirements must be met:
+Step 1, write a personal monologue of approximately 400-550 words. The following requirements must be met:
 -Ensure clear thinking, logical coherence, and no grammatical errors in the copy
 -A monologue can be an introduction to an object, an advertisement, or an inner thought process. But they all require specific items or events to occur, and they are relatively close to daily life
 
@@ -1167,7 +1167,7 @@ Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level.
 
 Task: Create an AI-friendly picture prompt that visually depicts a scene where a question is being asked. 
 Indicate clearly who speaks first: if a woman asks the question, a man should be shown answering, and if a man asks, a woman should answer. 
-The scene should be illustrated without any background text. And there is a black arrow pointing to the party who is about to answer the question. The arrow must closely follow the party who is about to answer the question.
+The scene should be illustrated without any background text. And there is a black arrow pointing to the party who is going to talk next. The arrow must closely follow the party who is going to talk next.
 
 Generate Japanese language test questions similar to JLPT situational questions.
 For each question, describe a real-life situation in Japanese and then ask what the person should say in that situation. 

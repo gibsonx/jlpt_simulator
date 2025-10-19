@@ -3,9 +3,10 @@ import requests
 from flask import Flask, request, jsonify
 from azure.storage.blob import BlobServiceClient
 from dotenv import load_dotenv
+import sys, os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from libs.CeleryHelper import run_exam_task
-
-
 # Load environment variables from .env
 load_dotenv()
 
