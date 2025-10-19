@@ -1004,7 +1004,22 @@ topic_understanding_txt_example = """
 keypoint_understanding_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: Your job is to write a natural-sounding conversation between a man and a woman. Alternatively, write a personal monologue, ensuring it is logically clear and flows smoothly. The probability of dialogue and monologue appearing is 50% each
+Task: Your job is either to write a natural-sounding conversation between a man and a woman or to write a personal monologue, ensuring it is logically clear and flows smoothly. 
+The probability of dialogue and monologue appearing is 70% and 30%
+
+If it's a monologue:
+
+Step 1, write a personal monologue of approximately 400-550 words. The following requirements must be met:
+-Ensure clear thinking, logical coherence, and no grammatical errors in the copy
+-A monologue can be an introduction to an object, an advertisement, or an inner thought process. But they all require specific items or events to occur, and they are relatively close to daily life
+
+Step 2, ask a follow-up question after the monologue ends, focusing on understanding the motivation or reasoning behind it and encouraging students to think deeply.
+This question should prompt students to choose the best option that matches the entire conversation or the key points of the conversation, such as:
+What is the reason for this person joining this company?
+Why is this tourist attraction famous?
+Why did that woman take the exam?
+
+Step 3, provide multiple-choice questions based on the listening content. These options should test understanding of the meaning of the conversation.
 
 If it's a conversation:
 
@@ -1028,23 +1043,8 @@ Why is the woman taking the exam?
 
 Step 5, provide multiple-choice options based on the listening content. These options should test comprehension of the conversation’s meaning.
 
-If it's a monologue:
-
-Step 1, write a personal monologue of approximately 400-550 words. The following requirements must be met:
--Ensure clear thinking, logical coherence, and no grammatical errors in the copy
--A monologue can be an introduction to an object, an advertisement, or an inner thought process. But they all require specific items or events to occur, and they are relatively close to daily life
-
-Step 2, ask a follow-up question after the monologue ends, focusing on understanding the motivation or reasoning behind it and encouraging students to think deeply.
-This question should prompt students to choose the best option that matches the entire conversation or the key points of the conversation, such as:
-What is the reason for this person joining this company?
-Why is this tourist attraction famous?
-Why did that woman take the exam?
-
-Step 3, provide multiple-choice questions based on the listening content. These options should test understanding of the meaning of the conversation.
-
-
 Instructions:
-Format: follow the format of the 2 examples in the formal exam paper but not the content.
+Format: follow the format of the 2 examples in the formal exam paper but not the content. 
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
@@ -1058,7 +1058,7 @@ Formal exam paper: {example}
 """
 
 keypoint_understanding_example = """
---- example 1 ---
+--- dialogue example ---
 <p class='background'>朝、家の玄関で妻と夫が話しています。</p>
 
 <div class='conversation'>
@@ -1079,7 +1079,7 @@ keypoint_understanding_example = """
     <li>はがきをわすれたから</li>  
 </ul>
 
---- example 2 ---
+--- monologue example ---
 <p class='background'>男の人が新しいスーパーについて話しています</p>  
 
 <div class='conversation'>
@@ -1098,7 +1098,7 @@ keypoint_understanding_example = """
 summary_understanding_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: Your job is to write a natural-sounding conversation between a man and a woman. Alternatively, write a personal monologue, ensuring it is logically clear and flows smoothly. The probability of dialogue and monologue appearing is 50% each 
+Task: Your job is either to write a natural-sounding conversation between a man and a woman or to write a personal monologue, ensuring it is logically clear and flows smoothly. The probability of dialogue and monologue appearing is 70% and 30%.
 
 Step 1, you should introduce the background of the dialogue.
 
