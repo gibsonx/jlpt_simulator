@@ -217,7 +217,7 @@ class JLPTTaskFactory:
             ListenSingleChoiceOutput,
             word
         )
-        obj["audio"] = _generate_express(content=obj, type="keypoint_understanding", seq=seq, uid=self.graph.exam_uid)
+        obj["audio"] = _generate_dialogue(content=obj, type="keypoint_understanding", seq=seq, uid=self.graph.exam_uid)
 
         return obj
 
