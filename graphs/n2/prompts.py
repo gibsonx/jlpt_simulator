@@ -82,6 +82,13 @@ write_kanji_example = """
 </ul>
 """
 
+words_collocation_teacher_prompt = """
+
+"""
+words_collocation_example = """
+
+"""
+
 word_meaning_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
@@ -694,6 +701,12 @@ midsize_reading_example = """
     </ul>
 """
 
+comprehensive_reading_teacher_prompt="""
+"""
+
+comprehensive_reading_example="""
+"""
+
 long_reading_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level.
 
@@ -1224,10 +1237,20 @@ immediate_ack_example = """
 　<li>じゃ、見に行かなきゃね</li>
 """
 
+comprehensive_expression_teacher_prompt="""
+"""
+
+comprehensive_expression_example="""
+"""
+
+
 kanji_reading_reflection_prompt = """
 """
 
 write_kanji_reflection_prompt = """
+"""
+
+word_collocation_reflection_prompt= """
 """
 
 word_meaning_reflection_prompt = """
@@ -1260,6 +1283,9 @@ short_reading_notification_reflection_prompt = """
 midsize_reading_reflection_prompt = """
 """
 
+comprehensive_reading_reflection_prompt = """
+"""
+
 long_reading_reflection_prompt = """
 """
 
@@ -1282,6 +1308,9 @@ actively_expression_reflection_prompt = """
 """
 
 immediate_ack_reflection_prompt = """
+"""
+
+comprehensive_expression_reflection_prompt ="""
 """
 
 

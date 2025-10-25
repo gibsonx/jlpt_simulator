@@ -85,6 +85,19 @@ class JLPTTaskFactory:
             word
         )
 
+    def words_collocation(self, word):
+        return self._run_task(
+            self.prompts_module.words_collocation_teacher_prompt,
+            self.prompts_module.words_collocation_example,
+            self.prompts_module.words_collocation_reflection_prompt,
+            SimpleChoiceQuestionOutput,
+            word
+        )
+
+    # =====================
+    # Sentence Structure Tasks
+    # =====================
+
     def sentence_grammar(self, word, grammar):
         return self._run_task(
             self.prompts_module.sentence_grammar_teacher_prompt,
@@ -148,6 +161,15 @@ class JLPTTaskFactory:
             self.prompts_module.midsize_reading_teacher_prompt,
             self.prompts_module.midsize_reading_example,
             self.prompts_module.midsize_reading_reflection_prompt,
+            MultipleQuestionOutput,
+            word
+        )
+
+    def comprehensive_read(self, word):
+        return self._run_task(
+            self.prompts_module.comprehensive_reading_teacher_prompt,
+            self.prompts_module.comprehensive_reading_example,
+            self.prompts_module.comprehensive_reading_reflection_prompt,
             MultipleQuestionOutput,
             word
         )
@@ -255,6 +277,31 @@ class JLPTTaskFactory:
                 import time
                 time.sleep(5)
         return obj
+
+    def comprehensive_expression(self, word, seq: int):
+        obj = self._run_task(
+            self.prompts_module.comprehensive_expression_teacher_prompt,
+            self.prompts_module.comprehensive_expression_example,
+            self.prompts_module.comprehensive_expression_reflection_prompt,
+            ImageListenQuestionOutput,
+            word
+        )
+        obj["audio"] = _generate_express(content=obj, type="comprehensive_expression", seq=seq, uid=self.graph.exam_uid)
+
+        # Retry logic for image generation
+        max_attempts = 3
+        for attempt in range(max_attempts):
+            try:
+                obj["image"] = _generate_image(obj["background"])
+                break
+            except Exception as e:
+                print(f"Attempt {attempt + 1} failed: {e}")
+                if attempt == max_attempts - 1:
+                    raise
+                import time
+                time.sleep(5)
+        return obj
+
 
     def immediate_ack(self, word, seq: int):
         obj = self._run_task(
