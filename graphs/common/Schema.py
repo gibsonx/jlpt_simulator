@@ -31,11 +31,23 @@ class ListenConversation(TypedDict):
     gender: Literal['male','female']
     context: Annotated[str, "context for the conversation in Japanese, excluding gender"]
 
+class ListenMultiPersonConversation(TypedDict):
+    gender: Literal['male1','male2','female1','female2']
+    context: Annotated[str, "context for the conversation in Japanese, excluding gender"]
+
 class ListenSingleChoiceOutput(TypedDict):
     """Listen Simple Question Formatted Output"""
     background: Annotated[str, "the background introduction of the conversation"]
     follow_up: Annotated[str, "the follow-up question"]
     conversation: List[ListenConversation]
+    choices: Annotated[List, "answer options as a list, each option is in string format"]
+    correct_answer: Annotated[int, "correct option in 1,2,3,4"]
+
+class ListenMultiPersonOutput(TypedDict):
+    """Listen Simple Question Formatted Output"""
+    background: Annotated[str, "the background introduction of the conversation"]
+    follow_up: Annotated[str, "the follow-up question"]
+    conversation: List[ListenMultiPersonConversation]
     choices: Annotated[List, "answer options as a list, each option is in string format"]
     correct_answer: Annotated[int, "correct option in 1,2,3,4"]
 

@@ -83,16 +83,52 @@ write_kanji_example = """
 """
 
 words_collocation_teacher_prompt = """
+Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
+Task: Your job is to write a question for a JLPT N2 level exam paper.
+You should write a short sentence and give a parenthesis in the sentence.
+Next, require candidates to fill the most semantically and grammatically appropriate word from the options based on the context of the sentence in the parenthesis 
+This mainly tests students' fixed collocations of Japanese nouns and compound verbs.
+The word in the sentence should not be used in the options
+Options are written either entirely in kanji or entirely in kana.
+
+
+Instructions:
+Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Content: Ensure the vocabulary is restricted to N2 level. 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+
+
+Formal exam paper: {example}
 """
-words_collocation_example = """
 
+words_collocation_example = """
+--- example 1 ---
+<a>経営の方針については、社長が決定（　）を持っている。</a>
+<ul class='options'>
+  <li>任</li>
+  <li>手</li>
+  <li>権</li>
+  <li>裁</li>
+</ul>
+
+--- example 2 ---
+<a>買い物をしている二人（　）にインタビューをしました。</a>
+<ul class='options'>
+  <li>出かけ</li>
+  <li>連れ</li>
+  <li>会い</li>
+  <li>集まり</li>
+</ul>
 """
 
 word_meaning_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
-Task:
 Task: Your job is to write a question for a JLPT N2 level exam paper.
 You should write a short sentence and give a parenthesis in the sentence,
 Next, require candidates to fill the most semantically and grammatically appropriate word from the options based on the context of the sentence in the parenthesis 
@@ -138,7 +174,7 @@ word_meaning_example = """
 synonym_substitution_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
-Task: Your job is to generate a JLPT N3 vocabulary question where the student must select the word closest in meaning to a given word used in a sentence.
+Task: Your job is to generate a JLPT N2 vocabulary question where the student must select the word closest in meaning to a given word used in a sentence.
 Wrap the target word in <u> tags and the full sentence in an <a> tag.
 Follow the sentence with a list of four <li> options, only one of which is a correct synonym or meaning-equivalent of the target word.
 The incorrect options (distractions) must be reasonable but clearly different in meaning
@@ -210,15 +246,15 @@ word_usage_example = """
 """
 
 sentence_grammar_teacher_prompt = """
-职位：你是一名日语老师，正在为JLPT N3水平写试卷。
+职位：你是一名日语老师，正在为JLPT N2水平写试卷。
 
-任务：按照以下步骤为JLPT N3级别试卷生成一道语法题，测试考生在实际语境中对语法的掌握程度。
+任务：按照以下步骤为JLPT N2级别试卷生成一道语法题，测试考生在实际语境中对语法的掌握程度。
 
 步骤1：生成1-2个短句，或者两个人对话的两句句子。要求：
 - 问题的灵感来源主题,内容应涵盖日常生活场景、对话或简短的解释性语境。
 - 生成的句子可以包含两种形式：1-2句短句；或者为2个人之间每人1-2句的对话，只需要1个对话回合
 - 题目的总字数在40-60个单词之间
-- 使用JLPT N3中的词汇；语法正确，语义通顺
+- 使用JLPT N2中的词汇；语法正确，语义通顺
 - 句子需要包含“语法参考列表”中的语法点
 - 语法点可以是：使用连词或介词作为语法的考点；或使用一个词的几种不同形态变化如te型、ta型等作为语法的考点；或使用自动词和他动词作为语法考点；或使用同一个词的不同时态作为语法考点；或使用日语敬词作为语法的考点
 
@@ -503,7 +539,6 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
-
 short_reading_narrative_example = """
 <div class='article'>
     <p>
@@ -547,12 +582,11 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
-
-short_reading_mail_example="""
+short_reading_mail_example = """
 --- example 1 ---
 <div class='article'>
     <p>これは、今川さんが後のミゲルさんに書いたメールである。</p>  
-      
+
     <p><strong>ミゲルさん</strong></p>  
     <p>メールをありがとう。</p>  
     <p>同じ会社で働くことになって、うれしいです。</p>  
@@ -560,10 +594,10 @@ short_reading_mail_example="""
     <p>会社まで歩いて行きたいと書いてありましたが、会社のりはオフィスばかりで、アパートはほとんどありません。電車通勤になりますが、私が以前住んでいた緑野という町はいいですよ。</p>  
     <p>緑野駅から会社のある北駅まで電車で15分だし、いろいろなお店があって便利です。</p>  
     <p>いい所が見つかるといいですね。会えるのを楽しみにしています。</p>  
-    
+
     <p>今川</p>
 </div>
-    
+
 <a>まで電車で15分で行けるし、店も多いので、緑野にしたらどうか。</a>  
 <ul class='options'>
     <li>(選択肢なし)</li>
@@ -595,7 +629,7 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
-short_reading_notification_example="""
+short_reading_notification_example = """
 <div class='article'>
 <p><strong>(会社で)</strong></p>  
 <p>ミンさんが席に戻ると、机の上に、原口課長からのメモが置いてあった。</p>  
@@ -691,7 +725,7 @@ midsize_reading_example = """
         <li>魚をとるためにかかっていたお金を減らすことができるから</li>  
         <li>自分たちが少しお金を出すだけで、海をきれいにしてもらえるから</li>  
     </ul>  
-  
+
     <a>32. この文章を書いた人は、日本で売られ始めた「海外のファッションの会社」の服や靴について、どのように考えているか。</a>  
     <ul class='options'>  
         <li>海外のファッションに関心を持つ人が増えているので、売れるだろう</li>  
@@ -701,10 +735,78 @@ midsize_reading_example = """
     </ul>
 """
 
-comprehensive_reading_teacher_prompt="""
+comprehensive_reading_teacher_prompt = """
+Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level.
+
+Task: Task: Your job is to write a reading question for a JLPT N2 level exam. 
+First you need to write a long article around 450 words for student to read. 
+Then, you give 4 questions by the related content in the article. 
+The purpose is to ensure the students are able to understand the meaning of the article.
+
+
+Instructions:
+Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Content: Ensure the vocabulary is restricted to N2 level. 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the article can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+
+
+
+Formal exam paper: {example}
 """
 
-comprehensive_reading_example="""
+comprehensive_reading_example = """
+<div class="reading-text">
+  <h3>A</h3>
+  <p>
+    新しい商品を企画するとき、いいアイデアがなかなか思いつかないことがある。そんなとき、自分には才能がないからだと思い込み、
+    自信をなくしてしまうのはよくない。アイデアは生まれつきの能力に関係なく、努力次第で誰でも生み出すことができる。
+    アイデアは、情報の組み合わせによって生まれることがほとんどだ。そのため、日ごろから情報を集めておくことが有効だ。
+    担当する商品に関連する情報だけを集めていると、似たようなアイデアばかりになってしまう。発想の幅を広げるには、
+    関連する分野以外の情報も頭に入れておくほうがいい。ふだんから視野を広げてさまざまな情報を蓄積しておけば、
+    必ずアイデアの役に立つはずだ。
+  </p>
+
+  <h3>B</h3>
+  <p>
+    新しい商品を企画するには、これまでとは異なるアイデアが必要だ。現在流行している商品の情報を集めるだけでは、
+    他社に勝つことはできないだろう。私はアイデアを生み出すために、一般的に考えられていることとは逆の発想をするようにしている。
+    現在流行している商品が若者向けの物なら高齢者向けにできないかと考えたり、多機能の物なら機能を一つに絞れないかと考えたりするのである。
+  </p>
+  <p>
+    アイデアは一部の才能がある人しか生み出せないものだという印象があるせいか、生み出し方を知ろうとしない人が多いと思う。
+    才能がないからといってあきらめるのではなく、思い切って発想を転換してみれば、いいアイデアにつながっていく。
+  </p>
+</div>
+
+<body>
+    <h1>65. アイデアを生み出すことについて、AとBが共通して述べていることは何か。</h1>
+    <ol>
+        <li>アイデアを生み出し方は、簡単に身につけることができる。</li>
+        <li>多くの情報を得ることで、アイデアを生み出しやすくなる。</li>
+        <li>特別な能力がなくても、アイデアを生み出すことができる。</li>
+        <li>発想のしかたを大きく変えなければ、アイデアは生み出せない。</li>
+    </ol>
+
+    <h1>66. 新しい商品を企画することについて、AとBはどのようなアドバイスをしているか。</h1>
+    <ol>
+        <li>AもBも、いろいろな分野の情報をできるだけ多く集めるといいと述べている。</li>
+        <li>AもBも、流行している商品について詳しく調べるといいと述べている。</li>
+        <li>Aは関連する分野の他社の商品の情報を集めるといいと述べ、Bは流行に逆らった考え方をするといいと述べている。</li>
+        <li>AもBも、流行している商品について詳しく調べるといいと述べている。</li>
+    </ol>
+
+    <h1>67. 新しい商品を企画する際の注意点について、AとBが共通して述べていることは何か。</h1>
+    <ol>
+        <li>十分な時間と資金を確保すること。</li>
+        <li>多くの消費者の意見を取り入れること。</li>
+        <li>市場の需要を調べる前に、デザインや機能にこだわること。</li>
+        <li>競合他社の動きを分析し、それに合わせること。</li>
+    </ol>
+</body>
 """
 
 long_reading_teacher_prompt = """
@@ -735,7 +837,7 @@ long_reading_example = """
     <p>Kさんの直し方はこうだ。まず、家を一度バラバラにする。そして、材料の悪くなっている部分は取り替えるが、そのまま使える材料はできるだけ使って、前と同じように組み立てる。直しながら壁の色を変えたり、最新の暖房を入れたりもする。この方法なら、古民家が時代に合った住みやすい家になるのだ。</p>  
     <p>Kさんは、家を直して住み始めたあと、下村にあるほかの古民家もそのままにしておくのはもったいないと思い、友人にお金を借りて直し始めた。自分のように古民家を直した家の良さがわかり、買ってくれる人がいるはずだと信じていたのだ。実際、すぐにそのような人は見つかった。そして、その後、直した古民家を見学しに全国各地の人が下村に来るようになった。</p>  
     <p>日本では、古い家を直すより新しい家を建てたほうがいいという考えが、まだまだ強い。Kさんの行動は、日本人に（　　　）を教えてくれているのだと思う。</p>  
-  
+
     <a>さんが住む前の下村は、どのような状態だったか。</a>  
     <ul class='options'>  
         <li>ほとんど壊れていないのに、誰も住んでいない古民家がたくさんあった</li>  
@@ -751,7 +853,7 @@ long_reading_example = """
         <li>古い材料をできるだけ使っていて、朝の色や暖房も昔と変わらない家</li>  
         <li>古い材料をできるだけ使っているが、駅の色や暖房は新しく変えた家</li>  
     </ul>  
-  
+
     <a>そのような人とはあるが、どのような人か。</a>  
     <ul class='options'>   
         <li>Kさんが直して住み始めた古民家を買ってくれる人</li>  
@@ -759,7 +861,7 @@ long_reading_example = """
         <li>下村にある壊れた古民家を買って、Kさんに直してもらおうとする人</li>  
         <li>古民家を直した家の良さがKさんのように分かって、買ってくれる人</li>  
     </ul>  
-  
+
     <a>（　）に入れるのに最もよいものはどれか。</a>  
     <ul class='options'>    
         <li>古い家を自分で直すことの面白さ</li>  
@@ -1237,16 +1339,101 @@ immediate_ack_example = """
 　<li>じゃ、見に行かなきゃね</li>
 """
 
-comprehensive_expression_show_answer_teacher_prompt="""
+comprehensive_expression_show_answer_teacher_prompt = """
+角色：你是一名日语老师，正在为JLPT N2水平撰写试卷。 
+
+任务：你的工作是写3个人之间听起来很自然的对话。要求是2男1女，或者2女一男。
+
+第一步，你应该介绍对话的背景。
+
+第二步，生成的对话要求总长度约为500-600字。针对某个话题进行讨论，需要有核心思想。
+
+第三步，问一个后续问题，问题可以关于是主角的想法、这段话的主题或说话者想表达什么。
+主题应该适合语言学习者，并反映日常情况。
+
+第四步，根据听力内容提供多项选择题。这些选项应该测试对对话含义的理解。
+
+
+说明：
+格式：遵循正式试卷中的例子的格式，但不要遵循内容。
+内容：确保词汇限制在N2级。 
+参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈（如果存在）
+附加要求：
+-不要在生成的内容中显示问题说明和序列号。 
+-句子中的单词既不能用于问题，也不能用于选项。
+-您必须在输出中显示正确答案，选项为1,2,3,4。例如：正解:1.
+
+
+正式试卷：{example}
 """
 
-comprehensive_expression_show_answer_example="""
+comprehensive_expression_show_answer_example = """
+<p class='background'>地域のボランティアグループのリーダーとメンバー2人が話しています。</p>
+
+<div class='conversation'>
+男1: 僕たちが市と協力して定期的にゴミ拾いをしている事公園、ゴミを置いていっちゃう人が多いよね。何か対策を考えて市役所に提案しようと思うんだ。
+女: お菓子の袋とかペットボトルとか、置いていっちゃう人がいるんですね。
+男1: 市の方針でゴミ箱は置かないことになってるからね。
+男2: 特にゴミが多いところから対策を考えた方がいいんじゃないですか?ゴミが目立つところに花壇を作るとか。
+他の公園で花壇を作ったら、その周りはゴミが減ったそうですよ。
+男1: ゴミが多いのはベンチの周りだよね?そこに花壇を作るのは難しいと思うんだ。
+女: 私は公園全体を考えた方がいいと思うんですが... [ゴミを持ち帰りましょう] って書いた看板を増やすのはどうですか?
+男1: うーん、既にいくつか立ててあるから今以上に増やす必要ないんじゃないかな?</p>
+女: あと私たちボランティアが見回って、ゴミを持って帰ってもらうように直接声をかけるのも効果があると思うんですけど。
+男1: ボランティアの負担が大きくなるのはちょっとね。うーん、まず、ゴミが多いところからなんとかしよう。
+花壇を作る代わりにっていうアイデアが良さそうだね。市役所の担当者に早速提案してみよう。
+</div>
+<a class='follow_up'>公園のゴミを減らすため、何を市役所に提案することにしましたか？</a>
+<ul class='options'> 
+    <li>ベンチの近くに花壇を作ること</li>
+    <li>ゴミを捨てないように看板を増やすこと</li>
+    <li>公園を見回ること</li>
+    <li>公園を見回ること</li>
+</ul>
 """
 
-comprehensive_expression_listen_answer_teacher_prompt="""
+comprehensive_expression_listen_answer_teacher_prompt = """
+角色：你是一名日语老师，正在为JLPT N2水平撰写试卷。 
+
+任务：你的工作是写3个人之间听起来很自然的对话。要求是2男1女，或者2女一男。
+
+第一步，你应该介绍对话的背景。
+
+第二步，生成的对话要求总长度约为500-600字。针对某个话题进行讨论，需要有核心思想。
+
+第三步，问一个后续问题，问题可以关于是主角的想法、这段话的主题或说话者想表达什么。
+主题应该适合语言学习者，并反映日常情况。
+
+第四步，根据听力内容提供多项选择题。这些选项应该测试对对话含义的理解。
+
+
+说明：
+格式：遵循正式试卷中的例子的格式，但不要遵循内容。
+内容：确保词汇限制在N2级。 
+参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈（如果存在）
+附加要求：
+-不要在生成的内容中显示问题说明和序列号。 
+-句子中的单词既不能用于问题，也不能用于选项。
+-您必须在输出中显示正确答案，选项为1,2,3,4。例如：正解:1.
+
+
+正式试卷：{example}
 """
 
-comprehensive_expression_listen_answer_example="""
+comprehensive_expression_listen_answer_example = """
+<p class='background'>池で行われているイベントでアナウンスを聞いた後、女の人と男の人が話しています。</p>
+
+<div class='conversation'>
+女1: 本日は桜花祭りにお越しくださり、ありがとうございます。各会場についてご案内いたします。中央会場では、今日捕れた魚や貝をその場で焼いてお召し上がりいただけます。こちらは、なくなり次第終了いたします。南会場では、初心者向けの釣り教室を開催しています。道具の貸し出しもあります。餌の付け方なども教えいたします。東会場では、海の生き物が観察できます。地元の海の生き物を間近で見ることができ、お子様も大人の方も楽しめいただけます。西会場では、新鮮な魚介類を販売しています。
+女2: 新鮮な魚、おいしそう。なくなり前に早く行かなきゃ？
+男: え？早速買い物？先に買っちゃうともっとたくさん食べられない？
+女2: あ、そうか。そんなに自分でたくさん食べられないって言うなら、買い物は最後にしようよ。
+男: あ、そうしような。まずはここに行こう。そんなに近くで生き物を観察できるって言うなら、買い物は最後にしようよ。
+女2: いいよ。釣りはいいの？
+男: うーん、初心者向けって言ってたから今日は初めてていいかな。
+</div>
+<a class='follow_up'>質問1: 2人は最初にどの会場に行くですか？</a>
+<a class='follow_up'>質問2: 2人は2番目にどの会場に行くですか？</a>
 """
 
 kanji_reading_reflection_prompt = """
@@ -1255,7 +1442,7 @@ kanji_reading_reflection_prompt = """
 write_kanji_reflection_prompt = """
 """
 
-words_collocation_reflection_prompt= """
+word_collocation_reflection_prompt = """
 """
 
 word_meaning_reflection_prompt = """

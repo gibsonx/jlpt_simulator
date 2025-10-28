@@ -1,5 +1,5 @@
 from graphs.common.GraphBuilder import *
-from libs.Utils import _generate_dialogue,_generate_express,_generate_image, _generate_comic_strip
+from libs.Utils import _generate_dialogue,_generate_express,_generate_multi_dialogue, _generate_image, _generate_comic_strip
 from graphs.common.Schema import *
 load_dotenv()
 
@@ -300,10 +300,10 @@ class JLPTTaskFactory:
             self.prompts_module.comprehensive_expression_show_answer_teacher_prompt,
             self.prompts_module.comprehensive_expression_show_answer_example,
             self.prompts_module.comprehensive_expression_show_answer_reflection_prompt,
-            ImageListenQuestionOutput,
+            ListenMultiPersonOutput,
             word
         )
-        obj["audio"] = _generate_dialogue(content=obj, type="comprehensive_expression_show_answer", seq=seq, uid=self.graph.exam_uid)
+        obj["audio"] = _generate_multi_dialogue(content=obj, type="comprehensive_expression_show_answer", seq=seq, uid=self.graph.exam_uid)
         return obj
 
 
@@ -318,8 +318,8 @@ class JLPTTaskFactory:
             self.prompts_module.comprehensive_expression_listen_answer_teacher_prompt,
             self.prompts_module.comprehensive_expression_listen_answer_example,
             self.prompts_module.comprehensive_expression_listen_answer_reflection_prompt,
-            ImageListenQuestionOutput,
+            ListenMultiPersonOutput,
             word
         )
-        obj["audio"] = _generate_dialogue(content=obj, type="comprehensive_expression_listen_answer", seq=seq, uid=self.graph.exam_uid)
+        obj["audio"] = _generate_multi_dialogue(content=obj, type="comprehensive_expression_listen_answer", seq=seq, uid=self.graph.exam_uid)
         return obj

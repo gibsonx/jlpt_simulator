@@ -17,7 +17,7 @@ load_dotenv()
 voices = {
     "nanami": "ja-JP-NanamiNeural",
     "masaru": "ja-JP-KeitaNeural",
-    "shiori": "ja-JP-ShioriNeural",
+    "daichi": "ja-JP-DaichiNeural",
     "mayu": "ja-JP-NanamiNeural"
 }
 
@@ -147,8 +147,6 @@ def AzureAIVoice(text, voice_name, filename, speed="0%"):
     synthesizer.speak_ssml_async(ssml).get()
 
 def _generate_dialogue(content, type, seq, uid):
-    import os
-    from pydub import AudioSegment
 
     base_path = os.environ["PROJECT_PATH"]
 
@@ -191,7 +189,7 @@ def _generate_dialogue(content, type, seq, uid):
     follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_follow_up.wav")
     AzureAIVoice(content["follow_up"], voices["nanami"], follow_up_file, speed="-5%")
 
-    if type not in ["summary_understanding", "comprehensive_expression_listen_answer"]:
+    if type not in ["summary_understanding"]:
         output_files.append(follow_up_file)
         output_files.append(os.path.join(voice_source, "empty_1s.wav"))
 
@@ -205,7 +203,7 @@ def _generate_dialogue(content, type, seq, uid):
     output_files.append(follow_up_file)
 
     # Generate Choice Voice
-    if type in ["summary_understanding", "comprehensive_expression_listen_answer"]:
+    if type in ["summary_understanding"]:
         for i, text in enumerate(content["choices"], start=1):
             option_seq = os.path.join(voice_tmp, f"{type}_{seq}_{i}_seq.wav")
             AzureAIVoice(f"{i}", voices["masaru"], option_seq, speed="-5%")
@@ -245,6 +243,107 @@ def _generate_dialogue(content, type, seq, uid):
 
     # Return full blob path
     return f"{os.environ['AZURE_CONTAINER_URL']}/{os.environ['AZURE_VOICE_CONTAINER']}/{blob_name}"
+
+
+def _generate_multi_dialogue(content, type, seq, uid):
+    base_path = os.environ["PROJECT_PATH"]
+
+    # UID-specific subfolders
+    voice_tmp = os.path.join(base_path, "tmp", uid)
+    voice_source = os.path.join(base_path, "voice")
+    voice_output = os.path.join(base_path, "output", uid)
+
+    os.makedirs(voice_tmp, exist_ok=True)
+    os.makedirs(voice_output, exist_ok=True)
+
+    voice_map = {
+        "male1": "masaru",
+        "female1": "nanami",
+        "male2": "daichi",
+        "female2": "mayu",
+    }
+
+    dialogue = [
+        (voice_map[line["gender"]], line["context"])
+        for line in content["conversation"]
+    ]
+
+    output_files = []
+
+    # Common sounds
+    output_files.append(os.path.join(voice_source, "ding.wav"))
+
+    # Sequence intro
+    seq_file = os.path.join(voice_tmp, f"{type}_{seq}.wav")
+    AzureAIVoice(f"{seq}番", voices["masaru"], seq_file, speed="0%")
+    output_files.append(seq_file)
+    output_files.append(os.path.join(voice_source, "empty_1s.wav"))
+
+    # Background
+    background_file = os.path.join(voice_tmp, f"{type}_{seq}_background.wav")
+    AzureAIVoice(content["background"], voices["nanami"], background_file, speed="-5%")
+    output_files.append(background_file)
+    output_files.append(os.path.join(voice_source, "empty_1s.wav"))
+
+    # Follow-up
+    follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_follow_up.wav")
+    AzureAIVoice(content["follow_up"], voices["nanami"], follow_up_file, speed="-5%")
+
+    if type not in ["comprehensive_expression_listen_answer"]:
+        output_files.append(follow_up_file)
+        output_files.append(os.path.join(voice_source, "empty_1s.wav"))
+
+    # Conversation
+    for i, (speaker, text) in enumerate(dialogue):
+        filename = os.path.join(voice_tmp, f"{type}_{seq}_{i}_speaker.wav")
+        AzureAIVoice(text, voices[speaker], filename, speed="-5%")
+        output_files.append(filename)
+
+    output_files.append(os.path.join(voice_source, "ding.wav"))
+    output_files.append(follow_up_file)
+
+    # Generate Choice Voice
+    if type in ["comprehensive_expression_listen_answer"]:
+        for i, text in enumerate(content["choices"], start=1):
+            option_seq = os.path.join(voice_tmp, f"{type}_{seq}_{i}_seq.wav")
+            AzureAIVoice(f"{i}", voices["masaru"], option_seq, speed="-5%")
+
+            option = os.path.join(voice_tmp, f"{type}_{seq}_{i}_option.wav")
+            AzureAIVoice(text, voices["nanami"], option, speed="-5%")
+
+            output_files.append(option_seq)
+            output_files.append(option)
+
+    # Combine audio
+    combined = AudioSegment.empty()
+    for file in output_files:
+        logger.info(file)
+        combined += AudioSegment.from_wav(file)
+
+    # Final output
+    filename = f"{type}_{seq}_conversation_output.mp3"
+    target_file = os.path.join(voice_output, filename)
+
+    combined.export(target_file, format="mp3", bitrate="96k")
+    logger.info(f"Conversation audio saved as {target_file}")
+
+    # Upload to blob with UID subfolder
+    blob_name = f"{uid}/{filename}"
+    try:
+        with open(target_file, "rb") as data:
+            container_client.upload_blob(
+                name=blob_name,
+                data=data,
+                overwrite=True,
+                timeout=300,
+            )
+        logger.info(f"✅ Uploaded {target_file} as blob {blob_name}")
+    except Exception as e:
+        logger.info(f"Upload failed: {e}")
+
+    # Return full blob path
+    return f"{os.environ['AZURE_CONTAINER_URL']}/{os.environ['AZURE_VOICE_CONTAINER']}/{blob_name}"
+
 
 def _generate_express(content, type, seq, uid):
 
