@@ -204,7 +204,7 @@ class JLPTTaskFactory:
             ListenSingleChoiceOutput,
             word
         )
-        obj["audio"] = _generate_dialogue(content=obj, type="topic_understanding", seq=seq, uid=self.graph.exam_uid)
+        obj["audio"] = _generate_dialogue(content=obj, type="topic_understanding_img", seq=seq, uid=self.graph.exam_uid)
 
         # Retry logic for image generation
         max_attempts = 3
@@ -228,7 +228,7 @@ class JLPTTaskFactory:
             ListenSingleChoiceOutput,
             word
         )
-        obj["audio"] = _generate_dialogue(content=obj, type="topic_understanding", seq=seq, uid=self.graph.exam_uid)
+        obj["audio"] = _generate_dialogue(content=obj, type="topic_understanding_txt", seq=seq, uid=self.graph.exam_uid)
         return obj
 
     def keypoint_understanding(self, word, seq: int):
@@ -278,31 +278,6 @@ class JLPTTaskFactory:
                 time.sleep(5)
         return obj
 
-    def comprehensive_expression(self, word, seq: int):
-        obj = self._run_task(
-            self.prompts_module.comprehensive_expression_teacher_prompt,
-            self.prompts_module.comprehensive_expression_example,
-            self.prompts_module.comprehensive_expression_reflection_prompt,
-            ImageListenQuestionOutput,
-            word
-        )
-        obj["audio"] = _generate_express(content=obj, type="comprehensive_expression", seq=seq, uid=self.graph.exam_uid)
-
-        # Retry logic for image generation
-        max_attempts = 3
-        for attempt in range(max_attempts):
-            try:
-                obj["image"] = _generate_image(obj["background"])
-                break
-            except Exception as e:
-                print(f"Attempt {attempt + 1} failed: {e}")
-                if attempt == max_attempts - 1:
-                    raise
-                import time
-                time.sleep(5)
-        return obj
-
-
     def immediate_ack(self, word, seq: int):
         obj = self._run_task(
             self.prompts_module.immediate_ack_teacher_prompt,
@@ -312,4 +287,39 @@ class JLPTTaskFactory:
             word
         )
         obj["audio"] = _generate_express(content=obj, type="immediate_ack", seq=seq, uid=self.graph.exam_uid)
+        return obj
+
+    def comprehensive_expression_show_answer(self, word, seq: int):
+        """
+        specific for N2
+        :param word:
+        :param seq:
+        :return:
+        """
+        obj = self._run_task(
+            self.prompts_module.comprehensive_expression_show_answer_teacher_prompt,
+            self.prompts_module.comprehensive_expression_show_answer_example,
+            self.prompts_module.comprehensive_expression_show_answer_reflection_prompt,
+            ImageListenQuestionOutput,
+            word
+        )
+        obj["audio"] = _generate_dialogue(content=obj, type="comprehensive_expression_show_answer", seq=seq, uid=self.graph.exam_uid)
+        return obj
+
+
+    def comprehensive_expression_listen_answer(self, word, seq: int):
+        """
+        specific for N2
+        :param word:
+        :param seq:
+        :return:
+        """
+        obj = self._run_task(
+            self.prompts_module.comprehensive_expression_listen_answer_teacher_prompt,
+            self.prompts_module.comprehensive_expression_listen_answer_example,
+            self.prompts_module.comprehensive_expression_listen_answer_reflection_prompt,
+            ImageListenQuestionOutput,
+            word
+        )
+        obj["audio"] = _generate_dialogue(content=obj, type="comprehensive_expression_listen_answer", seq=seq, uid=self.graph.exam_uid)
         return obj

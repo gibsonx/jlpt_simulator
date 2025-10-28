@@ -894,7 +894,7 @@ Instructions:
 Format: follow the format of the example in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
-Additional Requirement: 
+Additional Requirement:
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1

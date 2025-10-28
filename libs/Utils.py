@@ -191,7 +191,7 @@ def _generate_dialogue(content, type, seq, uid):
     follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_follow_up.wav")
     AzureAIVoice(content["follow_up"], voices["nanami"], follow_up_file, speed="-5%")
 
-    if type != "summary_understanding":
+    if type not in ["summary_understanding", "comprehensive_expression_listen_answer"]:
         output_files.append(follow_up_file)
         output_files.append(os.path.join(voice_source, "empty_1s.wav"))
 
@@ -204,8 +204,8 @@ def _generate_dialogue(content, type, seq, uid):
     output_files.append(os.path.join(voice_source, "ding.wav"))
     output_files.append(follow_up_file)
 
-    # Choices for summary_understanding
-    if type == "summary_understanding":
+    # Generate Choice Voice
+    if type in ["summary_understanding", "comprehensive_expression_listen_answer"]:
         for i, text in enumerate(content["choices"], start=1):
             option_seq = os.path.join(voice_tmp, f"{type}_{seq}_{i}_seq.wav")
             AzureAIVoice(f"{i}", voices["masaru"], option_seq, speed="-5%")

@@ -1237,12 +1237,17 @@ immediate_ack_example = """
 　<li>じゃ、見に行かなきゃね</li>
 """
 
-comprehensive_expression_teacher_prompt="""
+comprehensive_expression_show_answer_teacher_prompt="""
 """
 
-comprehensive_expression_example="""
+comprehensive_expression_show_answer_example="""
 """
 
+comprehensive_expression_listen_answer_teacher_prompt="""
+"""
+
+comprehensive_expression_listen_answer_example="""
+"""
 
 kanji_reading_reflection_prompt = """
 """
@@ -1250,7 +1255,7 @@ kanji_reading_reflection_prompt = """
 write_kanji_reflection_prompt = """
 """
 
-word_collocation_reflection_prompt= """
+words_collocation_reflection_prompt= """
 """
 
 word_meaning_reflection_prompt = """
@@ -1310,7 +1315,10 @@ actively_expression_reflection_prompt = """
 immediate_ack_reflection_prompt = """
 """
 
-comprehensive_expression_reflection_prompt ="""
+comprehensive_expression_show_answer_reflection_prompt ="""
+"""
+
+comprehensive_expression_listen_answer_reflection_prompt ="""
 """
 
 

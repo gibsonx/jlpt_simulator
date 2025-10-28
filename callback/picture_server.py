@@ -1,4 +1,5 @@
-import os
+from io import BytesIO
+from PIL import Image
 import requests
 from flask import Flask, request, jsonify
 from azure.storage.blob import BlobServiceClient
@@ -41,17 +42,36 @@ def handle_callback():
                 # Download image
                 response = requests.get(url)
                 if response.status_code == 200:
+                    # Open the image
+                    img = Image.open(BytesIO(response.content))
+
+                    # Resize: long side = 500px, maintain aspect ratio
+                    width, height = img.size
+                    if width > height:
+                        new_width = 500
+                        new_height = int((500 / width) * height)
+                    else:
+                        new_height = 500
+                        new_width = int((500 / height) * width)
+
+                    img_resized = img.resize((new_width, new_height), Image.Resampling.LANCZOS)
+
+                    # Save to buffer
+                    buffer = BytesIO()
+                    img_resized.save(buffer, format="PNG")
+                    buffer.seek(0)
+
                     # Blob name: organize by task
                     blob_name = f"4o_images_{task_id}_image_{i + 1}.png"
 
                     # Upload to Azure Blob
                     container_client.upload_blob(
                         name=blob_name,
-                        data=response.content,
+                        data=buffer,
                         overwrite=True
                     )
 
-                    print(f"Uploaded {blob_name} to Azure Blob Storage")
+                    print(f"Uploaded resized {blob_name} ({new_width}x{new_height}) to Azure Blob Storage")
                 else:
                     print(f"Failed to download image: status {response.status_code}")
 
@@ -70,7 +90,6 @@ def handle_callback():
 
     # Always acknowledge callback
     return jsonify({'status': 'received'}), 200
-
 
 @app.route("/run_exam", methods=["POST"])
 def run_exam_endpoint():
