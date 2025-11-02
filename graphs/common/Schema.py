@@ -46,10 +46,21 @@ class ListenSingleChoiceOutput(TypedDict):
 class ListenMultiPersonOutput(TypedDict):
     """Listen Simple Question Formatted Output"""
     background: Annotated[str, "the background introduction of the conversation"]
-    follow_up: Annotated[str, "the follow-up question"]
     conversation: List[ListenMultiPersonConversation]
+    follow_up: Annotated[str, "the follow-up question"]
     choices: Annotated[List, "answer options as a list, each option is in string format"]
     correct_answer: Annotated[int, "correct option in 1,2,3,4"]
+
+class ListenQuestions(TypedDict):
+    follow_up: Annotated[str, "the follow-up question"]
+    correct_answer: Annotated[int, "correct option in 1,2,3,4"]
+    choices: Annotated[List, "answer options as a list, each option is in string format"]
+
+class ListenMultiPersonAndQuestionOutput(TypedDict):
+    """Listen Simple Question Formatted Output"""
+    background: Annotated[str, "the background introduction of the conversation"]
+    conversation: List[ListenMultiPersonConversation]
+    listen_questions: List[ListenQuestions]
 
 class ImageListenQuestionOutput(TypedDict):
     """Listen Simple Question Formatted Output"""

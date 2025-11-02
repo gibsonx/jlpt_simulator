@@ -17,8 +17,8 @@ load_dotenv()
 voices = {
     "nanami": "ja-JP-NanamiNeural",
     "masaru": "ja-JP-KeitaNeural",
-    "daichi": "ja-JP-DaichiNeural",
-    "mayu": "ja-JP-NanamiNeural"
+    "daichi": "ja-JP-MasaruNeural",
+    "mayu": "ja-JP-ShioriNeural"
 }
 
 # Initialize Blob client
@@ -117,6 +117,18 @@ def _render_result(result, idx=1):
         if "questions" in result and isinstance(result["questions"], list):
             for idx, q in enumerate(result["questions"],1):
                 html += f'<p><strong>{idx}.{q["html_question"]}</strong></p>\n'
+                if "choices" in q:
+                    correct = q.get("correct_answer", -1)
+                    html += '<ul>\n'
+                    for idx, choice in enumerate(q["choices"], 1):
+                        if idx == correct:
+                            html += f"<li><b>{choice}</b> <span style='color:green;'>(correct)</span></li>\n"
+                        else:
+                            html += f"<li>{choice}</li>\n"
+                    html += '</ul>\n'
+        if "listen_questions" in result and isinstance(result["listen_questions"], list):
+            for idx, q in enumerate(result["listen_questions"],1):
+                html += f'<p><strong>{idx}.{q["follow_up"]}</strong></p>\n'
                 if "choices" in q:
                     correct = q.get("correct_answer", -1)
                     html += '<ul>\n'
@@ -285,22 +297,29 @@ def _generate_multi_dialogue(content, type, seq, uid):
     output_files.append(background_file)
     output_files.append(os.path.join(voice_source, "empty_1s.wav"))
 
-    # Follow-up
-    follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_follow_up.wav")
-    AzureAIVoice(content["follow_up"], voices["nanami"], follow_up_file, speed="-5%")
-
-    if type not in ["comprehensive_expression_listen_answer"]:
-        output_files.append(follow_up_file)
-        output_files.append(os.path.join(voice_source, "empty_1s.wav"))
-
     # Conversation
     for i, (speaker, text) in enumerate(dialogue):
         filename = os.path.join(voice_tmp, f"{type}_{seq}_{i}_speaker.wav")
         AzureAIVoice(text, voices[speaker], filename, speed="-5%")
         output_files.append(filename)
 
-    output_files.append(os.path.join(voice_source, "ding.wav"))
-    output_files.append(follow_up_file)
+    # # Follow-up
+    if type in ["comprehensive_expression_listen_answer"]:
+        follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_follow_up.wav")
+        AzureAIVoice(content["follow_up"], voices["nanami"], follow_up_file, speed="-5%")
+
+        output_files.append(os.path.join(voice_source, "ding.wav"))
+        output_files.append(follow_up_file)
+    else:
+        for i, text in enumerate(content["listen_questions"], start=1):
+            output_files.append(os.path.join(voice_source, "ding.wav"))
+
+            follow_up_file = os.path.join(voice_tmp, f"{type}_{seq}_{i}_follow_up.wav")
+            AzureAIVoice(text['follow_up'], voices["nanami"], follow_up_file, speed="-5%")
+            output_files.append(follow_up_file)
+
+            output_files.append(os.path.join(voice_source, "empty_1s.wav"))
+
 
     # Generate Choice Voice
     if type in ["comprehensive_expression_listen_answer"]:

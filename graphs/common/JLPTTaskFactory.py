@@ -289,24 +289,6 @@ class JLPTTaskFactory:
         obj["audio"] = _generate_express(content=obj, type="immediate_ack", seq=seq, uid=self.graph.exam_uid)
         return obj
 
-    def comprehensive_expression_show_answer(self, word, seq: int):
-        """
-        specific for N2
-        :param word:
-        :param seq:
-        :return:
-        """
-        obj = self._run_task(
-            self.prompts_module.comprehensive_expression_show_answer_teacher_prompt,
-            self.prompts_module.comprehensive_expression_show_answer_example,
-            self.prompts_module.comprehensive_expression_show_answer_reflection_prompt,
-            ListenMultiPersonOutput,
-            word
-        )
-        obj["audio"] = _generate_multi_dialogue(content=obj, type="comprehensive_expression_show_answer", seq=seq, uid=self.graph.exam_uid)
-        return obj
-
-
     def comprehensive_expression_listen_answer(self, word, seq: int):
         """
         specific for N2
@@ -322,4 +304,21 @@ class JLPTTaskFactory:
             word
         )
         obj["audio"] = _generate_multi_dialogue(content=obj, type="comprehensive_expression_listen_answer", seq=seq, uid=self.graph.exam_uid)
+        return obj
+
+    def comprehensive_expression_show_answer(self, word, seq: int):
+        """
+        specific for N2
+        :param word:
+        :param seq:
+        :return:
+        """
+        obj = self._run_task(
+            self.prompts_module.comprehensive_expression_show_answer_teacher_prompt,
+            self.prompts_module.comprehensive_expression_show_answer_example,
+            self.prompts_module.comprehensive_expression_show_answer_reflection_prompt,
+            ListenMultiPersonAndQuestionOutput,
+            word
+        )
+        obj["audio"] = _generate_multi_dialogue(content=obj, type="comprehensive_expression_show_answer", seq=seq, uid=self.graph.exam_uid)
         return obj
