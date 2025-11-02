@@ -17,8 +17,8 @@ load_dotenv()
 voices = {
     "nanami": "ja-JP-NanamiNeural",
     "masaru": "ja-JP-KeitaNeural",
-    "daichi": "ja-JP-DaichiNeural",
-    "mayu": "ja-JP-NanamiNeural"
+    "daichi": "ja-JP-MasaruNeural",
+    "mayu": "ja-JP-ShioriNeural"
 }
 
 # Initialize Blob client

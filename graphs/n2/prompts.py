@@ -33,21 +33,21 @@ Formal exam paper: {example}
 
 kanji_reading_example = """  
 --- example 1 ---
-<a>この町の<u>主要</u>な産業は何ですか。</a>
+<a>状況を<u>詳細</u>に書いてださい。</a>
 <ul>
-    <li>じゅおう</li>
-    <li>しゅおう</li>
-    <li>じゅうよう</li>
-    <li>しゅよう</li>
+    <li>そうざい</li>
+    <li>そうさい</li>
+    <li>しょうざい</li>
+    <li>しょうさい</li>
 </ul>
 
 --- example 2 ---
-<a>今日とても<u>嬉しい</u>ですね。</a>
+<a>とても<u>鮮やか</u>だったことを覚えています。</a>
 <ul>
-    <li>うれしい</li>
-    <li>はれしい</li>
-    <li>まぶしい</li>
-    <li>きびしい</li>
+    <li>おだやか</li>
+    <li>さわやか</li>
+    <li>あざやか</li>
+    <li>なごやか</li>
 </ul>
 """
 
@@ -73,12 +73,22 @@ Formal exam paper: {example}
 """
 
 write_kanji_example = """
-<a>ここから<u>じゅんばん</u>に見てください。 </a>
-<ul class='options'>
-  <li>順番</li>
-  <li>項番</li>
-  <li>順審</li>
-  <li>項審</li>
+--- example 1 ---
+<a>この会社を<u>しぼう</u>した理由を教えてください。</a>
+<ul>
+    <li>希望</li>
+    <li>志望</li>
+    <li>指望</li>
+    <li>貴望</li>
+</ul>
+
+--- example 2 ---
+<a>このセーターにはとても<u>やわらかい</u>毛系が使われている。</a>
+<ul>
+    <li>伸らかい</li>
+    <li>軽らかい</li>
+    <li>暖らかい</li>
+    <li>柔らかい</li>
 </ul>
 """
 
@@ -108,21 +118,21 @@ Formal exam paper: {example}
 
 words_collocation_example = """
 --- example 1 ---
-<a>経営の方針については、社長が決定（　）を持っている。</a>
+<a>しょうゆの（　）原料は大豆です。</a>
 <ul class='options'>
-  <li>任</li>
-  <li>手</li>
-  <li>権</li>
-  <li>裁</li>
+  <li>主</li>
+  <li>要</li>
+  <li>正</li>
+  <li>本</li>
 </ul>
 
 --- example 2 ---
-<a>買い物をしている二人（　）にインタビューをしました。</a>
+<a>子どもたちの読書（　）が進んでいるらしい。</a>
 <ul class='options'>
-  <li>出かけ</li>
-  <li>連れ</li>
-  <li>会い</li>
-  <li>集まり</li>
+  <li>抜け</li>
+  <li>逃げ</li>
+  <li>別れ</li>
+  <li>離れ</li>
 </ul>
 """
 
@@ -152,21 +162,21 @@ Formal exam paper: {example}
 
 word_meaning_example = """
 --- example 1 ---
-<a>大雪で朝から電車が（　）している。</a>
+<a>両親はおいしい料理で客を（　）のが好きだ。</a>
 <ul class='options'>
-  <li>縮小</li>
-  <li>滞在</li>
-  <li>延期</li>
-  <li>運休</li>
+  <li>もてなす</li>
+  <li>おだてる</li>
+  <li>許す</li>
+  <li>救う</li>
 </ul>
 
 --- example 2 ---
-<a>今日は暑かったので、シャツが（　）でぬれてしまった。</a>
+<a>西川さんは転校してきたばかりだが、友達もできて、もうすっかりクラスに（　）ている。</a>
 <ul class='options'>
-  <li>いびき</li>
-  <li>あくび</li>
-  <li>あせ</li>
-  <li>いき</li>
+  <li>当てはまって</li>
+  <li>溶け込んで</li>
+  <li>結びついて</li>
+  <li>触れ合って</li>
 </ul>
 
 """
@@ -198,20 +208,20 @@ Formal exam paper: {example}
 """
 
 synonym_substitution_example = """
-<a>さん、<u>避難</u>してください。</a>
+<a>出張の日程は<u>おおよそ</u>決まりました。</a>
 <ul class='options'>
-  <li>ならんで</li>
-  <li>入って</li>
-  <li>にげて</li>
-  <li>急いで</li>
+  <li>だいたい</li>
+  <li>すべて</li>
+  <li>やっと</li>
+  <li>もう</li>
 </ul>
 
-<a>来週、ここで<u>企業</u>の説明会があります。
+<a>中西さんはいつも<u>威張って</u>いる。</a>
 <ul class='options'>
-  <li>旅行</li>
-  <li>会社</li>
-  <li>大学</li>
-  <li>建物</li>
+  <li>眠そうにして</li>
+  <li>偉そうにして</li>
+  <li>暇そうにして</li>
+  <li>嫌そうにして</li>
 </ul>
 """
 
@@ -236,12 +246,12 @@ Formal exam paper: {example}
 """
 
 word_usage_example = """
-<a>内容</a>
+<a>共有</a>
 <ul class='options'>
-  <li>修理のため、エアコンの<u>内容</u>を一度取り出します</li>
-  <li>鍋の中にカレーの<u>内容</u>を入れて、１時間くらい煮てください</li>
-  <li>古い財布から新しい財布へ<u>内容</u>を移しました</li>
-  <li>この手紙の<u>内容</u>は、ほかの人には秘密にしてください</li>
+  <li>市民ボランティアの<u>共有</u>で、留学生のスピーチコンテストが行われた</li>
+  <li>大学と企業が<u>共有</u>で新しい技術の研究を行っている</li>
+  <li>これらの事件には、発生場所に<u>共有</u>の特徴があることが分かった</li>
+  <li>結婚してから購入した物は、夫婦の<u>共有</u>財産になる</li>
 </ul>
 """
 
@@ -288,24 +298,24 @@ sentence_grammar_teacher_prompt = """
 
 sentence_grammar_example = """
 --- example 1 ---
-<a>私は、自分の作ったパンをたくさんの人（　　　）食べてほしいと思って、パン屋を始めた。</a>
+<a>携帯電話を一人一台持つのは当たり前と言われる現代で、私のように携帯電話なしで生活している人は（　　　）いるのだろうか。</a>
 <ul class='options'>
-  <li>は</li>
-  <li>に</li>
-  <li>まで</li>
-  <li>なら</li>
+  <li>どうも</li>
+  <li>どれほど</li>
+  <li>どうしても</li>
+  <li>どんなに</li>
 </ul>
 
 --- example 2 ---
-<a>（研究室で）<br>
-学生「先生、今、よろしいですか。来週の発表（　　　）、ちょっとご相談したいのですが。」<br>
-先生「ええ、いいですよ。」
+<a>（カメラ屋で）<br>
+客「カメラを海に落としてしまって、電源が入らないんです。中に水が入ってしまったようなのですが…。」<br>
+店員「海水が入った（　　）、修理は難しいかもしれませんが、一応見てみますね」
 </a>
 <ul class='options'>
-  <li>にとって</li>
-  <li>によると</li>
-  <li>のことで</li>
-  <li>のほか</li>
+  <li>のであれば</li>
+  <li>ことであれば</li>
+  <li>のであって</li>
+  <li>ことであって</li>
 </ul>
 """
 
@@ -313,7 +323,7 @@ sentence_grammar_example = """
 # When the third word is identified, point out its sequence number in the options.
 
 sentence_sort_teacher_prompt = """
-Role: You are a Japanese teacher who designed a sentence sorting question for the JLPT N3 exam.
+Role: You are a Japanese teacher who designed a sentence sorting question for the JLPT N2 exam.
 
 Task: You should write a sentence of approximately 60 words and cut out four consecutive phrases as options for the question. The specific execution steps are as follows:
 
@@ -363,33 +373,33 @@ Grammar reference: {grammar}
 
 sentence_sort_example = """
 --- example 1 ---
-<a>山川大学では、<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u> について新入生がにアンケート調査を行っている。</a>
+<a>会議での西山さんのプレゼントは、普段はなかなか<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>素晴らしかった。</a>
 <ul class='options'>
-  <li>大学生活</li>
-  <li>持っている</li>
-  <li>に対して</li>
-  <li>イメージ</li>
+  <li>ぐらい</li>
+  <li>課長が</li>
+  <li>褒める</li>
+  <li>褒めることができない</li>
 </ul>
 
 --- example 2 ---
-<a>来週の夫の誕生日には、<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u> つもりだ。</a>
+<a>さくら駅周辺の再開発事業を行う<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>予定だ。</a>
 <ul class='options'>
-  <li>最近</li>
-  <li>プレゼントする</li>
-  <li>かばんを</li>
-  <li>欲しがっている</li>
+  <li>さくら市は</li>
+  <li>に先立って</li>
+  <li>関係者に対する</li>
+  <li>説明会を開催する</li>
 </ul>
 
 """
 
 structure_selection_teacher_prompt = """
-角色：你是一名日语老师，正在为JLPT N3水平撰写试卷。 
+角色：你是一名日语老师，正在为JLPT N2水平撰写试卷。 
 
-任务：你的工作是按照以下步骤为JLPT N3级别出一道填入正确内容的语法题。
+任务：你的工作是按照以下步骤为JLPT N2级别出一道填入正确内容的语法题。
 
 步骤1：问题的灵感来源"主题"。写一篇日语短文。短文需要符合以下要求：
 - 短文需要有1-3个段落，350-500个词。
-- 确保短文中的词汇95%限制在N3级别。
+- 确保短文中的词汇95%限制在N2级别。
 - 整段内容需要保证语义通顺，没有语法错误。短文需要包含“语法参考列表”中的语法点。
 
 步骤2：辨析并优化步骤1中生成的短文。使优化后的短文符合以下几个条件：
@@ -428,91 +438,70 @@ structure_selection_example = """
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>富士山の思い出</title>
+<meta charset="UTF-8">
+<title>紅葉の異変（続き）</title>
+<style>
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+    margin: 40px;
+    line-height: 1.8;
+  }
+  .container {
+    border: 1px solid #000;
+    padding: 20px;
+  }
+  .title {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .author {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+  .question {
+    margin-top: 20px;
+  }
+</style>
 </head>
 <body>
-  <h1>富士山<ruby>山<rt>さん</rt></ruby>の思い出</h1>
-  <p><small>ヒエン</small></p>
+  <p>以下は、留学生がスピーチのために書いた文章である</p>
 
-  <p>
-    今年の<ruby>夏休<rt>なつやす</rt></ruby>みに、初めて<ruby>富士山<rt>ふじさん</rt></ruby>に<ruby>登<rt>のぼ</rt></ruby>りました。
-    <ruby>富士山<rt>ふじさん</rt></ruby>は日本でいちばん高い山で、3776メートルもあります。
-    <strong>５</strong>はわたしの国にはありません。
-    それで、<ruby>留学<rt>りゅうがく</rt></ruby>したら、ぜひ登ってみたいと思っていました。
-  </p>
+  <div class="container">
+    <div class="title">紅葉の異変</div>
+    <div class="author">サリム ソフィア</div>
 
-  <p>
-    <ruby>富士山<rt>ふじさん</rt></ruby>の<ruby>途<rt>と</rt></ruby>中までバスで行って、
-    夜10時ごろから<ruby>登<rt>のぼ</rt></ruby>り始めました。
-    山の上で朝日を見るために夜中も歩かなければなりませんでした。
-    <ruby>登山<rt>とざん</rt></ruby>の<ruby>途中<rt>とちゅう</rt></ruby>で、<strong>６</strong>と思いました。
-  </p>
+    <p>
+      私は日本の秋の景色が好きです。秋になって紅葉が始まり、緑だった葉が黄色やオレンジ、赤に変わると、とてもきれいです。秋の紅葉は、日本の四季の変化を感じさせてくれるものです。
+    </p>
 
-  <p>
-    なぜかというと、夏でも<ruby>富士山<rt>ふじさん</rt></ruby>の上のほうは<ruby>本当<rt>ほんとう</rt></ruby>に寒かったし、
-    <ruby>予想<rt>よそう</rt></ruby>よりも山の道を歩くのは<ruby>大変<rt>たいへん</rt></ruby>で、足も<ruby>痛<rt>いた</rt></ruby>かったからです。
-    <strong>７</strong>、山の上に着いて朝日を見たら、それまでの<ruby>疲<rt>つか</rt></ruby>れが<ruby>消<rt>き</rt></ruby>えてしまいました。
-  </p>
+    <p>
+      （48）ですが、先日テレビで、紅葉がピークを迎える時期が年々遅くなっているというニュースを見ました。中には、1月になってからピークを迎えたところもあるそうで、驚きました。温暖化によって平均気温が上昇していることが大きな原因だそうです。私は、夏が過ぎて気温が下がってくれば、必ず紅葉が始まると思っていました。（49）そうではありませんでした。紅葉には、条件となる気温の変化があります。
+    </p>
 
-  <p>
-    突然、目の前に広がる<ruby>雲<rt>くも</rt></ruby>の間から朝日が<strong>８</strong>。
-    今まで見た中でいちばん<ruby>美<rt>うつく</rt></ruby>しい朝日でした。
-    一生<ruby>忘<rt>わす</rt></ruby>れないだろうと思います。
-    とてもすばらしい<strong>９</strong>。
-  </p>
+    <p>
+      葉の変色が始まるのは、1日の最低気温が大体8度以下になってからです。秋になっても、最低気温が一定の気温まで下がらなければ、紅葉は（50）その後、さらに寒くなり、5～6度まで下がると、紅葉は一気に進みます。また、5度以下の日が続くと、最も美しい新葉が見られるといわれています。
+    </p>
 
-
-  <div class="question">
-    <h2>5</h2>
-    <ol>
-      <li><ruby>このいちばん高<rt>たか</rt></ruby>い<ruby>富士山<rt>ふじさん</rt></ruby></li>
-      <li>こんな<ruby>富士山<rt>ふじさん</rt></ruby></li>
-      <li>こんなに<ruby>高<rt>たか</rt></ruby>い山</li>
-      <li><ruby>このいちばん高<rt>たか</rt></ruby>い山</li>
-    </ol>
+    <p>
+      紅葉に起きている異変を知り、このまま温暖化が進むと、日本の秋の景色が変わってしまう可能性もあるのではないかと思いました。もしかしたら、紅葉自体が見られなくなる日も来るかもしれません。紅葉を通して、温暖化が身近な問題であることをより強く（51）
+    </p>
   </div>
 
   <div class="question">
-    <h2>6</h2>
-    <ol>
-      <li>いつか<ruby>行<rt>い</rt></ruby>こう</li>
-      <li>とうとう<ruby>来<rt>こ</rt></ruby>なかった</li>
-      <li>やっと<ruby>帰<rt>かえ</rt></ruby>った</li>
-      <li>もう<ruby>帰<rt>かえ</rt></ruby>りたい</li>
-    </ol>
-  </div>
+    <p><strong>48</strong></p>
+    <p>1. そこの紅葉　　2. そんな紅葉　　3. そちら　　4. 紅葉</p>
 
-  <div class="question">
-    <h2>7</h2>
-    <ol>
-      <li>そのうえ</li>
-      <li>しかし</li>
-      <li><ruby>実<rt>じつ</rt></ruby>は</li>
-      <li>それに</li>
-    </ol>
-  </div>
+    <p><strong>49</strong></p>
+    <p>1. 結局　　2. 確かに　　3. しかし　　4. つまり</p>
 
-  <div class="question">
-    <h2>8</h2>
-    <ol>
-      <li><ruby>現<rt>あらわ</rt></ruby>れたのです</li>
-      <li><ruby>現<rt>あらわ</rt></ruby>れるはずです</li>
-      <li><ruby>現<rt>あらわ</rt></ruby>れたのでしょう</li>
-      <li><ruby>現<rt>あらわ</rt></ruby>れるはずでした</li>
-    </ol>
-  </div>
+    <p><strong>50</strong></p>
+    <p>1. 始まらないのです　　2. 始まらないためです　　3. 始まらないのでしょうか　　4. 始まらないためでしょうか</p>
 
-  <div class="question">
-    <h2>9</h2>
-    <ol>
-      <li><ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>で</rt></ruby>を<ruby>作<rt>つく</rt></ruby>りたいです</li>
-      <li><ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>で</rt></ruby>もあります</li>
-      <li><ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>で</rt></ruby>になりました</li>
-      <li><ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>で</rt></ruby>がほしいです</li>
-    </ol>
+    <p><strong>51</strong></p>
+    <p>1. 感じているからだと思います　　2. 感じられるところだと思います　　3. 感じさせることができました　　4. 感じるようになりました</p>
   </div>
-
 </body>
 </html>
 """
@@ -521,13 +510,13 @@ short_reading_narrative_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
 Task: Your job is to write a reading question for JLPT N2 level exam. 
-First you need to write a narrative article around 250 words for student to read.  
+First you need to write a narrative article around 300 words for student to read.  
 Then, you give a question by the related content in the article. Most importantly, the correct answer must not be stated directly in the article. 
 Instead, it should require the test-taker to infer, summarize, or understand the context or intent of the passage.
 The passage should reflect a real-life topic (e.g., daily life, work, study, travel, opinions).
 
 Instructions:
-Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of 1 example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
 Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
@@ -540,22 +529,65 @@ Formal exam paper: {example}
 """
 
 short_reading_narrative_example = """
-<div class='article'>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>論理的な会話に必要なこと</title>
+<style>
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+    margin: 40px;
+    line-height: 1.8;
+  }
+  .container {
+    border: 1px solid #000;
+    padding: 20px;
+  }
+  .title {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .note {
+    font-size: 0.95em;
+    margin-top: 10px;
+    color: #333;
+  }
+  .question {
+    margin-top: 25px;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
     <p>
-      友達のマキは、いいことがあったという話をよくする。だから私は、マキは運がいいのだと思っていた。しかし、最近、そうではないと気づいた。<br><br>
-      先日二人で出かけたとき、事故で電車が止まっていて、何キロも歩いて帰ることになった。<br>
-      嫌だなと思っている私に、マキは「知らない町を歩けるね。」とうれしそうに言った。<br>
-      こんなことでも、マキは楽しめてしまうのだ。今まで私が聞いた話も、マキだから「いいこと」だと感じたのだろうと思う。
+      自分の言葉は自分の頭の中にしかなく、相手の言葉は相手の頭の中にしかありません。
+      抽象的な言葉の場合には、まったく同じ意味で使用していることのほうが少ないと言えてしょう。
     </p>
-  </div>
 
-<a>24. 最近、「私」はマキのことをどのような人だと思うようになったか。</a>
-<ul class='options'>
-      <li>「いいこと」ばかりが起きる、運がいい人</li>
-       <li>「私」と一緒に経験したことは、何でも「いいこと」だと思える人</li>
-      <li> ほかの人に起こった「いいこと」を一緒に喜んであげられる人</li>
-      <li> ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人</li>
+    <p>
+      したがって、議論をする際には、言葉の定義づけが重要になってきます。相手がどう（注）
+      かくにんという意味でその言葉を使用しているのか、自分と同じ意味で使用しているのかを確認する
+      ことぜんていとは大切なことです。これは、論理的に会話をするうえでの大前提となるものです。
+    </p>
+
+    <p class="note">
+      （注）定義づけ：ここでは、意味を決めること
+    </p>
+
+    <div class="question">
+      <p>52 筆者によると、論理的な会話をするのに必要なことは何か。</p>
+      <p>1. 抽象的な言葉をできるだけ使用しないようにする。</p>
+      <p>2. 抽象的な言葉を、正しい意味かどうかを確認してから使用する。</p>
+      <p>3. 同じ言葉を、相手と自分が同じ意味で使用しているかを確認する。</p>
+      <p>4. 相手の知らない言葉は、自分がどういう意味で使用しているかを説明する。</p>
     </div>
+  </div>
+</body>
+</html>
+
 """
 
 short_reading_mail_teacher_prompt = """
@@ -1293,9 +1325,9 @@ There is a black arrow pointing towards the woman.
 """
 
 immediate_ack_teacher_prompt = """
-角色：你是一名日语老师，正在为JLPT N3水平撰写试卷。 
+角色：你是一名日语老师，正在为JLPT N2水平撰写试卷。 
 
-任务：出一道符合N3水平的听力题。具体步骤如下：
+任务：出一道符合N2水平的听力题。具体步骤如下：
 
 步骤1：设置一个场景，两人个人a和b生成一段只有一个回合的对话。要求对话：
 - a的发言字数在20-40个单词左右
@@ -1311,7 +1343,7 @@ immediate_ack_teacher_prompt = """
 
 说明：
 格式：遵循正式试卷中2个例子的格式，但不要遵循内容。
-内容：确保词汇量限制在N3级。 
+内容：确保词汇量限制在N2级。 
 参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈（如果存在）
 附加要求：
 -不要在生成的内容中显示问题说明和序列号。 
@@ -1432,8 +1464,21 @@ comprehensive_expression_listen_answer_example = """
 女2: いいよ。釣りはいいの？
 男: うーん、初心者向けって言ってたから今日は初めてていいかな。
 </div>
-<a class='follow_up'>質問1: 2人は最初にどの会場に行くですか？</a>
-<a class='follow_up'>質問2: 2人は2番目にどの会場に行くですか？</a>
+<a class='follow_up_01'>質問1: 2人は最初にどの会場に行くですか？</a>
+<ul class='options_01'> 
+    <li>中央会場</li>
+    <li>南会場</li>
+    <li>東会場</li>
+    <li>西会場</li>
+</ul>
+<a class='follow_up_02'>質問2: 2人は2番目にどの会場に行くですか？</a>
+<ul class='options_02'> 
+    <li>中央会場</li>
+    <li>南会場</li>
+    <li>東会場</li>
+    <li>西会場</li>
+</ul>
+
 """
 
 kanji_reading_reflection_prompt = """
