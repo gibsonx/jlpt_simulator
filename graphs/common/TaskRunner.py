@@ -4,13 +4,13 @@ import importlib
 from libs.Logger import logger
 from graphs.common.Schema import ExamType
 
-
 class TaskRunner:
     """
     Class-based handler for generating and storing exam outlines and papers.
     """
 
-    def __init__(self, level: str, exam_type: ExamType):
+    def __init__(self, level: str, exam_type: ExamType, task_id: Optional[int] = None):
+        self.task_id = task_id
         self.level = level.lower()
         self.exam_type = exam_type
         self.level_lower = level.lower()
@@ -58,7 +58,7 @@ class TaskRunner:
             )
         return prompt
 
-    def run(self) -> Tuple[Optional[str], Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
+    def run(self) -> None:
         """
         Run exam generation pipeline.
         Returns:
@@ -69,6 +69,7 @@ class TaskRunner:
 
         try:
             exam_generator = ExamGenerator(
+                task_id=self.task_id,
                 level=self.level,
                 exam_type=self.exam_type,
                 db_collection=f"{self.level_lower}_{self.exam_type_lower}",
@@ -83,14 +84,11 @@ class TaskRunner:
             raise ValueError("Failed to generate exam outline. Check logs for details.") from e
 
         try:
-            inserted_id, exam_paper = exam_generator._generate_and_store_paper(outline=outline)
+            exam_paper = exam_generator._generate_and_store_paper(outline=outline)
         except Exception as e:
             logger.warning("Failed to store exam paper. Returning outline only. Error: %s", e)
-            return None, outline, None
 
-        if inserted_id:
-            logger.info("Exam outline stored successfully! Document ID: %s", inserted_id)
-            return inserted_id, outline, exam_paper
+        if exam_paper:
+            logger.info("Exam outline stored successfully! Document ID: %s", self.task_id)
         else:
             logger.warning("Exam paper storage failed, but outline was generated successfully.")
-            return None, outline, None

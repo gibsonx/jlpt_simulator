@@ -2,14 +2,13 @@ import os
 
 from celery import Celery
 from graphs.common.TaskRunner import TaskRunner
-from kombu import Queue
 from graphs.common.Schema import ExamType
 
 
 # Azure Service Bus connection (Basic/Standard)
 # Replace with your values
 NAMESPACE = "jlpt-mq.servicebus.windows.net"
-QUEUE_NAME = "exam"
+QUEUE_NAME = "jlpt"
 SAS_POLICY = "RootManageSharedAccessKey"
 SAS_KEY = os.environ['MQ_SAS_KEY']
 
@@ -34,9 +33,10 @@ celery.conf.task_annotations = {
 }
 
 @celery.task(bind=True)
-def run_exam_task(self, level: str, exam_type:ExamType ):
+def run_exam_task(self, level: str, exam_type:ExamType):
     """
     Celery task wrapping the run_exam function.
     """
-    runner = TaskRunner(level=level, exam_type=exam_type)
-    return runner.run()
+    task_id = self.request.id  # Celery auto-generated ID
+    runner = TaskRunner(level=level, exam_type=exam_type, task_id=task_id)
+    runner.run()

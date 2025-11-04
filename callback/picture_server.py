@@ -95,37 +95,106 @@ def handle_callback():
 def run_exam_endpoint():
     """
     Run exam job asynchronously via Celery.
-    Body example: { "level": "N3", "exam_type": "fast_exam", "count": 5 }
+    Example body:
+    {
+        "level": "n3",
+        "exam_type": "fast_exam",
+        "count": 5
+    }
     """
     data = request.get_json()
     if not data or "level" not in data or "exam_type" not in data:
-        return jsonify({"error": "Missing 'level' or 'exam_type'"}), 400
+        return jsonify({
+            "error": "Missing required parameters.",
+            "required_fields": ["level", "exam_type"],
+            "example": {"level": "n3", "exam_type": "fast_exam", "count": 3}
+        }), 400
 
-    level = data["level"]
-    exam_type = data["exam_type"]
-    count = data.get("count", 1)  # run how many times
+    level = data["level"].lower()
+    exam_type = data["exam_type"].lower()
+    count = int(data.get("count", 1))
 
-    # Queue multiple jobs
+    # Define valid values inside the function
+    valid_levels = ["n1", "n2", "n3", "n4", "n5"]
+    valid_exam_types = ["full_exam", "fast_exam", "vocab", "grammar", "reading", "listening"]
+
+    # Validate level
+    if level not in valid_levels:
+        return jsonify({
+            "error": f"Invalid level '{level}'.",
+            "valid_levels": valid_levels,
+            "hint": "Use lowercase levels: n1, n2, n3, n4, n5."
+        }), 400
+
+    # Validate exam type
+    if exam_type not in valid_exam_types:
+        return jsonify({
+            "error": f"Invalid exam_type '{exam_type}'.",
+            "valid_exam_types": valid_exam_types,
+            "hint": "Use one of the supported exam types."
+        }), 400
+
+    # Validate count (1–10)
+    if not (1 <= count <= 10):
+        return jsonify({
+            "error": f"Invalid count '{count}'.",
+            "valid_range": "1–10",
+            "hint": "You can queue between 1 and 10 exam runs at once."
+        }), 400
+
+    # Queue jobs
     task_ids = []
     for _ in range(count):
         task = run_exam_task.delay(level, exam_type)
         task_ids.append(task.id)
 
-    return jsonify({"status": "queued", "task_ids": task_ids}), 202
+    return jsonify({
+        "status": "queued",
+        "level": level,
+        "exam_type": exam_type,
+        "count": count,
+        "task_ids": task_ids
+    }), 202
 
 
 @app.route("/status/<task_id>", methods=["GET"])
 def get_status(task_id):
     """
-    Get status and result of a Celery job by ID.
+    Get detailed state info of a Celery job by ID.
     """
     task = run_exam_task.AsyncResult(task_id)
+
+    response = {"task_id": task.id, "state": task.state}
+
     if task.state == "PENDING":
-        return jsonify({"state": task.state, "result": None}), 200
+        response["message"] = "Task is waiting in the queue or not yet started."
+
+    elif task.state == "RECEIVED":
+        response["message"] = "Task has been received by a worker."
+
+    elif task.state == "STARTED":
+        response["message"] = "Task is currently running."
+
+    elif task.state == "RETRY":
+        response["message"] = "Task is being retried after a failure."
+        response["error"] = str(task.info)
+
     elif task.state == "FAILURE":
-        return jsonify({"state": task.state, "error": str(task.info)}), 500
+        response["message"] = "Task failed during execution."
+        response["error"] = str(task.info)
+
+    elif task.state == "SUCCESS":
+        response["message"] = "Task completed successfully."
+
+    elif task.state == "PROGRESS":
+        # if you use update_state() with meta info
+        response["message"] = "Task is in progress."
+        response["meta"] = task.info
+
     else:
-        return jsonify({"state": task.state, "result": task.result}), 200
+        response["message"] = "Unknown state."
+
+    return jsonify(response), 200
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=3000, debug=True)

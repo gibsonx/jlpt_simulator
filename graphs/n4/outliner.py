@@ -1,4 +1,3 @@
-from graphs.common.ExamGenerator import ExamGenerator
 from langchain_core.prompts import ChatPromptTemplate
 from graphs.common.Schema import *
 
@@ -259,31 +258,3 @@ listening_prompt = ChatPromptTemplate.from_messages(
         ("user", "TopicList: {topic_list}, vocabulary: {vocab_dict}, GrammarList: {grammar_list}"),
     ]
 )
-
-# def run(level: str, exam_type: ExamType):
-#
-#     PROMPT_REGISTRY: dict[str, ChatPromptTemplate] = {
-#         "full_exam": full_exam_prompt,
-#         "fast_exam": fast_exam_prompt,
-#         "reading": reading_prompt,
-#         "listening": listening_prompt,
-#         "grammar": grammar_prompt,
-#         "vocab": vocab_prompt,
-#     }
-#
-#     prompt = PROMPT_REGISTRY.get(exam_type.lower())  # make it case-insensitive
-#     if not prompt:
-#         raise ValueError(f"No prompt defined for exam_type: {exam_type}")
-#
-#     exam_generator = ExamGenerator(level=level, exam_type=exam_type, db_collection=f"{level}_{exam_type}")
-#     inserted_id, outline = exam_generator._generate_and_store_paper(instruction=prompt)
-#
-#     if inserted_id:
-#         print(f"✅ Exam outline stored successfully! Document ID: {inserted_id}")
-#     else:
-#         print("❌ Failed to generate or store exam outline. Check logs for details.")
-#
-#     # Optionally inspect the outline object
-#     if outline:
-#         print("\nGenerated Outline:")
-#         print(outline)
