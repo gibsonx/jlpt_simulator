@@ -1,11 +1,13 @@
 import inspect
 import json
 import logging
+import os
 import random
 import time
 import uuid
 from typing import *
 from tqdm import tqdm
+import requests
 
 from graphs.common.GraphBuilder import GraphBuilder
 from graphs.common.JLPTTaskFactory import JLPTTaskFactory
@@ -159,3 +161,41 @@ class ExamGenerator:
             logger.error("Failed to generate and store paper for exam_uid=%s: %s", self.exam_uid, e, exc_info=True)
             # Return a consistent tuple on error
             return None
+
+    def callback_system_api(self):
+        """
+        Executes a GET request equivalent to:
+          curl -X GET --location "https://jlpt.kongxuan.com/api/mongo/loadData/n3/full_exam"
+          -H "clientid: ..."
+          -H "x-auth: Bearer <token>"
+        Retries 3 times automatically if any error occurs.
+        """
+        url = f"https://jlpt.kongxuan.com/api/mongo/loadData/{self.level}/{self.exam_type}"
+        headers = {
+            "clientid": "e5cd7e4891bf95d1d19206ce24a7b32e",
+            # If 401 persists, try changing "x-auth" to "Authorization"
+            "x-auth": os.environ["EXAM_SYSTEM_TOKEN"],
+        }
+
+        RETRY_COUNT = 3
+        RETRY_DELAY = 2  # seconds
+
+        for attempt in range(1, RETRY_COUNT + 1):
+            try:
+                print(f"Attempt {attempt} of {RETRY_COUNT}...")
+                response = requests.get(url, headers=headers, params={id: self.exam_uid}, timeout=10)
+                response.raise_for_status()
+
+                print("✅ Request successful")
+                return response.json()
+
+            except requests.RequestException as e:
+                print(f"⚠️ Attempt {attempt} failed: {e}")
+                if attempt < RETRY_COUNT:
+                    print(f"⏳ Retrying in {RETRY_DELAY} seconds...\n")
+                    time.sleep(RETRY_DELAY)
+                else:
+                    print("❌ All retry attempts failed.")
+                    return None
+
+

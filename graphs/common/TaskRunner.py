@@ -86,6 +86,9 @@ class TaskRunner:
 
         try:
             exam_paper = exam_generator._generate_and_store_paper(outline=outline)
+            # call back system
+            if self.task_id:
+                exam_generator.callback_system_api()
         except Exception as e:
             logger.warning("Failed to store exam paper. Returning outline only. Error: %s", e)
 
