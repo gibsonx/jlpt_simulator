@@ -1,16 +1,12 @@
 import pandas as pd
-import platform
 import time
-from pydub import AudioSegment
 import requests
-import os
 import azure.cognitiveservices.speech as speechsdk
 from azure.storage.blob import BlobServiceClient
-from dotenv import load_dotenv
 from libs.Logger import logger
 import os
 from pydub import AudioSegment
-
+from dotenv import load_dotenv
 load_dotenv()
 
 # Voice mappings

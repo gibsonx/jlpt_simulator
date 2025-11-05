@@ -3,7 +3,8 @@ from typing import *
 import importlib
 from libs.Logger import logger
 from graphs.common.Schema import ExamType
-
+from dotenv import load_dotenv
+load_dotenv()
 class TaskRunner:
     """
     Class-based handler for generating and storing exam outlines and papers.

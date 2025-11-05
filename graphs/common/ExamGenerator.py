@@ -1,4 +1,3 @@
-from langchain_core.prompts import ChatPromptTemplate
 import inspect
 import json
 import logging
@@ -18,6 +17,9 @@ from libs.Utils import _load_vocab_and_resources
 from graphs.common.Schema import Outline,ExamType
 from libs.Logger import logger
 from libs.Utils import render_to_html
+
+from dotenv import load_dotenv
+load_dotenv()
 
 class ExamGenerator:
     def __init__(self, level: str, exam_type: ExamType, db_collection: str, task_id: Optional[str] = None):
@@ -137,7 +139,7 @@ class ExamGenerator:
         Generate an exam outline, build paper, and store it in DB.
         Returns: (inserted_id, outline_str, output_data)
         """
-        project_path = os.getenv("PROJECT_PATH")
+        project_path = os.environ['PROJECT_PATH']
 
         try:
             output_data = self._build_output(outline)
@@ -146,7 +148,7 @@ class ExamGenerator:
             self._insert_to_db(output_data)
 
             # render paper to output folder for debug
-            filename = f"{project_path}/output/jlpt_simulator/JLPT_{self.exam_uid}.html"
+            filename = f"{project_path}/output/JLPT_{self.exam_uid}.html"
             html_output = render_to_html(output_data['sections'])
 
             with open(filename, "w", encoding="utf-8") as file:
