@@ -172,7 +172,7 @@ class ExamGenerator:
         """
         url = f"https://jlpt.kongxuan.com/api/mongo/loadData/{self.level}/{self.exam_type}"
         headers = {
-            "clientid": "e5cd7e4891bf95d1d19206ce24a7b32e",
+            "clientid": os.environ['EXAM_SYSTEM_CLIENT_ID'],
             # If 401 persists, try changing "x-auth" to "Authorization"
             "x-auth": os.environ["EXAM_SYSTEM_TOKEN"],
         }

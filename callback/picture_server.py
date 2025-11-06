@@ -6,12 +6,26 @@ from azure.storage.blob import BlobServiceClient
 from dotenv import load_dotenv
 import sys, os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from libs.CeleryHelper import run_exam_task
 # Load environment variables from .env
 load_dotenv()
 
 app = Flask(__name__)
+
+app = Flask(__name__)
+auth = HTTPBasicAuth()
+
+users = {
+    "jlpt": generate_password_hash(os.getenv("FLASK_PASS"))
+}
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users and check_password_hash(users[username], password):
+        return username
 
 # Initialize Blob client
 blob_service_client = BlobServiceClient.from_connection_string(os.getenv("AZURE_STORAGE_CONNECTION_STRING"))
@@ -92,6 +106,7 @@ def handle_callback():
     return jsonify({'status': 'received'}), 200
 
 @app.route("/run_exam", methods=["POST"])
+@auth.login_required
 def run_exam_endpoint():
     """
     Run exam job asynchronously via Celery.
@@ -158,6 +173,7 @@ def run_exam_endpoint():
 
 
 @app.route("/status/<task_id>", methods=["GET"])
+@auth.login_required
 def get_status(task_id):
     """
     Get detailed state info of a Celery job by ID.
