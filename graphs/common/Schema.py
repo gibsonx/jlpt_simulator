@@ -52,7 +52,7 @@ class ListenMultiPersonOutput(TypedDict):
     correct_answer: Annotated[int, "correct option in 1,2,3,4"]
 
 class ListenQuestions(TypedDict):
-    follow_up: Annotated[str, "the follow-up question"]
+    follow_up: Annotated[str, "the question from follow-up"]
     correct_answer: Annotated[int, "correct option in 1,2,3,4"]
     choices: Annotated[List, "answer options as a list, each option is in string format"]
 
