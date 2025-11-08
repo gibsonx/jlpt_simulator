@@ -1760,7 +1760,7 @@ kanji_reading_reflection_prompt = """
 write_kanji_reflection_prompt = """
 """
 
-word_collocation_reflection_prompt = """
+words_collocation_reflection_prompt = """
 """
 
 word_meaning_reflection_prompt = """
