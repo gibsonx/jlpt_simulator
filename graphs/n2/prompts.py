@@ -489,7 +489,7 @@ structure_selection_example = """
     </p>
   </div>
 
-  <div class="question">
+  <div class="follow-up">
     <p><strong>48</strong></p>
     <p>1. そこの紅葉　　2. そんな紅葉　　3. そちら　　4. 紅葉</p>
 
@@ -687,7 +687,7 @@ short_reading_mail_example = """
 
 
 
-<div class="question">「緑山牧場チーズ詰め合わせ」を社内販売で購入したい社員は、期日までに営業課にメールで申し込んだあと、どうすればいいか。</div>
+<div class="follow-up">「緑山牧場チーズ詰め合わせ」を社内販売で購入したい社員は、期日までに営業課にメールで申し込んだあと、どうすればいいか。</div>
 
 <ul class='options'>
     <li>経理課で支払いをして受け取る。</li>
@@ -814,7 +814,7 @@ short_reading_notification_example = """
 
 
 
-<dive class="question">この文書で最も伝えたいことは何か。</div>
+<dive class="follow-up">この文書で最も伝えたいことは何か。</div>
 
 <ul class="options">
     <li>「資源ごみ」として出す衣類・布類の量を減らしてほしい。</li>
@@ -831,9 +831,9 @@ midsize_reading_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
 Task: Your job is to write a reading question for a JLPT N2 level exam.
-First you need to write a mid-size article around 400 words for student to read.
+First you need to write a mid-size article around 450 words for student to read.
 The keypoints being tested in each question needs to be underlined with <u></u>
-Then, you give 3 questions by the related content in the article. the meaning of keypoint cannot be found in the article.
+Then, you give 2 questions by the related content in the article. the meaning of keypoint cannot be found in the article.
 Then, you give a question by the related content in the article.
 Instead, it should require the test-taker to infer, summarize, or understand the context or intent of the passage.
 
@@ -908,7 +908,7 @@ midsize_reading_example = """
 
             <p>そして、スケジュールにこだわるより、脳の変動の波をできるだけ感<br>じとり、能率が悪くても悲観せずに、必ず上げ潮のときがくることを期待<br>すればいい。そして、上げ潮のときには自分でもおどろくほどに能率が上<br>がるので、そのときに一気に遅れをとり戻せばいいのである。</p>
 
-            <div class="question">59. 筆者によると、スケジュールを立てる際の注意点は何か。</div>
+            <div class="follow-up">59. 筆者によると、スケジュールを立てる際の注意点は何か。</div>
             <ol>
                 <li>脳の調子がいいときを基準にしない</li>
                 <li>いつも脳が同じ調子ではたらけるようにする</li>
@@ -916,7 +916,7 @@ midsize_reading_example = """
                 <li>能率が悪くなったときに変更できるようにしておく</li>
             </ol>
 
-            <div class="question">60. 筆者の考えに合うのはどれか。</div>
+            <div class="follow-up">60. 筆者の考えに合うのはどれか。</div>
             <ol>
                 <li>能率を上げるためには、脳の状態をコントロールするといい</li>
                 <li>脳の変動の波に合わせて勉強や仕事を進められる方法を探すといい</li>
@@ -935,7 +935,7 @@ Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level.
 
 Task: Task: Your job is to write a reading question for a JLPT N2 level exam. 
 First you need to write a long article around 450 words for student to read. 
-Then, you give 4 questions by the related content in the article. 
+Then, you give 2 questions by the related content in the article. 
 The purpose is to ensure the students are able to understand the meaning of the article.
 
 
@@ -1008,8 +1008,8 @@ long_reading_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level.
 
 Task: Task: Your job is to write a reading question for a JLPT N2 level exam. 
-First you need to write a long article around 450 words for student to read. 
-Then, you give 4 questions by the related content in the article. 
+First you need to write a long article around 600 words for student to read. 
+Then, you give 3 questions by the related content in the article. 
 The purpose is to ensure the students are able to understand the meaning of the article.
 
 
@@ -1080,7 +1080,7 @@ long_reading_example = """
         
         <p>料理でも、絵画でも、あるいは家事の手順でも、創ることの喜びを知ってしまうと、なかなかそれから離れることができない。読むことの楽しみは、と訊かれれば、創ることの自由さだと私は答える。</p>
         
-        <div class="question">67. ①この行為とはどういうことか</div>
+        <div class="follow-up">67. ①この行為とはどういうことか</div>
         <ol>
             <li>実際に、主人公が食べていた食べものを味わってみること</li>
             <li>食べたことのないものを主人公と一緒に食べているところを想像すること</li>
@@ -1088,7 +1088,7 @@ long_reading_example = """
             <li>主人公になりきって、食べたことのないものを想像して味わうこと</li>
         </ol>
         
-        <div class="question">68. ②つまらない本について、筆者はどのように述べているか。</div>
+        <div class="follow-up">68. ②つまらない本について、筆者はどのように述べているか。</div>
         <ol>
             <li>つまらなく感じた点について色々考えていると、おもしろくなる</li>
             <li>つまらなく感じた理由を考えていると、自分の好みがよく分かってくる</li>
@@ -1096,7 +1096,7 @@ long_reading_example = """
             <li>つまらないと思っても、人にあらすじを話すとおもしろいところが見つけられる</li>
         </ol>
         
-        <div class="question">69. 本を読むことについて、筆者はどのように考えているか</div>
+        <div class="follow-up">69. 本を読むことについて、筆者はどのように考えているか</div>
         <ol>
             <li>本を読むことは、料理や絵画より創ることの喜びが大きい</li>
             <li>本を読むことは、自由に想像を膨らませる楽しい創造の作業だ</li>
@@ -1120,7 +1120,7 @@ This section is designed to simulate real-life scenarios where students need to 
 such as train or flight schedules, event, or advertisements.
 
 Instructions:
-Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
 Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
@@ -1133,6 +1133,7 @@ Formal exam paper: {example}
 """
 
 information_retrieval_example = """
+--- example 1 ---
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -1258,7 +1259,7 @@ information_retrieval_example = """
     </p>
   </div>
 
-  <div class="question">
+  <div class="follow-up">
       <p><strong>70.</strong> 高校生の村田さんは「C 平日夜間・土日（初心者）コース」に入会したいと思っている。姉がすでに同じコースを受講しているが、入会時に支払うものは何か。</p>
       <ol>
         <li>入会金、年会費、10％割引された受講料</li>
@@ -1268,7 +1269,7 @@ information_retrieval_example = """
       </ol>
     </div>
 
-    <div class="question">
+    <div class="follow-up">
       <p><strong>71.</strong> リナさんは、このテニススクールに1か月前に入会し、現在「B. 平日昼間（中・上級者）コース」を受講している。5月から「D. 平日夜間・土日（中・上級者）コース」に変わりたいと思っているが、リナさんはどうしなければならないか。今日は3月15日である。</p>
       <ol>
         <li>4月10日までに、手数料550円を支払い、手続きをする</li>
@@ -1280,6 +1281,90 @@ information_retrieval_example = """
 </body>
 </html>
 
+
+--- example 2 ---
+<div class="container">
+<h2>着物レンタルのご案内</h2>
+
+<p>着物を着て水森市を観光しませんか。「はなかわ」では、山林店、古寺店、森島店の三つの店で、レンタルの着物をご用意しております。</p>
+
+<h3>＜着物レンタルの流れ＞</h3>
+<ol>
+  <li>ご利用になりたい店に電話でご予約ください。</li>
+  <li>ご予約の日時にご来店になり、お好きな着物にお着替えください。必要な方には無料でお手伝いいたします。</li>
+  <li>お支払いのあと、着物で観光をお楽しみください。</li>
+  <li>各店の最終返却時間までに借りた店に戻り、当日中に着物をご返却ください（翌日返却も可能です。ご希望の方は、＜翌日返却について＞をお読みください）。</li>
+</ol>
+
+<h3>＜料金（1名様）＞</h3>
+<p>基本料金：3,500円</p>
+
+<h3>＜割引について＞</h3>
+<ul>
+  <li>早期予約割引：1週間前までのご予約で基本料金から300円割引します。</li>
+  <li>学生割引：学生の方は基本料金から200円割引します。</li>
+  <li>※早期予約割引を使う場合は、学生割引は使えません。</li>
+</ul>
+
+<h3>＜お持ちになる物＞</h3>
+<p>特にありません。はき物などもセットでお貸しします。</p>
+
+<h3>＜翌日返却について＞</h3>
+
+<h4>ご予約時の申し込み</h4>
+<p>1,200円の翌日返却料金で、返却時間を翌日の正午までに延長できます。</p>
+
+<h4>ご来店時の申し込み、またはお出かけ後の変更</h4>
+<p>翌日返却料金は1,500円になります。お出かけ後の変更の場合は、借りた日の最終返却時間までに借りた店にお電話ください。翌日返却料金は、返却の際にお支払いください。</p>
+
+<p>※返却が翌日の正午を過ぎる場合、追加料金1,000円をいただきます。その後は、1日遅れるごとに3,000円を請求いたします。</p>
+
+<h3>＜各店の営業時間・返却時間＞</h3>
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th>店舗</th>
+    <th>営業開始時間</th>
+    <th>最終返却時間</th>
+  </tr>
+  <tr>
+    <td>山林店、古寺店</td>
+    <td>8時</td>
+    <td>18時30分</td>
+  </tr>
+  <tr>
+    <td>森島店</td>
+    <td>9時</td>
+    <td>18時</td>
+  </tr>
+</table>
+
+<p>※電話番号など、詳細はホームページ内の各店のページをご覧ください。</p>
+
+<hr>
+</div>
+
+
+<div class="follow-up">
+<h4>70.</h4>
+<p>大学生のリンさんは、2週間後の日曜日に山林店で着物をレンタルしたいと思っている。着物は当日中に返却する予定だ。今日、予約をする場合、料金はいくらになるか。</p>
+<ol>
+  <li>3,500円</li>
+  <li>3,500円から200円が割引された金額</li>
+  <li>3,500円から300円が割引された金額</li>
+  <li>3,500円から200円と300円が割引された金額</li>
+</ol>
+</div>
+
+<div class="follow-up">
+<h4>71.</h4>
+<p>ローザさんは、今日、森島店で着物を借りた。今日中に返却する予定だったが、店を出たあとで翌日返却に変更したくなった。今は14時である。明日の午前中に返却する場合、どうすればいいか。</p>
+<ol>
+  <li>今日の18時までに森島店に電話をして、返却の際に1,200円を支払う。</li>
+  <li>今日の18時までに森島店に電話をして、返却の際に1,500円を支払う。</li>
+  <li>今日の18時までに森島店に電話をして、返却の際に1,500円と1,000円を支払う。</li>
+  <li>今日の18時30分までに森島店に電話をして、返却の際に1,500円を支払う。</li>
+</ol>
+</div>
 """
 
 topic_understanding_txt_teacher_prompt = """
@@ -1432,7 +1517,7 @@ keypoint_understanding_example = """
         <p><span class="speaker">女:</span>そうでしたか。</p>
         <p><span class="speaker">男:</span>母のレベルにはまだまだなんですが、おいしいパンを地元の方に食べてもらえるように頑張っています</p>
     </div>
-    <div class="question">店長はどうしてパン屋を始めたと言っていますか</div>
+    <div class="follow-up">店長はどうしてパン屋を始めたと言っていますか</div>
     <ul class='options'>
         <li>母といっしょにパン屋をやりたかったから</li>
         <li>母にたのまれたから</li>
@@ -1456,7 +1541,7 @@ keypoint_understanding_example = """
         <p><span class="speaker">女:</span>うーん、そうだね。安い引っ越し会社は見つからないだろうし、費用を抑えられるようにあんまり使ってない大きい家具のもらい手を探そうか。</p>
         <p><span class="speaker">男:</span>うん、そうだね。</p>
 
-    <div class="question">2人は引っ越しの値段を安くするため、どうすることにしましたか。</div>
+    <div class="follow-up">2人は引っ越しの値段を安くするため、どうすることにしましたか。</div>
     <ul class='options'>
         <li>ソファーをもらってくれる人をさがす</li>
         <li>れいぞうこを売る</li>
@@ -1620,8 +1705,8 @@ Formal exam paper: {example}
 immediate_ack_example = """
 --- example 1 ---
 <div class="conversation">
-    <div class="follow_up">
-        課長、明日の会議の資料ですが、ご覧いただけないでしょうか？
+    <div class="follow-up">
+        男：課長、明日の会議の資料ですが、ご覧いただけないでしょうか？
     </div>
     <ul class='options'>  
         <li>資料、見てくれるんですね</li>
@@ -1633,8 +1718,8 @@ immediate_ack_example = """
 
 --- example 2 ---
 <div class="conversation">
-    <div class="follow_up">
-        この会社、経験者に限らず応募できるって。
+    <div class="follow-up">
+        女：この会社、経験者に限らず応募できるって。
     </div>
     <ul class='options'>  
         <li>募集は経験が無い人だけなんだ</li>
