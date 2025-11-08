@@ -59,7 +59,7 @@ class TaskRunner:
             )
         return prompt
 
-    def run(self) -> None:
+    def run(self) -> Tuple[Optional[Dict], Optional[Dict]]:
         """
         Run exam generation pipeline.
         Returns:
@@ -83,16 +83,18 @@ class TaskRunner:
                 self.exam_type,
             )
             raise ValueError("Failed to generate exam outline. Check logs for details.") from e
-
         try:
             exam_paper = exam_generator._generate_and_store_paper(outline=outline)
-            # call back system
-            if self.task_id:
-                exam_generator.callback_system_api()
         except Exception as e:
             logger.warning("Failed to store exam paper. Returning outline only. Error: %s", e)
 
+        # call back system
+        if self.task_id:
+            exam_generator.callback_system_api()
+
         if exam_paper:
             logger.info("Exam outline stored successfully! Document ID: %s", self.task_id)
+            return outline, exam_paper
         else:
             logger.warning("Exam paper storage failed, but outline was generated successfully.")
+            return outline, None

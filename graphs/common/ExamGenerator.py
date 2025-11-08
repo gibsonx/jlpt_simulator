@@ -1,7 +1,7 @@
 import inspect
 import json
 import logging
-import os
+from uuid import UUID
 import random
 import time
 import uuid
@@ -16,7 +16,7 @@ from libs.LLMs import *
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 from libs.Utils import _load_vocab_and_resources
-from graphs.common.Schema import Outline,ExamType
+from graphs.common.Schema import Outline, ExamType
 from libs.Logger import logger
 from libs.Utils import render_to_html
 
@@ -74,7 +74,7 @@ class ExamGenerator:
                                 seq += 1
                                 break
                             except Exception as e:
-                                print(f"Error {e} on {question['topic']}")
+                                logger.error(f"Error {e} on {question['topic']}")
                                 if attempt < max_attempts - 1:
                                     question['topic'] = random.choice(topics_list)
                     else:
@@ -90,7 +90,7 @@ class ExamGenerator:
             output_data['sections'].append(output_section)
 
         end_time = time.time()
-        print(f"Total execution time: {end_time - start_time:.2f} seconds")
+        logger.info(f"Total execution time: {end_time - start_time:.2f} seconds")
 
         return output_data
 
@@ -100,7 +100,7 @@ class ExamGenerator:
 
     def _generate_outline(
         self, instruction: Any
-    ) -> str:
+    ) -> Outline:
         """Generate structured exam outline using LLM."""
         try:
             generate_outline = instruction | azure_llm.with_structured_output(Outline)
@@ -118,7 +118,7 @@ class ExamGenerator:
         """Build the final exam paper data."""
         return self._write_paper(outline, self.topics)
 
-    def _insert_to_db(self, task_id: int, output_data: Dict[str, Any]) -> str:
+    def _insert_to_db(self, task_id: Optional[str], output_data: Dict[str, Any]) -> str:
         """Insert exam data into Cosmos MongoDB."""
         if task_id:
             output_data["_id"] = task_id
@@ -147,7 +147,9 @@ class ExamGenerator:
             output_data = self._build_output(outline)
 
             # insert it into mongoDB
-            self._insert_to_db(output_data)
+            self._insert_to_db(task_id=self.exam_uid,
+                               output_data=output_data
+                               )
 
             # render paper to output folder for debug
             filename = f"{project_path}/output/JLPT_{self.exam_uid}.html"
@@ -169,10 +171,11 @@ class ExamGenerator:
           -H "clientid: ..."
           -H "x-auth: Bearer <token>"
         Retries 3 times automatically if any error occurs.
+        Always continues regardless of success or failure.
         """
         url = f"https://jlpt.kongxuan.com/api/mongo/loadData/{self.level}/{self.exam_type}"
         headers = {
-            "clientid": os.environ['EXAM_SYSTEM_CLIENT_ID'],
+            "clientid": os.environ["EXAM_SYSTEM_CLIENT_ID"],
             # If 401 persists, try changing "x-auth" to "Authorization"
             "x-auth": os.environ["EXAM_SYSTEM_TOKEN"],
         }
@@ -180,22 +183,38 @@ class ExamGenerator:
         RETRY_COUNT = 3
         RETRY_DELAY = 2  # seconds
 
+        last_exception = None
+        result = None
+
         for attempt in range(1, RETRY_COUNT + 1):
             try:
-                print(f"Attempt {attempt} of {RETRY_COUNT}...")
-                response = requests.get(url, headers=headers, params={id: self.exam_uid}, timeout=10)
+                logger.info(f"Attempt {attempt} of {RETRY_COUNT}...")
+                response = requests.get(
+                    url,
+                    headers=headers,
+                    params={"id": self.exam_uid},  # fixed param key
+                    timeout=10,
+                )
                 response.raise_for_status()
 
-                print("✅ Request successful")
-                return response.json()
+                logger.info("Request successful")
+                result = response.json()
+                break  # 成功后就跳出循环
 
             except requests.RequestException as e:
-                print(f"⚠️ Attempt {attempt} failed: {e}")
+                logger.info(f"Attempt {attempt} failed: {e}")
+                last_exception = e
                 if attempt < RETRY_COUNT:
-                    print(f"⏳ Retrying in {RETRY_DELAY} seconds...\n")
+                    logger.info(f"Retrying in {RETRY_DELAY} seconds...\n")
                     time.sleep(RETRY_DELAY)
                 else:
-                    print("❌ All retry attempts failed.")
-                    return None
+                    logger.error("All retry attempts failed.")
+
+        # ✅ 无论成功失败都继续，不中断流程
+        if result is None:
+            logger.warning("Returning empty result due to failure.")
+            result = {"success": False, "error": str(last_exception) if last_exception else "unknown error"}
+
+        return result
 
 

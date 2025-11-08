@@ -1,8 +1,7 @@
-import os
-
 from pymongo import MongoClient
 from uuid import uuid4
 from typing import Dict, Optional
+from datetime import datetime
 
 
 class CosmosMongoDB:
@@ -27,6 +26,17 @@ class CosmosMongoDB:
         collection = db[self.collection_name]
         return collection
 
+    def _add_timestamps(self, document: Dict, is_many: bool = False):
+        """Add created_at and updated_at timestamps."""
+        now = datetime.utcnow()
+        if is_many:
+            for doc in document:
+                doc.setdefault("created_at", now)
+                doc.setdefault("updated_at", now)
+        else:
+            document.setdefault("created_at", now)
+            document.setdefault("updated_at", now)
+
     def insert_one(self, document: Dict) -> str:
         """
         Insert a single document into the collection.
@@ -38,6 +48,10 @@ class CosmosMongoDB:
         """
         if "_id" not in document:
             document["_id"] = str(uuid4())
+
+        # Add timestamps
+        self._add_timestamps(document)
+
         result = self.collection.insert_one(document)
         return str(result.inserted_id)
 
@@ -53,6 +67,10 @@ class CosmosMongoDB:
         for doc in documents:
             if "_id" not in doc:
                 doc["_id"] = str(uuid4())
+
+        # Add timestamps to all documents
+        self._add_timestamps(documents, is_many=True)
+
         result = self.collection.insert_many(documents)
         return [str(_id) for _id in result.inserted_ids]
 
