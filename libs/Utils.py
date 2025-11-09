@@ -13,7 +13,7 @@ load_dotenv()
 voices = {
     "nanami": "ja-JP-NanamiNeural",
     "masaru": "ja-JP-KeitaNeural",
-    "daichi": "ja-JP-MasaruNeural",
+    "daichi": "ja-JP-DaichiNeural",
     "mayu": "ja-JP-ShioriNeural"
 }
 

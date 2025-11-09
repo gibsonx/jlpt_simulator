@@ -3,31 +3,38 @@ from graphs.common.Schema import *
 
 full_exam_instruction = """
 Section 1: vocabulary
-- 問題1 のことばの読み方として最もよいものを、1・2・3・4から一つえらびなさい (kanji_reading) 8 questions in total: 3 are nouns, 3 are verbs, 1 is an adjective, and 1 is an adverb
-- 問題2 このことばを漢字で書くとき、最もよいものを、1・2・3・4から一つえらびなさい (write_kanji) 6 questions in total: 2 nouns, 2 verbs, 1 adjective, and 1 adverb.
-- 問題3（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。 (word_meaning) 11 questions in total: 4 are nouns, 4 are verbs, 2 are adjectives, and 1 is an adverb.
-- 問題4 に意味が最も近いものを、1・2・3・4から一つえらびなさい。(synonym_substitution) 5 questions in total: 2 are nouns, 2 are verbs, and 1 is an adjective.
-- 問題5 つぎのことばの使い方として最もよいものを、1・2・3・4から一つえらびなさい。 (word_usage) 5 questions in total: 3 noun, and 2 verbs.
+- 問題1 のことばの読み方として最もよいものを、1・2・3・4から一つえらびなさい (kanji_reading) 5 questions in total: 2 are nouns, 1 are verbs, 1 is an adjective, and 1 is an adverb.
+- 問題2 このことばを漢字で書くとき、最もよいものを、1・2・3・4から一つえらびなさい (write_kanji) 5 questions in total: 2 nouns, 1 verbs, 1 adjective, and 1 adverb.
+- 問題3（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。 (words_collocation) 3 questions in total: 1 are nouns, 1 are verbs, 1 is adjective
+- 問題4（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。 (word_meaning) 7 questions in total: 2 are nouns, 2 are verbs, 2 are adjectives, and 1 is an adverb. 
+- 問題5 に意味が最も近いものを、1・2・3・4から一つえらびなさい。(synonym_substitution) 5 questions in total: 2 are nouns, 1 are verbs, and 1 is an adjective and 1 is an adverb.
+- 問題6 つぎのことばの使い方として最もよいものを、1・2・3・4から一つえらびなさい。 (word_usage) 5 questions in total: 3 noun, and 2 verbs.
 
 Section 2: Grammar
-- 問題6 つぎの文の（　　　）に入れるのに最もよいものを、１・２・３・４から一つえらびなさい。(sentence_grammar) 13 questions in total: the first 1 is honorific speech, next 1 adverb, 1 auxiliary word, and other 10 different sentence structures
-- 問題7 つぎの文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。(sentence_sort) 5 questions in total.
-- 問題8 つぎの文章を読んで、文章全体の内容を考えて、文中の 19 から 22 の中に入る最もよいものを、1・2・3・4から一つえらびなさい (sentence_structure) 1 question
+- 問題1 つぎの文の（　　　）に入れるのに最もよいものを、１・２・３・４から一つえらびなさい。(sentence_grammar) 12 questions in total: the first 1 is honorific speech, next 1 adverb, 1 auxiliary word, and other 9 different sentence structures
+- 問題2 つぎの文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。(sentence_sort) 5 questions in total.
+- 問題3 つぎの文章を読んで、文章全体の内容を考えて、文中の 48 から 51 の中に入る最もよいものを、1・2・3・4から一つえらびなさい (sentence_structure) 1 question
 
 Section 3: Reading Comprehension
-- 問題1-1 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_mail_read): 1 article
-- 問題1-2 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_notification_read): 1 article
-- 問題1-3 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_narrative_read): 2 articles
-- 問題2 つぎの(1)と(2)の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (midsize_passage_read): 2 articles
-- 問題3 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。(long_passage_read): 1 article
-- 問題4 これを読んで、下の質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい Information retrieval (info_retrieval): 1 article
+- 問題1-1 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_narrative_read): 1 article
+- 問題1-2 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_mail_read): 1 article
+- 問題1-3 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_narrative_read): 1 article
+- 問題1-4 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_notification_read): 1 article
+- 問題1-5 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_narrative_read): 1 article
+
+- 問題2 つぎの(1)と(2)の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (midsize_passage_read): 4 articles
+- 問題3 つぎの(1)と(2)の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (comprehensive_reading): 2 articles
+
+- 問題4 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。(long_passage_read): 1 article
+- 問題5 これを読んで、下の質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい Information retrieval (info_retrieval): 1 article
 
 Section 4: Listening Comprehension
-- 問題1 では、まず質問を聞いてください。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (topic_understanding): 6 question
-- 問題2 では、まず質問を聞いてください。そのあと、問題用紙を見てください。読む時間があります。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (keypoint_understanding): 6 question
-- 問題3では、問題用紙（もんだいようし）に何（なに）も いんさつされていません。この問題（もんだい）は、ぜんたいとして どんな ないようかを聞（き）く 問題（もんだい）です。話（はなし）の前（まえ）に 質問（しつもん）は ありません。まず 話（はなし）を 聞（き）いてください。それから、質問（しつもん）と せんたくし を聞（き）いて、1から4の中（なか）から、最（もっと）も よい ものを 一（ひと）つ えらんでください。(summary_understanding) 3 questions
-- 問題4 では、元を見ながら質問を聞いてください。やじるし（➔）の人は何と言いますか。1 から 3 の中から、最もよいものを一つえらんでください。 (active_expression): 4 questions
-- 問題5 では、問題用紙に何もいんさつしていません。まず文を聞いてください。それから、そのへんしを聞いて、1 から 3 の中から、最もよいものを一つえらんでください。 (immediate_ack): 9 questions
+- 問題1 では、まず質問を聞いてください。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (topic_understanding_txt): 5 questions
+- 問題2 では、まず質問を聞いてください。そのあと、問題用紙を見てください。読む時間があります。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (keypoint_understanding): 4 questions
+- 問題3 では、問題用紙（もんだいようし）に何（なに）も いんさつされていません。この問題（もんだい）は、ぜんたいとして どんな ないようかを聞（き）く 問題（もんだい）です。話（はなし）の前（まえ）に 質問（しつもん）は ありません。まず 話（はなし）を 聞（き）いてください。それから、質問（しつもん）と せんたくし を聞（き）いて、1から4の中（なか）から、最（もっと）も よい ものを 一（ひと）つ えらんでください。(summary_understanding) 5 questions
+- 問題4 では、問題用紙に何もいんさつしていません。まず文を聞いてください。それから、そのへんしを聞いて、1 から 3 の中から、最もよいものを一つえらんでください。 (immediate_ack): 11 questions
+- 問題5-1 では、長めの話を聞きます。この問題には練習はありません。問題用紙にメモをとってもかまいません。 (comprehensive_expression_listen_answer) 1 question
+- 問題5-1 では、長めの話を聞きます。この問題には練習はありません。問題用紙にメモをとってもかまいません。 (comprehensive_expression_show_answer) 2 questions
 """
 
 full_exam_prompt = ChatPromptTemplate.from_messages(
@@ -64,31 +71,36 @@ full_exam_prompt = ChatPromptTemplate.from_messages(
 
 fast_exam_instruction = """
 Section 1: vocabulary
-- 問題1 のことばの読み方として最もよいものを、1・2・3・4から一つえらびなさい (kanji_reading) 2 questions in total
-- 問題2 このことばを漢字で書くとき、最もよいものを、1・2・3・4から一つえらびなさい (write_kanji) 2 questions in total
-- 問題3（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。 (word_meaning) 2 questions in total
-- 問題4 に意味が最も近いものを、1・2・3・4から一つえらびなさい。(synonym_substitution) 2 questions in total
-- 問題5 つぎのことばの使い方として最もよいものを、1・2・3・4から一つえらびなさい。 (word_usage) 2 questions in total
+- 問題1 のことばの読み方として最もよいものを、1・2・3・4から一つえらびなさい (kanji_reading) 1 question in total: 1 nouns
+- 問題2 このことばを漢字で書くとき、最もよいものを、1・2・3・4から一つえらびなさい (write_kanji) 1 question in total: 1 nouns
+- 問題3（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。 (words_collocation) 1 question in total: 1 verb.
+- 問題4（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。 (word_meaning) 1 question in total: 1 verb.
+- 問題5 に意味が最も近いものを、1・2・3・4から一つえらびなさい。(synonym_substitution) 1 question in total: 1 are verb.
+- 問題6 つぎのことばの使い方として最もよいものを、1・2・3・4から一つえらびなさい。 (word_usage) 1 question in total: 1 verb.
 
 Section 2: Grammar
-- 問題6 つぎの文の（　　　）に入れるのに最もよいものを、１・２・３・４から一つえらびなさい。(sentence_grammar) 2 questions in total
-- 問題7 つぎの文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。(sentence_sort) 2 questions in total
-- 問題8 つぎの文章を読んで、文章全体の内容を考えて、文中の 19 から 22 の中に入る最もよいものを、1・2・3・4から一つえらびなさい (sentence_structure) 1 question
+- 問題1 つぎの文の（　　　）に入れるのに最もよいものを、１・２・３・４から一つえらびなさい。(sentence_grammar) 1 question in total: 1 adverb
+- 問題2 つぎの文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。(sentence_sort) 2 question in total.
+- 問題3 つぎの文章を読んで、文章全体の内容を考えて、文中の 48 から 51 の中に入る最もよいものを、1・2・3・4から一つえらびなさい (sentence_structure) 1 question
 
 Section 3: Reading Comprehension
-- 問題1-1 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_mail_read): 1 article
-- 問題1-2 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_notification_read): 1 article
-- 問題1-3 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_narrative_read): 1 article
+- 問題1-1 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_narrative_read): 1 article
+- 問題1-2 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_mail_read): 1 article
+- 問題1-3 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_notification_read): 1 article
+
 - 問題2 つぎの(1)と(2)の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (midsize_passage_read): 1 article
-- 問題3 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。(long_passage_read): 1 article
-- 問題4 これを読んで、下の質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい Information retrieval (info_retrieval): 1 article
+- 問題3 つぎの(1)と(2)の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (comprehensive_reading): 1 article
+
+- 問題4 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。(long_passage_read): 1 article
+- 問題5 これを読んで、下の質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい Information retrieval (info_retrieval): 1 article
 
 Section 4: Listening Comprehension
 - 問題1 では、まず質問を聞いてください。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (topic_understanding): 1 question
 - 問題2 では、まず質問を聞いてください。そのあと、問題用紙を見てください。読む時間があります。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (keypoint_understanding): 1 question
-- 問題3では、問題用紙（もんだいようし）に何（なに）も いんさつされていません。この問題（もんだい）は、ぜんたいとして どんな ないようかを聞（き）く 問題（もんだい）です。話（はなし）の前（まえ）に 質問（しつもん）は ありません。まず 話（はなし）を 聞（き）いてください。それから、質問（しつもん）と せんたくし を聞（き）いて、1から4の中（なか）から、最（もっと）も よい ものを 一（ひと）つ えらんでください。(summary_understanding) 1 question
-- 問題4 では、元を見ながら質問を聞いてください。やじるし（➔）の人は何と言いますか。1 から 3 の中から、最もよいものを一つえらんでください。 (active_expression): 1 question
-- 問題5 では、問題用紙に何もいんさつしていません。まず文を聞いてください。それから、そのへんしを聞いて、1 から 3 の中から、最もよいものを一つえらんでください。 (immediate_ack): 1 question
+- 問題3 では、問題用紙（もんだいようし）に何（なに）も いんさつされていません。この問題（もんだい）は、ぜんたいとして どんな ないようかを聞（き）く 問題（もんだい）です。話（はなし）の前（まえ）に 質問（しつもん）は ありません。まず 話（はなし）を 聞（き）いてください。それから、質問（しつもん）と せんたくし を聞（き）いて、1から4の中（なか）から、最（もっと）も よい ものを 一（ひと）つ えらんでください。(summary_understanding) 1 question
+- 問題4 では、問題用紙に何もいんさつしていません。まず文を聞いてください。それから、そのへんしを聞いて、1 から 3 の中から、最もよいものを一つえらんでください。 (immediate_ack): 1 question
+- 問題5-1 では、長めの話を聞きます。この問題には練習はありません。問題用紙にメモをとってもかまいません。 (comprehensive_expression_listen_answer) 1 question
+- 問題5-1 では、長めの話を聞きます。この問題には練習はありません。問題用紙にメモをとってもかまいません。 (comprehensive_expression_show_answer) 1 question
 """
 
 fast_exam_prompt = ChatPromptTemplate.from_messages(
@@ -225,7 +237,7 @@ reading_prompt = ChatPromptTemplate.from_messages(
 
 listening_instruction = """
 Section 4: Listening Comprehension
-- 問題1 では、まず質問を聞いてください。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (topic_understanding): 6 question
+- 問題1 では、まず質問を聞いてください。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (topic_understanding_txt): 6 question
 - 問題2 では、まず質問を聞いてください。そのあと、問題用紙を見てください。読む時間があります。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (keypoint_understanding): 6 question
 - 問題3では、問題用紙（もんだいようし）に何（なに）も いんさつされていません。この問題（もんだい）は、ぜんたいとして どんな ないようかを聞（き）く 問題（もんだい）です。話（はなし）の前（まえ）に 質問（しつもん）は ありません。まず 話（はなし）を 聞（き）いてください。それから、質問（しつもん）と せんたくし を聞（き）いて、1から4の中（なか）から、最（もっと）も よい ものを 一（ひと）つ えらんでください。(summary_understanding) 3 questions
 - 問題4 では、元を見ながら質問を聞いてください。やじるし（➔）の人は何と言いますか。1 から 3 の中から、最もよいものを一つえらんでください。 (active_expression): 4 questions

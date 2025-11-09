@@ -65,15 +65,15 @@ full_exam_prompt = ChatPromptTemplate.from_messages(
 
 fast_exam_instruction = """
 Section 1: vocabulary
-- 問題1 のことばの読み方として最もよいものを、1・2・3・4から一つえらびなさい (kanji_reading) 2 questions in total
-- 問題2 このことばを漢字で書くとき、最もよいものを、1・2・3・4から一つえらびなさい (write_kanji) 2 questions in total
-- 問題3（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。 (word_meaning) 2 questions in total
-- 問題4 に意味が最も近いものを、1・2・3・4から一つえらびなさい。(synonym_substitution) 2 questions in total
-- 問題5 つぎのことばの使い方として最もよいものを、1・2・3・4から一つえらびなさい。 (word_usage) 2 questions in total
+- 問題1 のことばの読み方として最もよいものを、1・2・3・4から一つえらびなさい (kanji_reading) 1 question in total
+- 問題2 このことばを漢字で書くとき、最もよいものを、1・2・3・4から一つえらびなさい (write_kanji) 1 question in total
+- 問題3（　）に入れるのに最もよいものを、1・2・3・4から一つえらびなさい。 (word_meaning) 1 question in total
+- 問題4 に意味が最も近いものを、1・2・3・4から一つえらびなさい。(synonym_substitution) 1 question in total
+- 問題5 つぎのことばの使い方として最もよいものを、1・2・3・4から一つえらびなさい。 (word_usage) 1 question in total
 
 Section 2: Grammar
-- 問題6 つぎの文の（　　　）に入れるのに最もよいものを、１・２・３・４から一つえらびなさい。(sentence_grammar) 2 questions in total
-- 問題7 つぎの文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。(sentence_sort) 2 questions in total
+- 問題6 つぎの文の（　　　）に入れるのに最もよいものを、１・２・３・４から一つえらびなさい。(sentence_grammar) 1 question in total
+- 問題7 つぎの文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。(sentence_sort) 1 question in total
 - 問題8 つぎの文章を読んで、文章全体の内容を考えて、文中の 19 から 22 の中に入る最もよいものを、1・2・3・4から一つえらびなさい (sentence_structure) 1 question
 
 Section 3: Reading Comprehension

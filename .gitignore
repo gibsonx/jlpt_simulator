@@ -52,3 +52,6 @@ tmp/*
 
 #for debug
 conversation.html
+celery_results.sqlite
+celerybeat-schedule
+temp_id_ed25519
