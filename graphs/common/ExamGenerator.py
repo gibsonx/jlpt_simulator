@@ -152,7 +152,7 @@ class ExamGenerator:
                                )
 
             # render paper to output folder for debug
-            filename = f"{project_path}/output/JLPT_{self.exam_uid}.html"
+            filename = f"{project_path}/output/JLPT_{self.level}_{self.exam_uid}.html"
             html_output = render_to_html(output_data['sections'])
 
             with open(filename, "w", encoding="utf-8") as file:
