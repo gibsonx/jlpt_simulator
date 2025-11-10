@@ -31,23 +31,23 @@ Additional requirement: Do not display problem descriptions and serial numbers i
 Formal exam paper: {example}
 """
 
-kanji_reading_example = """
+kanji_reading_example = """  
 --- example 1 ---
-<a>この町の<u>主要</u>な産業は何ですか。</a>
+<a>状況を<u>詳細</u>に書いてださい。</a>
 <ul>
-    <li>じゅおう</li>
-    <li>しゅおう</li>
-    <li>じゅうよう</li>
-    <li>しゅよう</li>
+    <li>そうざい</li>
+    <li>そうさい</li>
+    <li>しょうざい</li>
+    <li>しょうさい</li>
 </ul>
 
 --- example 2 ---
-<a>今日とても<u>嬉しい</u>ですね。</a>
+<a>とても<u>鮮やか</u>だったことを覚えています。</a>
 <ul>
-    <li>うれしい</li>
-    <li>はれしい</li>
-    <li>まぶしい</li>
-    <li>きびしい</li>
+    <li>おだやか</li>
+    <li>さわやか</li>
+    <li>あざやか</li>
+    <li>なごやか</li>
 </ul>
 """
 
@@ -73,19 +73,72 @@ Formal exam paper: {example}
 """
 
 write_kanji_example = """
-<a>ここから<u>じゅんばん</u>に見てください。 </a>
+--- example 1 ---
+<a>この会社を<u>しぼう</u>した理由を教えてください。</a>
+<ul>
+    <li>希望</li>
+    <li>志望</li>
+    <li>指望</li>
+    <li>貴望</li>
+</ul>
+
+--- example 2 ---
+<a>このセーターにはとても<u>やわらかい</u>毛系が使われている。</a>
+<ul>
+    <li>伸らかい</li>
+    <li>軽らかい</li>
+    <li>暖らかい</li>
+    <li>柔らかい</li>
+</ul>
+"""
+
+words_collocation_teacher_prompt = """
+Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
+
+Task: Your job is to write a question for a JLPT N1 level exam paper.
+You should write a short sentence and give a parenthesis in the sentence.
+Next, require candidates to fill the most semantically and grammatically appropriate word from the options based on the context of the sentence in the parenthesis 
+This mainly tests students' fixed collocations of Japanese nouns and compound verbs.
+The word in the sentence should not be used in the options
+Options are written either entirely in kanji or entirely in kana.
+
+
+Instructions:
+Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Content: Ensure the vocabulary is restricted to N1 level. 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+
+
+Formal exam paper: {example}
+"""
+
+words_collocation_example = """
+--- example 1 ---
+<a>しょうゆの（　）原料は大豆です。</a>
 <ul class='options'>
-  <li>順番</li>
-  <li>項番</li>
-  <li>順審</li>
-  <li>項審</li>
+  <li>主</li>
+  <li>要</li>
+  <li>正</li>
+  <li>本</li>
+</ul>
+
+--- example 2 ---
+<a>子どもたちの読書（　）が進んでいるらしい。</a>
+<ul class='options'>
+  <li>抜け</li>
+  <li>逃げ</li>
+  <li>別れ</li>
+  <li>離れ</li>
 </ul>
 """
 
 word_meaning_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
 
-Task:
 Task: Your job is to write a question for a JLPT N1 level exam paper.
 You should write a short sentence and give a parenthesis in the sentence,
 Next, require candidates to fill the most semantically and grammatically appropriate word from the options based on the context of the sentence in the parenthesis 
@@ -109,21 +162,21 @@ Formal exam paper: {example}
 
 word_meaning_example = """
 --- example 1 ---
-<a>大雪で朝から電車が（　）している。</a>
+<a>両親はおいしい料理で客を（　）のが好きだ。</a>
 <ul class='options'>
-  <li>縮小</li>
-  <li>滞在</li>
-  <li>延期</li>
-  <li>運休</li>
+  <li>もてなす</li>
+  <li>おだてる</li>
+  <li>許す</li>
+  <li>救う</li>
 </ul>
 
 --- example 2 ---
-<a>今日は暑かったので、シャツが（　）でぬれてしまった。</a>
+<a>西川さんは転校してきたばかりだが、友達もできて、もうすっかりクラスに（　）ている。</a>
 <ul class='options'>
-  <li>いびき</li>
-  <li>あくび</li>
-  <li>あせ</li>
-  <li>いき</li>
+  <li>当てはまって</li>
+  <li>溶け込んで</li>
+  <li>結びついて</li>
+  <li>触れ合って</li>
 </ul>
 
 """
@@ -131,7 +184,7 @@ word_meaning_example = """
 synonym_substitution_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
 
-Task: Your job is to generate a JLPT N3 vocabulary question where the student must select the word closest in meaning to a given word used in a sentence.
+Task: Your job is to generate a JLPT N1 vocabulary question where the student must select the word closest in meaning to a given word used in a sentence.
 Wrap the target word in <u> tags and the full sentence in an <a> tag.
 Follow the sentence with a list of four <li> options, only one of which is a correct synonym or meaning-equivalent of the target word.
 The incorrect options (distractions) must be reasonable but clearly different in meaning
@@ -155,20 +208,20 @@ Formal exam paper: {example}
 """
 
 synonym_substitution_example = """
-<a>さん、<u>避難</u>してください。</a>
+<a>出張の日程は<u>おおよそ</u>決まりました。</a>
 <ul class='options'>
-  <li>ならんで</li>
-  <li>入って</li>
-  <li>にげて</li>
-  <li>急いで</li>
+  <li>だいたい</li>
+  <li>すべて</li>
+  <li>やっと</li>
+  <li>もう</li>
 </ul>
 
-<a>来週、ここで<u>企業</u>の説明会があります。
+<a>中西さんはいつも<u>威張って</u>いる。</a>
 <ul class='options'>
-  <li>旅行</li>
-  <li>会社</li>
-  <li>大学</li>
-  <li>建物</li>
+  <li>眠そうにして</li>
+  <li>偉そうにして</li>
+  <li>暇そうにして</li>
+  <li>嫌そうにして</li>
 </ul>
 """
 
@@ -193,25 +246,25 @@ Formal exam paper: {example}
 """
 
 word_usage_example = """
-<a>内容</a>
+<a>共有</a>
 <ul class='options'>
-  <li>修理のため、エアコンの<u>内容</u>を一度取り出します</li>
-  <li>鍋の中にカレーの<u>内容</u>を入れて、１時間くらい煮てください</li>
-  <li>古い財布から新しい財布へ<u>内容</u>を移しました</li>
-  <li>この手紙の<u>内容</u>は、ほかの人には秘密にしてください</li>
+  <li>市民ボランティアの<u>共有</u>で、留学生のスピーチコンテストが行われた</li>
+  <li>大学と企業が<u>共有</u>で新しい技術の研究を行っている</li>
+  <li>これらの事件には、発生場所に<u>共有</u>の特徴があることが分かった</li>
+  <li>結婚してから購入した物は、夫婦の<u>共有</u>財産になる</li>
 </ul>
 """
 
 sentence_grammar_teacher_prompt = """
-职位：你是一名日语老师，正在为JLPT N3水平写试卷。
+职位：你是一名日语老师，正在为JLPT N1水平写试卷。
 
-任务：按照以下步骤为JLPT N3级别试卷生成一道语法题，测试考生在实际语境中对语法的掌握程度。
+任务：按照以下步骤为JLPT N1级别试卷生成一道语法题，测试考生在实际语境中对语法的掌握程度。
 
 步骤1：生成1-2个短句，或者两个人对话的两句句子。要求：
 - 问题的灵感来源主题,内容应涵盖日常生活场景、对话或简短的解释性语境。
 - 生成的句子可以包含两种形式：1-2句短句；或者为2个人之间每人1-2句的对话，只需要1个对话回合
 - 题目的总字数在40-60个单词之间
-- 使用JLPT N3中的词汇；语法正确，语义通顺
+- 使用JLPT N1中的词汇；语法正确，语义通顺
 - 句子需要包含“语法参考列表”中的语法点
 - 语法点可以是：使用连词或介词作为语法的考点；或使用一个词的几种不同形态变化如te型、ta型等作为语法的考点；或使用自动词和他动词作为语法考点；或使用同一个词的不同时态作为语法考点；或使用日语敬词作为语法的考点
 
@@ -245,24 +298,24 @@ sentence_grammar_teacher_prompt = """
 
 sentence_grammar_example = """
 --- example 1 ---
-<a>私は、自分の作ったパンをたくさんの人（　　　）食べてほしいと思って、パン屋を始めた。</a>
+<a>携帯電話を一人一台持つのは当たり前と言われる現代で、私のように携帯電話なしで生活している人は（　　　）いるのだろうか。</a>
 <ul class='options'>
-  <li>は</li>
-  <li>に</li>
-  <li>まで</li>
-  <li>なら</li>
+  <li>どうも</li>
+  <li>どれほど</li>
+  <li>どうしても</li>
+  <li>どんなに</li>
 </ul>
 
 --- example 2 ---
-<a>（研究室で）<br>
-学生「先生、今、よろしいですか。来週の発表（　　　）、ちょっとご相談したいのですが。」<br>
-先生「ええ、いいですよ。」
+<a>（カメラ屋で）<br>
+客「カメラを海に落としてしまって、電源が入らないんです。中に水が入ってしまったようなのですが…。」<br>
+店員「海水が入った（　　）、修理は難しいかもしれませんが、一応見てみますね」
 </a>
 <ul class='options'>
-  <li>にとって</li>
-  <li>によると</li>
-  <li>のことで</li>
-  <li>のほか</li>
+  <li>のであれば</li>
+  <li>ことであれば</li>
+  <li>のであって</li>
+  <li>ことであって</li>
 </ul>
 """
 
@@ -270,7 +323,7 @@ sentence_grammar_example = """
 # When the third word is identified, point out its sequence number in the options.
 
 sentence_sort_teacher_prompt = """
-Role: You are a Japanese teacher who designed a sentence sorting question for the JLPT N3 exam.
+Role: You are a Japanese teacher who designed a sentence sorting question for the JLPT N1 exam.
 
 Task: You should write a sentence of approximately 60 words and cut out four consecutive phrases as options for the question. The specific execution steps are as follows:
 
@@ -320,33 +373,33 @@ Grammar reference: {grammar}
 
 sentence_sort_example = """
 --- example 1 ---
-<a>山川大学では、<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u> について新入生がにアンケート調査を行っている。</a>
+<a>会議での西山さんのプレゼントは、普段はなかなか<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>素晴らしかった。</a>
 <ul class='options'>
-  <li>大学生活</li>
-  <li>持っている</li>
-  <li>に対して</li>
-  <li>イメージ</li>
+  <li>ぐらい</li>
+  <li>課長が</li>
+  <li>褒める</li>
+  <li>褒めることができない</li>
 </ul>
 
 --- example 2 ---
-<a>来週の夫の誕生日には、<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u> つもりだ。</a>
+<a>さくら駅周辺の再開発事業を行う<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>予定だ。</a>
 <ul class='options'>
-  <li>最近</li>
-  <li>プレゼントする</li>
-  <li>かばんを</li>
-  <li>欲しがっている</li>
+  <li>さくら市は</li>
+  <li>に先立って</li>
+  <li>関係者に対する</li>
+  <li>説明会を開催する</li>
 </ul>
 
 """
 
 structure_selection_teacher_prompt = """
-角色：你是一名日语老师，正在为JLPT N3水平撰写试卷。 
+角色：你是一名日语老师，正在为JLPT N1水平撰写试卷。 
 
-任务：你的工作是按照以下步骤为JLPT N3级别出一道填入正确内容的语法题。
+任务：你的工作是按照以下步骤为JLPT N1级别出一道填入正确内容的语法题。
 
 步骤1：问题的灵感来源"主题"。写一篇日语短文。短文需要符合以下要求：
 - 短文需要有1-3个段落，350-500个词。
-- 确保短文中的词汇95%限制在N3级别。
+- 确保短文中的词汇95%限制在N1级别。
 - 整段内容需要保证语义通顺，没有语法错误。短文需要包含“语法参考列表”中的语法点。
 
 步骤2：辨析并优化步骤1中生成的短文。使优化后的短文符合以下几个条件：
@@ -385,91 +438,70 @@ structure_selection_example = """
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>富士山の思い出</title>
+<meta charset="UTF-8">
+<title>紅葉の異変（続き）</title>
+<style>
+  body {
+    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+    margin: 40px;
+    line-height: 1.8;
+  }
+  .container {
+    border: 1px solid #000;
+    padding: 20px;
+  }
+  .title {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .author {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+  .question {
+    margin-top: 20px;
+  }
+</style>
 </head>
 <body>
-  <h1>富士山<ruby>山<rt>さん</rt></ruby>の思い出</h1>
-  <p><small>ヒエン</small></p>
+  <p>以下は、留学生がスピーチのために書いた文章である</p>
 
-  <p>
-    今年の<ruby>夏休<rt>なつやす</rt></ruby>みに、初めて<ruby>富士山<rt>ふじさん</rt></ruby>に<ruby>登<rt>のぼ</rt></ruby>りました。
-    <ruby>富士山<rt>ふじさん</rt></ruby>は日本でいちばん高い山で、3776メートルもあります。
-    <strong>５</strong>はわたしの国にはありません。
-    それで、<ruby>留学<rt>りゅうがく</rt></ruby>したら、ぜひ登ってみたいと思っていました。
-  </p>
+  <div class="container">
+    <div class="title">紅葉の異変</div>
+    <div class="author">サリム ソフィア</div>
 
-  <p>
-    <ruby>富士山<rt>ふじさん</rt></ruby>の<ruby>途<rt>と</rt></ruby>中までバスで行って、
-    夜10時ごろから<ruby>登<rt>のぼ</rt></ruby>り始めました。
-    山の上で朝日を見るために夜中も歩かなければなりませんでした。
-    <ruby>登山<rt>とざん</rt></ruby>の<ruby>途中<rt>とちゅう</rt></ruby>で、<strong>６</strong>と思いました。
-  </p>
+    <p>
+      私は日本の秋の景色が好きです。秋になって紅葉が始まり、緑だった葉が黄色やオレンジ、赤に変わると、とてもきれいです。秋の紅葉は、日本の四季の変化を感じさせてくれるものです。
+    </p>
 
-  <p>
-    なぜかというと、夏でも<ruby>富士山<rt>ふじさん</rt></ruby>の上のほうは<ruby>本当<rt>ほんとう</rt></ruby>に寒かったし、
-    <ruby>予想<rt>よそう</rt></ruby>よりも山の道を歩くのは<ruby>大変<rt>たいへん</rt></ruby>で、足も<ruby>痛<rt>いた</rt></ruby>かったからです。
-    <strong>７</strong>、山の上に着いて朝日を見たら、それまでの<ruby>疲<rt>つか</rt></ruby>れが<ruby>消<rt>き</rt></ruby>えてしまいました。
-  </p>
+    <p>
+      （48）ですが、先日テレビで、紅葉がピークを迎える時期が年々遅くなっているというニュースを見ました。中には、1月になってからピークを迎えたところもあるそうで、驚きました。温暖化によって平均気温が上昇していることが大きな原因だそうです。私は、夏が過ぎて気温が下がってくれば、必ず紅葉が始まると思っていました。（49）そうではありませんでした。紅葉には、条件となる気温の変化があります。
+    </p>
 
-  <p>
-    突然、目の前に広がる<ruby>雲<rt>くも</rt></ruby>の間から朝日が<strong>８</strong>。
-    今まで見た中でいちばん<ruby>美<rt>うつく</rt></ruby>しい朝日でした。
-    一生<ruby>忘<rt>わす</rt></ruby>れないだろうと思います。
-    とてもすばらしい<strong>９</strong>。
-  </p>
+    <p>
+      葉の変色が始まるのは、1日の最低気温が大体8度以下になってからです。秋になっても、最低気温が一定の気温まで下がらなければ、紅葉は（50）その後、さらに寒くなり、5～6度まで下がると、紅葉は一気に進みます。また、5度以下の日が続くと、最も美しい新葉が見られるといわれています。
+    </p>
 
-
-  <div class="question">
-    <h2>5</h2>
-    <ol>
-      <li><ruby>このいちばん高<rt>たか</rt></ruby>い<ruby>富士山<rt>ふじさん</rt></ruby></li>
-      <li>こんな<ruby>富士山<rt>ふじさん</rt></ruby></li>
-      <li>こんなに<ruby>高<rt>たか</rt></ruby>い山</li>
-      <li><ruby>このいちばん高<rt>たか</rt></ruby>い山</li>
-    </ol>
+    <p>
+      紅葉に起きている異変を知り、このまま温暖化が進むと、日本の秋の景色が変わってしまう可能性もあるのではないかと思いました。もしかしたら、紅葉自体が見られなくなる日も来るかもしれません。紅葉を通して、温暖化が身近な問題であることをより強く（51）
+    </p>
   </div>
 
-  <div class="question">
-    <h2>6</h2>
-    <ol>
-      <li>いつか<ruby>行<rt>い</rt></ruby>こう</li>
-      <li>とうとう<ruby>来<rt>こ</rt></ruby>なかった</li>
-      <li>やっと<ruby>帰<rt>かえ</rt></ruby>った</li>
-      <li>もう<ruby>帰<rt>かえ</rt></ruby>りたい</li>
-    </ol>
-  </div>
+  <div class="follow-up">
+    <p><strong>48</strong></p>
+    <p>1. そこの紅葉　　2. そんな紅葉　　3. そちら　　4. 紅葉</p>
 
-  <div class="question">
-    <h2>7</h2>
-    <ol>
-      <li>そのうえ</li>
-      <li>しかし</li>
-      <li><ruby>実<rt>じつ</rt></ruby>は</li>
-      <li>それに</li>
-    </ol>
-  </div>
+    <p><strong>49</strong></p>
+    <p>1. 結局　　2. 確かに　　3. しかし　　4. つまり</p>
 
-  <div class="question">
-    <h2>8</h2>
-    <ol>
-      <li><ruby>現<rt>あらわ</rt></ruby>れたのです</li>
-      <li><ruby>現<rt>あらわ</rt></ruby>れるはずです</li>
-      <li><ruby>現<rt>あらわ</rt></ruby>れたのでしょう</li>
-      <li><ruby>現<rt>あらわ</rt></ruby>れるはずでした</li>
-    </ol>
-  </div>
+    <p><strong>50</strong></p>
+    <p>1. 始まらないのです　　2. 始まらないためです　　3. 始まらないのでしょうか　　4. 始まらないためでしょうか</p>
 
-  <div class="question">
-    <h2>9</h2>
-    <ol>
-      <li><ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>で</rt></ruby>を<ruby>作<rt>つく</rt></ruby>りたいです</li>
-      <li><ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>で</rt></ruby>もあります</li>
-      <li><ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>で</rt></ruby>になりました</li>
-      <li><ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>で</rt></ruby>がほしいです</li>
-    </ol>
+    <p><strong>51</strong></p>
+    <p>1. 感じているからだと思います　　2. 感じられるところだと思います　　3. 感じさせることができました　　4. 感じるようになりました</p>
   </div>
-
 </body>
 </html>
 """
@@ -478,13 +510,13 @@ short_reading_narrative_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
 
 Task: Your job is to write a reading question for JLPT N1 level exam. 
-First you need to write a narrative article around 250 words for student to read.  
+First you need to write a narrative article around 300 words for student to read.  
 Then, you give a question by the related content in the article. Most importantly, the correct answer must not be stated directly in the article. 
 Instead, it should require the test-taker to infer, summarize, or understand the context or intent of the passage.
 The passage should reflect a real-life topic (e.g., daily life, work, study, travel, opinions).
 
 Instructions:
-Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of 1 example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N1 level. 
 Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
@@ -496,24 +528,68 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
-
 short_reading_narrative_example = """
-<div class='article'>
-    <p>
-      友達のマキは、いいことがあったという話をよくする。だから私は、マキは運がいいのだと思っていた。しかし、最近、そうではないと気づいた。<br><br>
-      先日二人で出かけたとき、事故で電車が止まっていて、何キロも歩いて帰ることになった。<br>
-      嫌だなと思っている私に、マキは「知らない町を歩けるね。」とうれしそうに言った。<br>
-      こんなことでも、マキは楽しめてしまうのだ。今まで私が聞いた話も、マキだから「いいこと」だと感じたのだろうと思う。
-    </p>
-  </div>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>インタビューに関する文章</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        p {
+            margin-bottom: 1.5em;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #555;
+            margin-left: 1em;
+        }
+        ol {
+            margin-top: 2em;
+        }
+        li {
+            margin-bottom: 0.8em;
+        }
+        .page-number {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 2em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
 
-<a>24. 最近、「私」はマキのことをどのような人だと思うようになったか。</a>
-<ul class='options'>
-      <li>「いいこと」ばかりが起きる、運がいい人</li>
-       <li>「私」と一緒に経験したことは、何でも「いいこと」だと思える人</li>
-      <li> ほかの人に起こった「いいこと」を一緒に喜んであげられる人</li>
-      <li> ほかの人が「いいこと」だと思わないことも「いいこと」だと思える人</li>
-    </div>
+<p>インタビューでは準備も重要だが、実際のインタビューの場面になったら、いったんその準備で得たものをすべて捨てなくてはならない。そして、相手の話を真剣に深く聞き、その人が何を言わんとしているのか、丸ごと捉えて、そこで出てきた素晴らしい言葉、豊かな言葉、言葉に込められた大事なメッセージをしっかりとつかむことこそが必要なのだ。</p>
+
+<p>そこから良い対話が生まれてくる。良いインタビューは、次の質問を忘れて相手の話を聞けたときに初めて行えるものなのだ。</p>
+
+<p class="note">（注1）言わんとしている：言おうとしている</p>
+<p class="note">（注2）丸ごと：そのまま全部</p>
+
+<div class="page-number">52</div>
+
+<p>インタビューについて、筆者の考えに合うのはどれか。</p>
+
+<ol>
+    <li>準備したものから離れて、相手の話をよく聞くことが重要だ。</li>
+    <li>準備した質問に沿って、相手から大事なメッセージを引き出すことが重要だ。</li>
+    <li>相手の話をしっかり聞くことが大切なので、準備をする必要はない。</li>
+    <li>相手から素晴らしい言葉を引き出すには、準備しすぎないほうがいい。</li>
+</ol>
+
+</body>
+</html>
+
 """
 
 short_reading_mail_teacher_prompt = """
@@ -540,30 +616,88 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
+short_reading_mail_example = """
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メールに関する文章</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 2em 0;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+        p {
+            margin-bottom: 1.2em;
+        }
+        .page-number {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 2em;
+            color: #666;
+        }
+        ol {
+            margin-top: 1.5em;
+        }
+        li {
+            margin-bottom: 0.8em;
+        }
+        .file-note {
+            font-style: italic;
+            color: #555;
+            margin-top: 2em;
+        }
+    </style>
+</head>
+<body>
 
-short_reading_mail_example="""
---- example 1 ---
-<div class='article'>
-    <p>これは、今川さんが後のミゲルさんに書いたメールである。</p>  
-      
-    <p><strong>ミゲルさん</strong></p>  
-    <p>メールをありがとう。</p>  
-    <p>同じ会社で働くことになって、うれしいです。</p>  
-    <p>住む所についてアドバイスをくださいと書いてあったので、お答えします。</p>  
-    <p>会社まで歩いて行きたいと書いてありましたが、会社のりはオフィスばかりで、アパートはほとんどありません。電車通勤になりますが、私が以前住んでいた緑野という町はいいですよ。</p>  
-    <p>緑野駅から会社のある北駅まで電車で15分だし、いろいろなお店があって便利です。</p>  
-    <p>いい所が見つかるといいですね。会えるのを楽しみにしています。</p>  
-    
-    <p>今川</p>
-</div>
-    
-<a>まで電車で15分で行けるし、店も多いので、緑野にしたらどうか。</a>  
+<p>以下は、ある会社で全社員に送られたメールである。</p>
+
+<hr>
+
+<h3>社員各位</h3>
+
+<p>わが社の人気商品「緑山牧場チーズ詰め合わせ」を、定価の30%引き（割引後3,500円）で社員向けに特別販売します。</p>
+
+<p>購入希望者は、添付の申込書にお名前と購入数を記入のうえ、3月9日までに営業課までメールでお申し込みください。通常、社内販売の支払いと商品のお渡しは経理課で行っていますが、今回は営業課で行います。代金と引き換えに、その場で商品をお渡しします。お渡し期間は3月16日から19日の間です。</p>
+
+<p>以上、よろしくお願いします。</p>
+
+<p class="file-note">添付ファイル：3月1日「緑山牧場チーズ詰め合わせ」申込書</p>
+
+<h3>営業課 安井</h3>
+
+<hr>
+
+
+
+<div class="follow-up">「緑山牧場チーズ詰め合わせ」を社内販売で購入したい社員は、期日までに営業課にメールで申し込んだあと、どうすればいいか。</div>
+
 <ul class='options'>
-    <li>(選択肢なし)</li>
-    <li>いろいろな店があって便利なので、北駅駅の近くにしたらどうか</li>  
-    <li>北駅まで電車で15分で行けるし、店も多いので、緑野にしたらどうか</li>  
-    <li>いろいろな店があって便利なので、北駅駅の近くにしたらどうか</li>  
-</ul> 
+    <li>経理課で支払いをして受け取る。</li>
+    <li>経理課で支払いをして、営業課で受け取る。</li>
+    <li>営業課で支払いをして受け取る。</li>
+    <li>営業課で支払いをして、経理課で受け取る。</li>
+</ul>
+
+</body>
+</html>
 """
 
 short_reading_notification_teacher_prompt = """
@@ -588,39 +722,123 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
-short_reading_notification_example="""
-<div class='article'>
-<p><strong>(会社で)</strong></p>  
-<p>ミンさんが席に戻ると、机の上に、原口課長からのメモが置いてあった。</p>  
+short_reading_notification_example = """
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>掲示板に関する文書</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .document {
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #fff;
+            position: relative;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 50%;
+        }
+        .top-left { top: 10px; left: 10px; }
+        .top-right { top: 10px; right: 10px; }
+        .bottom-left { bottom: 10px; left: 10px; }
+        .bottom-right { bottom: 10px; right: 10px; }
+        .date {
+            text-align: right;
+            margin-bottom: 1em;
+            font-weight: bold;
+        }
+        h3 {
+            text-align: center;
+            margin: 1.5em 0;
+            font-size: 1.3em;
+        }
+        p {
+            margin-bottom: 1.2em;
+            text-indent: 1em;
+        }
+        .signature {
+            text-align: right;
+            margin-top: 2em;
+        }
+        .page-number {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 2em;
+            color: #666;
+        }
+        ol {
+            margin-top: 1.5em;
+        }
+        li {
+            margin-bottom: 0.8em;
+        }
+    </style>
+</head>
+<body>
 
-<p><strong>ミンさん</strong></p>  
-<p>子どもが熱を出したので、早退します。午後、明日の会議の進行について確認する約束だったのに、すみません。午後の話し合いのために予約していた小会議室はキャンセルしてくれますか。席に戻ったら、すぐにお願いします。会議の進行については、明日の朝、最初に確認して、そのあとに会議室の準備をしましょう。</p>  
-<p>それから、ミンさんの作った資料ですが、問題ないので、今日中に8人分印刷しておいてください。</p>  
-<p>よろしくお願いします。</p>  
-<p>9月8日 12:10</p>  
-<p>原口</p>  
+<p>以下は、ある町の掲示板に貼られていた文書である。</p>
 
-<a>25. このメモを読んで、ミンさんはまず何をしなければならないか。</a>  
-<ul class='options'>
-    <li>会議の進行について口課長と確認する</li>  
-    <li>小会議室をキャンセルする</li>  
-    <li>会議室の準備をする</li>  
-    <li>会議の資料を8人分印刷する</li>  
+<div class="document">
+    <div class="corner top-left"></div>
+    <div class="corner top-right"></div>
+    <div class="corner bottom-left"></div>
+    <div class="corner bottom-right"></div>
+
+    <div class="date">10月5日</div>
+
+    <p>住民の皆様へ</p>
+
+    <h3>ごみに関するお願い</h3>
+
+    <p>最近、「可燃ごみ」の回収日に衣類・布類が多く出されています。しかし、市の規則では、衣類・布類は毎週火曜日の「資源ごみ」の回収日に出すことになっています。資源を有効に活用するため、決められた回収日に出してください。</p>
+
+    <p>衣類・布類は、市内8か所の公共施設に設置してある回収ボックスでも回収しています。回収後は、中古の衣類として再使用したり、工場で再生利用したりします。ご協力をよろしくお願いします。</p>
+
+    <p class="signature">竹川市役所 市民生活課</p>
+</div>
+
+
+
+<dive class="follow-up">この文書で最も伝えたいことは何か。</div>
+
+<ul class="options">
+    <li>「資源ごみ」として出す衣類・布類の量を減らしてほしい。</li>
+    <li>「資源ごみ」の回収日に「可燃ごみ」を出さないでほしい。</li>
+    <li>衣類・布類は、「資源ごみ」の回収日に出してほしい。</li>
+    <li>衣類・布類は、新しく設置した回収ボックスに出してほしい。</li>
 </ul>
+
+</body>
+</html>
 """
 
 midsize_reading_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
 
 Task: Your job is to write a reading question for a JLPT N1 level exam.
-First you need to write a mid-size article around 400 words for student to read.
+First you need to write a mid-size article around 450 words for student to read.
 The keypoints being tested in each question needs to be underlined with <u></u>
-Then, you give 3 questions by the related content in the article. the meaning of keypoint cannot be found in the article.
+Then, you give 2 questions by the related content in the article. the meaning of keypoint cannot be found in the article.
 Then, you give a question by the related content in the article.
 Instead, it should require the test-taker to infer, summarize, or understand the context or intent of the passage.
 
 Instructions:
-Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of the 1 example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N1 level. 
 Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
@@ -634,72 +852,164 @@ Formal exam paper: {example}
 """
 
 midsize_reading_example = """
---- example 1 ---
-<div class='article'>
-    <p>日本に留学に来る前、母が持っていきなさいと言って、私の国でよく売っている粉の香辛料をくれました。私が普段あまり使わないものでしたが、役に立つかもしれないと母が言うので、荷物に入れました。最近、それが本当に役に立ちました。</p>  
-    <p>先月、<u>①ちょっと困ったことがありました</u>。ある留学生交流会に、国の料理を何か作ってさし出してと言われたのです。私にも得意な料理はあるのですが、日本では買えない材料を使うので作れません。そのとき、私はあの香辛料を思い出したのです。</p>  
-    <p>私は、肉と卵を使ってチャーハンを作り、香辛料をかけてみました。すると、日本によくある普通のチャーハンが、私の国らしい味と香りの<u>②特別なチャーハン</u>になったのです。交流会でも、みんな、おいしいおいしいと言って食べてくれて、安心しました。</p>  
-    <p>あのとき、母はこういうことを予想していたのでしょうか。明日電話するので、<u>③母に聞いてみようと思います</u>。</p>  
-</div>
-    <a><u>①ちょっと困ったことがありました</u>とあるが、「私」が困ったのはなぜか。</a>  
-    <ul class='options'>
-        <li>母に、普段あまり使わない香辛料を持っていくように言われたから</li>  
-        <li>得意な料理がないのに、国の料理を作ってきてほしいと言われたから</li>  
-        <li>国の料理を作ってきてほしいと言われたが、日本では得意な料理が作れないから</li>  
-        <li>チャーハンが作れないのに、チャーハンを作ってきてほしいと言われたから</li>  
-    </ul>
-    <a><u>②特別なチャーハン</u>とは、どのようなチャーハンか。</a>  
-    <ul class='options'> 
-        <li>日本で売っている材料でチャーハンを作って、国の香辛料をかけたもの</li>  
-        <li>日本で売っている材料でチャーハンを作って、日本の香辛料をかけたもの</li>  
-        <li>国から持ってきた材料でチャーハンを作って、国の香辛料をかけたもの</li>  
-        <li>国から持ってきた材料でチャーハンを作って、日本の香辛料をかけたもの</li>  
-    </ul>  
-    <a><u>③母に聞いてみようと思います</u>とあるが、「私」はどのようなことを聞くと考えられるか。</a>  
-    <ul class='options'>
-        <li>国の香辛料がどうして日本で役に立つと思ったのか</li>  
-        <li>どんな料理を作るときに国の香辛料を使えばいいのか</li>  
-        <li>「私」が日本に留学することを予想していたかどうか</li>  
-        <li>次の留学生交流会に、どんな料理を持っていけばいいと思うか</li>  
-    </ul> 
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章内容</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        ol {
+            padding-left: 20px;
+        }
+        li {
+            margin: 12px 0;
+        }
+        .question {
+            font-weight: bold;
+            color: #e74c3c;
+            margin-top: 25px;
+        }
+        .article {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
 
---- example 2 ---
-<div class='article'>
-<p>重大な影響が出ている。このような問題に関心を持つ企業や消費者は、日本でも海外でも増えている。</p>  
-    <p>服や靴を作っている、ある海外のファッションの会社が始めた活動がある。まず、漁師たち、つまり魚をとって生活している人たちに組んで、魚をとるときに絡むごみを、港に持ち帰ってもらう。そして、会社がそのごみを回収、分類し、その中のプラスチックを繊維に変え、服や靴にして売るというリサイクル活動である。</p>  
-    <p>実は、以前、漁師たちはごみがとれても海に戻していた。漁に持ち帰ると捨てるのにお金がかかるからだ。この活動は、漁師にとっても、自分のお金を使わずに海をきれいにできる良さがあるのだ。</p>  
-    <p>これらの服や靴は、最近日本でも売られ始めた。デザインも悪くない。消費者の意識が変化している今、日本でもきっと受け入れられるだろう。</p>  
-</div>  
-    <a>30. 「海外のファッションの会社」がしていることとして、合っているのはどれか。</a>  
-    <ul class='options'>  
-        <li>漁師たちと一緒に、海にごみをとりに行っている</li>  
-        <li>漁師たちから捨てごみを受け取って、他に持ち帰っている</li>  
-        <li>漁師たちがプラスチックごみから服や靴を作るのを助けて、それを売っている</li>  
-        <li>漁師たちが持ってきたプラスチックごみを利用して、服や靴を作っている</li>  
-    </ul>
-    <a>31. 漁師たちは、なぜ「海外のファッションの会社」が始めた活動に参加するのか。</a>  
-    <ul class='options'>
-        <li>ほかの漁師たちとの協力関係ができるから</li>  
-        <li>自分たちのお金をかけずに、海のごみを減らすことができるから</li>  
-        <li>魚をとるためにかかっていたお金を減らすことができるから</li>  
-        <li>自分たちが少しお金を出すだけで、海をきれいにしてもらえるから</li>  
-    </ul>  
-  
-    <a>32. この文章を書いた人は、日本で売られ始めた「海外のファッションの会社」の服や靴について、どのように考えているか。</a>  
-    <ul class='options'>  
-        <li>海外のファッションに関心を持つ人が増えているので、売れるだろう</li>  
-        <li>環境問題に関心を持つ人が増えているし、デザインも悪くないので、売れるだろう</li>  
-        <li>デザインの良さで製品を選ぶ人が増えているので、値段が高くても売れるだろう</li>  
-        <li>製品のデザインが日本の消費者には合わないので、あまり売れないだろう</li>  
-    </ul>
+        <!-- 第二篇文章 -->
+        <div class="article">
+            <p>勉強にしても、仕事にしても、その能率には必ず波があり、それがな<br>いようにみえても、波が小さいだけである。つまり、人間は機械のように<br>いつも同じ調子ではたらいていないから、1 時間に 50 個の製品がつく<br>れるから、10 時間で 500 個がつくれる、という具合には計算できない。<br>従って、脳が最も快調にはたらいているときを基準にすると、たいていの<br>ときは不調ということになってしまう。</p>
+
+            <p>それでも、全く無計画に勉強や仕事をするわけにもゆかないので、一<br>応はスケジュールを立てる。その際に、快調に脳がはたらいているときの<br>能率を基準にしてスケジュールを立てれば、そのスケジュールの通りにこ<br>とが進行することは絶対にないといってもいい。その度に、自分の才能に失<br>望していれば、失望しつづけることになる。さし迫った状態では、どうし<br>ても脳がフル回転しているときを基準にスケジュールを組むので、たいてい<br>は不完全な形で終ってしまう。スケジュールをつくるときには、せめて<br>中等度に脳がはたらいているときの能率を基準にする必要がある。スケジ<br>ュール以上にはかどっても誰もこまる人はいない。</p>
+
+            <p>そして、スケジュールにこだわるより、脳の変動の波をできるだけ感<br>じとり、能率が悪くても悲観せずに、必ず上げ潮のときがくることを期待<br>すればいい。そして、上げ潮のときには自分でもおどろくほどに能率が上<br>がるので、そのときに一気に遅れをとり戻せばいいのである。</p>
+
+            <div class="follow-up">59. 筆者によると、スケジュールを立てる際の注意点は何か。</div>
+            <ol>
+                <li>脳の調子がいいときを基準にしない</li>
+                <li>いつも脳が同じ調子ではたらけるようにする</li>
+                <li>能率の変化を考えすぎない</li>
+                <li>能率が悪くなったときに変更できるようにしておく</li>
+            </ol>
+
+            <div class="follow-up">60. 筆者の考えに合うのはどれか。</div>
+            <ol>
+                <li>能率を上げるためには、脳の状態をコントロールするといい</li>
+                <li>脳の変動の波に合わせて勉強や仕事を進められる方法を探すといい</li>
+                <li>計画の通りに行かなくても失望せずに、脳の調子が上がるのを待てばいい</li>
+                <li>計画の通りに勉強や仕事を進めるためには、脳の変動の波を小さくすればいい</li>
+            </ol>
+        </div>
+
+    </div>
+</body>
+</html>
+"""
+
+comprehensive_reading_teacher_prompt = """
+Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level.
+
+Task: Task: Your job is to write a reading question for a JLPT N1 level exam. 
+First you need to write a long article around 450 words for student to read. 
+Then, you give 2 questions by the related content in the article. 
+The purpose is to ensure the students are able to understand the meaning of the article.
+
+
+Instructions:
+Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Content: Ensure the vocabulary is restricted to N1 level. 
+Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Additional Requirement: 
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the article can neither be used in the question nor options.
+- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+
+
+
+Formal exam paper: {example}
+"""
+
+comprehensive_reading_example = """
+<div class="reading-text">
+  <h3>A</h3>
+  <p>
+    新しい商品を企画するとき、いいアイデアがなかなか思いつかないことがある。そんなとき、自分には才能がないからだと思い込み、
+    自信をなくしてしまうのはよくない。アイデアは生まれつきの能力に関係なく、努力次第で誰でも生み出すことができる。
+    アイデアは、情報の組み合わせによって生まれることがほとんどだ。そのため、日ごろから情報を集めておくことが有効だ。
+    担当する商品に関連する情報だけを集めていると、似たようなアイデアばかりになってしまう。発想の幅を広げるには、
+    関連する分野以外の情報も頭に入れておくほうがいい。ふだんから視野を広げてさまざまな情報を蓄積しておけば、
+    必ずアイデアの役に立つはずだ。
+  </p>
+
+  <h3>B</h3>
+  <p>
+    新しい商品を企画するには、これまでとは異なるアイデアが必要だ。現在流行している商品の情報を集めるだけでは、
+    他社に勝つことはできないだろう。私はアイデアを生み出すために、一般的に考えられていることとは逆の発想をするようにしている。
+    現在流行している商品が若者向けの物なら高齢者向けにできないかと考えたり、多機能の物なら機能を一つに絞れないかと考えたりするのである。
+  </p>
+  <p>
+    アイデアは一部の才能がある人しか生み出せないものだという印象があるせいか、生み出し方を知ろうとしない人が多いと思う。
+    才能がないからといってあきらめるのではなく、思い切って発想を転換してみれば、いいアイデアにつながっていく。
+  </p>
+</div>
+
+<body>
+    <h1>65. アイデアを生み出すことについて、AとBが共通して述べていることは何か。</h1>
+    <ol>
+        <li>アイデアを生み出し方は、簡単に身につけることができる。</li>
+        <li>多くの情報を得ることで、アイデアを生み出しやすくなる。</li>
+        <li>特別な能力がなくても、アイデアを生み出すことができる。</li>
+        <li>発想のしかたを大きく変えなければ、アイデアは生み出せない。</li>
+    </ol>
+
+    <h1>66. 新しい商品を企画することについて、AとBはどのようなアドバイスをしているか。</h1>
+    <ol>
+        <li>AもBも、いろいろな分野の情報をできるだけ多く集めるといいと述べている。</li>
+        <li>AもBも、流行している商品について詳しく調べるといいと述べている。</li>
+        <li>Aは関連する分野の他社の商品の情報を集めるといいと述べ、Bは流行に逆らった考え方をするといいと述べている。</li>
+        <li>AもBも、流行している商品について詳しく調べるといいと述べている。</li>
+    </ol>
+
+    <h1>67. 新しい商品を企画する際の注意点について、AとBが共通して述べていることは何か。</h1>
+    <ol>
+        <li>十分な時間と資金を確保すること。</li>
+        <li>多くの消費者の意見を取り入れること。</li>
+        <li>市場の需要を調べる前に、デザインや機能にこだわること。</li>
+        <li>競合他社の動きを分析し、それに合わせること。</li>
+    </ol>
+</body>
 """
 
 long_reading_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level.
 
 Task: Task: Your job is to write a reading question for a JLPT N1 level exam. 
-First you need to write a long article around 450 words for student to read. 
-Then, you give 4 questions by the related content in the article. 
+First you need to write a long article around 600 words for student to read. 
+Then, you give 3 questions by the related content in the article. 
 The purpose is to ensure the students are able to understand the meaning of the article.
 
 
@@ -718,42 +1028,84 @@ Formal exam paper: {example}
 """
 
 long_reading_example = """
-    <p>分が住むために直し始めた。日本の古民家には、丈夫で立派な木の材料が使われている。それを利用して直せば、長く住めるいい家になると考えたのだ。</p>  
-    <p>Kさんの直し方はこうだ。まず、家を一度バラバラにする。そして、材料の悪くなっている部分は取り替えるが、そのまま使える材料はできるだけ使って、前と同じように組み立てる。直しながら壁の色を変えたり、最新の暖房を入れたりもする。この方法なら、古民家が時代に合った住みやすい家になるのだ。</p>  
-    <p>Kさんは、家を直して住み始めたあと、下村にあるほかの古民家もそのままにしておくのはもったいないと思い、友人にお金を借りて直し始めた。自分のように古民家を直した家の良さがわかり、買ってくれる人がいるはずだと信じていたのだ。実際、すぐにそのような人は見つかった。そして、その後、直した古民家を見学しに全国各地の人が下村に来るようになった。</p>  
-    <p>日本では、古い家を直すより新しい家を建てたほうがいいという考えが、まだまだ強い。Kさんの行動は、日本人に（　　　）を教えてくれているのだと思う。</p>  
-  
-    <a>さんが住む前の下村は、どのような状態だったか。</a>  
-    <ul class='options'>  
-        <li>ほとんど壊れていないのに、誰も住んでいない古民家がたくさんあった</li>  
-        <li>住みやすいように直されているのに、誰も住んでいない古家がたくさんあった</li>  
-        <li>壊れたまま直さず人が住んでいる古民家がたくさんあった</li>  
-        <li>誰も住んでいない壊れた古民家がたくさんあった</li>  
-    </ul>  
-
-    <a>さんの方法で直した古民家は、どのような家になるか。</a>  
-    <ul class='options'>   
-        <li>新しい材料をできるだけ使っていて、壁の色や暖房も新しく変えた家</li>  
-        <li>新しい材料をできるだけ使っているが、壁の色や暖房は昔と変わらない家</li>  
-        <li>古い材料をできるだけ使っていて、朝の色や暖房も昔と変わらない家</li>  
-        <li>古い材料をできるだけ使っているが、駅の色や暖房は新しく変えた家</li>  
-    </ul>  
-  
-    <a>そのような人とはあるが、どのような人か。</a>  
-    <ul class='options'>   
-        <li>Kさんが直して住み始めた古民家を買ってくれる人</li>  
-        <li>下村の古民家を直そうとするKさんに、お金を貸してくれる人</li>  
-        <li>下村にある壊れた古民家を買って、Kさんに直してもらおうとする人</li>  
-        <li>古民家を直した家の良さがKさんのように分かって、買ってくれる人</li>  
-    </ul>  
-  
-    <a>（　）に入れるのに最もよいものはどれか。</a>  
-    <ul class='options'>    
-        <li>古い家を自分で直すことの面白さ</li>  
-        <li>古い家にはない、新しい家の素晴らしさ</li>  
-        <li>古い家を利用し、直して使っていくことの良さ</li>  
-        <li>古い家を変えずに、そのまま残していくことの価値</li>  
-    </ul>         
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章内容</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        ol {
+            padding-left: 20px;
+        }
+        li {
+            margin: 12px 0;
+        }
+        .question {
+            font-weight: bold;
+            color: #e74c3c;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <p>以下は、ある作家が物語などの本を読むことについて書いた文章である。</p>
+        
+        <p>読むことは、受動的な作業だと思っている人は意外に多い。（中略）読んでインプットして、書いてアウトプットする。そうではなくて、両方アウトプットなのだというのが、私の持論である。</p>
+        
+        <p>そこにある言葉を読む。すると心には、文字以上のものが広がる。たとえば、子どものころ読んだ海外作品に、聞いたこともない料理名が出てくるということが、よくあった。クロスグリのパイだとか、ジンジャークッキーだとか。食べたことのないものを、懸命に想像して味わう。それを食べる主人公の舌を、獲得するわけである。①この行為、受動ではなく能動である。「創る」作業である。本でしか読んだことのない食べものを、大人になってから実際に食べ、「違う」と思った経験を持つ人は、意外に多いのではないだろうか。もちろん違うのは私たちの想像なのだが、しかし自分の頭のなかで創った料理のほうが、断然おいしかった、ということは、よくある。</p>
+        
+        <p>本を読まない、というのは、だから、私にとって創造の放棄である。②つまらない本、相性が悪い本というのはもちろんある。しかしそこで、どこがどんなふうにつまらないのか、どう展開したらおもしろかったのか、自分のどの部分と相性が悪いのか、そんなことを考えていると、つまらない本はおもしろくなるし、相性が悪い本はいつか相性がよくなる日を待とうと思うことができる。私は、おもしろかった本よりつまらなかった本のあらすじを人に話すほうが、ずっと好きだ。どこがどんなふうにつまらなく感じたかを話すのはそれだけ創造の余地があるからだろう。</p>
+        
+        <p>料理でも、絵画でも、あるいは家事の手順でも、創ることの喜びを知ってしまうと、なかなかそれから離れることができない。読むことの楽しみは、と訊かれれば、創ることの自由さだと私は答える。</p>
+        
+        <div class="follow-up">67. ①この行為とはどういうことか</div>
+        <ol>
+            <li>実際に、主人公が食べていた食べものを味わってみること</li>
+            <li>食べたことのないものを主人公と一緒に食べているところを想像すること</li>
+            <li>主人公がどんな食べものが好きかを想像してみること</li>
+            <li>主人公になりきって、食べたことのないものを想像して味わうこと</li>
+        </ol>
+        
+        <div class="follow-up">68. ②つまらない本について、筆者はどのように述べているか。</div>
+        <ol>
+            <li>つまらなく感じた点について色々考えていると、おもしろくなる</li>
+            <li>つまらなく感じた理由を考えていると、自分の好みがよく分かってくる</li>
+            <li>つまらないと思っても、いつか必ず相性がよくなる日がくる</li>
+            <li>つまらないと思っても、人にあらすじを話すとおもしろいところが見つけられる</li>
+        </ol>
+        
+        <div class="follow-up">69. 本を読むことについて、筆者はどのように考えているか</div>
+        <ol>
+            <li>本を読むことは、料理や絵画より創ることの喜びが大きい</li>
+            <li>本を読むことは、自由に想像を膨らませる楽しい創造の作業だ</li>
+            <li>本を読んでたくさん知ることができれば、創ることの喜びも増す</li>
+            <li>本を読んで想像力を身につければ、生活のなかでも自由に想像が楽しめる</li>
+        </ol>
+    </div>
+</body>
+</html>
 """
 
 information_retrieval_teacher_prompt = """
@@ -768,7 +1120,7 @@ This section is designed to simulate real-life scenarios where students need to 
 such as train or flight schedules, event, or advertisements.
 
 Instructions:
-Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N1 level. 
 Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
@@ -781,92 +1133,238 @@ Formal exam paper: {example}
 """
 
 information_retrieval_example = """
-<div class='article'>
-<h2>園内活動の協力者を募集します</h2>
-  <p>東山公園内の活動に、4月から新しく協力してくださる方を募集します。一緒に公園で活動しませんか。</p>
-  <h3>■ 活動内容</h3>
-  <table border="1" cellspacing="0" cellpadding="5">
-    <tr>
-      <th>活動の種類</th>
-      <th>活動日・時間</th>
-      <th>活動場所</th>
-      <th>活動概要内容</th>
-    </tr>
-    <tr>
-      <td>① 花や木の世話</td>
-      <td>毎週土曜日<br>9時～11時</td>
-      <td>園内</td>
-      <td>花を育て、花や木の世話をします。花の名前がわからなくても活動できます。</td>
-    </tr>
-    <tr>
-      <td>② ホームページ作り</td>
-      <td>毎週土曜日<br>9時～11時</td>
-      <td>図書館</td>
-      <td>活動内容を記録し、ホームページの更新が得意な方にお願いします。</td>
-    </tr>
-    <tr>
-      <td>③ 公園のお話</td>
-      <td>第1・第3日曜日<br>14時～16時</td>
-      <td>図書館または園内</td>
-      <td>絵本、ごっこ遊びなどをします。子どもが好きな方、ご協力をお願いします。</td>
-    </tr>
-    <tr>
-      <td>④ 公園の案内</td>
-      <td>第1・第3日曜日<br>9時～11時</td>
-      <td>園内</td>
-      <td>園内を案内して、公園を案内します。</td>
-    </tr>
-  </table>
+--- example 1 ---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>秋原テニススクール入会案内</title>
+<style>
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    margin: 40px;
+    line-height: 1.8;
+  }
+  .container {
+    border: 1px solid #000;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+  }
+  th, td {
+    border: 1px solid #000;
+    padding: 8px;
+    text-align: left;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .section-title {
+    font-weight: bold;
+    margin-top: 25px;
+  }
+  .note {
+    font-size: 0.9em;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1>秋原テニススクール入会案内</h1>
 
-  <h3>応募できる方</h3>
-  <p>東山町に住んでいる18歳以上の方で、説明会に参加できる方を4つの活動に分けて募集しています。複数の応募も可能です。</p>
+    <p class="section-title">コース・クラスについて</p>
+    <p>
+      以下の四つのコースの中から、ご希望の曜日、時間のクラスをお選びいただけます。<br>
+      曜日、時間については、別紙をご確認ください。中学生以上から受講が可能です。<br>
+      各コースの1クラスの定員：10名　レッスン時間：60分
+    </p>
 
-  <h3>説明会</h3>
-  <p>以下のAかBのどちらかに参加してください（AとBの内容は同じです）。参加希望日の前日までに、事務所へ電話で連絡してください。</p>
+    <table>
+      <tr><th>コース</th><th>受講料（週一回、一ヶ月分）</th></tr>
+      <tr><td>A. 平日昼間（初心者）</td><td>8,800円</td></tr>
+      <tr><td>B. 平日昼間（中・上級者）</td><td>12,000円</td></tr>
+      <tr><td>C. 平日夜間・土日（初心者）</td><td>9,300円</td></tr>
+      <tr><td>D. 平日夜間・土日（中・上級者）</td><td>12,500円</td></tr>
+    </table>
 
-  <table border="1" cellspacing="0" cellpadding="5">
-    <tr>
-      <th>回</th>
-      <th>日時</th>
-      <th>場所</th>
-    </tr>
-    <tr>
-      <td>A</td>
-      <td>3月19日（日）14時30分</td>
-      <td>東山文化センター 2階会議室</td>
-    </tr>
-    <tr>
-      <td>B</td>
-      <td>3月19日（日）11時</td>
-      <td>東山文化センター 2階会議室</td>
-    </tr>
-  </table>
+    <p class="section-title">入会時のお支払い</p>
+    <p>
+      ご入会の際に、入会金（6,600円）、年会金（2,200円）、受講料1ヶ月分を現金でお支払いください。<br>
+      受講料は、2ヶ月目から口座引き落としになります。
+    </p>
 
-  <h3>応募方法</h3>
-  <p>用紙に記入をして必要な情報を書いて、事務所へ持参してください。郵送も可能です。</p>
-  <p>説明会や活動について質問がある方は、それぞれの活動・説明に電話で確認してください（追加の申し込みも可能です）。</p>
+    <p class="section-title">割引制度</p>
+    <p>複数の割引は同時に適応できません。一番条件のいい割引が一つ適用されます。</p>
 
-  <p>東山図書館 事務所<br>
-  〒166-0113 東山花庄町13-5<br>
-  電話: 0865-65-9877（9:00～17:00）</p>
----
-</div>
+    <table>
+      <tr><th>種類</th><th>適応対象</th><th>割引内容</th></tr>
+      <tr>
+        <td>学生割引</td>
+        <td>中学生、高校生</td>
+        <td>毎月の受講料を10％割引</td>
+      </tr>
+      <tr>
+        <td>複数のコース・クラス割引</td>
+        <td>複数コース・クラスを受講する方</td>
+        <td>二つ目以降のコース・クラス毎月の受講料を50％割引</td>
+      </tr>
+      <tr>
+        <td>家族割引</td>
+        <td>ご家族に本スクールの受講生がいる方</td>
+        <td>入会金無料、毎月の受講料を15％割引</td>
+      </tr>
+    </table>
 
-<a>37. 次のうち、正しい活動の選択肢はどれか。（※問題文の具体的な選択肢が不足しているため、活動内容から推測）</a>
-<ul class="options">
-  <li><strong>①</strong>（定々木の世話）</li>
-  <li>②（ホームページ付け）</li>
-  <li>③（公園の清掃）</li>
-  <li>④（公園の案内）</li>
+    <p class="section-title">振り替え制度</p>
+    <p>
+      同じコースの他の曜日に振り替えて受講する場合、フロントで事前にご予約ください。
+    </p>
+
+    <p class="section-title">各種手続き</p>
+    <p>以下の場合は、期日までにフロントでお手続きください。</p>
+
+    <table>
+      <tr><th>変更内容</th><th>手続き期限</th></tr>
+      <tr>
+        <td>変更（コースを変更したり、同じコース内で曜日・時間を変更する場合）</td>
+        <td>変更したい月の前月10日まで</td>
+      </tr>
+      <tr>
+        <td>退会（スクールをやめる場合）</td>
+        <td>最終受講の前月末まで</td>
+      </tr>
+      <tr>
+        <td>休会（スクールを1ヶ月以上休む場合）</td>
+        <td>休会したい月の前月20日まで</td>
+      </tr>
+    </table>
+
+    <p class="note">
+      ※手数料550円がかかります（入会後3ヶ月以内に手続きをする場合は無料）。
+    </p>
+
+    <p>
+      電話：062-241-3998（9時～22時）<br>
+      〒433-0010 北高市朝中町27<br>
+      ホームページ：<a href="http://www.akiharayuukibui-tennis.jp" target="_blank">http://www.akiharayuukibui-tennis.jp</a>
+    </p>
+  </div>
+
+  <div class="follow-up">
+      <p><strong>70.</strong> 高校生の村田さんは「C 平日夜間・土日（初心者）コース」に入会したいと思っている。姉がすでに同じコースを受講しているが、入会時に支払うものは何か。</p>
+      <ol>
+        <li>入会金、年会費、10％割引された受講料</li>
+        <li>入会金、年会費、15％割引された受講料</li>
+        <li>年会費、15％割引された受講料</li>
+        <li>年会費、50％割引された受講料</li>
+      </ol>
+    </div>
+
+    <div class="follow-up">
+      <p><strong>71.</strong> リナさんは、このテニススクールに1か月前に入会し、現在「B. 平日昼間（中・上級者）コース」を受講している。5月から「D. 平日夜間・土日（中・上級者）コース」に変わりたいと思っているが、リナさんはどうしなければならないか。今日は3月15日である。</p>
+      <ol>
+        <li>4月10日までに、手数料550円を支払い、手続きをする</li>
+        <li>4月10日までに手続きをする。手数料は必要ない</li>
+        <li>4月20日までに、手数料550円を支払い、手続きをする</li>
+        <li>4月20日までに手続きをする。手数料は必要ない</li>
+      </ol>
+    </div>
+</body>
+</html>
+
+
+--- example 2 ---
+<div class="container">
+<h2>着物レンタルのご案内</h2>
+
+<p>着物を着て水森市を観光しませんか。「はなかわ」では、山林店、古寺店、森島店の三つの店で、レンタルの着物をご用意しております。</p>
+
+<h3>＜着物レンタルの流れ＞</h3>
+<ol>
+  <li>ご利用になりたい店に電話でご予約ください。</li>
+  <li>ご予約の日時にご来店になり、お好きな着物にお着替えください。必要な方には無料でお手伝いいたします。</li>
+  <li>お支払いのあと、着物で観光をお楽しみください。</li>
+  <li>各店の最終返却時間までに借りた店に戻り、当日中に着物をご返却ください（翌日返却も可能です。ご希望の方は、＜翌日返却について＞をお読みください）。</li>
+</ol>
+
+<h3>＜料金（1名様）＞</h3>
+<p>基本料金：3,500円</p>
+
+<h3>＜割引について＞</h3>
+<ul>
+  <li>早期予約割引：1週間前までのご予約で基本料金から300円割引します。</li>
+  <li>学生割引：学生の方は基本料金から200円割引します。</li>
+  <li>※早期予約割引を使う場合は、学生割引は使えません。</li>
 </ul>
 
-<a>38. 瞬時活動の魅力者になりたい人が気をつけるべきことはどれか。</a>
-    <ul class="options">
-      <li>機能の活躍に応募できない</li>
-      <li>透明点（A・B）の両方に参加必須</li>
-      <li>参加希望日の前日までに電話連絡が必要</li>
-      <li>応募用紙を事務所へ持参必須</li>
-    </ul>
+<h3>＜お持ちになる物＞</h3>
+<p>特にありません。はき物などもセットでお貸しします。</p>
+
+<h3>＜翌日返却について＞</h3>
+
+<h4>ご予約時の申し込み</h4>
+<p>1,200円の翌日返却料金で、返却時間を翌日の正午までに延長できます。</p>
+
+<h4>ご来店時の申し込み、またはお出かけ後の変更</h4>
+<p>翌日返却料金は1,500円になります。お出かけ後の変更の場合は、借りた日の最終返却時間までに借りた店にお電話ください。翌日返却料金は、返却の際にお支払いください。</p>
+
+<p>※返却が翌日の正午を過ぎる場合、追加料金1,000円をいただきます。その後は、1日遅れるごとに3,000円を請求いたします。</p>
+
+<h3>＜各店の営業時間・返却時間＞</h3>
+<table border="1" cellspacing="0" cellpadding="6">
+  <tr>
+    <th>店舗</th>
+    <th>営業開始時間</th>
+    <th>最終返却時間</th>
+  </tr>
+  <tr>
+    <td>山林店、古寺店</td>
+    <td>8時</td>
+    <td>18時30分</td>
+  </tr>
+  <tr>
+    <td>森島店</td>
+    <td>9時</td>
+    <td>18時</td>
+  </tr>
+</table>
+
+<p>※電話番号など、詳細はホームページ内の各店のページをご覧ください。</p>
+
+<hr>
+</div>
+
+
+<div class="follow-up">
+<h4>70.</h4>
+<p>大学生のリンさんは、2週間後の日曜日に山林店で着物をレンタルしたいと思っている。着物は当日中に返却する予定だ。今日、予約をする場合、料金はいくらになるか。</p>
+<ol>
+  <li>3,500円</li>
+  <li>3,500円から200円が割引された金額</li>
+  <li>3,500円から300円が割引された金額</li>
+  <li>3,500円から200円と300円が割引された金額</li>
+</ol>
+</div>
+
+<div class="follow-up">
+<h4>71.</h4>
+<p>ローザさんは、今日、森島店で着物を借りた。今日中に返却する予定だったが、店を出たあとで翌日返却に変更したくなった。今は14時である。明日の午前中に返却する場合、どうすればいいか。</p>
+<ol>
+  <li>今日の18時までに森島店に電話をして、返却の際に1,200円を支払う。</li>
+  <li>今日の18時までに森島店に電話をして、返却の際に1,500円を支払う。</li>
+  <li>今日の18時までに森島店に電話をして、返却の際に1,500円と1,000円を支払う。</li>
+  <li>今日の18時30分までに森島店に電話をして、返却の際に1,500円を支払う。</li>
+</ol>
+</div>
 """
 
 topic_understanding_txt_teacher_prompt = """
@@ -883,7 +1381,7 @@ Do not refer to them as Mr. or Miss in the conversation context. Be polite and c
 Besides, the name at the end of a sentence can be omitted.
 For example: "ありがとう、佐藤さん。" the name at the end of a sentence can be omitted, like "ありがとう。"
 
-Step 3, write dialogue, the dialogue should consist of 1-3 exchanges (back-and-forth turns). The total length should be approximately 100–200 words.
+Step 3, write dialogue, the dialogue should consist of 6-9 exchanges (back-and-forth turns). The total length should be approximately 300-400 words.
 
 Step 4, after the conversation, ask a follow-up question related to the conversation and focusing on the man or woman's next action, such as 
 What,When,Where,Who,How,Which,Whose,How long,How often,How much,How many.
@@ -906,42 +1404,51 @@ Formal exam paper: {example}
 
 topic_understanding_txt_example = """
 --- example 1 ---
-<p class='background'>会社で課長と男の人が話しています。</p>
+<p class='background'>大学で女の学生と男の学生が話しています。男の学生はこの後まず、何をしますか。</p>
 
 <div class='conversation'>
-女：田中さん。初めての出張、お疲れ様でした、この出張のレポート詳みました。
-男：はい。
-女：出張の目的と訪問した会社で誰に会ったのかはこれています。ただ、話し合いについては最終的にどうなったのかがわかりくいています。そこを直してください。
-男：はい、わかりました。
-女：次の訪問日は3ヶ月後になつたんですね。
-男：はい。
-<p class='follow-up'>男の人は出張レポートのことを直きなければなりませんか？</p>
+<p><b>女：</b> 中村くん、シンポジウムのポスター、掲示板に貼ってくれたんだね。ありがとう。<br>
+<b>男：</b> ええ、他に僕がやっておくことってありますか？<br>
+<b>女：</b> マイクとか会場の準備は前日にすればいいし、当日のスタッフ用のスケジュール表、これないから欲しいな、今週中にお願いしていい？<br>
+<b>男：</b> あ、はい。<br>
+<b>女：</b> それから１番大事な当日配る資料、コピーまだなんじゃない？100部だよね？<br>
+<b>男：</b> あ、それなんですけど、発表者の方からの資料が全部そろってないんですよ。<br>
+<b>女：</b> そう、みなさんお忙しい方ばかりだから…私の方で発表者に資料を送ってもらうようにすぐに連絡をするから、集まったら次第コピーしよう。週明けには出してもらうようにするね。<br>
+<b>男：</b> はい、わかりました。</p>
 </div>
 
-<ul class='options'>
-    <li>しゅっちょうの　もくてき</li>
-    <li>会った人のじょうほう</li>  
-    <li>話し合いのけっか</li>  
-    <li>つぎのほうもん日/li> 
-</ul>  
+<p class="follow-up">男の学生は、この後まず何をしますか。</p>
+<div class="options">
+  <p>1. シンポジウムのポスターを貼る<br>
+     2. スタッフの当日の予定表を作る<br>
+     3. 当日配る資料をコピーする<br>
+     4. 発表者に連絡する
+  </p>
+</div>
+
 
 --- example 2 ---
-<p class='background'>会社で男の人と女の人が話しています。</p>
+<p class='background'>スーパーで男の店長と女の店員が話しています。女の店員はこの後まず、何をしますか。</p>
 
 <div class='conversation'>
-女：あ、田中さん。明日の会議、10時からでしたっけ？
-男：いいえ、10時じゃなくて、午後1時からですよ。場所はいつもの会議室です。
-女：あ、そうでしたね。資料はどうすればいいですか？
-男：事前にメールで送ってください。当日、紙で持ってこなくても大丈夫です。
-<p class='follow-up'>女の人は、何時から会議があると言われましたか。</p>
+<p><b>女：</b> おはようございます、森田さん。今日は一部の商品に値引きシールを付ける作業をやってくれることになってるね。<br>
+<b>男：</b> あ、はい。準備してます。<br>
+<b>男：</b> えっと、忙しい時に悪いんだけど、倉庫に行って南コーヒーの豆、何袋あるか数えてきてくれる？数が少なかったら今日中に注文しないといけないんだ。<br>
+<b>女：</b> あ、わかりました。急ぎですか？<br>
+<b>男：</b> あー、そのシールを貼る作業が終わってからでいいから。袋の数を数えたらメモを私の机の上に置いといて。<br>
+<b>女：</b> わかりました。<br>
+<b>男：</b> お客さんがレジにたくさん並んでるから、私もすぐレジを手伝わなきゃいけなくて。値引シールを付けた商品をレジの横の棚に並べるのは明日の開店前にみんなですればいいから。じゃ、よろしくね。</p>
 </div>
 
-<ul class='options'>
-    <li>午前10時</li>  
-    <li>午後1時</li> 
-    <li>午後3時</li>   
-    <li>午後5時</li> 
-</ul>
+<p class="follow-up">女の店員はこの後まず、何をしますか。</p>
+<div class="options">
+  <p>1. 商品に値引きシールを貼る<br>
+     2. 倉庫で南コーヒーの数を数える<br>
+     3. レジの手伝いをする<br>
+     4. 商品をレジの横の棚に並べる
+  </p>
+</div>
+
 """
 
 keypoint_understanding_teacher_prompt = """
@@ -960,7 +1467,7 @@ Do not refer to them as Mr. or Miss in the conversation context. Be polite and c
 Besides, the name at the end of a sentence can be omitted.
 For example: "ありがとう、佐藤さん。" the name at the end of a sentence can be omitted, like "ありがとう。"
 
-Step 3, write dialogue, the dialogue should consist of 3-4 exchanges (back-and-forth turns). The total length should be approximately 150–180 words.
+Step 3, write dialogue, the dialogue should consist of 6-9 exchanges (back-and-forth turns). The total length should be approximately 300-350 words.
 The topic should be appropriate for language learners and reflect everyday situations.
 
 Step 4, after the conversation, ask a follow-up question focusing on understanding of the motivation or reasoning behind it, encouraging students to think deeply.
@@ -1002,40 +1509,46 @@ Formal exam paper: {example}
 
 keypoint_understanding_example = """
 --- example 1 ---
-<p class='background'>朝、家の玄関で妻と夫が話しています。</p>
+    <p class='background'>テレビでアナンサーの女の人がパン屋の店長にインタビューをしています。店長はどうしてパン屋を始めたと言っていますか。</p>  
+        <p><span class="speaker">女:</span>店長の山本さんです。こちらのお店の手作りのパン、大変人気ですが山本さんご自身は以前、会社員をなされていたんですよね？</p>
+        <p><span class="speaker">男:</span>はい。この店はもともとパン作りが好きな母がやる予定だったんですが、店を出す準備をしている途中で母が病気になってしまいました。母はずっとパン屋をやりたかったので店を諦めることをとても残念がっていたんですよ。それで「やってくれ」と言われたわけじゃないんですが、僕が何とか形にしたいと思いました。</p>
+        <p><span class="speaker">女:</span>それまでパン作りのご経験はあったんですか？</p>
+        <p><span class="speaker">男:</span>いえ、全くなくて…パン作りは専門学校で一から勉強しました。卒業する前に母は亡くなりました。</p>
+        <p><span class="speaker">女:</span>そうでしたか。</p>
+        <p><span class="speaker">男:</span>母のレベルにはまだまだなんですが、おいしいパンを地元の方に食べてもらえるように頑張っています</p>
+    </div>
+    <div class="follow-up">店長はどうしてパン屋を始めたと言っていますか</div>
+    <ul class='options'>
+        <li>母といっしょにパン屋をやりたかったから</li>
+        <li>母にたのまれたから</li>
+        <li>母のゆめをかなえたかったから</li>
+        <li>母のパンの味を残したかったから</li>
+    </ul>
 
-<div class='conversation'>
-女:あれ？どうしたの？忘れ物？書類？    
-男:いや、バス停で待ってたんだけど、なぜかバスがなかなか来なくて。今日は車で会社に行くよ。車の鍵、取ってくれる？    
-女:えー、私、今日車使いたいんだけど・・・会社まで送ってったあげるよ。    
-男:本当？悪いね。走って戻ってきたら、喉渇いちゃった。ちょっと水飲んでくるから待ってて。    
-女:あ、机の上に切手が貼ってあるハガキがあったけど、出さなくていいの？    
-男:あぁ、忘れてた。取ってくるよ。 
-<p class='follow-up'>夫はどうしても家に戻ってきましたか？</p> 
-</div>
 
-<a class='question'></a> 
-<ul class='options'>
-    <li>しょるいをわすれたから</li>
-    <li>車で会社に行くことにしたから</li>    
-    <li>のどがかわいたから</li>      
-    <li>はがきをわすれたから</li>  
-</ul>
 
 --- example 2 ---
-<p class='background'>男の人が新しいスーパーについて話しています</p>  
 
-<div class='conversation'>
-男：昨日、新しいスーパーに行ってみました。駅から歩いて5分くらいで、とても便利です。中は広くて、野菜や果物が安いし、パンも種類が多かったです。ただ、夕方だったのでレジが混んでいて、10分ぐらい待たされました。次は午前中に行こうと思います。
-<p class='follow-up'>男の人は、このスーパーについてどう思っていますか。</p>
-</div>    
+     <p class='background'>うちで女の人と男の人が話しています。２人は引っ越しの値段を安くするため、どうすることにしましたか。</p>
+        <p><span class="speaker">女:</span>うーん、そうだね。安い引っ越し会社は見つからないだろうし、費用を抑えられるようにあんまり使ってない大きい家具のもらい手を探そうか。</p>
+        <p><span class="speaker">男:</span>うん、そうだね。</p>
+        <p><span class="speaker">女:</span>引っ越し会社に引越しの見積もりを出してもらったけど予算よりかなり高かったよ。今の時期はどこの会社も高いんだね。荷物の量と移動距離で料金を計算するから荷物を減らせば安くなるって。</p>
+        <p><span class="speaker">男:</span>そう、んー。大きい荷物を減らそうか。え一つと、大きいものって言ったらソファー、冷蔵庫、本棚だね。</p>
+        <p><span class="speaker">女:</span>本棚は分解できるよ。ソファーはあまり使ってないし、欲しい人にあげてもいいかもしれないね。</p>
+        <p><span class="speaker">男:</span>それもそうだね。あ、冷蔵庫は古いし、この際、売って向こうで新しいの買う？</p>
+        <p><span class="speaker">女:</span>えー？冷蔵庫はまだ使うよ！あ、そうだ。親戚のおじさんがトラックを持ってるからおじさんに手伝ってもらって、自分たちで荷物を運ぶ？</p>
+        <p><span class="speaker">男:</span>荷物の積み降ろしって結構大変だよ。やっぱり引っ越し会社に頼んだ方がいいんじゃないかな？</p>
+        <p><span class="speaker">女:</span>うーん、そうだね。安い引っ越し会社は見つからないだろうし、費用を抑えられるようにあんまり使ってない大きい家具のもらい手を探そうか。</p>
+        <p><span class="speaker">男:</span>うん、そうだね。</p>
 
-<ul class='options'>
-    <li>場所が遠くて不便だと思っている</li>    
-    <li>品物が高いと思っている</li>     
-    <li>品物はよいが、レジが混んでいると思っている</li>    
-    <li>午後に行くのが一番いいと思っている</li>
-</ul>    
+    <div class="follow-up">2人は引っ越しの値段を安くするため、どうすることにしましたか。</div>
+    <ul class='options'>
+        <li>ソファーをもらってくれる人をさがす</li>
+        <li>れいぞうこを売る</li>
+        <li>親戚にひっこしを手伝ってもらう</li>
+        <li>安いひっこし会社をさがす</li>
+    </ul>
+
 """
 
 summary_understanding_teacher_prompt = """
@@ -1068,119 +1581,101 @@ Formal exam paper: {example}
 
 summary_understanding_example = """
 --- example 1 ---
-<p class='background'>日本語学校で女の留学生と男の留学生が話しています。</p>
-
-<div class='conversation'>
-- 女: 来月で佐藤先生、学校を辞めちゃうんだよね。  
-- 男: 寂しくなるね。  
-- 女: うん。ねえ、クラスのみんなで先生に何か記念になるものをあげたいね。  
-- 男: あ、いいね。何か身に付けるものとか?  
-- 女: 先生おしゃれだし、そういうの選ぶの難しくない? それより私たちで何か作ろうよ。  
-- 男: あ、メッセージカードは? クラスのみんなにも書いてもらおうよ。  
-- 女: じゃ、スポーツ大会の時に撮ったクラスの集合写真を真ん中に貼って、周りにメッセージを書いてもらう?  
-- 男: いいね。皆にももらえるといいね。明日、休み時間にクラスのみんなに話してみよう。  
+<div class="section">
+    <p class='background'>講演会で鉄道の写真家が話しています。</p>
+    <div class="dialogue">
+        <p><span class="speaker">男:</span>私は鉄道の写真を撮るためにいろいろなところへ行きます。行く先々で鉄道ファンの方に会うと「どうやったらうまく撮れますか？」と聞かれるんですが、私は反対に「写真で何を伝えたいですか？」と尋ねるんです。シャッターを押すタイミングとか列車と風景をどんなバランスで撮るかとか、上手に撮影するテクニックはいろいろあります。けど、少しぐらい下手でも構わないんです。1枚の写真の中に季節感や感動的な風景など何を表現したいかを意識して撮ることで全く違った写真になると思うんです。</p>
+        <a class='follow-up'>講演会で鉄道の写真家が話しています</a>
+    </div>
+    <ul class='options'> 
+        <li>鉄道の写真を撮る時に大切なこと</li>
+        <li>鉄道の写真を撮るのに良い場所</li>
+        <li>鉄道の美しさを表現する楽しさ</li>
+        <li>鉄道の写真を上手に撮るテクニック</li>
+    </ul>
 </div>
-
-<a class='follow-up'>2人は何について話していますか? </a>
-<ul class='options'>
-    <li>先生が学校を辞める理由</li>   
-    <li>先生に贈る物</li>     
-    <li>クラスからのメッセージ</li>     
-    <li>先生との思い出</li>    
-</ul>
 
 --- example 2 ---
-<p class='background'>男の人が最近の生活について話しています</p>
+<div class="section">
+    <p class='background'>テレビで工業デザイナーが話しています。</p>
 
-<div class='conversation'>  
-- 男：最近、仕事が忙しくて、毎日残業しています。帰るのが遅いので、夕食はいつもコンビニで買った弁当です。でも、栄養がよくないと思うし、体も疲れやすくなってきました。だから、これからは少し早く帰って、自分で料理を作るようにしたいと思っています。健康のために、生活を変えなければならないと感じています。
+    <div class="dialogue">
+        <p><span class="speaker">女:</span>中学1年の時、視力が悪くなり、メガネが必要になりました。メガネ屋さんに行ったのですが、気に入るメガネが見つかりませんでした。仕方なく1つ買ったんですが、自分の気に入らないメガネをかけるのは耐えられませんでした。同じ頃、友達の家で出されたジュースのコップがすごくきれいな形で感激しました。有名なデザイナーがデザインしたコップだったのですが、ちょっと形を変えるだけでこんなにおしゃれになるんだと驚きました。今思えば、デザインということに初めて興味を持ったのがこの頃でした。</p>
+        <a class='follow-up'>工業デザイナーは何について話していますか。</a>
+    </div>
+    <ul class='options'> 
+        <li>メガネを買う人へのアドバイス</li>
+        <li>人気があるメガネのデザイン</li>
+        <li>おしゃれなデザインのポイント</li>
+        <li>デザインを意識し始めたきっかけ</li>
+    </ul>
 </div>
 
-<a class='follow-up'>男の人は、何を言いたいのですか？</a>
-<ul class='options'> 
-    <li>忙しいので、残業をもっと増やしたい</li>   
-    <li>料理を作るのがめんどうだと思っている</li>    
-    <li>健康のために、生活を変えたいと思っている</li>    
-    <li>コンビニの弁当はおいしくないと思っている</li>  
-</ul>  
 """
 
-actively_expression_teacher_prompt = """
-Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
+# actively_expression_teacher_prompt = """
+# Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
-Task: Create an AI-friendly picture prompt that visually depicts a scene where a question is being asked. 
-Indicate clearly who speaks first: if a woman asks the question, a man should be shown answering, and if a man asks, a woman should answer. 
-The scene should be illustrated without any background text. And there is a black arrow pointing to the party who is about to answer the question. The arrow must closely follow the party who is about to answer the question.
+# Task: Create an AI-friendly picture prompt that visually depicts a scene where a question is being asked. 
+# Indicate clearly who speaks first: if a woman asks the question, a man should be shown answering, and if a man asks, a woman should answer. 
+# The scene should be illustrated without any background text. And there is a black arrow pointing to the party who is about to answer the question. The arrow must closely follow the party who is about to answer the question.
 
-Generate Japanese language test questions similar to JLPT situational questions.
-For each question, describe a real-life situation in Japanese and then ask what the person should say in that situation. 
-Provide three possible answers in Japanese.
-only one of which is appropriate or most natural for the situation. 
-The correct answer must be highly relevant to the question and logical. The answer needs to maintain coherence with the previous question and not be too abrupt. For example, according to different scenarios, it is best to add a "あのう〜／へ〜／すみません／わ〜" connector as a buffer.
-The language used in the correct answer needs to match the identity of both interlocutors. 
-For example, students must use respectful language towards their teachers, and subordinates must also use respectful language towards their superiors.
-Keep the situations practical and relevant to everyday life in Japan. Do not mention or refer to blurred faces.
+# Generate Japanese language test questions similar to JLPT situational questions.
+# For each question, describe a real-life situation in Japanese and then ask what the person should say in that situation. 
+# Provide three possible answers in Japanese.
+# only one of which is appropriate or most natural for the situation. 
+# The correct answer must be highly relevant to the question and logical. The answer needs to maintain coherence with the previous question and not be too abrupt. For example, according to different scenarios, it is best to add a "あのう〜／へ〜／すみません／わ〜" connector as a buffer.
+# The language used in the correct answer needs to match the identity of both interlocutors. 
+# For example, students must use respectful language towards their teachers, and subordinates must also use respectful language towards their superiors.
+# Keep the situations practical and relevant to everyday life in Japan. Do not mention or refer to blurred faces.
 
-The picture description must be in a dedicated section named: background.
-The gender of the character indicated by the arrow in the picture needs to be consistent with the gender of the character generating the conversation.
+# The picture description must be in a dedicated section named: background.
+# The gender of the character indicated by the arrow in the picture needs to be consistent with the gender of the character generating the conversation.
 
-Instructions:
-Format: follow the format of the 2 examples in the formal exam paper but not the content.
-Content: Ensure the vocabulary is restricted to N1 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
-Additional Requirement: 
-- Don't show question instructions and sequence number in the generated content. 
-- The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
+# Instructions:
+# Format: follow the format of the 2 examples in the formal exam paper but not the content.
+# Content: Ensure the vocabulary is restricted to N2 level. 
+# Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+# Additional Requirement: 
+# - Don't show question instructions and sequence number in the generated content. 
+# - The word in the sentence can neither be used in the question nor options.
+# - You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
 
 
-Formal exam paper: {example}
-"""
+# Formal exam paper: {example}
+# """
 
-actively_expression_example = """
---- example 1 ---
-<p class='background'>
-The scene shows a young person standing at the entrance of a house, holding a bag and facing three adults who are standing together inside the house. 
-The setting is indoors and feels polite and formal, as if the young person is greeting or saying goodbye to the adults. 
-Include a vase with flowers on a shelf or table near the entrance. 
-There is a black arrow pointing towards the young person.
-</p>
+# actively_expression_example = """
+# --- example 1 ---
+# <div class="conversation">
+#     <div class="follow_up">
+#         課長、明日の会議の資料ですが、ご覧いただけないでしょうか？
+#     </div>
+#     <ul class='options'>  
+#         <li>資料、見てくれるんですね</li>
+#         <li>資料は私が作っておきますね</li>
+#         <li>資料、見ておきます</li>
+#     </ul>
+# </div>
 
-<div class='conversation'>
-- 男: 休みの間、友達の家に泊めてもらいました。帰る時、友達の両親に挨拶します。何と言いますか？
-</div>
 
-<a class='follow_up'>休みの間、友達の家に泊めてもらいました。帰る時、友達の両親に挨拶します。何と言いますか？</a>
-<ul class='options'>
-    <li>お世話になりました</li>     
-    <li>お邪魔します</li>    
-    <li>気をつけて帰ってください</li>
-</ul>
-
---- example 2 ---
-<p class='background'>
-The scene takes place in a café or restaurant. 
-A woman is sitting at a table with drinks in front of her, speaking to a server who stands beside her table holding a tray with a glass. 
-There are additional tables and chairs in the background, with drinks and utensils visible. 
-There is a black arrow pointing towards the woman.
-</p>
-
-<div class='conversation'>
-- 女: カフェで窓側の席が空きました。席を変われるかどうか聞きたいです。店員に何と言いますか？
-</div>
-
-<a class='follow_up'>カフェで窓側の席が空きました。席を変われるかどうか聞きたいです。店員に何と言いますか？</a>
-<ul class='options'>  
-    <li>あの席に変わってもらえますか</li>    
-    <li>窓側の席に座らないといけませんか</li>  
-    <li>あっちの席に移れますか</li>
-</ul>
-"""
+# --- example 2 ---
+# <div class="conversation">
+#     <div class="follow_up">
+#         この会社、経験者に限らず応募できるって。
+#     </div>
+#     <ul class='options'>  
+#         <li>募集は経験が無い人だけなんだ</li>
+#         <li>経験がなくてもいいんだね</li>
+#         <li>やっぱり経験が無いといけないのか</li>
+#     </ul>
+# </div>
+# """
 
 immediate_ack_teacher_prompt = """
-角色：你是一名日语老师，正在为JLPT N3水平撰写试卷。 
+角色：你是一名日语老师，正在为JLPT N1水平撰写试卷。 
 
-任务：出一道符合N3水平的听力题。具体步骤如下：
+任务：出一道符合N1水平的听力题。具体步骤如下：
 
 步骤1：设置一个场景，两人个人a和b生成一段只有一个回合的对话。要求对话：
 - a的发言字数在20-40个单词左右
@@ -1196,7 +1691,7 @@ immediate_ack_teacher_prompt = """
 
 说明：
 格式：遵循正式试卷中2个例子的格式，但不要遵循内容。
-内容：确保词汇量限制在N3级。 
+内容：确保词汇量限制在N1级。 
 参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈（如果存在）
 附加要求：
 -不要在生成的内容中显示问题说明和序列号。 
@@ -1209,26 +1704,148 @@ Formal exam paper: {example}
 
 immediate_ack_example = """
 --- example 1 ---
-<a class='follow_up'> 女：足、痛そうだね。年後のテニスの練習、休んだら？</a>
-<ul class='options'>  
-　<li>そうです、今日は帰るね</li>
-　<li>今日は練習、ないんだね</li>
-　<li>テニス、今日は休むの？</li>
-</ul> 
+<div class="conversation">
+    <div class="follow-up">
+        男：課長、明日の会議の資料ですが、ご覧いただけないでしょうか？
+    </div>
+    <ul class='options'>  
+        <li>資料、見てくれるんですね</li>
+        <li>資料は私が作っておきますね</li>
+        <li>資料、見ておきます</li>
+    </ul>
+</div>
+
 
 --- example 2 ---
-<a class='follow_up'>男：町の花火大会、今年はやらないことになったそうだよ。</a>
-<ul class='options'> 
-　<li>やらないもしれなかったね</li>
-　<li>え？なんて？楽しみにしていたのに…</li>
-　<li>じゃ、見に行かなきゃね</li>
+<div class="conversation">
+    <div class="follow-up">
+        女：この会社、経験者に限らず応募できるって。
+    </div>
+    <ul class='options'>  
+        <li>募集は経験が無い人だけなんだ</li>
+        <li>経験がなくてもいいんだね</li>
+        <li>やっぱり経験が無いといけないのか</li>
+    </ul>
+</div>
 """
 
+comprehensive_expression_show_answer_teacher_prompt = """
+角色：你是一名日语老师，正在为JLPT N1水平撰写试卷。 
+
+任务：你的工作是写3个人之间听起来很自然的对话。要求是2男1女，或者2女一男。
+
+第一步，你应该介绍对话的背景。
+
+第二步，生成的对话要求总长度约为500-600字。针对某个话题进行讨论，需要有核心思想。
+
+第三步，问一个后续问题，问题可以关于是主角的想法、这段话的主题或说话者想表达什么。
+主题应该适合语言学习者，并反映日常情况。
+
+第四步，根据听力内容提供多项选择题。这些选项应该测试对对话含义的理解。
+
+
+说明：
+格式：遵循正式试卷中的例子的格式，但不要遵循内容。
+内容：确保词汇限制在N1级。 
+参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈（如果存在）
+附加要求：
+-不要在生成的内容中显示问题说明和序列号。 
+-句子中的单词既不能用于问题，也不能用于选项。
+-您必须在输出中显示正确答案，选项为1,2,3,4。例如：正解:1.
+
+
+正式试卷：{example}
+"""
+
+comprehensive_expression_show_answer_example = """
+<p class='background'>地域のボランティアグループのリーダーとメンバー2人が話しています。</p>
+
+<div class='conversation'>
+男1: 僕たちが市と協力して定期的にゴミ拾いをしている事公園、ゴミを置いていっちゃう人が多いよね。何か対策を考えて市役所に提案しようと思うんだ。
+女: お菓子の袋とかペットボトルとか、置いていっちゃう人がいるんですね。
+男1: 市の方針でゴミ箱は置かないことになってるからね。
+男2: 特にゴミが多いところから対策を考えた方がいいんじゃないですか?ゴミが目立つところに花壇を作るとか。
+他の公園で花壇を作ったら、その周りはゴミが減ったそうですよ。
+男1: ゴミが多いのはベンチの周りだよね?そこに花壇を作るのは難しいと思うんだ。
+女: 私は公園全体を考えた方がいいと思うんですが... [ゴミを持ち帰りましょう] って書いた看板を増やすのはどうですか?
+男1: うーん、既にいくつか立ててあるから今以上に増やす必要ないんじゃないかな?</p>
+女: あと私たちボランティアが見回って、ゴミを持って帰ってもらうように直接声をかけるのも効果があると思うんですけど。
+男1: ボランティアの負担が大きくなるのはちょっとね。うーん、まず、ゴミが多いところからなんとかしよう。
+花壇を作る代わりにっていうアイデアが良さそうだね。市役所の担当者に早速提案してみよう。
+</div>
+<a class='follow_up'>公園のゴミを減らすため、何を市役所に提案することにしましたか？</a>
+<ul class='options'> 
+    <li>ベンチの近くに花壇を作ること</li>
+    <li>ゴミを捨てないように看板を増やすこと</li>
+    <li>公園を見回ること</li>
+    <li>公園を見回ること</li>
+</ul>
+"""
+
+comprehensive_expression_listen_answer_teacher_prompt = """
+角色：你是一名日语老师，正在为JLPT N1水平撰写试卷。 
+
+任务：你的工作是写3个人之间听起来很自然的对话。要求是2男1女，或者2女一男。
+
+第一步，你应该介绍对话的背景。
+
+第二步，生成的对话要求总长度约为500-600字。针对某个话题进行讨论，需要有核心思想。
+
+第三步，问一个后续问题，问题可以关于是主角的想法、这段话的主题或说话者想表达什么。
+主题应该适合语言学习者，并反映日常情况。
+
+第四步，根据听力内容提供多项选择题。这些选项应该测试对对话含义的理解。
+
+
+说明：
+格式：遵循正式试卷中的例子的格式，但不要遵循内容。
+内容：确保词汇限制在N1级。 
+参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈（如果存在）
+附加要求：
+-不要在生成的内容中显示问题说明和序列号。 
+-句子中的单词既不能用于问题，也不能用于选项。
+-您必须在输出中显示正确答案，选项为1,2,3,4。例如：正解:1.
+
+
+正式试卷：{example}
+"""
+
+comprehensive_expression_listen_answer_example = """
+<p class='background'>池で行われているイベントでアナウンスを聞いた後、女の人と男の人が話しています。</p>
+
+<div class='conversation'>
+女1: 本日は桜花祭りにお越しくださり、ありがとうございます。各会場についてご案内いたします。中央会場では、今日捕れた魚や貝をその場で焼いてお召し上がりいただけます。こちらは、なくなり次第終了いたします。南会場では、初心者向けの釣り教室を開催しています。道具の貸し出しもあります。餌の付け方なども教えいたします。東会場では、海の生き物が観察できます。地元の海の生き物を間近で見ることができ、お子様も大人の方も楽しめいただけます。西会場では、新鮮な魚介類を販売しています。
+女2: 新鮮な魚、おいしそう。なくなり前に早く行かなきゃ？
+男: え？早速買い物？先に買っちゃうともっとたくさん食べられない？
+女2: あ、そうか。そんなに自分でたくさん食べられないって言うなら、買い物は最後にしようよ。
+男: あ、そうしような。まずはここに行こう。そんなに近くで生き物を観察できるって言うなら、買い物は最後にしようよ。
+女2: いいよ。釣りはいいの？
+男: うーん、初心者向けって言ってたから今日は初めてていいかな。
+</div>
+<a class='follow_up_01'>質問1: 2人は最初にどの会場に行くですか？</a>
+<ul class='options_01'> 
+    <li>中央会場</li>
+    <li>南会場</li>
+    <li>東会場</li>
+    <li>西会場</li>
+</ul>
+<a class='follow_up_02'>質問2: 2人は2番目にどの会場に行くですか？</a>
+<ul class='options_02'> 
+    <li>中央会場</li>
+    <li>南会場</li>
+    <li>東会場</li>
+    <li>西会場</li>
+</ul>
+
+"""
 
 kanji_reading_reflection_prompt = """
 """
 
 write_kanji_reflection_prompt = """
+"""
+
+word_collocation_reflection_prompt = """
 """
 
 word_meaning_reflection_prompt = """
@@ -1261,6 +1878,9 @@ short_reading_notification_reflection_prompt = """
 midsize_reading_reflection_prompt = """
 """
 
+comprehensive_reading_reflection_prompt = """
+"""
+
 long_reading_reflection_prompt = """
 """
 
@@ -1284,4 +1904,12 @@ actively_expression_reflection_prompt = """
 
 immediate_ack_reflection_prompt = """
 """
+
+comprehensive_expression_show_answer_reflection_prompt ="""
+"""
+
+comprehensive_expression_listen_answer_reflection_prompt ="""
+"""
+
+
 
