@@ -132,8 +132,8 @@ class ExamGenerator:
     # ---------------- Main Function ---------------- #
 
     def _generate_and_store_paper(
-        self, outline: Any
-    ) -> Tuple[Optional[str], Optional[Dict[str, Any]]]:
+        self, outline: Outline
+    ) -> Optional[Dict[str, Any]]:
         """
         Generate an exam outline, build paper, and store it in DB.
         Returns: (inserted_id, outline_str, output_data)
@@ -142,7 +142,6 @@ class ExamGenerator:
 
         try:
             output_data = self._write_paper(outline)
-
 
             # insert it into mongoDB
             if self.task_id:
