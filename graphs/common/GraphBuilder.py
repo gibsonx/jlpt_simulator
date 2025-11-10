@@ -20,8 +20,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class GraphBuilder:
-    def __init__(self):
-        # self.exam_uid = exam_uid
+    def __init__(self, exam_uid):
+        self.exam_uid = exam_uid
         self.llm = azure_llm
         self.ref_llm = azure_llm
         self.nodes = {

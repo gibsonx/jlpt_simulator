@@ -28,7 +28,7 @@ class ExamGenerator:
         self.level = level
         self.exam_type = exam_type
         self.db_collection = db_collection
-        self.task_id = task_id
+        self.task_id = task_id if task_id else uuid.uuid1()
         self.vocab, self.topics, self.grammar = self._load_resources()
 
     def _write_paper(self, initial_outline: Any) -> Dict[str, Any]:
@@ -53,7 +53,7 @@ class ExamGenerator:
                 seq = 1
 
                 for question in tqdm(questions, desc=f"Processing {subsection['subsection_title']}"):
-                    graph = GraphBuilder(exam_uid=self.exam_uid)
+                    graph = GraphBuilder(exam_uid=self.task_id)
                     handler = JLPTTaskFactory(graph=graph, level=self.level)
                     func = getattr(handler, function_name, None)
 
@@ -111,7 +111,7 @@ class ExamGenerator:
             })
             logger.info("Outline of the exam:\n\n%s", outline.as_str)
         except Exception as e:
-            logger.error("Failed to generate outline for exam_uid=%s: %s", self.exam_uid, e, exc_info=True)
+            logger.error("Failed to generate outline for exam_uid=%s: %s", self.task_id, e, exc_info=True)
         return outline
 
     # def _build_output(self, outline: Any) -> Dict[str, Any]:
@@ -188,7 +188,7 @@ class ExamGenerator:
                 response = requests.get(
                     url,
                     headers=headers,
-                    params={"id": self.exam_uid},  # fixed param key
+                    params={"id": self.task_id},  # fixed param key
                     timeout=10,
                 )
                 response.raise_for_status()

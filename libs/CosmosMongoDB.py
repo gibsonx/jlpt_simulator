@@ -46,9 +46,6 @@ class CosmosMongoDB:
         Returns:
             Inserted document ID
         """
-        if "_id" not in document:
-            document["_id"] = str(uuid4())
-
         # Add timestamps
         self._add_timestamps(document)
 

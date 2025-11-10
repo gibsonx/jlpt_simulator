@@ -10,7 +10,7 @@ class TaskRunner:
     Class-based handler for generating and storing exam outlines and papers.
     """
 
-    def __init__(self, level: str, exam_type: ExamType, task_id: Optional[str] = None):
+    def __init__(self, level: str, exam_type: ExamType, task_id: str):
         self.task_id = task_id
         self.level = level.lower()
         self.exam_type = exam_type
@@ -18,6 +18,8 @@ class TaskRunner:
         self.exam_type_lower = exam_type.lower()
         self.module_name = f"graphs.{self.level_lower}.outliner"
         self.level_module = self._import_level_module()
+
+        logger.info(f"Current Task ID {task_id} is being initialized")
 
     def _import_level_module(self):
         try:
