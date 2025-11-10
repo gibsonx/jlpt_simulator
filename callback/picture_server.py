@@ -4,7 +4,7 @@ import requests
 from flask import Flask, request, jsonify
 from azure.storage.blob import BlobServiceClient
 from dotenv import load_dotenv
-import sys, os
+import sys, os,uuid
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -160,8 +160,9 @@ def run_exam_endpoint():
     # Queue jobs
     task_ids = []
     for _ in range(count):
-        task = run_exam_task.delay(level, exam_type)
-        task_ids.append(task.id)
+        task_uuid = str(uuid.uuid1())
+        run_exam_task.delay(level, exam_type, task_uuid)
+        task_ids.append(task_uuid)
 
     return jsonify({
         "status": "queued",

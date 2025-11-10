@@ -33,10 +33,9 @@ celery.conf.task_annotations = {
 }
 
 @celery.task(bind=True)
-def run_exam_task(self, level: str, exam_type:ExamType):
+def run_exam_task(self, level: str, exam_type:ExamType, task_uuid: str):
     """
     Celery task wrapping the run_exam function.
     """
-    task_id = self.request.id  # Celery auto-generated ID
-    runner = TaskRunner(level=level, exam_type=exam_type, task_id=task_id)
+    runner = TaskRunner(level=level, exam_type=exam_type, task_id=task_uuid)
     runner.run()
