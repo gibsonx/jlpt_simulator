@@ -28,15 +28,15 @@ class ExamGenerator:
         self.level = level
         self.exam_type = exam_type
         self.db_collection = db_collection
-        self.exam_uid = task_id or str(uuid.uuid1())
+        self.task_id = task_id
         self.vocab, self.topics, self.grammar = self._load_resources()
 
-    def _write_paper(self, initial_outline: Any, topics_list: List[str]) -> Dict[str, Any]:
+    def _write_paper(self, initial_outline: Any) -> Dict[str, Any]:
         outliner_json = initial_outline.model_dump_json()
         data = json.loads(outliner_json)
 
         output_data = {
-            "_id": self.exam_uid,
+            "_id": self.task_id,
             "level": self.level,
             "type": self.exam_type,
             "sections": []
@@ -76,7 +76,7 @@ class ExamGenerator:
                             except Exception as e:
                                 logger.error(f"Error {e} on {question['topic']}")
                                 if attempt < max_attempts - 1:
-                                    question['topic'] = random.choice(topics_list)
+                                    question['topic'] = random.choice(self.topics)
                     else:
                         question['result'] = f"Method {function_name} not found"
 
@@ -114,15 +114,12 @@ class ExamGenerator:
             logger.error("Failed to generate outline for exam_uid=%s: %s", self.exam_uid, e, exc_info=True)
         return outline
 
-    def _build_output(self, outline: Any) -> Dict[str, Any]:
-        """Build the final exam paper data."""
-        return self._write_paper(outline, self.topics)
+    # def _build_output(self, outline: Any) -> Dict[str, Any]:
+    #     """Build the final exam paper data."""
+    #     return self._write_paper(outline, self.topics)
 
-    def _insert_to_db(self, task_id: Optional[str], output_data: Dict[str, Any]) -> str:
+    def _insert_to_db(self, output_data: Dict[str, Any]) -> str:
         """Insert exam data into Cosmos MongoDB."""
-        if task_id:
-            output_data["_id"] = task_id
-
         db_client = CosmosMongoDB(
             os.environ['AZURE_MONGO_CONNECTION'],
             os.environ['AZURE_MONGO_DBNAME'],
@@ -144,15 +141,15 @@ class ExamGenerator:
         project_path = os.environ['PROJECT_PATH']
 
         try:
-            output_data = self._build_output(outline)
+            output_data = self._write_paper(outline)
+
 
             # insert it into mongoDB
-            self._insert_to_db(task_id=self.exam_uid,
-                               output_data=output_data
-                               )
+            if self.task_id:
+                self._insert_to_db(output_data=output_data)
 
             # render paper to output folder for debug
-            filename = f"{project_path}/output/JLPT_{self.level}_{self.exam_uid}.html"
+            filename = f"{project_path}/output/JLPT_{self.level}_{self.task_id}.html"
             html_output = render_to_html(output_data['sections'])
 
             with open(filename, "w", encoding="utf-8") as file:
@@ -160,7 +157,7 @@ class ExamGenerator:
 
             return output_data
         except Exception as e:
-            logger.error("Failed to generate and store paper for exam_uid=%s: %s", self.exam_uid, e, exc_info=True)
+            logger.error("Failed to generate and store paper for exam_uid=%s: %s", self.task_id, e, exc_info=True)
             # Return a consistent tuple on error
             return None
 
