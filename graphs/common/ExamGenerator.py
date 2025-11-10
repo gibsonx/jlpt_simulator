@@ -28,7 +28,7 @@ class ExamGenerator:
         self.level = level
         self.exam_type = exam_type
         self.db_collection = db_collection
-        self.task_id = task_id if task_id else uuid.uuid1()
+        self.task_id = task_id if task_id else str(uuid.uuid1())
         self.vocab, self.topics, self.grammar = self._load_resources()
 
     def _write_paper(self, initial_outline: Any) -> Dict[str, Any]:
