@@ -10,7 +10,7 @@ class TaskRunner:
     Class-based handler for generating and storing exam outlines and papers.
     """
 
-    def __init__(self, level: str, exam_type: ExamType, task_id: str):
+    def __init__(self, level: str, exam_type: ExamType, task_id: Optional[str] = None):
         self.task_id = task_id
         self.level = level.lower()
         self.exam_type = exam_type
