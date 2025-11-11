@@ -33,108 +33,108 @@ Formal exam paper: {example}
 
 kanji_reading_example = """  
 --- example 1 ---
-<a>状況を<u>詳細</u>に書いてださい。</a>
+<a>食品の<u>腐敗</u>を防止する。</a>
 <ul>
-    <li>そうざい</li>
-    <li>そうさい</li>
-    <li>しょうざい</li>
-    <li>しょうさい</li>
+    <li>ふはい</li>
+    <li>ふばい</li>
+    <li>ふうはい</li>
+    <li>ふうばい</li>
 </ul>
 
 --- example 2 ---
-<a>とても<u>鮮やか</u>だったことを覚えています。</a>
+<a>手紙の内容は、私を<u>戒める</u>ものだった。</a>
 <ul>
-    <li>おだやか</li>
-    <li>さわやか</li>
-    <li>あざやか</li>
-    <li>なごやか</li>
+    <li>とがめる</li>
+    <li>せめる</li>
+    <li>なぐさめる</li>
+    <li>いましめる</li>
 </ul>
 """
 
-write_kanji_teacher_prompt = """
-Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
+# write_kanji_teacher_prompt = """
+# Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
 
-Task: Your job is to write a question for a JLPT N1 level exam paper.
-You should write a short sentence and ask candidate to identify the correct kanji writing of a given word in hiragana.
-The number of kanji characters in the options must be the same. The kanji characters must be usded in Japanese daily life.
-The word in hiragana being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
+# Task: Your job is to write a question for a JLPT N1 level exam paper.
+# You should write a short sentence and ask candidate to identify the correct kanji writing of a given word in hiragana.
+# The number of kanji characters in the options must be the same. The kanji characters must be usded in Japanese daily life.
+# The word in hiragana being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
 
-Instructions:
-Format: follow the format of the example in the formal exam paper but not the content.  The output must be in html format and remove line change tag.
-Content: Ensure the vocabulary is restricted to N1 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
-Additional Requirement: 
-- Don't show question instructions and sequence number in the generated content. 
-- The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
-
-
-Formal exam paper: {example}
-"""
-
-write_kanji_example = """
---- example 1 ---
-<a>この会社を<u>しぼう</u>した理由を教えてください。</a>
-<ul>
-    <li>希望</li>
-    <li>志望</li>
-    <li>指望</li>
-    <li>貴望</li>
-</ul>
-
---- example 2 ---
-<a>このセーターにはとても<u>やわらかい</u>毛系が使われている。</a>
-<ul>
-    <li>伸らかい</li>
-    <li>軽らかい</li>
-    <li>暖らかい</li>
-    <li>柔らかい</li>
-</ul>
-"""
-
-words_collocation_teacher_prompt = """
-Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
-
-Task: Your job is to write a question for a JLPT N1 level exam paper.
-You should write a short sentence and give a parenthesis in the sentence.
-Next, require candidates to fill the most semantically and grammatically appropriate word from the options based on the context of the sentence in the parenthesis 
-This mainly tests students' fixed collocations of Japanese nouns and compound verbs.
-The word in the sentence should not be used in the options
-Options are written either entirely in kanji or entirely in kana.
+# Instructions:
+# Format: follow the format of the example in the formal exam paper but not the content.  The output must be in html format and remove line change tag.
+# Content: Ensure the vocabulary is restricted to N1 level. 
+# Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+# Additional Requirement: 
+# - Don't show question instructions and sequence number in the generated content. 
+# - The word in the sentence can neither be used in the question nor options.
+# - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
-Instructions:
-Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
-Content: Ensure the vocabulary is restricted to N1 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
-Additional Requirement: 
-- Don't show question instructions and sequence number in the generated content. 
-- The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+# Formal exam paper: {example}
+# """
+
+# write_kanji_example = """
+# --- example 1 ---
+# <a>この会社を<u>しぼう</u>した理由を教えてください。</a>
+# <ul>
+#     <li>希望</li>
+#     <li>志望</li>
+#     <li>指望</li>
+#     <li>貴望</li>
+# </ul>
+
+# --- example 2 ---
+# <a>このセーターにはとても<u>やわらかい</u>毛系が使われている。</a>
+# <ul>
+#     <li>伸らかい</li>
+#     <li>軽らかい</li>
+#     <li>暖らかい</li>
+#     <li>柔らかい</li>
+# </ul>
+# """
+
+# words_collocation_teacher_prompt = """
+# Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
+
+# Task: Your job is to write a question for a JLPT N1 level exam paper.
+# You should write a short sentence and give a parenthesis in the sentence.
+# Next, require candidates to fill the most semantically and grammatically appropriate word from the options based on the context of the sentence in the parenthesis 
+# This mainly tests students' fixed collocations of Japanese nouns and compound verbs.
+# The word in the sentence should not be used in the options
+# Options are written either entirely in kanji or entirely in kana.
 
 
-Formal exam paper: {example}
-"""
+# Instructions:
+# Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+# Content: Ensure the vocabulary is restricted to N1 level. 
+# Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+# Additional Requirement: 
+# - Don't show question instructions and sequence number in the generated content. 
+# - The word in the sentence can neither be used in the question nor options.
+# - You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
-words_collocation_example = """
---- example 1 ---
-<a>しょうゆの（　）原料は大豆です。</a>
-<ul class='options'>
-  <li>主</li>
-  <li>要</li>
-  <li>正</li>
-  <li>本</li>
-</ul>
 
---- example 2 ---
-<a>子どもたちの読書（　）が進んでいるらしい。</a>
-<ul class='options'>
-  <li>抜け</li>
-  <li>逃げ</li>
-  <li>別れ</li>
-  <li>離れ</li>
-</ul>
-"""
+# Formal exam paper: {example}
+# """
+
+# words_collocation_example = """
+# --- example 1 ---
+# <a>しょうゆの（　）原料は大豆です。</a>
+# <ul class='options'>
+#   <li>主</li>
+#   <li>要</li>
+#   <li>正</li>
+#   <li>本</li>
+# </ul>
+
+# --- example 2 ---
+# <a>子どもたちの読書（　）が進んでいるらしい。</a>
+# <ul class='options'>
+#   <li>抜け</li>
+#   <li>逃げ</li>
+#   <li>別れ</li>
+#   <li>離れ</li>
+# </ul>
+# """
 
 word_meaning_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
@@ -162,21 +162,21 @@ Formal exam paper: {example}
 
 word_meaning_example = """
 --- example 1 ---
-<a>両親はおいしい料理で客を（　）のが好きだ。</a>
+<a>今回の遺跡の発見は、これまでの説を（　）から覆すものになりそうだ。</a>
 <ul class='options'>
-  <li>もてなす</li>
-  <li>おだてる</li>
-  <li>許す</li>
-  <li>救う</li>
+  <li>拠点</li>
+  <li>根底</li>
+  <li>原来</li>
+  <li>元祖</li>
 </ul>
 
 --- example 2 ---
-<a>西川さんは転校してきたばかりだが、友達もできて、もうすっかりクラスに（　）ている。</a>
+<a>会場は、人々の話し声で（　）と騒がしく、アナウンスがよく聞こえなかった。</a>
 <ul class='options'>
-  <li>当てはまって</li>
-  <li>溶け込んで</li>
-  <li>結びついて</li>
-  <li>触れ合って</li>
+  <li>じわじわ</li>
+  <li>どろどろ</li>
+  <li>がやがや</li>
+  <li>べたべた</li>
 </ul>
 
 """
@@ -195,7 +195,7 @@ Avoid mixing inconsistent formats (e.g., don't include both a Kanji form and a H
 All choices should be written in Japanese only
 
 Instructions:
-Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of the 3 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N1 level. 
 Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: 
@@ -208,20 +208,28 @@ Formal exam paper: {example}
 """
 
 synonym_substitution_example = """
-<a>出張の日程は<u>おおよそ</u>決まりました。</a>
+<a>その話を聞いて、<u>すがすがしい</u>気分になった。</a>
 <ul class='options'>
-  <li>だいたい</li>
-  <li>すべて</li>
-  <li>やっと</li>
-  <li>もう</li>
+  <li>ゆううつな</li>
+  <li>爽やかな</li>
+  <li>楽しい</li>
+  <li>懐かしい</li>
 </ul>
 
-<a>中西さんはいつも<u>威張って</u>いる。</a>
+<a>男の子は父親の話を<u>うなだれて</u>聞いていた。</a>
 <ul class='options'>
-  <li>眠そうにして</li>
-  <li>偉そうにして</li>
-  <li>暇そうにして</li>
-  <li>嫌そうにして</li>
+  <li>ふざけた態度で</li>
+  <li>目を閉じて</li>
+  <li>まじめな表情で</li>
+  <li>下を向いて</li>
+</ul>
+
+<a>リフォームの費用を<u>工面する</u>必要がある。</a>
+<ul class='options'>
+  <li>減らす</li>
+  <li>計算する</li>
+  <li>用意する</li>
+  <li>支払う</li>
 </ul>
 """
 
@@ -246,12 +254,12 @@ Formal exam paper: {example}
 """
 
 word_usage_example = """
-<a>共有</a>
+<a>撤回</a>
 <ul class='options'>
-  <li>市民ボランティアの<u>共有</u>で、留学生のスピーチコンテストが行われた</li>
-  <li>大学と企業が<u>共有</u>で新しい技術の研究を行っている</li>
-  <li>これらの事件には、発生場所に<u>共有</u>の特徴があることが分かった</li>
-  <li>結婚してから購入した物は、夫婦の<u>共有</u>財産になる</li>
+  <li>雪が激しくなってきたので、途中で登山を<u>撤回</u>して山小屋に戻った。</li>
+  <li>旅行の前日に風邪をひいてしまい、ホテルの予約を<u>撤回</u>した。</li>
+  <li>水野氏は今朝の記者会見でした発言を、午後すぐに<u>撤回</u>した。</li>
+  <li>彼は医師になるという進路を<u>撤回</u>し、音楽家を目指すことにしたそうだ。</li>
 </ul>
 """
 
@@ -298,24 +306,22 @@ sentence_grammar_teacher_prompt = """
 
 sentence_grammar_example = """
 --- example 1 ---
-<a>携帯電話を一人一台持つのは当たり前と言われる現代で、私のように携帯電話なしで生活している人は（　　　）いるのだろうか。</a>
+<a>（ホームページ）<br>
+<p>当センターの相談窓口に（　　　）、事前にご連絡をお願いいたします。</p>
 <ul class='options'>
-  <li>どうも</li>
-  <li>どれほど</li>
-  <li>どうしても</li>
-  <li>どんなに</li>
+  <li>伺って以来</li>
+  <li>伺う際は</li>
+  <li>お越しになって以来</li>
+  <li>お越しになる際は</li>
 </ul>
 
 --- example 2 ---
-<a>（カメラ屋で）<br>
-客「カメラを海に落としてしまって、電源が入らないんです。中に水が入ってしまったようなのですが…。」<br>
-店員「海水が入った（　　）、修理は難しいかもしれませんが、一応見てみますね」
-</a>
+<p>6歳の息子は、将来私と同じ消防士になりたいと言っている。実際に（　　　）、そんなことを言ってくれたことがうれしい。</p>
 <ul class='options'>
-  <li>のであれば</li>
-  <li>ことであれば</li>
-  <li>のであって</li>
-  <li>ことであって</li>
+  <li>なるかどうかに限らず</li>
+  <li>なるかどうかはともかく</li>
+  <li>ならざるを得ないとしても</li>
+  <li>ならざるを得ないばかりか</li>
 </ul>
 """
 
@@ -373,21 +379,21 @@ Grammar reference: {grammar}
 
 sentence_sort_example = """
 --- example 1 ---
-<a>会議での西山さんのプレゼントは、普段はなかなか<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>素晴らしかった。</a>
+<a>息子が通っているピアノ教室の発表会で、緊張して弾けなくなってしまった子がいた。大人だって<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>無理はないだろう。</a>
 <ul class='options'>
-  <li>ぐらい</li>
-  <li>課長が</li>
-  <li>褒める</li>
-  <li>褒めることができない</li>
+  <li>そうなるのも</li>
+  <li>緊張するのだから</li>
+  <li>大勢の前で何かをするのは</li>
+  <li>子供が</li>
 </ul>
 
 --- example 2 ---
-<a>さくら駅周辺の再開発事業を行う<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>予定だ。</a>
+<a>人工知能をはじめとする<u>＿＿</u> <u>＿＿</u> <u>&nbsp; &nbsp;★</u><u>&nbsp; &nbsp;</u> <u>＿＿</u>企業は多い。</a>
 <ul class='options'>
-  <li>さくら市は</li>
-  <li>に先立って</li>
-  <li>関係者に対する</li>
-  <li>説明会を開催する</li>
+  <li>メリットは理解しつつも</li>
+  <li>導入に⾄っていない</li>
+  <li>先端技術を取り入れる</li>
+  <li>扱える人材の確保やコスト面での難しさから</li>
 </ul>
 
 """
@@ -398,7 +404,7 @@ structure_selection_teacher_prompt = """
 任务：你的工作是按照以下步骤为JLPT N1级别出一道填入正确内容的语法题。
 
 步骤1：问题的灵感来源"主题"。写一篇日语短文。短文需要符合以下要求：
-- 短文需要有1-3个段落，350-500个词。
+- 短文需要有1-3个段落，450-600个词。
 - 确保短文中的词汇95%限制在N1级别。
 - 整段内容需要保证语义通顺，没有语法错误。短文需要包含“语法参考列表”中的语法点。
 
@@ -416,13 +422,13 @@ structure_selection_teacher_prompt = """
 
 步骤4：提取的5个短语用5/6/7/8/9，这5个标号代替。要求这5个标号需要以“【5】”的形式呈现
 
-步骤5：把步骤3中提取的5个短语分别作为5道题的正确选项的答案，并生成每道题的其他3个选项。生成的选项需要符合以下几个要求：
+步骤5：把步骤3中提取的4个短语分别作为4道题的正确选项的答案，并生成每道题的其他3个选项。生成的选项需要符合以下几个要求：
 - 每道题的3个错误选项要和正确选项有一定相似度，首先保证词性相同。比如正确选项是助词，则其他3个错误选项也必须是助词或副助词
 - 每道题只能有1个正确选项，其他3个选项只能是错误选项
 - 如果是谓语短语，那么其他3个错误选项要和正确选项有一定相似度，可以把动词的形态、时态等做一下调整
 
 步骤6：把步骤5中生成的每道题的选项，在每道题的范围内打乱顺序。要求：
-- 每道题的正确选项不在固定的某个位置。比如第5题的正确答案在第2个位置，第6题的正确答案在第4个位置
+- 每道题的正确选项不在固定的某个位置。比如第3题的正确答案在第2个位置，第2题的正确答案在第3个位置
 
 步骤7：生成题目。
 题目格式：遵循正式试卷中示例的格式，而不是内容。输出必须为html格式，并删除行更改标记
@@ -435,75 +441,70 @@ structure_selection_teacher_prompt = """
 """
 
 structure_selection_example = """
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<title>紅葉の異変（続き）</title>
-<style>
-  body {
-    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
-    margin: 40px;
-    line-height: 1.8;
-  }
-  .container {
-    border: 1px solid #000;
-    padding: 20px;
-  }
-  .title {
-    text-align: center;
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  .author {
-    text-align: right;
-    margin-bottom: 20px;
-  }
-  .question {
-    margin-top: 20px;
-  }
-</style>
-</head>
-<body>
-  <p>以下は、留学生がスピーチのために書いた文章である</p>
+<h3>以下は医師が脳と心の健康について書いた文章である。</h3>
 
-  <div class="container">
-    <div class="title">紅葉の異変</div>
-    <div class="author">サリム ソフィア</div>
+<h2>人には会いに行こう</h2>
 
-    <p>
-      私は日本の秋の景色が好きです。秋になって紅葉が始まり、緑だった葉が黄色やオレンジ、赤に変わると、とてもきれいです。秋の紅葉は、日本の四季の変化を感じさせてくれるものです。
-    </p>
+<p>
+人に会いに行こうというと、当たり前だと思うでしょう。わざわざ人には会いに行こうとしたのは、電話や手紙（もしくはメール）ですませるのではなく、会うことに意味があるからです。
+</p>
 
-    <p>
-      （48）ですが、先日テレビで、紅葉がピークを迎える時期が年々遅くなっているというニュースを見ました。中には、1月になってからピークを迎えたところもあるそうで、驚きました。温暖化によって平均気温が上昇していることが大きな原因だそうです。私は、夏が過ぎて気温が下がってくれば、必ず紅葉が始まると思っていました。（49）そうではありませんでした。紅葉には、条件となる気温の変化があります。
-    </p>
+<p>
+会うのは、コミュニケーションとしてきわめて重要です。つまり、コミュニケーションは自分の持っている情報を伝えるだけでなく、相手との共感がありますが、自分自身の規制、相手の規制にもつながる場合もあります。会って <strong>（41）</strong>、相手も変わり、自分も変わる可能性があるということです。
+</p>
 
-    <p>
-      葉の変色が始まるのは、1日の最低気温が大体8度以下になってからです。秋になっても、最低気温が一定の気温まで下がらなければ、紅葉は（50）その後、さらに寒くなり、5～6度まで下がると、紅葉は一気に進みます。また、5度以下の日が続くと、最も美しい新葉が見られるといわれています。
-    </p>
+<p>
+コミュニケーションではお互いにかかわりあう、つまり共感が大変重要です。相手の身になって何かを感じる、それは相手の感情かもしれないし、痛みかもしれません。こうした共感こそ、人間のコミュニケーションです。
+</p>
 
-    <p>
-      紅葉に起きている異変を知り、このまま温暖化が進むと、日本の秋の景色が変わってしまう可能性もあるのではないかと思いました。もしかしたら、紅葉自体が見られなくなる日も来るかもしれません。紅葉を通して、温暖化が身近な問題であることをより強く（51）
-    </p>
-  </div>
+<p>
+会わなくても、電話や手紙（メール）でも、こうした共感は生まれますが、相手の身になることができるかというと難しいでしょう。やはり実際に <strong>（42）</strong> 本当の共感は生まれると思います。
+</p>
 
-  <div class="follow-up">
-    <p><strong>48</strong></p>
-    <p>1. そこの紅葉　　2. そんな紅葉　　3. そちら　　4. 紅葉</p>
+<p>
+脳にとっても、刺激の度合いが違います。初恋の人とデートをしたときのことを <strong>（43）</strong>。脳がどきどきして、たいへん緊張したでしょう。初恋の人でなくても、好きな人に会えば脳は活性化し、ときめき状態を維持しますし、反対に嫌いな人に会うとそれなりの負の感情が生まれてきます。感情の流れが生まれ、共感も発生します。当然、脳も喜びにもふれるでしょうし、反対に嫌悪の情が流れることもあるでしょう。それだけ活性化される <strong>（44）</strong>。
+</p>
 
-    <p><strong>49</strong></p>
-    <p>1. 結局　　2. 確かに　　3. しかし　　4. つまり</p>
+<p>
+やはり人には会いに行きましょう。ときめきを求めて。
+</p>
 
-    <p><strong>50</strong></p>
-    <p>1. 始まらないのです　　2. 始まらないためです　　3. 始まらないのでしょうか　　4. 始まらないためでしょうか</p>
+<hr>
 
-    <p><strong>51</strong></p>
-    <p>1. 感じているからだと思います　　2. 感じられるところだと思います　　3. 感じさせることができました　　4. 感じるようになりました</p>
-  </div>
-</body>
-</html>
+<div class="follow-up">
+
+<h4>41</h4>
+<ul class='options'>
+  <li>話したとしても</li>
+  <li>話そうものなら</li>
+  <li>話すことで</li>
+  <li>話さないかぎり</li>
+</ul>
+
+<h4>42</h4>
+<ul class='options'>
+  <li>会うよりも</li>
+  <li>会ってこそ</li>
+  <li>会うまでに</li>
+  <li>あっただけでも</li>
+</ul>
+
+<h4>43</h4>
+<ul class='options'>
+  <li>思い出したくてたまらないのです</li>
+  <li>思い出すのではないでしょうか</li>
+  <li>思い出すしかありません</li>
+  <li>思い出してください</li>
+</ul>
+
+<h4>44</h4>
+<ul class='options'>
+  <li>というわけです</li>
+  <li>という点です</li>
+  <li>とします</li>
+  <li>としています</li>
+</ul>
+</div>
 """
 
 short_reading_narrative_teacher_prompt = """
