@@ -7,7 +7,7 @@ import time
 import uuid
 from typing import *
 from tqdm import tqdm
-import requests
+
 
 from graphs.common.GraphBuilder import GraphBuilder
 from graphs.common.JLPTTaskFactory import JLPTTaskFactory
@@ -24,10 +24,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class ExamGenerator:
-    def __init__(self, level: str, exam_type: ExamType, db_collection: str, task_id: Optional[str] = None):
+    def __init__(self, level: str, exam_type: ExamType, task_id: Optional[str] = None):
         self.level = level
         self.exam_type = exam_type
-        self.db_collection = db_collection
         self.task_id = task_id if task_id else str(uuid.uuid1())
         self.vocab, self.topics, self.grammar = self._load_resources()
 
@@ -117,21 +116,8 @@ class ExamGenerator:
     # def _build_output(self, outline: Any) -> Dict[str, Any]:
     #     """Build the final exam paper data."""
     #     return self._write_paper(outline, self.topics)
-
-    def _insert_to_db(self, output_data: Dict[str, Any]) -> str:
-        """Insert exam data into Cosmos MongoDB."""
-        db_client = CosmosMongoDB(
-            os.environ['AZURE_MONGO_CONNECTION'],
-            os.environ['AZURE_MONGO_DBNAME'],
-            self.db_collection
-        )
-        inserted_id = db_client.insert_one(output_data)
-        logger.info("Inserted document ID: %s", inserted_id)
-        return inserted_id
-
     # ---------------- Main Function ---------------- #
-
-    def _generate_and_store_paper(
+    def _generate_paper(
         self, outline: Outline
     ) -> Optional[Dict[str, Any]]:
         """
@@ -142,10 +128,6 @@ class ExamGenerator:
 
         try:
             output_data = self._write_paper(outline)
-
-            # insert it into mongoDB
-            if self.task_id:
-                self._insert_to_db(output_data=output_data)
 
             # render paper to output folder for debug
             filename = f"{project_path}/output/JLPT_{self.level}_{self.task_id}.html"
@@ -160,57 +142,6 @@ class ExamGenerator:
             # Return a consistent tuple on error
             return None
 
-    def callback_system_api(self):
-        """
-        Executes a GET request equivalent to:
-          curl -X GET --location "https://jlpt.kongxuan.com/api/mongo/loadData/n3/full_exam"
-          -H "clientid: ..."
-          -H "x-auth: Bearer <token>"
-        Retries 3 times automatically if any error occurs.
-        Always continues regardless of success or failure.
-        """
-        url = f"https://jlpt.kongxuan.com/api/mongo/loadData/{self.level}/{self.exam_type}"
-        headers = {
-            "clientid": os.environ["EXAM_SYSTEM_CLIENT_ID"],
-            # If 401 persists, try changing "x-auth" to "Authorization"
-            "x-auth": os.environ["EXAM_SYSTEM_TOKEN"],
-        }
 
-        RETRY_COUNT = 3
-        RETRY_DELAY = 2  # seconds
-
-        last_exception = None
-        result = None
-
-        for attempt in range(1, RETRY_COUNT + 1):
-            try:
-                logger.info(f"Attempt {attempt} of {RETRY_COUNT}...")
-                response = requests.get(
-                    url,
-                    headers=headers,
-                    params={"id": self.task_id},  # fixed param key
-                    timeout=10,
-                )
-                response.raise_for_status()
-
-                logger.info("Request successful")
-                result = response.json()
-                break  # 成功后就跳出循环
-
-            except requests.RequestException as e:
-                logger.info(f"Attempt {attempt} failed: {e}")
-                last_exception = e
-                if attempt < RETRY_COUNT:
-                    logger.info(f"Retrying in {RETRY_DELAY} seconds...\n")
-                    time.sleep(RETRY_DELAY)
-                else:
-                    logger.error("All retry attempts failed.")
-
-        # ✅ 无论成功失败都继续，不中断流程
-        if result is None:
-            logger.warning("Returning empty result due to failure.")
-            result = {"success": False, "error": str(last_exception) if last_exception else "unknown error"}
-
-        return result
 
 

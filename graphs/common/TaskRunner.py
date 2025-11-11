@@ -1,9 +1,14 @@
 from graphs.common.ExamGenerator import ExamGenerator
 from typing import *
+import os
 import importlib
 from libs.Logger import logger
 from graphs.common.Schema import ExamType
 from dotenv import load_dotenv
+from libs.CosmosMongoDB import CosmosMongoDB
+import requests
+import time
+
 load_dotenv()
 class TaskRunner:
     """
@@ -61,43 +66,110 @@ class TaskRunner:
             )
         return prompt
 
-    def run(self) -> Tuple[Optional[Dict], Optional[Dict]]:
+    def callback_system_api(self):
+        """
+        Executes a GET request equivalent to:
+          curl -X GET --location "https://jlpt.kongxuan.com/api/mongo/loadData/n3/full_exam"
+          -H "clientid: ..."
+          -H "x-auth: Bearer <token>"
+        Retries 3 times automatically if any error occurs.
+        Always continues regardless of success or failure.
+        """
+        url = f"https://jlpt.kongxuan.com/api/mongo/loadData/{self.level}/{self.exam_type}"
+        headers = {
+            "clientid": os.environ["EXAM_SYSTEM_CLIENT_ID"],
+            # If 401 persists, try changing "x-auth" to "Authorization"
+            "x-auth": os.environ["EXAM_SYSTEM_TOKEN"],
+        }
+
+        RETRY_COUNT = 3
+        RETRY_DELAY = 2  # seconds
+
+        last_exception = None
+        result = None
+
+        for attempt in range(1, RETRY_COUNT + 1):
+            try:
+                logger.info(f"Attempt {attempt} of {RETRY_COUNT}...")
+                response = requests.get(
+                    url,
+                    headers=headers,
+                    params={"id": self.task_id},  # fixed param key
+                    timeout=10,
+                )
+                response.raise_for_status()
+
+                logger.info("Request successful")
+                result = response.json()
+                break  # 成功后就跳出循环
+
+            except requests.RequestException as e:
+                logger.info(f"Attempt {attempt} failed: {e}")
+                last_exception = e
+                if attempt < RETRY_COUNT:
+                    logger.info(f"Retrying in {RETRY_DELAY} seconds...\n")
+                    time.sleep(RETRY_DELAY)
+                else:
+                    logger.error("All retry attempts failed.")
+
+        # ✅ 无论成功失败都继续，不中断流程
+        if result is None:
+            logger.warning("Returning empty result due to failure.")
+            result = {"success": False, "error": str(last_exception) if last_exception else "unknown error"}
+
+        return result
+
+    def run(self):
         """
         Run exam generation pipeline.
+
         Returns:
-            - (inserted_id, outline, exam_paper) if success.
-            - (None, outline, None) if paper storage failed but outline was generated.
+            tuple: (outline, exam_paper) if success,
+                   (outline, None) if paper storage failed.
+        Raises:
+            ValueError: If outline generation fails.
         """
         prompt = self._get_prompt()
+        exam_generator = ExamGenerator(
+            task_id=self.task_id,
+            level=self.level,
+            exam_type=self.exam_type,
+        )
 
+        # --- Step 1: Generate outline ---
         try:
-            exam_generator = ExamGenerator(
-                task_id=self.task_id,
-                level=self.level,
-                exam_type=self.exam_type,
-                db_collection=f"{self.level_lower}_{self.exam_type_lower}",
-            )
             outline = exam_generator._generate_outline(instruction=prompt)
         except Exception as e:
             logger.exception(
                 "Failed to generate exam outline for level '%s' and exam_type '%s'",
-                self.level,
-                self.exam_type,
+                self.level, self.exam_type
             )
             raise ValueError("Failed to generate exam outline. Check logs for details.") from e
+
+        # --- Step 2: Generate and store exam paper ---
+        exam_paper = None
         try:
-            exam_paper = exam_generator._generate_and_store_paper(outline=outline)
+            exam_paper = exam_generator._generate_paper(outline=outline)
         except Exception as e:
-            logger.warning("Failed to store exam paper. Returning outline only. Error: %s", e)
+            logger.warning("Failed to generate exam paper. Returning outline only. Error: %s", e)
 
-        # call back system
-        if self.task_id:
-            logger.info("Callback message is sent")
-            exam_generator.callback_system_api()
-
-        if exam_paper:
-            logger.info("Exam outline stored successfully! Document ID: %s", self.task_id)
-            return outline, exam_paper
-        else:
+        if not exam_paper:
             logger.warning("Exam paper storage failed, but outline was generated successfully.")
             return outline, None
+
+        try:
+            db_client = CosmosMongoDB(
+                os.environ['AZURE_MONGO_CONNECTION'],
+                os.environ['AZURE_MONGO_DBNAME'],
+                f"{self.level_lower}_{self.exam_type_lower}",
+            )
+            inserted_id = db_client.insert_one(exam_paper)
+            if inserted_id:
+                self.callback_system_api()
+                logger.info("Inserted document ID: %s", inserted_id)
+            logger.info("Exam outline stored successfully!")
+        except Exception as e:
+            logger.exception("Failed to insert exam paper into MongoDB: %s", e)
+
+        return outline, exam_paper
+
