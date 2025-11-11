@@ -161,7 +161,7 @@ def run_exam_endpoint():
     task_ids = []
     for _ in range(count):
         task_uuid = str(uuid.uuid1())
-        run_exam_task.delay(level, exam_type, task_uuid)
+        run_exam_task.apply_async(args=(level, exam_type, task_uuid))
         task_ids.append(task_uuid)
 
     return jsonify({

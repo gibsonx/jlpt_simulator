@@ -32,7 +32,7 @@ celery.conf.task_annotations = {
     '*': {'max_retries': 3, 'autoretry_for': (Exception,), 'retry_backoff': True}
 }
 
-@celery.task(bind=True)
+@celery.task
 def run_exam_task(level: str, exam_type:ExamType, task_uuid: str):
     """
     Celery task wrapping the run_exam function.
