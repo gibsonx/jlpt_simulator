@@ -33,7 +33,7 @@ celery.conf.task_annotations = {
 }
 
 @celery.task(bind=True)
-def run_exam_task(self, level: str, exam_type:ExamType, task_uuid: str):
+def run_exam_task(level: str, exam_type:ExamType, task_uuid: str):
     """
     Celery task wrapping the run_exam function.
     """
