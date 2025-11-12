@@ -26,16 +26,8 @@ celery = Celery(
     backend=backend_url
 )
 
-# Optional: auto-retry configuration for tasks
-celery.conf.task_default_retry_delay = 5  # seconds between retries
-celery.conf.task_annotations = {
-    '*': {'max_retries': 3, 'autoretry_for': (Exception,), 'retry_backoff': True}
-}
-
-@celery.task
-def run_exam_task(level: str, exam_type:ExamType, task_uuid: str):
-    """
-    Celery task wrapping the run_exam function.
-    """
+@celery.task(bind=True)
+def run_exam_task(self, level: str, exam_type: ExamType):
+    task_uuid = self.request.id
     runner = TaskRunner(level=level, exam_type=exam_type, task_id=task_uuid)
     runner.run()
