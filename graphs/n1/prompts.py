@@ -2308,6 +2308,9 @@ midsize_reading_reflection_prompt = """
 comprehensive_reading_reflection_prompt = """
 """
 
+long_reading_understanding_reflection_prompt = """
+"""
+
 long_reading_reflection_prompt = """
 """
 

@@ -121,13 +121,16 @@ class TaskRunner:
 
     def run(self):
         """
-        Run exam generation pipeline.
+        Run the exam generation pipeline.
 
         Returns:
-            tuple: (outline, exam_paper) if success,
-                   (outline, None) if paper storage failed.
+            tuple:
+                (outline, exam_paper) if both are generated successfully,
+                (outline, None) if paper generation or storage fails,
+                (None, None) if outline generation fails completely.
+
         Raises:
-            ValueError: If outline generation fails.
+            ValueError: If outline generation fails irrecoverably.
         """
         prompt = self._get_prompt()
         exam_generator = ExamGenerator(
@@ -136,40 +139,45 @@ class TaskRunner:
             exam_type=self.exam_type,
         )
 
-        # --- Step 1: Generate outline ---
-        try:
-            outline = exam_generator._generate_outline(instruction=prompt)
-        except Exception as e:
-            logger.exception(
-                "Failed to generate exam outline for level '%s' and exam_type '%s'",
-                self.level, self.exam_type
-            )
-            raise ValueError("Failed to generate exam outline. Check logs for details.") from e
+        outline, exam_paper = None, None
 
-        # --- Step 2: Generate and store exam paper ---
-        exam_paper = None
         try:
-            exam_paper = exam_generator._generate_paper(outline=outline)
+            result = exam_generator._generate_paper(instruction=prompt)
+            if result:
+                outline, exam_paper = result
+                logger.info(" ###OUTLINE### \n\n %s", outline.as_str)
+            else:
+                logger.error("Exam paper generation returned None.")
         except Exception as e:
-            logger.warning("Failed to generate exam paper. Returning outline only. Error: %s", e)
+            logger.exception("Failed to generate exam paper: %s", e)
+            # Outline may not exist if the generation crashed early
+            if not outline:
+                return None, None
 
-        if not exam_paper:
-            logger.warning("Exam paper storage failed, but outline was generated successfully.")
+        if outline and not exam_paper:
+            logger.warning("Exam paper not generated; returning outline only.")
             return outline, None
 
-        try:
-            db_client = CosmosMongoDB(
-                os.environ['AZURE_MONGO_CONNECTION'],
-                os.environ['AZURE_MONGO_DBNAME'],
-                f"{self.level_lower}_{self.exam_type_lower}",
-            )
-            inserted_id = db_client.insert_one(exam_paper)
-            if inserted_id:
-                self.callback_system_api()
-                logger.info("Inserted document ID: %s", inserted_id)
-            logger.info("Exam outline stored successfully!")
-        except Exception as e:
-            logger.exception("Failed to insert exam paper into MongoDB: %s", e)
+        if exam_paper:
+            try:
+                conn_str = os.getenv("AZURE_MONGO_CONNECTION")
+                db_name = os.getenv("AZURE_MONGO_DBNAME")
+                if not conn_str or not db_name:
+                    raise EnvironmentError("Missing MongoDB connection settings.")
+
+                collection_name = f"{self.level_lower}_{self.exam_type_lower}"
+                db_client = CosmosMongoDB(conn_str, db_name, collection_name)
+                inserted_id = db_client.insert_one(exam_paper)
+
+                if inserted_id:
+                    logger.info("Inserted document ID: %s", inserted_id)
+                    self.callback_system_api()
+                    logger.info("Callback system API triggered successfully.")
+                else:
+                    logger.warning("MongoDB insertion returned no document ID.")
+            except Exception as e:
+                logger.exception("Failed to insert exam paper into MongoDB: %s", e)
+                return outline, None
 
         return outline, exam_paper
 
