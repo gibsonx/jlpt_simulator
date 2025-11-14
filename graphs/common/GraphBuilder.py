@@ -62,7 +62,7 @@ class GraphBuilder:
         return online_search
 
     # Nodes
-    def generation_node_builder(self, llm,  prompt_text, example, grammar=None):
+    def generation_node_builder(self, llm,  prompt_text, example, gan_history, grammar=None):
         def question_generator(state):
             """First LLM call to generate initial question"""
             logger.info("---Generator----")
@@ -81,9 +81,7 @@ class GraphBuilder:
             )
 
             params = {
-                # "search_result": search_result,
-                # "topic": state['topic'],
-                # "topic": topic,
+                "gen_history": gan_history,
                 "example": example,
                 "messages": state["messages"],
             }
@@ -227,19 +225,21 @@ class GraphBuilder:
 
         return builder.compile()
 
-    def build_agent(self, prompt_text, example, reflection_prompt, OutType, grammar=None):
+    def build_agent(self, prompt_text, example, reflection_prompt, OutType, gan_history, grammar=None):
         self.nodes["online_search"] = self.online_search_node_builder()
         if grammar:
             self.nodes["generator"] = self.generation_node_builder(
                 llm=self.llm,
                 prompt_text=prompt_text,
                 example=example,
-                grammar=grammar
+                gan_history=gan_history,
+                grammar=grammar,
             )
         else:
             self.nodes["generator"] = self.generation_node_builder(
                 llm=self.llm,
                 prompt_text=prompt_text,
+                gan_history=gan_history,
                 example=example
             )
 

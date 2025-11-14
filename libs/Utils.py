@@ -7,6 +7,7 @@ from libs.Logger import logger
 import os
 from pydub import AudioSegment
 from dotenv import load_dotenv
+import json
 load_dotenv()
 
 # Voice mappings
@@ -29,6 +30,7 @@ def collect_vocabulary(file_path):
     # Extract the second column (values) and convert to a single-line string
     vocab_string = ','.join(words.iloc[:, 1].astype(str).tolist())
     return vocab_string
+
 
 
 def _load_vocab_and_resources(level: str):
@@ -559,3 +561,34 @@ def _generate_comic_strip(prompt: str, retry: int=10):
 
     # Raise exception if not ready after retries
     raise RuntimeError(f"Failed to generate image after 5 attempts: {image_url}")
+
+def _extract_questions_qa_lines(data):
+    output_lines = []
+
+    for section in data.get("sections", []):
+        for subsection in section.get("subsections", []):
+            for topic in subsection.get("question_topics", []):
+                result = topic.get("result", {})
+
+                if "questions" in result:
+                    for q in result["questions"]:
+                        question = q.get("html_question", "")
+                        choices = "|".join(q.get("choices", []))
+                        output_lines.append(f"q:{question}")
+                        output_lines.append(f"a:{choices}")
+                elif "follow_up" in result:
+                    question = result["follow_up"]
+                    choices = "|".join(result.get("choices", []))
+                    output_lines.append(f"q:{question}")
+                    output_lines.append(f"a:{choices}")
+                elif "html_question" in result:
+                    question = result["html_question"]
+                    choices = "|".join(result.get("choices", []))
+                    output_lines.append(f"q:{question}")
+                    output_lines.append(f"a:{choices}")
+
+    # Remove the last "--" if present
+    if output_lines:
+        output_lines.pop()
+
+    return "\n".join(output_lines)

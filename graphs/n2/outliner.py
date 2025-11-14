@@ -168,8 +168,8 @@ vocab_prompt = ChatPromptTemplate.from_messages(
 
 grammar_instruction = """
 Section 2: Grammar
-- 問題1 つぎの文の（　　　）に入れるのに最もよいものを、１・２・３・４から一つえらびなさい。(sentence_grammar) 1 question in total: 1 adverb
-- 問題2 つぎの文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。(sentence_sort) 2 question in total.
+- 問題1 つぎの文の（　　　）に入れるのに最もよいものを、１・２・３・４から一つえらびなさい。(sentence_grammar) 12 questions in total: the first 1 is honorific speech, next 1 adverb, 1 auxiliary word, and other 9 different sentence structures
+- 問題2 つぎの文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。(sentence_sort) 5 questions in total.
 - 問題3 つぎの文章を読んで、文章全体の内容を考えて、文中の 48 から 51 の中に入る最もよいものを、1・2・3・4から一つえらびなさい (sentence_structure) 1 question
 """
 
@@ -235,12 +235,12 @@ reading_prompt = ChatPromptTemplate.from_messages(
 
 listening_instruction = """
 Section 4: Listening Comprehension
-- 問題1 では、まず質問を聞いてください。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (topic_understanding): 1 question
-- 問題2 では、まず質問を聞いてください。そのあと、問題用紙を見てください。読む時間があります。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (keypoint_understanding): 1 question
-- 問題3 では、問題用紙（もんだいようし）に何（なに）も いんさつされていません。この問題（もんだい）は、ぜんたいとして どんな ないようかを聞（き）く 問題（もんだい）です。話（はなし）の前（まえ）に 質問（しつもん）は ありません。まず 話（はなし）を 聞（き）いてください。それから、質問（しつもん）と せんたくし を聞（き）いて、1から4の中（なか）から、最（もっと）も よい ものを 一（ひと）つ えらんでください。(summary_understanding) 1 question
-- 問題4 では、問題用紙に何もいんさつしていません。まず文を聞いてください。それから、そのへんしを聞いて、1 から 3 の中から、最もよいものを一つえらんでください。 (immediate_ack): 1 question
+- 問題1 では、まず質問を聞いてください。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (topic_understanding_txt): 5 questions
+- 問題2 では、まず質問を聞いてください。そのあと、問題用紙を見てください。読む時間があります。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (keypoint_understanding): 4 questions
+- 問題3 では、問題用紙（もんだいようし）に何（なに）も いんさつされていません。この問題（もんだい）は、ぜんたいとして どんな ないようかを聞（き）く 問題（もんだい）です。話（はなし）の前（まえ）に 質問（しつもん）は ありません。まず 話（はなし）を 聞（き）いてください。それから、質問（しつもん）と せんたくし を聞（き）いて、1から4の中（なか）から、最（もっと）も よい ものを 一（ひと）つ えらんでください。(summary_understanding) 5 questions
+- 問題4 では、問題用紙に何もいんさつしていません。まず文を聞いてください。それから、そのへんしを聞いて、1 から 3 の中から、最もよいものを一つえらんでください。 (immediate_ack): 11 questions
 - 問題5-1 では、長めの話を聞きます。この問題には練習はありません。問題用紙にメモをとってもかまいません。 (comprehensive_expression_listen_answer) 1 question
-- 問題5-1 では、長めの話を聞きます。この問題には練習はありません。問題用紙にメモをとってもかまいません。 (comprehensive_expression_show_answer) 1 question
+- 問題5-1 では、長めの話を聞きます。この問題には練習はありません。問題用紙にメモをとってもかまいません。 (comprehensive_expression_show_answer) 2 questions
 """
 
 listening_prompt = ChatPromptTemplate.from_messages(

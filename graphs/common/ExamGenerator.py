@@ -15,7 +15,7 @@ from libs.CosmosMongoDB import CosmosMongoDB
 from libs.LLMs import *
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-from libs.Utils import _load_vocab_and_resources
+from libs.Utils import _load_vocab_and_resources, _extract_questions_qa_lines
 from graphs.common.Schema import Outline, ExamType
 from libs.Logger import logger
 from libs.Utils import render_to_html
@@ -62,7 +62,7 @@ class ExamGenerator:
                             try:
                                 sig = inspect.signature(func)
                                 params = sig.parameters
-                                args = [question['topic']]
+                                args = [question['topic'], _extract_questions_qa_lines(output_data)]
                                 if 'grammar' in question and question['grammar']:
                                     args.append(question['grammar'])
                                 if 'seq' in params:
@@ -78,6 +78,7 @@ class ExamGenerator:
                                     question['topic'] = random.choice(self.topics)
                     else:
                         question['result'] = f"Method {function_name} not found"
+
 
                 output_subsection = {
                     'subsection_title': subsection['subsection_title'],
@@ -117,15 +118,21 @@ class ExamGenerator:
     #     """Build the final exam paper data."""
     #     return self._write_paper(outline, self.topics)
     # ---------------- Main Function ---------------- #
-    def _generate_paper(
-        self, outline: Outline
-    ) -> Optional[Dict[str, Any]]:
+    def _generate_paper(self, instruction: Any):
         """
         Generate an exam outline, build paper, and store it in DB.
         Returns: (inserted_id, outline_str, output_data)
         """
+        outline = None
         project_path = os.environ['PROJECT_PATH']
-
+        # --- Step 1: Generate outline ---
+        try:
+            outline = self._generate_outline(instruction)
+        except Exception as e:
+            logger.error(
+                "Failed to generate exam outline for level '%s' and exam_type '%s', %s",
+                self.level, self.exam_type, e
+            )
         try:
             output_data = self._write_paper(outline)
 
@@ -136,11 +143,11 @@ class ExamGenerator:
             with open(filename, "w", encoding="utf-8") as file:
                 file.write(html_output)
 
-            return output_data
+            return outline, output_data
         except Exception as e:
             logger.error("Failed to generate and store paper for exam_uid=%s: %s", self.task_id, e, exc_info=True)
             # Return a consistent tuple on error
-            return None
+            return None, None
 
 
 
