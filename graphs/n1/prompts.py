@@ -421,6 +421,7 @@ structure_selection_teacher_prompt = """
 - 至少有2个短语是谓语短语、至少1个短语是连接词或用于连接的短语、至少1个助词或副助词的短语
 
 步骤4：提取的5个短语用5/6/7/8/9，这5个标号代替。要求这5个标号需要以“【5】”的形式呈现
+- 提取的5个短语，两两之间不能一样
 
 步骤5：把步骤3中提取的4个短语分别作为4道题的正确选项的答案，并生成每道题的其他3个选项。生成的选项需要符合以下几个要求：
 - 每道题的3个错误选项要和正确选项有一定相似度，首先保证词性相同。比如正确选项是助词，则其他3个错误选项也必须是助词或副助词
@@ -535,7 +536,7 @@ short_reading_narrative_example = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>インタビューに関する文章</title>
+    <title>筆者の考えに関する文章</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -548,17 +549,7 @@ short_reading_narrative_example = """
         }
         p {
             margin-bottom: 1.5em;
-        }
-        .note {
-            font-size: 0.9em;
-            color: #555;
-            margin-left: 1em;
-        }
-        ol {
-            margin-top: 2em;
-        }
-        li {
-            margin-bottom: 0.8em;
+            text-align: justify;
         }
         .page-number {
             text-align: right;
@@ -566,26 +557,31 @@ short_reading_narrative_example = """
             margin-top: 2em;
             color: #666;
         }
+        ol {
+            margin-top: 2em;
+        }
+        li {
+            margin-bottom: 0.8em;
+        }
     </style>
 </head>
 <body>
 
-<p>インタビューでは準備も重要だが、実際のインタビューの場面になったら、いったんその準備で得たものをすべて捨てなくてはならない。そして、相手の話を真剣に深く聞き、その人が何を言わんとしているのか、丸ごと捉えて、そこで出てきた素晴らしい言葉、豊かな言葉、言葉に込められた大事なメッセージをしっかりとつかむことこそが必要なのだ。</p>
+<p>「練習ではできていなかったのに、試合では技を成功させられた」などという場合に「すごいね」とほめられると、「私は本番に強いから、練習はそこそこにして、本番で勝負をかければいい」と思ってしまい、がちです。</p>
 
-<p>そこから良い対話が生まれてくる。良いインタビューは、次の質問を忘れて相手の話を聞けたときに初めて行えるものなのだ。</p>
+<p>本番に強いのは悪いことではありませんが、練習でしっかりできていないことを「本番になればきっとできるだろう」と考えるのは、甘いと言わざるをえません。そのようなスタンスでは、トップクラスの結果を出すことはとうていできないでしょう。</p>
 
-<p class="note">（注1）言わんとしている：言おうとしている</p>
-<p class="note">（注2）丸ごと：そのまま全部</p>
+<p>真の実力をつけるには、やはり練習でも常に全力投球する姿勢が必要です。</p>
 
-<div class="page-number">52</div>
+<div class="page-number">45</div>
 
-<p>インタビューについて、筆者の考えに合うのはどれか。</p>
+<p>筆者の考えに合うのはどれか。</p>
 
 <ol>
-    <li>準備したものから離れて、相手の話をよく聞くことが重要だ。</li>
-    <li>準備した質問に沿って、相手から大事なメッセージを引き出すことが重要だ。</li>
-    <li>相手の話をしっかり聞くことが大切なので、準備をする必要はない。</li>
-    <li>相手から素晴らしい言葉を引き出すには、準備しすぎないほうがいい。</li>
+    <li>本当に実力があれば、練習でできなかったことでも試合でできる。</li>
+    <li>全力で練習したから試合でも成功するというのは、甘い考えだ。</li>
+    <li>練習でしっかりできていても、試合で実力を発揮するのは難しい。</li>
+    <li>練習にも全力で取り組まなければ、試合でいい結果は出せない。</li>
 </ol>
 
 </body>
@@ -623,7 +619,7 @@ short_reading_mail_example = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>メールに関する文章</title>
+    <title>イヤホンに関するメール</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -639,6 +635,14 @@ short_reading_mail_example = """
             border-top: 1px solid #ccc;
             margin: 2em 0;
         }
+        .email-header {
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 1.5em;
+        }
+        .email-header p {
+            margin: 0.3em 0;
+        }
         h3 {
             font-size: 1.2em;
             margin-top: 1.5em;
@@ -646,6 +650,9 @@ short_reading_mail_example = """
         }
         p {
             margin-bottom: 1.2em;
+        }
+        .signature {
+            margin-top: 2em;
         }
         .page-number {
             text-align: right;
@@ -659,68 +666,76 @@ short_reading_mail_example = """
         li {
             margin-bottom: 0.8em;
         }
-        .file-note {
-            font-style: italic;
-            color: #555;
-            margin-top: 2em;
-        }
     </style>
 </head>
 <body>
 
-<p>以下は、ある会社で全社員に送られたメールである。</p>
+<p>以下は、ある電気店から届いたメールである。</p>
 
 <hr>
 
-<h3>社員各位</h3>
+<div class="email-header">
+    <p>宛て先：syo_yasuhara@kfy.co.jp</p>
+    <p>件名：イヤホン「AS-10」の件</p>
+    <p>日時：9月13日 13：30</p>
+</div>
 
-<p>わが社の人気商品「緑山牧場チーズ詰め合わせ」を、定価の30%引き（割引後3,500円）で社員向けに特別販売します。</p>
+<h3>安原 正一様</h3>
 
-<p>購入希望者は、添付の申込書にお名前と購入数を記入のうえ、3月9日までに営業課までメールでお申し込みください。通常、社内販売の支払いと商品のお渡しは経理課で行っていますが、今回は営業課で行います。代金と引き換えに、その場で商品をお渡しします。お渡し期間は3月16日から19日の間です。</p>
+<p>LM電気大木店をご利用いただき、ありがとうございます。</p>
 
-<p>以上、よろしくお願いします。</p>
+<p>ご予約いただいたイヤホン「AS-10」ですが、メーカーの生産が遅れているため、発売日（9月20日）当日に、すべてのお客様にお渡しすることが困難な状況です。</p>
 
-<p class="file-note">添付ファイル：3月1日「緑山牧場チーズ詰め合わせ」申込書</p>
+<p>本日、当店で9月20日にお渡しできる数が確定し、安原様のご注文分は確保できないことが分かりました。大変申し訳ございません。</p>
 
-<h3>営業課 安井</h3>
+<p>安原様へのお渡しは10月以降になってしまうのですが、いかがいたしましょうか。ご注文のキャンセルも承っております。</p>
+
+<p>お忙しいところ恐縮ですが、ご返信お待ちしております。</p>
+
+<div class="signature">
+    <p>LM電気 大木店</p>
+    <p>担当：上田 映子</p>
+</div>
 
 <hr>
 
+<div class="page-number">46</div>
 
+<p>イヤホン「AS-10」について、このメールで確認していることは何か。</p>
 
-<div class="follow-up">「緑山牧場チーズ詰め合わせ」を社内販売で購入したい社員は、期日までに営業課にメールで申し込んだあと、どうすればいいか。</div>
-
-<ul class='options'>
-    <li>経理課で支払いをして受け取る。</li>
-    <li>経理課で支払いをして、営業課で受け取る。</li>
-    <li>営業課で支払いをして受け取る。</li>
-    <li>営業課で支払いをして、経理課で受け取る。</li>
-</ul>
+<ol>
+    <li>今から予約しても発売日には渡せないが、予約するかどうか。</li>
+    <li>発売日が10月以降になってしまうが、予約するかどうか。</li>
+    <li>発売日に渡せるかは分からないが、予約したままでいいかどうか。</li>
+    <li>発売日ではなく10月以降に渡すことになるが、予約したままでいいかどうか。</li>
+</ol>
 
 </body>
 </html>
 """
 
 short_reading_notification_teacher_prompt = """
-Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
+角色：你是一名日语老师，正在为JLPT N1水平撰写试卷。 
 
-Task: Your job is to write a reading question for JLPT N1 level exam. 
-First you need to write a notification around 250 words for student to read, including several keigo expressions
-Then, you give a question by the related content in the article. Most importantly, the correct answer must not be stated directly in the article. 
-Instead, it should require the test-taker to infer, summarize, or understand the context or intent of the passage.
-The passage should reflect a real-life topic (e.g., daily life, work, study, travel, opinions).
+任务：你的工作是为JLPT N1水平考试写一道阅读题。
+首先，你需要写一段大约300字左右的文章，主要以散文形式呈现。内容可以是关于：
+人生的哲理、做人的三观、对世事的探讨等
 
-Instructions:
-Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
-Content: Ensure the vocabulary is restricted to N1 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
-Additional Requirement: 
-- Don't show question instructions and sequence number in the generated content. 
-- The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+然后，你根据文章中的相关内容提出一个问题。最重要的是，文章中不能直接给出正确答案。 
+相反，它应该要求考生推断、总结或理解文章的背景或意图。
+文章应反映现实生活中的主题（例如，日常生活、工作、学习、旅行、观点）。
+
+说明：
+格式：遵循正式试卷中2个例子的格式，而不是内容。输出必须为html格式，并删除行更改标记。
+内容：确保词汇量限制在N1级。 
+参考：从用户给出的“主题”中获得灵感。考虑前一次对话中给出的反馈（如果存在）
+附加要求：
+-不要在生成的内容中显示问题说明和序列号。 
+-文章中的单词既不能用于问题，也不能用于选项。
+-您必须在输出中显示正确答案，选项为1,2,3,4。例如：正解:1.
 
 
-Formal exam paper: {example}
+正式试卷：{example}
 """
 
 short_reading_notification_example = """
@@ -729,7 +744,7 @@ short_reading_notification_example = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>掲示板に関する文書</title>
+    <title>筆者の考えに関する文章（縦書き）</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -740,41 +755,20 @@ short_reading_notification_example = """
             background-color: #f9f9f9;
             color: #333;
         }
-        .document {
+        .tategaki-container {
+            width: 600px;
+            margin: 2em auto;
             border: 1px solid #ccc;
             padding: 20px;
             background-color: #fff;
-            position: relative;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
         }
-        .corner {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: #ddd;
-            border-radius: 50%;
-        }
-        .top-left { top: 10px; left: 10px; }
-        .top-right { top: 10px; right: 10px; }
-        .bottom-left { bottom: 10px; left: 10px; }
-        .bottom-right { bottom: 10px; right: 10px; }
-        .date {
-            text-align: right;
-            margin-bottom: 1em;
-            font-weight: bold;
-        }
-        h3 {
-            text-align: center;
-            margin: 1.5em 0;
-            font-size: 1.3em;
-        }
-        p {
-            margin-bottom: 1.2em;
-            text-indent: 1em;
-        }
-        .signature {
-            text-align: right;
-            margin-top: 2em;
+        .tategaki {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            height: 600px;
+            font-size: 1.1em;
+            line-height: 2;
+            text-align: justify;
         }
         .page-number {
             text-align: right;
@@ -783,7 +777,7 @@ short_reading_notification_example = """
             color: #666;
         }
         ol {
-            margin-top: 1.5em;
+            margin-top: 2em;
         }
         li {
             margin-bottom: 0.8em;
@@ -792,37 +786,23 @@ short_reading_notification_example = """
 </head>
 <body>
 
-<p>以下は、ある町の掲示板に貼られていた文書である。</p>
-
-<div class="document">
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
-
-    <div class="date">10月5日</div>
-
-    <p>住民の皆様へ</p>
-
-    <h3>ごみに関するお願い</h3>
-
-    <p>最近、「可燃ごみ」の回収日に衣類・布類が多く出されています。しかし、市の規則では、衣類・布類は毎週火曜日の「資源ごみ」の回収日に出すことになっています。資源を有効に活用するため、決められた回収日に出してください。</p>
-
-    <p>衣類・布類は、市内8か所の公共施設に設置してある回収ボックスでも回収しています。回収後は、中古の衣類として再使用したり、工場で再生利用したりします。ご協力をよろしくお願いします。</p>
-
-    <p class="signature">竹川市役所 市民生活課</p>
+<div class="tategaki-container">
+    <div class="tategaki">
+        「自分の悪い部分を露にすると、嫌われたり、敬遠されたりするのではないか」という不安は、もちろんだろう。見せ方がまずいと、実際にそうなる危険性もある。しかし、世間からの評価や期待に対し、神経質になりすぎ、そのせいで常に不安を抱えながら生きていくくらいなら、他人から嫌われるほうがよほどましである。
+        そもそも他人は、あなたが思っているほどあなたに対して期待などしていない。誰もが皆、自分のことで頭がいっぱいで、他人のことなど気にかけてはいない。
+    </div>
 </div>
 
+<div class="page-number">48</div>
 
+<p>筆者が言いたいことは何か。</p>
 
-<dive class="follow-up">この文書で最も伝えたいことは何か。</div>
-
-<ul class="options">
-    <li>「資源ごみ」として出す衣類・布類の量を減らしてほしい。</li>
-    <li>「資源ごみ」の回収日に「可燃ごみ」を出さないでほしい。</li>
-    <li>衣類・布類は、「資源ごみ」の回収日に出してほしい。</li>
-    <li>衣類・布類は、新しく設置した回収ボックスに出してほしい。</li>
-</ul>
+<ol>
+    <li>他人に嫌われることなく生きることは難しい。</li>
+    <li>世間の評価や期待を気にしながら生きる必要はない。</li>
+    <li>自分の悪い部分を見せなければ、他人に嫌われることはない。</li>
+    <li>自分の悪い部分を見せて他人から嫌われるほうが、楽に生きられる。</li>
+</ol>
 
 </body>
 </html>
@@ -853,83 +833,340 @@ Formal exam paper: {example}
 """
 
 midsize_reading_example = """
+--- example1----
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文章内容</title>
+    <title>羽毛を持つ恐竜について</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
             max-width: 800px;
             margin: 40px auto;
-            padding: 0 20px;
+            padding: 20px;
             background-color: #f9f9f9;
             color: #333;
         }
-        .content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        p {
+            margin-bottom: 1.5em;
+            text-align: justify;
         }
-        h3 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+        .note {
+            font-size: 0.9em;
+            color: #555;
+            margin-left: 1em;
+        }
+        .page-number {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 2em;
+            color: #666;
         }
         ol {
-            padding-left: 20px;
+            margin-top: 2em;
         }
         li {
-            margin: 12px 0;
+            margin-bottom: 0.8em;
         }
-        .question {
-            font-weight: bold;
-            color: #e74c3c;
-            margin-top: 25px;
-        }
-        .article {
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
+        hr {
+            border: none;
+            border-top: 1px dashed #ccc;
+            margin: 3em 0;
         }
     </style>
 </head>
 <body>
-    <div class="content">
 
-        <!-- 第二篇文章 -->
-        <div class="article">
-            <p>勉強にしても、仕事にしても、その能率には必ず波があり、それがな<br>いようにみえても、波が小さいだけである。つまり、人間は機械のように<br>いつも同じ調子ではたらいていないから、1 時間に 50 個の製品がつく<br>れるから、10 時間で 500 個がつくれる、という具合には計算できない。<br>従って、脳が最も快調にはたらいているときを基準にすると、たいていの<br>ときは不調ということになってしまう。</p>
+<p>以下は、羽毛を持つ恐竜について述べられた文章である。</p>
 
-            <p>それでも、全く無計画に勉強や仕事をするわけにもゆかないので、一<br>応はスケジュールを立てる。その際に、快調に脳がはたらいているときの<br>能率を基準にしてスケジュールを立てれば、そのスケジュールの通りにこ<br>とが進行することは絶対にないといってもいい。その度に、自分の才能に失<br>望していれば、失望しつづけることになる。さし迫った状態では、どうし<br>ても脳がフル回転しているときを基準にスケジュールを組むので、たいてい<br>は不完全な形で終ってしまう。スケジュールをつくるときには、せめて<br>中等度に脳がはたらいているときの能率を基準にする必要がある。スケジ<br>ュール以上にはかどっても誰もこまる人はいない。</p>
+<p>恐竜には、鳥のように卵を温める習性があったことがわかっています。</p>
 
-            <p>そして、スケジュールにこだわるより、脳の変動の波をできるだけ感<br>じとり、能率が悪くても悲観せずに、必ず上げ潮のときがくることを期待<br>すればいい。そして、上げ潮のときには自分でもおどろくほどに能率が上<br>がるので、そのときに一気に遅れをとり戻せばいいのである。</p>
+<p class="note">（中略）</p>
 
-            <div class="follow-up">59. 筆者によると、スケジュールを立てる際の注意点は何か。</div>
-            <ol>
-                <li>脳の調子がいいときを基準にしない</li>
-                <li>いつも脳が同じ調子ではたらけるようにする</li>
-                <li>能率の変化を考えすぎない</li>
-                <li>能率が悪くなったときに変更できるようにしておく</li>
-            </ol>
+<p>気になるのは、いつから卵を温めるようになったのかということですが、羽毛を持った時点で、卵を温める習性も持っていた可能性があります。</p>
 
-            <div class="follow-up">60. 筆者の考えに合うのはどれか。</div>
-            <ol>
-                <li>能率を上げるためには、脳の状態をコントロールするといい</li>
-                <li>脳の変動の波に合わせて勉強や仕事を進められる方法を探すといい</li>
-                <li>計画の通りに行かなくても失望せずに、脳の調子が上がるのを待てばいい</li>
-                <li>計画の通りに勉強や仕事を進めるためには、脳の変動の波を小さくすればいい</li>
-            </ol>
-        </div>
+<p>羽毛を持つことで、体温が維持できるようになるので、その体温を使って卵の温度を一定に保つことができます。特に夜間は気温が下がるので、夜に親が卵の上に座って眠っていれば、卵の保温にはとても効果的です。卵が一定の温かさで保たれていれば、さまざまな環境で卵が孵る確率が高くなります。</p>
 
-    </div>
+<p>は虫類は卵を温めません。は虫類の卵は、放置されても、1日のうちある程度の時間、気温が30度を超えるなどの条件が整っていれば、自然と孵ります。その代わり、は虫類は1年のうち気温の高い限られた時期にしか産卵しません。生息地域も限られます。</p>
+
+<p>羽毛のある恐竜が、鳥に近い体温を持っていたとすれば、夏以外の季節でも、寒冷地でも、安定して35～40度ほどの温度で卵を温めることが可能です。</p>
+
+<p>厳密に言うと、羽毛があると体の熱を逃がさないので、卵を温めるには不向きです。人間で言うと、衣服の上からでは温めにくいのと同じです。温めるなら、服の中に入れて直接体温が伝わるようにするはずです。</p>
+
+<p>卵を抱く時期の鳥も、卵と接する部分の羽毛がなくなり、皮膚がむき出しになります。恐竜が卵を温めていたとすれば、おそらく同じように、お腹のあたりの羽毛が抜けていたと思われます。</p>
+
+<p class="note">（注）生息地域：生活している地域</p>
+
+<div class="page-number">51</div>
+
+<p>筆者によると、羽毛を持つことにはどのような利点があるか。</p>
+
+<ol>
+    <li>低温の環境でも、卵を一定の温かさで保つことができる。</li>
+    <li>低温の環境でも、卵の成長を促し早く孵すことができる。</li>
+    <li>環境にかかわらず体温が維持でき、卵が多く産める。</li>
+    <li>環境に合わせて卵の温度を調整でき、早く孵すことができる。</li>
+</ol>
+
+<hr>
+
+<div class="page-number">52</div>
+
+<p>お腹のあたりの羽毛が抜けていたと思われますとあるが、筆者はなぜそう考えるのか。</p>
+
+<ol>
+    <li>体の熱を逃がすことで、卵を温めすぎるのを防げるから</li>
+    <li>皮膚から卵に直接体温が伝わることで、効率的に卵を温められるから</li>
+    <li>卵に皮膚を直接当てることで、卵の温度を知ることができるから</li>
+    <li>卵と接する部分の皮膚がむき出しになることで、卵が抱きやすくなるから</li>
+</ol>
+
+</body>
+</html>
+
+---example2---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>羽毛を持つ恐竜について</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        p {
+            margin-bottom: 1.5em;
+            text-align: justify;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #555;
+            margin-left: 1em;
+        }
+        .page-number {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 2em;
+            color: #666;
+        }
+        .underline {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        ol {
+            margin-top: 2em;
+        }
+        li {
+            margin-bottom: 0.8em;
+        }
+        hr {
+            border: none;
+            border-top: 1px dashed #ccc;
+            margin: 3em 0;
+        }
+    </style>
+</head>
+<body>
+
+<p>以下は、羽毛を持つ恐竜について述べられた文章である。</p>
+
+<p>恐竜には、鳥のように卵を温める習性があったことがわかっています。</p>
+
+<p class="note">（中略）</p>
+
+<p>気になるのは、いつから卵を温めるようになったのかということですが、羽毛を持った時点で、卵を温める習性も持っていた可能性があります。</p>
+
+<p>羽毛を持つことで、体温が維持できるようになるので、その体温を使って卵の温度を一定に保つことができます。特に夜間は気温が下がるので、夜に親が卵の上に座って眠っていれば、卵の保温にはとても効果的です。卵が一定の温かさで保たれていれば、さまざまな環境で卵が孵る確率が高くなります。</p>
+
+<p>は虫類は卵を温めません。は虫類の卵は、放置されても、1日のうちある程度の時間、気温が30度を超えるなどの条件が整っていれば、自然と孵ります。その代わり、は虫類は1年のうち気温の高い限られた時期にしか産卵しません。生息地域も限られます。</p>
+
+<p>羽毛のある恐竜が、鳥に近い体温を持っていたとすれば、夏以外の季節でも、寒冷地でも、安定して35～40度ほどの温度で卵を温めることが可能です。</p>
+
+<p>厳密に言うと、羽毛があると体の熱を逃がさないので、卵を温めるには不向きです。人間で言うと、衣服の上からでは温めにくいのと同じです。温めるなら、服の中に入れて直接体温が伝わるようにするはずです。</p>
+
+<p>卵を抱く時期の鳥も、卵と接する部分の羽毛がなくなり、皮膚がむき出しになります。恐竜が卵を温めていたとすれば、おそらく同じように、<span class="underline">お腹のあたりの羽毛が抜けていたと思われます。</span> </p>
+
+<p class="note">（注）生息地域：生活している地域</p>
+
+<div class="page-number">51</div>
+
+<p>筆者によると、羽毛を持つことにはどのような利点があるか。</p>
+
+<ol>
+    <li>低温の環境でも、卵を一定の温かさで保つことができる。</li>
+    <li>低温の環境でも、卵の成長を促し早く孵すことができる。</li>
+    <li>環境にかかわらず体温が維持でき、卵が多く産める。</li>
+    <li>環境に合わせて卵の温度を調整でき、早く孵すことができる。</li>
+</ol>
+
+<hr>
+
+<div class="page-number">52</div>
+
+<p><span class="underline">お腹のあたりの羽毛が抜けていたと思われます</span>とあるが、筆者はなぜそう考えるのか。</p>
+
+<ol>
+    <li>体の熱を逃がすことで、卵を温めすぎるのを防げるから</li>
+    <li>皮膚から卵に直接体温が伝わることで、効率的に卵を温められるから</li>
+    <li>卵に皮膚を直接当てることで、卵の温度を知ることができるから</li>
+    <li>卵と接する部分の皮膚がむき出しになることで、卵が抱きやすくなるから</li>
+</ol>
+
 </body>
 </html>
 """
+
+long_reading_understanding_teacher_prompt = """
+角色：你是一名日语老师，正在为JLPT N1水平撰写试卷。
+
+任务：任务：你的工作是为JLPT N1水平考试写一道阅读题。
+首先，你需要写一篇大约800字的长篇文章供学生阅读。 
+然后，根据文章中的相关内容给出3个问题。 
+目的是确保学生能够理解文章的内容。
+
+
+说明：
+格式：遵循正式试卷中示例的格式，而不是内容。输出必须为html格式，并删除行更改标记。
+内容：确保词汇量限制在N1级。 
+参考：从用户给出的“主题”中获得灵感。考虑前一次对话中给出的反馈（如果存在）
+附加要求：
+-不要在生成的内容中显示问题说明和序列号。 
+-文章中的单词既不能用于问题，也不能用于选项。
+-您必须在输出中显示正确答案，选项为1,2,3,4。例如：正解:1.
+
+
+
+正式试卷：{example}
+"""
+
+long_reading_understanding_example = """
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数学の問題を解くことについて</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        p {
+            margin-bottom: 1.5em;
+            text-align: justify;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #555;
+            margin-left: 1em;
+        }
+        .page-number {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 2em;
+            color: #666;
+        }
+        ol {
+            margin-top: 2em;
+        }
+        li {
+            margin-bottom: 0.8em;
+        }
+        hr {
+            border: none;
+            border-top: 1px dashed #ccc;
+            margin: 3em 0;
+        }
+        .underline {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+        sup {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+
+<p>以下は、ある数学者が描いた文章である。</p>
+
+<p>数学というものは、解き方がわかってしまったあとで、力がつくことはない。解き方を身につける前の、まだ解き方のわからない間だけが、力をつけるチャンスである。解けるようになるのは同じでも、それまでのあり方で、力が身につくかどうかが、きまってくる。</p>
+
+<p>それに、おもしろいのも、本当は、まだ解けないで、いろいろと考えている間である。解けなきゃつまらないようだが、それは早く解こうとあせるからで、楽しみは解けるまでのほうにある。解けるようになったあとは、むしろむなしい。だいたい、「答えのわかっている謎」なんて、意味がない。解き方がわからないからこそ、問題の名にあたいするのだ。</p>
+
+<p>もちろん、まったく手がつかないのでは、おもしろくもないが、案外に、多少はわからないでも、うまく<span class="underline">頭のなかに飼っておくと</span>、そのうちに馴れてくれて、わかってきたりする。その、だんだん少しずつ、わかりかけというのも、オツなものだ。そのためには、それを飼っておく、頭の牧場がゆたかでなければならない。本当のところは、数学の力というのは、いろいろとわかったことをためこむより、わからないのを飼っておける、その牧場のゆたかさのほうにあるのかもしれない。</p>
+
+<p>とくに、公式などをおぼえるのには、ぼくは反対である。それは簡単すぎて、少しもおもしろくないし、おぼえたものは忘れるものだ。とくに、急いでおぼえたものは、早く忘れる。同じおぼえるにしても、なるべくなら時間をかけたほうが、長持ちする。</p>
+
+<p class="note">（中略）</p>
+
+<p>このごろは、テストでおどされることが多いので、わかること、解けることを急ぐ傾向にある。たしかに、テストなどでは、時間がかぎられているので、急ぐのも多少は仕方がない。しかしながら、時間を制限されたときに急いでできるためには、時間の制限されていないときに、時間を気にしないでやっておいたほうがよい。テストで急ぐためには、テスト以外で急がないほうがよいのである。</p>
+
+<p>どんなやり方でも、わかって、問題が解けるようになる、という結果は同じかもしれない。しかし、ゆったりとやると、そのわかり方にコクが出てくるものだ。そして、その結果に達するまでの道筋を楽しむことで、力がつく。</p>
+
+<p>勉強を楽しむなんて、と思うかもしれないが、それは目的ばかり見てあせるからで、楽しむ気になれば、なんだって楽しめるものだ。</p>
+
+<p class="note">(注1)手がつかない：ここでは、できない</p>
+<p class="note">(注2)オツな：ここでは、おもしろい</p>
+<p class="note">(注3)おどされる：ここでは、早く問題を解かされる</p>
+<p class="note">(注4)コク：深み。</p>
+
+<div class="page-number">57</div>
+
+<p>数学の問題を解くことについて、筆者の考えに合うのはどれか。</p>
+
+<ol>
+    <li>早く解けなくても、解き方を身につけることが大切だ。</li>
+    <li>解けても解けなくても、問題に取り組むことが大切だ。</li>
+    <li>解けなかった問題が解けるようになったらおもしろくなる。</li>
+    <li>解き方のわからない問題を解こうとすることに意味がある。</li>
+</ol>
+
+<hr>
+
+<div class="page-number">58</div>
+
+<p><span class="underline">頭のなかに飼っておく</span>とはどういうことか。</p>
+
+<ol>
+    <li>わかる問題を手がかりにして、わからない問題を考えること</li>
+    <li>わかる問題とわからない問題を、頭のなかで区別しておくこと。</li>
+    <li>わからない問題をわかるまで解き続けていること</li>
+    <li>わからない状態のまま、問題を頭のなかに残しておくこと</li>
+</ol>
+
+<hr>
+
+<div class="page-number">59</div>
+
+<p>筆者によると、どのように勉強すればよいか。</p>
+
+<ol>
+    <li>結果を急がずに、考えることを楽しむ。</li>
+    <li>結果に達することができれば、どんなやり方でもよい。</li>
+    <li>目的を忘れないで、あせらずに勉強を楽しめばよい。</li>
+    <li>自分に合ったやり方を探して、時間を気にせず取り組む。</li>
+</ol>
+
+</body>
+</html>
+"""
+
 
 comprehensive_reading_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level.
@@ -955,77 +1192,133 @@ Formal exam paper: {example}
 """
 
 comprehensive_reading_example = """
-<div class="reading-text">
-  <h3>A</h3>
-  <p>
-    新しい商品を企画するとき、いいアイデアがなかなか思いつかないことがある。そんなとき、自分には才能がないからだと思い込み、
-    自信をなくしてしまうのはよくない。アイデアは生まれつきの能力に関係なく、努力次第で誰でも生み出すことができる。
-    アイデアは、情報の組み合わせによって生まれることがほとんどだ。そのため、日ごろから情報を集めておくことが有効だ。
-    担当する商品に関連する情報だけを集めていると、似たようなアイデアばかりになってしまう。発想の幅を広げるには、
-    関連する分野以外の情報も頭に入れておくほうがいい。ふだんから視野を広げてさまざまな情報を蓄積しておけば、
-    必ずアイデアの役に立つはずだ。
-  </p>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AとBの「あきらめる」について</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .section {
+            margin-bottom: 3em;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+        }
+        .label {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 1em;
+            display: block;
+        }
+        p {
+            margin-bottom: 1.2em;
+            text-align: justify;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 1.5em;
+        }
+        .page-number {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 2em;
+            color: #666;
+        }
+        ol {
+            margin-top: 2em;
+        }
+        li {
+            margin-bottom: 0.8em;
+        }
+        hr {
+            border: none;
+            border-top: 1px dashed #ccc;
+            margin: 3em 0;
+        }
+        sup {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
 
-  <h3>B</h3>
-  <p>
-    新しい商品を企画するには、これまでとは異なるアイデアが必要だ。現在流行している商品の情報を集めるだけでは、
-    他社に勝つことはできないだろう。私はアイデアを生み出すために、一般的に考えられていることとは逆の発想をするようにしている。
-    現在流行している商品が若者向けの物なら高齢者向けにできないかと考えたり、多機能の物なら機能を一つに絞れないかと考えたりするのである。
-  </p>
-  <p>
-    アイデアは一部の才能がある人しか生み出せないものだという印象があるせいか、生み出し方を知ろうとしない人が多いと思う。
-    才能がないからといってあきらめるのではなく、思い切って発想を転換してみれば、いいアイデアにつながっていく。
-  </p>
+<div class="section">
+    <span class="label">A</span>
+    <p>まじめで責任感が強く、負けず嫌いな人は「あきらめない」傾向があります。「あきらめない」ことは、基本的にはもちろんいいことなのですが、しかし一方、あきらめたほうがよいことも、実はけっこうあるものです。</p>
+    <p>一所懸命に取り組んでも、うまくいかない、成果が出ない、充足感や満足感が得られない。そうした場合は「あきらめる」というのも、十分よい選択肢になります。</p>
+    <p>こうした場合の「あきらめる」とは、「やめてしまう」ということです。</p>
+    <p class="note">（中略）</p>
+    <p>やめる際には、「うまくいかなかった。やめてよかった」と思うのがコツでしょうね。うまくいかなかったことを悔やみつつやめるのは、避けたいものです。それでは、うまくいかなかったことが尾をひいてしまいます。「うまくいかなくてよかった」と思うくらいがちょうどいいでしょう。それができるようになると、一時的に落ち込んでも、立ち直りが早くなります。</p>
 </div>
 
-<body>
-    <h1>65. アイデアを生み出すことについて、AとBが共通して述べていることは何か。</h1>
-    <ol>
-        <li>アイデアを生み出し方は、簡単に身につけることができる。</li>
-        <li>多くの情報を得ることで、アイデアを生み出しやすくなる。</li>
-        <li>特別な能力がなくても、アイデアを生み出すことができる。</li>
-        <li>発想のしかたを大きく変えなければ、アイデアは生み出せない。</li>
-    </ol>
+<div class="section">
+    <span class="label">B</span>
+    <p>最近は仕事で悩んでいる人に対して「無理をしないであきらめたほうがよい。」というアドバイスを目にすることがある。もちろん体調を崩してしまうような場合には途中でやめるべきだ。しかしあきらめるということは、やれることはすべてやり尽くしたあとで考えるべきではないだろうか。困難な目標ほど簡単には達成できないものだ。だから、最初から、できなければあきらめてもいいんだという気持ちでいては、つらくなったときに頑張り続けることができない。</p>
+    <p>仮にどうしてもうまくいかずにあきらめることになったとしても、精いっぱい努力した結果ならば納得できる。落ち込んだりくよくよしたりするのではなく気持ちを切り替えて、しっかり原因を考えて次に生かすことが重要だ。</p>
+    <p class="note">(注) 尾を引く：ずっと残る</p>
+</div>
 
-    <h1>66. 新しい商品を企画することについて、AとBはどのようなアドバイスをしているか。</h1>
-    <ol>
-        <li>AもBも、いろいろな分野の情報をできるだけ多く集めるといいと述べている。</li>
-        <li>AもBも、流行している商品について詳しく調べるといいと述べている。</li>
-        <li>Aは関連する分野の他社の商品の情報を集めるといいと述べ、Bは流行に逆らった考え方をするといいと述べている。</li>
-        <li>AもBも、流行している商品について詳しく調べるといいと述べている。</li>
-    </ol>
+<div class="page-number">60</div>
 
-    <h1>67. 新しい商品を企画する際の注意点について、AとBが共通して述べていることは何か。</h1>
-    <ol>
-        <li>十分な時間と資金を確保すること。</li>
-        <li>多くの消費者の意見を取り入れること。</li>
-        <li>市場の需要を調べる前に、デザインや機能にこだわること。</li>
-        <li>競合他社の動きを分析し、それに合わせること。</li>
-    </ol>
+<p>あきらめることについて、AとBはどのように述べているか。</p>
+
+<ol>
+    <li>AもBも、成果が出せる可能性が低いばあいには、あきらめたほうがよいと述べている。</li>
+    <li>AもBも、つらくても、できるだけあきらめずに頑張ったほうがよいと述べている。</li>
+    <li>Aは状況によっては、あきらめたほうがよいこともあると述べ、Bはあきらめてもいいと思ったほうが、頑張り続けられる場合もあると述べている。</li>
+    <li>Aは努力しても結果に結びつかない場合は、あきらめたほうがよいと述べ、Bは十分にやってみるまでは、あきらめることを考えるべきではないと述べている。</li>
+</ol>
+
+<hr>
+
+<div class="page-number">61</div>
+
+<p>AとBの認識で共通していることは何か。</p>
+
+<ol>
+    <li>あきらめることになった原因を考えるべきだ。</li>
+    <li>あきらめるのが早ければ、早く立ち直れる。</li>
+    <li>あきらめたことでも、再挑戦することはできる。</li>
+    <li>あきらめたことを後悔してはいけない。</li>
+</ol>
+
 </body>
+</html>
 """
 
 long_reading_teacher_prompt = """
-Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level.
+角色：你是一名日语老师，正在为JLPT N1水平撰写试卷。
 
-Task: Task: Your job is to write a reading question for a JLPT N1 level exam. 
-First you need to write a long article around 600 words for student to read. 
-Then, you give 3 questions by the related content in the article. 
-The purpose is to ensure the students are able to understand the meaning of the article.
-
-
-Instructions:
-Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
-Content: Ensure the vocabulary is restricted to N1 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
-Additional Requirement: 
-- Don't show question instructions and sequence number in the generated content. 
-- The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+任务：任务：你的工作是为JLPT N1水平考试写一道阅读题。
+首先，你需要写一篇大约800字的长篇文章供学生阅读。 
+然后，根据文章中的相关内容给出3个问题。 
+目的是确保学生能够理解笔者的主张和观点。
 
 
+说明：
+格式：遵循正式试卷中示例的格式，而不是内容。输出必须为html格式，并删除行更改标记。
+内容：确保词汇量限制在N1级。 
+参考：从用户给出的“主题”中获得灵感。考虑前一次对话中给出的反馈（如果存在）
+附加要求：
+-不要在生成的内容中显示问题说明和序列号。 
+-文章中的单词既不能用于问题，也不能用于选项。
+-您必须在输出中显示正确答案，选项为1,2,3,4。例如：正解:1.
 
-Formal exam paper: {example}
+
+
+正式试卷：{example}
 """
 
 long_reading_example = """
@@ -1034,77 +1327,107 @@ long_reading_example = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文章内容</title>
+    <title>SNSと人間関係について</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.8;
             max-width: 800px;
             margin: 40px auto;
-            padding: 0 20px;
+            padding: 20px;
             background-color: #f9f9f9;
             color: #333;
         }
-        .content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        p {
+            margin-bottom: 1.5em;
+            text-align: justify;
         }
-        h3 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
+        .note {
+            font-size: 0.9em;
+            color: #555;
+            margin-left: 1em;
+        }
+        .page-number {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 2em;
+            color: #666;
         }
         ol {
-            padding-left: 20px;
+            margin-top: 2em;
         }
         li {
-            margin: 12px 0;
+            margin-bottom: 0.8em;
         }
-        .question {
-            font-weight: bold;
-            color: #e74c3c;
-            margin-top: 25px;
+        hr {
+            border: none;
+            border-top: 1px dashed #ccc;
+            margin: 3em 0;
+        }
+        sup {
+            font-size: 0.8em;
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <p>以下は、ある作家が物語などの本を読むことについて書いた文章である。</p>
-        
-        <p>読むことは、受動的な作業だと思っている人は意外に多い。（中略）読んでインプットして、書いてアウトプットする。そうではなくて、両方アウトプットなのだというのが、私の持論である。</p>
-        
-        <p>そこにある言葉を読む。すると心には、文字以上のものが広がる。たとえば、子どものころ読んだ海外作品に、聞いたこともない料理名が出てくるということが、よくあった。クロスグリのパイだとか、ジンジャークッキーだとか。食べたことのないものを、懸命に想像して味わう。それを食べる主人公の舌を、獲得するわけである。①この行為、受動ではなく能動である。「創る」作業である。本でしか読んだことのない食べものを、大人になってから実際に食べ、「違う」と思った経験を持つ人は、意外に多いのではないだろうか。もちろん違うのは私たちの想像なのだが、しかし自分の頭のなかで創った料理のほうが、断然おいしかった、ということは、よくある。</p>
-        
-        <p>本を読まない、というのは、だから、私にとって創造の放棄である。②つまらない本、相性が悪い本というのはもちろんある。しかしそこで、どこがどんなふうにつまらないのか、どう展開したらおもしろかったのか、自分のどの部分と相性が悪いのか、そんなことを考えていると、つまらない本はおもしろくなるし、相性が悪い本はいつか相性がよくなる日を待とうと思うことができる。私は、おもしろかった本よりつまらなかった本のあらすじを人に話すほうが、ずっと好きだ。どこがどんなふうにつまらなく感じたかを話すのはそれだけ創造の余地があるからだろう。</p>
-        
-        <p>料理でも、絵画でも、あるいは家事の手順でも、創ることの喜びを知ってしまうと、なかなかそれから離れることができない。読むことの楽しみは、と訊かれれば、創ることの自由さだと私は答える。</p>
-        
-        <div class="follow-up">67. ①この行為とはどういうことか</div>
-        <ol>
-            <li>実際に、主人公が食べていた食べものを味わってみること</li>
-            <li>食べたことのないものを主人公と一緒に食べているところを想像すること</li>
-            <li>主人公がどんな食べものが好きかを想像してみること</li>
-            <li>主人公になりきって、食べたことのないものを想像して味わうこと</li>
-        </ol>
-        
-        <div class="follow-up">68. ②つまらない本について、筆者はどのように述べているか。</div>
-        <ol>
-            <li>つまらなく感じた点について色々考えていると、おもしろくなる</li>
-            <li>つまらなく感じた理由を考えていると、自分の好みがよく分かってくる</li>
-            <li>つまらないと思っても、いつか必ず相性がよくなる日がくる</li>
-            <li>つまらないと思っても、人にあらすじを話すとおもしろいところが見つけられる</li>
-        </ol>
-        
-        <div class="follow-up">69. 本を読むことについて、筆者はどのように考えているか</div>
-        <ol>
-            <li>本を読むことは、料理や絵画より創ることの喜びが大きい</li>
-            <li>本を読むことは、自由に想像を膨らませる楽しい創造の作業だ</li>
-            <li>本を読んでたくさん知ることができれば、創ることの喜びも増す</li>
-            <li>本を読んで想像力を身につければ、生活のなかでも自由に想像が楽しめる</li>
-        </ol>
-    </div>
+
+<p>SNSを含むリアルタイムウェブの本質は、時間と過程の消去にある。かつてコンテンツの拡散には一定の時間がかかった。権威やメディアをすり抜ける必要もあった。けれどもいまや、それらの面倒をすべてすっ飛ばし、無名の書き手が一晩で何百万もの支持者を集めることができる。それはSNSの良いところだ。</p>
+
+<p>けれども人生にはトラブルがつきものである。どれだけ誠実に生きていても、誤解や中傷に曝されることが必ずある。そしてそういうとき、SNSの支持はほとんど役に立たない。匿名の支持者は、トラブルの話題自体すぐに忘れてしまう。あっというまに集まった人々は、同じくあっというまに離れる。そこで継続的に助けてくれるのは、結局は面倒な人間関係に支えられた家族や友人たちだったりする。</p>
+
+<p>SNSの人間関係には面倒がない。だからSNSの知人は面倒を背負ってくれない。そんなSNSでも、たしかに人生がうまく行っているときは大きな力になる。けれども、本当の困難を抱えたときは、助けにならないのだ。</p>
+
+<p>これからの時代を生きるうえで、SNSのこの性格を知っておくことはとても重要なように思う。そもそも、人生の困難なるものは自分と世界のズレの表れである。自分はあることを正しいと信じるが、世界はそう思わない——そういう対立が生じたとき、困難が訪れる。だから困難そのものが悪いわけではない。むしろ、概念の発明や政治の変革は必ず困難とともに生じる。その困難を時間をかけて解消し昇華することで、はじめて自分も相手も社会も進歩するのだ。けれども、いまのSNSにはそのような熟成の余裕がほとんどない。</p>
+
+<p>困難な時期を支えるとは、言いかえれば、支える相手と世界の関係が変化する過程に時間をかけてつきあうということである。ひとりの人間が変わるというのはたいへんなことで、「いいね！」をつけるようにポンポン複製できるものではない。いわゆる「議論」で相手が変わると考えているひとは、人間の本質について無知である。ぼくが一生をかけて変えることができるのは、ごく少数の身の回りの人々だけであり、そしてぼくを変えることができるのもおそらくは彼らだけだ。その小さく面倒な人間関係をどれだけ濃密に作れるかで、人生の広がりが決まるのだと思う。</p>
+
+<p>家族も友人もあっというまには作れない。面倒な存在でもある。だからこそそれは変化の受け皿となる。面倒がないところに変化はない。情報技術は、面倒のない人間関係の調達を可能にしたが、それはまた人間から変化の可能性を奪うものでもあった。そのことを忘れずにおきたいと思う。</p>
+
+<p class="note">(注1) SNS：ウェブ上での情報のやり取りや交流の場を提供するサービス</p>
+<p class="note">(注2) リアルタイムウェブ：情報更新が即時に行われるウェブ</p>
+<p class="note">(注3) コンテンツ：ここでは、情報</p>
+<p class="note">(注4) すっ飛ばす：ここでは、省略する</p>
+<p class="note">(注5) つきもの：必ず伴うもの</p>
+<p class="note">(注6) あっというまに：短い間に</p>
+<p class="note">(注7) 昇華する：ここでは、別の良いものに変える</p>
+
+<div class="page-number">62</div>
+
+<p>SNSの支持はほとんど役に立たないとあるが、なぜか。</p>
+
+<ol>
+    <li>SNSの支持者の意見はさまざまで、すぐにはまとまらないから</li>
+    <li>SNSの支持者は無名で権威を持たないひとが多いから</li>
+    <li>SNSの支持者はトラブルの原因を誤解したまますぐに発信するから</li>
+    <li>SNSの支持者はすぐに興味をなくし、去ってしまうから</li>
+</ol>
+
+<hr>
+
+<div class="page-number">63</div>
+
+<p>困難な時期について、筆者はどのように述べているか。</p>
+
+<ol>
+    <li>自分と世界の認識のズレに気づき自分が変わろうとすれば、乗り越えられる。</li>
+    <li>「議論」によって相手や自分を変化させることで、乗り越えられる。</li>
+    <li>少数の身の回りの人々から人間関係を広げていけば、乗り越えられる。</li>
+    <li>家族や友人のような存在との深い関係によって、乗り越えられる。</li>
+</ol>
+
+<hr>
+
+<div class="page-number">64</div>
+
+<p>筆者が言いたいことは何か。</p>
+
+<ol>
+    <li>情報技術の特徴を理解したうえで活用すれば、自分自身の変化につながる。</li>
+    <li>情報技術を活用すれば、面倒な人間関係を変えられる可能性がある。</li>
+    <li>情報技術によって作られた人間関係では、人間の変化は期待できない。</li>
+    <li>情報技術は人間の変化の可能性を奪うものであり、利用は控えるべきだ。</li>
+</ol>
+
 </body>
 </html>
 """
@@ -1113,7 +1436,7 @@ information_retrieval_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
 
 Task: You are a Japanese teacher writing a retrieve information question on an exam paper for the JLPT N1 level.
-you must provide 1 or 2 html format tables and with additional information for retrieve below. The content and conditions combined should be more than 300 words and complex enough for JLPT N1 level.
+you must provide 1 or 2 html format tables and with additional information for retrieve below. The content and conditions combined should be more than 400 words and complex enough for JLPT N1 level.
 After that, asking candidate to answer 2 questions from the related content in the table.
 Most importantly, the question and answer must not be stated directly in the table or clues. 
 Instead, it should require the test-taker to infer, summarize, or understand the context.
@@ -1138,234 +1461,337 @@ information_retrieval_example = """
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>秋原テニススクール入会案内</title>
-<style>
-  body {
-    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-    margin: 40px;
-    line-height: 1.8;
-  }
-  .container {
-    border: 1px solid #000;
-    padding: 20px;
-  }
-  h1 {
-    text-align: center;
-    font-size: 1.6em;
-    margin-bottom: 20px;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 15px 0;
-  }
-  th, td {
-    border: 1px solid #000;
-    padding: 8px;
-    text-align: left;
-  }
-  th {
-    background-color: #f2f2f2;
-  }
-  .section-title {
-    font-weight: bold;
-    margin-top: 25px;
-  }
-  .note {
-    font-size: 0.9em;
-    color: #333;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マスダ買い取りサービス</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 1em;
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            font-size: 1.3em;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            color: #222;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 0.95em;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #eee;
+            width: 30%;
+        }
+        ul {
+            margin: 0.5em 0;
+            padding-left: 1.2em;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 1.5em;
+        }
+        .page-number {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 2em;
+            color: #666;
+        }
+        ol {
+            margin-top: 2em;
+        }
+        li {
+            margin-bottom: 0.8em;
+        }
+        hr {
+            border: none;
+            border-top: 1px dashed #ccc;
+            margin: 3em 0;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>秋原テニススクール入会案内</h1>
 
-    <p class="section-title">コース・クラスについて</p>
-    <p>
-      以下の四つのコースの中から、ご希望の曜日、時間のクラスをお選びいただけます。<br>
-      曜日、時間については、別紙をご確認ください。中学生以上から受講が可能です。<br>
-      各コースの1クラスの定員：10名　レッスン時間：60分
-    </p>
+<h1>マスダ買い取りサービス</h1>
 
-    <table>
-      <tr><th>コース</th><th>受講料（週一回、一ヶ月分）</th></tr>
-      <tr><td>A. 平日昼間（初心者）</td><td>8,800円</td></tr>
-      <tr><td>B. 平日昼間（中・上級者）</td><td>12,000円</td></tr>
-      <tr><td>C. 平日夜間・土日（初心者）</td><td>9,300円</td></tr>
-      <tr><td>D. 平日夜間・土日（中・上級者）</td><td>12,500円</td></tr>
-    </table>
+<h2>買い取りサービスのご利用について</h2>
 
-    <p class="section-title">入会時のお支払い</p>
-    <p>
-      ご入会の際に、入会金（6,600円）、年会金（2,200円）、受講料1ヶ月分を現金でお支払いください。<br>
-      受講料は、2ヶ月目から口座引き落としになります。
-    </p>
+<h3>◆買い取り可能な品物</h3>
+<p>冷蔵庫などの家電、机などの家具、自転車、楽器を受け付けています。詳しくは、「買い取り可能な品物」のページをご確認ください。</p>
 
-    <p class="section-title">割引制度</p>
-    <p>複数の割引は同時に適応できません。一番条件のいい割引が一つ適用されます。</p>
+<h3>◆買い取り方法と流れ</h3>
 
-    <table>
-      <tr><th>種類</th><th>適応対象</th><th>割引内容</th></tr>
-      <tr>
-        <td>学生割引</td>
-        <td>中学生、高校生</td>
-        <td>毎月の受講料を10％割引</td>
-      </tr>
-      <tr>
-        <td>複数のコース・クラス割引</td>
-        <td>複数コース・クラスを受講する方</td>
-        <td>二つ目以降のコース・クラス毎月の受講料を50％割引</td>
-      </tr>
-      <tr>
-        <td>家族割引</td>
-        <td>ご家族に本スクールの受講生がいる方</td>
-        <td>入会金無料、毎月の受講料を15％割引</td>
-      </tr>
-    </table>
+<table>
+    <tr>
+        <th>店頭買取</th>
+        <td>
+            <ol>
+                <li>店頭へお持ちください。</li>
+                <li>品物を確認し、買い取り金額をご提示します。</li>
+                <li>ご納得いただけた場合は、現金をお渡しします。</li>
+            </ol>
+        </td>
+    </tr>
+    <tr>
+        <th>出張買取</th>
+        <td>
+            <ol>
+                <li>最寄りの店舗にお電話ください。</li>
+                <li>弊社スタッフがご自宅へ伺います。</li>
+                <li>ご自宅で品物を確認し、買い取り金額をご提示します。</li>
+                <li>ご納得いただけた場合は、現金をお渡しします。</li>
+            </ol>
+        </td>
+    </tr>
+    <tr>
+        <th>宅配買取</th>
+        <td>
+            <ol>
+                <li>ホームページからご予約ください。</li>
+                <li>宅配業者が伺いますので、品物をお渡しください。</li>
+                <li>店舗への品物到着から3営業日以内に、買い取り金額をメールでご連絡します。ご納得いただけた場合は、銀行口座へお振り込みします。</li>
+            </ol>
+        </td>
+    </tr>
+</table>
 
-    <p class="section-title">振り替え制度</p>
-    <p>
-      同じコースの他の曜日に振り替えて受講する場合、フロントで事前にご予約ください。
-    </p>
+<p>※買い取り金額にご納得いただけずキャンセルされる場合でも、出張料や返送料はかかりません。</p>
 
-    <p class="section-title">各種手続き</p>
-    <p>以下の場合は、期日までにフロントでお手続きください。</p>
+<h3>◆受け付け可能な品数とサイズ</h3>
 
-    <table>
-      <tr><th>変更内容</th><th>手続き期限</th></tr>
-      <tr>
-        <td>変更（コースを変更したり、同じコース内で曜日・時間を変更する場合）</td>
-        <td>変更したい月の前月10日まで</td>
-      </tr>
-      <tr>
-        <td>退会（スクールをやめる場合）</td>
-        <td>最終受講の前月末まで</td>
-      </tr>
-      <tr>
-        <td>休会（スクールを1ヶ月以上休む場合）</td>
-        <td>休会したい月の前月20日まで</td>
-      </tr>
-    </table>
+<table>
+    <tr>
+        <th></th>
+        <th>受け付け可能な品数</th>
+        <th>1点あたりのサイズ制限</th>
+    </tr>
+    <tr>
+        <td>店頭買取</td>
+        <td>1点から</td>
+        <td>なし</td>
+    </tr>
+    <tr>
+        <td>出張買取</td>
+        <td>2点から</td>
+        <td>なし</td>
+    </tr>
+    <tr>
+        <td>宅配買取</td>
+        <td>1点から</td>
+        <td>25kg以下で、かつ三辺（縦・横・高さ）の合計が160cm以下のもの（自転車の場合、サイズ内でも宅配買取は利用できません）</td>
+    </tr>
+</table>
 
-    <p class="note">
-      ※手数料550円がかかります（入会後3ヶ月以内に手続きをする場合は無料）。
-    </p>
+<h3>◆ご本人確認について</h3>
+<p>店頭買取、出張買取の場合、本人確認書類（運転免許証等）をご提示いただきます。宅配買取の場合は、品物と一緒にコピーをお送りいただきます。<br>
+家電、家具、楽器の場合は、顔写真のない本人確認書類もご利用になれますが、自転車の場合は、顔写真付きのものをご用意ください。</p>
 
-    <p>
-      電話：062-241-3998（9時～22時）<br>
-      〒433-0010 北高市朝中町27<br>
-      ホームページ：<a href="http://www.akiharayuukibui-tennis.jp" target="_blank">http://www.akiharayuukibui-tennis.jp</a>
-    </p>
-  </div>
+<div class="page-number">65</div>
 
-  <div class="follow-up">
-      <p><strong>70.</strong> 高校生の村田さんは「C 平日夜間・土日（初心者）コース」に入会したいと思っている。姉がすでに同じコースを受講しているが、入会時に支払うものは何か。</p>
-      <ol>
-        <li>入会金、年会費、10％割引された受講料</li>
-        <li>入会金、年会費、15％割引された受講料</li>
-        <li>年会費、15％割引された受講料</li>
-        <li>年会費、50％割引された受講料</li>
-      </ol>
-    </div>
+<p>チョウさんは、机1台を買い取ってもらいたいと思っている。机は、重さが12kgで、三辺の合計が220cmである。チョウさんが利用できる方法はどれか。</p>
 
-    <div class="follow-up">
-      <p><strong>71.</strong> リナさんは、このテニススクールに1か月前に入会し、現在「B. 平日昼間（中・上級者）コース」を受講している。5月から「D. 平日夜間・土日（中・上級者）コース」に変わりたいと思っているが、リナさんはどうしなければならないか。今日は3月15日である。</p>
-      <ol>
-        <li>4月10日までに、手数料550円を支払い、手続きをする</li>
-        <li>4月10日までに手続きをする。手数料は必要ない</li>
-        <li>4月20日までに、手数料550円を支払い、手続きをする</li>
-        <li>4月20日までに手続きをする。手数料は必要ない</li>
-      </ol>
-    </div>
+<ol>
+    <li>店頭買取か出張買取か宅配買取</li>
+    <li>店頭買取か出張買取</li>
+    <li>店頭買取か宅配買取</li>
+    <li>店頭買取</li>
+</ol>
+
+<hr>
+
+<div class="page-number">66</div>
+
+<p>森村さんは、ギター（重さ5kg、三辺の合計150cm）と自転車（重さ10kg、三辺の合計160cm）をまとめて買い取ってもらいたいと思っているが、店頭に自分で持っていかずに済む方法がいい。森村さんが利用できる方法はどれで、何を準備しなければならないか。</p>
+
+<ol>
+    <li>宅配買取で、品物と顔写真付きの本人確認書類のコピーを準備する。</li>
+    <li>宅配買取で、品物と本人確認書類のコピーを準備する。本人確認書類は、顔写真付きでなくてもいい。</li>
+    <li>出張買取で、品物と顔写真付きの本人確認書類を準備する。</li>
+    <li>出張買取で、品物と本人確認書類を準備する。本人確認書類は、顔写真付きでなくてもいい。</li>
+</ol>
+
 </body>
 </html>
 
 
 --- example 2 ---
-<div class="container">
-<h2>着物レンタルのご案内</h2>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>秋川大学＞秋川大学図書館＞一般利用</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 1em;
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5em;
+        }
+        h2 {
+            font-size: 1.3em;
+            margin-top: 2em;
+            margin-bottom: 1em;
+            color: #222;
+            border-left: 5px solid #555;
+            padding-left: 0.8em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 0.95em;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #eee;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 1.5em;
+        }
+        .page-number {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 2em;
+            color: #666;
+        }
+        ol {
+            margin-top: 2em;
+        }
+        li {
+            margin-bottom: 0.8em;
+        }
+        hr {
+            border: none;
+            border-top: 1px dashed #ccc;
+            margin: 3em 0;
+        }
+    </style>
+</head>
+<body>
 
-<p>着物を着て水森市を観光しませんか。「はなかわ」では、山林店、古寺店、森島店の三つの店で、レンタルの着物をご用意しております。</p>
+<h1>秋川大学＞秋川大学図書館＞一般利用</h1>
 
-<h3>＜着物レンタルの流れ＞</h3>
-<ol>
-  <li>ご利用になりたい店に電話でご予約ください。</li>
-  <li>ご予約の日時にご来店になり、お好きな着物にお着替えください。必要な方には無料でお手伝いいたします。</li>
-  <li>お支払いのあと、着物で観光をお楽しみください。</li>
-  <li>各店の最終返却時間までに借りた店に戻り、当日中に着物をご返却ください（翌日返却も可能です。ご希望の方は、＜翌日返却について＞をお読みください）。</li>
-</ol>
+<h2>一般の方の図書館利用について</h2>
+<p>秋川大学の学生以外の一般の方も、研究等の目的のために、秋川キャンパスにある中央図書館や文学部図書館の資料が利用できます。</p>
 
-<h3>＜料金（1名様）＞</h3>
-<p>基本料金：3,500円</p>
+<h2>【入館方法】</h2>
+<p>・図書館利用カードをお持ちの方は、自動入退館ゲートから入退館ができます。<br>
+・お持ちでない方は、カウンターで1日入館証を発行いたします。</p>
 
-<h3>＜割引について＞</h3>
-<ul>
-  <li>早期予約割引：1週間前までのご予約で基本料金から300円割引します。</li>
-  <li>学生割引：学生の方は基本料金から200円割引します。</li>
-  <li>※早期予約割引を使う場合は、学生割引は使えません。</li>
-</ul>
+<h2>【図書館利用カードについて】</h2>
+<p>・図書館利用カードは、図書館資料の貸し出しの際に必要になります。<br>
+・発行をご希望の方は、身分証明書をお持ちなり、中央図書館、または文学部図書館のカウンターにお越しください(文学部図書館では平日のみ受け付けています)。<br>
+・平日の9時から17時までの間に申請を受け付けた場合、その日のうちにカードをお渡しします。平日の17時以降、および土日に受け付けた場合は、次の平日開館日以降にお渡しします。</p>
 
-<h3>＜お持ちになる物＞</h3>
-<p>特にありません。はき物などもセットでお貸しします。</p>
+<h2>【貸し出しと返却】</h2>
+<p>・貸し出し冊数は5冊まで、貸し出し期間は2週間です。<br>
+・中央図書館の貸し出し受付時間は閉館30分前まで、文学部図書館は閉館15分前までです。<br>
+・閉館時の返却は、カウンターで受け付けています。閉館・休館時は、ブックポストに入れてください。</p>
 
-<h3>＜翌日返却について＞</h3>
+<h2>【資料の複写】</h2>
+<p>・館内の複写機で、図書館資料の複写ができます。<br>
+・複写機は、中央図書館は閉館10分前まで、文学部図書館は閉館時間まで利用できます。</p>
 
-<h4>ご予約時の申し込み</h4>
-<p>1,200円の翌日返却料金で、返却時間を翌日の正午までに延長できます。</p>
+<h2>【開館時間】</h2>
 
-<h4>ご来店時の申し込み、またはお出かけ後の変更</h4>
-<p>翌日返却料金は1,500円になります。お出かけ後の変更の場合は、借りた日の最終返却時間までに借りた店にお電話ください。翌日返却料金は、返却の際にお支払いください。</p>
-
-<p>※返却が翌日の正午を過ぎる場合、追加料金1,000円をいただきます。その後は、1日遅れるごとに3,000円を請求いたします。</p>
-
-<h3>＜各店の営業時間・返却時間＞</h3>
-<table border="1" cellspacing="0" cellpadding="6">
-  <tr>
-    <th>店舗</th>
-    <th>営業開始時間</th>
-    <th>最終返却時間</th>
-  </tr>
-  <tr>
-    <td>山林店、古寺店</td>
-    <td>8時</td>
-    <td>18時30分</td>
-  </tr>
-  <tr>
-    <td>森島店</td>
-    <td>9時</td>
-    <td>18時</td>
-  </tr>
+<table>
+    <tr>
+        <th rowspan="2"></th>
+        <th colspan="2">期間※</th>
+        <th>平日</th>
+        <th>土曜・日曜</th>
+    </tr>
+    <tr>
+        <td>授業期間</td>
+        <td>9:00～22:00</td>
+        <td colspan="2">9:00～17:00</td>
+    </tr>
+    <tr>
+        <td>中央<br>図書館</td>
+        <td>夏休み・春休み期間</td>
+        <td>9:00～19:00</td>
+        <td colspan="2">休館</td>
+    </tr>
+    <tr>
+        <td>文学部<br>図書館</td>
+        <td>授業期間</td>
+        <td>9:00～21:00</td>
+        <td colspan="2">9:00～17:00</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>夏休み・春休み期間</td>
+        <td>9:00～18:00</td>
+        <td colspan="2">休館</td>
+    </tr>
 </table>
 
-<p>※電話番号など、詳細はホームページ内の各店のページをご覧ください。</p>
+<p class="note">※各期間の具体的な日程は、開館カレンダーのページをご覧ください。</p>
+
+<div class="page-number">65</div>
+
+<p>マリーさんは、秋川大学で本を借りるために、図書館利用カードを作ろうと思っている。今日は金曜日である。明日の夜までに本を借りたいが、図書館利用カードは、どうように申請しなければならないか。</p>
+
+<ol>
+    <li>今日、中央図書館か文学部図書館で9時から17時までの間に申請する。</li>
+    <li>今日、中央図書館で9時から17時までの間に申請する。文学部図書館では申請できない。</li>
+    <li>今日、中央図書館か文学部図書館で9時から17時までの間に申請するか、明日、中央図書館で9時から17時までの間に申請する。</li>
+    <li>今日か明日、中央図書館か文学部図書館で9時から17時までの間に申請する。</li>
+</ol>
 
 <hr>
-</div>
 
+<div class="page-number">66</div>
 
-<div class="follow-up">
-<h4>70.</h4>
-<p>大学生のリンさんは、2週間後の日曜日に山林店で着物をレンタルしたいと思っている。着物は当日中に返却する予定だ。今日、予約をする場合、料金はいくらになるか。</p>
+<p>ケイさんは、研究のために資料を借りたい複写したりする必要があって、秋川大学の文学部図書館に来た。図書館利用カードを持っている。今日は、授業期間の火曜日である。貸し出しと複写は何時まで可能か。</p>
+
 <ol>
-  <li>3,500円</li>
-  <li>3,500円から200円が割引された金額</li>
-  <li>3,500円から300円が割引された金額</li>
-  <li>3,500円から200円と300円が割引された金額</li>
+    <li>貸し出しは18時の15分前まで、複写は18時まで可能である。</li>
+    <li>貸し出しは21時の15分前まで、複写は21時まで可能である。</li>
+    <li>貸し出しは21時の15分前まで、複写は21時の10分前まで可能である。</li>
+    <li>貸し出しは21時の30分前まで、複写は21時の10分前まで可能である。</li>
 </ol>
-</div>
 
-<div class="follow-up">
-<h4>71.</h4>
-<p>ローザさんは、今日、森島店で着物を借りた。今日中に返却する予定だったが、店を出たあとで翌日返却に変更したくなった。今は14時である。明日の午前中に返却する場合、どうすればいいか。</p>
-<ol>
-  <li>今日の18時までに森島店に電話をして、返却の際に1,200円を支払う。</li>
-  <li>今日の18時までに森島店に電話をして、返却の際に1,500円を支払う。</li>
-  <li>今日の18時までに森島店に電話をして、返却の際に1,500円と1,000円を支払う。</li>
-  <li>今日の18時30分までに森島店に電話をして、返却の際に1,500円を支払う。</li>
-</ol>
-</div>
+</body>
+</html>
 """
 
 topic_understanding_txt_teacher_prompt = """
