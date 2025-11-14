@@ -191,7 +191,7 @@ class JLPTTaskFactory:
             gan_history
         )
 
-    def long_passage_read(self, word, gan_history):
+    def long_passage_read(self, word, gan_history: Optional[str] = None):
         return self._run_task(
             self.prompts_module.long_reading_teacher_prompt,
             self.prompts_module.long_reading_example,
@@ -201,7 +201,17 @@ class JLPTTaskFactory:
             gan_history
         )
 
-    def info_retrieval(self, word, gan_history: Optional[str] = None,):
+    def understanding_read(self, word, gan_history: Optional[str] = None):
+        return self._run_task(
+            self.prompts_module.long_reading_understanding_teacher_prompt,
+            self.prompts_module.long_reading_understanding_example,
+            self.prompts_module.long_reading_understanding_reflection_prompt,
+            MultipleQuestionOutput,
+            word,
+            gan_history
+        )
+
+    def info_retrieval(self, word, gan_history: Optional[str] = None):
         return self._run_task(
             self.prompts_module.information_retrieval_teacher_prompt,
             self.prompts_module.information_retrieval_example,
