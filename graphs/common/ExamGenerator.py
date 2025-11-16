@@ -59,7 +59,7 @@ class ExamGenerator:
                     func = getattr(handler, function_name, None)
 
                     if func:
-                        max_attempts = 2
+                        max_attempts = 3
                         for attempt in range(max_attempts):
                             try:
                                 sig = inspect.signature(func)
@@ -82,6 +82,7 @@ class ExamGenerator:
                                 logger.error(f"Error {e} on {question['topic']}")
                                 if attempt < max_attempts - 1:
                                     question['topic'] = random.choice(self.topics)
+                                    time.sleep(10)
                                     return None
                     else:
                         question['result'] = f"Method {function_name} not found"
