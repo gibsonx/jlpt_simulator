@@ -25,10 +25,11 @@ Step 3: Generate 4 options for this question. Require all of the following condi
 Step 4: output a question.
 Format: Follow the format of the 2 examples in the formal exam paper, not the content. The output must be in HTML format and the line change tag must be removed.
 Content: Ensure vocabulary is limited to N2 level.  
-Reference: Get inspiration from the "Topic". Consider the feedback given in the previous conversation (if any)
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.  
 Additional requirement: Do not display problem descriptions and serial numbers in the generated content.  
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 kanji_reading_example = """  
@@ -62,14 +63,15 @@ The word in hiragana being tested needs to be underlined with <u></u>, no other 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content.  The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 write_kanji_example = """
@@ -106,14 +108,15 @@ Options are written either entirely in kanji or entirely in kana.
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 words_collocation_example = """
@@ -150,14 +153,15 @@ Options are written either entirely in kanji or entirely in kana.
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 word_meaning_example = """
@@ -197,14 +201,15 @@ All choices should be written in Japanese only
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 synonym_substitution_example = """
@@ -237,12 +242,13 @@ Make only one option correct (the one using the word naturally), and ensure the 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: Don't show question instructions and sequence number in the generated content.
 You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 word_usage_example = """
@@ -289,7 +295,7 @@ sentence_grammar_teacher_prompt = """
 步骤7：生成题目
 题目格式：遵循正式试卷中示例的格式（example 1, example 2），而不是内容。输出必须为html格式，并删除行更改标记
 附加要求：
-- 在输出中显示正确答案，选项为1,2,3,4.例如：正解：1
+- 在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要平均，不要集中在某个选项
 - 不要在生成的内容中显示问题说明和序列号。
 
 正式测试问题示例: {example}
@@ -368,6 +374,7 @@ Additional requirements:
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 Grammar reference: {grammar}
 """
 
@@ -395,7 +402,7 @@ sentence_sort_example = """
 structure_selection_teacher_prompt = """
 角色：你是一名日语老师，正在为JLPT N2水平撰写试卷。 
 
-任务：你的工作是按照以下步骤为JLPT N2级别出一道填入正确内容的语法题。
+任务：你的工作是按照以下步骤为JLPT N2级别出一道填入正确内容的语法题。根据语法参考列表中的4个语法点出题
 
 步骤1：问题的灵感来源"主题"。写一篇日语短文。短文需要符合以下要求：
 - 短文需要有1-3个段落，350-500个词。
@@ -426,10 +433,12 @@ structure_selection_teacher_prompt = """
 
 步骤7：生成题目。
 题目格式：遵循正式试卷中示例的格式，而不是内容。输出必须为html格式，并删除行更改标记
+参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈和批评（如果存在）,避免重复生成"历史题目"的问题(q)或给出的答案(a)。
 附加要求：
-- 在输出中显示正确答案，选项为1,2,3,4.例如：正解：1
+- 在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要平均，不要集中在某个选项
 - 不要在生成的内容中显示问题说明和序列号。
 
+历史题目: {gan_history}
 正式试卷：{example}
 语法参考列表：{grammar}
 """
@@ -466,6 +475,7 @@ structure_selection_example = """
 </style>
 </head>
 <body>
+<div class="article">
   <p>以下は、留学生がスピーチのために書いた文章である</p>
 
   <div class="container">
@@ -488,19 +498,40 @@ structure_selection_example = """
       紅葉に起きている異変を知り、このまま温暖化が進むと、日本の秋の景色が変わってしまう可能性もあるのではないかと思いました。もしかしたら、紅葉自体が見られなくなる日も来るかもしれません。紅葉を通して、温暖化が身近な問題であることをより強く（51）
     </p>
   </div>
+</div>
 
   <div class="follow-up">
-    <p><strong>48</strong></p>
-    <p>1. そこの紅葉　　2. そんな紅葉　　3. そちら　　4. 紅葉</p>
-
-    <p><strong>49</strong></p>
-    <p>1. 結局　　2. 確かに　　3. しかし　　4. つまり</p>
+    <a><strong>48</strong></a>
+    <div class="options">
+        <li>そこの紅葉</li>
+        <li>そんな紅葉</li>
+        <li>そちら</li>
+        <li>紅葉</li>
+    </div>
+    
+    <a><strong>49</strong></a>
+    <div class="options">
+        <li>結局</li>　　
+        <li>確かに</li>　　
+        <li>しかし</li>　　
+        <li>つまり</li>
 
     <p><strong>50</strong></p>
-    <p>1. 始まらないのです　　2. 始まらないためです　　3. 始まらないのでしょうか　　4. 始まらないためでしょうか</p>
-
+    <div class="options">
+        <li>始まらないのです</li>　　
+        <li>始まらないためです</li>　　
+        <li>始まらないのでしょうか</li>　　
+        <li>始まらないためでしょうか</li>
+    </div>
+    
     <p><strong>51</strong></p>
-    <p>1. 感じているからだと思います　　2. 感じられるところだと思います　　3. 感じさせることができました　　4. 感じるようになりました</p>
+    <div class="options">
+        <li>1. 感じているからだと思います</li>　　
+        <li>感じられるところだと思います</li>　　
+        <li>感じさせることができました</li>　　
+        <li>感じるようになりました</li>
+    </div>
+    </div>
   </div>
 </body>
 </html>
@@ -518,14 +549,15 @@ The passage should reflect a real-life topic (e.g., daily life, work, study, tra
 Instructions:
 Format: follow the format of 1 example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 short_reading_narrative_example = """
@@ -568,7 +600,7 @@ short_reading_narrative_example = """
     </style>
 </head>
 <body>
-
+<div class="article">
 <p>インタビューでは準備も重要だが、実際のインタビューの場面になったら、いったんその準備で得たものをすべて捨てなくてはならない。そして、相手の話を真剣に深く聞き、その人が何を言わんとしているのか、丸ごと捉えて、そこで出てきた素晴らしい言葉、豊かな言葉、言葉に込められた大事なメッセージをしっかりとつかむことこそが必要なのだ。</p>
 
 <p>そこから良い対話が生まれてくる。良いインタビューは、次の質問を忘れて相手の話を聞けたときに初めて行えるものなのだ。</p>
@@ -576,16 +608,16 @@ short_reading_narrative_example = """
 <p class="note">（注1）言わんとしている：言おうとしている</p>
 <p class="note">（注2）丸ごと：そのまま全部</p>
 
-<div class="page-number">52</div>
+</div>
 
-<p>インタビューについて、筆者の考えに合うのはどれか。</p>
+<a>インタビューについて、筆者の考えに合うのはどれか。</a>
 
-<ol>
+<ul class="options">
     <li>準備したものから離れて、相手の話をよく聞くことが重要だ。</li>
     <li>準備した質問に沿って、相手から大事なメッセージを引き出すことが重要だ。</li>
     <li>相手の話をしっかり聞くことが大切なので、準備をする必要はない。</li>
     <li>相手から素晴らしい言葉を引き出すには、準備しすぎないほうがいい。</li>
-</ol>
+</ul>
 
 </body>
 </html>
@@ -606,14 +638,15 @@ The passage should reflect a real-life topic (e.g., daily life, work, study, tra
 Instructions:
 Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 short_reading_mail_example = """
@@ -666,7 +699,7 @@ short_reading_mail_example = """
     </style>
 </head>
 <body>
-
+<div class="article">
 <p>以下は、ある会社で全社員に送られたメールである。</p>
 
 <hr>
@@ -683,11 +716,9 @@ short_reading_mail_example = """
 
 <h3>営業課 安井</h3>
 
-<hr>
+</div>
 
-
-
-<div class="follow-up">「緑山牧場チーズ詰め合わせ」を社内販売で購入したい社員は、期日までに営業課にメールで申し込んだあと、どうすればいいか。</div>
+<a>「緑山牧場チーズ詰め合わせ」を社内販売で購入したい社員は、期日までに営業課にメールで申し込んだあと、どうすればいいか。</a>
 
 <ul class='options'>
     <li>経理課で支払いをして受け取る。</li>
@@ -712,14 +743,15 @@ The passage should reflect a real-life topic (e.g., daily life, work, study, tra
 Instructions:
 Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 short_reading_notification_example = """
@@ -790,31 +822,29 @@ short_reading_notification_example = """
     </style>
 </head>
 <body>
-
-<p>以下は、ある町の掲示板に貼られていた文書である。</p>
-
-<div class="document">
+<div class="article">
+    <p>以下は、ある町の掲示板に貼られていた文書である。</p>
+    <div class="document">
     <div class="corner top-left"></div>
     <div class="corner top-right"></div>
     <div class="corner bottom-left"></div>
     <div class="corner bottom-right"></div>
-
+    
     <div class="date">10月5日</div>
-
+    
     <p>住民の皆様へ</p>
-
+    
     <h3>ごみに関するお願い</h3>
-
+    
     <p>最近、「可燃ごみ」の回収日に衣類・布類が多く出されています。しかし、市の規則では、衣類・布類は毎週火曜日の「資源ごみ」の回収日に出すことになっています。資源を有効に活用するため、決められた回収日に出してください。</p>
-
+    
     <p>衣類・布類は、市内8か所の公共施設に設置してある回収ボックスでも回収しています。回収後は、中古の衣類として再使用したり、工場で再生利用したりします。ご協力をよろしくお願いします。</p>
-
+    
     <p class="signature">竹川市役所 市民生活課</p>
-</div>
+    </div>
+</div
 
-
-
-<dive class="follow-up">この文書で最も伝えたいことは何か。</div>
+<a>この文書で最も伝えたいことは何か。</a>
 
 <ul class="options">
     <li>「資源ごみ」として出す衣類・布類の量を減らしてほしい。</li>
@@ -840,15 +870,16 @@ Instead, it should require the test-taker to infer, summarize, or understand the
 Instructions:
 Format: follow the format of the 1 example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 midsize_reading_example = """
@@ -898,32 +929,30 @@ midsize_reading_example = """
     </style>
 </head>
 <body>
-    <div class="content">
 
-        <!-- 第二篇文章 -->
-        <div class="article">
-            <p>勉強にしても、仕事にしても、その能率には必ず波があり、それがな<br>いようにみえても、波が小さいだけである。つまり、人間は機械のように<br>いつも同じ調子ではたらいていないから、1 時間に 50 個の製品がつく<br>れるから、10 時間で 500 個がつくれる、という具合には計算できない。<br>従って、脳が最も快調にはたらいているときを基準にすると、たいていの<br>ときは不調ということになってしまう。</p>
+<div class="article">
+    <p>勉強にしても、仕事にしても、その能率には必ず波があり、それがな<br>いようにみえても、波が小さいだけである。つまり、人間は機械のように<br>いつも同じ調子ではたらいていないから、1 時間に 50 個の製品がつく<br>れるから、10 時間で 500 個がつくれる、という具合には計算できない。<br>従って、脳が最も快調にはたらいているときを基準にすると、たいていの<br>ときは不調ということになってしまう。</p>
+    <p>それでも、全く無計画に勉強や仕事をするわけにもゆかないので、一<br>応はスケジュールを立てる。その際に、快調に脳がはたらいているときの<br>能率を基準にしてスケジュールを立てれば、そのスケジュールの通りにこ<br>とが進行することは絶対にないといってもいい。その度に、自分の才能に失<br>望していれば、失望しつづけることになる。さし迫った状態では、どうし<br>ても脳がフル回転しているときを基準にスケジュールを組むので、たいてい<br>は不完全な形で終ってしまう。スケジュールをつくるときには、せめて<br>中等度に脳がはたらいているときの能率を基準にする必要がある。スケジ<br>ュール以上にはかどっても誰もこまる人はいない。</p>
+    <p>そして、スケジュールにこだわるより、脳の変動の波をできるだけ感<br>じとり、能率が悪くても悲観せずに、必ず上げ潮のときがくることを期待<br>すればいい。そして、上げ潮のときには自分でもおどろくほどに能率が上<br>がるので、そのときに一気に遅れをとり戻せばいいのである。</p>
+</div>
 
-            <p>それでも、全く無計画に勉強や仕事をするわけにもゆかないので、一<br>応はスケジュールを立てる。その際に、快調に脳がはたらいているときの<br>能率を基準にしてスケジュールを立てれば、そのスケジュールの通りにこ<br>とが進行することは絶対にないといってもいい。その度に、自分の才能に失<br>望していれば、失望しつづけることになる。さし迫った状態では、どうし<br>ても脳がフル回転しているときを基準にスケジュールを組むので、たいてい<br>は不完全な形で終ってしまう。スケジュールをつくるときには、せめて<br>中等度に脳がはたらいているときの能率を基準にする必要がある。スケジ<br>ュール以上にはかどっても誰もこまる人はいない。</p>
-
-            <p>そして、スケジュールにこだわるより、脳の変動の波をできるだけ感<br>じとり、能率が悪くても悲観せずに、必ず上げ潮のときがくることを期待<br>すればいい。そして、上げ潮のときには自分でもおどろくほどに能率が上<br>がるので、そのときに一気に遅れをとり戻せばいいのである。</p>
-
-            <div class="follow-up">59. 筆者によると、スケジュールを立てる際の注意点は何か。</div>
-            <ol>
-                <li>脳の調子がいいときを基準にしない</li>
-                <li>いつも脳が同じ調子ではたらけるようにする</li>
-                <li>能率の変化を考えすぎない</li>
-                <li>能率が悪くなったときに変更できるようにしておく</li>
-            </ol>
-
-            <div class="follow-up">60. 筆者の考えに合うのはどれか。</div>
-            <ol>
-                <li>能率を上げるためには、脳の状態をコントロールするといい</li>
-                <li>脳の変動の波に合わせて勉強や仕事を進められる方法を探すといい</li>
-                <li>計画の通りに行かなくても失望せずに、脳の調子が上がるのを待てばいい</li>
-                <li>計画の通りに勉強や仕事を進めるためには、脳の変動の波を小さくすればいい</li>
-            </ol>
-        </div>
+<div class="follow-up">           
+    <a>筆者によると、スケジュールを立てる際の注意点は何か。</a>
+    <ul class="options">
+        <li>脳の調子がいいときを基準にしない</li>
+        <li>いつも脳が同じ調子ではたらけるようにする</li>
+        <li>能率の変化を考えすぎない</li>
+        <li>能率が悪くなったときに変更できるようにしておく</li>
+    </ul>
+    
+    <a>筆者の考えに合うのはどれか。</a>
+    <ul class="options">
+        <li>能率を上げるためには、脳の状態をコントロールするといい</li>
+        <li>脳の変動の波に合わせて勉強や仕事を進められる方法を探すといい</li>
+        <li>計画の通りに行かなくても失望せずに、脳の調子が上がるのを待てばいい</li>
+        <li>計画の通りに勉強や仕事を進めるためには、脳の変動の波を小さくすればいい</li>
+    </ul>
+</div>
 
     </div>
 </body>
@@ -942,19 +971,20 @@ The purpose is to ensure the students are able to understand the meaning of the 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 comprehensive_read_example = """
-<div class="reading-text">
+<div class="article">
   <h3>A</h3>
   <p>
     新しい商品を企画するとき、いいアイデアがなかなか思いつかないことがある。そんなとき、自分には才能がないからだと思い込み、
@@ -978,29 +1008,29 @@ comprehensive_read_example = """
 </div>
 
 <body>
-    <h1>65. アイデアを生み出すことについて、AとBが共通して述べていることは何か。</h1>
-    <ol>
+    <a>65. アイデアを生み出すことについて、AとBが共通して述べていることは何か。</a>
+    <ul class="options">
         <li>アイデアを生み出し方は、簡単に身につけることができる。</li>
         <li>多くの情報を得ることで、アイデアを生み出しやすくなる。</li>
         <li>特別な能力がなくても、アイデアを生み出すことができる。</li>
         <li>発想のしかたを大きく変えなければ、アイデアは生み出せない。</li>
-    </ol>
+    </ul>
 
-    <h1>66. 新しい商品を企画することについて、AとBはどのようなアドバイスをしているか。</h1>
-    <ol>
+    <a>66. 新しい商品を企画することについて、AとBはどのようなアドバイスをしているか。</a>
+    <ul class="options">
         <li>AもBも、いろいろな分野の情報をできるだけ多く集めるといいと述べている。</li>
         <li>AもBも、流行している商品について詳しく調べるといいと述べている。</li>
         <li>Aは関連する分野の他社の商品の情報を集めるといいと述べ、Bは流行に逆らった考え方をするといいと述べている。</li>
         <li>AもBも、流行している商品について詳しく調べるといいと述べている。</li>
-    </ol>
+    </ul>
 
-    <h1>67. 新しい商品を企画する際の注意点について、AとBが共通して述べていることは何か。</h1>
-    <ol>
+    <a>67. 新しい商品を企画する際の注意点について、AとBが共通して述べていることは何か。</a>
+    <ul class="options">
         <li>十分な時間と資金を確保すること。</li>
         <li>多くの消費者の意見を取り入れること。</li>
         <li>市場の需要を調べる前に、デザインや機能にこだわること。</li>
         <li>競合他社の動きを分析し、それに合わせること。</li>
-    </ol>
+    </ul>
 </body>
 """
 
@@ -1016,15 +1046,16 @@ The purpose is to ensure the students are able to understand the meaning of the 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 long_reading_example = """
@@ -1069,40 +1100,38 @@ long_reading_example = """
     </style>
 </head>
 <body>
-    <div class="content">
+    <div class="article">
         <p>以下は、ある作家が物語などの本を読むことについて書いた文章である。</p>
-        
         <p>読むことは、受動的な作業だと思っている人は意外に多い。（中略）読んでインプットして、書いてアウトプットする。そうではなくて、両方アウトプットなのだというのが、私の持論である。</p>
-        
         <p>そこにある言葉を読む。すると心には、文字以上のものが広がる。たとえば、子どものころ読んだ海外作品に、聞いたこともない料理名が出てくるということが、よくあった。クロスグリのパイだとか、ジンジャークッキーだとか。食べたことのないものを、懸命に想像して味わう。それを食べる主人公の舌を、獲得するわけである。①この行為、受動ではなく能動である。「創る」作業である。本でしか読んだことのない食べものを、大人になってから実際に食べ、「違う」と思った経験を持つ人は、意外に多いのではないだろうか。もちろん違うのは私たちの想像なのだが、しかし自分の頭のなかで創った料理のほうが、断然おいしかった、ということは、よくある。</p>
-        
-        <p>本を読まない、というのは、だから、私にとって創造の放棄である。②つまらない本、相性が悪い本というのはもちろんある。しかしそこで、どこがどんなふうにつまらないのか、どう展開したらおもしろかったのか、自分のどの部分と相性が悪いのか、そんなことを考えていると、つまらない本はおもしろくなるし、相性が悪い本はいつか相性がよくなる日を待とうと思うことができる。私は、おもしろかった本よりつまらなかった本のあらすじを人に話すほうが、ずっと好きだ。どこがどんなふうにつまらなく感じたかを話すのはそれだけ創造の余地があるからだろう。</p>
-        
-        <p>料理でも、絵画でも、あるいは家事の手順でも、創ることの喜びを知ってしまうと、なかなかそれから離れることができない。読むことの楽しみは、と訊かれれば、創ることの自由さだと私は答える。</p>
-        
-        <div class="follow-up">67. ①この行為とはどういうことか</div>
-        <ol>
+        <p>本を読まない、というのは、だから、私にとって創造の放棄である。②つまらない本、相性が悪い本というのはもちろんある。しかしそこで、どこがどんなふうにつまらないのか、どう展開したらおもしろかったのか、自分のどの部分と相性が悪いのか、そんなことを考えていると、つまらない本はおもしろくなるし、相性が悪い本はいつか相性がよくなる日を待とうと思うことができる。私は、おもしろかった本よりつまらなかった本のあらすじを人に話すほうが、ずっと好きだ。どこがどんなふうにつまらなく感じたかを話すのはそれだけ創造の余地があるからだろう。</p>        
+        <p>料理でも、絵画でも、あるいは家事の手順でも、創ることの喜びを知ってしまうと、なかなかそれから離れることができない。読むことの楽しみは、と訊かれれば、創ることの自由さだと私は答える。</p>        
+    </div>
+    
+    <div class="follow-up">    
+        <a>①この行為とはどういうことか</a>
+        <ul class="options">
             <li>実際に、主人公が食べていた食べものを味わってみること</li>
             <li>食べたことのないものを主人公と一緒に食べているところを想像すること</li>
             <li>主人公がどんな食べものが好きかを想像してみること</li>
             <li>主人公になりきって、食べたことのないものを想像して味わうこと</li>
-        </ol>
+        </ul>
         
-        <div class="follow-up">68. ②つまらない本について、筆者はどのように述べているか。</div>
-        <ol>
+        <a>②つまらない本について、筆者はどのように述べているか。</a>
+        <ul class="options">
             <li>つまらなく感じた点について色々考えていると、おもしろくなる</li>
             <li>つまらなく感じた理由を考えていると、自分の好みがよく分かってくる</li>
             <li>つまらないと思っても、いつか必ず相性がよくなる日がくる</li>
             <li>つまらないと思っても、人にあらすじを話すとおもしろいところが見つけられる</li>
-        </ol>
+        </ul>
         
-        <div class="follow-up">69. 本を読むことについて、筆者はどのように考えているか</div>
-        <ol>
+        <a>本を読むことについて、筆者はどのように考えているか</a>
+        <ul class="options">
             <li>本を読むことは、料理や絵画より創ることの喜びが大きい</li>
             <li>本を読むことは、自由に想像を膨らませる楽しい創造の作業だ</li>
             <li>本を読んでたくさん知ることができれば、創ることの喜びも増す</li>
             <li>本を読んで想像力を身につければ、生活のなかでも自由に想像が楽しめる</li>
-        </ol>
+        </ul>
     </div>
 </body>
 </html>
@@ -1122,14 +1151,15 @@ such as train or flight schedules, event, or advertisements.
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the table and clues can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 information_retrieval_example = """
@@ -1178,7 +1208,7 @@ information_retrieval_example = """
 </style>
 </head>
 <body>
-  <div class="container">
+  <div class="article">
     <h1>秋原テニススクール入会案内</h1>
 
     <p class="section-title">コース・クラスについて</p>
@@ -1260,30 +1290,30 @@ information_retrieval_example = """
   </div>
 
   <div class="follow-up">
-      <p><strong>70.</strong> 高校生の村田さんは「C 平日夜間・土日（初心者）コース」に入会したいと思っている。姉がすでに同じコースを受講しているが、入会時に支払うものは何か。</p>
-      <ol>
+      <a>高校生の村田さんは「C 平日夜間・土日（初心者）コース」に入会したいと思っている。姉がすでに同じコースを受講しているが、入会時に支払うものは何か。</a>
+      <ul class="options">
         <li>入会金、年会費、10％割引された受講料</li>
         <li>入会金、年会費、15％割引された受講料</li>
         <li>年会費、15％割引された受講料</li>
         <li>年会費、50％割引された受講料</li>
-      </ol>
+      </ul>
     </div>
 
     <div class="follow-up">
-      <p><strong>71.</strong> リナさんは、このテニススクールに1か月前に入会し、現在「B. 平日昼間（中・上級者）コース」を受講している。5月から「D. 平日夜間・土日（中・上級者）コース」に変わりたいと思っているが、リナさんはどうしなければならないか。今日は3月15日である。</p>
-      <ol>
+      <a>リナさんは、このテニススクールに1か月前に入会し、現在「B. 平日昼間（中・上級者）コース」を受講している。5月から「D. 平日夜間・土日（中・上級者）コース」に変わりたいと思っているが、リナさんはどうしなければならないか。今日は3月15日である。</a>
+      <ul class="options">
         <li>4月10日までに、手数料550円を支払い、手続きをする</li>
         <li>4月10日までに手続きをする。手数料は必要ない</li>
         <li>4月20日までに、手数料550円を支払い、手続きをする</li>
         <li>4月20日までに手続きをする。手数料は必要ない</li>
-      </ol>
+      </ul>
     </div>
 </body>
 </html>
 
 
 --- example 2 ---
-<div class="container">
+<div class="article">
 <h2>着物レンタルのご案内</h2>
 
 <p>着物を着て水森市を観光しませんか。「はなかわ」では、山林店、古寺店、森島店の三つの店で、レンタルの着物をご用意しております。</p>
@@ -1345,25 +1375,22 @@ information_retrieval_example = """
 
 
 <div class="follow-up">
-<h4>70.</h4>
-<p>大学生のリンさんは、2週間後の日曜日に山林店で着物をレンタルしたいと思っている。着物は当日中に返却する予定だ。今日、予約をする場合、料金はいくらになるか。</p>
-<ol>
-  <li>3,500円</li>
-  <li>3,500円から200円が割引された金額</li>
-  <li>3,500円から300円が割引された金額</li>
-  <li>3,500円から200円と300円が割引された金額</li>
-</ol>
-</div>
-
-<div class="follow-up">
-<h4>71.</h4>
-<p>ローザさんは、今日、森島店で着物を借りた。今日中に返却する予定だったが、店を出たあとで翌日返却に変更したくなった。今は14時である。明日の午前中に返却する場合、どうすればいいか。</p>
-<ol>
-  <li>今日の18時までに森島店に電話をして、返却の際に1,200円を支払う。</li>
-  <li>今日の18時までに森島店に電話をして、返却の際に1,500円を支払う。</li>
-  <li>今日の18時までに森島店に電話をして、返却の際に1,500円と1,000円を支払う。</li>
-  <li>今日の18時30分までに森島店に電話をして、返却の際に1,500円を支払う。</li>
-</ol>
+    <a>大学生のリンさんは、2週間後の日曜日に山林店で着物をレンタルしたいと思っている。着物は当日中に返却する予定だ。今日、予約をする場合、料金はいくらになるか。</a>
+    <ul class="options">
+      <li>3,500円</li>
+      <li>3,500円から200円が割引された金額</li>
+      <li>3,500円から300円が割引された金額</li>
+      <li>3,500円から200円と300円が割引された金額</li>
+    </ul>
+    </div>
+    
+    <a>ローザさんは、今日、森島店で着物を借りた。今日中に返却する予定だったが、店を出たあとで翌日返却に変更したくなった。今は14時である。明日の午前中に返却する場合、どうすればいいか。</a>
+    <ul class="options">
+      <li>今日の18時までに森島店に電話をして、返却の際に1,200円を支払う。</li>
+      <li>今日の18時までに森島店に電話をして、返却の際に1,500円を支払う。</li>
+      <li>今日の18時までに森島店に電話をして、返却の際に1,500円と1,000円を支払う。</li>
+      <li>今日の18時30分までに森島店に電話をして、返却の際に1,500円を支払う。</li>
+    </ul>
 </div>
 """
 
@@ -1391,15 +1418,14 @@ Step 5, provide multiple-choice options based on the listening content. These op
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
-
-
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 topic_understanding_txt_example = """
@@ -1407,23 +1433,22 @@ topic_understanding_txt_example = """
 <p class='background'>大学で女の学生と男の学生が話しています。男の学生はこの後まず、何をしますか。</p>
 
 <div class='conversation'>
-<p><b>女：</b> 中村くん、シンポジウムのポスター、掲示板に貼ってくれたんだね。ありがとう。<br>
-<b>男：</b> ええ、他に僕がやっておくことってありますか？<br>
-<b>女：</b> マイクとか会場の準備は前日にすればいいし、当日のスタッフ用のスケジュール表、これないから欲しいな、今週中にお願いしていい？<br>
-<b>男：</b> あ、はい。<br>
-<b>女：</b> それから１番大事な当日配る資料、コピーまだなんじゃない？100部だよね？<br>
-<b>男：</b> あ、それなんですけど、発表者の方からの資料が全部そろってないんですよ。<br>
-<b>女：</b> そう、みなさんお忙しい方ばかりだから…私の方で発表者に資料を送ってもらうようにすぐに連絡をするから、集まったら次第コピーしよう。週明けには出してもらうようにするね。<br>
-<b>男：</b> はい、わかりました。</p>
+女：中村くん、シンポジウムのポスター、掲示板に貼ってくれたんだね。ありがとう。
+男：ええ、他に僕がやっておくことってありますか？
+女：マイクとか会場の準備は前日にすればいいし、当日のスタッフ用のスケジュール表、これないから欲しいな、今週中にお願いしていい？
+男：あ、はい。
+女：それから１番大事な当日配る資料、コピーまだなんじゃない？100部だよね？
+男：あ、それなんですけど、発表者の方からの資料が全部そろってないんですよ。
+女：そう、みなさんお忙しい方ばかりだから…私の方で発表者に資料を送ってもらうようにすぐに連絡をするから、集まったら次第コピーしよう。週明けには出してもらうようにするね。
+男：はい、わかりました。
 </div>
 
 <p class="follow-up">男の学生は、この後まず何をしますか。</p>
 <div class="options">
-  <p>1. シンポジウムのポスターを貼る<br>
-     2. スタッフの当日の予定表を作る<br>
-     3. 当日配る資料をコピーする<br>
-     4. 発表者に連絡する
-  </p>
+  <li>シンポジウムのポスターを貼る</li>
+  <li>スタッフの当日の予定表を作る</li>
+  <li>当日配る資料をコピーする</li>
+  <li>発表者に連絡する</li>
 </div>
 
 
@@ -1431,22 +1456,21 @@ topic_understanding_txt_example = """
 <p class='background'>スーパーで男の店長と女の店員が話しています。女の店員はこの後まず、何をしますか。</p>
 
 <div class='conversation'>
-<p><b>女：</b> おはようございます、森田さん。今日は一部の商品に値引きシールを付ける作業をやってくれることになってるね。<br>
-<b>男：</b> あ、はい。準備してます。<br>
-<b>男：</b> えっと、忙しい時に悪いんだけど、倉庫に行って南コーヒーの豆、何袋あるか数えてきてくれる？数が少なかったら今日中に注文しないといけないんだ。<br>
-<b>女：</b> あ、わかりました。急ぎですか？<br>
-<b>男：</b> あー、そのシールを貼る作業が終わってからでいいから。袋の数を数えたらメモを私の机の上に置いといて。<br>
-<b>女：</b> わかりました。<br>
-<b>男：</b> お客さんがレジにたくさん並んでるから、私もすぐレジを手伝わなきゃいけなくて。値引シールを付けた商品をレジの横の棚に並べるのは明日の開店前にみんなですればいいから。じゃ、よろしくね。</p>
+女：おはようございます、森田さん。今日は一部の商品に値引きシールを付ける作業をやってくれることになってるね。
+男：あ、はい。準備してます。
+男：えっと、忙しい時に悪いんだけど、倉庫に行って南コーヒーの豆、何袋あるか数えてきてくれる？数が少なかったら今日中に注文しないといけないんだ。
+女：あ、わかりました。急ぎですか？
+男：あー、そのシールを貼る作業が終わってからでいいから。袋の数を数えたらメモを私の机の上に置いといて。
+女：わかりました。<br>
+男：お客さんがレジにたくさん並んでるから、私もすぐレジを手伝わなきゃいけなくて。値引シールを付けた商品をレジの横の棚に並べるのは明日の開店前にみんなですればいいから。じゃ、よろしくね。
 </div>
 
 <p class="follow-up">女の店員はこの後まず、何をしますか。</p>
 <div class="options">
-  <p>1. 商品に値引きシールを貼る<br>
-     2. 倉庫で南コーヒーの数を数える<br>
-     3. レジの手伝いをする<br>
-     4. 商品をレジの横の棚に並べる
-  </p>
+    <li>商品に値引きシールを貼る</li>
+    <li>倉庫で南コーヒーの数を数える</li>
+    <li>レジの手伝いをする</li>
+    <li>商品をレジの横の棚に並べる</li>
 </div>
 
 """
@@ -1496,60 +1520,58 @@ Step 3, provide multiple-choice questions based on the listening content. These 
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 keypoint_understanding_example = """
 --- example 1 ---
-    <p class='background'>テレビでアナンサーの女の人がパン屋の店長にインタビューをしています。店長はどうしてパン屋を始めたと言っていますか。</p>
-    <div class='conversation'>  
-        - 女: 店長の山本さんです。こちらのお店の手作りのパン、大変人気ですが山本さんご自身は以前、会社員をなされていたんですよね？
-        - 男: はい。この店はもともとパン作りが好きな母がやる予定だったんですが、店を出す準備をしている途中で母が病気になってしまいました。母はずっとパン屋をやりたかったので店を諦めることをとても残念がっていたんですよ。それで「やってくれ」と言われたわけじゃないんですが、僕が何とか形にしたいと思いました。</p>
-        - 女: それまでパン作りのご経験はあったんですか？
-        - 男:いえ、全くなくて…パン作りは専門学校で一から勉強しました。卒業する前に母は亡くなりました。
-        - 女:そうでしたか。</p>
-        - 男:母のレベルにはまだまだなんですが、おいしいパンを地元の方に食べてもらえるように頑張っています
-    </div>
-    <div class="follow-up">店長はどうしてパン屋を始めたと言っていますか</div>
-    <ul class='options'>
-        <li>母といっしょにパン屋をやりたかったから</li>
-        <li>母にたのまれたから</li>
-        <li>母のゆめをかなえたかったから</li>
-        <li>母のパンの味を残したかったから</li>
-    </ul>
-
-
+<p class='background'>テレビでアナンサーの女の人がパン屋の店長にインタビューをしています。店長はどうしてパン屋を始めたと言っていますか。</p>
+<div class='conversation'>  
+女: 店長の山本さんです。こちらのお店の手作りのパン、大変人気ですが山本さんご自身は以前、会社員をなされていたんですよね？
+男: はい。この店はもともとパン作りが好きな母がやる予定だったんですが、店を出す準備をしている途中で母が病気になってしまいました。母はずっとパン屋をやりたかったので店を諦めることをとても残念がっていたんですよ。それで「やってくれ」と言われたわけじゃないんですが、僕が何とか形にしたいと思いました。</p>
+女: それまでパン作りのご経験はあったんですか？
+男: いえ、全くなくて…パン作りは専門学校で一から勉強しました。卒業する前に母は亡くなりました。
+女: そうでしたか。</p>
+男: 母のレベルにはまだまだなんですが、おいしいパンを地元の方に食べてもらえるように頑張っています
+</div>
+<div class="follow-up">店長はどうしてパン屋を始めたと言っていますか</div>
+<ul class='options'>
+    <li>母といっしょにパン屋をやりたかったから</li>
+    <li>母にたのまれたから</li>
+    <li>母のゆめをかなえたかったから</li>
+    <li>母のパンの味を残したかったから</li>
+</ul>
 
 --- example 2 ---
-
-     <p class='background'>うちで女の人と男の人が話しています。２人は引っ越しの値段を安くするため、どうすることにしましたか。</p>
-        <p><span class="speaker">女:</span>うーん、そうだね。安い引っ越し会社は見つからないだろうし、費用を抑えられるようにあんまり使ってない大きい家具のもらい手を探そうか。</p>
-        <p><span class="speaker">男:</span>うん、そうだね。</p>
-        <p><span class="speaker">女:</span>引っ越し会社に引越しの見積もりを出してもらったけど予算よりかなり高かったよ。今の時期はどこの会社も高いんだね。荷物の量と移動距離で料金を計算するから荷物を減らせば安くなるって。</p>
-        <p><span class="speaker">男:</span>そう、んー。大きい荷物を減らそうか。え一つと、大きいものって言ったらソファー、冷蔵庫、本棚だね。</p>
-        <p><span class="speaker">女:</span>本棚は分解できるよ。ソファーはあまり使ってないし、欲しい人にあげてもいいかもしれないね。</p>
-        <p><span class="speaker">男:</span>それもそうだね。あ、冷蔵庫は古いし、この際、売って向こうで新しいの買う？</p>
-        <p><span class="speaker">女:</span>えー？冷蔵庫はまだ使うよ！あ、そうだ。親戚のおじさんがトラックを持ってるからおじさんに手伝ってもらって、自分たちで荷物を運ぶ？</p>
-        <p><span class="speaker">男:</span>荷物の積み降ろしって結構大変だよ。やっぱり引っ越し会社に頼んだ方がいいんじゃないかな？</p>
-        <p><span class="speaker">女:</span>うーん、そうだね。安い引っ越し会社は見つからないだろうし、費用を抑えられるようにあんまり使ってない大きい家具のもらい手を探そうか。</p>
-        <p><span class="speaker">男:</span>うん、そうだね。</p>
-
-    <div class="follow-up">2人は引っ越しの値段を安くするため、どうすることにしましたか。</div>
-    <ul class='options'>
-        <li>ソファーをもらってくれる人をさがす</li>
-        <li>れいぞうこを売る</li>
-        <li>親戚にひっこしを手伝ってもらう</li>
-        <li>安いひっこし会社をさがす</li>
-    </ul>
-
+ <p class='background'>うちで女の人と男の人が話しています。２人は引っ越しの値段を安くするため、どうすることにしましたか。
+ <div class='conversation'> 
+女: うーん、そうだね。安い引っ越し会社は見つからないだろうし、費用を抑えられるようにあんまり使ってない大きい家具のもらい手を探そうか。
+男: うん、そうだね。</p>
+女: 引っ越し会社に引越しの見積もりを出してもらったけど予算よりかなり高かったよ。今の時期はどこの会社も高いんだね。荷物の量と移動距離で料金を計算するから荷物を減らせば安くなるって。
+男: そう、んー。大きい荷物を減らそうか。え一つと、大きいものって言ったらソファー、冷蔵庫、本棚だね。
+女: 本棚は分解できるよ。ソファーはあまり使ってないし、欲しい人にあげてもいいかもしれないね。
+男: それもそうだね。あ、冷蔵庫は古いし、この際、売って向こうで新しいの買う？
+女: えー？冷蔵庫はまだ使うよ！あ、そうだ。親戚のおじさんがトラックを持ってるからおじさんに手伝ってもらって、自分たちで荷物を運ぶ？
+男: 荷物の積み降ろしって結構大変だよ。やっぱり引っ越し会社に頼んだ方がいいんじゃないかな？
+女: うーん、そうだね。安い引っ越し会社は見つからないだろうし、費用を抑えられるようにあんまり使ってない大きい家具のもらい手を探そうか。
+男: うん、そうだね。
+</div>
+<div class="follow-up">2人は引っ越しの値段を安くするため、どうすることにしましたか。</div>
+<ul class='options'>
+    <li>ソファーをもらってくれる人をさがす</li>
+    <li>れいぞうこを売る</li>
+    <li>親戚にひっこしを手伝ってもらう</li>
+    <li>安いひっこし会社をさがす</li>
+</ul>
 """
 
 summary_understanding_teacher_prompt = """
@@ -1570,14 +1592,15 @@ Step 4, provide multiple-choice options based on the listening content. These op
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N2 level. 
-Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.   
 Additional Requirement:
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 summary_understanding_example = """
@@ -1585,7 +1608,7 @@ summary_understanding_example = """
 <div class="section">
     <p class='background'>講演会で鉄道の写真家が話しています。</p>
     <div class="dialogue">
-        - 男:私は鉄道の写真を撮るためにいろいろなところへ行きます。行く先々で鉄道ファンの方に会うと「どうやったらうまく撮れますか？」と聞かれるんですが、私は反対に「写真で何を伝えたいですか？」と尋ねるんです。シャッターを押すタイミングとか列車と風景をどんなバランスで撮るかとか、上手に撮影するテクニックはいろいろあります。けど、少しぐらい下手でも構わないんです。1枚の写真の中に季節感や感動的な風景など何を表現したいかを意識して撮ることで全く違った写真になると思うんです。</p>
+        男:私は鉄道の写真を撮るためにいろいろなところへ行きます。行く先々で鉄道ファンの方に会うと「どうやったらうまく撮れますか？」と聞かれるんですが、私は反対に「写真で何を伝えたいですか？」と尋ねるんです。シャッターを押すタイミングとか列車と風景をどんなバランスで撮るかとか、上手に撮影するテクニックはいろいろあります。けど、少しぐらい下手でも構わないんです。1枚の写真の中に季節感や感動的な風景など何を表現したいかを意識して撮ることで全く違った写真になると思うんです。</p>
         <a class='follow-up'>講演会で鉄道の写真家が話しています</a>
     </div>
     <ul class='options'> 
@@ -1613,65 +1636,6 @@ summary_understanding_example = """
 </div>
 
 """
-
-# actively_expression_teacher_prompt = """
-# Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
-
-# Task: Create an AI-friendly picture prompt that visually depicts a scene where a question is being asked. 
-# Indicate clearly who speaks first: if a woman asks the question, a man should be shown answering, and if a man asks, a woman should answer. 
-# The scene should be illustrated without any background text. And there is a black arrow pointing to the party who is about to answer the question. The arrow must closely follow the party who is about to answer the question.
-
-# Generate Japanese language test questions similar to JLPT situational questions.
-# For each question, describe a real-life situation in Japanese and then ask what the person should say in that situation. 
-# Provide three possible answers in Japanese.
-# only one of which is appropriate or most natural for the situation. 
-# The correct answer must be highly relevant to the question and logical. The answer needs to maintain coherence with the previous question and not be too abrupt. For example, according to different scenarios, it is best to add a "あのう〜／へ〜／すみません／わ〜" connector as a buffer.
-# The language used in the correct answer needs to match the identity of both interlocutors. 
-# For example, students must use respectful language towards their teachers, and subordinates must also use respectful language towards their superiors.
-# Keep the situations practical and relevant to everyday life in Japan. Do not mention or refer to blurred faces.
-
-# The picture description must be in a dedicated section named: background.
-# The gender of the character indicated by the arrow in the picture needs to be consistent with the gender of the character generating the conversation.
-
-# Instructions:
-# Format: follow the format of the 2 examples in the formal exam paper but not the content.
-# Content: Ensure the vocabulary is restricted to N2 level. 
-# Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
-# Additional Requirement: 
-# - Don't show question instructions and sequence number in the generated content. 
-# - The word in the sentence can neither be used in the question nor options.
-# - You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
-
-
-# Formal exam paper: {example}
-# """
-
-# actively_expression_example = """
-# --- example 1 ---
-# <div class="conversation">
-#     <div class="follow_up">
-#         課長、明日の会議の資料ですが、ご覧いただけないでしょうか？
-#     </div>
-#     <ul class='options'>  
-#         <li>資料、見てくれるんですね</li>
-#         <li>資料は私が作っておきますね</li>
-#         <li>資料、見ておきます</li>
-#     </ul>
-# </div>
-
-
-# --- example 2 ---
-# <div class="conversation">
-#     <div class="follow_up">
-#         この会社、経験者に限らず応募できるって。
-#     </div>
-#     <ul class='options'>  
-#         <li>募集は経験が無い人だけなんだ</li>
-#         <li>経験がなくてもいいんだね</li>
-#         <li>やっぱり経験が無いといけないのか</li>
-#     </ul>
-# </div>
-# """
 
 immediate_ack_teacher_prompt = """
 角色：你是一名日语老师，正在为JLPT N2水平撰写试卷。 
@@ -1701,6 +1665,7 @@ immediate_ack_teacher_prompt = """
 
 
 Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 immediate_ack_example = """
@@ -1752,25 +1717,26 @@ comprehensive_expression_listen_answer_teacher_prompt = """
 附加要求：
 -不要在生成的内容中显示问题说明和序列号。 
 -句子中的单词既不能用于问题，也不能用于选项。
--您必须在输出中显示正确答案，选项为1,2,3,4。例如：正解:1.
+-在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要平均，不要集中在某个选项
 
 
 正式试卷：{example}
+历史题目：{gan_history}
 """
 
 comprehensive_expression_listen_answer_example = """
 <p class='background'>地域のボランティアグループのリーダーとメンバー2人が話しています。</p>
 
 <div class='conversation'>
-- 男1: 僕たちが市と協力して定期的にゴミ拾いをしている事公園、ゴミを置いていっちゃう人が多いよね。何か対策を考えて市役所に提案しようと思うんだ。
-- 女1: お菓子の袋とかペットボトルとか、置いていっちゃう人がいるんですね。
-- 男1: 市の方針でゴミ箱は置かないことになってるからね。
-- 男2: 特にゴミが多いところから対策を考えた方がいいんじゃないですか?ゴミが目立つところに花壇を作るとか。他の公園で花壇を作ったら、その周りはゴミが減ったそうですよ。
-- 男1: ゴミが多いのはベンチの周りだよね?そこに花壇を作るのは難しいと思うんだ。
-- 女1: 私は公園全体を考えた方がいいと思うんですが... [ゴミを持ち帰りましょう] って書いた看板を増やすのはどうですか?
-- 男1: うーん、既にいくつか立ててあるから今以上に増やす必要ないんじゃないかな?</p>
-- 女1: あと私たちボランティアが見回って、ゴミを持って帰ってもらうように直接声をかけるのも効果があると思うんですけど。
-- 男1: ボランティアの負担が大きくなるのはちょっとね。うーん、まず、ゴミが多いところからなんとかしよう。花壇を作る代わりにっていうアイデアが良さそうだね。市役所の担当者に早速提案してみよう。
+男1: 僕たちが市と協力して定期的にゴミ拾いをしている事公園、ゴミを置いていっちゃう人が多いよね。何か対策を考えて市役所に提案しようと思うんだ。
+女1: お菓子の袋とかペットボトルとか、置いていっちゃう人がいるんですね。
+男1: 市の方針でゴミ箱は置かないことになってるからね。
+男2: 特にゴミが多いところから対策を考えた方がいいんじゃないですか?ゴミが目立つところに花壇を作るとか。他の公園で花壇を作ったら、その周りはゴミが減ったそうですよ。
+男1: ゴミが多いのはベンチの周りだよね?そこに花壇を作るのは難しいと思うんだ。
+女1: 私は公園全体を考えた方がいいと思うんですが... [ゴミを持ち帰りましょう] って書いた看板を増やすのはどうですか?
+男1: うーん、既にいくつか立ててあるから今以上に増やす必要ないんじゃないかな?</p>
+女1: あと私たちボランティアが見回って、ゴミを持って帰ってもらうように直接声をかけるのも効果があると思うんですけど。
+男1: ボランティアの負担が大きくなるのはちょっとね。うーん、まず、ゴミが多いところからなんとかしよう。花壇を作る代わりにっていうアイデアが良さそうだね。市役所の担当者に早速提案してみよう。
 </div>
 <a class='follow_up'>公園のゴミを減らすため、何を市役所に提案することにしましたか？</a>
 <ul class='options'> 
@@ -1803,23 +1769,24 @@ comprehensive_expression_show_answer_teacher_prompt = """
 附加要求：
 -不要在生成的内容中显示问题说明和序列号。 
 -句子中的单词既不能用于问题，也不能用于选项。
--您必须在输出中显示正确答案，选项为1,2,3,4。例如：正解:1.
+-在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要平均，不要集中在某个选项
 
 
 正式试卷：{example}
+历史题目：{gan_history}
 """
 
 comprehensive_expression_show_answer_example = """
 <p class='background'>池で行われているイベントでアナウンスを聞いた後、女の人と男の人が話しています。</p>
 
 <div class='conversation'>
-- 女1: 本日は桜花祭りにお越しくださり、ありがとうございます。各会場についてご案内いたします。中央会場では、今日捕れた魚や貝をその場で焼いてお召し上がりいただけます。こちらは、なくなり次第終了いたします。南会場では、初心者向けの釣り教室を開催しています。道具の貸し出しもあります。餌の付け方なども教えいたします。東会場では、海の生き物が観察できます。地元の海の生き物を間近で見ることができ、お子様も大人の方も楽しめいただけます。西会場では、新鮮な魚介類を販売しています。
-- 女2: 新鮮な魚、おいしそう。なくなり前に早く行かなきゃ？
-- 男1: え？早速買い物？先に買っちゃうともっとたくさん食べられない？
-- 女2: あ、そうか。そんなに自分でたくさん食べられないって言うなら、買い物は最後にしようよ。
-- 男1: あ、そうしような。まずはここに行こう。そんなに近くで生き物を観察できるって言うなら、買い物は最後にしようよ。
-- 女2: いいよ。釣りはいいの？
-- 男1: うーん、初心者向けって言ってたから今日は初めてていいかな。
+女1: 本日は桜花祭りにお越しくださり、ありがとうございます。各会場についてご案内いたします。中央会場では、今日捕れた魚や貝をその場で焼いてお召し上がりいただけます。こちらは、なくなり次第終了いたします。南会場では、初心者向けの釣り教室を開催しています。道具の貸し出しもあります。餌の付け方なども教えいたします。東会場では、海の生き物が観察できます。地元の海の生き物を間近で見ることができ、お子様も大人の方も楽しめいただけます。西会場では、新鮮な魚介類を販売しています。
+女2: 新鮮な魚、おいしそう。なくなり前に早く行かなきゃ？
+男1: え？早速買い物？先に買っちゃうともっとたくさん食べられない？
+女2: あ、そうか。そんなに自分でたくさん食べられないって言うなら、買い物は最後にしようよ。
+男1: あ、そうしような。まずはここに行こう。そんなに近くで生き物を観察できるって言うなら、買い物は最後にしようよ。
+女2: いいよ。釣りはいいの？
+男1: うーん、初心者向けって言ってたから今日は初めてていいかな。
 </div>
 <a class='follow_up'>質問1: 2人は最初にどの会場に行くですか？</a>
 <ul class='options'> 

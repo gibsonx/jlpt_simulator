@@ -202,9 +202,11 @@ reading_instruction = """
 Section 3: Reading Comprehension
 - 問題1-1 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_narrative_read): 1 article
 - 問題1-2 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_mail_read): 1 article
-- 問題1-3 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_notification_read): 1 article
-- 問題2 つぎの(1)と(2)の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (midsize_passage_read): 1 article
-- 問題3 つぎの(1)と(2)の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (comprehensive_read): 1 article
+- 問題1-3 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_narrative_read): 1 article
+- 問題1-4 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_notification_read): 1 article
+- 問題1-5 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_narrative_read): 1 article
+- 問題2 つぎの(1)と(2)の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (midsize_passage_read): 4 articles
+- 問題3 つぎの(1)と(2)の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (comprehensive_read): 2 articles
 - 問題4 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。(long_passage_read): 1 article
 - 問題5 これを読んで、下の質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい Information retrieval (info_retrieval): 1 article
 """
@@ -240,7 +242,7 @@ Section 4: Listening Comprehension
 - 問題3 では、問題用紙（もんだいようし）に何（なに）も いんさつされていません。この問題（もんだい）は、ぜんたいとして どんな ないようかを聞（き）く 問題（もんだい）です。話（はなし）の前（まえ）に 質問（しつもん）は ありません。まず 話（はなし）を 聞（き）いてください。それから、質問（しつもん）と せんたくし を聞（き）いて、1から4の中（なか）から、最（もっと）も よい ものを 一（ひと）つ えらんでください。(summary_understanding) 5 questions
 - 問題4 では、問題用紙に何もいんさつしていません。まず文を聞いてください。それから、そのへんしを聞いて、1 から 3 の中から、最もよいものを一つえらんでください。 (immediate_ack): 11 questions
 - 問題5-1 では、長めの話を聞きます。この問題には練習はありません。問題用紙にメモをとってもかまいません。 (comprehensive_expression_listen_answer) 1 question
-- 問題5-1 では、長めの話を聞きます。この問題には練習はありません。問題用紙にメモをとってもかまいません。 (comprehensive_expression_show_answer) 2 questions
+- 問題5-2 では、長めの話を聞きます。この問題には練習はありません。問題用紙にメモをとってもかまいません。 (comprehensive_expression_show_answer) 2 questions
 """
 
 listening_prompt = ChatPromptTemplate.from_messages(

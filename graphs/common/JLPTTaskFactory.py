@@ -153,13 +153,14 @@ class JLPTTaskFactory:
     # Reading Tasks
     # =====================
 
-    def short_passage_narrative_read(self, word):
+    def short_passage_narrative_read(self, word, gan_history: Optional[str] = "",):
         return self._run_task(
             self.prompts_module.short_reading_narrative_teacher_prompt,
             self.prompts_module.short_reading_narrative_example,
             self.prompts_module.short_reading_narrative_reflection_prompt,
             MultipleQuestionOutput,
-            word
+            word,
+            gan_history
         )
 
     def short_passage_mail_read(self, word, gan_history: Optional[str] = "",):
