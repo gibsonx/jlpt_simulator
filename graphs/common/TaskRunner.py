@@ -142,10 +142,9 @@ class TaskRunner:
         outline, exam_paper = None, None
 
         try:
-            result = exam_generator._generate_paper(instruction=prompt)
-            if result:
-                outline, exam_paper = result
-                logger.info(" ###OUTLINE### \n\n %s", outline.as_str)
+            outline, exam_paper = exam_generator._generate_paper(instruction=prompt)
+            if outline:
+                logger.info(" ### OUTLINE ### \n\n %s", outline.as_str)
             else:
                 logger.error("Exam paper generation returned None.")
         except Exception as e:
@@ -159,6 +158,7 @@ class TaskRunner:
             return outline, None
 
         if exam_paper:
+            logger.info(" ### Exam Paper ### \n\n %s", exam_paper)
             try:
                 conn_str = os.getenv("AZURE_MONGO_CONNECTION")
                 db_name = os.getenv("AZURE_MONGO_DBNAME")

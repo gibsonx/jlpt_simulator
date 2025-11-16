@@ -30,9 +30,11 @@ class ExamGenerator:
         self.task_id = task_id if task_id else str(uuid.uuid1())
         self.vocab, self.topics, self.grammar = self._load_resources()
 
-    def _write_paper(self, initial_outline: Any) -> Dict[str, Any]:
+    def _write_paper(self, initial_outline: Any) -> Dict[str, Any] | None:
         outliner_json = initial_outline.model_dump_json()
         data = json.loads(outliner_json)
+
+        print(data)
 
         output_data = {
             "_id": self.task_id,
@@ -62,6 +64,7 @@ class ExamGenerator:
                             try:
                                 sig = inspect.signature(func)
                                 params = sig.parameters
+
                                 args = [question['topic'], _extract_questions_qa_lines(output_data)]
                                 if 'grammar' in question and question['grammar']:
                                     args.append(question['grammar'])
@@ -69,16 +72,19 @@ class ExamGenerator:
                                     args.append(seq)
 
                                 result = func(*args)
-                                question['result'] = result
+                                if not result:
+                                    raise ValueError("No data available for processing")
+                                else:
+                                    question['result'] = result
                                 seq += 1
                                 break
                             except Exception as e:
                                 logger.error(f"Error {e} on {question['topic']}")
                                 if attempt < max_attempts - 1:
                                     question['topic'] = random.choice(self.topics)
+                                    return None
                     else:
                         question['result'] = f"Method {function_name} not found"
-
 
                 output_subsection = {
                     'subsection_title': subsection['subsection_title'],
@@ -133,9 +139,9 @@ class ExamGenerator:
                 "Failed to generate exam outline for level '%s' and exam_type '%s', %s",
                 self.level, self.exam_type, e
             )
+        # --- Step 1: Generate exam Paper ---
         try:
             output_data = self._write_paper(outline)
-
             # render paper to output folder for debug
             filename = f"{project_path}/output/JLPT_{self.level}_{self.task_id}.html"
             html_output = render_to_html(output_data['sections'])

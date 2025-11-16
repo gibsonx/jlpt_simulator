@@ -23,12 +23,25 @@ class JLPTTaskFactory:
         import importlib
         return importlib.import_module(f"graphs.{level}.prompts")
 
-    def _run_task(self, prompt, example, reflection_prompt, output_cls, word, gan_history, grammar=None):
+    def _run_task(self, prompt, example, reflection_prompt, output_cls, word, gan_history: Optional[str] = "", grammar: Optional[str] = None ):
         """Generic task runner."""
         if grammar:
-            graph = self.graph.build_agent(prompt, example, reflection_prompt, output_cls, gan_history, grammar)
+            graph = self.graph.build_agent(
+                prompt_text=prompt,
+                example=example,
+                reflection_prompt=reflection_prompt,
+                output_cls=output_cls,
+                gan_history=gan_history,
+                grammar=grammar
+            )
         else:
-            graph = self.graph.build_agent(prompt, example, reflection_prompt, output_cls, gan_history)
+            graph = self.graph.build_agent(
+                prompt_text=prompt,
+                example=example,
+                reflection_prompt=reflection_prompt,
+                output_cls=output_cls,
+                gan_history=gan_history
+            )
 
         instance = graph.invoke(
             {"messages": [HumanMessage(content=f"Generate a JLPT question regarding Topic: {word}")]},
@@ -39,83 +52,82 @@ class JLPTTaskFactory:
     # =====================
     # Vocabulary Tasks
     # =====================
-
-    def kanji_reading(self, word, gan_history: Optional[str] = None,):
+    def kanji_reading(self, word, gan_history: Optional[str] = ""):
         return self._run_task(
-            self.prompts_module.kanji_reading_teacher_prompt,
-            self.prompts_module.kanji_reading_example,
-            self.prompts_module.kanji_reading_reflection_prompt,
-            SimpleChoiceQuestionOutput,
-            gan_history,
-            word
+            prompt=self.prompts_module.kanji_reading_teacher_prompt,
+            example=self.prompts_module.kanji_reading_example,
+            reflection_prompt=self.prompts_module.kanji_reading_reflection_prompt,
+            output_cls=SimpleChoiceQuestionOutput,
+            word=word,
+            gan_history=gan_history
         )
 
-    def write_kanji(self, word, gan_history: Optional[str] = None,):
+    def write_kanji(self, word, gan_history: Optional[str] = ""):
         return self._run_task(
             self.prompts_module.write_kanji_teacher_prompt,
             self.prompts_module.write_kanji_example,
             self.prompts_module.write_kanji_reflection_prompt,
             SimpleChoiceQuestionOutput,
-            gan_history,
-            word
+            word,
+            gan_history
         )
 
-    def word_meaning(self, word, gan_history: Optional[str] = None,):
+    def word_meaning(self, word, gan_history: Optional[str] = ""):
         return self._run_task(
             self.prompts_module.word_meaning_teacher_prompt,
             self.prompts_module.word_meaning_example,
             self.prompts_module.word_meaning_reflection_prompt,
             SimpleChoiceQuestionOutput,
-            gan_history,
-            word
+            word,
+            gan_history
         )
 
-    def synonym_substitution(self, word, gan_history: Optional[str] = None,):
+    def synonym_substitution(self, word, gan_history: Optional[str] = "",):
         return self._run_task(
             self.prompts_module.synonym_substitution_teacher_prompt,
             self.prompts_module.synonym_substitution_example,
             self.prompts_module.synonym_substitution_reflection_prompt,
             SimpleChoiceQuestionOutput,
-            gan_history,
-            word
+            word,
+            gan_history
         )
 
-    def word_usage(self, word, gan_history: Optional[str] = None,):
+    def word_usage(self, word, gan_history: Optional[str] = "",):
         return self._run_task(
             self.prompts_module.word_usage_teacher_prompt,
             self.prompts_module.word_usage_example,
             self.prompts_module.word_usage_reflection_prompt,
             SimpleChoiceQuestionOutput,
-            gan_history,
-            word
+            word,
+            gan_history
         )
 
-    def words_collocation(self, word, gan_history: Optional[str] = None,):
+    def words_collocation(self, word, gan_history: Optional[str] = "",):
         return self._run_task(
             self.prompts_module.words_collocation_teacher_prompt,
             self.prompts_module.words_collocation_example,
             self.prompts_module.words_collocation_reflection_prompt,
             SimpleChoiceQuestionOutput,
-            gan_history,
-            word
+            word,
+            gan_history
         )
 
     # =====================
     # Sentence Structure Tasks
     # =====================
 
-    def sentence_grammar(self, word, gan_history: Optional[str] = None, grammar: Optional[str] = None):
+    def sentence_grammar(self, word, gan_history: Optional[str] = "", grammar: Optional[str] = None):
         return self._run_task(
             self.prompts_module.sentence_grammar_teacher_prompt,
             self.prompts_module.sentence_grammar_example,
             self.prompts_module.sentence_grammar_reflection_prompt,
             SimpleChoiceQuestionOutput,
-            gan_history,
             word,
+            gan_history,
             grammar
         )
 
-    def sentence_sort(self, word, gan_history: Optional[str] = None, grammar: Optional[str] = None):
+    def sentence_sort(self, word, gan_history: Optional[str] = "", grammar: Optional[str] = None):
         return self._run_task(
             self.prompts_module.sentence_sort_teacher_prompt,
             self.prompts_module.sentence_sort_example,
@@ -126,7 +138,7 @@ class JLPTTaskFactory:
             grammar
         )
 
-    def sentence_structure(self, word, gan_history: Optional[str] = None, grammar: Optional[str] = None):
+    def sentence_structure(self, word, gan_history: Optional[str] = "", grammar: Optional[str] = None):
         return self._run_task(
             self.prompts_module.structure_selection_teacher_prompt,
             self.prompts_module.structure_selection_example,
@@ -141,17 +153,16 @@ class JLPTTaskFactory:
     # Reading Tasks
     # =====================
 
-    def short_passage_narrative_read(self, word, gan_history: Optional[str] = None,):
+    def short_passage_narrative_read(self, word):
         return self._run_task(
             self.prompts_module.short_reading_narrative_teacher_prompt,
             self.prompts_module.short_reading_narrative_example,
             self.prompts_module.short_reading_narrative_reflection_prompt,
             MultipleQuestionOutput,
-            word,
-            gan_history
+            word
         )
 
-    def short_passage_mail_read(self, word, gan_history: Optional[str] = None,):
+    def short_passage_mail_read(self, word, gan_history: Optional[str] = "",):
         return self._run_task(
             self.prompts_module.short_reading_mail_teacher_prompt,
             self.prompts_module.short_reading_mail_example,
@@ -161,7 +172,7 @@ class JLPTTaskFactory:
             gan_history
         )
 
-    def short_passage_notification_read(self, word, gan_history: Optional[str] = None,):
+    def short_passage_notification_read(self, word, gan_history: Optional[str] = "",):
         return self._run_task(
             self.prompts_module.short_reading_notification_teacher_prompt,
             self.prompts_module.short_reading_notification_example,
@@ -171,7 +182,7 @@ class JLPTTaskFactory:
             gan_history
         )
 
-    def midsize_passage_read(self, word, gan_history: Optional[str] = None,):
+    def midsize_passage_read(self, word, gan_history: Optional[str] = "",):
         return self._run_task(
             self.prompts_module.midsize_reading_teacher_prompt,
             self.prompts_module.midsize_reading_example,
@@ -181,17 +192,17 @@ class JLPTTaskFactory:
             gan_history
         )
 
-    def comprehensive_read(self, word, gan_history: Optional[str] = None,):
+    def comprehensive_read(self, word, gan_history: Optional[str] = "",):
         return self._run_task(
-            self.prompts_module.comprehensive_reading_teacher_prompt,
-            self.prompts_module.comprehensive_reading_example,
-            self.prompts_module.comprehensive_reading_reflection_prompt,
+            self.prompts_module.comprehensive_read_teacher_prompt,
+            self.prompts_module.comprehensive_read_example,
+            self.prompts_module.comprehensive_read_reflection_prompt,
             MultipleQuestionOutput,
             word,
             gan_history
         )
 
-    def long_passage_read(self, word, gan_history: Optional[str] = None):
+    def long_passage_read(self, word, gan_history: Optional[str] = ""):
         return self._run_task(
             self.prompts_module.long_reading_teacher_prompt,
             self.prompts_module.long_reading_example,
@@ -201,7 +212,7 @@ class JLPTTaskFactory:
             gan_history
         )
 
-    def understanding_read(self, word, gan_history: Optional[str] = None):
+    def understanding_read(self, word, gan_history: Optional[str] = ""):
         return self._run_task(
             self.prompts_module.long_reading_understanding_teacher_prompt,
             self.prompts_module.long_reading_understanding_example,
@@ -211,7 +222,7 @@ class JLPTTaskFactory:
             gan_history
         )
 
-    def info_retrieval(self, word, gan_history: Optional[str] = None):
+    def info_retrieval(self, word, gan_history: Optional[str] = ""):
         return self._run_task(
             self.prompts_module.information_retrieval_teacher_prompt,
             self.prompts_module.information_retrieval_example,
@@ -225,7 +236,7 @@ class JLPTTaskFactory:
     # Listening Tasks
     # =====================
 
-    def topic_understanding_img(self, word, gan_history: Optional[str] = None, seq: int = 1):
+    def topic_understanding_img(self, word, gan_history: Optional[str] = "", seq: int = 1):
         obj = self._run_task(
             self.prompts_module.topic_understanding_img_teacher_prompt,
             self.prompts_module.topic_understanding_img_example,
@@ -250,7 +261,7 @@ class JLPTTaskFactory:
                 time.sleep(5)
         return obj
 
-    def topic_understanding_txt(self, word, gan_history: Optional[str] = None, seq: int = 1):
+    def topic_understanding_txt(self, word, gan_history: Optional[str] = "", seq: int = 1):
         obj = self._run_task(
             self.prompts_module.topic_understanding_txt_teacher_prompt,
             self.prompts_module.topic_understanding_txt_example,
@@ -262,7 +273,7 @@ class JLPTTaskFactory:
         obj["audio"] = _generate_dialogue(content=obj, type="topic_understanding_txt", seq=seq, uid=self.graph.exam_uid)
         return obj
 
-    def keypoint_understanding(self, word, gan_history: Optional[str] = None, seq: int = 1):
+    def keypoint_understanding(self, word, gan_history: Optional[str] = "", seq: int = 1):
         obj = self._run_task(
             self.prompts_module.keypoint_understanding_teacher_prompt,
             self.prompts_module.keypoint_understanding_example,
@@ -275,7 +286,7 @@ class JLPTTaskFactory:
 
         return obj
 
-    def summary_understanding(self, word, gan_history: Optional[str] = None, seq: int = 1):
+    def summary_understanding(self, word, gan_history: Optional[str] = "", seq: int = 1):
         obj = self._run_task(
             self.prompts_module.summary_understanding_teacher_prompt,
             self.prompts_module.summary_understanding_example,
@@ -287,7 +298,7 @@ class JLPTTaskFactory:
         obj["audio"] = _generate_dialogue(content=obj, type="summary_understanding", seq=seq, uid=self.graph.exam_uid)
         return obj
 
-    def active_expression(self, word, gan_history: Optional[str] = None, seq: int = 1):
+    def active_expression(self, word, gan_history: Optional[str] = "", seq: int = 1):
         obj = self._run_task(
             self.prompts_module.actively_expression_teacher_prompt,
             self.prompts_module.actively_expression_example,
@@ -324,7 +335,7 @@ class JLPTTaskFactory:
         obj["audio"] = _generate_express(content=obj, type="immediate_ack", seq=seq, uid=self.graph.exam_uid)
         return obj
 
-    def comprehensive_expression_listen_answer(self, word, gan_history: Optional[str] = None, seq: int = 1):
+    def comprehensive_expression_listen_answer(self, word, gan_history: Optional[str] = "", seq: int = 1):
         """
         specific for N2
         :param word:
@@ -342,7 +353,7 @@ class JLPTTaskFactory:
         obj["audio"] = _generate_multi_dialogue(content=obj, type="comprehensive_expression_listen_answer", seq=seq, uid=self.graph.exam_uid)
         return obj
 
-    def comprehensive_expression_show_answer(self, word, gan_history: Optional[str] = None, seq: int = 1):
+    def comprehensive_expression_show_answer(self, word, gan_history: Optional[str] = "", seq: int = 1):
         """
         specific for N2
         :param word:

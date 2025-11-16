@@ -28,7 +28,8 @@ Content: Ensure vocabulary is limited to N3 level.
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional requirement: Do not display problem descriptions and serial numbers in the generated content.  
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 kanji_reading_example = """  
@@ -68,7 +69,8 @@ Additional Requirement:
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 write_kanji_example = """
@@ -102,7 +104,8 @@ Additional Requirement:
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 word_meaning_example = """
@@ -148,7 +151,8 @@ Additional Requirement:
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 synonym_substitution_example = """
@@ -187,7 +191,8 @@ Additional Requirement:
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 word_usage_example = """
@@ -313,7 +318,8 @@ Additional requirements:
 -Output 4 options in the order of sequence y.
 -Mark "g_answer" as correct answer.
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 Grammar reference: {grammar}
 """
 
@@ -493,7 +499,8 @@ Additional Requirement:
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 
@@ -537,7 +544,8 @@ Additional Requirement:
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 
@@ -585,7 +593,8 @@ Additional Requirement:
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 short_reading_notification_example="""
@@ -627,7 +636,8 @@ Additional Requirement:
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 midsize_reading_example = """
@@ -708,7 +718,8 @@ Additional Requirement:
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 long_reading_example = """
@@ -771,7 +782,8 @@ Additional Requirement:
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 information_retrieval_example = """
@@ -879,8 +891,7 @@ For example: "ありがとう、佐藤さん。" the name at the end of a senten
 
 Step 3, write dialogue, the dialogue should consist of 1-3 exchanges (back-and-forth turns). The total length should be approximately 100–200 words.
 
-Step 4, after the conversation, ask a follow-up question related to the conversation and focusing on the man or woman's next action, such as 
-What,When,Where,Who,How,Which,Whose,How long,How often,How much,How many.
+Step 4, after the conversation, ask a follow-up question related to the conversation and focusing on the man or woman's venues, environments, and scenarios.
 
 Step 5, provide multiple-choice options based on the listening content. These options should be written in English for creating picture scenes.
 
@@ -893,7 +904,8 @@ Additional Requirement:
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 topic_understanding_img_example = """
@@ -950,7 +962,8 @@ Additional Requirement:
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 topic_understanding_txt_example = """
@@ -1044,7 +1057,8 @@ Additional Requirement:
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 keypoint_understanding_example = """
@@ -1108,7 +1122,8 @@ Additional Requirement:
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 summary_understanding_example = """
@@ -1179,7 +1194,8 @@ Additional Requirement:
 - You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
 
 
-Formal exam paper: {example} \n\n , Historical Generation : {gan_history}
+Formal exam paper: {example}
+Historical Generation : {gan_history}
 """
 
 actively_expression_example = """
@@ -1242,11 +1258,11 @@ immediate_ack_teacher_prompt = """
 说明：
 格式：遵循正式试卷中2个例子的格式，但不要遵循内容。
 内容：确保词汇量限制在N3级。 
-参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈（如果存在）
+参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈和批评（如果存在）,避免重复生成"历史题目"的问题(q)或给出的答案(a)。
 附加要求：
 - 在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要平均，不要集中在某个选项
 - 不要在生成的内容中显示问题说明和序列号。
-- 根据用户提供的主题汲取灵感，在生成内容时参考先前的反馈和批评，并避免重复生成"历史题目"的问题(q)或给出的答案(a)。
+
 
 历史题目：{gan_history}
 正式试卷：{example}

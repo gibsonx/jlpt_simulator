@@ -930,7 +930,7 @@ midsize_reading_example = """
 </html>
 """
 
-comprehensive_reading_teacher_prompt = """
+comprehensive_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level.
 
 Task: Task: Your job is to write a reading question for a JLPT N2 level exam. 
@@ -953,7 +953,7 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
-comprehensive_reading_example = """
+comprehensive_read_example = """
 <div class="reading-text">
   <h3>A</h3>
   <p>
@@ -1877,7 +1877,7 @@ short_reading_notification_reflection_prompt = """
 midsize_reading_reflection_prompt = """
 """
 
-comprehensive_reading_reflection_prompt = """
+comprehensive_read_reflection_prompt = """
 """
 
 long_reading_reflection_prompt = """
