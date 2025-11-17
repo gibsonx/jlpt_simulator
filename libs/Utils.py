@@ -562,33 +562,34 @@ def _generate_comic_strip(prompt: str, retry: int=10):
     # Raise exception if not ready after retries
     raise RuntimeError(f"Failed to generate image after 5 attempts: {image_url}")
 
-def _extract_questions_qa_lines(data):
+def _extract_questions_qa_lines(data, limit):
     output_lines = []
 
-    for section in data.get("sections", []):
-        for subsection in section.get("subsections", []):
-            for topic in subsection.get("question_topics", []):
-                result = topic.get("result", {})
+    for result in data:
+        # Case 1: result contains a list of questions
+        if "questions" in result:
+            for q in result["questions"]:
+                question = q.get("html_question", "")
+                choices = "|".join(q.get("choices", []))
+                output_lines.append(f"q:{question}")
+                output_lines.append(f"a:{choices}")
 
-                if "questions" in result:
-                    for q in result["questions"]:
-                        question = q.get("html_question", "")
-                        choices = "|".join(q.get("choices", []))
-                        output_lines.append(f"q:{question}")
-                        output_lines.append(f"a:{choices}")
-                elif "follow_up" in result:
-                    question = result["follow_up"]
-                    choices = "|".join(result.get("choices", []))
-                    output_lines.append(f"q:{question}")
-                    output_lines.append(f"a:{choices}")
-                elif "html_question" in result:
-                    question = result["html_question"]
-                    choices = "|".join(result.get("choices", []))
-                    output_lines.append(f"q:{question}")
-                    output_lines.append(f"a:{choices}")
+        # Case 2: follow-up question
+        elif "follow_up" in result:
+            question = result.get("follow_up", "")
+            choices = "|".join(result.get("choices", []))
+            output_lines.append(f"q:{question}")
+            output_lines.append(f"a:{choices}")
 
-    # Remove the last "--" if present
-    if output_lines:
-        output_lines.pop()
+        # Case 3: single question
+        elif "html_question" in result:
+            question = result.get("html_question", "")
+            choices = "|".join(result.get("choices", []))
+            output_lines.append(f"q:{question}")
+            output_lines.append(f"a:{choices}")
+
+    # Keep only the latest 20 QA pairs → 40 lines
+    if len(output_lines) > limit:
+        output_lines = output_lines[-limit:]
 
     return "\n".join(output_lines)
