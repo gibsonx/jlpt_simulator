@@ -34,14 +34,15 @@ class ExamGenerator:
         outliner_json = initial_outline.model_dump_json()
         data = json.loads(outliner_json)
 
-        print(data)
-
         output_data = {
             "_id": self.task_id,
             "level": self.level,
             "type": self.exam_type,
             "sections": []
         }
+
+        # global live results for the entire paper
+        live_results = []
 
         start_time = time.time()
 
@@ -65,7 +66,8 @@ class ExamGenerator:
                                 sig = inspect.signature(func)
                                 params = sig.parameters
 
-                                args = [question['topic'], _extract_questions_qa_lines(output_data)]
+                                # Pass the global live_results so all previous questions are included
+                                args = [question['topic'], _extract_questions_qa_lines(live_results, 30)]
                                 if 'grammar' in question and question['grammar']:
                                     args.append(question['grammar'])
                                 if 'seq' in params:
@@ -76,14 +78,16 @@ class ExamGenerator:
                                     raise ValueError("No data available for processing")
                                 else:
                                     question['result'] = result
+                                    live_results.append(result)  # update global live results
                                 seq += 1
                                 break
                             except Exception as e:
                                 logger.error(f"Error {e} on {question['topic']}")
                                 if attempt < max_attempts - 1:
                                     question['topic'] = random.choice(self.topics)
-                                    time.sleep(10)
-                                    return None
+                                    logger.info(f"Retry {attempt}")
+                                else:
+                                    question['result'] = None
                     else:
                         question['result'] = f"Method {function_name} not found"
 
