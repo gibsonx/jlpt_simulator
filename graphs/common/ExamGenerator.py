@@ -7,8 +7,6 @@ import time
 import uuid
 from typing import *
 from tqdm import tqdm
-
-
 from graphs.common.GraphBuilder import GraphBuilder
 from graphs.common.JLPTTaskFactory import JLPTTaskFactory
 from libs.CosmosMongoDB import CosmosMongoDB
@@ -60,14 +58,14 @@ class ExamGenerator:
                     func = getattr(handler, function_name, None)
 
                     if func:
-                        max_attempts = 3
+                        max_attempts = 5
                         for attempt in range(max_attempts):
                             try:
                                 sig = inspect.signature(func)
                                 params = sig.parameters
 
                                 # Pass the global live_results so all previous questions are included
-                                args = [question['topic'], _extract_questions_qa_lines(live_results, 30)]
+                                args = [question['topic'], _extract_questions_qa_lines(live_results, 20)]
                                 if 'grammar' in question and question['grammar']:
                                     args.append(question['grammar'])
                                 if 'seq' in params:
@@ -110,26 +108,34 @@ class ExamGenerator:
         """Load vocab, topics, and grammar for the exam level."""
         return _load_vocab_and_resources(self.level)
 
-    def _generate_outline(
-        self, instruction: Any
-    ) -> Outline:
-        """Generate structured exam outline using LLM."""
-        try:
-            generate_outline = instruction | azure_llm.with_structured_output(Outline)
-            outline = generate_outline.invoke({
-                "topic_list": self.topics,
-                "vocab_dict": self.vocab,
-                "grammar_list": self.grammar
-            })
-            logger.info("Outline of the exam:\n\n%s", outline.as_str)
-        except Exception as e:
-            logger.error("Failed to generate outline for exam_uid=%s: %s", self.task_id, e, exc_info=True)
-        return outline
+    def _generate_outline(self, instruction: Any) -> Outline | None:
+        max_retries = 3
+        outline = None
 
-    # def _build_output(self, outline: Any) -> Dict[str, Any]:
-    #     """Build the final exam paper data."""
-    #     return self._write_paper(outline, self.topics)
-    # ---------------- Main Function ---------------- #
+        for attempt in range(1, max_retries + 1):
+            try:
+                generate_outline = instruction | azure_llm.with_structured_output(Outline)
+                outline = generate_outline.invoke({
+                    "topic_list": self.topics,
+                    "vocab_dict": self.vocab,
+                    "grammar_list": self.grammar
+                })
+                logger.info("Outline of the exam:\n\n%s", outline.as_str)
+                return outline
+
+            except Exception as e:
+                logger.error(
+                    "Attempt %s/%s failed for exam_uid=%s: %s",
+                    attempt, max_retries, self.task_id, e, exc_info=True
+                )
+
+                if attempt < max_retries:
+                    delay = 2 ** attempt  # exponential backoff: 2s, 4s, ...
+                    time.sleep(delay)
+                else:
+                    logger.error("All retries failed for exam_uid=%s", self.task_id)
+                    return None
+
     def _generate_paper(self, instruction: Any):
         """
         Generate an exam outline, build paper, and store it in DB.
