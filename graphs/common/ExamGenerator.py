@@ -85,9 +85,10 @@ class ExamGenerator:
                                 logger.error(f"Error {e} on {question['topic']}")
                                 if attempt < max_attempts - 1:
                                     question['topic'] = random.choice(self.topics)
-                                    logger.info(f"Retry {attempt}")
+                                    time.sleep(30)
+                                    logger.info(f"Retry {attempt} after 30 seconds")
                                 else:
-                                    question['result'] = None
+                                    return None
                     else:
                         question['result'] = f"Method {function_name} not found"
 
