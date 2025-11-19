@@ -331,7 +331,7 @@ structure_selection_teacher_prompt = """
 - 短文通篇语义通顺、连贯，表达流畅。
 - 短文的语法正确、时态正确
 
-步骤3：将步骤2优化后的短文中，提取5个短语，作为题目的正确选项。被提取的5个短语可以是以下几种情况：
+步骤3：将步骤2优化后的短文中，提取4个短语，作为题目的正确选项。被提取的4个短语可以是以下几种情况：
 - 连接词或用于连接的短语
 - 助词、副助词
 - 阐述动作的谓语短语，或者作为定语、状语的谓语短语
@@ -339,8 +339,8 @@ structure_selection_teacher_prompt = """
 - 被提取的5个短语不能再出现在题干中，题干中不能保留被提取的短语
 - 至少有2个短语是谓语短语、至少1个短语是连接词或用于连接的短语、至少1个助词或副助词的短语
 
-步骤4：提取的5个短语用5/6/7/8/9，这5个标号代替。要求这5个标号需要以“【5】”的形式呈现
-- 提取的5个短语，两两之间不能一样
+步骤4：提取的4个短语用41/42/43/44，这4个标号代替。要求这4个标号需要以“【41】”的形式呈现
+- 提取的4个短语，两两之间不能一样
 
 步骤5：把步骤3中提取的4个短语分别作为4道题的正确选项的答案，并生成每道题的其他3个选项。生成的选项需要符合以下几个要求：
 - 每道题的3个错误选项要和正确选项有一定相似度，首先保证词性相同。比如正确选项是助词，则其他3个错误选项也必须是助词或副助词
@@ -740,7 +740,7 @@ Then, you give a question by the related content in the article.
 Instead, it should require the test-taker to infer, summarize, or understand the context or intent of the passage.
 
 Instructions:
-Format: follow the format of the 1 example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
+Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N1 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation.  
 Additional Requirement: 
