@@ -1062,85 +1062,26 @@ Historical Generation : {gan_history}
 comprehensive_read_example = """
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AとBの「あきらめる」について</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        .section {
-            margin-bottom: 3em;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 12px;
-        }
-        .label {
-            font-size: 1.4em;
-            font-weight: bold;
-            margin-bottom: 1em;
-            display: block;
-        }
-        p {
-            margin-bottom: 1.2em;
-            text-align: justify;
-        }
-        .note {
-            font-size: 0.9em;
-            color: #555;
-            margin-top: 1.5em;
-        }
-        .page-number {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 2em;
-            color: #666;
-        }
-        ol {
-            margin-top: 2em;
-        }
-        li {
-            margin-bottom: 0.8em;
-        }
-        hr {
-            border: none;
-            border-top: 1px dashed #ccc;
-            margin: 3em 0;
-        }
-        sup {
-            font-size: 0.8em;
-        }
-    </style>
-</head>
-<body>
 <div class='article'>
-    <div class="section">
-        <span class="label">A</span>
-        <p>まじめで責任感が強く、負けず嫌いな人は「あきらめない」傾向があります。「あきらめない」ことは、基本的にはもちろんいいことなのですが、しかし一方、あきらめたほうがよいことも、実はけっこうあるものです。</p>
-        <p>一所懸命に取り組んでも、うまくいかない、成果が出ない、充足感や満足感が得られない。そうした場合は「あきらめる」というのも、十分よい選択肢になります。</p>
-        <p>こうした場合の「あきらめる」とは、「やめてしまう」ということです。</p>
-        <p class="note">（中略）</p>
-        <p>やめる際には、「うまくいかなかった。やめてよかった」と思うのがコツでしょうね。うまくいかなかったことを悔やみつつやめるのは、避けたいものです。それでは、うまくいかなかったことが尾をひいてしまいます。「うまくいかなくてよかった」と思うくらいがちょうどいいでしょう。それができるようになると、一時的に落ち込んでも、立ち直りが早くなります。</p>
+    <div class="section" style="margin-bottom: 3em; padding: 20px; background-color: #fff; border: 1px solid #ccc; border-radius: 12px;">
+        <span class="label" style="font-size: 1.4em; font-weight: bold; margin-bottom: 1em; display: block;">A</span>
+        <p style="margin-bottom: 1.2em; text-align: justify;">まじめで責任感が強く、負けず嫌いな人は「あきらめない」傾向があります。「あきらめない」ことは、基本的にはもちろんいいことなのですが、しかし一方、あきらめたほうがよいことも、実はけっこうあるものです。</p>
+        <p style="margin-bottom: 1.2em; text-align: justify;">一所懸命に取り組んでも、うまくいかない、成果が出ない、充足感や満足感が得られない。そうした場合は「あきらめる」というのも、十分よい選択肢になります。</p>
+        <p style="margin-bottom: 1.2em; text-align: justify;">こうした場合の「あきらめる」とは、「やめてしまう」ということです。</p>
+        <p class="note" style="font-size: 0.9em; color: #555; margin-top: 1.5em; margin-bottom: 1.2em; text-align: justify;">（中略）</p>
+        <p style="margin-bottom: 1.2em; text-align: justify;">やめる際には、「うまくいかなかった。やめてよかった」と思うのがコツでしょうね。うまくいかなかったことを悔やみつつやめるのは、避けたいものです。それでは、うまくいかなかったことが尾をひいてしまいます。「うまくいかなくてよかった」と思うくらいがちょうどいいでしょう。それができるようになると、一時的に落ち込んでも、立ち直りが早くなります。</p>
     </div>
-    
-    <div class="section">
-        <span class="label">B</span>
-        <p>最近は仕事で悩んでいる人に対して「無理をしないであきらめたほうがよい。」というアドバイスを目にすることがある。もちろん体調を崩してしまうような場合には途中でやめるべきだ。しかしあきらめるということは、やれることはすべてやり尽くしたあとで考えるべきではないだろうか。困難な目標ほど簡単には達成できないものだ。だから、最初から、できなければあきらめてもいいんだという気持ちでいては、つらくなったときに頑張り続けることができない。</p>
-        <p>仮にどうしてもうまくいかずにあきらめることになったとしても、精いっぱい努力した結果ならば納得できる。落ち込んだりくよくよしたりするのではなく気持ちを切り替えて、しっかり原因を考えて次に生かすことが重要だ。</p>
-        <p class="note">(注) 尾を引く：ずっと残る</p>
+
+    <div class="section" style="margin-bottom: 3em; padding: 20px; background-color: #fff; border: 1px solid #ccc; border-radius: 12px;">
+        <span class="label" style="font-size: 1.4em; font-weight: bold; margin-bottom: 1em; display: block;">B</span>
+        <p style="margin-bottom: 1.2em; text-align: justify;">最近は仕事で悩んでいる人に対して「無理をしないであきらめたほうがよい。」というアドバイスを目にすることがある。もちろん体調を崩してしまうような場合には途中でやめるべきだ。しかしあきらめるということは、やれることはすべてやり尽くしたあとで考えるべきではないだろうか。困難な目標ほど簡単には達成できないものだ。だから、最初から、できなければあきらめてもいいんだという気持ちでいては、つらくなったときに頑張り続けることができない。</p>
+        <p style="margin-bottom: 1.2em; text-align: justify;">仮にどうしてもうまくいかずにあきらめることになったとしても、精いっぱい努力した結果ならば納得できる。落ち込んだりくよくよしたりするのではなく気持ちを切り替えて、しっかり原因を考えて次に生かすことが重要だ。</p>
+        <p class="note" style="font-size: 0.9em; color: #555; margin-top: 1.5em; margin-bottom: 1.2em; text-align: justify;">(注) 尾を引く：ずっと残る</p>
     </div>
 </div>
 
 <a>あきらめることについて、AとBはどのように述べているか。</a>
-<ul class="options">
+<ul class="options"">
     <li>AもBも、成果が出せる可能性が低いばあいには、あきらめたほうがよいと述べている。</li>
     <li>AもBも、つらくても、できるだけあきらめずに頑張ったほうがよいと述べている。</li>
     <li>Aは状況によっては、あきらめたほうがよいこともあると述べ、Bはあきらめてもいいと思ったほうが、頑張り続けられる場合もあると述べている。</li>

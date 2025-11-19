@@ -20,8 +20,8 @@ Section 3: Reading Comprehension
 - 問題1-4 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_notification_read): 1 article
 - 問題2 つぎの(1)と(2)の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (midsize_passage_read): 4 articles
 - 問題3 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。(long_passage_read): 1 article
-- 問題4 次の文章は、「相談者」からの相談と、それに対するAとBからの回答である。三つの文章を読んで、後の問いに対する答えとして、最もよいものを1·2·3·4から-つ選びなさい。(understanding_read): 1 article
-- 問題5 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。(long_passage_read): 1 article
+- 問題4 次の文章は、「相談者」からの相談と、それに対するAとBからの回答である。三つの文章を読んで、後の問いに対する答えとして、最もよいものを1·2·3·4から-つ選びなさい。(comprehensive_read): 1 article
+- 問題5 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。(understanding_read): 1 article
 - 問題6 これを読んで、下の質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい Information retrieval (info_retrieval): 1 article
 
 Section 4: Listening Comprehension
