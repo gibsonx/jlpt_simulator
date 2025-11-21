@@ -4,12 +4,12 @@ import os
 import importlib
 from libs.Logger import logger
 from graphs.common.Schema import ExamType
-from dotenv import load_dotenv
 from libs.CosmosMongoDB import CosmosMongoDB
 import requests
 import time
-
+from dotenv import load_dotenv
 load_dotenv()
+
 class TaskRunner:
     """
     Class-based handler for generating and storing exam outlines and papers.
@@ -132,6 +132,21 @@ class TaskRunner:
         Raises:
             ValueError: If outline generation fails irrecoverably.
         """
+        conn_str = os.getenv("AZURE_MONGO_CONNECTION")
+        db_name = os.getenv("AZURE_MONGO_DBNAME")
+
+        collection_name = f"{self.level_lower}_{self.exam_type_lower}"
+        db_client = CosmosMongoDB(conn_str, db_name, collection_name)
+
+        # Check task_id unique key
+        if self.task_id:
+            existing = db_client.exists(self.task_id)
+            if existing:
+                logger.warning(f"Exam with _id={self.task_id} already exists. Skipping execution.")
+                return None, None
+            else:
+                logger.info("Safe to process as task_id [%s] is new", self.task_id)
+
         prompt = self._get_prompt()
         exam_generator = ExamGenerator(
             task_id=self.task_id,
@@ -139,19 +154,11 @@ class TaskRunner:
             exam_type=self.exam_type,
         )
 
-        outline, exam_paper = None, None
-
-        try:
-            outline, exam_paper = exam_generator._generate_paper(instruction=prompt)
-            if outline:
-                logger.info(" ### OUTLINE ### \n\n %s", outline.as_str)
-            else:
-                logger.error("Exam paper generation returned None.")
-        except Exception as e:
-            logger.exception("Failed to generate exam paper: %s", e)
-            # Outline may not exist if the generation crashed early
-            if not outline:
-                return None, None
+        outline, exam_paper = exam_generator._generate_paper(instruction=prompt)
+        if outline:
+            logger.info(" ### OUTLINE ### \n\n %s", outline.as_str)
+        else:
+            logger.error("Exam paper generation returned None.")
 
         if outline and not exam_paper:
             logger.warning("Exam paper not generated; returning outline only.")
@@ -159,25 +166,21 @@ class TaskRunner:
 
         if exam_paper:
             logger.info(" ### Exam Paper ### \n\n %s", exam_paper)
-            try:
-                conn_str = os.getenv("AZURE_MONGO_CONNECTION")
-                db_name = os.getenv("AZURE_MONGO_DBNAME")
-                if not conn_str or not db_name:
-                    raise EnvironmentError("Missing MongoDB connection settings.")
+            # try:
 
-                collection_name = f"{self.level_lower}_{self.exam_type_lower}"
-                db_client = CosmosMongoDB(conn_str, db_name, collection_name)
-                inserted_id = db_client.insert_one(exam_paper)
+            if not conn_str or not db_name:
+                raise EnvironmentError("Missing MongoDB connection settings.")
 
-                if inserted_id:
-                    logger.info("Inserted document ID: %s", inserted_id)
-                    self.callback_system_api()
-                    logger.info("Callback system API triggered successfully.")
-                else:
-                    logger.warning("MongoDB insertion returned no document ID.")
-            except Exception as e:
-                logger.exception("Failed to insert exam paper into MongoDB: %s", e)
-                return outline, None
+            inserted_id = db_client.safe_insert_one(exam_paper)
 
+            if inserted_id:
+                logger.info("Inserted document ID: %s", inserted_id)
+                self.callback_system_api()
+                logger.info("Callback system API triggered successfully.")
+            else:
+                logger.warning("MongoDB insertion returned no document ID.")
+            # except Exception as e:
+            #     logger.exception("Failed to insert exam paper into MongoDB: %s", e)
+            #     return outline, None
         return outline, exam_paper
 

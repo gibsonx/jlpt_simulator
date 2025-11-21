@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from uuid import uuid4
 from typing import Dict, Optional
 from datetime import datetime
-
+from libs.Logger import logger
 
 class CosmosMongoDB:
     def __init__(self, connection_string: str, database_name: str, collection_name: str):
@@ -37,15 +37,24 @@ class CosmosMongoDB:
             document.setdefault("created_at", now)
             document.setdefault("updated_at", now)
 
-    def insert_one(self, document: Dict) -> str:
-        """
-        Insert a single document into the collection.
+    def exists(self, doc_id: str) -> bool:
+        """Check if a document with the given _id already exists."""
+        return self.collection.count_documents({"_id": doc_id}, limit=1) > 0
 
-        Args:
-            document: Dictionary object (matches your TypedDict structures)
-        Returns:
-            Inserted document ID
+    def safe_insert_one(self, document: Dict) -> str | None:
         """
+        Insert a document only if a duplicate _id does not already exist.
+        Returns inserted_id or None if skipped.
+        """
+        # Ensure _id exists
+        if "_id" not in document:
+            document["_id"] = str(uuid4())
+
+        # Check for duplicate
+        if self.exists(document["_id"]):
+            logger.warning(f"Duplicate _id detected ({document['_id']}), skipping insert.")
+            return None
+
         # Add timestamps
         self._add_timestamps(document)
 

@@ -19,3 +19,4 @@ azure-servicebus
 concurrent-log-handler
 Pillow
 Flask-HTTPAuth
+redis
