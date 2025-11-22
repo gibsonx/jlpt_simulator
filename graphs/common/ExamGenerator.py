@@ -45,57 +45,108 @@ class ExamGenerator:
         start_time = time.time()
 
         for section in data['sections']:
-            output_section = {'section_title': section['section_title'], 'subsections': []}
+
+            output_section = {
+                'section_title': section['section_title'],
+                'subsections': []
+            }
+
+            # -------------------------------------------------------------------
+            # Shared sequence for ONLY topic_understanding_txt / topic_understanding_img
+            # -------------------------------------------------------------------
+            shared_topic_understanding_seq = 1
 
             for subsection in tqdm(section['subsections'], desc=f"Processing {section['section_title']}"):
+
                 function_name = subsection['subsection_title']
                 questions = subsection['question_topics']
-                seq = 1
+
+                # normal subsections keep their own sequence starting from 1
+                local_seq = 1
 
                 for question in tqdm(questions, desc=f"Processing {subsection['subsection_title']}"):
                     graph = GraphBuilder(exam_uid=self.task_id)
                     handler = JLPTTaskFactory(graph=graph, level=self.level)
+
                     func = getattr(handler, function_name, None)
 
                     if func:
-                        max_attempts = 5
+                        max_attempts = 3
+
                         for attempt in range(max_attempts):
                             try:
                                 sig = inspect.signature(func)
                                 params = sig.parameters
 
-                                # Pass the global live_results so all previous questions are included
-                                args = [question['topic'], _extract_questions_qa_lines(live_results, 20)]
+                                # Determine sequence rule for this subsection
+                                is_topic_understanding = function_name in [
+                                    "topic_understanding_txt",
+                                    "topic_understanding_img"
+                                ]
+
+                                # Choose correct sequence number
+                                if is_topic_understanding:
+                                    seq_to_pass = shared_topic_understanding_seq
+                                else:
+                                    seq_to_pass = local_seq
+
+                                # Build arguments
+                                args = [
+                                    question['topic'],
+                                    _extract_questions_qa_lines(live_results, 20)
+                                ]
+
                                 if 'grammar' in question and question['grammar']:
                                     args.append(question['grammar'])
-                                if 'seq' in params:
-                                    args.append(seq)
 
+                                if 'seq' in params:
+                                    args.append(seq_to_pass)
+
+                                # Execute
                                 result = func(*args)
+
                                 if not result:
                                     raise ValueError("No data available for processing")
+
+                                question['result'] = result
+                                live_results.append(result)
+
+                                # Update sequence after success
+                                if is_topic_understanding:
+                                    shared_topic_understanding_seq += 1
                                 else:
-                                    question['result'] = result
-                                    live_results.append(result)  # update global live results
-                                seq += 1
-                                break
+                                    local_seq += 1
+
+                                break  # exit retry loop
+
                             except Exception as e:
-                                logger.error(f"Error {e} on {question['topic']}")
+                                logger.error(
+                                    f"Error {e} on {question['topic']} "
+                                    f"(attempt {attempt + 1}/{max_attempts})"
+                                )
+
                                 if attempt < max_attempts - 1:
+                                    # retry with another topic
                                     question['topic'] = random.choice(self.topics)
                                     time.sleep(30)
-                                    logger.info(f"Retry {attempt} after 30 seconds")
+                                    logger.info(f"Retry {attempt + 1} after 30 seconds")
                                 else:
+                                    # ❌ FAILED after 3 attempts → STOP entire pipeline
+                                    logger.error(
+                                        f"FAILED after {max_attempts} attempts on "
+                                        f"{question['topic']}. RETURNING NONE."
+                                    )
                                     return None
                     else:
-                        question['result'] = f"Method {function_name} not found"
+                        logger.error(f"Method {function_name} not found")
+                        return None
 
-                output_subsection = {
+                # store subsection output
+                output_section['subsections'].append({
                     'subsection_title': subsection['subsection_title'],
                     'description': subsection['description'],
                     'question_topics': questions
-                }
-                output_section['subsections'].append(output_subsection)
+                })
 
             output_data['sections'].append(output_section)
 
@@ -139,22 +190,36 @@ class ExamGenerator:
     def _generate_paper(self, instruction: Any):
         """
         Generate an exam outline, build paper, and store it in DB.
-        Returns: (inserted_id, outline_str, output_data)
+        Returns: (outline, output_data)
+        Raises: Exception → so Celery marks the job as FAILED
         """
-        outline = None
         project_path = os.environ['PROJECT_PATH']
+
         # --- Step 1: Generate outline ---
         try:
             outline = self._generate_outline(instruction)
         except Exception as e:
             logger.error(
-                "Failed to generate exam outline for level '%s' and exam_type '%s', %s",
-                self.level, self.exam_type, e
+                "Failed to generate exam outline for level '%s' and exam_type '%s': %s",
+                self.level, self.exam_type, e,
             )
-        # --- Step 1: Generate exam Paper ---
+            # ❗ Force Celery task failure
+            raise RuntimeError(f"Failed to generate outline: {e}")
+
+        # If outline generator returned None → also fail
+        if outline is None:
+            raise RuntimeError("Outline generation returned None")
+
+        # --- Step 2: Generate exam paper ---
         try:
             output_data = self._write_paper(outline)
-            # render paper to output folder for debug
+
+            if output_data is None:
+                # _write_paper() returns None when retry fails
+                logger.error("Paper generation returned None")
+            return outline, None
+
+            # Save HTML (debug output)
             filename = f"{project_path}/output/JLPT_{self.level}_{self.task_id}.html"
             html_output = render_to_html(output_data['sections'])
 
@@ -162,10 +227,14 @@ class ExamGenerator:
                 file.write(html_output)
 
             return outline, output_data
+
         except Exception as e:
-            logger.error("Failed to generate and store paper for exam_uid=%s: %s", self.task_id, e, exc_info=True)
-            # Return a consistent tuple on error
-            return None, None
+            logger.error(
+                "Failed to generate and store paper for exam_uid=%s: %s",
+                self.task_id, e, exc_info=True
+            )
+            # ❗ Force Celery task failure
+            raise RuntimeError(f"Failed to generate paper: {e}")
 
 
 

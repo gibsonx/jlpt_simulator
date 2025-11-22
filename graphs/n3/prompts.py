@@ -1260,7 +1260,6 @@ immediate_ack_teacher_prompt = """
 
 历史题目：{gan_history}
 正式试卷：{example}
-语法参考列表：{grammar}
 """
 
 immediate_ack_example = """
