@@ -243,9 +243,6 @@ sentence_grammar_example = """
 </ul>
 """
 
-# The candidate must re-arrange words (don't change options order) and identify the third word according to the word positions for a sentence.
-# When the third word is identified, point out its sequence number in the options.
-
 sentence_sort_teacher_prompt = """
 Role: You are a Japanese teacher who designed a sentence sorting question for the JLPT N1 exam.
 
@@ -288,8 +285,6 @@ Additional requirements:
 -Do not display problem descriptions and serial numbers in the generated content.   
 -Output 4 options in the order of sequence y.
 -Mark "g_answer" as correct answer.
-
-
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -362,36 +357,27 @@ structure_selection_teacher_prompt = """
 """
 
 structure_selection_example = """
-
-<div class=article>
-<h3>以下は医師が脳と心の健康について書いた文章である。</h3>
-
-<h2>人には会いに行こう</h2>
-
-<p>
-人に会いに行こうというと、当たり前だと思うでしょう。わざわざ人には会いに行こうとしたのは、電話や手紙（もしくはメール）ですませるのではなく、会うことに意味があるからです。
-</p>
-
-<p>
-会うのは、コミュニケーションとしてきわめて重要です。つまり、コミュニケーションは自分の持っている情報を伝えるだけでなく、相手との共感がありますが、自分自身の規制、相手の規制にもつながる場合もあります。会って <strong>（41）</strong>、相手も変わり、自分も変わる可能性があるということです。
-</p>
-
-<p>
-コミュニケーションではお互いにかかわりあう、つまり共感が大変重要です。相手の身になって何かを感じる、それは相手の感情かもしれないし、痛みかもしれません。こうした共感こそ、人間のコミュニケーションです。
-</p>
-
-<p>
-会わなくても、電話や手紙（メール）でも、こうした共感は生まれますが、相手の身になることができるかというと難しいでしょう。やはり実際に <strong>（42）</strong> 本当の共感は生まれると思います。
-</p>
-
-<p>
-脳にとっても、刺激の度合いが違います。初恋の人とデートをしたときのことを <strong>（43）</strong>。脳がどきどきして、たいへん緊張したでしょう。初恋の人でなくても、好きな人に会えば脳は活性化し、ときめき状態を維持しますし、反対に嫌いな人に会うとそれなりの負の感情が生まれてきます。感情の流れが生まれ、共感も発生します。当然、脳も喜びにもふれるでしょうし、反対に嫌悪の情が流れることもあるでしょう。それだけ活性化される <strong>（44）</strong>。
-</p>
-
-<p>
-やはり人には会いに行きましょう。ときめきを求めて。
-</p>
-
+<div class="article">
+    <h3>以下は医師が脳と心の健康について書いた文章である。</h3>
+    <h2>人には会いに行こう</h2>
+    <p>
+    人に会いに行こうというと、当たり前だと思うでしょう。わざわざ人には会いに行こうとしたのは、電話や手紙（もしくはメール）ですませるのではなく、会うことに意味があるからです。
+    </p>
+    <p>
+    会うのは、コミュニケーションとしてきわめて重要です。つまり、コミュニケーションは自分の持っている情報を伝えるだけでなく、相手との共感がありますが、自分自身の規制、相手の規制にもつながる場合もあります。会って <strong>【41】</strong>、相手も変わり、自分も変わる可能性があるということです。
+    </p>
+    <p>
+    コミュニケーションではお互いにかかわりあう、つまり共感が大変重要です。相手の身になって何かを感じる、それは相手の感情かもしれないし、痛みかもしれません。こうした共感こそ、人間のコミュニケーションです。
+    </p>
+    <p>
+    会わなくても、電話や手紙（メール）でも、こうした共感は生まれますが、相手の身になることができるかというと難しいでしょう。やはり実際に <strong>【42】</strong> 本当の共感は生まれると思います。
+    </p>
+    <p>
+    脳にとっても、刺激の度合いが違います。初恋の人とデートをしたときのことを <strong>【43】</strong>。脳がどきどきして、たいへん緊張したでしょう。初恋の人でなくても、好きな人に会えば脳は活性化し、ときめき状態を維持しますし、反対に嫌いな人に会うとそれなりの負の感情が生まれてきます。感情の流れが生まれ、共感も発生します。当然、脳も喜びにもふれるでしょうし、反対に嫌悪の情が流れることもあるでしょう。それだけ活性化される <strong>【44】</strong>。
+    </p>
+    <p>
+    やはり人には会いに行きましょう。ときめきを求めて。
+    </p>
 </div>
 
 <div class="follow-up">
@@ -454,49 +440,20 @@ Historical Generation : {gan_history}
 """
 
 short_reading_narrative_example = """
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>筆者の考えに関する文章</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        p {
-            margin-bottom: 1.5em;
-            text-align: justify;
-        }
-        .page-number {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 2em;
-            color: #666;
-        }
-        ol {
-            margin-top: 2em;
-        }
-        li {
-            margin-bottom: 0.8em;
-        }
-    </style>
-</head>
-<body>
-<div class="article">
-<p>「練習ではできていなかったのに、試合では技を成功させられた」などという場合に「すごいね」とほめられると、「私は本番に強いから、練習はそこそこにして、本番で勝負をかければいい」と思ってしまい、がちです。</p>
+<div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; background-color: #f9f9f9; color: #333;">
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        「練習ではできていなかったのに、試合では技を成功させられた」などという場合に「すごいね」とほめられると、「私は本番に強いから、練習はそこそこにして、本番で勝負をかければいい」と思ってしまい、がちです。
+    </p>
 
-<p>本番に強いのは悪いことではありませんが、練習でしっかりできていないことを「本番になればきっとできるだろう」と考えるのは、甘いと言わざるをえません。そのようなスタンスでは、トップクラスの結果を出すことはとうていできないでしょう。</p>
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        本番に強いのは悪いことではありませんが、練習でしっかりできていないことを「本番になればきっとできるだろう」と考えるのは、甘いと言わざるをえません。そのようなスタンスでは、トップクラスの結果を出すことはとうていできないでしょう。
+    </p>
 
-<p>真の実力をつけるには、やはり練習でも常に全力投球する姿勢が必要です。</p>
-
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        真の実力をつけるには、やはり練習でも常に全力投球する姿勢が必要です。
+    </p>
 </div>
+
 
 <a>筆者の考えに合うのはどれか。</a>
 
@@ -538,102 +495,43 @@ Historical Generation : {gan_history}
 """
 
 short_reading_mail_example = """
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>イヤホンに関するメール</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        hr {
-            border: none;
-            border-top: 1px solid #ccc;
-            margin: 2em 0;
-        }
-        .email-header {
-            font-size: 0.9em;
-            color: #555;
-            margin-bottom: 1.5em;
-        }
-        .email-header p {
-            margin: 0.3em 0;
-        }
-        h3 {
-            font-size: 1.2em;
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
-        }
-        p {
-            margin-bottom: 1.2em;
-        }
-        .signature {
-            margin-top: 2em;
-        }
-        .page-number {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 2em;
-            color: #666;
-        }
-        ol {
-            margin-top: 1.5em;
-        }
-        li {
-            margin-bottom: 0.8em;
-        }
-    </style>
-</head>
-<body>
-<div class='article'>
-<p>以下は、ある電気店から届いたメールである。</p>
+<div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; background-color: #f9f9f9; color: #333;">
+    <p>以下は、ある電気店から届いたメールである。</p>
 
-<hr>
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 2em 0;">
 
-<div class="email-header">
-    <p>宛て先：syo_yasuhara@kfy.co.jp</p>
-    <p>件名：イヤホン「AS-10」の件</p>
-    <p>日時：9月13日 13：30</p>
-</div>
+    <div style="font-size: 0.9em; color: #555; margin-bottom: 1.5em;">
+        <p style="margin: 0.3em 0;">宛て先：syo_yasuhara@kfy.co.jp</p>
+        <p style="margin: 0.3em 0;">件名：イヤホン「AS-10」の件</p>
+        <p style="margin: 0.3em 0;">日時：9月13日 13：30</p>
+    </div>
 
-<h3>安原 正一様</h3>
+    <h3 style="font-size: 1.2em; margin-top: 1.5em; margin-bottom: 0.5em;">安原 正一様</h3>
 
-<p>LM電気大木店をご利用いただき、ありがとうございます。</p>
+    <p style="margin-bottom: 1.2em;">LM電気大木店をご利用いただき、ありがとうございます。</p>
 
-<p>ご予約いただいたイヤホン「AS-10」ですが、メーカーの生産が遅れているため、発売日（9月20日）当日に、すべてのお客様にお渡しすることが困難な状況です。</p>
+    <p style="margin-bottom: 1.2em;">ご予約いただいたイヤホン「AS-10」ですが、メーカーの生産が遅れているため、発売日（9月20日）当日に、すべてのお客様にお渡しすることが困難な状況です。</p>
 
-<p>本日、当店で9月20日にお渡しできる数が確定し、安原様のご注文分は確保できないことが分かりました。大変申し訳ございません。</p>
+    <p style="margin-bottom: 1.2em;">本日、当店で9月20日にお渡しできる数が確定し、安原様のご注文分は確保できないことが分かりました。大変申し訳ございません。</p>
 
-<p>安原様へのお渡しは10月以降になってしまうのですが、いかがいたしましょうか。ご注文のキャンセルも承っております。</p>
+    <p style="margin-bottom: 1.2em;">安原様へのお渡しは10月以降になってしまうのですが、いかがいたしましょうか。ご注文のキャンセルも承っております。</p>
 
-<p>お忙しいところ恐縮ですが、ご返信お待ちしております。</p>
+    <p style="margin-bottom: 1.2em;">お忙しいところ恐縮ですが、ご返信お待ちしております。</p>
 
-<div class="signature">
-    <p>LM電気 大木店</p>
-    <p>担当：上田 映子</p>
-</div>
-<hr>
+    <div style="margin-top: 2em;">
+        <p style="margin-bottom: 0.3em;">LM電気 大木店</p>
+        <p style="margin-bottom: 0.3em;">担当：上田 映子</p>
+    </div>
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 2em 0;">
 </div>
 
 <a>イヤホン「AS-10」について、このメールで確認していることは何か。</a>
-
 <ul class="options">
     <li>今から予約しても発売日には渡せないが、予約するかどうか。</li>
     <li>発売日が10月以降になってしまうが、予約するかどうか。</li>
     <li>発売日に渡せるかは分からないが、予約したままでいいかどうか。</li>
     <li>発売日ではなく10月以降に渡すことになるが、予約したままでいいかどうか。</li>
 </ul>
-
-</body>
-</html>
 """
 
 short_reading_notification_teacher_prompt = """
@@ -661,55 +559,9 @@ short_reading_notification_teacher_prompt = """
 """
 
 short_reading_notification_example = """
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>筆者の考えに関する文章（縦書き）</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        .tategaki-container {
-            width: 600px;
-            margin: 2em auto;
-            border: 1px solid #ccc;
-            padding: 20px;
-            background-color: #fff;
-        }
-        .tategaki {
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            height: 600px;
-            font-size: 1.1em;
-            line-height: 2;
-            text-align: justify;
-        }
-        .page-number {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 2em;
-            color: #666;
-        }
-        ol {
-            margin-top: 2em;
-        }
-        li {
-            margin-bottom: 0.8em;
-        }
-    </style>
-</head>
-<body>
-<div class='article'>
-    <div class="tategaki-container">
-        <div class="tategaki">
+<div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; background-color: #f9f9f9; color: #333;">
+    <div style="width: 600px; margin: 2em auto; border: 1px solid #ccc; padding: 20px; background-color: #fff;">
+        <div style="writing-mode: vertical-rl; text-orientation: mixed; height: 600px; font-size: 1.1em; line-height: 2; text-align: justify;">
             「自分の悪い部分を露にすると、嫌われたり、敬遠されたりするのではないか」という不安は、もちろんだろう。見せ方がまずいと、実際にそうなる危険性もある。しかし、世間からの評価や期待に対し、神経質になりすぎ、そのせいで常に不安を抱えながら生きていくくらいなら、他人から嫌われるほうがよほどましである。
             そもそも他人は、あなたが思っているほどあなたに対して期待などしていない。誰もが皆、自分のことで頭がいっぱいで、他人のことなど気にかけてはいない。
         </div>
@@ -717,16 +569,12 @@ short_reading_notification_example = """
 </div>
 
 <a>筆者が言いたいことは何か。</a>
-
 <ul class="options">
     <li>他人に嫌われることなく生きることは難しい。</li>
     <li>世間の評価や期待を気にしながら生きる必要はない。</li>
     <li>自分の悪い部分を見せなければ、他人に嫌われることはない。</li>
     <li>自分の悪い部分を見せて他人から嫌われるほうが、楽に生きられる。</li>
 </ul>
-
-</body>
-</html>
 """
 
 midsize_reading_teacher_prompt = """
@@ -754,62 +602,17 @@ Historical Generation : {gan_history}
 
 midsize_reading_example = """
 --- example1----
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>羽毛を持つ恐竜について</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        p {
-            margin-bottom: 1.5em;
-            text-align: justify;
-        }
-        .note {
-            font-size: 0.9em;
-            color: #555;
-            margin-left: 1em;
-        }
-        .page-number {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 2em;
-            color: #666;
-        }
-        ol {
-            margin-top: 2em;
-        }
-        li {
-            margin-bottom: 0.8em;
-        }
-        hr {
-            border: none;
-            border-top: 1px dashed #ccc;
-            margin: 3em 0;
-        }
-    </style>
-</head>
-<body>
-<div class='article'>
-    <p>以下は、羽毛を持つ恐竜について述べられた文章である。</p>
-    <p>恐竜には、鳥のように卵を温める習性があったことがわかっています。</p>
-    <p class="note">（中略）</p>
-    <p>気になるのは、いつから卵を温めるようになったのかということですが、羽毛を持った時点で、卵を温める習性も持っていた可能性があります。</p>
-    <p>羽毛を持つことで、体温が維持できるようになるので、その体温を使って卵の温度を一定に保つことができます。特に夜間は気温が下がるので、夜に親が卵の上に座って眠っていれば、卵の保温にはとても効果的です。卵が一定の温かさで保たれていれば、さまざまな環境で卵が孵る確率が高くなります。</p>
-    <p>は虫類は卵を温めません。は虫類の卵は、放置されても、1日のうちある程度の時間、気温が30度を超えるなどの条件が整っていれば、自然と孵ります。その代わり、は虫類は1年のうち気温の高い限られた時期にしか産卵しません。生息地域も限られます。</p>
-    <p>羽毛のある恐竜が、鳥に近い体温を持っていたとすれば、夏以外の季節でも、寒冷地でも、安定して35～40度ほどの温度で卵を温めることが可能です。</p>
-    <p>厳密に言うと、羽毛があると体の熱を逃がさないので、卵を温めるには不向きです。人間で言うと、衣服の上からでは温めにくいのと同じです。温めるなら、服の中に入れて直接体温が伝わるようにするはずです。</p>
-    <p>卵を抱く時期の鳥も、卵と接する部分の羽毛がなくなり、皮膚がむき出しになります。恐竜が卵を温めていたとすれば、おそらく同じように、お腹のあたりの羽毛が抜けていたと思われます。</p>
-    <p class="note">（注）生息地域：生活している地域</p>
+<div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; background-color: #f9f9f9; color: #333;">
+    <p style="margin-bottom: 1.5em; text-align: justify;">以下は、羽毛を持つ恐竜について述べられた文章である。</p>
+    <p style="margin-bottom: 1.5em; text-align: justify;">恐竜には、鳥のように卵を温める習性があったことがわかっています。</p>
+    <p style="margin-bottom: 1.5em; text-align: justify; font-size: 0.9em; color: #555; margin-left: 1em;">（中略）</p>
+    <p style="margin-bottom: 1.5em; text-align: justify;">気になるのは、いつから卵を温めるようになったのかということですが、羽毛を持った時点で、卵を温める習性も持っていた可能性があります。</p>
+    <p style="margin-bottom: 1.5em; text-align: justify;">羽毛を持つことで、体温が維持できるようになるので、その体温を使って卵の温度を一定に保つことができます。特に夜間は気温が下がるので、夜に親が卵の上に座って眠っていれば、卵の保温にはとても効果的です。卵が一定の温かさで保たれていれば、さまざまな環境で卵が孵る確率が高くなります。</p>
+    <p style="margin-bottom: 1.5em; text-align: justify;">は虫類は卵を温めません。は虫類の卵は、放置されても、1日のうちある程度の時間、気温が30度を超えるなどの条件が整っていれば、自然と孵ります。その代わり、は虫類は1年のうち気温の高い限られた時期にしか産卵しません。生息地域も限られます。</p>
+    <p style="margin-bottom: 1.5em; text-align: justify;">羽毛のある恐竜が、鳥に近い体温を持っていたとすれば、夏以外の季節でも、寒冷地でも、安定して35～40度ほどの温度で卵を温めることが可能です。</p>
+    <p style="margin-bottom: 1.5em; text-align: justify;">厳密に言うと、羽毛があると体の熱を逃がさないので、卵を温めるには不向きです。人間で言うと、衣服の上からでは温めにくいのと同じです。温めるなら、服の中に入れて直接体温が伝わるようにするはずです。</p>
+    <p style="margin-bottom: 1.5em; text-align: justify;">卵を抱く時期の鳥も、卵と接する部分の羽毛がなくなり、皮膚がむき出しになります。恐竜が卵を温めていたとすれば、おそらく同じように、お腹のあたりの羽毛が抜けていたと思われます。</p>
+    <p style="margin-bottom: 1.5em; text-align: justify; font-size: 0.9em; color: #555; margin-left: 1em;">（注）生息地域：生活している地域</p>
 </div>
 
 <div class="follow-up">
@@ -830,70 +633,49 @@ midsize_reading_example = """
     </ul>
 </div>
 
-</body>
-</html>
-
 ---example2---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>羽毛を持つ恐竜について</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        p {
-            margin-bottom: 1.5em;
-            text-align: justify;
-        }
-        .note {
-            font-size: 0.9em;
-            color: #555;
-            margin-left: 1em;
-        }
-        .page-number {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 2em;
-            color: #666;
-        }
-        .underline {
-            text-decoration: underline;
-            text-underline-offset: 2px;
-        }
-        ol {
-            margin-top: 2em;
-        }
-        li {
-            margin-bottom: 0.8em;
-        }
-        hr {
-            border: none;
-            border-top: 1px dashed #ccc;
-            margin: 3em 0;
-        }
-    </style>
-</head>
-<body>
-<div class='article'>
-    <p>以下は、羽毛を持つ恐竜について述べられた文章である。</p>
-    <p>恐竜には、鳥のように卵を温める習性があったことがわかっています。</p>
-    <p class="note">（中略）</p>
-    <p>気になるのは、いつから卵を温めるようになったのかということですが、羽毛を持った時点で、卵を温める習性も持っていた可能性があります。</p>
-    <p>羽毛を持つことで、体温が維持できるようになるので、その体温を使って卵の温度を一定に保つことができます。特に夜間は気温が下がるので、夜に親が卵の上に座って眠っていれば、卵の保温にはとても効果的です。卵が一定の温かさで保たれていれば、さまざまな環境で卵が孵る確率が高くなります。</p>
-    <p>は虫類は卵を温めません。は虫類の卵は、放置されても、1日のうちある程度の時間、気温が30度を超えるなどの条件が整っていれば、自然と孵ります。その代わり、は虫類は1年のうち気温の高い限られた時期にしか産卵しません。生息地域も限られます。</p>
-    <p>羽毛のある恐竜が、鳥に近い体温を持っていたとすれば、夏以外の季節でも、寒冷地でも、安定して35～40度ほどの温度で卵を温めることが可能です。</p>
-    <p>厳密に言うと、羽毛があると体の熱を逃がさないので、卵を温めるには不向きです。人間で言うと、衣服の上からでは温めにくいのと同じです。温めるなら、服の中に入れて直接体温が伝わるようにするはずです。</p>
-    <p>卵を抱く時期の鳥も、卵と接する部分の羽毛がなくなり、皮膚がむき出しになります。恐竜が卵を温めていたとすれば、おそらく同じように、<span class="underline">お腹のあたりの羽毛が抜けていたと思われます。</span> </p>
-    <p class="note">（注）生息地域：生活している地域</p>
+<div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; color: #333; background-color: #f9f9f9;">
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        以下は、羽毛を持つ恐竜について述べられた文章である。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        恐竜には、鳥のように卵を温める習性があったことがわかっています。
+    </p>
+
+    <p style="font-size: 0.9em; color: #555; margin-left: 1em; margin-top: 1.5em;">
+        （中略）
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        気になるのは、いつから卵を温めるようになったのかということですが、羽毛を持った時点で、卵を温める習性も持っていた可能性があります。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        羽毛を持つことで、体温が維持できるようになるので、その体温を使って卵の温度を一定に保つことができます。特に夜間は気温が下がるので、夜に親が卵の上に座って眠っていれば、卵の保温にはとても効果的です。卵が一定の温かさで保たれていれば、さまざまな環境で卵が孵る確率が高くなります。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        は虫類は卵を温めません。は虫類の卵は、放置されても、1日のうちある程度の時間、気温が30度を超えるなどの条件が整っていれば、自然と孵ります。その代わり、は虫類は1年のうち気温の高い限られた時期にしか産卵しません。生息地域も限られます。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        羽毛のある恐竜が、鳥に近い体温を持っていたとすれば、夏以外の季節でも、寒冷地でも、安定して35～40度ほどの温度で卵を温めることが可能です。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        厳密に言うと、羽毛があると体の熱を逃がさないので、卵を温めるには不向きです。人間で言うと、衣服の上からでは温めにくいのと同じです。温めるなら、服の中に入れて直接体温が伝わるようにするはずです。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        卵を抱く時期の鳥も、卵と接する部分の羽毛がなくなり、皮膚がむき出しになります。恐竜が卵を温めていたとすれば、おそらく同じように、
+        <span style="text-decoration: underline; text-underline-offset: 2px;">お腹のあたりの羽毛が抜けていたと思われます。</span>
+    </p>
+
+    <p style="font-size: 0.9em; color: #555; margin-left: 1em; margin-top: 1.5em;">
+        （注）生息地域：生活している地域
+    </p>
 </div>
 
 <div class="follow-up">
@@ -913,8 +695,6 @@ midsize_reading_example = """
     <li>卵と接する部分の皮膚がむき出しになることで、卵が抱きやすくなるから</li>
 </ul>
 </div>
-</body>
-</html>
 """
 
 long_reading_understanding_teacher_prompt = """
@@ -936,76 +716,57 @@ long_reading_understanding_teacher_prompt = """
 
 
 正式试卷：{example}
+历史题目: {gan_history}
 """
 
 long_reading_understanding_example = """
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数学の問題を解くことについて</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        p {
-            margin-bottom: 1.5em;
-            text-align: justify;
-        }
-        .note {
-            font-size: 0.9em;
-            color: #555;
-            margin-left: 1em;
-        }
-        .page-number {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 2em;
-            color: #666;
-        }
-        ol {
-            margin-top: 2em;
-        }
-        li {
-            margin-bottom: 0.8em;
-        }
-        hr {
-            border: none;
-            border-top: 1px dashed #ccc;
-            margin: 3em 0;
-        }
-        .underline {
-            text-decoration: underline;
-            text-underline-offset: 2px;
-        }
-        sup {
-            font-size: 0.8em;
-        }
-    </style>
-</head>
-<body>
-<div class='article'>
-    <p>以下は、ある数学者が描いた文章である。</p>
-    <p>数学というものは、解き方がわかってしまったあとで、力がつくことはない。解き方を身につける前の、まだ解き方のわからない間だけが、力をつけるチャンスである。解けるようになるのは同じでも、それまでのあり方で、力が身につくかどうかが、きまってくる。</p>
-    <p>それに、おもしろいのも、本当は、まだ解けないで、いろいろと考えている間である。解けなきゃつまらないようだが、それは早く解こうとあせるからで、楽しみは解けるまでのほうにある。解けるようになったあとは、むしろむなしい。だいたい、「答えのわかっている謎」なんて、意味がない。解き方がわからないからこそ、問題の名にあたいするのだ。</p>
-    <p>もちろん、まったく手がつかないのでは、おもしろくもないが、案外に、多少はわからないでも、うまく<span class="underline">頭のなかに飼っておくと</span>、そのうちに馴れてくれて、わかってきたりする。その、だんだん少しずつ、わかりかけというのも、オツなものだ。そのためには、それを飼っておく、頭の牧場がゆたかでなければならない。本当のところは、数学の力というのは、いろいろとわかったことをためこむより、わからないのを飼っておける、その牧場のゆたかさのほうにあるのかもしれない。</p>
-    <p>とくに、公式などをおぼえるのには、ぼくは反対である。それは簡単すぎて、少しもおもしろくないし、おぼえたものは忘れるものだ。とくに、急いでおぼえたものは、早く忘れる。同じおぼえるにしても、なるべくなら時間をかけたほうが、長持ちする。</p>
-    <p class="note">（中略）</p>
-    <p>このごろは、テストでおどされることが多いので、わかること、解けることを急ぐ傾向にある。たしかに、テストなどでは、時間がかぎられているので、急ぐのも多少は仕方がない。しかしながら、時間を制限されたときに急いでできるためには、時間の制限されていないときに、時間を気にしないでやっておいたほうがよい。テストで急ぐためには、テスト以外で急がないほうがよいのである。</p>
-    <p>どんなやり方でも、わかって、問題が解けるようになる、という結果は同じかもしれない。しかし、ゆったりとやると、そのわかり方にコクが出てくるものだ。そして、その結果に達するまでの道筋を楽しむことで、力がつく。</p>
-    <p>勉強を楽しむなんて、と思うかもしれないが、それは目的ばかり見てあせるからで、楽しむ気になれば、なんだって楽しめるものだ。</p>
-    <p class="note">(注1)手がつかない：ここでは、できない</p>
-    <p class="note">(注2)オツな：ここでは、おもしろい</p>
-    <p class="note">(注3)おどされる：ここでは、早く問題を解かされる</p>
-    <p class="note">(注4)コク：深み。</p>
+<div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; color: #333; background-color: #f9f9f9;">
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        以下は、ある数学者が描いた文章である。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        数学というものは、解き方がわかってしまったあとで、力がつくことはない。解き方を身につける前の、まだ解き方のわからない間だけが、力をつけるチャンスである。解けるようになるのは同じでも、それまでのあり方で、力が身につくかどうかが、きまってくる。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        それに、おもしろいのも、本当は、まだ解けないで、いろいろと考えている間である。解けなきゃつまらないようだが、それは早く解こうとあせるからで、楽しみは解けるまでのほうにある。解けるようになったあとは、むしろむなしい。だいたい、「答えのわかっている謎」なんて、意味がない。解き方がわからないからこそ、問題の名にあたいするのだ。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        もちろん、まったく手がつかないのでは、おもしろくもないが、案外に、多少はわからないでも、うまく
+        <span style="text-decoration: underline; text-underline-offset: 2px;">頭のなかに飼っておくと</span>、
+        そのうちに馴れてくれて、わかってきたりする。その、だんだん少しずつ、わかりかけというのも、オツなものだ。そのためには、それを飼っておく、頭の牧場がゆたかでなければならない。本当のところは、数学の力というのは、いろいろとわかったことをためこむより、わからないのを飼っておける、その牧場のゆたかさのほうにあるのかもしれない。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        とくに、公式などをおぼえるのには、ぼくは反対である。それは簡単すぎて、少しもおもしろくないし、おぼえたものは忘れるものだ。とくに、急いでおぼえたものは、早く忘れる。同じおぼえるにしても、なるべくなら時間をかけたほうが、長持ちする。
+    </p>
+
+    <p style="font-size: 0.9em; color: #555; margin-left: 1em; margin-top: 1.5em;">
+        （中略）
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        このごろは、テストでおどされることが多いので、わかること、解けることを急ぐ傾向にある。たしかに、テストなどでは、時間がかぎられているので、急ぐのも多少は仕方がない。しかしながら、時間を制限されたときに急いでできるためには、時間の制限されていないときに、時間を気にしないでやっておいたほうがよい。テストで急ぐためには、テスト以外で急がないほうがよいのである。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        どんなやり方でも、わかって、問題が解けるようになる、という結果は同じかもしれない。しかし、ゆったりとやると、そのわかり方にコクが出てくるものだ。そして、その結果に達するまでの道筋を楽しむことで、力がつく。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        勉強を楽しむなんて、と思うかもしれないが、それは目的ばかり見てあせるからで、楽しむ気になれば、なんだって楽しめるものだ。
+    </p>
+
+    <p style="font-size: 0.9em; color: #555; margin-left: 1em; margin-top: 1.5em;">(注1)手がつかない：ここでは、できない</p>
+    <p style="font-size: 0.9em; color: #555; margin-left: 1em; margin-top: 1.5em;">(注2)オツな：ここでは、おもしろい</p>
+    <p style="font-size: 0.9em; color: #555; margin-left: 1em; margin-top: 1.5em;">(注3)おどされる：ここでは、早く問題を解かされる</p>
+    <p style="font-size: 0.9em; color: #555; margin-left: 1em; margin-top: 1.5em;">(注4)コク：深み。</p>
+
 </div>
+
 
 <a>数学の問題を解くことについて、筆者の考えに合うのはどれか。</a>
 <ul class="options">
@@ -1035,7 +796,6 @@ long_reading_understanding_example = """
 </html>
 """
 
-
 comprehensive_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level.
 
@@ -1043,7 +803,6 @@ Task: Task: Your job is to write a reading question for a JLPT N1 level exam.
 First you need to write a long article around 450 words for student to read. 
 Then, you give 2 questions by the related content in the article. 
 The purpose is to ensure the students are able to understand the meaning of the article.
-
 
 Instructions:
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
@@ -1060,8 +819,6 @@ Historical Generation : {gan_history}
 """
 
 comprehensive_read_example = """
-<!DOCTYPE html>
-<html lang="ja">
 <div class='article'>
     <div class="section" style="margin-bottom: 3em; padding: 20px; background-color: #fff; border: 1px solid #ccc; border-radius: 12px;">
         <span class="label" style="font-size: 1.4em; font-weight: bold; margin-bottom: 1em; display: block;">A</span>
@@ -1095,9 +852,6 @@ comprehensive_read_example = """
     <li>あきらめたことでも、再挑戦することはできる。</li>
     <li>あきらめたことを後悔してはいけない。</li>
 </ul>
-
-</body>
-</html>
 """
 
 long_reading_teacher_prompt = """
@@ -1118,75 +872,44 @@ long_reading_teacher_prompt = """
 -文章中的单词既不能用于问题，也不能用于选项。
 -在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要平均，不要集中在某个选项
 
-
-
 正式试卷：{example}
+历史题目: {gan_history}
 """
 
 long_reading_example = """
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SNSと人間関係について</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        p {
-            margin-bottom: 1.5em;
-            text-align: justify;
-        }
-        .note {
-            font-size: 0.9em;
-            color: #555;
-            margin-left: 1em;
-        }
-        .page-number {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 2em;
-            color: #666;
-        }
-        ol {
-            margin-top: 2em;
-        }
-        li {
-            margin-bottom: 0.8em;
-        }
-        hr {
-            border: none;
-            border-top: 1px dashed #ccc;
-            margin: 3em 0;
-        }
-        sup {
-            font-size: 0.8em;
-        }
-    </style>
-</head>
-<body>
-<div class="article">
-    <p>SNSを含むリアルタイムウェブの本質は、時間と過程の消去にある。かつてコンテンツの拡散には一定の時間がかかった。権威やメディアをすり抜ける必要もあった。けれどもいまや、それらの面倒をすべてすっ飛ばし、無名の書き手が一晩で何百万もの支持者を集めることができる。それはSNSの良いところだ。</p>
-    <p>けれども人生にはトラブルがつきものである。どれだけ誠実に生きていても、誤解や中傷に曝されることが必ずある。そしてそういうとき、SNSの支持はほとんど役に立たない。匿名の支持者は、トラブルの話題自体すぐに忘れてしまう。あっというまに集まった人々は、同じくあっというまに離れる。そこで継続的に助けてくれるのは、結局は面倒な人間関係に支えられた家族や友人たちだったりする。</p>
-    <p>SNSの人間関係には面倒がない。だからSNSの知人は面倒を背負ってくれない。そんなSNSでも、たしかに人生がうまく行っているときは大きな力になる。けれども、本当の困難を抱えたときは、助けにならないのだ。</p>
-    <p>これからの時代を生きるうえで、SNSのこの性格を知っておくことはとても重要なように思う。そもそも、人生の困難なるものは自分と世界のズレの表れである。自分はあることを正しいと信じるが、世界はそう思わない——そういう対立が生じたとき、困難が訪れる。だから困難そのものが悪いわけではない。むしろ、概念の発明や政治の変革は必ず困難とともに生じる。その困難を時間をかけて解消し昇華することで、はじめて自分も相手も社会も進歩するのだ。けれども、いまのSNSにはそのような熟成の余裕がほとんどない。</p>
-    <p>困難な時期を支えるとは、言いかえれば、支える相手と世界の関係が変化する過程に時間をかけてつきあうということである。ひとりの人間が変わるというのはたいへんなことで、「いいね！」をつけるようにポンポン複製できるものではない。いわゆる「議論」で相手が変わると考えているひとは、人間の本質について無知である。ぼくが一生をかけて変えることができるのは、ごく少数の身の回りの人々だけであり、そしてぼくを変えることができるのもおそらくは彼らだけだ。その小さく面倒な人間関係をどれだけ濃密に作れるかで、人生の広がりが決まるのだと思う。</p>
-    <p>家族も友人もあっというまには作れない。面倒な存在でもある。だからこそそれは変化の受け皿となる。面倒がないところに変化はない。情報技術は、面倒のない人間関係の調達を可能にしたが、それはまた人間から変化の可能性を奪うものでもあった。そのことを忘れずにおきたいと思う。</p>
-    
-    <p class="note">(注1) SNS：ウェブ上での情報のやり取りや交流の場を提供するサービス</p>
-    <p class="note">(注2) リアルタイムウェブ：情報更新が即時に行われるウェブ</p>
-    <p class="note">(注3) コンテンツ：ここでは、情報</p>
-    <p class="note">(注4) すっ飛ばす：ここでは、省略する</p>
-    <p class="note">(注5) つきもの：必ず伴うもの</p>
-    <p class="note">(注6) あっというまに：短い間に</p>
-    <p class="note">(注7) 昇華する：ここでは、別の良いものに変える</p>
+<div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; color: #333; background-color: #f9f9f9;">
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        SNSを含むリアルタイムウェブの本質は、時間と過程の消去にある。かつてコンテンツの拡散には一定の時間がかかった。権威やメディアをすり抜ける必要もあった。けれどもいまや、それらの面倒をすべてすっ飛ばし、無名の書き手が一晩で何百万もの支持者を集めることができる。それはSNSの良いところだ。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        けれども人生にはトラブルがつきものである。どれだけ誠実に生きていても、誤解や中傷に曝されることが必ずある。そしてそういうとき、SNSの支持はほとんど役に立たない。匿名の支持者は、トラブルの話題自体すぐに忘れてしまう。あっというまに集まった人々は、同じくあっというまに離れる。そこで継続的に助けてくれるのは、結局は面倒な人間関係に支えられた家族や友人たちだったりする。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        SNSの人間関係には面倒がない。だからSNSの知人は面倒を背負ってくれない。そんなSNSでも、たしかに人生がうまく行っているときは大きな力になる。けれども、本当の困難を抱えたときは、助けにならないのだ。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        これからの時代を生きるうえで、SNSのこの性格を知っておくことはとても重要なように思う。そもそも、人生の困難なるものは自分と世界のズレの表れである。自分はあることを正しいと信じるが、世界はそう思わない——そういう対立が生じたとき、困難が訪れる。だから困難そのものが悪いわけではない。むしろ、概念の発明や政治の変革は必ず困難とともに生じる。その困難を時間をかけて解消し昇華することで、はじめて自分も相手も社会も進歩するのだ。けれども、いまのSNSにはそのような熟成の余裕がほとんどない。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        困難な時期を支えるとは、言いかえれば、支える相手と世界の関係が変化する過程に時間をかけてつきあうということである。ひとりの人間が変わるというのはたいへんなことで、「いいね！」をつけるようにポンポン複製できるものではない。いわゆる「議論」で相手が変わると考えているひとは、人間の本質について無知である。ぼくが一生をかけて変えることができるのは、ごく少数の身の回りの人々だけであり、そしてぼくを変えることができるのもおそらくは彼らだけだ。その小さく面倒な人間関係をどれだけ濃密に作れるかで、人生の広がりが決まるのだと思う。
+    </p>
+
+    <p style="margin-bottom: 1.5em; text-align: justify;">
+        家族も友人もあっというまには作れない。面倒な存在でもある。だからこそそれは変化の受け皿となる。面倒がないところに変化はない。情報技術は、面倒のない人間関係の調達を可能にしたが、それはまた人間から変化の可能性を奪うものでもあった。そのことを忘れずにおきたいと思う。
+    </p>
+
+    <p style="font-size: 0.9em; color: #555; margin-top: 1.5em; margin-left: 1em;">(注1) SNS：ウェブ上での情報のやり取りや交流の場を提供するサービス</p>
+    <p style="font-size: 0.9em; color: #555; margin-top: 1.5em; margin-left: 1em;">(注2) リアルタイムウェブ：情報更新が即時に行われるウェブ</p>
+    <p style="font-size: 0.9em; color: #555; margin-top: 1.5em; margin-left: 1em;">(注3) コンテンツ：ここでは、情報</p>
+    <p style="font-size: 0.9em; color: #555; margin-top: 1.5em; margin-left: 1em;">(注4) すっ飛ばす：ここでは、省略する</p>
+    <p style="font-size: 0.9em; color: #555; margin-top: 1.5em; margin-left: 1em;">(注5) つきもの：必ず伴うもの</p>
+    <p style="font-size: 0.9em; color: #555; margin-top: 1.5em; margin-left: 1em;">(注6) あっというまに：短い間に</p>
+    <p style="font-size: 0.9em; color: #555; margin-top: 1.5em; margin-left: 1em;">(注7) 昇華する：ここでは、別の良いものに変える</p>
 </div>
 
 <a>SNSの支持はほとんど役に立たないとあるが、なぜか。</a>
@@ -1212,9 +935,6 @@ long_reading_example = """
     <li>情報技術によって作られた人間関係では、人間の変化は期待できない。</li>
     <li>情報技術は人間の変化の可能性を奪うものであり、利用は控えるべきだ。</li>
 </ul>
-
-</body>
-</html>
 """
 
 information_retrieval_teacher_prompt = """
@@ -1237,159 +957,97 @@ Additional Requirement:
 - The word in the table and clues can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-
 Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
 information_retrieval_example = """
 --- example 1 ---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>マスダ買い取りサービス</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            font-size: 1.5em;
-            margin-bottom: 1em;
-            border-bottom: 2px solid #333;
-            padding-bottom: 0.5em;
-        }
-        h2 {
-            font-size: 1.3em;
-            margin-top: 2em;
-            margin-bottom: 1em;
-            color: #222;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5em 0;
-            font-size: 0.95em;
-        }
-        th, td {
-            border: 1px solid #999;
-            padding: 10px;
-            text-align: left;
-            vertical-align: top;
-        }
-        th {
-            background-color: #eee;
-            width: 30%;
-        }
-        ul {
-            margin: 0.5em 0;
-            padding-left: 1.2em;
-        }
-        .note {
-            font-size: 0.9em;
-            color: #555;
-            margin-top: 1.5em;
-        }
-        .page-number {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 2em;
-            color: #666;
-        }
-        ol {
-            margin-top: 2em;
-        }
-        li {
-            margin-bottom: 0.8em;
-        }
-        hr {
-            border: none;
-            border-top: 1px dashed #ccc;
-            margin: 3em 0;
-        }
-    </style>
-</head>
-<body>
-<div class="article">
-    <h1>マスダ買い取りサービス</h1>
-    <h2>買い取りサービスのご利用について</h2>
-    <h3>◆買い取り可能な品物</h3>
-    <p>冷蔵庫などの家電、机などの家具、自転車、楽器を受け付けています。詳しくは、「買い取り可能な品物」のページをご確認ください。</p>
-    <h3>◆買い取り方法と流れ</h3>
-    
-    <table>
+<div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; color: #333; background-color: #f9f9f9;">
+
+    <h1 style="text-align: center; font-size: 1.5em; margin-bottom: 1em; border-bottom: 2px solid #333; padding-bottom: 0.5em;">
+        マスダ買い取りサービス
+    </h1>
+
+    <h2 style="font-size: 1.3em; margin-top: 2em; margin-bottom: 1em; color: #222;">
+        買い取りサービスのご利用について
+    </h2>
+
+    <h3 style="margin-top: 1.5em; margin-bottom: 0.5em;">◆買い取り可能な品物</h3>
+    <p style="margin-bottom: 1.5em;">
+        冷蔵庫などの家電、机などの家具、自転車、楽器を受け付けています。詳しくは、「買い取り可能な品物」のページをご確認ください。
+    </p>
+
+    <h3 style="margin-top: 1.5em; margin-bottom: 0.5em;">◆買い取り方法と流れ</h3>
+
+    <table style="width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.95em;">
         <tr>
-            <th>店頭買取</th>
-            <td>
-                <ol>
-                    <li>店頭へお持ちください。</li>
-                    <li>品物を確認し、買い取り金額をご提示します。</li>
-                    <li>ご納得いただけた場合は、現金をお渡しします。</li>
+            <th style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top; background-color: #eee; width: 30%;">店頭買取</th>
+            <td style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top;">
+                <ol style="margin-top: 0.5em; margin-bottom: 0.5em; padding-left: 1.2em;">
+                    <li style="margin-bottom: 0.8em;">店頭へお持ちください。</li>
+                    <li style="margin-bottom: 0.8em;">品物を確認し、買い取り金額をご提示します。</li>
+                    <li style="margin-bottom: 0.8em;">ご納得いただけた場合は、現金をお渡しします。</li>
                 </ol>
             </td>
         </tr>
         <tr>
-            <th>出張買取</th>
-            <td>
-                <ol>
-                    <li>最寄りの店舗にお電話ください。</li>
-                    <li>弊社スタッフがご自宅へ伺います。</li>
-                    <li>ご自宅で品物を確認し、買い取り金額をご提示します。</li>
-                    <li>ご納得いただけた場合は、現金をお渡しします。</li>
+            <th style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top; background-color: #eee; width: 30%;">出張買取</th>
+            <td style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top;">
+                <ol style="margin-top: 0.5em; margin-bottom: 0.5em; padding-left: 1.2em;">
+                    <li style="margin-bottom: 0.8em;">最寄りの店舗にお電話ください。</li>
+                    <li style="margin-bottom: 0.8em;">弊社スタッフがご自宅へ伺います。</li>
+                    <li style="margin-bottom: 0.8em;">ご自宅で品物を確認し、買い取り金額をご提示します。</li>
+                    <li style="margin-bottom: 0.8em;">ご納得いただけた場合は、現金をお渡しします。</li>
                 </ol>
             </td>
         </tr>
         <tr>
-            <th>宅配買取</th>
-            <td>
-                <ol>
-                    <li>ホームページからご予約ください。</li>
-                    <li>宅配業者が伺いますので、品物をお渡しください。</li>
-                    <li>店舗への品物到着から3営業日以内に、買い取り金額をメールでご連絡します。ご納得いただけた場合は、銀行口座へお振り込みします。</li>
+            <th style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top; background-color: #eee; width: 30%;">宅配買取</th>
+            <td style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top;">
+                <ol style="margin-top: 0.5em; margin-bottom: 0.5em; padding-left: 1.2em;">
+                    <li style="margin-bottom: 0.8em;">ホームページからご予約ください。</li>
+                    <li style="margin-bottom: 0.8em;">宅配業者が伺いますので、品物をお渡しください。</li>
+                    <li style="margin-bottom: 0.8em;">店舗への品物到着から3営業日以内に、買い取り金額をメールでご連絡します。ご納得いただけた場合は、銀行口座へお振り込みします。</li>
                 </ol>
             </td>
         </tr>
     </table>
-    
-    <p>※買い取り金額にご納得いただけずキャンセルされる場合でも、出張料や返送料はかかりません。</p>
-    
-    <h3>◆受け付け可能な品数とサイズ</h3>
-    
-    <table>
+
+    <p style="margin-bottom: 1.5em;">※買い取り金額にご納得いただけずキャンセルされる場合でも、出張料や返送料はかかりません。</p>
+
+    <h3 style="margin-top: 1.5em; margin-bottom: 0.5em;">◆受け付け可能な品数とサイズ</h3>
+
+    <table style="width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.95em;">
         <tr>
-            <th></th>
-            <th>受け付け可能な品数</th>
-            <th>1点あたりのサイズ制限</th>
+            <th style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top; background-color: #eee; width: 30%;"></th>
+            <th style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top; background-color: #eee; width: 30%;">受け付け可能な品数</th>
+            <th style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top; background-color: #eee; width: 40%;">1点あたりのサイズ制限</th>
         </tr>
         <tr>
-            <td>店頭買取</td>
-            <td>1点から</td>
-            <td>なし</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top;">店頭買取</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top;">1点から</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top;">なし</td>
         </tr>
         <tr>
-            <td>出張買取</td>
-            <td>2点から</td>
-            <td>なし</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top;">出張買取</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top;">2点から</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top;">なし</td>
         </tr>
         <tr>
-            <td>宅配買取</td>
-            <td>1点から</td>
-            <td>25kg以下で、かつ三辺（縦・横・高さ）の合計が160cm以下のもの（自転車の場合、サイズ内でも宅配買取は利用できません）</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top;">宅配買取</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top;">1点から</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: left; vertical-align: top;">25kg以下で、かつ三辺（縦・横・高さ）の合計が160cm以下のもの（自転車の場合、サイズ内でも宅配買取は利用できません）</td>
         </tr>
     </table>
-    
-    <h3>◆ご本人確認について</h3>
-    <p>店頭買取、出張買取の場合、本人確認書類（運転免許証等）をご提示いただきます。宅配買取の場合は、品物と一緒にコピーをお送りいただきます。<br>
-    家電、家具、楽器の場合は、顔写真のない本人確認書類もご利用になれますが、自転車の場合は、顔写真付きのものをご用意ください。</p>
+
+    <h3 style="margin-top: 1.5em; margin-bottom: 0.5em;">◆ご本人確認について</h3>
+    <p style="margin-bottom: 1.5em;">
+        店頭買取、出張買取の場合、本人確認書類（運転免許証等）をご提示いただきます。宅配買取の場合は、品物と一緒にコピーをお送りいただきます。<br>
+        家電、家具、楽器の場合は、顔写真のない本人確認書類もご利用になれますが、自転車の場合は、顔写真付きのものをご用意ください。
+    </p>
 </div>
+
 
 <a>チョウさんは、机1台を買い取ってもらいたいと思っている。机は、重さが12kgで、三辺の合計が220cmである。チョウさんが利用できる方法はどれか。</a>
 <ul class="options">
@@ -1407,141 +1065,97 @@ information_retrieval_example = """
     <li>出張買取で、品物と本人確認書類を準備する。本人確認書類は、顔写真付きでなくてもいい。</li>
 </ul>
 
-</body>
-</html>
-
 
 --- example 2 ---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>秋川大学＞秋川大学図書館＞一般利用</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-            font-size: 1.5em;
-            margin-bottom: 1em;
-            border-bottom: 2px solid #333;
-            padding-bottom: 0.5em;
-        }
-        h2 {
-            font-size: 1.3em;
-            margin-top: 2em;
-            margin-bottom: 1em;
-            color: #222;
-            border-left: 5px solid #555;
-            padding-left: 0.8em;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5em 0;
-            font-size: 0.95em;
-        }
-        th, td {
-            border: 1px solid #999;
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #eee;
-        }
-        .note {
-            font-size: 0.9em;
-            color: #555;
-            margin-top: 1.5em;
-        }
-        .page-number {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 2em;
-            color: #666;
-        }
-        ol {
-            margin-top: 2em;
-        }
-        li {
-            margin-bottom: 0.8em;
-        }
-        hr {
-            border: none;
-            border-top: 1px dashed #ccc;
-            margin: 3em 0;
-        }
-    </style>
-</head>
-<body>
-<div class="article">
-    <h1>秋川大学＞秋川大学図書館＞一般利用</h1>
+<div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; color: #333; background-color: #f9f9f9;">
+
+    <h1 style="text-align: center; font-size: 1.5em; margin-bottom: 1em; border-bottom: 2px solid #333; padding-bottom: 0.5em;">
+        秋川大学＞秋川大学図書館＞一般利用
+    </h1>
     
-    <h2>一般の方の図書館利用について</h2>
-    <p>秋川大学の学生以外の一般の方も、研究等の目的のために、秋川キャンパスにある中央図書館や文学部図書館の資料が利用できます。</p>
+    <h2 style="font-size: 1.3em; margin-top: 2em; margin-bottom: 1em; color: #222; border-left: 5px solid #555; padding-left: 0.8em;">
+        一般の方の図書館利用について
+    </h2>
+    <p style="margin-bottom: 1.5em;">
+        秋川大学の学生以外の一般の方も、研究等の目的のために、秋川キャンパスにある中央図書館や文学部図書館の資料が利用できます。
+    </p>
     
-    <h2>【入館方法】</h2>
-    <p>・図書館利用カードをお持ちの方は、自動入退館ゲートから入退館ができます。<br>
-    ・お持ちでない方は、カウンターで1日入館証を発行いたします。</p>
+    <h2 style="font-size: 1.3em; margin-top: 2em; margin-bottom: 1em; color: #222; border-left: 5px solid #555; padding-left: 0.8em;">
+        【入館方法】
+    </h2>
+    <p style="margin-bottom: 1.5em;">
+        ・図書館利用カードをお持ちの方は、自動入退館ゲートから入退館ができます。<br>
+        ・お持ちでない方は、カウンターで1日入館証を発行いたします。
+    </p>
     
-    <h2>【図書館利用カードについて】</h2>
-    <p>・図書館利用カードは、図書館資料の貸し出しの際に必要になります。<br>
-    ・発行をご希望の方は、身分証明書をお持ちなり、中央図書館、または文学部図書館のカウンターにお越しください(文学部図書館では平日のみ受け付けています)。<br>
-    ・平日の9時から17時までの間に申請を受け付けた場合、その日のうちにカードをお渡しします。平日の17時以降、および土日に受け付けた場合は、次の平日開館日以降にお渡しします。</p>
+    <h2 style="font-size: 1.3em; margin-top: 2em; margin-bottom: 1em; color: #222; border-left: 5px solid #555; padding-left: 0.8em;">
+        【図書館利用カードについて】
+    </h2>
+    <p style="margin-bottom: 1.5em;">
+        ・図書館利用カードは、図書館資料の貸し出しの際に必要になります。<br>
+        ・発行をご希望の方は、身分証明書をお持ちなり、中央図書館、または文学部図書館のカウンターにお越しください(文学部図書館では平日のみ受け付けています)。<br>
+        ・平日の9時から17時までの間に申請を受け付けた場合、その日のうちにカードをお渡しします。平日の17時以降、および土日に受け付けた場合は、次の平日開館日以降にお渡しします。
+    </p>
     
-    <h2>【貸し出しと返却】</h2>
-    <p>・貸し出し冊数は5冊まで、貸し出し期間は2週間です。<br>
-    ・中央図書館の貸し出し受付時間は閉館30分前まで、文学部図書館は閉館15分前までです。<br>
-    ・閉館時の返却は、カウンターで受け付けています。閉館・休館時は、ブックポストに入れてください。</p>
+    <h2 style="font-size: 1.3em; margin-top: 2em; margin-bottom: 1em; color: #222; border-left: 5px solid #555; padding-left: 0.8em;">
+        【貸し出しと返却】
+    </h2>
+    <p style="margin-bottom: 1.5em;">
+        ・貸し出し冊数は5冊まで、貸し出し期間は2週間です。<br>
+        ・中央図書館の貸し出し受付時間は閉館30分前まで、文学部図書館は閉館15分前までです。<br>
+        ・閉館時の返却は、カウンターで受け付けています。閉館・休館時は、ブックポストに入れてください。
+    </p>
     
-    <h2>【資料の複写】</h2>
-    <p>・館内の複写機で、図書館資料の複写ができます。<br>
-    ・複写機は、中央図書館は閉館10分前まで、文学部図書館は閉館時間まで利用できます。</p>
+    <h2 style="font-size: 1.3em; margin-top: 2em; margin-bottom: 1em; color: #222; border-left: 5px solid #555; padding-left: 0.8em;">
+        【資料の複写】
+    </h2>
+    <p style="margin-bottom: 1.5em;">
+        ・館内の複写機で、図書館資料の複写ができます。<br>
+        ・複写機は、中央図書館は閉館10分前まで、文学部図書館は閉館時間まで利用できます。
+    </p>
     
-    <h2>【開館時間】</h2>
+    <h2 style="font-size: 1.3em; margin-top: 2em; margin-bottom: 1em; color: #222; border-left: 5px solid #555; padding-left: 0.8em;">
+        【開館時間】
+    </h2>
     
-    <table>
+    <table style="width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 0.95em;">
         <tr>
-            <th rowspan="2"></th>
-            <th colspan="2">期間※</th>
-            <th>平日</th>
-            <th>土曜・日曜</th>
+            <th style="border: 1px solid #999; padding: 10px; text-align: center; background-color: #eee;" rowspan="2"></th>
+            <th style="border: 1px solid #999; padding: 10px; text-align: center; background-color: #eee;" colspan="2">期間※</th>
+            <th style="border: 1px solid #999; padding: 10px; text-align: center; background-color: #eee;">平日</th>
+            <th style="border: 1px solid #999; padding: 10px; text-align: center; background-color: #eee;">土曜・日曜</th>
         </tr>
         <tr>
-            <td>授業期間</td>
-            <td>9:00～22:00</td>
-            <td colspan="2">9:00～17:00</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;">授業期間</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;">9:00～22:00</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;" colspan="2">9:00～17:00</td>
         </tr>
         <tr>
-            <td>中央<br>図書館</td>
-            <td>夏休み・春休み期間</td>
-            <td>9:00～19:00</td>
-            <td colspan="2">休館</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;">中央<br>図書館</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;">夏休み・春休み期間</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;">9:00～19:00</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;" colspan="2">休館</td>
         </tr>
         <tr>
-            <td>文学部<br>図書館</td>
-            <td>授業期間</td>
-            <td>9:00～21:00</td>
-            <td colspan="2">9:00～17:00</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;">文学部<br>図書館</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;">授業期間</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;">9:00～21:00</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;" colspan="2">9:00～17:00</td>
         </tr>
         <tr>
-            <td></td>
-            <td>夏休み・春休み期間</td>
-            <td>9:00～18:00</td>
-            <td colspan="2">休館</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;"></td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;">夏休み・春休み期間</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;">9:00～18:00</td>
+            <td style="border: 1px solid #999; padding: 10px; text-align: center;" colspan="2">休館</td>
         </tr>
     </table>
     
-    <p class="note">※各期間の具体的な日程は、開館カレンダーのページをご覧ください。</p>
+    <p style="font-size: 0.9em; color: #555; margin-top: 1.5em;">
+        ※各期間の具体的な日程は、開館カレンダーのページをご覧ください。
+    </p>
+
 </div>
+
 
 <a>マリーさんは、秋川大学で本を借りるために、図書館利用カードを作ろうと思っている。今日は金曜日である。明日の夜までに本を借りたいが、図書館利用カードは、どうように申請しなければならないか。</a>
 <ul class="options">
@@ -1551,7 +1165,6 @@ information_retrieval_example = """
     <li>今日か明日、中央図書館か文学部図書館で9時から17時までの間に申請する。</li>
 </ul>
 
-
 <a>ケイさんは、研究のために資料を借りたい複写したりする必要があって、秋川大学の文学部図書館に来た。図書館利用カードを持っている。今日は、授業期間の火曜日である。貸し出しと複写は何時まで可能か。</p>
 <ul class="options">
     <li>貸し出しは18時の15分前まで、複写は18時まで可能である。</li>
@@ -1559,9 +1172,6 @@ information_retrieval_example = """
     <li>貸し出しは21時の15分前まで、複写は21時の10分前まで可能である。</li>
     <li>貸し出しは21時の30分前まで、複写は21時の10分前まで可能である。</li>
 </ul>
-
-</body>
-</html>
 """
 
 topic_understanding_txt_teacher_prompt = """
@@ -1594,8 +1204,6 @@ Additional Requirement:
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-
-
 Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
@@ -1617,11 +1225,11 @@ topic_understanding_txt_example = """
 
 <p class="follow-up">男の学生は、この後まず何をしますか。</p>
 <div class="options">
-     1. シンポジウムのポスターを貼る<br>
-     2. スタッフの当日の予定表を作る<br>
-     3. 当日配る資料をコピーする<br>
-     4. 発表者に連絡する
-  </p>
+ <li>シンポジウムのポスターを貼る</li>
+ <li>スタッフの当日の予定表を作る</li>
+ <li>当日配る資料をコピーする</li>
+ <li>発表者に連絡する</li>
+</p>
 </div>
 
 
@@ -1690,7 +1298,6 @@ Why did that woman take the exam?
 
 Step 3, provide multiple-choice questions based on the listening content. These options should test understanding of the meaning of the conversation.
 
-
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N1 level. 
@@ -1699,8 +1306,6 @@ Additional Requirement:
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
-
-
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1726,8 +1331,8 @@ keypoint_understanding_example = """
 </ul>
 
 --- example 2 ---
- <p class='background'>うちで女の人と男の人が話しています。２人は引っ越しの値段を安くするため、どうすることにしましたか。</p>
- <div class='conversation'>
+<p class='background'>うちで女の人と男の人が話しています。２人は引っ越しの値段を安くするため、どうすることにしましたか。</p>
+<div class='conversation'>
 女: うーん、そうだね。安い引っ越し会社は見つからないだろうし、費用を抑えられるようにあんまり使ってない大きい家具のもらい手を探そうか。
 男: うん、そうだね。
 女: 引っ越し会社に引越しの見積もりを出してもらったけど予算よりかなり高かったよ。今の時期はどこの会社も高いんだね。荷物の量と移動距離で料金を計算するから荷物を減らせば安くなるって。
@@ -1773,42 +1378,36 @@ Additional Requirement:
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
 
-
 Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
 summary_understanding_example = """
 --- example 1 ---
-<div class="section">
-    <p class='background'>講演会で鉄道の写真家が話しています。</p>
-    <div class="dialogue">
-        <p><span class="speaker">男:</span>私は鉄道の写真を撮るためにいろいろなところへ行きます。行く先々で鉄道ファンの方に会うと「どうやったらうまく撮れますか？」と聞かれるんですが、私は反対に「写真で何を伝えたいですか？」と尋ねるんです。シャッターを押すタイミングとか列車と風景をどんなバランスで撮るかとか、上手に撮影するテクニックはいろいろあります。けど、少しぐらい下手でも構わないんです。1枚の写真の中に季節感や感動的な風景など何を表現したいかを意識して撮ることで全く違った写真になると思うんです。</p>
-        <a class='follow-up'>講演会で鉄道の写真家が話しています</a>
-    </div>
-    <ul class='options'> 
-        <li>鉄道の写真を撮る時に大切なこと</li>
-        <li>鉄道の写真を撮るのに良い場所</li>
-        <li>鉄道の美しさを表現する楽しさ</li>
-        <li>鉄道の写真を上手に撮るテクニック</li>
-    </ul>
+<p class='background'>講演会で鉄道の写真家が話しています。</p>
+<div class="conversation">
+男: 私は鉄道の写真を撮るためにいろいろなところへ行きます。行く先々で鉄道ファンの方に会うと「どうやったらうまく撮れますか？」と聞かれるんですが、私は反対に「写真で何を伝えたいですか？」と尋ねるんです。シャッターを押すタイミングとか列車と風景をどんなバランスで撮るかとか、上手に撮影するテクニックはいろいろあります。けど、少しぐらい下手でも構わないんです。1枚の写真の中に季節感や感動的な風景など何を表現したいかを意識して撮ることで全く違った写真になると思うんです。</p>
 </div>
+<a class='follow-up'>講演会で鉄道の写真家が話しています</a>
+<ul class='options'> 
+    <li>鉄道の写真を撮る時に大切なこと</li>
+    <li>鉄道の写真を撮るのに良い場所</li>
+    <li>鉄道の美しさを表現する楽しさ</li>
+    <li>鉄道の写真を上手に撮るテクニック</li>
+</ul>
 
 --- example 2 ---
-<div class="section">
-    <p class='background'>テレビで工業デザイナーが話しています。</p>
-
-    <div class="dialogue">
-        <p><span class="speaker">女:</span>中学1年の時、視力が悪くなり、メガネが必要になりました。メガネ屋さんに行ったのですが、気に入るメガネが見つかりませんでした。仕方なく1つ買ったんですが、自分の気に入らないメガネをかけるのは耐えられませんでした。同じ頃、友達の家で出されたジュースのコップがすごくきれいな形で感激しました。有名なデザイナーがデザインしたコップだったのですが、ちょっと形を変えるだけでこんなにおしゃれになるんだと驚きました。今思えば、デザインということに初めて興味を持ったのがこの頃でした。</p>
-        <a class='follow-up'>工業デザイナーは何について話していますか。</a>
-    </div>
-    <ul class='options'> 
-        <li>メガネを買う人へのアドバイス</li>
-        <li>人気があるメガネのデザイン</li>
-        <li>おしゃれなデザインのポイント</li>
-        <li>デザインを意識し始めたきっかけ</li>
-    </ul>
+<p class='background'>テレビで工業デザイナーが話しています。</p>
+<div class="conversation">
+女:中学1年の時、視力が悪くなり、メガネが必要になりました。メガネ屋さんに行ったのですが、気に入るメガネが見つかりませんでした。仕方なく1つ買ったんですが、自分の気に入らないメガネをかけるのは耐えられませんでした。同じ頃、友達の家で出されたジュースのコップがすごくきれいな形で感激しました。有名なデザイナーがデザインしたコップだったのですが、ちょっと形を変えるだけでこんなにおしゃれになるんだと驚きました。今思えば、デザインということに初めて興味を持ったのがこの頃でした。</p>
 </div>
+<a class='follow-up'>工業デザイナーは何について話していますか。</a>
+<ul class='options'> 
+    <li>メガネを買う人へのアドバイス</li>
+    <li>人気があるメガネのデザイン</li>
+    <li>おしゃれなデザインのポイント</li>
+    <li>デザインを意識し始めたきっかけ</li>
+</ul>
 """
 
 immediate_ack_teacher_prompt = """
@@ -1837,36 +1436,30 @@ immediate_ack_teacher_prompt = """
 -句子中的单词既不能用于问题，也不能用于选项。
 -在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要平均，不要集中在某个选项
 
-
 历史题目: {gan_history}
 正式试卷：{example}
 """
 
 immediate_ack_example = """
 --- example 1 ---
-<div class="conversation">
-    <div class="follow-up">
-        男：課長、明日の会議の資料ですが、ご覧いただけないでしょうか？
-    </div>
-    <ul class='options'>  
-        <li>資料、見てくれるんですね</li>
-        <li>資料は私が作っておきますね</li>
-        <li>資料、見ておきます</li>
-    </ul>
+<div class="follow-up">
+    男：課長、明日の会議の資料ですが、ご覧いただけないでしょうか？
 </div>
-
+<ul class='options'>  
+    <li>資料、見てくれるんですね</li>
+    <li>資料は私が作っておきますね</li>
+    <li>資料、見ておきます</li>
+</ul>
 
 --- example 2 ---
-<div class="conversation">
-    <div class="follow-up">
-        女：この会社、経験者に限らず応募できるって。
-    </div>
-    <ul class='options'>  
-        <li>募集は経験が無い人だけなんだ</li>
-        <li>経験がなくてもいいんだね</li>
-        <li>やっぱり経験が無いといけないのか</li>
-    </ul>
+<div class="follow-up">
+    女：この会社、経験者に限らず応募できるって。
 </div>
+<ul class='options'>  
+    <li>募集は経験が無い人だけなんだ</li>
+    <li>経験がなくてもいいんだね</li>
+    <li>やっぱり経験が無いといけないのか</li>
+</ul>
 """
 
 comprehensive_expression_show_answer_teacher_prompt = """
@@ -2046,11 +1639,8 @@ actively_expression_reflection_prompt = """
 immediate_ack_reflection_prompt = """
 """
 
-comprehensive_expression_show_answer_reflection_prompt ="""
+comprehensive_expression_show_answer_reflection_prompt = """
 """
 
-comprehensive_expression_listen_answer_reflection_prompt ="""
+comprehensive_expression_listen_answer_reflection_prompt = """
 """
-
-
-

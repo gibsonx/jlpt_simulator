@@ -187,54 +187,54 @@ class ExamGenerator:
                     logger.error("All retries failed for exam_uid=%s", self.task_id)
                     return None
 
-    def _generate_paper(self, instruction: Any):
-        """
-        Generate an exam outline, build paper, and store it in DB.
-        Returns: (outline, output_data)
-        Raises: Exception → so Celery marks the job as FAILED
-        """
-        project_path = os.environ['PROJECT_PATH']
-
-        # --- Step 1: Generate outline ---
-        try:
-            outline = self._generate_outline(instruction)
-        except Exception as e:
-            logger.error(
-                "Failed to generate exam outline for level '%s' and exam_type '%s': %s",
-                self.level, self.exam_type, e,
-            )
-            # ❗ Force Celery task failure
-            raise RuntimeError(f"Failed to generate outline: {e}")
-
-        # If outline generator returned None → also fail
-        if outline is None:
-            raise RuntimeError("Outline generation returned None")
-
-        # --- Step 2: Generate exam paper ---
-        try:
-            output_data = self._write_paper(outline)
-
-            if output_data is None:
-                # _write_paper() returns None when retry fails
-                logger.error("Paper generation returned None")
-            return outline, None
-
-            # Save HTML (debug output)
-            filename = f"{project_path}/output/JLPT_{self.level}_{self.task_id}.html"
-            html_output = render_to_html(output_data['sections'])
-
-            with open(filename, "w", encoding="utf-8") as file:
-                file.write(html_output)
-
-            return outline, output_data
-
-        except Exception as e:
-            logger.error(
-                "Failed to generate and store paper for exam_uid=%s: %s",
-                self.task_id, e, exc_info=True
-            )
-            # ❗ Force Celery task failure
-            raise RuntimeError(f"Failed to generate paper: {e}")
+    # def _generate_paper(self, instruction: Any):
+    #     """
+    #     Generate an exam outline, build paper, and store it in DB.
+    #     Returns: (outline, output_data)
+    #     Raises: Exception → so Celery marks the job as FAILED
+    #     """
+    #     project_path = os.environ['PROJECT_PATH']
+    #
+    #     # --- Step 1: Generate outline ---
+    #     try:
+    #         outline = self._generate_outline(instruction)
+    #     except Exception as e:
+    #         logger.error(
+    #             "Failed to generate exam outline for level '%s' and exam_type '%s': %s",
+    #             self.level, self.exam_type, e,
+    #         )
+    #         # ❗ Force Celery task failure
+    #         raise RuntimeError(f"Failed to generate outline: {e}")
+    #
+    #     # If outline generator returned None → also fail
+    #     if outline is None:
+    #         raise RuntimeError("Outline generation returned None")
+    #
+    #     # --- Step 2: Generate exam paper ---
+    #     try:
+    #         output_data = self._write_paper(outline)
+    #
+    #         if output_data is None:
+    #             # _write_paper() returns None when retry fails
+    #             logger.error("Paper generation returned None")
+    #         return outline, None
+    #
+    #         # Save HTML (debug output)
+    #         filename = f"{project_path}/output/JLPT_{self.level}_{self.task_id}.html"
+    #         html_output = render_to_html(output_data['sections'])
+    #
+    #         with open(filename, "w", encoding="utf-8") as file:
+    #             file.write(html_output)
+    #
+    #         return outline, output_data
+    #
+    #     except Exception as e:
+    #         logger.error(
+    #             "Failed to generate and store paper for exam_uid=%s: %s",
+    #             self.task_id, e, exc_info=True
+    #         )
+    #         # ❗ Force Celery task failure
+    #         raise RuntimeError(f"Failed to generate paper: {e}")
 
 
 

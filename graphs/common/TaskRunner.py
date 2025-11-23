@@ -2,6 +2,7 @@ from graphs.common.ExamGenerator import ExamGenerator
 from typing import *
 import os
 import importlib
+from libs.Utils import render_to_html
 from libs.Logger import logger
 from graphs.common.Schema import ExamType
 from libs.CosmosMongoDB import CosmosMongoDB
@@ -134,6 +135,7 @@ class TaskRunner:
         """
         conn_str = os.getenv("AZURE_MONGO_CONNECTION")
         db_name = os.getenv("AZURE_MONGO_DBNAME")
+        project_path = os.environ['PROJECT_PATH']
 
         collection_name = f"{self.level_lower}_{self.exam_type_lower}"
         db_client = CosmosMongoDB(conn_str, db_name, collection_name)
@@ -143,7 +145,6 @@ class TaskRunner:
             existing = db_client.exists(self.task_id)
             if existing:
                 logger.warning(f"Exam with _id={self.task_id} already exists. Skipping execution.")
-                return None, None
             else:
                 logger.info("Safe to process as task_id [%s] is new", self.task_id)
 
@@ -154,33 +155,70 @@ class TaskRunner:
             exam_type=self.exam_type,
         )
 
-        outline, exam_paper = exam_generator._generate_paper(instruction=prompt)
-        if outline:
-            logger.info(" ### OUTLINE ### \n\n %s", outline.as_str)
+        # --- Step 1: Generate Outline ---
+        outline = exam_generator._generate_outline(prompt)
+
+        # If outline generator returned None, throw exception to celery
+        if outline is None:
+            raise RuntimeError("Outline generation returned None")
+
+        # --- Step 2: Generate exam paper ---
+        exam_paper = exam_generator._write_paper(outline)
+
+        if exam_paper is None:
+            # _write_paper() returns None when retry fails
+            logger.error("Paper generation returned None")
+            raise RuntimeError("Outline generation returned None")
         else:
-            logger.error("Exam paper generation returned None.")
+            # Save Object as HTML (debug output)
+            filename = f"{project_path}/output/JLPT_{self.level}_{self.task_id}.html"
+            html_output = render_to_html(exam_paper['sections'])
 
-        if outline and not exam_paper:
-            logger.warning("Exam paper not generated; returning outline only.")
-            return outline, None
+            with open(filename, "w", encoding="utf-8") as file:
+                file.write(html_output)
 
-        if exam_paper:
-            logger.info(" ### Exam Paper ### \n\n %s", exam_paper)
-            # try:
+            logger.info(f" ### Exam Paper is Save as {filename} ###")
 
-            if not conn_str or not db_name:
-                raise EnvironmentError("Missing MongoDB connection settings.")
-
+            # Save Object to MongoDB
             inserted_id = db_client.safe_insert_one(exam_paper)
 
+            # Inform Exam System via API
             if inserted_id:
                 logger.info("Inserted document ID: %s", inserted_id)
                 self.callback_system_api()
                 logger.info("Callback system API triggered successfully.")
             else:
                 logger.warning("MongoDB insertion returned no document ID.")
-            # except Exception as e:
-            #     logger.exception("Failed to insert exam paper into MongoDB: %s", e)
-            #     return outline, None
+
         return outline, exam_paper
+
+
+        # outline, exam_paper = exam_generator._generate_paper(instruction=prompt)
+        # if outline:
+        #     logger.info(" ### OUTLINE ### \n\n %s", outline.as_str)
+        # else:
+        #     logger.error("Exam paper generation returned None.")
+        #
+        # if outline and not exam_paper:
+        #     logger.warning("Exam paper not generated; returning outline only.")
+        #     return outline, None
+        #
+        # if exam_paper:
+        #     logger.info(" ### Exam Paper ### \n\n %s", exam_paper)
+        #
+        #     if not conn_str or not db_name:
+        #         raise EnvironmentError("Missing MongoDB connection settings.")
+        #
+        #     inserted_id = db_client.safe_insert_one(exam_paper)
+        #
+        #     if inserted_id:
+        #         logger.info("Inserted document ID: %s", inserted_id)
+        #         self.callback_system_api()
+        #         logger.info("Callback system API triggered successfully.")
+        #     else:
+        #         logger.warning("MongoDB insertion returned no document ID.")
+        #     # except Exception as e:
+        #     #     logger.exception("Failed to insert exam paper into MongoDB: %s", e)
+        #     #     return outline, None
+        # return outline, exam_paper
 

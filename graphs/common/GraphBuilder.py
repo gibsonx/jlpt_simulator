@@ -187,7 +187,7 @@ class GraphBuilder:
 
             msg = format_pipeline.invoke(input={"question": question})
 
-            logger.info("Formatter: {}".format(msg))
+            # logger.info("Formatter: {}".format(msg))
 
             # We treat the output of this as human feedback for the generator
             return {"formatted_output": msg }

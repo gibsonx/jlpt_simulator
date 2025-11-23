@@ -1124,7 +1124,6 @@ Historical Generation : {gan_history}
 summary_understanding_example = """
 --- example 1 ---
 <p class='background'>日本語学校で女の留学生と男の留学生が話しています。</p>
-
 <div class='conversation'>
 女: 来月で佐藤先生、学校を辞めちゃうんだよね。  
 男: 寂しくなるね。  

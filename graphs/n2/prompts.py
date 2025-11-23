@@ -69,7 +69,6 @@ Additional Requirement:
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
-
 Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
@@ -113,7 +112,6 @@ Additional Requirement:
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
-
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -421,7 +419,7 @@ structure_selection_teacher_prompt = """
 - 被提取的5个短语不能再出现在题干中，题干中不能保留被提取的短语
 - 至少有2个短语是谓语短语、至少1个短语是连接词或用于连接的短语、至少1个助词或副助词的短语
 
-步骤4：提取的5个短语用5/6/7/8/9，这5个标号代替。要求这5个标号需要以“【5】”的形式呈现
+步骤4：提取的5个短语用48/49/50/51/52，这5个标号代替。要求这5个标号需要以“【48】”的形式呈现
 - 提取的5个短语，两两之间不能一样
 
 步骤5：把步骤3中提取的5个短语分别作为5道题的正确选项的答案，并生成每道题的其他3个选项。生成的选项需要符合以下几个要求：
@@ -445,63 +443,39 @@ structure_selection_teacher_prompt = """
 """
 
 structure_selection_example = """
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<title>紅葉の異変（続き）</title>
-<style>
-  body {
-    font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
-    margin: 40px;
-    line-height: 1.8;
-  }
-  .container {
-    border: 1px solid #000;
-    padding: 20px;
-  }
-  .title {
-    text-align: center;
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  .author {
-    text-align: right;
-    margin-bottom: 20px;
-  }
-  .question {
-    margin-top: 20px;
-  }
-</style>
-</head>
-<body>
 <div class="article">
-  <p>以下は、留学生がスピーチのために書いた文章である</p>
+  <p style="font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif; line-height: 1.8; margin-bottom: 1.5em;">
+    以下は、留学生がスピーチのために書いた文章である
+  </p>
 
-  <div class="container">
-    <div class="title">紅葉の異変</div>
-    <div class="author">サリム ソフィア</div>
+  <div style="border: 1px solid #000; padding: 20px; margin-bottom: 20px; font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif; line-height: 1.8;">
+    <div style="text-align: center; font-size: 1.5em; font-weight: bold; margin-bottom: 10px;">
+      紅葉の異変
+    </div>
 
-    <p>
+    <div style="text-align: right; margin-bottom: 20px;">
+      サリム ソフィア
+    </div>
+
+    <p style="margin-bottom: 1.5em;">
       私は日本の秋の景色が好きです。秋になって紅葉が始まり、緑だった葉が黄色やオレンジ、赤に変わると、とてもきれいです。秋の紅葉は、日本の四季の変化を感じさせてくれるものです。
     </p>
 
-    <p>
-      （48）ですが、先日テレビで、紅葉がピークを迎える時期が年々遅くなっているというニュースを見ました。中には、1月になってからピークを迎えたところもあるそうで、驚きました。温暖化によって平均気温が上昇していることが大きな原因だそうです。私は、夏が過ぎて気温が下がってくれば、必ず紅葉が始まると思っていました。（49）そうではありませんでした。紅葉には、条件となる気温の変化があります。
+    <p style="margin-bottom: 1.5em;">
+      【48】ですが、先日テレビで、紅葉がピークを迎える時期が年々遅くなっているというニュースを見ました。中には、1月になってからピークを迎えたところもあるそうで、驚きました。温暖化によって平均気温が上昇していることが大きな原因だそうです。私は、夏が過ぎて気温が下がってくれば、必ず紅葉が始まると思っていました。【49】そうではありませんでした。紅葉には、条件となる気温の変化があります。
     </p>
 
-    <p>
-      葉の変色が始まるのは、1日の最低気温が大体8度以下になってからです。秋になっても、最低気温が一定の気温まで下がらなければ、紅葉は（50）その後、さらに寒くなり、5～6度まで下がると、紅葉は一気に進みます。また、5度以下の日が続くと、最も美しい新葉が見られるといわれています。
+    <p style="margin-bottom: 1.5em;">
+      葉の変色が始まるのは、1日の最低気温が大体8度以下になってからです。秋になっても、最低気温が一定の気温まで下がらなければ、紅葉は【50】その後、さらに寒くなり、5～6度まで下がると、紅葉は一気に進みます。また、5度以下の日が続くと、最も美しい新葉が見られるといわれています。
     </p>
 
-    <p>
-      紅葉に起きている異変を知り、このまま温暖化が進むと、日本の秋の景色が変わってしまう可能性もあるのではないかと思いました。もしかしたら、紅葉自体が見られなくなる日も来るかもしれません。紅葉を通して、温暖化が身近な問題であることをより強く（51）
+    <p style="margin-bottom: 1.5em;">
+      紅葉に起きている異変を知り、このまま温暖化が進むと、日本の秋の景色が変わってしまう可能性もあるのではないかと思いました。もしかしたら、紅葉自体が見られなくなる日も来るかもしれません。紅葉を通して、温暖化が身近な問題であることをより強く【51】
     </p>
   </div>
 </div>
 
-  <div class="follow-up">
+<div class="follow-up">
     <a><strong>48</strong></a>
     <div class="options">
         <li>そこの紅葉</li>
@@ -516,7 +490,7 @@ structure_selection_example = """
         <li>確かに</li>　　
         <li>しかし</li>　　
         <li>つまり</li>
-
+    
     <p><strong>50</strong></p>
     <div class="options">
         <li>始まらないのです</li>　　
@@ -532,10 +506,8 @@ structure_selection_example = """
         <li>感じさせることができました</li>　　
         <li>感じるようになりました</li>
     </div>
-    </div>
-  </div>
-</body>
-</html>
+</div>
+
 """
 
 short_reading_narrative_teacher_prompt = """
@@ -562,66 +534,28 @@ Historical Generation : {gan_history}
 """
 
 short_reading_narrative_example = """
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>インタビューに関する文章</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        p {
-            margin-bottom: 1.5em;
-        }
-        .note {
-            font-size: 0.9em;
-            color: #555;
-            margin-left: 1em;
-        }
-        ol {
-            margin-top: 2em;
-        }
-        li {
-            margin-bottom: 0.8em;
-        }
-        .page-number {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 2em;
-            color: #666;
-        }
-    </style>
-</head>
-<body>
 <div class="article">
-<p>インタビューでは準備も重要だが、実際のインタビューの場面になったら、いったんその準備で得たものをすべて捨てなくてはならない。そして、相手の話を真剣に深く聞き、その人が何を言わんとしているのか、丸ごと捉えて、そこで出てきた素晴らしい言葉、豊かな言葉、言葉に込められた大事なメッセージをしっかりとつかむことこそが必要なのだ。</p>
-
-<p>そこから良い対話が生まれてくる。良いインタビューは、次の質問を忘れて相手の話を聞けたときに初めて行えるものなのだ。</p>
-
-<p class="note">（注1）言わんとしている：言おうとしている</p>
-<p class="note">（注2）丸ごと：そのまま全部</p>
-
+    <p style="margin-bottom: 1.5em;">
+        インタビューでは準備も重要だが、実際のインタビューの場面になったら、いったんその準備で得たものをすべて捨てなくてはならない。そして、相手の話を真剣に深く聞き、その人が何を言わんとしているのか、丸ごと捉えて、そこで出てきた素晴らしい言葉、豊かな言葉、言葉に込められた大事なメッセージをしっかりとつかむことこそが必要なのだ。
+    </p>
+    <p style="margin-bottom: 1.5em;">
+        そこから良い対話が生まれてくる。良いインタビューは、次の質問を忘れて相手の話を聞けたときに初めて行えるものなのだ。
+    </p>
+    <p style="margin-bottom: 1.5em; font-size: 0.9em; color: #555; margin-left: 1em;">
+        （注1）言わんとしている：言おうとしている
+    </p>
+    <p style="margin-bottom: 1.5em; font-size: 0.9em; color: #555; margin-left: 1em;">
+        （注2）丸ごと：そのまま全部
+    </p>
 </div>
 
 <a>インタビューについて、筆者の考えに合うのはどれか。</a>
-
 <ul class="options">
     <li>準備したものから離れて、相手の話をよく聞くことが重要だ。</li>
     <li>準備した質問に沿って、相手から大事なメッセージを引き出すことが重要だ。</li>
     <li>相手の話をしっかり聞くことが大切なので、準備をする必要はない。</li>
     <li>相手から素晴らしい言葉を引き出すには、準備しすぎないほうがいい。</li>
 </ul>
-
-</body>
-</html>
 
 """
 
@@ -651,85 +585,38 @@ Historical Generation : {gan_history}
 """
 
 short_reading_mail_example = """
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>メールに関する文章</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        hr {
-            border: none;
-            border-top: 1px solid #ccc;
-            margin: 2em 0;
-        }
-        h3 {
-            font-size: 1.2em;
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
-        }
-        p {
-            margin-bottom: 1.2em;
-        }
-        .page-number {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 2em;
-            color: #666;
-        }
-        ol {
-            margin-top: 1.5em;
-        }
-        li {
-            margin-bottom: 0.8em;
-        }
-        .file-note {
-            font-style: italic;
-            color: #555;
-            margin-top: 2em;
-        }
-    </style>
-</head>
-<body>
-<div class="article">
-<p>以下は、ある会社で全社員に送られたメールである。</p>
-
-<hr>
-
-<h3>社員各位</h3>
-
-<p>わが社の人気商品「緑山牧場チーズ詰め合わせ」を、定価の30%引き（割引後3,500円）で社員向けに特別販売します。</p>
-
-<p>購入希望者は、添付の申込書にお名前と購入数を記入のうえ、3月9日までに営業課までメールでお申し込みください。通常、社内販売の支払いと商品のお渡しは経理課で行っていますが、今回は営業課で行います。代金と引き換えに、その場で商品をお渡しします。お渡し期間は3月16日から19日の間です。</p>
-
-<p>以上、よろしくお願いします。</p>
-
-<p class="file-note">添付ファイル：3月1日「緑山牧場チーズ詰め合わせ」申込書</p>
-
-<h3>営業課 安井</h3>
-
+<div class="article" style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
+    <p style="margin-bottom: 1.2em;">
+        以下は、ある会社で全社員に送られたメールである。
+    </p>
+    <hr style="border: none; border-top: 1px solid #ccc; margin: 2em 0;">
+    <h3 style="font-size: 1.2em; margin-top: 1.5em; margin-bottom: 0.5em;">
+        社員各位
+    </h3>
+    <p style="margin-bottom: 1.2em;">
+        わが社の人気商品「緑山牧場チーズ詰め合わせ」を、定価の30%引き（割引後3,500円）で社員向けに特別販売します。
+    </p>
+    <p style="margin-bottom: 1.2em;">
+        購入希望者は、添付の申込書にお名前と購入数を記入のうえ、3月9日までに営業課までメールでお申し込みください。通常、社内販売の支払いと商品のお渡しは経理課で行っていますが、今回は営業課で行います。代金と引き換えに、その場で商品をお渡しします。お渡し期間は3月16日から19日の間です。
+    </p>
+    <p style="margin-bottom: 1.2em;">
+        以上、よろしくお願いします。
+    </p>
+    <p style="font-style: italic; color: #555; margin-top: 2em; margin-bottom: 1.2em;">
+        添付ファイル：3月1日「緑山牧場チーズ詰め合わせ」申込書
+    </p>
+    <h3 style="font-size: 1.2em; margin-top: 1.5em; margin-bottom: 0.5em;">
+        営業課 安井
+    </h3>
 </div>
 
 <a>「緑山牧場チーズ詰め合わせ」を社内販売で購入したい社員は、期日までに営業課にメールで申し込んだあと、どうすればいいか。</a>
-
 <ul class='options'>
     <li>経理課で支払いをして受け取る。</li>
     <li>経理課で支払いをして、営業課で受け取る。</li>
     <li>営業課で支払いをして受け取る。</li>
     <li>営業課で支払いをして、経理課で受け取る。</li>
 </ul>
-
-</body>
-</html>
 """
 
 short_reading_notification_teacher_prompt = """
@@ -750,112 +637,93 @@ Additional Requirement:
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
-
 Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
 short_reading_notification_example = """
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>掲示板に関する文書</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        .document {
-            border: 1px solid #ccc;
-            padding: 20px;
-            background-color: #fff;
-            position: relative;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
-        }
-        .corner {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: #ddd;
-            border-radius: 50%;
-        }
-        .top-left { top: 10px; left: 10px; }
-        .top-right { top: 10px; right: 10px; }
-        .bottom-left { bottom: 10px; left: 10px; }
-        .bottom-right { bottom: 10px; right: 10px; }
-        .date {
-            text-align: right;
-            margin-bottom: 1em;
-            font-weight: bold;
-        }
-        h3 {
-            text-align: center;
-            margin: 1.5em 0;
-            font-size: 1.3em;
-        }
-        p {
-            margin-bottom: 1.2em;
-            text-indent: 1em;
-        }
-        .signature {
-            text-align: right;
-            margin-top: 2em;
-        }
-        .page-number {
-            text-align: right;
-            font-weight: bold;
-            margin-top: 2em;
-            color: #666;
-        }
-        ol {
-            margin-top: 1.5em;
-        }
-        li {
-            margin-bottom: 0.8em;
-        }
-    </style>
-</head>
-<body>
-<div class="article">
-    <p>以下は、ある町の掲示板に貼られていた文書である。</p>
-    <div class="document">
-    <div class="corner top-left"></div>
-    <div class="corner top-right"></div>
-    <div class="corner bottom-left"></div>
-    <div class="corner bottom-right"></div>
-    
-    <div class="date">10月5日</div>
-    
-    <p>住民の皆様へ</p>
-    
-    <h3>ごみに関するお願い</h3>
-    
-    <p>最近、「可燃ごみ」の回収日に衣類・布類が多く出されています。しかし、市の規則では、衣類・布類は毎週火曜日の「資源ごみ」の回収日に出すことになっています。資源を有効に活用するため、決められた回収日に出してください。</p>
-    
-    <p>衣類・布類は、市内8か所の公共施設に設置してある回収ボックスでも回収しています。回収後は、中古の衣類として再使用したり、工場で再生利用したりします。ご協力をよろしくお願いします。</p>
-    
-    <p class="signature">竹川市役所 市民生活課</p>
+<div class="article" style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
+<p style="margin-bottom: 1.2em; text-indent: 1em;">
+    以下は、ある町の掲示板に貼られていた文書である。
+</p>
+<div style="
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #fff;
+    position: relative;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+">
+    <!-- Corners -->
+    <div style="
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #ddd;
+        border-radius: 50%;
+        top: 10px;
+        left: 10px;
+    "></div>
+    <div style="
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #ddd;
+        border-radius: 50%;
+        top: 10px;
+        right: 10px;
+    "></div>
+    <div style="
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #ddd;
+        border-radius: 50%;
+        bottom: 10px;
+        left: 10px;
+    "></div>
+    <div style="
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #ddd;
+        border-radius: 50%;
+        bottom: 10px;
+        right: 10px;
+    "></div>
+
+    <!-- Date -->
+    <div style="text-align: right; margin-bottom: 1em; font-weight: bold;">
+        10月5日
     </div>
-</div
+
+    <p style="margin-bottom: 1.2em; text-indent: 1em;">
+        住民の皆様へ
+    </p>
+
+    <h3 style="text-align: center; margin: 1.5em 0; font-size: 1.3em;">
+        ごみに関するお願い
+    </h3>
+
+    <p style="margin-bottom: 1.2em; text-indent: 1em;">
+        最近、「可燃ごみ」の回収日に衣類・布類が多く出されています。しかし、市の規則では、衣類・布類は毎週火曜日の「資源ごみ」の回収日に出すことになっています。資源を有効に活用するため、決められた回収日に出してください。
+    </p>
+
+    <p style="margin-bottom: 1.2em; text-indent: 1em;">
+        衣類・布類は、市内8か所の公共施設に設置してある回収ボックスでも回収しています。回収後は、中古の衣類として再使用したり、工場で再生利用したりします。ご協力をよろしくお願いします。
+    </p>
+
+    <p style="text-align: right; margin-top: 2em;">
+        竹川市役所 市民生活課
+    </p>
+</div>
 
 <a>この文書で最も伝えたいことは何か。</a>
-
 <ul class="options">
     <li>「資源ごみ」として出す衣類・布類の量を減らしてほしい。</li>
     <li>「資源ごみ」の回収日に「可燃ごみ」を出さないでほしい。</li>
     <li>衣類・布類は、「資源ごみ」の回収日に出してほしい。</li>
     <li>衣類・布類は、新しく設置した回収ボックスに出してほしい。</li>
 </ul>
-
-</body>
-</html>
 """
 
 midsize_reading_teacher_prompt = """
@@ -884,57 +752,21 @@ Historical Generation : {gan_history}
 """
 
 midsize_reading_example = """
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文章内容</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        .content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h3 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        ol {
-            padding-left: 20px;
-        }
-        li {
-            margin: 12px 0;
-        }
-        .question {
-            font-weight: bold;
-            color: #e74c3c;
-            margin-top: 25px;
-        }
-        .article {
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-    </style>
-</head>
-<body>
+<div class="article" style="
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+">
 
-<div class="article">
-    <p>勉強にしても、仕事にしても、その能率には必ず波があり、それがな<br>いようにみえても、波が小さいだけである。つまり、人間は機械のように<br>いつも同じ調子ではたらいていないから、1 時間に 50 個の製品がつく<br>れるから、10 時間で 500 個がつくれる、という具合には計算できない。<br>従って、脳が最も快調にはたらいているときを基準にすると、たいていの<br>ときは不調ということになってしまう。</p>
-    <p>それでも、全く無計画に勉強や仕事をするわけにもゆかないので、一<br>応はスケジュールを立てる。その際に、快調に脳がはたらいているときの<br>能率を基準にしてスケジュールを立てれば、そのスケジュールの通りにこ<br>とが進行することは絶対にないといってもいい。その度に、自分の才能に失<br>望していれば、失望しつづけることになる。さし迫った状態では、どうし<br>ても脳がフル回転しているときを基準にスケジュールを組むので、たいてい<br>は不完全な形で終ってしまう。スケジュールをつくるときには、せめて<br>中等度に脳がはたらいているときの能率を基準にする必要がある。スケジ<br>ュール以上にはかどっても誰もこまる人はいない。</p>
-    <p>そして、スケジュールにこだわるより、脳の変動の波をできるだけ感<br>じとり、能率が悪くても悲観せずに、必ず上げ潮のときがくることを期待<br>すればいい。そして、上げ潮のときには自分でもおどろくほどに能率が上<br>がるので、そのときに一気に遅れをとり戻せばいいのである。</p>
+    <p style="
+        margin: 0 0 20px 0;
+    ">勉強にしても、仕事にしても、その能率には必ず波があり、それがな<br>いようにみえても、波が小さいだけである。つまり、人間は機械のように<br>いつも同じ調子ではたらいていないから、1 時間に 50 個の製品がつく<br>れるから、10 時間で 500 個がつくれる、という具合には計算できない。<br>従って、脳が最も快調にはたらいているときを基準にすると、たいていの<br>ときは不調ということになってしまう。</p>
+    <p style="
+        margin: 0 0 20px 0;
+    ">それでも、全く無計画に勉強や仕事をするわけにもゆかないので、一<br>応はスケジュールを立てる。その際に、快調に脳がはたらいているときの<br>能率を基準にしてスケジュールを立てれば、そのスケジュールの通りにこ<br>とが進行することは絶対にないといってもいい。その度に、自分の才能に失<br>望していれば、失望しつづけることになる。さし迫った状態では、どうし<br>ても脳がフル回転しているときを基準にスケジュールを組むので、たいてい<br>は不完全な形で終ってしまう。スケジュールをつくるときには、せめて<br>中等度に脳がはたらいているときの能率を基準にする必要がある。スケジ<br>ュール以上にはかどっても誰もこまる人はいない。</p>
+    <p style="
+        margin: 0 0 20px 0;
+    ">そして、スケジュールにこだわるより、脳の変動の波をできるだけ感<br>じとり、能率が悪くても悲観せずに、必ず上げ潮のときがくることを期待<br>すればいい。そして、上げ潮のときには自分でもおどろくほどに能率が上<br>がるので、そのときに一気に遅れをとり戻せばいいのである。</p>
 </div>
 
 <div class="follow-up">           
@@ -954,10 +786,6 @@ midsize_reading_example = """
         <li>計画の通りに勉強や仕事を進めるためには、脳の変動の波を小さくすればいい</li>
     </ul>
 </div>
-
-    </div>
-</body>
-</html>
 """
 
 comprehensive_read_teacher_prompt = """
@@ -1041,89 +869,76 @@ Additional Requirement:
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options.
 
-
-
 Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
 long_reading_example = """
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文章内容</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        .content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h3 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        ol {
-            padding-left: 20px;
-        }
-        li {
-            margin: 12px 0;
-        }
-        .question {
-            font-weight: bold;
-            color: #e74c3c;
-            margin-top: 25px;
-        }
-    </style>
-</head>
-<body>
-    <div class="article">
-        <p>以下は、ある作家が物語などの本を読むことについて書いた文章である。</p>
-        <p>読むことは、受動的な作業だと思っている人は意外に多い。（中略）読んでインプットして、書いてアウトプットする。そうではなくて、両方アウトプットなのだというのが、私の持論である。</p>
-        <p>そこにある言葉を読む。すると心には、文字以上のものが広がる。たとえば、子どものころ読んだ海外作品に、聞いたこともない料理名が出てくるということが、よくあった。クロスグリのパイだとか、ジンジャークッキーだとか。食べたことのないものを、懸命に想像して味わう。それを食べる主人公の舌を、獲得するわけである。①この行為、受動ではなく能動である。「創る」作業である。本でしか読んだことのない食べものを、大人になってから実際に食べ、「違う」と思った経験を持つ人は、意外に多いのではないだろうか。もちろん違うのは私たちの想像なのだが、しかし自分の頭のなかで創った料理のほうが、断然おいしかった、ということは、よくある。</p>
-        <p>本を読まない、というのは、だから、私にとって創造の放棄である。②つまらない本、相性が悪い本というのはもちろんある。しかしそこで、どこがどんなふうにつまらないのか、どう展開したらおもしろかったのか、自分のどの部分と相性が悪いのか、そんなことを考えていると、つまらない本はおもしろくなるし、相性が悪い本はいつか相性がよくなる日を待とうと思うことができる。私は、おもしろかった本よりつまらなかった本のあらすじを人に話すほうが、ずっと好きだ。どこがどんなふうにつまらなく感じたかを話すのはそれだけ創造の余地があるからだろう。</p>        
-        <p>料理でも、絵画でも、あるいは家事の手順でも、創ることの喜びを知ってしまうと、なかなかそれから離れることができない。読むことの楽しみは、と訊かれれば、創ることの自由さだと私は答える。</p>        
-    </div>
+<div class="article" style="
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.8;
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 0 20px;
+        background-color: #f9f9f9;
+        color: #333;
+        margin-bottom: 40px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    >
+    <p>以下は、ある作家が物語などの本を読むことについて書いた文章である。</p>
+    <p>読むことは、受動的な作業だと思っている人は意外に多い。（中略）読んでインプットして、書いてアウトプットする。そうではなくて、両方アウトプットなのだというのが、私の持論である。</p>
+    <p>
+        そこにある言葉を読む。すると心には、文字以上のものが広がる。
+        たとえば、子どものころ読んだ海外作品に、聞いたこともない料理名が出てくるということが、よくあった。
+        クロスグリのパイだとか、ジンジャークッキーだとか。
+        食べたことのないものを、懸命に想像して味わう。それを食べる主人公の舌を、獲得するわけである。
+        <span style="font-weight: bold; color: #e74c3c;">①この行為、受動ではなく能動である。</span>
+        「創る」作業である。
+        本でしか読んだことのない食べものを、大人になってから実際に食べ、「違う」と思った経験を持つ人は、意外に多いのではないだろうか。
+        もちろん違うのは私たちの想像なのだが、しかし自分の頭のなかで創った料理のほうが、断然おいしかった、ということは、よくある。
+    </p>
+    <p>
+        本を読まない、というのは、だから、私にとって創造の放棄である。
+        <span style="font-weight: bold; color: #e74c3c;">②つまらない本、相性が悪い本というのはもちろんある。</span>
+        しかしそこで、どこがどんなふうにつまらないのか、どう展開したらおもしろかったのか、
+        自分のどの部分と相性が悪いのか、そんなことを考えていると、
+        つまらない本はおもしろくなるし、相性が悪い本はいつか相性がよくなる日を待とうと思うことができる。
+        私は、おもしろかった本よりつまらなかった本のあらすじを人に話すほうが、ずっと好きだ。
+        どこがどんなふうにつまらなく感じたかを話すのはそれだけ創造の余地があるからだろう。
+    </p>
+    <p>
+        料理でも、絵画でも、あるいは家事の手順でも、創ることの喜びを知ってしまうと、なかなかそれから離れることができない。
+        読むことの楽しみは、と訊かれれば、創ることの自由さだと私は答える。
+    </p>
+</div>
     
-    <div class="follow-up">    
-        <a>①この行為とはどういうことか</a>
-        <ul class="options">
-            <li>実際に、主人公が食べていた食べものを味わってみること</li>
-            <li>食べたことのないものを主人公と一緒に食べているところを想像すること</li>
-            <li>主人公がどんな食べものが好きかを想像してみること</li>
-            <li>主人公になりきって、食べたことのないものを想像して味わうこと</li>
-        </ul>
-        
-        <a>②つまらない本について、筆者はどのように述べているか。</a>
-        <ul class="options">
-            <li>つまらなく感じた点について色々考えていると、おもしろくなる</li>
-            <li>つまらなく感じた理由を考えていると、自分の好みがよく分かってくる</li>
-            <li>つまらないと思っても、いつか必ず相性がよくなる日がくる</li>
-            <li>つまらないと思っても、人にあらすじを話すとおもしろいところが見つけられる</li>
-        </ul>
-        
-        <a>本を読むことについて、筆者はどのように考えているか</a>
-        <ul class="options">
-            <li>本を読むことは、料理や絵画より創ることの喜びが大きい</li>
-            <li>本を読むことは、自由に想像を膨らませる楽しい創造の作業だ</li>
-            <li>本を読んでたくさん知ることができれば、創ることの喜びも増す</li>
-            <li>本を読んで想像力を身につければ、生活のなかでも自由に想像が楽しめる</li>
-        </ul>
-    </div>
-</body>
-</html>
+<div class="follow-up">    
+    <a>①この行為とはどういうことか</a>
+    <ul class="options">
+        <li>実際に、主人公が食べていた食べものを味わってみること</li>
+        <li>食べたことのないものを主人公と一緒に食べているところを想像すること</li>
+        <li>主人公がどんな食べものが好きかを想像してみること</li>
+        <li>主人公になりきって、食べたことのないものを想像して味わうこと</li>
+    </ul>
+    
+    <a>②つまらない本について、筆者はどのように述べているか。</a>
+    <ul class="options">
+        <li>つまらなく感じた点について色々考えていると、おもしろくなる</li>
+        <li>つまらなく感じた理由を考えていると、自分の好みがよく分かってくる</li>
+        <li>つまらないと思っても、いつか必ず相性がよくなる日がくる</li>
+        <li>つまらないと思っても、人にあらすじを話すとおもしろいところが見つけられる</li>
+    </ul>
+    
+    <a>本を読むことについて、筆者はどのように考えているか</a>
+    <ul class="options">
+        <li>本を読むことは、料理や絵画より創ることの喜びが大きい</li>
+        <li>本を読むことは、自由に想像を膨らませる楽しい創造の作業だ</li>
+        <li>本を読んでたくさん知ることができれば、創ることの喜びも増す</li>
+        <li>本を読んで想像力を身につければ、生活のなかでも自由に想像が楽しめる</li>
+    </ul>
+</div>
+
 """
 
 information_retrieval_teacher_prompt = """
@@ -1153,213 +968,239 @@ Historical Generation : {gan_history}
 
 information_retrieval_example = """
 --- example 1 ---
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<title>秋原テニススクール入会案内</title>
-<style>
-  body {
-    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-    margin: 40px;
-    line-height: 1.8;
-  }
-  .container {
-    border: 1px solid #000;
-    padding: 20px;
-  }
-  h1 {
-    text-align: center;
-    font-size: 1.6em;
-    margin-bottom: 20px;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 15px 0;
-  }
-  th, td {
-    border: 1px solid #000;
-    padding: 8px;
-    text-align: left;
-  }
-  th {
-    background-color: #f2f2f2;
-  }
-  .section-title {
-    font-weight: bold;
-    margin-top: 25px;
-  }
-  .note {
-    font-size: 0.9em;
-    color: #333;
-  }
-</style>
-</head>
-<body>
-  <div class="article">
-    <h1>秋原テニススクール入会案内</h1>
-
-    <p class="section-title">コース・クラスについて</p>
-    <p>
-      以下の四つのコースの中から、ご希望の曜日、時間のクラスをお選びいただけます。<br>
-      曜日、時間については、別紙をご確認ください。中学生以上から受講が可能です。<br>
-      各コースの1クラスの定員：10名　レッスン時間：60分
+<div class="article">
+    <h1 style="text-align: center; font-size: 1.6em; margin-bottom: 20px; font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;">
+        秋原テニススクール入会案内
+    </h1>
+    <p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-weight: bold; margin-top: 25px;">
+        コース・クラスについて
+    </p>
+    <p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; margin-bottom: 1.5em;">
+        以下の四つのコースの中から、ご希望の曜日、時間のクラスをお選びいただけます。<br>
+        曜日、時間については、別紙をご確認ください。中学生以上から受講が可能です。<br>
+        各コースの1クラスの定員：10名　レッスン時間：60分
     </p>
 
-    <table>
-      <tr><th>コース</th><th>受講料（週一回、一ヶ月分）</th></tr>
-      <tr><td>A. 平日昼間（初心者）</td><td>8,800円</td></tr>
-      <tr><td>B. 平日昼間（中・上級者）</td><td>12,000円</td></tr>
-      <tr><td>C. 平日夜間・土日（初心者）</td><td>9,300円</td></tr>
-      <tr><td>D. 平日夜間・土日（中・上級者）</td><td>12,500円</td></tr>
+    <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;">
+        <tr>
+            <th style="border: 1px solid #000; padding: 8px; text-align: left; background-color: #f2f2f2;">コース</th>
+            <th style="border: 1px solid #000; padding: 8px; text-align: left; background-color: #f2f2f2;">受講料（週一回、一ヶ月分）</th>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #000; padding: 8px;">A. 平日昼間（初心者）</td>
+            <td style="border: 1px solid #000; padding: 8px;">8,800円</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #000; padding: 8px;">B. 平日昼間（中・上級者）</td>
+            <td style="border: 1px solid #000; padding: 8px;">12,000円</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #000; padding: 8px;">C. 平日夜間・土日（初心者）</td>
+            <td style="border: 1px solid #000; padding: 8px;">9,300円</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #000; padding: 8px;">D. 平日夜間・土日（中・上級者）</td>
+            <td style="border: 1px solid #000; padding: 8px;">12,500円</td>
+        </tr>
     </table>
 
-    <p class="section-title">入会時のお支払い</p>
-    <p>
-      ご入会の際に、入会金（6,600円）、年会金（2,200円）、受講料1ヶ月分を現金でお支払いください。<br>
-      受講料は、2ヶ月目から口座引き落としになります。
+    <p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-weight: bold; margin-top: 25px;">
+        入会時のお支払い
+    </p>
+    <p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; margin-bottom: 1.5em;">
+        ご入会の際に、入会金（6,600円）、年会金（2,200円）、受講料1ヶ月分を現金でお支払いください。<br>
+        受講料は、2ヶ月目から口座引き落としになります。
+    </p>
+    <p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-weight: bold; margin-top: 25px;">
+        割引制度
+    </p>
+    <p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; margin-bottom: 1.5em;">
+        複数の割引は同時に適応できません。一番条件のいい割引が一つ適用されます。
     </p>
 
-    <p class="section-title">割引制度</p>
-    <p>複数の割引は同時に適応できません。一番条件のいい割引が一つ適用されます。</p>
-
-    <table>
-      <tr><th>種類</th><th>適応対象</th><th>割引内容</th></tr>
-      <tr>
-        <td>学生割引</td>
-        <td>中学生、高校生</td>
-        <td>毎月の受講料を10％割引</td>
-      </tr>
-      <tr>
-        <td>複数のコース・クラス割引</td>
-        <td>複数コース・クラスを受講する方</td>
-        <td>二つ目以降のコース・クラス毎月の受講料を50％割引</td>
-      </tr>
-      <tr>
-        <td>家族割引</td>
-        <td>ご家族に本スクールの受講生がいる方</td>
-        <td>入会金無料、毎月の受講料を15％割引</td>
-      </tr>
+    <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;">
+        <tr>
+            <th style="border: 1px solid #000; padding: 8px; text-align: left; background-color: #f2f2f2;">種類</th>
+            <th style="border: 1px solid #000; padding: 8px; text-align: left; background-color: #f2f2f2;">適応対象</th>
+            <th style="border: 1px solid #000; padding: 8px; text-align: left; background-color: #f2f2f2;">割引内容</th>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #000; padding: 8px;">学生割引</td>
+            <td style="border: 1px solid #000; padding: 8px;">中学生、高校生</td>
+            <td style="border: 1px solid #000; padding: 8px;">毎月の受講料を10％割引</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #000; padding: 8px;">複数のコース・クラス割引</td>
+            <td style="border: 1px solid #000; padding: 8px;">複数コース・クラスを受講する方</td>
+            <td style="border: 1px solid #000; padding: 8px;">二つ目以降のコース・クラス毎月の受講料を50％割引</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #000; padding: 8px;">家族割引</td>
+            <td style="border: 1px solid #000; padding: 8px;">ご家族に本スクールの受講生がいる方</td>
+            <td style="border: 1px solid #000; padding: 8px;">入会金無料、毎月の受講料を15％割引</td>
+        </tr>
     </table>
 
-    <p class="section-title">振り替え制度</p>
-    <p>
-      同じコースの他の曜日に振り替えて受講する場合、フロントで事前にご予約ください。
+    <p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-weight: bold; margin-top: 25px;">
+        振り替え制度
+    </p>
+    <p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; margin-bottom: 1.5em;">
+        同じコースの他の曜日に振り替えて受講する場合、フロントで事前にご予約ください。
+    </p>
+    <p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-weight: bold; margin-top: 25px;">
+        各種手続き
+    </p>
+    <p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; margin-bottom: 1.5em;">
+        以下の場合は、期日までにフロントでお手続きください。
     </p>
 
-    <p class="section-title">各種手続き</p>
-    <p>以下の場合は、期日までにフロントでお手続きください。</p>
-
-    <table>
-      <tr><th>変更内容</th><th>手続き期限</th></tr>
-      <tr>
-        <td>変更（コースを変更したり、同じコース内で曜日・時間を変更する場合）</td>
-        <td>変更したい月の前月10日まで</td>
-      </tr>
-      <tr>
-        <td>退会（スクールをやめる場合）</td>
-        <td>最終受講の前月末まで</td>
-      </tr>
-      <tr>
-        <td>休会（スクールを1ヶ月以上休む場合）</td>
-        <td>休会したい月の前月20日まで</td>
-      </tr>
+    <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;">
+        <tr>
+            <th style="border: 1px solid #000; padding: 8px; text-align: left; background-color: #f2f2f2;">変更内容</th>
+            <th style="border: 1px solid #000; padding: 8px; text-align: left; background-color: #f2f2f2;">手続き期限</th>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #000; padding: 8px;">変更（コースを変更したり、同じコース内で曜日・時間を変更する場合）</td>
+            <td style="border: 1px solid #000; padding: 8px;">変更したい月の前月10日まで</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #000; padding: 8px;">退会（スクールをやめる場合）</td>
+            <td style="border: 1px solid #000; padding: 8px;">最終受講の前月末まで</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #000; padding: 8px;">休会（スクールを1ヶ月以上休む場合）</td>
+            <td style="border: 1px solid #000; padding: 8px;">休会したい月の前月20日まで</td>
+        </tr>
     </table>
 
-    <p class="note">
-      ※手数料550円がかかります（入会後3ヶ月以内に手続きをする場合は無料）。
+    <p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-size: 0.9em; color: #333; margin-bottom: 1.5em;">
+        ※手数料550円がかかります（入会後3ヶ月以内に手続きをする場合は無料）。
     </p>
-
-    <p>
-      電話：062-241-3998（9時～22時）<br>
-      〒433-0010 北高市朝中町27<br>
-      ホームページ：<a href="http://www.akiharayuukibui-tennis.jp" target="_blank">http://www.akiharayuukibui-tennis.jp</a>
+    <p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; margin-bottom: 1.5em;">
+        電話：062-241-3998（9時～22時）<br>
+        〒433-0010 北高市朝中町27<br>
+        ホームページ：<a href="http://www.akiharayuukibui-tennis.jp" target="_blank">http://www.akiharayuukibui-tennis.jp</a>
     </p>
-  </div>
+</div>
+<div class="follow-up">
+  <a>高校生の村田さんは「C 平日夜間・土日（初心者）コース」に入会したいと思っている。姉がすでに同じコースを受講しているが、入会時に支払うものは何か。</a>
+  <ul class="options">
+    <li>入会金、年会費、10％割引された受講料</li>
+    <li>入会金、年会費、15％割引された受講料</li>
+    <li>年会費、15％割引された受講料</li>
+    <li>年会費、50％割引された受講料</li>
+  </ul>
+</div>
 
-  <div class="follow-up">
-      <a>高校生の村田さんは「C 平日夜間・土日（初心者）コース」に入会したいと思っている。姉がすでに同じコースを受講しているが、入会時に支払うものは何か。</a>
-      <ul class="options">
-        <li>入会金、年会費、10％割引された受講料</li>
-        <li>入会金、年会費、15％割引された受講料</li>
-        <li>年会費、15％割引された受講料</li>
-        <li>年会費、50％割引された受講料</li>
-      </ul>
-    </div>
-
-    <div class="follow-up">
-      <a>リナさんは、このテニススクールに1か月前に入会し、現在「B. 平日昼間（中・上級者）コース」を受講している。5月から「D. 平日夜間・土日（中・上級者）コース」に変わりたいと思っているが、リナさんはどうしなければならないか。今日は3月15日である。</a>
-      <ul class="options">
-        <li>4月10日までに、手数料550円を支払い、手続きをする</li>
-        <li>4月10日までに手続きをする。手数料は必要ない</li>
-        <li>4月20日までに、手数料550円を支払い、手続きをする</li>
-        <li>4月20日までに手続きをする。手数料は必要ない</li>
-      </ul>
-    </div>
-</body>
-</html>
-
+<div class="follow-up">
+  <a>リナさんは、このテニススクールに1か月前に入会し、現在「B. 平日昼間（中・上級者）コース」を受講している。5月から「D. 平日夜間・土日（中・上級者）コース」に変わりたいと思っているが、リナさんはどうしなければならないか。今日は3月15日である。</a>
+  <ul class="options">
+    <li>4月10日までに、手数料550円を支払い、手続きをする</li>
+    <li>4月10日までに手続きをする。手数料は必要ない</li>
+    <li>4月20日までに、手数料550円を支払い、手続きをする</li>
+    <li>4月20日までに手続きをする。手数料は必要ない</li>
+  </ul>
+</div>
 
 --- example 2 ---
 <div class="article">
-<h2>着物レンタルのご案内</h2>
+<h2 style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-size: 1.4em; font-weight: bold; margin-bottom: 1em;">
+    着物レンタルのご案内
+</h2>
 
-<p>着物を着て水森市を観光しませんか。「はなかわ」では、山林店、古寺店、森島店の三つの店で、レンタルの着物をご用意しております。</p>
+<p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; line-height: 1.8; margin-bottom: 1.5em;">
+    着物を着て水森市を観光しませんか。「はなかわ」では、山林店、古寺店、森島店の三つの店で、レンタルの着物をご用意しております。
+</p>
 
-<h3>＜着物レンタルの流れ＞</h3>
-<ol>
-  <li>ご利用になりたい店に電話でご予約ください。</li>
-  <li>ご予約の日時にご来店になり、お好きな着物にお着替えください。必要な方には無料でお手伝いいたします。</li>
-  <li>お支払いのあと、着物で観光をお楽しみください。</li>
-  <li>各店の最終返却時間までに借りた店に戻り、当日中に着物をご返却ください（翌日返却も可能です。ご希望の方は、＜翌日返却について＞をお読みください）。</li>
+<h3 style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-size: 1.2em; font-weight: bold; margin-top: 1.5em; margin-bottom: 0.8em;">
+    ＜着物レンタルの流れ＞
+</h3>
+
+<ol style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; margin-top: 1em; margin-bottom: 1.5em; padding-left: 1.5em;">
+  <li style="margin-bottom: 0.8em;">ご利用になりたい店に電話でご予約ください。</li>
+  <li style="margin-bottom: 0.8em;">ご予約の日時にご来店になり、お好きな着物にお着替えください。必要な方には無料でお手伝いいたします。</li>
+  <li style="margin-bottom: 0.8em;">お支払いのあと、着物で観光をお楽しみください。</li>
+  <li style="margin-bottom: 0.8em;">各店の最終返却時間までに借りた店に戻り、当日中に着物をご返却ください（翌日返却も可能です。ご希望の方は、＜翌日返却について＞をお読みください）。</li>
 </ol>
 
-<h3>＜料金（1名様）＞</h3>
-<p>基本料金：3,500円</p>
+<h3 style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-size: 1.2em; font-weight: bold; margin-top: 1.5em; margin-bottom: 0.8em;">
+    ＜料金（1名様）＞
+</h3>
 
-<h3>＜割引について＞</h3>
-<ul>
-  <li>早期予約割引：1週間前までのご予約で基本料金から300円割引します。</li>
-  <li>学生割引：学生の方は基本料金から200円割引します。</li>
-  <li>※早期予約割引を使う場合は、学生割引は使えません。</li>
+<p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; line-height: 1.8; margin-bottom: 1.5em;">
+    基本料金：3,500円
+</p>
+
+<h3 style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-size: 1.2em; font-weight: bold; margin-top: 1.5em; margin-bottom: 0.8em;">
+    ＜割引について＞
+</h3>
+
+<ul style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; line-height: 1.8; margin-top: 1em; margin-bottom: 1.5em; padding-left: 1.5em;">
+  <li style="margin-bottom: 0.8em;">早期予約割引：1週間前までのご予約で基本料金から300円割引します。</li>
+  <li style="margin-bottom: 0.8em;">学生割引：学生の方は基本料金から200円割引します。</li>
+  <li style="margin-bottom: 0.8em;">※早期予約割引を使う場合は、学生割引は使えません。</li>
 </ul>
 
-<h3>＜お持ちになる物＞</h3>
-<p>特にありません。はき物などもセットでお貸しします。</p>
+<h3 style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-size: 1.2em; font-weight: bold; margin-top: 1.5em; margin-bottom: 0.8em;">
+    ＜お持ちになる物＞
+</h3>
 
-<h3>＜翌日返却について＞</h3>
+<p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; line-height: 1.8; margin-bottom: 1.5em;">
+    特にありません。はき物などもセットでお貸しします。
+</p>
 
-<h4>ご予約時の申し込み</h4>
-<p>1,200円の翌日返却料金で、返却時間を翌日の正午までに延長できます。</p>
+<h3 style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-size: 1.2em; font-weight: bold; margin-top: 1.5em; margin-bottom: 0.8em;">
+    ＜翌日返却について＞
+</h3>
 
-<h4>ご来店時の申し込み、またはお出かけ後の変更</h4>
-<p>翌日返却料金は1,500円になります。お出かけ後の変更の場合は、借りた日の最終返却時間までに借りた店にお電話ください。翌日返却料金は、返却の際にお支払いください。</p>
+<h4 style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-size: 1.1em; font-weight: bold; margin-top: 1.2em; margin-bottom: 0.5em;">
+    ご予約時の申し込み
+</h4>
 
-<p>※返却が翌日の正午を過ぎる場合、追加料金1,000円をいただきます。その後は、1日遅れるごとに3,000円を請求いたします。</p>
+<p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; line-height: 1.8; margin-bottom: 1.5em;">
+    1,200円の翌日返却料金で、返却時間を翌日の正午までに延長できます。
+</p>
 
-<h3>＜各店の営業時間・返却時間＞</h3>
-<table border="1" cellspacing="0" cellpadding="6">
+<h4 style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-size: 1.1em; font-weight: bold; margin-top: 1.2em; margin-bottom: 0.5em;">
+    ご来店時の申し込み、またはお出かけ後の変更
+</h4>
+
+<p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; line-height: 1.8; margin-bottom: 1.5em;">
+    翌日返却料金は1,500円になります。お出かけ後の変更の場合は、借りた日の最終返却時間までに借りた店にお電話ください。翌日返却料金は、返却の際にお支払いください。
+</p>
+
+<p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; line-height: 1.8; margin-bottom: 1.5em;">
+    ※返却が翌日の正午を過ぎる場合、追加料金1,000円をいただきます。その後は、1日遅れるごとに3,000円を請求いたします。
+</p>
+
+<h3 style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; font-size: 1.2em; font-weight: bold; margin-top: 1.5em; margin-bottom: 0.8em;">
+    ＜各店の営業時間・返却時間＞
+</h3>
+
+<table style="width: 100%; border-collapse: collapse; font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; margin-bottom: 1.5em;">
   <tr>
-    <th>店舗</th>
-    <th>営業開始時間</th>
-    <th>最終返却時間</th>
+    <th style="border: 1px solid #000; padding: 6px; background-color: #f2f2f2;">店舗</th>
+    <th style="border: 1px solid #000; padding: 6px; background-color: #f2f2f2;">営業開始時間</th>
+    <th style="border: 1px solid #000; padding: 6px; background-color: #f2f2f2;">最終返却時間</th>
   </tr>
   <tr>
-    <td>山林店、古寺店</td>
-    <td>8時</td>
-    <td>18時30分</td>
+    <td style="border: 1px solid #000; padding: 6px;">山林店、古寺店</td>
+    <td style="border: 1px solid #000; padding: 6px;">8時</td>
+    <td style="border: 1px solid #000; padding: 6px;">18時30分</td>
   </tr>
   <tr>
-    <td>森島店</td>
-    <td>9時</td>
-    <td>18時</td>
+    <td style="border: 1px solid #000; padding: 6px;">森島店</td>
+    <td style="border: 1px solid #000; padding: 6px;">9時</td>
+    <td style="border: 1px solid #000; padding: 6px;">18時</td>
   </tr>
 </table>
 
-<p>※電話番号など、詳細はホームページ内の各店のページをご覧ください。</p>
+<p style="font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif; line-height: 1.8; margin-bottom: 1.5em;">
+    ※電話番号など、詳細はホームページ内の各店のページをご覧ください。
+</p>
 
-<hr>
+<hr style="border: none; border-top: 1px solid #ccc; margin: 2em 0;">
+
 </div>
 
 
@@ -1659,29 +1500,25 @@ Historical Generation : {gan_history}
 
 immediate_ack_example = """
 --- example 1 ---
-<div class="conversation">
-    <div class="follow-up">
-        男：課長、明日の会議の資料ですが、ご覧いただけないでしょうか？
-    </div>
-    <ul class='options'>  
-        <li>資料、見てくれるんですね</li>
-        <li>資料は私が作っておきますね</li>
-        <li>資料、見ておきます</li>
-    </ul>
+<div class="follow-up">
+    男：課長、明日の会議の資料ですが、ご覧いただけないでしょうか？
 </div>
+<ul class='options'>  
+    <li>資料、見てくれるんですね</li>
+    <li>資料は私が作っておきますね</li>
+    <li>資料、見ておきます</li>
+</ul>
 
 
 --- example 2 ---
-<div class="conversation">
-    <div class="follow-up">
-        女：この会社、経験者に限らず応募できるって。
-    </div>
-    <ul class='options'>  
-        <li>募集は経験が無い人だけなんだ</li>
-        <li>経験がなくてもいいんだね</li>
-        <li>やっぱり経験が無いといけないのか</li>
-    </ul>
+<div class="follow-up">
+    女：この会社、経験者に限らず応募できるって。
 </div>
+<ul class='options'>  
+    <li>募集は経験が無い人だけなんだ</li>
+    <li>経験がなくてもいいんだね</li>
+    <li>やっぱり経験が無いといけないのか</li>
+</ul>
 """
 
 comprehensive_expression_listen_answer_teacher_prompt = """
