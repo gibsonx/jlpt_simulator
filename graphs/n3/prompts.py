@@ -366,7 +366,7 @@ structure_selection_teacher_prompt = """
 - 被提取的5个短语不能再出现在题干中，题干中不能保留被提取的短语
 - 至少有2个短语是谓语短语、至少1个短语是连接词或用于连接的短语、至少1个助词或副助词的短语
 
-步骤4：提取的5个短语用5/6/7/8/9，这5个标号代替。要求这5个标号需要以“【5】”的形式呈现
+步骤4：提取的5个短语用54/55/56/57/58，这5个标号代替。要求这5个标号需要以“【54】”的形式呈现
 - 提取的5个短语，两两之间不能一样
 
 步骤5：把步骤3中提取的5个短语分别作为5道题的正确选项的答案，并生成每道题的其他3个选项。生成的选项需要符合以下几个要求：
@@ -404,7 +404,7 @@ structure_selection_example = """
   <p>
     今年の<ruby>夏休<rt>なつやす</rt></ruby>みに、初めて<ruby>富士山<rt>ふじさん</rt></ruby>に<ruby>登<rt>のぼ</rt></ruby>りました。
     <ruby>富士山<rt>ふじさん</rt></ruby>は日本でいちばん高い山で、3776メートルもあります。
-    <strong>５</strong>はわたしの国にはありません。
+    <strong>【54】</strong>はわたしの国にはありません。
     それで、<ruby>留学<rt>りゅうがく</rt></ruby>したら、ぜひ登ってみたいと思っていました。
   </p>
 
@@ -412,25 +412,25 @@ structure_selection_example = """
     <ruby>富士山<rt>ふじさん</rt></ruby>の<ruby>途<rt>と</rt></ruby>中までバスで行って、
     夜10時ごろから<ruby>登<rt>のぼ</rt></ruby>り始めました。
     山の上で朝日を見るために夜中も歩かなければなりませんでした。
-    <ruby>登山<rt>とざん</rt></ruby>の<ruby>途中<rt>とちゅう</rt></ruby>で、<strong>６</strong>と思いました。
+    <ruby>登山<rt>とざん</rt></ruby>の<ruby>途中<rt>とちゅう</rt></ruby>で、<strong>【55】</strong>と思いました。
   </p>
 
   <p>
     なぜかというと、夏でも<ruby>富士山<rt>ふじさん</rt></ruby>の上のほうは<ruby>本当<rt>ほんとう</rt></ruby>に寒かったし、
     <ruby>予想<rt>よそう</rt></ruby>よりも山の道を歩くのは<ruby>大変<rt>たいへん</rt></ruby>で、足も<ruby>痛<rt>いた</rt></ruby>かったからです。
-    <strong>７</strong>、山の上に着いて朝日を見たら、それまでの<ruby>疲<rt>つか</rt></ruby>れが<ruby>消<rt>き</rt></ruby>えてしまいました。
+    <strong>【56】</strong>、山の上に着いて朝日を見たら、それまでの<ruby>疲<rt>つか</rt></ruby>れが<ruby>消<rt>き</rt></ruby>えてしまいました。
   </p>
 
   <p>
-    突然、目の前に広がる<ruby>雲<rt>くも</rt></ruby>の間から朝日が<strong>８</strong>。
+    突然、目の前に広がる<ruby>雲<rt>くも</rt></ruby>の間から朝日が<strong>【57】</strong>。
     今まで見た中でいちばん<ruby>美<rt>うつく</rt></ruby>しい朝日でした。
     一生<ruby>忘<rt>わす</rt></ruby>れないだろうと思います。
-    とてもすばらしい<strong>９</strong>。
+    とてもすばらしい<strong>【58】</strong>。
   </p>
 </div>
 
   <div class="follow-up">
-    <a>5</a>
+    <a>54</a>
     <ul class="options">
       <li><ruby>このいちばん高<rt>たか</rt></ruby>い<ruby>富士山<rt>ふじさん</rt></ruby></li>
       <li>こんな<ruby>富士山<rt>ふじさん</rt></ruby></li>
@@ -439,7 +439,7 @@ structure_selection_example = """
     </ul>
   </div>
 
-    <a>6</a>
+    <a>55</a>
     <ul class="options">
       <li>いつか<ruby>行<rt>い</rt></ruby>こう</li>
       <li>とうとう<ruby>来<rt>こ</rt></ruby>なかった</li>
@@ -447,7 +447,7 @@ structure_selection_example = """
       <li>もう<ruby>帰<rt>かえ</rt></ruby>りたい</li>
     </ul>
 
-    <a>7</a>
+    <a>56</a>
     <ul class="options">
       <li>そのうえ</li>
       <li>しかし</li>
@@ -455,7 +455,7 @@ structure_selection_example = """
       <li>それに</li>
     </ul>
 
-    <a>8</a>
+    <a>57</a>
     <ul class="options">
       <li><ruby>現<rt>あらわ</rt></ruby>れたのです</li>
       <li><ruby>現<rt>あらわ</rt></ruby>れるはずです</li>
@@ -464,7 +464,7 @@ structure_selection_example = """
     </ul>
   </div>
 
-    <a>9</a>
+    <a>58</a>
     <ul>
       <li><ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>で</rt></ruby>を<ruby>作<rt>つく</rt></ruby>りたいです</li>
       <li><ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>で</rt></ruby>もあります</li>
