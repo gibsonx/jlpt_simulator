@@ -1,0 +1,28 @@
+[Unit]
+Description=Celery Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+EnvironmentFile=/etc/default/celeryd
+WorkingDirectory=/root/jlpt_simulator
+ExecStart=/bin/sh -c '${CELERY_BIN} -A ${CELERY_APP} beat --pidfile=${CELERYBEAT_PID_FILE} --logfile=${CELERYBEAT_LOG_FILE} --loglevel=${CELERYD_LOG_LEVEL}'
+
+[Install]
+WantedBy=multi-user.target
+(jlpt_venv) root@notebook:~/jlpt_simulator# cat /etc/systemd/system/celerybeat.service
+[Unit]
+Description=Celery Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+EnvironmentFile=/etc/default/celeryd
+WorkingDirectory=/root/jlpt_simulator
+ExecStart=/bin/sh -c '${CELERY_BIN} -A ${CELERY_APP} beat --pidfile=${CELERYBEAT_PID_FILE} --logfile=${CELERYBEAT_LOG_FILE} --loglevel=${CELERYD_LOG_LEVEL}'
+
+[Install]

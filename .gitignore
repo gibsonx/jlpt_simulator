@@ -1,8 +1,57 @@
-.idea/*
-.idea
-model/
+# IDEs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
 env/
+venv/
+ENV/
+env.bak/
+env.old/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Data / models
+data/
+model/
 chroma_db/*
-tokenizer
+tokenizer/
+output/
+logs/
+.nohup
+*.h5
+*.ckpt
+*.pt
+*.pth
+*.sav
+
+# Environment variables
 .env
-data/*
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Misc
+*.log
+*.sqlite3
+
+*.out
+nohup.out
+*.nohup.out
+tmp/*
+
+#for debug
+conversation.html
+celery_results.sqlite
+celerybeat-schedule
+temp_id_ed25519
