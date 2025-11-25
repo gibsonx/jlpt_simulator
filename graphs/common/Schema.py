@@ -99,7 +99,12 @@ class Subsection(BaseModel):
         return f"### {self.subsection_title}\n\n{self.description}\n\n{question_topics_str}".strip()
 
 class Section(BaseModel):
-    section_title: str = Field(..., title="Title of the section")
+    section_title: Literal["語彙", "文法", "読解", "聴解"] = Field(
+        ...,
+        title="Title of the section",
+        description="fixed option amongst provided 4"
+    )
+    # section_title: str = Field(..., title="Title of the section")
     subsections: Optional[List[Subsection]] = Field(
         default_factory=list,
         title="Titles and reason for each subsection of the JLPT exam page.",
