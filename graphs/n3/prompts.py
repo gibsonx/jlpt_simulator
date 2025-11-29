@@ -8,9 +8,11 @@ Step 1: Generate a short sentence within 30 words as the question stem. And sele
 
 Step 2: For word a, underline it.
 The selected words need to be marked with<u></u>, such as<u>主要</u>, and no other tags should appear in the sentence.
-Additional requirements:
--Words in sentences should not be used in options
--You must display the correct answer in the output with options 1, 2, 3, 4. For example: Correct solution: 1
+Additional Requirement: 
+- Words in sentences should not be used in options
+- Don't show question instructions and sequence number in the generated content. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed. 
 
 Step 3: Generate 4 options for this question. Require all of the following conditions:
 -These 4 options must be different from each other.
@@ -65,9 +67,10 @@ Format: follow the format of the example in the formal exam paper but not the co
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional Requirement: 
+- Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -94,15 +97,15 @@ This mainly tests students the ability to identify the part of speech of a word 
 The word in the sentence should not be used in the options
 Options are written either entirely in kanji or entirely in kana.
 
-
 Instructions:
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional Requirement: 
+- Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -147,9 +150,10 @@ Format: follow the format of the 2 examples in the formal exam paper but not the
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional Requirement: 
+- Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -187,9 +191,10 @@ Format: follow the format of the example in the formal exam paper but not the co
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional Requirement: 
+- Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -238,12 +243,13 @@ sentence_grammar_teacher_prompt = """
 
 步骤7：生成题目
 题目格式：遵循正式试卷中示例的格式（example 1, example 2），而不是内容。输出必须为html格式，并删除行更改标记
+参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈和批评（如果存在）,避免重复生成"历史题目"的问题(q)或给出的答案(a)。
 附加要求：
-- 在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要平均，不要集中在某个选项
-- 不要在生成的内容中显示问题说明和序列号。
-- 根据用户提供的主题汲取灵感，在生成内容时参考先前的反馈和批评，并避免重复生成"历史题目"的问题(q)或给出的答案(a)。
+-不要在生成的内容中显示问题说明和序列号。 
+-句子中的单词既不能用于问题，也不能用于选项。问题中的单词也不能出现在选项中
+-在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项
 
-历史题目：{gan_history}
+历史题目: {gan_history}
 正式试卷：{example}
 语法参考列表：{grammar}
 """
@@ -380,7 +386,7 @@ structure_selection_teacher_prompt = """
 步骤7：生成题目。
 题目格式：遵循正式试卷中示例的格式，而不是内容。输出必须为html格式，并删除行更改标记
 附加要求：
-- 在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要平均，不要集中在某个选项
+- 在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项
 - 不要在生成的内容中显示问题说明和序列号。
 - 根据用户提供的主题汲取灵感，在生成内容时参考先前的反馈和批评，并避免重复生成"历史题目"的问题(q)或给出的答案(a)。
 
@@ -491,9 +497,10 @@ Format: follow the format of 2 examples in the formal exam paper but not the con
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional Requirement: 
+- Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
-- The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- The word in the sentence can neither be used in the question nor options.
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed. 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -535,9 +542,10 @@ Format: follow the format of 2 examples in the formal exam paper but not the con
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional Requirement: 
+- Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed. 
 
 
 Formal exam paper: {example}
@@ -583,9 +591,10 @@ Format: follow the format of 2 examples in the formal exam paper but not the con
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional Requirement: 
+- Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed. 
 
 
 Formal exam paper: {example}
@@ -627,9 +636,10 @@ Format: follow the format of the 2 examples in the formal exam paper but not the
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional Requirement: 
+- Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed. 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -709,9 +719,10 @@ Format: follow the format of the example in the formal exam paper but not the co
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional Requirement: 
+- Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed. 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -772,9 +783,10 @@ Format: follow the format of the example in the formal exam paper but not the co
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional Requirement: 
+- Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
-- The word in the table and clues can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- The word in the article can neither be used in the question nor options.
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
 
 
 Formal exam paper: {example}
@@ -897,7 +909,7 @@ Reference: Generate new content based on the user-provided "Topic", taking into 
 Additional Requirement:
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed. 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -953,9 +965,10 @@ Format: follow the format of the 2 examples in the formal exam paper but not the
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional Requirement: 
+- Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1048,9 +1061,10 @@ Format: follow the format of the 2 examples in the formal exam paper but not the
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional Requirement: 
+- Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1115,7 +1129,7 @@ Reference: Generate new content based on the user-provided "Topic", taking into 
 Additional Requirement:
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . The options are 1,2,3,4. ensuring a balanced distribution of correct answers across options. 
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed. 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1183,9 +1197,10 @@ Format: follow the format of the 2 examples in the formal exam paper but not the
 Content: Ensure the vocabulary is restricted to N3 level. 
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
 Additional Requirement: 
+- Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3. for example: 正解: 1
+- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3) remains randomly distributed.
 
 
 Formal exam paper: {example}
@@ -1254,7 +1269,7 @@ immediate_ack_teacher_prompt = """
 内容：确保词汇量限制在N3级。 
 参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈和批评（如果存在）,避免重复生成"历史题目"的问题(q)或给出的答案(a)。
 附加要求：
-- 在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要平均，不要集中在某个选项
+- 在输出中显示正确答案，选项为1,2,3 例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项
 - 不要在生成的内容中显示问题说明和序列号。
 
 历史题目：{gan_history}
