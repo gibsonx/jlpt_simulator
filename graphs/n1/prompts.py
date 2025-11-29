@@ -12,7 +12,7 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed. 
+- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (1-4) remains randomly distributed （25% for each）, avoid always: 1. 
 
 Step 3: Generate 4 options for this question. Require all of the following conditions:
 -These 4 options must be different from each other.
@@ -37,19 +37,19 @@ kanji_reading_example = """
 --- example 1 ---
 <a>食品の<u>腐敗</u>を防止する。</a>
 <ul>
+    <li>ふうはい</li>
     <li>ふはい</li>
     <li>ふばい</li>
-    <li>ふうはい</li>
     <li>ふうばい</li>
 </ul>
 
 --- example 2 ---
 <a>手紙の内容は、私を<u>戒める</u>ものだった。</a>
 <ul class="options">
-    <li>とがめる</li>
     <li>せめる</li>
     <li>なぐさめる</li>
     <li>いましめる</li>
+    <li>とがめる</li>
 </ul>
 """
 
@@ -72,7 +72,7 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed. 
+- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (1-4) remains randomly distributed （25% for each）, avoid always: 1. 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -82,18 +82,18 @@ word_meaning_example = """
 --- example 1 ---
 <a>今回の遺跡の発見は、これまでの説を（　）から覆すものになりそうだ。</a>
 <ul class='options'>
-  <li>拠点</li>
   <li>根底</li>
   <li>原来</li>
+  <li>拠点</li>
   <li>元祖</li>
 </ul>
 
 --- example 2 ---
 <a>会場は、人々の話し声で（　）と騒がしく、アナウンスがよく聞こえなかった。</a>
 <ul class='options'>
-  <li>じわじわ</li>
   <li>どろどろ</li>
   <li>がやがや</li>
+  <li>じわじわ</li>
   <li>べたべた</li>
 </ul>
 
@@ -120,7 +120,7 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
+- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (1-4) remains randomly distributed （25% for each）, avoid always: 1.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -129,25 +129,25 @@ Historical Generation : {gan_history}
 synonym_substitution_example = """
 <a>その話を聞いて、<u>すがすがしい</u>気分になった。</a>
 <ul class='options'>
-  <li>ゆううつな</li>
   <li>爽やかな</li>
+  <li>ゆううつな</li>
   <li>楽しい</li>
   <li>懐かしい</li>
 </ul>
 
 <a>男の子は父親の話を<u>うなだれて</u>聞いていた。</a>
 <ul class='options'>
-  <li>ふざけた態度で</li>
   <li>目を閉じて</li>
   <li>まじめな表情で</li>
   <li>下を向いて</li>
+ <li>ふざけた態度で</li>
 </ul>
 
 <a>リフォームの費用を<u>工面する</u>必要がある。</a>
 <ul class='options'>
-  <li>減らす</li>
   <li>計算する</li>
   <li>用意する</li>
+  <li>減らす</li>  
   <li>支払う</li>
 </ul>
 """
@@ -169,7 +169,7 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
+- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (1-4) remains randomly distributed （25% for each）, avoid always: 1.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -178,9 +178,9 @@ Historical Generation : {gan_history}
 word_usage_example = """
 <a>撤回</a>
 <ul class='options'>
-  <li>雪が激しくなってきたので、途中で登山を<u>撤回</u>して山小屋に戻った。</li>
   <li>旅行の前日に風邪をひいてしまい、ホテルの予約を<u>撤回</u>した。</li>
   <li>水野氏は今朝の記者会見でした発言を、午後すぐに<u>撤回</u>した。</li>
+  <li>雪が激しくなってきたので、途中で登山を<u>撤回</u>して山小屋に戻った。</li>
   <li>彼は医師になるという進路を<u>撤回</u>し、音楽家を目指すことにしたそうだ。</li>
 </ul>
 """
@@ -222,7 +222,7 @@ sentence_grammar_teacher_prompt = """
 附加要求：
 -不要在生成的内容中显示问题说明和序列号。 
 -句子中的单词既不能用于问题，也不能用于选项。问题中的单词也不能出现在选项中
--在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项
+-在输出中显示正确答案，选项为4,3,2,1 随机例如：正解：n, 考虑历史题目的正确答案（c）, 正确答案分布要随机平均（25%），避免总是：1
 
 历史题目: {gan_history}
 正式试卷：{example}
@@ -233,8 +233,8 @@ sentence_grammar_example = """
 --- example 1 ---
 <a>当センターの相談窓口に（　　　）、事前にご連絡をお願いいたします。</a>
 <ul class='options'>
-  <li>伺って以来</li>
   <li>伺う際は</li>
+  <li>伺って以来</li>
   <li>お越しになって以来</li>
   <li>お越しになる際は</li>
 </ul>
@@ -242,9 +242,9 @@ sentence_grammar_example = """
 --- example 2 ---
 <a>6歳の息子は、将来私と同じ消防士になりたいと言っている。実際に（　　　）、そんなことを言ってくれたことがうれしい。</a>
 <ul class='options'>
-  <li>なるかどうかに限らず</li>
   <li>なるかどうかはともかく</li>
   <li>ならざるを得ないとしても</li>
+  <li>なるかどうかに限らず</li>
   <li>ならざるを得ないばかりか</li>
 </ul>
 """
@@ -349,7 +349,7 @@ structure_selection_teacher_prompt = """
 - 如果是谓语短语，那么其他3个错误选项要和正确选项有一定相似度，可以把动词的形态、时态等做一下调整
 
 步骤6：把步骤5中生成的每道题的选项，在每道题的范围内打乱顺序。要求：
-- 每道题的正确选项不在固定的某个位置。比如第3题的正确答案在第2个位置，第2题的正确答案在第3个位置
+- 每道题的正确选项随机分配。比如第3题的正确答案在第2个位置，第2题的正确答案在第3个位置
 
 步骤7：生成题目。
 题目格式：遵循正式试卷中示例的格式，而不是内容。输出必须为html格式，并删除行更改标记
@@ -357,7 +357,7 @@ structure_selection_teacher_prompt = """
 附加要求：
 -不要在生成的内容中显示问题说明和序列号。 
 -句子中的单词既不能用于问题，也不能用于选项。问题中的单词也不能出现在选项中
--在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项
+-在输出中显示正确答案，选项为4,3,2,1 随机例如：正解：n, 考虑历史题目的正确答案（c）, 正确答案分布要随机平均（25%），避免总是：1
 
 历史题目: {gan_history}
 正式试卷：{example}
@@ -441,7 +441,7 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
+- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (1-4) remains randomly distributed （25% for each）, avoid always: 1.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -496,7 +496,7 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
+- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (1-4) remains randomly distributed （25% for each）, avoid always: 1.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -560,7 +560,7 @@ short_reading_notification_teacher_prompt = """
 附加要求：
 -不要在生成的内容中显示问题说明和序列号。 
 -句子中的单词既不能用于问题，也不能用于选项。问题中的单词也不能出现在选项中
--在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项
+-在输出中显示正确答案，选项为4,3,2,1 随机例如：正解：n, 考虑历史题目的正确答案（c）, 正确答案分布要随机平均（25%），避免总是：1
 
 历史题目: {gan_history}
 正式试卷：{example}
@@ -603,7 +603,7 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed. 
+- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (1-4) remains randomly distributed （25% for each）, avoid always: 1. 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -721,7 +721,7 @@ long_reading_understanding_teacher_prompt = """
 附加要求：
 -不要在生成的内容中显示问题说明和序列号。 
 -句子中的单词既不能用于问题，也不能用于选项。问题中的单词也不能出现在选项中
--在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项
+-在输出中显示正确答案，选项为4,3,2,1 随机例如：正解：n, 考虑历史题目的正确答案（c）, 正确答案分布要随机平均（25%），避免总是：1
 
 
 正式试卷：{example}
@@ -821,7 +821,7 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed. 
+- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (1-4) remains randomly distributed （25% for each）, avoid always: 1. 
 
 
 Formal exam paper: {example}
@@ -880,7 +880,7 @@ long_reading_teacher_prompt = """
 附加要求：
 -不要在生成的内容中显示问题说明和序列号。 
 -句子中的单词既不能用于问题，也不能用于选项。问题中的单词也不能出现在选项中
--在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项
+-在输出中显示正确答案，选项为4,3,2,1 随机例如：正解：n, 考虑历史题目的正确答案（c）, 正确答案分布要随机平均（25%），避免总是：1
 
 正式试卷：{example}
 历史题目: {gan_history}
@@ -966,7 +966,7 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
+- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (1-4) remains randomly distributed （25% for each）, avoid always: 1.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1214,7 +1214,7 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
+- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (1-4) remains randomly distributed （25% for each）, avoid always: 1.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1318,7 +1318,7 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
+- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (1-4) remains randomly distributed （25% for each）, avoid always: 1.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1390,7 +1390,7 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3, or 4) remains randomly distributed.
+- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (1-4) remains randomly distributed （25% for each）, avoid always: 1.
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1498,7 +1498,7 @@ comprehensive_expression_show_answer_teacher_prompt = """
 附加要求：
 -不要在生成的内容中显示问题说明和序列号。 
 -句子中的单词既不能用于问题，也不能用于选项。问题中的单词也不能出现在选项中
--在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项
+-在输出中显示正确答案，选项为4,3,2,1 随机例如：正解：n, 考虑历史题目的正确答案（c）, 正确答案分布要随机平均（25%），避免总是：1
 
 
 历史题目: {gan_history}
@@ -1554,7 +1554,7 @@ comprehensive_expression_listen_answer_teacher_prompt = """
 附加要求：
 -不要在生成的内容中显示问题说明和序列号。 
 -句子中的单词既不能用于问题，也不能用于选项。问题中的单词也不能出现在选项中
--在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项
+-在输出中显示正确答案，选项为4,3,2,1 随机例如：正解：n, 考虑历史题目的正确答案（c）, 正确答案分布要随机平均（25%），避免总是：1
 
 历史题目: {gan_history}
 正式试卷：{example}

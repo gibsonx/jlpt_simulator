@@ -66,7 +66,7 @@ Reference: Get inspiration from the "Topic" given by the user. Consider the feed
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, the options are 1到4随机 for example: 正解: 1
 
 
 Formal exam paper: {example}
@@ -101,7 +101,7 @@ Reference: Get inspiration from the "Topic" given by the user. Consider the feed
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, the options are 1到4随机 for example: 正解: 1
 
 
 Formal exam paper: {example}
@@ -148,7 +148,7 @@ Reference: Get inspiration from the "Topic" given by the user. Consider the feed
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, the options are 1到4随机 for example: 正解: 1
 
 
 Formal exam paper: {example}
@@ -186,7 +186,7 @@ Format: follow the format of the example in the formal exam paper but not the co
 Content: Ensure the vocabulary is restricted to N4 level. 
 Reference: Get inspiration from the "Topic" given by the user. Consider the feedback given in the previous conversation if it exists 
 Additional Requirement: Don't show question instructions and sequence number in the generated content.
-You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+You must show the correct answer in the output, the options are 1到4随机 for example: 正解: 1
 
 
 Formal exam paper: {example}
@@ -236,7 +236,7 @@ sentence_grammar_teacher_prompt = """
 步骤7：生成题目
 题目格式：遵循正式试卷中示例的格式（example 1, example 2），而不是内容。输出必须为html格式，并删除行更改标记
 附加要求：
-- 在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项
+- 在输出中显示正确答案，选项为1到4随机例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项, 如一直是: 1
 - 不要在生成的内容中显示问题说明和序列号。
 
 正式测试问题示例: {example}
@@ -374,7 +374,7 @@ structure_selection_teacher_prompt = """
 步骤7：生成题目。
 题目格式：遵循正式试卷中示例的格式，而不是内容。输出必须为html格式，并删除行更改标记
 附加要求：
-- 在输出中显示正确答案，选项为1,2,3,4.例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项
+- 在输出中显示正确答案，选项为1到4随机例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项, 如一直是: 1
 - 不要在生成的内容中显示问题说明和序列号。
 
 正式试卷：{example}
@@ -490,7 +490,7 @@ Reference: Get inspiration from the "Topic" given by the user. Consider the feed
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, the options are 1到4随机 for example: 正解: 1
 
 
 Formal exam paper: {example}
@@ -534,7 +534,7 @@ Reference: Get inspiration from the "Topic" given by the user. Consider the feed
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, the options are 1到4随机 for example: 正解: 1
 
 
 Formal exam paper: {example}
@@ -582,7 +582,7 @@ Reference: Get inspiration from the "Topic" given by the user. Consider the feed
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, the options are 1到4随机 for example: 正解: 1
 
 
 Formal exam paper: {example}
@@ -626,7 +626,7 @@ Reference: Get inspiration from the "Topic" given by the user. Consider the feed
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, the options are 1到4随机 for example: 正解: 1
 
 
 
@@ -710,7 +710,7 @@ Reference: Get inspiration from the "Topic" given by the user. Consider the feed
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, the options are 1到4随机 for example: 正解: 1
 
 
 
@@ -774,7 +774,7 @@ Reference: Get inspiration from the "Topic" given by the user. Consider the feed
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the table and clues can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, the options are 1到4随机 for example: 正解: 1
 
 
 Formal exam paper: {example}
@@ -897,7 +897,7 @@ Reference: Get inspiration from the "Topic" given by the user. Consider the feed
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, the options are 1到4随机 for example: 正解: 1
 
 
 
@@ -993,7 +993,7 @@ Reference: Get inspiration from the "Topic" given by the user. Consider the feed
 Additional Requirement: 
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, the options are 1到4随机 for example: 正解: 1
 
 
 
@@ -1060,7 +1060,7 @@ Reference: Get inspiration from the "Topic" given by the user. Consider the feed
 Additional Requirement:
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, the options are 1,2,3,4. for example: 正解: 1
+- You must show the correct answer in the output, the options are 1到4随机 for example: 正解: 1
 
 
 Formal exam paper: {example}

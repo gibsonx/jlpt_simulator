@@ -571,22 +571,28 @@ def _extract_questions_qa_lines(data, limit):
             for q in result["questions"]:
                 question = q.get("html_question", "")
                 choices = "|".join(q.get("choices", []))
+                correct_answer = q.get("correct_answer", "")
                 output_lines.append(f"q:{question}")
                 output_lines.append(f"a:{choices}")
+                output_lines.append(f"c:{correct_answer}")
 
         # Case 2: follow-up question
         elif "follow_up" in result:
             question = result.get("follow_up", "")
             choices = "|".join(result.get("choices", []))
+            correct_answer = result.get("correct_answer", "")
             output_lines.append(f"q:{question}")
             output_lines.append(f"a:{choices}")
+            output_lines.append(f"c:{correct_answer}")
 
         # Case 3: single question
         elif "html_question" in result:
             question = result.get("html_question", "")
             choices = "|".join(result.get("choices", []))
+            correct_answer = result.get("correct_answer", "")
             output_lines.append(f"q:{question}")
             output_lines.append(f"a:{choices}")
+            output_lines.append(f"c:{correct_answer}")
 
     # Keep only the latest 20 QA pairs → 40 lines
     if len(output_lines) > limit:

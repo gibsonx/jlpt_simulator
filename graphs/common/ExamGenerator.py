@@ -93,7 +93,7 @@ class ExamGenerator:
                                 # Build arguments
                                 args = [
                                     question['topic'],
-                                    _extract_questions_qa_lines(live_results, 20)
+                                    _extract_questions_qa_lines(live_results, 40)
                                 ]
 
                                 if 'grammar' in question and question['grammar']:
