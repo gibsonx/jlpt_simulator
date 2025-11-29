@@ -11,7 +11,7 @@ from typing_extensions import TypedDict
 class SimpleChoiceQuestionOutput(TypedDict):
     """Simple Question Formatted Output"""
     html_question: Annotated[str, "the question in html format at a single line"]
-    correct_answer: Annotated[int, "correct option in 1,2,3,4"]
+    correct_answer: Annotated[int, "correct option number"]
     choices: Annotated[List, "answer options as a list, each option is in html format"]
 
 class GraphState(TypedDict):
@@ -41,7 +41,7 @@ class ListenSingleChoiceOutput(TypedDict):
     follow_up: Annotated[str, "the follow-up question"]
     conversation: List[ListenConversation]
     choices: Annotated[List, "answer options as a list, each option is in string format"]
-    correct_answer: Annotated[int, "correct option in 1,2,3,4"]
+    correct_answer: Annotated[int, "correct option number"]
 
 class ListenMultiPersonOutput(TypedDict):
     """Listen Simple Question Formatted Output"""
@@ -49,11 +49,11 @@ class ListenMultiPersonOutput(TypedDict):
     conversation: List[ListenMultiPersonConversation]
     follow_up: Annotated[str, "the follow-up question"]
     choices: Annotated[List, "answer options as a list, each option is in string format"]
-    correct_answer: Annotated[int, "correct option in 1,2,3,4"]
+    correct_answer: Annotated[int, "correct option number"]
 
 class ListenQuestions(TypedDict):
     follow_up: Annotated[str, "the question from follow-up"]
-    correct_answer: Annotated[int, "correct option in 1,2,3,4"]
+    correct_answer: Annotated[int, "correct option number"]
     choices: Annotated[List, "answer options as a list, each option is in string format"]
 
 class ListenMultiPersonAndQuestionOutput(TypedDict):
@@ -68,14 +68,14 @@ class ImageListenQuestionOutput(TypedDict):
     follow_up: Annotated[str, "the follow-up question"]
     conversation: List[ListenConversation]
     choices: Annotated[List, "answer options as a list, each option is in string format"]
-    correct_answer: Annotated[int, "correct option in 1,2,3"]
+    correct_answer: Annotated[int, "correct option number"]
 
 class ListenImmediateQuestionOutput(TypedDict):
     """Listen Simple Question Formatted Output"""
     follow_up: Annotated[str, "the follow-up question"]
     conversation: List[ListenConversation]
     choices: Annotated[List, "answer options as a list, each option is in string format"]
-    correct_answer: Annotated[int, "correct option in 1,2,3"]
+    correct_answer: Annotated[int, "correct option number"]
 
 # ----------------------------
 # Outline Structures
