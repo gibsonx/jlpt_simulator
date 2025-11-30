@@ -12,7 +12,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 Step 3: Generate 4 options for this question. Require all of the following conditions:
 -These 4 options must be different from each other.
@@ -70,7 +71,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -115,7 +117,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -160,7 +163,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 
 Formal exam paper: {example}
@@ -209,7 +213,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 
 Formal exam paper: {example}
@@ -251,7 +256,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 
 Formal exam paper: {example}
@@ -539,7 +545,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 
 Formal exam paper: {example}
@@ -591,7 +598,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 
 Formal exam paper: {example}
@@ -650,7 +658,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -759,7 +768,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -819,7 +829,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -881,7 +892,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1267,7 +1279,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1370,7 +1383,8 @@ Additional Requirement:
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
+- You must show the correct answer in the output, for example: 正解: n . 
+- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting option 1 repeatedly 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
