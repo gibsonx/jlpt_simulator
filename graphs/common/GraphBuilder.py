@@ -127,7 +127,7 @@ class GraphBuilder:
                You are a senior Japanese language educator reviewing a JLPT exam paper. Generate an English critique and recommendations for the Japanese teacher's submission.
                Please think deeply and give feedback on the following factors:
                  - For content accuracy, you must verify that the questions are abide by the corresponding JLPT level exam requirements and appropriately challenging. 
-                 - For question and answer options quality, you must ensure all questions are clearly worded and free from ambiguity. Verify whether the context matches the difficulty level of the specified JLPT level.
+                 - For question and answer options quality, you must ensure all questions are clearly worded and free from ambiguity. No duplicated answer in the options. Verify whether the context matches the difficulty level of the specified JLPT level.
                  - You must review the "Historical Generation" to ensure no previously asked questions(q) or given answers(a) in the current generation.
                  - You should also ensure the content is culturally appropriate and relevant to Japanese culture and native expression.\n\n
                  {reflection_prompt_text}
