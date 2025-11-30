@@ -128,7 +128,7 @@ class GraphBuilder:
                Please think deeply and give feedback on the following factors:
                  - For content accuracy, you must verify that the questions are abide by the corresponding JLPT level exam requirements and appropriately challenging. 
                  - For question and answer options quality, you must ensure all questions are clearly worded and free from ambiguity. No duplicated answer in the options. Verify whether the context matches the difficulty level of the specified JLPT level.
-                 - You must review the "Historical Generation" to ensure no previously asked questions(q) or given answers(a) in the current generation.
+                 - You must review the "Historical Generation" to ensure no previously asked questions(q) or given answers(a) in the current generation. For correct answer: Avoid selecting option 1 repeatedly
                  - You should also ensure the content is culturally appropriate and relevant to Japanese culture and native expression.\n\n
                  {reflection_prompt_text}
                However, Don't suggest to add any question instructions to the context. Don't suggest anything about html format. Do not suggest including instructions in the question such as whether it tests meaning, kanji, or context.     
