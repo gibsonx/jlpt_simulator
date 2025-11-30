@@ -1304,6 +1304,13 @@ kanji_reading_reflection_prompt = """
 """
 
 write_kanji_reflection_prompt = """
+the wrong example:
+the answer content cannot be same as question.
+彼は<u>そそっかしい</u>ので、よく物を忘れます。
+1. 粗速かしい
+2. 疎速かしい
+3. 粗疎かしい
+4. そそっかしい (correct)
 """
 
 word_meaning_reflection_prompt = """
