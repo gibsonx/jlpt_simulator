@@ -46,7 +46,7 @@ celery.conf.update(
     task_reject_on_worker_lost=False,     # do NOT requeue if worker dies
     task_acks_on_failure_or_timeout=False,
     broker_transport_options={
-        "visibility_timeout": 36000,       # safe window, but irrelevant with acks_late=False
+        "visibility_timeout": 360000,       # safe window, but irrelevant with acks_late=False
         "retry_on_startup": False
     },
     broker_connection_retry_on_startup=False,
