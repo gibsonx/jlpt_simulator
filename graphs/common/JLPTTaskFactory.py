@@ -252,7 +252,7 @@ class JLPTTaskFactory:
         max_attempts = 3
         for attempt in range(max_attempts):
             try:
-                obj["image"] = _generate_comic_strip(",".join(obj["choices"]))
+                obj["image"] = _generate_comic_strip(obj)
                 break
             except Exception as e:
                 print(f"Attempt {attempt + 1} failed: {e}")

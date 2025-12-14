@@ -505,7 +505,7 @@ def _generate_image(prompt: str, retry: int=10):
     raise RuntimeError(f"Failed to generate image after 5 attempts: {image_url}")
 
 
-def _generate_comic_strip(prompt: str, retry: int=10):
+def _generate_comic_strip(obj, retry: int=10):
 
     KIA_API_KEY = os.environ["KIA_API_KEY"]
     url = "https://api.kie.ai/api/v1/gpt4o-image/generate"
@@ -521,8 +521,9 @@ def _generate_comic_strip(prompt: str, retry: int=10):
                 "Arrange the panels in a 2×2 grid. show sequence number on the left-up conner at each panel"
                 "The style should be minimal, with clean outlines and look like an educational test question picture."
                 "No text, no words, no signage."
-                "You can refer to the style of uploaded pictures."
-                "The image describes the following 4 scenes:\n\n" + prompt
+                f"You can refer to the style of uploaded pictures."
+                f"follow-up question: {obj['follow_up']}"
+                f"The image describes the following 4 scenes for the next action of the follow-up question:\n\n" + ",".join(obj["choices"])
         ),
         "size": "3:2",
         "callBackUrl": os.environ["IMAGE_CALLBACK_URL"],

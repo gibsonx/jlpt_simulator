@@ -903,7 +903,7 @@ For example: "ありがとう、佐藤さん。" the name at the end of a senten
 
 Step 3, write dialogue, the dialogue should consist of 1-3 exchanges (back-and-forth turns). The total length should be approximately 100–200 words.
 
-Step 4, after the conversation, ask a follow-up question related to the conversation and focusing on the man or woman's venues, environments, and scenarios.
+Step 4, after the conversation, ask a follow-up question related to the conversation and focusing on the venues, environments, and scenarios for the next action.
 
 Step 5, provide multiple-choice options based on the listening content. These options should be written in English for creating picture scenes.
 
@@ -933,6 +933,7 @@ topic_understanding_img_example = """
 男：はい、何のピザにするんですか？
 女：えっと、ソーセージとピーマンにしよう。私、切るね。切ったの載せていってくれる？
 男：はい。
+
 <p class='follow-up'>男の留学生はこの後まず、何をしますか？</p>
 </div>
 

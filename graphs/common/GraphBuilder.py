@@ -175,8 +175,8 @@ class GraphBuilder:
                         """You are a AI assistance. your job is to format the Context to the structured output following 
                         the instruction below: 
                         1. you should not change any context and html tags, except removing change line tags like \\n or \\n\\n from the context.
-                        2. use the content inside <a></a> as the html_question. However, the content in the <ul class='options'></ul> and <p class='follow-up'></p> should not be written in html_question. 
-                        3. Also, question requirements and correct answer should not be written in the html_question.
+                        2. use the content inside <a></a> as the html_question. And, write the content in the <ul class='options'></ul> as choices, pick content in <p class='follow-up'></p> as follow_up. 
+                        3. Also, question requirements, options and correct answer should not be written in the html_question.
                         4. write the content in the <div class='article'></div> in html_article. but choices in <li></li> must be excluded.
                         5. use the content inside <li></li> as choices and keep html format, but <li></li> tags must be excluded.
                         6. write the content in the <div class='background'></div> in background if it exists, no modification.
@@ -188,7 +188,7 @@ class GraphBuilder:
 
             msg = format_pipeline.invoke(input={"question": question})
 
-            # logger.info("Formatter: {}".format(msg))
+            logger.info("Formatter: {}".format(msg))
 
             # We treat the output of this as human feedback for the generator
             return {"formatted_output": msg }
@@ -248,7 +248,7 @@ class GraphBuilder:
             llm=self.ref_llm,
             reflection_prompt_text=reflection_prompt
         )
-        self.nodes["formatter"] = self.formatter_node_builder(llm=self.fmt_llm, OutType=output_cls)
+        self.nodes["formatter"] = self.formatter_node_builder(llm=self.llm, OutType=output_cls)
 
         graph = self.build_graph(StateGraph(GraphState), self.nodes)
         return graph
