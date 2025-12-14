@@ -11,7 +11,7 @@ from graphs.common.GraphBuilder import *
 
 from libs.Utils import _generate_dialogue,_generate_express,_generate_image,collect_vocabulary
 from graphs.common.Schema import *
-from libs.LLMs import azure_llm
+from libs.LLMs import azure_llm,azure_format_llm
 import random
 from graphs.n3.prompts import *
 from langgraph.graph import StateGraph
@@ -25,6 +25,7 @@ class GraphBuilder:
         self.exam_uid = exam_uid
         self.llm = azure_llm
         self.ref_llm = azure_llm
+        self.fmt_llm = azure_format_llm
         self.nodes = {
             "online_search": None,
             "generator": None,
@@ -247,7 +248,7 @@ class GraphBuilder:
             llm=self.ref_llm,
             reflection_prompt_text=reflection_prompt
         )
-        self.nodes["formatter"] = self.formatter_node_builder(llm=self.ref_llm, OutType=output_cls)
+        self.nodes["formatter"] = self.formatter_node_builder(llm=self.fmt_llm, OutType=output_cls)
 
         graph = self.build_graph(StateGraph(GraphState), self.nodes)
         return graph
