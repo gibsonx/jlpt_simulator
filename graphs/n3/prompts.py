@@ -903,7 +903,8 @@ For example: "ありがとう、佐藤さん。" the name at the end of a senten
 
 Step 3, write dialogue, the dialogue should consist of 4-6 exchanges (back-and-forth turns). The total length should be approximately 100–200 words.
 
-Step 4, after the conversation, ask a follow-up question related to the conversation and focusing on the activities or venues for the next action.
+Step 4, after the conversation, ask a follow-up question related to the conversation and focusing on the activities or venues for the next action. 
+You should describe details about the activities or venues.
 
 Step 5, provide multiple-choice options based on the listening content. These options should be written in English for creating picture scenes.
 
