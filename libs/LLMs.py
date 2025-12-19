@@ -17,11 +17,20 @@ azure_llm = AzureChatOpenAI(
     top_p=0.95
 )
 
-
 azure_format_llm = AzureChatOpenAI(
-    azure_endpoint="https://ai-rolandaws880125ai409947751408.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2025-01-01-preview",
+    azure_endpoint="https://ai-rolandaws880125ai409947751408.cognitiveservices.azure.com/openai/deployments/gpt-4.1-2/chat/completions?api-version=2025-01-01-preview",
     api_key=os.environ["AZURE_API_KEY"],
-    model_name="gpt-4.1-mini",
+    model_name="gpt-4.1-2",
+    api_version="2025-01-01-preview",
+    temperature=0.1,
+    top_p=0.95
+)
+
+
+azure_ref_llm = AzureChatOpenAI(
+    azure_endpoint="https://ai-rolandaws880125ai409947751408.openai.azure.com/openai/deployments/gpt-4.1/chat/completions?api-version=2025-01-01-preview",
+    api_key=os.environ["AZURE_API_KEY"],
+    model_name="gpt-4.1",
     api_version="2025-01-01-preview",
     temperature=0,
 )

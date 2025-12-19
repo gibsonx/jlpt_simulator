@@ -776,7 +776,7 @@ information_retrieval_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
 Task: You are a Japanese teacher writing a retrieve information question on an exam paper for the JLPT N3 level.
-you must provide 1 or 2 html format tables and with additional information for retrieve below. The content and conditions combined should be more than 300 words and complex enough for JLPT n3 level.
+you must provide 2 html format tables with several lines and append additional information for retrieve below. The content and conditions combined should be more than 300 words and complex enough for JLPT n3 level.
 After that, asking candidate to answer 2 questions from the related content in the table.
 Most importantly, the question and answer must not be stated directly in the table or clues. 
 Instead, it should require the test-taker to infer, summarize, or understand the context.

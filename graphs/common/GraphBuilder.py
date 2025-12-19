@@ -11,7 +11,7 @@ from graphs.common.GraphBuilder import *
 
 from libs.Utils import _generate_dialogue,_generate_express,_generate_image,collect_vocabulary
 from graphs.common.Schema import *
-from libs.LLMs import azure_llm,azure_format_llm
+from libs.LLMs import *
 import random
 from graphs.n3.prompts import *
 from langgraph.graph import StateGraph
@@ -24,7 +24,7 @@ class GraphBuilder:
     def __init__(self, exam_uid):
         self.exam_uid = exam_uid
         self.llm = azure_llm
-        self.ref_llm = azure_llm
+        self.ref_llm = azure_ref_llm
         self.fmt_llm = azure_format_llm
         self.nodes = {
             "online_search": None,
@@ -127,9 +127,9 @@ class GraphBuilder:
             system_content = f"""
                You are a senior Japanese language educator reviewing a JLPT exam paper. Generate an English critique and recommendations for the Japanese teacher's submission.
                Please think deeply and give feedback on the following factors:
-                 - For content accuracy, you must verify that the questions are abide by the corresponding JLPT level exam requirements and appropriately challenging. 
-                 - For question and answer options quality, you must ensure all questions are clearly worded and free from ambiguity. No duplicated answer in the options. Verify whether the context matches the difficulty level of the specified JLPT level.
-                 - You must review the "Historical Generation" to ensure no previously asked questions(q) or given answers(a) in the current generation. For correct answer: Avoid selecting option 1 repeatedly
+                 - For content accuracy, you must verify that the questions are abide by the corresponding JLPT level exam requirements and appropriately challenging.
+                 - Review the question and its answer options to ensure the question is clearly worded, grammatically correct, unambiguous, and that exactly one option is definitively the correct answer while all others are clearly incorrect. No duplicated answers in the options.
+                 - You must review the "Historical Generation" to ensure no previously asked questions(q) or given answers(a) in the current generation. For correct answer: Avoid selecting same options continuously.
                  - You should also ensure the content is culturally appropriate and relevant to Japanese culture and native expression.\n\n
                  {reflection_prompt_text}
                However, Don't suggest to add any question instructions to the context. Don't suggest anything about html format. Do not suggest including instructions in the question such as whether it tests meaning, kanji, or context.     
@@ -248,7 +248,8 @@ class GraphBuilder:
             llm=self.ref_llm,
             reflection_prompt_text=reflection_prompt
         )
-        self.nodes["formatter"] = self.formatter_node_builder(llm=self.llm, OutType=output_cls)
+        self.nodes["formatter"] = self.formatter_node_builder(llm=self.fmt_llm
+                                                              , OutType=output_cls)
 
         graph = self.build_graph(StateGraph(GraphState), self.nodes)
         return graph

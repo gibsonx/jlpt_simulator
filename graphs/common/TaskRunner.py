@@ -170,26 +170,28 @@ class TaskRunner:
             logger.error("Paper generation returned None")
             raise RuntimeError("Outline generation returned None")
         else:
-            # Save Object as HTML (debug output)
-            filename = f"{project_path}/output/JLPT_{self.level}_{self.task_id}.html"
-            html_output = render_to_html(exam_paper['sections'])
+            if self.task_id:
+                # Save Object as HTML (debug output)
+                filename = f"{project_path}/output/JLPT_{self.level}_{self.task_id}.html"
+                html_output = render_to_html(exam_paper['sections'])
 
-            with open(filename, "w", encoding="utf-8") as file:
-                file.write(html_output)
+                with open(filename, "w", encoding="utf-8") as file:
+                    file.write(html_output)
 
-            logger.info(f" ### Exam Paper is Save as {filename} ###")
+                logger.info(f" ### Exam Paper is Save as {filename} ###")
 
-            # Save Object to MongoDB
-            inserted_id = db_client.safe_insert_one(exam_paper)
+                # Save Object to MongoDB
+                inserted_id = db_client.safe_insert_one(exam_paper)
 
-            # Inform Exam System via API
-            if inserted_id:
-                logger.info("Inserted document ID: %s", inserted_id)
-                self.callback_system_api()
-                logger.info("Callback system API triggered successfully.")
+                # Inform Exam System via API
+                if inserted_id:
+                    logger.info("Inserted document ID: %s", inserted_id)
+                    self.callback_system_api()
+                    logger.info("Callback system API triggered successfully.")
+                else:
+                    logger.warning("MongoDB insertion returned no document ID.")
             else:
-                logger.warning("MongoDB insertion returned no document ID.")
-
+                logger.warning("No task ID. Thus, no output")
         return outline, exam_paper
 
 
