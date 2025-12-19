@@ -521,9 +521,8 @@ def _generate_comic_strip(obj, retry: int=10):
                 "Arrange the panels in a 2×2 grid. show sequence number on the left-up conner at each panel"
                 "The style should be minimal, with clean outlines and look like an educational test question picture."
                 "No text, no words, no signage."
-                f"You can refer to the style of uploaded pictures."
-                f"follow-up question: {obj['follow_up']}"
-                f"The image describes the following 4 scenes for the next action of the follow-up question:\n\n" + ",".join(obj["choices"])
+                f"You can refer to the style of uploaded pictures. The image should be easily and directly understood by user"
+                f"The image describes the following 4 scenes in order: \n\n" + ",".join(obj["choices"])
         ),
         "size": "3:2",
         "callBackUrl": os.environ["IMAGE_CALLBACK_URL"],

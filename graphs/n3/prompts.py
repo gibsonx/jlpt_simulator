@@ -892,7 +892,7 @@ Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level.
 
 Task: Your job is to write a natural-sounding conversation between a man and a woman. 
 
-Step 1, write a concise background about the dialogue introduction, which exclude the follow-up question and character names.
+Step 1, write a concise background about the dialogue introduction, which excludes the follow-up question and character names.
 
 Step 2, Give characters names during the conversation. They should call each name during the conversation depending on their relationship, level of formality.
 Do not refer to them as Mr. or Miss in the conversation context. Be polite and culturally appropriate in how they address each other.
@@ -901,9 +901,9 @@ Do not refer to them as Mr. or Miss in the conversation context. Be polite and c
 Besides, the name at the end of a sentence can be omitted.
 For example: "ありがとう、佐藤さん。" the name at the end of a sentence can be omitted, like "ありがとう。"
 
-Step 3, write dialogue, the dialogue should consist of 1-3 exchanges (back-and-forth turns). The total length should be approximately 100–200 words.
+Step 3, write dialogue, the dialogue should consist of 4-6 exchanges (back-and-forth turns). The total length should be approximately 100–200 words.
 
-Step 4, after the conversation, ask a follow-up question related to the conversation and focusing on the venues, environments, and scenarios for the next action.
+Step 4, after the conversation, ask a follow-up question related to the conversation and focusing on the activities or venues for the next action.
 
 Step 5, provide multiple-choice options based on the listening content. These options should be written in English for creating picture scenes.
 
