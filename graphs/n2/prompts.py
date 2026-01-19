@@ -414,7 +414,7 @@ sentence_sort_example = """
 
 """
 
-structure_selection_teacher_prompt = """
+sentence_structure_teacher_prompt = """
 角色：你是一名日语老师，正在为JLPT N2水平撰写试卷。 
 
 任务：你的工作是按照以下步骤为JLPT N2级别出一道填入正确内容的语法题。根据语法参考列表中的4个语法点出题
@@ -460,7 +460,7 @@ structure_selection_teacher_prompt = """
 语法参考列表：{grammar}
 """
 
-structure_selection_example = """
+sentence_structure_example = """
 <div class="article">
   <p style="font-family: 'Hiragino Mincho ProN', 'Yu Mincho', serif; line-height: 1.8; margin-bottom: 1.5em;">
     以下は、留学生がスピーチのために書いた文章である
@@ -528,7 +528,7 @@ structure_selection_example = """
 
 """
 
-short_reading_narrative_teacher_prompt = """
+short_passage_narrative_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
 Task: Your job is to write a reading question for JLPT N2 level exam. 
@@ -553,7 +553,7 @@ Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
-short_reading_narrative_example = """
+short_passage_narrative_read_example = """
 <div class="article">
     <p style="margin-bottom: 1.5em;">
         インタビューでは準備も重要だが、実際のインタビューの場面になったら、いったんその準備で得たものをすべて捨てなくてはならない。そして、相手の話を真剣に深く聞き、その人が何を言わんとしているのか、丸ごと捉えて、そこで出てきた素晴らしい言葉、豊かな言葉、言葉に込められた大事なメッセージをしっかりとつかむことこそが必要なのだ。
@@ -579,7 +579,7 @@ short_reading_narrative_example = """
 
 """
 
-short_reading_mail_teacher_prompt = """
+short_passage_mail_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
 Task: Your job is to write a reading question for JLPT N2 level exam.
@@ -606,7 +606,7 @@ Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
-short_reading_mail_example = """
+short_passage_mail_read_example = """
 <div class="article" style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
     <p style="margin-bottom: 1.2em;">
         以下は、ある会社で全社員に送られたメールである。
@@ -641,7 +641,7 @@ short_reading_mail_example = """
 </ul>
 """
 
-short_reading_notification_teacher_prompt = """
+short_passage_notification_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
 Task: Your job is to write a reading question for JLPT N2 level exam. 
@@ -665,7 +665,7 @@ Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
-short_reading_notification_example = """
+short_passage_notification_read_example = """
 <div class="article" style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
 <p style="margin-bottom: 1.2em; text-indent: 1em;">
     以下は、ある町の掲示板に貼られていた文書である。
@@ -750,7 +750,7 @@ short_reading_notification_example = """
 </ul>
 """
 
-midsize_reading_teacher_prompt = """
+midsize_passage_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
 Task: Your job is to write a reading question for a JLPT N2 level exam.
@@ -775,7 +775,7 @@ Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
-midsize_reading_example = """
+midsize_passage_read_example = """
 <div class="article" style="
     margin-bottom: 40px;
     padding-bottom: 20px;
@@ -875,7 +875,7 @@ comprehensive_read_example = """
 </ul>
 """
 
-long_reading_teacher_prompt = """
+long_passage_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level.
 
 Task: Task: Your job is to write a reading question for a JLPT N2 level exam. 
@@ -899,7 +899,7 @@ Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
-long_reading_example = """
+long_passage_read_example = """
 <div class="article" style="
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         line-height: 1.8;
@@ -967,7 +967,7 @@ long_reading_example = """
 
 """
 
-information_retrieval_teacher_prompt = """
+info_retrieval_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N2 level. 
 
 Task: You are a Japanese teacher writing a retrieve information question on an exam paper for the JLPT N2 level.
@@ -992,7 +992,7 @@ Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
-information_retrieval_example = """
+info_retrieval_example = """
 --- example 1 ---
 <div class="article">
     <h1 style="text-align: center; font-size: 1.6em; margin-bottom: 20px; font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;">
@@ -1690,28 +1690,28 @@ sentence_grammar_reflection_prompt = """
 sentence_sort_reflection_prompt = """
 """
 
-structure_selection_reflection_prompt = """
+sentence_structure_reflection_prompt = """
 """
 
-short_reading_narrative_reflection_prompt = """
+short_passage_narrative_read_reflection_prompt = """
 """
 
-short_reading_mail_reflection_prompt = """
+short_passage_mail_read_reflection_prompt = """
 """
 
-short_reading_notification_reflection_prompt = """
+short_passage_notification_read_reflection_prompt = """
 """
 
-midsize_reading_reflection_prompt = """
+midsize_passage_read_reflection_prompt = """
 """
 
 comprehensive_read_reflection_prompt = """
 """
 
-long_reading_reflection_prompt = """
+long_passage_read_reflection_prompt = """
 """
 
-information_retrieval_reflection_prompt = """
+info_retrieval_reflection_prompt = """
 """
 
 topic_understanding_img_reflection_prompt = """

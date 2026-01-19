@@ -140,9 +140,9 @@ class JLPTTaskFactory:
 
     def sentence_structure(self, word, gan_history: Optional[str] = "", grammar: Optional[str] = None):
         return self._run_task(
-            self.prompts_module.structure_selection_teacher_prompt,
-            self.prompts_module.structure_selection_example,
-            self.prompts_module.structure_selection_reflection_prompt,
+            self.prompts_module.sentence_structure_teacher_prompt,
+            self.prompts_module.sentence_structure_example,
+            self.prompts_module.sentence_structure_reflection_prompt,
             MultipleQuestionOutput,
             word,
             gan_history,
@@ -155,9 +155,9 @@ class JLPTTaskFactory:
 
     def short_passage_narrative_read(self, word, gan_history: Optional[str] = "",):
         return self._run_task(
-            self.prompts_module.short_reading_narrative_teacher_prompt,
-            self.prompts_module.short_reading_narrative_example,
-            self.prompts_module.short_reading_narrative_reflection_prompt,
+            self.prompts_module.short_passage_narrative_read_teacher_prompt,
+            self.prompts_module.short_passage_narrative_read_example,
+            self.prompts_module.short_passage_narrative_read_reflection_prompt,
             MultipleQuestionOutput,
             word,
             gan_history
@@ -165,9 +165,9 @@ class JLPTTaskFactory:
 
     def short_passage_mail_read(self, word, gan_history: Optional[str] = "",):
         return self._run_task(
-            self.prompts_module.short_reading_mail_teacher_prompt,
-            self.prompts_module.short_reading_mail_example,
-            self.prompts_module.short_reading_mail_reflection_prompt,
+            self.prompts_module.short_passage_mail_read_teacher_prompt,
+            self.prompts_module.short_passage_mail_read_example,
+            self.prompts_module.short_passage_mail_read_reflection_prompt,
             MultipleQuestionOutput,
             word,
             gan_history
@@ -175,9 +175,9 @@ class JLPTTaskFactory:
 
     def short_passage_notification_read(self, word, gan_history: Optional[str] = "",):
         return self._run_task(
-            self.prompts_module.short_reading_notification_teacher_prompt,
-            self.prompts_module.short_reading_notification_example,
-            self.prompts_module.short_reading_notification_reflection_prompt,
+            self.prompts_module.short_passage_notification_read_teacher_prompt,
+            self.prompts_module.short_passage_notification_read_example,
+            self.prompts_module.short_passage_notification_read_reflection_prompt,
             MultipleQuestionOutput,
             word,
             gan_history
@@ -185,9 +185,9 @@ class JLPTTaskFactory:
 
     def midsize_passage_read(self, word, gan_history: Optional[str] = "",):
         return self._run_task(
-            self.prompts_module.midsize_reading_teacher_prompt,
-            self.prompts_module.midsize_reading_example,
-            self.prompts_module.midsize_reading_reflection_prompt,
+            self.prompts_module.midsize_passage_read_teacher_prompt,
+            self.prompts_module.midsize_passage_read_example,
+            self.prompts_module.midsize_passage_read_reflection_prompt,
             MultipleQuestionOutput,
             word,
             gan_history
@@ -205,9 +205,9 @@ class JLPTTaskFactory:
 
     def long_passage_read(self, word, gan_history: Optional[str] = ""):
         return self._run_task(
-            self.prompts_module.long_reading_teacher_prompt,
-            self.prompts_module.long_reading_example,
-            self.prompts_module.long_reading_reflection_prompt,
+            self.prompts_module.long_passage_read_teacher_prompt,
+            self.prompts_module.long_passage_read_example,
+            self.prompts_module.long_passage_read_reflection_prompt,
             MultipleQuestionOutput,
             word,
             gan_history
@@ -215,9 +215,9 @@ class JLPTTaskFactory:
 
     def understanding_read(self, word, gan_history: Optional[str] = ""):
         return self._run_task(
-            self.prompts_module.long_reading_understanding_teacher_prompt,
-            self.prompts_module.long_reading_understanding_example,
-            self.prompts_module.long_reading_understanding_reflection_prompt,
+            self.prompts_module.understanding_read_teacher_prompt,
+            self.prompts_module.understanding_read_example,
+            self.prompts_module.understanding_read_reflection_prompt,
             MultipleQuestionOutput,
             word,
             gan_history
@@ -225,9 +225,9 @@ class JLPTTaskFactory:
 
     def info_retrieval(self, word, gan_history: Optional[str] = ""):
         return self._run_task(
-            self.prompts_module.information_retrieval_teacher_prompt,
-            self.prompts_module.information_retrieval_example,
-            self.prompts_module.information_retrieval_reflection_prompt,
+            self.prompts_module.info_retrieval_teacher_prompt,
+            self.prompts_module.info_retrieval_example,
+            self.prompts_module.info_retrieval_reflection_prompt,
             MultipleQuestionOutput,
             word,
             gan_history

@@ -320,7 +320,7 @@ sentence_sort_example = """
 
 """
 
-structure_selection_teacher_prompt = """
+sentence_structure_teacher_prompt = """
 角色：你是一名日语老师，正在为JLPT N1水平撰写试卷。 
 
 任务：你的工作是按照以下步骤为JLPT N1级别出一道填入正确内容的语法题。根据语法参考列表中的4个语法点出题
@@ -366,7 +366,7 @@ structure_selection_teacher_prompt = """
 语法参考列表：{grammar}
 """
 
-structure_selection_example = """
+sentence_structure_example = """
 <div class="article">
     <h3>以下は医師が脳と心の健康について書いた文章である。</h3>
     <h2>人には会いに行こう</h2>
@@ -426,7 +426,7 @@ structure_selection_example = """
 </div>
 """
 
-short_reading_narrative_teacher_prompt = """
+short_passage_narrative_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
 
 Task: Your job is to write a reading question for JLPT N1 level exam. 
@@ -449,7 +449,7 @@ Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
-short_reading_narrative_example = """
+short_passage_narrative_read_example = """
 <div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; background-color: #f9f9f9; color: #333;">
     <p style="margin-bottom: 1.5em; text-align: justify;">
         「練習ではできていなかったのに、試合では技を成功させられた」などという場合に「すごいね」とほめられると、「私は本番に強いから、練習はそこそこにして、本番で勝負をかければいい」と思ってしまい、がちです。
@@ -479,7 +479,7 @@ short_reading_narrative_example = """
 
 """
 
-short_reading_mail_teacher_prompt = """
+short_passage_mail_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
 
 Task: Your job is to write a reading question for JLPT N1 level exam.
@@ -504,7 +504,7 @@ Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
-short_reading_mail_example = """
+short_passage_mail_read_example = """
 <div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; background-color: #f9f9f9; color: #333;">
     <p>以下は、ある電気店から届いたメールである。</p>
 
@@ -544,7 +544,7 @@ short_reading_mail_example = """
 </ul>
 """
 
-short_reading_notification_teacher_prompt = """
+short_passage_notification_read_teacher_prompt = """
 角色：你是一名日语老师，正在为JLPT N1水平撰写试卷。 
 
 任务：你的工作是为JLPT N1水平考试写一道阅读题。
@@ -568,7 +568,7 @@ short_reading_notification_teacher_prompt = """
 正式试卷：{example}
 """
 
-short_reading_notification_example = """
+short_passage_notification_read_example = """
 <div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; background-color: #f9f9f9; color: #333;">
     <div style="width: 600px; margin: 2em auto; border: 1px solid #ccc; padding: 20px; background-color: #fff;">
         <div style="writing-mode: vertical-rl; text-orientation: mixed; height: 600px; font-size: 1.1em; line-height: 2; text-align: justify;">
@@ -587,7 +587,7 @@ short_reading_notification_example = """
 </ul>
 """
 
-midsize_reading_teacher_prompt = """
+midsize_passage_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
 
 Task: Your job is to write a reading question for a JLPT N1 level exam.
@@ -612,7 +612,7 @@ Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
-midsize_reading_example = """
+midsize_passage_read_example = """
 --- example1----
 <div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; background-color: #f9f9f9; color: #333;">
     <p style="margin-bottom: 1.5em; text-align: justify;">以下は、羽毛を持つ恐竜について述べられた文章である。</p>
@@ -709,7 +709,7 @@ midsize_reading_example = """
 </div>
 """
 
-long_reading_understanding_teacher_prompt = """
+understanding_read_teacher_prompt = """
 角色：你是一名日语老师，正在为JLPT N1水平撰写试卷。
 
 任务：你的工作是为JLPT N1水平考试写一道阅读题。
@@ -731,7 +731,7 @@ long_reading_understanding_teacher_prompt = """
 历史题目: {gan_history}
 """
 
-long_reading_understanding_example = """
+understanding_read_example = """
 <div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; color: #333; background-color: #f9f9f9;">
 
     <p style="margin-bottom: 1.5em; text-align: justify;">
@@ -868,7 +868,7 @@ comprehensive_read_example = """
 </ul>
 """
 
-long_reading_teacher_prompt = """
+long_passage_read_teacher_prompt = """
 角色：你是一名日语老师，正在为JLPT N1水平撰写试卷。
 
 任务：任务：你的工作是为JLPT N1水平考试写一道阅读题。
@@ -890,7 +890,7 @@ long_reading_teacher_prompt = """
 历史题目: {gan_history}
 """
 
-long_reading_example = """
+long_passage_read_example = """
 <div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; color: #333; background-color: #f9f9f9;">
 
     <p style="margin-bottom: 1.5em; text-align: justify;">
@@ -951,7 +951,7 @@ long_reading_example = """
 </ul>
 """
 
-information_retrieval_teacher_prompt = """
+info_retrieval_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N1 level. 
 
 Task: You are a Japanese teacher writing a retrieve information question on an exam paper for the JLPT N1 level.
@@ -976,7 +976,7 @@ Formal exam paper: {example}
 Historical Generation : {gan_history}
 """
 
-information_retrieval_example = """
+info_retrieval_example = """
 --- example 1 ---
 <div class="article" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; max-width: 800px; margin: 40px auto; padding: 20px; color: #333; background-color: #f9f9f9;">
 
@@ -1618,31 +1618,31 @@ sentence_grammar_reflection_prompt = """
 sentence_sort_reflection_prompt = """
 """
 
-structure_selection_reflection_prompt = """
+sentence_structure_reflection_prompt = """
 """
 
-short_reading_narrative_reflection_prompt = """
+short_passage_narrative_read_reflection_prompt = """
 """
 
-short_reading_mail_reflection_prompt = """
+short_passage_mail_read_reflection_prompt = """
 """
 
-short_reading_notification_reflection_prompt = """
+short_passage_notification_read_reflection_prompt = """
 """
 
-midsize_reading_reflection_prompt = """
+midsize_passage_read_reflection_prompt = """
 """
 
 comprehensive_read_reflection_prompt = """
 """
 
-long_reading_understanding_reflection_prompt = """
+understanding_read_reflection_prompt = """
 """
 
-long_reading_reflection_prompt = """
+long_passage_read_reflection_prompt = """
 """
 
-information_retrieval_reflection_prompt = """
+info_retrieval_reflection_prompt = """
 """
 
 topic_understanding_img_reflection_prompt = """

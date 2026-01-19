@@ -339,7 +339,7 @@ sentence_sort_example = """
 
 """
 
-structure_selection_teacher_prompt = """
+sentence_structure_teacher_prompt = """
 角色：你是一名日语老师，正在为JLPT N3水平撰写试卷。 
 
 任务：你的工作是按照以下步骤为JLPT N3级别出一道填入正确内容的语法题。根据语法参考列表中的4个语法点出题
@@ -381,7 +381,7 @@ structure_selection_teacher_prompt = """
 语法参考列表：{grammar}
 """
 
-structure_selection_example = """
+sentence_structure_example = """
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -474,7 +474,7 @@ structure_selection_example = """
 </html>
 """
 
-short_reading_narrative_teacher_prompt = """
+short_passage_narrative_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N4 level. 
 
 Task: Your job is to write a reading question for JLPT N4 level exam. 
@@ -497,7 +497,7 @@ Formal exam paper: {example}
 """
 
 
-short_reading_narrative_example = """
+short_passage_narrative_read_example = """
 <div class='article'>
     <p>
       友達のマキは、いいことがあったという話をよくする。だから私は、マキは運がいいのだと思っていた。しかし、最近、そうではないと気づいた。<br><br>
@@ -516,7 +516,7 @@ short_reading_narrative_example = """
     </div>
 """
 
-short_reading_mail_teacher_prompt = """
+short_passage_mail_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N4 level. 
 
 Task: Your job is to write a reading question for JLPT N4 level exam.
@@ -541,7 +541,7 @@ Formal exam paper: {example}
 """
 
 
-short_reading_mail_example="""
+short_passage_mail_read_example="""
 --- example 1 ---
 <div class='article'>
     <p>これは、今川さんが後のミゲルさんに書いたメールである。</p>  
@@ -566,7 +566,7 @@ short_reading_mail_example="""
 </ul> 
 """
 
-short_reading_notification_teacher_prompt = """
+short_passage_notification_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N4 level. 
 
 Task: Your job is to write a reading question for JLPT N4 level exam. 
@@ -588,7 +588,7 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
-short_reading_notification_example="""
+short_passage_notification_read_example="""
 <div class='article'>
 <p><strong>(会社で)</strong></p>  
 <p>ミンさんが席に戻ると、机の上に、原口課長からのメモが置いてあった。</p>  
@@ -609,7 +609,7 @@ short_reading_notification_example="""
 </ul>
 """
 
-midsize_reading_teacher_prompt = """
+midsize_passage_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N4 level. 
 
 Task: Your job is to write a reading question for a JLPT N4 level exam.
@@ -633,7 +633,7 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
-midsize_reading_example = """
+midsize_passage_read_example = """
 --- example 1 ---
 <div class='article'>
     <p>日本に留学に来る前、母が持っていきなさいと言って、私の国でよく売っている粉の香辛料をくれました。私が普段あまり使わないものでしたが、役に立つかもしれないと母が言うので、荷物に入れました。最近、それが本当に役に立ちました。</p>  
@@ -694,7 +694,7 @@ midsize_reading_example = """
     </ul>
 """
 
-long_reading_teacher_prompt = """
+long_passage_read_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N4 level.
 
 Task: Task: Your job is to write a reading question for a JLPT N4 level exam. 
@@ -717,7 +717,7 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
-long_reading_example = """
+long_passage_read_example = """
     <p>分が住むために直し始めた。日本の古民家には、丈夫で立派な木の材料が使われている。それを利用して直せば、長く住めるいい家になると考えたのだ。</p>  
     <p>Kさんの直し方はこうだ。まず、家を一度バラバラにする。そして、材料の悪くなっている部分は取り替えるが、そのまま使える材料はできるだけ使って、前と同じように組み立てる。直しながら壁の色を変えたり、最新の暖房を入れたりもする。この方法なら、古民家が時代に合った住みやすい家になるのだ。</p>  
     <p>Kさんは、家を直して住み始めたあと、下村にあるほかの古民家もそのままにしておくのはもったいないと思い、友人にお金を借りて直し始めた。自分のように古民家を直した家の良さがわかり、買ってくれる人がいるはずだと信じていたのだ。実際、すぐにそのような人は見つかった。そして、その後、直した古民家を見学しに全国各地の人が下村に来るようになった。</p>  
@@ -756,7 +756,7 @@ long_reading_example = """
     </ul>         
 """
 
-information_retrieval_teacher_prompt = """
+info_retrieval_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N4 level. 
 
 Task: You are a Japanese teacher writing a retrieve information question on an exam paper for the JLPT N4 level.
@@ -780,7 +780,7 @@ Additional Requirement:
 Formal exam paper: {example}
 """
 
-information_retrieval_example = """
+info_retrieval_example = """
 <div class='article'>
 <h2>園内活動の協力者を募集します</h2>
   <p>東山公園内の活動に、4月から新しく協力してくださる方を募集します。一緒に公園で活動しませんか。</p>
@@ -1252,25 +1252,25 @@ sentence_grammar_reflection_prompt = """
 sentence_sort_reflection_prompt = """
 """
 
-structure_selection_reflection_prompt = """
+sentence_structure_reflection_prompt = """
 """
 
-short_reading_narrative_reflection_prompt = """
+short_passage_narrative_read_reflection_prompt = """
 """
 
-short_reading_mail_reflection_prompt = """
+short_passage_mail_read_reflection_prompt = """
 """
 
-short_reading_notification_reflection_prompt = """
+short_passage_notification_read_reflection_prompt = """
 """
 
-midsize_reading_reflection_prompt = """
+midsize_passage_read_reflection_prompt = """
 """
 
-long_reading_reflection_prompt = """
+long_passage_read_reflection_prompt = """
 """
 
-information_retrieval_reflection_prompt = """
+info_retrieval_reflection_prompt = """
 """
 
 topic_understanding_img_reflection_prompt = """
