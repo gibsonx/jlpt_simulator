@@ -200,15 +200,13 @@ class ExamTaskRunner:
 class EvalTaskRunner:
     def __init__(self, payload, task_id):
         self.payload = json.loads(payload)
-        self.jlpt_level = payload['level']
+        self.jlpt_level = self.payload['level']
         self.task_id = task_id
 
     def run(self):
         start_time = time.time()  # 记录开始时间
 
-        # 1️⃣ Load JSON data
         data = self.payload
-
         print(self.task_id, data)
         # 2️⃣ Initialize processor for the desired JLPT level
         processor = JLPTProcessor(level=self.jlpt_level)
