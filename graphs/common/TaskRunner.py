@@ -200,16 +200,23 @@ class ExamTaskRunner:
 class EvalTaskRunner:
     def __init__(self, payload, task_id):
         self.payload = json.loads(payload)
-        self.jlpt_level = self.payload['level']
+        self.level = self.payload['level']
+        self.exam_type = self.payload['exam_type']
         self.task_id = task_id
 
     def run(self):
         start_time = time.time()  # 记录开始时间
 
+        conn_str = os.getenv("AZURE_MONGO_CONNECTION")
+        db_name = os.getenv("AZURE_MONGO_DBNAME")
+
+        collection_name = "exam_eval"
+        db_client = CosmosMongoDB(conn_str, db_name, collection_name)
+
         data = self.payload
-        print(self.task_id, data)
+        data['_id'] = self.task_id
         # 2️⃣ Initialize processor for the desired JLPT level
-        processor = JLPTProcessor(level=self.jlpt_level)
+        processor = JLPTProcessor(level=self.level)
 
         # 3️⃣ Run the full processing pipeline
         # data = processor.add_user_answers_and_correctness(data)
@@ -219,9 +226,75 @@ class EvalTaskRunner:
         data = processor.add_jlpt_analysis_to_json(data)
         data = processor.add_summary_data(data)
 
-        print(json.dumps(data, ensure_ascii=False, separators=(',', ':')))
+        logger.info(json.dumps(data, ensure_ascii=False, separators=(',', ':')))
+
+        # insert into mongodb
+        inserted_id = db_client.safe_insert_one(data)
+
+        # Inform Exam System via API
+        if inserted_id:
+            logger.info("Inserted document ID: %s", inserted_id)
+            self.callback_system_api()
+            logger.info("Callback system API triggered successfully.")
+        else:
+            logger.warning("MongoDB insertion returned no document ID.")
+
+
 
         end_time = time.time()  # 记录结束时间
         total_time = end_time - start_time
         print(f"总执行时间: {total_time:.2f} 秒")
+
+    def callback_system_api(self):
+        """
+        Executes a GET request equivalent to:
+          curl -X GET --location "https://jlpt.kongxuan.com/api/mongo/loadData/n3/full_exam"
+          -H "clientid: ..."
+          -H "x-auth: Bearer <token>"
+        Retries 3 times automatically if any error occurs.
+        Always continues regardless of success or failure.
+        """
+        url = f"https://jlpt.kongxuan.com/api/mongo/loadData/{self.level}/{self.exam_type}"
+        headers = {
+            "clientid": os.environ["EXAM_SYSTEM_CLIENT_ID"],
+            # If 401 persists, try changing "x-auth" to "Authorization"
+            "x-auth": os.environ["EXAM_SYSTEM_TOKEN"],
+        }
+
+        RETRY_COUNT = 3
+        RETRY_DELAY = 2  # seconds
+
+        last_exception = None
+        result = None
+
+        for attempt in range(1, RETRY_COUNT + 1):
+            try:
+                logger.info(f"Attempt {attempt} of {RETRY_COUNT}...")
+                response = requests.get(
+                    url,
+                    headers=headers,
+                    params={"id": self.task_id},  # fixed param key
+                    timeout=10,
+                )
+                response.raise_for_status()
+
+                logger.info("Request successful")
+                result = response.json()
+                break  # 成功后就跳出循环
+
+            except requests.RequestException as e:
+                logger.info(f"Attempt {attempt} failed: {e}")
+                last_exception = e
+                if attempt < RETRY_COUNT:
+                    logger.info(f"Retrying in {RETRY_DELAY} seconds...\n")
+                    time.sleep(RETRY_DELAY)
+                else:
+                    logger.error("All retry attempts failed.")
+
+        # ✅ 无论成功失败都继续，不中断流程
+        if result is None:
+            logger.warning("Returning empty result due to failure.")
+            result = {"success": False, "error": str(last_exception) if last_exception else "unknown error"}
+
+        return result
 
