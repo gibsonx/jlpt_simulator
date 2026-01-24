@@ -129,6 +129,7 @@ class GraphBuilder:
                Please think deeply and give feedback on the following factors:
                  - For content accuracy, you must verify that the questions are abide by the corresponding JLPT level exam requirements and appropriately challenging.
                  - Review the question and its answer options to ensure the question is clearly worded, grammatically correct, unambiguous, and that exactly one option is definitively the correct answer while all others are clearly incorrect. No duplicated answers in the options.
+                 - Take a comprehensive view of all the examination points, and avoid testing the same points in the same or different types of questions. For example, if multiple questions test the same vocabulary in vocabulary questions, or if multiple questions test the same grammatical points in grammar questions.
                  - You must review the "Historical Generation" to ensure no previously asked questions(q) or given answers(a) in the current generation. For correct answer: Avoid selecting same options continuously.
                  - You should also ensure the content is culturally appropriate and relevant to Japanese culture and native expression.\n\n
                  {reflection_prompt_text}
