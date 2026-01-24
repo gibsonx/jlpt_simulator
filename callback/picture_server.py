@@ -1,15 +1,16 @@
 from io import BytesIO
 from PIL import Image
 import requests
+import json
 from flask import Flask, request, jsonify
 from azure.storage.blob import BlobServiceClient
 from dotenv import load_dotenv
-import sys, os,uuid
+import sys, os, uuid
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from flask_httpauth import HTTPBasicAuth
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from libs.CeleryHelper import run_exam_task
+from libs.CeleryHelper import run_exam_task, run_eval_task
 # Load environment variables from .env
 load_dotenv()
 
@@ -170,6 +171,63 @@ def run_exam_endpoint():
         "exam_type": exam_type,
         "count": count,
         "task_ids": task_ids
+    }), 202
+
+
+@app.route("/run_eval", methods=["POST"])
+@auth.login_required
+def run_eval_endpoint():
+    """
+    Run exam job asynchronously via Celery.
+    Example body:
+    {
+        "level": "n3",
+        "exam_type": "fast_exam",
+        ...
+    }
+    """
+    data = request.get_json()
+
+    if not data or "level" not in data or "type" not in data:
+        return jsonify({
+            "error": "Missing required parameters.",
+            "required_fields": ["level", "type"],
+            "example": {"level": "n3", "type": "fast_exam"}
+        }), 400
+
+    level = data["level"].lower()
+    exam_type = data["type"].lower()
+
+    # Define valid values inside the function
+    valid_levels = ["n1", "n2", "n3", "n4", "n5"]
+    valid_exam_types = ["full_exam", "fast_exam", "vocab", "grammar", "reading", "listening"]
+
+    # Validate level
+    if level not in valid_levels:
+        return jsonify({
+            "error": f"Invalid level '{level}'.",
+            "valid_levels": valid_levels,
+            "hint": "Use lowercase levels: n1, n2, n3, n4, n5."
+        }), 400
+
+    # Validate exam type
+    if exam_type not in valid_exam_types:
+        return jsonify({
+            "error": f"Invalid exam_type '{exam_type}'.",
+            "valid_exam_types": valid_exam_types,
+            "hint": "Use one of the supported exam types."
+        }), 400
+
+    print()
+
+    # create a job
+    task_uuid = run_eval_task.apply_async(args=[json.dumps(data, ensure_ascii=False)])
+
+    return jsonify({
+        "status": "queued",
+        "level": level,
+        "type": exam_type,
+        "task_id": str(task_uuid)
     }), 202
 
 

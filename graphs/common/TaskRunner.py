@@ -1,17 +1,19 @@
 from graphs.common.ExamGenerator import ExamGenerator
 from typing import *
 import os
+import json
 import importlib
 from libs.Utils import render_to_html
 from libs.Logger import logger
 from graphs.common.Schema import ExamType
 from libs.CosmosMongoDB import CosmosMongoDB
+from report.ReportCreator import JLPTProcessor
 import requests
 import time
 from dotenv import load_dotenv
 load_dotenv()
 
-class TaskRunner:
+class ExamTaskRunner:
     """
     Class-based handler for generating and storing exam outlines and papers.
     """
@@ -195,32 +197,33 @@ class TaskRunner:
         return outline, exam_paper
 
 
-        # outline, exam_paper = exam_generator._generate_paper(instruction=prompt)
-        # if outline:
-        #     logger.info(" ### OUTLINE ### \n\n %s", outline.as_str)
-        # else:
-        #     logger.error("Exam paper generation returned None.")
-        #
-        # if outline and not exam_paper:
-        #     logger.warning("Exam paper not generated; returning outline only.")
-        #     return outline, None
-        #
-        # if exam_paper:
-        #     logger.info(" ### Exam Paper ### \n\n %s", exam_paper)
-        #
-        #     if not conn_str or not db_name:
-        #         raise EnvironmentError("Missing MongoDB connection settings.")
-        #
-        #     inserted_id = db_client.safe_insert_one(exam_paper)
-        #
-        #     if inserted_id:
-        #         logger.info("Inserted document ID: %s", inserted_id)
-        #         self.callback_system_api()
-        #         logger.info("Callback system API triggered successfully.")
-        #     else:
-        #         logger.warning("MongoDB insertion returned no document ID.")
-        #     # except Exception as e:
-        #     #     logger.exception("Failed to insert exam paper into MongoDB: %s", e)
-        #     #     return outline, None
-        # return outline, exam_paper
+class EvalTaskRunner:
+    def __init__(self, payload, task_id):
+        self.payload = json.load(payload)
+        self.jlpt_level = payload['level']
+        self.task_id = task_id
+
+    def run(self):
+        start_time = time.time()  # 记录开始时间
+
+        # 1️⃣ Load JSON data
+        data = self.payload
+
+        print(self.task_id, data)
+        # 2️⃣ Initialize processor for the desired JLPT level
+        processor = JLPTProcessor(level=self.jlpt_level)
+
+        # 3️⃣ Run the full processing pipeline
+        # data = processor.add_user_answers_and_correctness(data)
+        data = processor.add_teacher_prompts_to_json(data)
+        data = processor.generate_explained_data(data)
+        data = processor.remove_teacher_prompts_from_json(data)
+        data = processor.add_jlpt_analysis_to_json(data)
+        data = processor.add_summary_data(data)
+
+        print(json.dumps(data, ensure_ascii=False, separators=(',', ':')))
+
+        end_time = time.time()  # 记录结束时间
+        total_time = end_time - start_time
+        print(f"总执行时间: {total_time:.2f} 秒")
 

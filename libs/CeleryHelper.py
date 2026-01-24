@@ -1,7 +1,7 @@
 import os
 
 from celery import Celery
-from graphs.common.TaskRunner import TaskRunner
+from graphs.common.TaskRunner import ExamTaskRunner,EvalTaskRunner
 from graphs.common.Schema import ExamType
 from dotenv import load_dotenv
 load_dotenv()
@@ -42,19 +42,27 @@ celery = Celery(
 )
 
 celery.conf.update(
+    timezone = 'Asia/Shanghai',
+    enable_utc = False,
     task_acks_late=False,                 # ACK at task receipt → never run twice
     task_reject_on_worker_lost=False,     # do NOT requeue if worker dies
     task_acks_on_failure_or_timeout=False,
     broker_transport_options={
-        "visibility_timeout": 3600 * 48,       # safe window, but irrelevant with acks_late=False
+        # "visibility_timeout": 3600 * 48,       # safe window, but irrelevant with acks_late=False
         "retry_on_startup": False,
         "worker_prefetch_multiplier": 1
     },
     broker_connection_retry_on_startup=False,
 )
 
-@celery.task(bind=True)
+@celery.task(bind=True,name='run_exam_task')
 def run_exam_task(self, level: str, exam_type: ExamType):
     task_uuid = self.request.id
-    runner = TaskRunner(level=level, exam_type=exam_type, task_id=task_uuid)
+    runner = ExamTaskRunner(level=level, exam_type=exam_type, task_id=task_uuid)
+    runner.run()
+
+@celery.task(bind=True,name='run_eval_task')
+def run_eval_task(self, payload):
+    task_uuid = self.request.id
+    runner = EvalTaskRunner(payload, task_id=task_uuid)
     runner.run()
