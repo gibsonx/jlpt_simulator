@@ -199,7 +199,7 @@ class ExamTaskRunner:
 
 class EvalTaskRunner:
     def __init__(self, payload, task_id):
-        self.payload = json.load(payload)
+        self.payload = json.loads(payload)
         self.jlpt_level = payload['level']
         self.task_id = task_id
 
