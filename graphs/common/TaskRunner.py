@@ -201,7 +201,7 @@ class EvalTaskRunner:
     def __init__(self, payload, task_id):
         self.payload = json.loads(payload)
         self.level = self.payload['level']
-        self.exam_type = self.payload['exam_type']
+        self.exam_type = self.payload['type']
         self.task_id = task_id
 
     def run(self):
