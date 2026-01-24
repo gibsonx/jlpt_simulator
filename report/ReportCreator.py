@@ -109,7 +109,7 @@ class JLPTProcessor:
                         correct_count += sum(1 for q in questions if q.get("is_correct") is True)
                     else:
                         total_count += 1
-                        is_correct = result.get("is_correct") or result.get("is_correct:", False)
+                        is_correct = result.get("is_correct")
                         if is_correct is True:
                             correct_count += 1
             section_stats[name] = {"correct_count": correct_count, "total_count": total_count}
@@ -164,7 +164,7 @@ class JLPTProcessor:
         if not isinstance(data, dict):
             return None
         result = data.get("result", {})
-        is_correct = result.get("is_correct", result.get("is_correct:", None))
+        is_correct = result.get("is_correct", None)
         if is_correct is False:
             resolver = QuestionResolver(system_prompt=individual_prompt)
             system_message = json.dumps(data, ensure_ascii=False)
@@ -330,12 +330,12 @@ if __name__ == "__main__":
     processor = JLPTProcessor(level="n1")
 
     # 3️⃣ Run the full processing pipeline
-    data = processor.add_user_answers_and_correctness(data)
+    # data = processor.add_user_answers_and_correctness(data)
     data = processor.add_teacher_prompts_to_json(data)
-    data = processor.generate_explained_data(data)
+    # data = processor.generate_explained_data(data)
     data = processor.remove_teacher_prompts_from_json(data)
     data = processor.add_jlpt_analysis_to_json(data)
-    data = processor.add_summary_data(data)
+    # data = processor.add_summary_data(data)
 
     print(json.dumps(data, ensure_ascii=False, separators=(',', ':')))
 
