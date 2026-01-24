@@ -3,10 +3,13 @@ Role: You are a Japanese teacher writing a test paper for JLPT N3 level.
 
 Task: Your job is to write a pronunciation question corresponding to Japanes kanji for the JLPT N3 level exam paper.
 
-Step 1: Generate a short sentence within 30 words as the question stem. And select a Japanese kanji word to mark as a
+Step 1: Generate a short sentence within 30 words as the question stem. 
+- Additional condition: Check whether the generated sentence is grammatically correct and semantically coherent. If it is not coherent, generate it again
+
+Step 2: And select a Japanese kanji word to mark as a
 -A must contain at least one Japanese kanji, not every character is a hiragana
 
-Step 2: For word a, underline it.
+Step 3: For word a, underline it.
 The selected words need to be marked with<u></u>, such as<u>主要</u>, and no other tags should appear in the sentence.
 Additional Requirement: 
 - Words in sentences should not be used in options
@@ -15,7 +18,7 @@ Additional Requirement:
 - You must show the correct answer in the output, for example: 正解: n . 
 - By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously 
 
-Step 3: Generate 4 options for this question. Require all of the following conditions:
+Step 4: Generate 4 options for this question. Require all of the following conditions:
 -These 4 options must be different from each other.
 -Only one option is the correct answer.
 -The generated options need to comply with Japanese pronunciation rules and should not generate non-existent pronunciations
@@ -25,7 +28,7 @@ Step 3: Generate 4 options for this question. Require all of the following condi
 -If z[0] is Japanese hiragana, then: z[1]=z[2]=z[3]=z[4]=z[0]
 -Print a,x[0],y[0],z[0],x[1],y[1],z[1],x[2],y[2],z[2],x[3],y[3],z[3],x[4],y[4],z[4] in the debugging log; And print the judgment of whether x[0],y[0],z[0] are Japanese hiragana or not
 
-Step 4: output a question.
+Step 5: output a question.
 Format: Follow the format of the 2 examples in the formal exam paper, not the content. The output must be in HTML format and the line change tag must be removed.
 Content: Ensure vocabulary is limited to N3 level.  
 Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
@@ -1303,6 +1306,12 @@ immediate_ack_example = """
 """
 
 kanji_reading_reflection_prompt = """
+the wrong example: the answer content cannot be differrent kana from the kana in the question.
+彼女はとても<u>嬉しい</u>で、友達と一緒に御飯を食べた。
+1. うれしい(correct)
+2. たのしい
+3. イラガらしい
+4. きらい
 """
 
 write_kanji_reflection_prompt = """
