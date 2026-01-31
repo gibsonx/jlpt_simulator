@@ -5,9 +5,9 @@ import json
 import random
 import time
 
-from langchain.schema.runnable import Runnable
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.prompts.chat import SystemMessagePromptTemplate
 
 from libs.LLMs import *
 
@@ -109,7 +109,7 @@ class JLPTProcessor:
                         correct_count += sum(1 for q in questions if q.get("is_correct") is True)
                     else:
                         total_count += 1
-                        is_correct = result.get("is_correct")
+                        is_correct = result.get("is_correct") or result.get("is_correct:", False)
                         if is_correct is True:
                             correct_count += 1
             section_stats[name] = {"correct_count": correct_count, "total_count": total_count}
@@ -164,7 +164,7 @@ class JLPTProcessor:
         if not isinstance(data, dict):
             return None
         result = data.get("result", {})
-        is_correct = result.get("is_correct", None)
+        is_correct = result.get("is_correct", result.get("is_correct:", None))
         if is_correct is False:
             resolver = QuestionResolver(system_prompt=individual_prompt)
             system_message = json.dumps(data, ensure_ascii=False)
@@ -214,7 +214,7 @@ class JLPTProcessor:
 
         return data
 
-class QuestionResolver(Runnable):
+class QuestionResolver:
     def __init__(self, system_prompt: str, **system_vars):
         """
         system_prompt: a template string, e.g.
@@ -225,10 +225,9 @@ class QuestionResolver(Runnable):
         self.system_prompt = system_prompt
         self.system_vars = system_vars
 
+        # Use prompt templates, not raw SystemMessage
         self.prompt = ChatPromptTemplate.from_messages([
-            SystemMessage(
-                content=system_prompt.format(**system_vars)
-            ),
+            SystemMessagePromptTemplate.from_template(system_prompt),
             MessagesPlaceholder(variable_name="messages")
         ])
 
@@ -237,10 +236,17 @@ class QuestionResolver(Runnable):
         messages: list of HumanMessage / AIMessage objects
         Returns: dict with explanation and messages
         """
-        # Format the prompt with conversation messages
-        resolved_prompt = self.prompt.format_messages(messages=messages)
-        # Call the LLM
-        msg = azure_mini_llm(resolved_prompt)
+        # Build input variables for the prompt
+        input_vars = {
+            **self.system_vars,
+            "messages": messages
+        }
+
+        # Resolve prompt into a list of messages
+        resolved_prompt = self.prompt.invoke(input_vars)
+
+        # Call the LLM (LangChain 1.x style)
+        msg = azure_mini_llm.invoke(resolved_prompt)
 
         return {
             "explanation": msg.content,
@@ -332,7 +338,7 @@ if __name__ == "__main__":
     # 3️⃣ Run the full processing pipeline
     # data = processor.add_user_answers_and_correctness(data)
     data = processor.add_teacher_prompts_to_json(data)
-    # data = processor.generate_explained_data(data)
+    data = processor.generate_explained_data(data)
     data = processor.remove_teacher_prompts_from_json(data)
     data = processor.add_jlpt_analysis_to_json(data)
     # data = processor.add_summary_data(data)

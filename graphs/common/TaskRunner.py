@@ -7,7 +7,7 @@ from libs.Utils import render_to_html
 from libs.Logger import logger
 from graphs.common.Schema import ExamType
 from libs.CosmosMongoDB import CosmosMongoDB
-from report.ReportCreator import JLPTProcessor
+from Insights.ReportCreator import JLPTProcessor
 import requests
 import time
 from dotenv import load_dotenv
