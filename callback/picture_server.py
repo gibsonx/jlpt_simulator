@@ -17,6 +17,7 @@ from pymongo import MongoClient
 from langgraph.checkpoint.mongodb import MongoDBSaver
 # Load environment variables from .env
 load_dotenv()
+from libs.Logger import logger
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
@@ -45,15 +46,15 @@ def handle_callback():
     task_id = callback_data.get('taskId')
     info = callback_data.get('info')
 
-    print(f"Received 4o image generation callback: taskId={task_id}, status={code}, message={msg}")
+    logger.info(f"Received 4o image generation callback: taskId={task_id}, status={code}, message={msg}")
 
     if code == 200:
-        print("Task completed successfully")
+        logger.info("Task completed successfully")
         result_urls = info.get('result_urls', []) if info else []
 
-        print(f"Generated {len(result_urls)} images")
+        logger.info(f"Generated {len(result_urls)} images")
         for i, url in enumerate(result_urls):
-            print(f"Image {i + 1}: {url}")
+            logger.info(f"Image {i + 1}: {url}")
 
             try:
                 # Download image
@@ -88,22 +89,22 @@ def handle_callback():
                         overwrite=True
                     )
 
-                    print(f"Uploaded resized {blob_name} ({new_width}x{new_height}) to Azure Blob Storage")
+                    logger.info(f"Uploaded resized {blob_name} ({new_width}x{new_height}) to Azure Blob Storage")
                 else:
-                    print(f"Failed to download image: status {response.status_code}")
+                    logger.error(f"Failed to download image: status {response.status_code}")
 
             except Exception as e:
-                print(f"Image download/upload failed: {e}")
+                logger.error(f"Image download/upload failed: {e}")
 
     else:
-        print(f"4o image generation failed: {msg}")
+        logger.error(f"4o image generation failed: {msg}")
 
         if code == 400:
-            print("Content policy violation or parameter error")
+            logger.error("Content policy violation or parameter error")
         elif code == 451:
-            print("Image download failed")
+            logger.error("Image download failed")
         elif code == 500:
-            print("Server internal error")
+            logger.error("Server internal error")
 
     # Always acknowledge callback
     return jsonify({'status': 'received'}), 200
@@ -219,8 +220,6 @@ def run_eval_endpoint():
             "valid_exam_types": valid_exam_types,
             "hint": "Use one of the supported exam types."
         }), 400
-
-    print()
 
     # create a job
     task_uuid = run_eval_task.apply_async(args=[json.dumps(data, ensure_ascii=False)])
@@ -347,7 +346,7 @@ def chat():
             }
 
             # Optional: Log the request for debugging (remove in production)
-            print(f"Processing chat request: level={level}, question_type={question_type}, "
+            logger.info(f"Processing chat request: level={level}, question_type={question_type}, "
                   f"thread_id={thread_id}, messages_count={len(user_input)}")
 
             async def stream_events():
@@ -397,7 +396,7 @@ def chat():
                                         }, ensure_ascii=False)
 
                 except Exception as e:
-                    print(f"Error in stream_events: {e}")
+                    logger.error(f"Error in stream_events: {e}")
                     yield json.dumps({
                         "type": "error",
                         "content": "Streaming error occurred",
@@ -424,10 +423,10 @@ def chat():
                     break
                 except asyncio.CancelledError:
                     # Handle client disconnection
-                    print(f"Client disconnected for thread_id: {thread_id}")
+                    logger.error(f"Client disconnected for thread_id: {thread_id}")
                     break
                 except Exception as e:
-                    print(f"Error processing chunk: {e}")
+                    logger.error(f"Error processing chunk: {e}")
                     yield f"data: {json.dumps({
                         'type': 'error',
                         'content': 'Failed to process response',
@@ -437,7 +436,7 @@ def chat():
 
         except Exception as e:
             # Log the error for debugging
-            print(f"Error in chat stream: {str(e)}")
+            logger.error(f"Error in chat stream: {str(e)}")
             import traceback
             traceback.print_exc()
 
@@ -448,7 +447,7 @@ def chat():
         finally:
             if loop and not loop.is_closed():
                 loop.close()
-                print(f"Cleaned up event loop for thread_id: {thread_id}")
+                logger.info(f"Cleaned up event loop for thread_id: {thread_id}")
 
     return Response(
         stream_with_context(generate()),
@@ -462,49 +461,85 @@ def chat():
         }
     )
 
+
 @app.route("/chat_history", methods=["POST"])
 @auth.login_required
 def chat_history():
-    data = request.json
-    thread_id = data.get("thread_id", "default-user")
+    try:
+        # 检查请求是否有JSON数据
+        if request.json is None:
+            return jsonify({"error": "请求必须包含JSON数据"}), 400
 
-    result = teacher_graph.get_state(
-        config={
-            "configurable": {
-                "thread_id": thread_id
-            }
-        }
-    )
+        data = request.json
 
-    chat_history = []
+        # 检查thread_id是否存在，如果没有则使用默认值
+        thread_id = data.get("thread_id", "default-user")
 
-    for msg in result.values["messages"]:
-        if isinstance(msg, HumanMessage):
-            role = "user"
-        elif isinstance(msg, AIMessage):
-            role = "assistant"
-        elif isinstance(msg, SystemMessage):
-            role = "system"
-        elif isinstance(msg, ToolMessage):
-            role = "tool"
-        else:
-            role = msg.type
-
-        if isinstance(msg.content, list):
-            text = "".join(
-                part.get("text", "")
-                for part in msg.content
-                if isinstance(part, dict)
+        # 尝试获取聊天状态
+        try:
+            result = teacher_graph.get_state(
+                config={
+                    "configurable": {
+                        "thread_id": thread_id
+                    }
+                }
             )
-        else:
-            text = msg.content
+        except Exception as e:
+            return jsonify({"error": f"获取聊天历史失败: {str(e)}"}), 404
 
-        chat_history.insert(0, {
-            "role": role,
-            "content": text
-        })
+        # 检查result中是否有messages字段
+        if not hasattr(result, 'values') or not hasattr(result.values, '__getitem__'):
+            return jsonify({"error": "返回的数据格式不正确"}), 500
 
-    return jsonify({"chat_history": chat_history})
+        messages = result.values.get("messages", [])
+
+        chat_history = []
+
+        for msg in messages:
+            try:
+                # 确定消息角色
+                if isinstance(msg, HumanMessage):
+                    role = "user"
+                elif isinstance(msg, AIMessage):
+                    role = "assistant"
+                elif isinstance(msg, SystemMessage):
+                    role = "system"
+                elif isinstance(msg, ToolMessage):
+                    role = "tool"
+                else:
+                    # 尝试获取消息类型，如果失败则使用默认值
+                    try:
+                        role = msg.type
+                    except AttributeError:
+                        role = "unknown"
+
+                # 提取消息内容
+                try:
+                    if isinstance(msg.content, list):
+                        text = "".join(
+                            part.get("text", "")
+                            for part in msg.content
+                            if isinstance(part, dict)
+                        )
+                    else:
+                        text = msg.content
+                except AttributeError:
+                    text = ""
+
+                chat_history.insert(0, {
+                    "role": role,
+                    "content": text
+                })
+
+            except Exception as msg_error:
+                # 跳过处理失败的单条消息，继续处理其他消息
+                continue
+
+        return jsonify({"chat_history": chat_history})
+
+    except Exception as e:
+        # 捕获所有未处理的异常
+        return jsonify({"error": f"服务器内部错误: {e}"}), 500
 
 
 if __name__ == '__main__':

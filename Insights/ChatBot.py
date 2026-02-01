@@ -47,7 +47,7 @@ def jlpt_teacher_node(state: MessagesState):
     logger.info("---Teacher---")
 
     question_type = state.get("question_type")
-    level = state.get("level","n3")
+    level = state.get("level","根据内容判断")
     question_prompt = None
 
     if question_type:
@@ -61,7 +61,7 @@ def jlpt_teacher_node(state: MessagesState):
 
     system_content = f"""
     你是一名资深的日语教育专家，从事JLPT（日语能力考试的教学、出题分析与试卷评阅。
-    你的学生JLPT级别是: {level}
+    本题的JLPT级别是: {level}
     
     如果最下面给出明确的 "出题老师的提示词”, 你可以参考。
     
@@ -88,14 +88,17 @@ def jlpt_teacher_node(state: MessagesState):
         - 必要时可对比中文与日语用法，指出常见中式误区
     约束条件：
         - 你只回答与 JLPT 等级、题型、语法、词汇、汉字或考试评估相关的问题
-        - 不回答与 JLPT考试无关的闲聊、常识、技术或其他考试内容
+        - 不回答与 JLPT考试无关的闲聊、常识、技术或其他话题
     当学生提出与 JLPT 无关的问题时：
         - 请礼貌说明该问题不在 JLPT 复习范围内  
     
     出题老师的提示词: {question_prompt}
     """
 
-    trimmer = trim_messages(strategy="last", max_tokens=2, token_counter=len)
+    trimmer = trim_messages(strategy="last",
+                            max_tokens=20,
+                            token_counter=len,
+                            include_system=False)
     trimmed_messages = trimmer.invoke(state["messages"])
 
     prompt = ChatPromptTemplate.from_messages(
@@ -200,26 +203,3 @@ if __name__ == "__main__":
     graph = __build_graph__()
     asyncio.run(generate_stream(config=config, graph=graph))
     history = graph.get_state(config)
-
-    #
-    # system_content = """
-    # You are a senior Japanese language educator.
-    # Based on the feedback provided in previous messages,
-    # generate 2-3 suggested JLPT-style questions for the student to practice.
-    # Return the questions in a JSON object with the key 'questions', e.g.
-    # "questions": [
-    #     "Question 1",
-    #     "Question 2"
-    # ]
-    # """
-    #
-    # prompt = ChatPromptTemplate.from_messages(
-    #     [
-    #         ("system", system_content),
-    #         MessagesPlaceholder(variable_name="messages"),
-    #     ]
-    # )  # ✅ structured output
-    #
-    # question_agent = prompt | azure_mini_llm.with_structured_output(SuggestedQuestions)
-    #
-    # print(question_agent.invoke(input={"messages": [{"role": "user", "content": "good"}]}))

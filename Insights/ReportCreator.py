@@ -4,6 +4,8 @@ import importlib
 import json
 import random
 import time
+import json
+from pathlib import Path
 
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -253,6 +255,160 @@ class QuestionResolver:
             "messages": messages + [AIMessage(content=msg.content)]
         }
 
+def report_writer(data):
+    """
+    生成 JLPT 分析报告 HTML
+    analysis = {
+        "sections": {...},
+        "overall": {...}
+    }
+    """
+
+    sections = data["analysis"]["sections"]
+    overall = data["analysis"]["overall"]
+
+    # ===== 雷达图数据 =====
+    labels = list(sections.keys()) + ["総合"]
+    values = [s["accuracy_rate"] for s in sections.values()] + [overall["total_accuracy"]]
+
+    labels_json = json.dumps(labels, ensure_ascii=False)
+    values_json = json.dumps(values)
+
+    # ===== 分项表格 HTML =====
+    rows = ""
+    for name, s in sections.items():
+        rows += f"""
+        <tr>
+            <td>{name}</td>
+            <td>{s['correct_count']}</td>
+            <td>{s['total_count']}</td>
+            <td>{s['accuracy_rate']}%</td>
+            <td>{s['estimated_score']}</td>
+            <td>{s['max_score']}</td>
+            <td>{s['target_score']}</td>
+            <td class="{'pass' if s['pass'] else 'fail'}">{s['result']}</td>
+        </tr>
+        <tr>
+            <td colspan="8" style="text-align:left; padding:8px;">{s.get('comments','')}</td>
+        </tr>
+        """
+
+    # ===== HTML =====
+    html = f"""
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+    <meta charset="UTF-8">
+    <title>JLPT 成绩分析报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+    body {{
+        font-family: Arial, sans-serif;
+        background: #f7f9fc;
+        margin: 40px;
+    }}
+    h1 {{ margin-bottom: 10px; text-align: center; }}
+
+    .card {{
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+    }}
+
+    .radar-container {{
+        width: 400px;
+        margin: 0 auto;
+    }}
+
+    table {{
+        border-collapse: collapse;
+        width: 100%;
+    }}
+    th, td {{
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }}
+    th {{
+        background: #f0f0f0;
+    }}
+    .pass {{ color: green; font-weight: bold; }}
+    .fail {{ color: red; font-weight: bold; }}
+    </style>
+    </head>
+
+    <body>
+
+    <h1>JLPT 成绩分析报告</h1>
+
+    <div class="card radar-container">
+        <h2>📊 分项正确率雷达图</h2>
+        <canvas id="radar"></canvas>
+    </div>
+    
+    <div class="card">
+        <h2>✅ 総合評価</h2>
+        <p>総合正答数：{overall['total_correct']} / {overall['total_questions']}</p>
+        <p>総合正答率：{overall['total_accuracy']}%</p>
+        <p>総合得点：{overall['total_score']} / {overall['total_max_score']}</p>
+        <p>目標得点：{overall['total_target_score']}</p>
+        <p>結果：<strong class="{'pass' if overall['overall_pass'] else 'fail'}">{overall['result']}</strong></p>
+    </div>
+
+    <div class="card">
+        <h2>📋 分项详细分析</h2>
+        <table>
+            <tr>
+                <th>项目</th>
+                <th>正确数</th>
+                <th>题目数</th>
+                <th>正确率</th>
+                <th>预估得分</th>
+                <th>满分</th>
+                <th>目标分</th>
+                <th>结果</th>
+            </tr>
+            {rows}
+        </table>
+    </div>
+    
+    <div class="card">
+    <h2>✅提升建议</h2>
+        <div>{overall.get('improves','')}</div>
+    </div>
+
+    <script>
+    new Chart(document.getElementById("radar"), {{
+        type: "radar",
+        data: {{
+            labels: {labels_json},
+            datasets: [{{
+                label: "正确率 (%)",
+                data: {values_json},
+                fill: true,
+                backgroundColor: "rgba(54,162,235,0.2)",
+                borderColor: "rgb(54,162,235)"
+            }}]
+        }},
+        options: {{
+            scales: {{
+                r: {{
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                }}
+            }}
+        }}
+    }});
+    </script>
+
+    </body>
+    </html>
+    """
+
+    Path("jlpt_report.html").write_text(html, encoding="utf-8")
+    print("✅ 已生成 jlpt_report.html")
+
 individual_prompt =  """
 你是一个资深的日语教师, 专门辅导中国学生 JLPT 考试, 请根据题目内容和学生答题结果, 指导学生，要求简洁明了。
   输出html格式， html内容包含在一个<div></div>内, 由于内容会被插入Json中html必须在一行中避免换行。
@@ -313,7 +469,12 @@ summary_prompt = """
                 - correct_answer：正确答案的选项
                 - user_answer: 学生答题的选项
                 - listen_questions：基于同一段多人物对话生成的多道题目列表，每一项包含该题的问题、选项以及正确答案编号。 
-4. 分析要简洁明了，条理清晰，每条指导应具体可操作，不笼统。  
+4. 分析要简洁明了，条理清晰，每条指导应具体可操作，不笼统。
+参考格式：
+<div style="background:#eef6ff;padding:12px;border-radius:6px;margin-bottom:12px;">
+  <p>【优势分析】...</p>
+  <p>【弱项分析】...</p>
+ </div>  
 """
 
 training_prompt = """
@@ -322,6 +483,12 @@ training_prompt = """
 输出格式为 HTML，内容包含在一个 <div></div> 内, 由于内容会被插入Json中html必须在一行中避免换行。。
 - 【复习 / 训练方法建议】：针对弱项给出具体的复习或训练方法，可包含例题、练习或记忆技巧。
 - 【下一阶段目标和计划】：给出可执行的下一步学习目标和建议计划，帮助学生持续提升。
+
+参考格式：
+<div style="background:#eef6ff;padding:12px;border-radius:6px;margin-bottom:12px;">
+  <p>【复习 / 训练方法建议】...</p>
+  <p>【下一阶段目标和计划】...</p>
+ </div>  
 """
 
 if __name__ == "__main__":
@@ -332,6 +499,7 @@ if __name__ == "__main__":
     with open(file_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
+
     # 2️⃣ Initialize processor for the desired JLPT level
     processor = JLPTProcessor(level="n1")
 
@@ -341,14 +509,13 @@ if __name__ == "__main__":
     data = processor.generate_explained_data(data)
     data = processor.remove_teacher_prompts_from_json(data)
     data = processor.add_jlpt_analysis_to_json(data)
-    # data = processor.add_summary_data(data)
+    data = processor.add_summary_data(data)
 
     print(json.dumps(data, ensure_ascii=False, separators=(',', ':')))
+    report_writer(data)
 
     end_time = time.time()  # 记录结束时间
     total_time = end_time - start_time
     print(f"总执行时间: {total_time:.2f} 秒")
 
         # print(incorrect_answers)
-
-
