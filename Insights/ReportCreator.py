@@ -10,6 +10,7 @@ from pathlib import Path
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.prompts.chat import SystemMessagePromptTemplate
+from libs.Logger import logger
 
 from libs.LLMs import *
 
@@ -172,6 +173,7 @@ class JLPTProcessor:
             system_message = json.dumps(data, ensure_ascii=False)
             messages = [HumanMessage(content=system_message)]
             res = resolver.invoke(messages)
+            logger.info(res.get("explanation"))
             return res.get("explanation")
         return None
 
