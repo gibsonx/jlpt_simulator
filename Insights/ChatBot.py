@@ -35,6 +35,8 @@ class MessagesState(TypedDict):
     questions: List[str]
     level: str
     question_type: str
+    route: str
+
 
 class SuggestedQuestions(BaseModel):
     questions: List[str] = Field(
@@ -43,7 +45,10 @@ class SuggestedQuestions(BaseModel):
         description="A list of suggested JLPT-style questions student may ask"
     )
 
-def jlpt_teacher_node(state: MessagesState):
+def intent_router(state: MessagesState):
+    return state["route"]
+
+def jlpt_question_explain_node(state: MessagesState):
     logger.info("---Teacher---")
 
     question_type = state.get("question_type")
@@ -62,24 +67,12 @@ def jlpt_teacher_node(state: MessagesState):
     system_content = f"""
     你是一名资深的日语教育专家，从事JLPT（日语能力考试的教学、出题分析与试卷评阅。
     本题的JLPT级别是: {level}
-    
+
     如果最下面给出明确的 "出题老师的提示词”, 你可以参考。
-    
-    如果问题包含在一个JSON结构化数据对象内，你可以参考以下字段解释：
-    - html_article：整篇文章内容，使用单行 HTML 字符串表示。
-    - questions：题目列表，每一项是一个选择题对象
-    - gender：说话者或角色标识，单人对话时为 male / female，多人物对话时为 male1、male2、female1、female2，用于区分不同人物。
-    - context：具体的日语对话内容文本，不包含性别或角色信息。
-    - background：对话或场景的背景说明，用于帮助理解情境；在图片听力题中还作为生成图片的详细背景描述提示词。
-    - follow_up：在听完对话或结合场景后提出的问题。
-    - conversation：对话内容主体，是一个列表，元素为单人对话结构或多人物对话结构。
-    - choices：答案选项列表，每个元素是一个字符串形式的选项内容。
-    - correct_answer：正确答案的选项
-    - user_answer: 学生答题的选项
-    - listen_questions：基于同一段多人物对话生成的多道题目列表，每一项包含该题的问题、选项以及正确答案编号。
-    
-    你的任务是：
-        - 讲解与分析 JLPT 题型、出题思路、易错点
+    出题老师的提示词: {question_prompt}
+
+   你的任务是：
+        - 讲解与分析该道JLPT题目的题型、出题思路、易错点
         - 对学生答案进行考试角度的评价与纠错
         - 按需提供备考建议与应试技巧
     回答规范：
@@ -92,7 +85,110 @@ def jlpt_teacher_node(state: MessagesState):
     当学生提出与 JLPT 无关的问题时：
         - 请礼貌说明该问题不在 JLPT 复习范围内  
     
+    如果问题包含在一个结构化数据对象内，你可以参考以下字段解释：
+    - html_article：整篇文章内容，使用单行 HTML 字符串表示。
+    - questions：题目列表，每一项是一个选择题对象
+    - gender：说话者或角色标识，单人对话时为 male / female，多人物对话时为 male1、male2、female1、female2，用于区分不同人物。
+    - context：具体的日语对话内容文本，不包含性别或角色信息。
+    - background：对话或场景的背景说明，用于帮助理解情境；在图片听力题中还作为生成图片的详细背景描述提示词。
+    - follow_up：在听完对话或结合场景后提出的问题。
+    - conversation：对话内容主体，是一个列表，元素为单人对话结构或多人物对话结构。
+    - choices：答案选项列表，每个元素是一个字符串形式的选项内容。
+    - correct_answer：正确答案的选项
+    - user_answer: 学生答题的选项
+    - listen_questions：基于同一段多人物对话生成的多道题目列表，每一项包含该题的问题、选项以及正确答案编号。
+    
+    用下列格式输出, 如果有html_article或者有男女对话conversation,background的, 提供文章的中文翻译作为一个补充点【文章翻译】放在【问题翻译】之后, 要求中文自然流畅, 不再显示日语原文。
+    尽量保留格式、如果是表格必须保留table样式, 但是里面的内容需要中文翻译
+              
+    格式参考(不要参考内容):
+    ### 【问题翻译】
+    xxx 
+    
+    ### 【考点分析】
+    - xxx  
+    - xx
+    - xx
+    
+    ### 【选项难点解析】
+    - xxx  
+    - xx
+    - xx
+    
+    ### 【错误原因分析】
+    - xxx  
+    - xx
+    - xx
+    
+    ### 【改正 / 加强练习建议】
+    - xxx  
+    - xx
+    - xx
+    """
+
+def jlpt_word_explain_node(state: MessagesState):
+    logger.info("---Highlight---")
+
+    question_type = state.get("question_type")
+    level = state.get("level", "根据内容判断")
+    question_prompt = None
+
+    if question_type:
+        prompt_data = importlib.import_module(f"graphs.{level}.prompts")
+        var_name = f"{question_type}_teacher_prompt"
+
+        if not hasattr(prompt_data, var_name):
+            print(f"警告: 未找到变量 {var_name}")
+        else:
+            question_prompt = re.sub(r"\{[^}]*\}", "", getattr(prompt_data,
+                                                               var_name))  # remove {} from the context as template looks it as a variable
+
+    system_content = f"""
+    你是一名资深的日语教育专家，从事JLPT（日语能力考试的教学、出题分析与试卷评阅。
+    本题的JLPT级别是: {level}
+
+    如果最下面给出明确的 "出题老师的提示词”, 你可以参考。
     出题老师的提示词: {question_prompt}
+
+   你的任务是：
+        - 接收用户给出来的内容。这个是用户划词提供的。 结合本题的上下文，讲解与分析
+    回答规范：
+        - 回答内容应符合 JLPT 官方考试标准
+        - 语言表达清晰简洁、结构化，适合以中文为母语的学生理解
+        - 必要时可对比中文与日语用法，指出常见中式误区
+    约束条件：
+        - 你只回答与 JLPT 等级、题型、语法、词汇、汉字或考试评估相关的问题
+        - 不回答与 JLPT考试无关的闲聊、常识、技术或其他话题
+    当学生提出与 JLPT 无关的问题时：
+        - 请礼貌说明该问题不在 JLPT 复习范围内  
+
+    如果问题包含在一个结构化数据对象内，你可以参考以下字段解释：
+    - html_article：整篇文章内容，使用单行 HTML 字符串表示。
+    - questions：题目列表，每一项是一个选择题对象
+    - gender：说话者或角色标识，单人对话时为 male / female，多人物对话时为 male1、male2、female1、female2，用于区分不同人物。
+    - context：具体的日语对话内容文本，不包含性别或角色信息。
+    - background：对话或场景的背景说明，用于帮助理解情境；在图片听力题中还作为生成图片的详细背景描述提示词。
+    - follow_up：在听完对话或结合场景后提出的问题。
+    - conversation：对话内容主体，是一个列表，元素为单人对话结构或多人物对话结构。
+    - choices：答案选项列表，每个元素是一个字符串形式的选项内容。
+    - correct_answer：正确答案的选项
+    - user_answer: 学生答题的选项
+    - listen_questions：基于同一段多人物对话生成的多道题目列表，每一项包含该题的问题、选项以及正确答案编号。
+    
+    用下列格式输出，如果用户提供的内容是个单词则增加【音标】和【词性】在【中文翻译】后面
+    格式参考(不要参考内容):
+    ### 【中文翻译】
+    xxx
+    
+    ### 【解释】
+    - xxx
+    - xxx
+    - xxx
+
+    ### 【例句】
+    - xxx
+    - xxx
+    - xxx
     """
 
     trimmer = trim_messages(strategy="last",
@@ -156,18 +252,35 @@ def suggested_question_node(state: MessagesState):
     #Return structured output for next node
     return {"questions": structured_msg }
 
+def entry_router_node(state: MessagesState):
+    pass
+
 def __build_graph__(checkpointer):
     # checkpointer = InMemorySaver()
     graph = StateGraph(MessagesState)
     # Add nodes
-    graph.add_node(jlpt_teacher_node)
-    graph.add_node(suggested_question_node)
+    graph.add_node(entry_router_node)
+    graph.add_node(jlpt_question_explain_node)
+    graph.add_node(jlpt_word_explain_node)
+    # graph.add_node(suggested_question_node)
 
-    # Define edges
-    graph.add_edge(START, "jlpt_teacher_node")
-    graph.add_edge("jlpt_teacher_node", "suggested_question_node")
-    graph.add_edge("suggested_question_node", END)
+    # === Edges ===
+    graph.add_edge(START, "entry_router_node")
+
+    graph.add_conditional_edges(
+        "entry_router_node",
+        intent_router,
+        {
+            "question": "jlpt_question_explain_node",
+            "word": "jlpt_word_explain_node"
+        }
+    )
+
+    graph.add_edge("jlpt_question_explain_node", END)
+    graph.add_edge("jlpt_word_explain_node", END)
+
     graph = graph.compile(checkpointer=checkpointer)
+
 
     return graph
 async def generate_stream(graph, messages, config):

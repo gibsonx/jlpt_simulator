@@ -303,6 +303,7 @@ def chat():
         user_input = data["messages"]
         level = data.get("level", "N3")  # Default to N3 if not provided
         question_type = data.get("question_type", "vocabulary")  # Default to vocabulary
+        route = data.get("router","word")
         thread_id = data.get("thread_id", f"user-{uuid.uuid4().hex[:8]}")  # Generate unique ID if not provided
 
         # Validate data types
@@ -342,7 +343,8 @@ def chat():
             input_data = {
                 "level": level,
                 "question_type": question_type,
-                "messages": user_input
+                "messages": user_input,
+                "route": route
             }
 
             # Optional: Log the request for debugging (remove in production)
@@ -362,7 +364,7 @@ def chat():
 
                         # Handle chat model streaming
                         if (event_type == "on_chat_model_stream" and
-                                event.get("metadata", {}).get("langgraph_node") == "jlpt_teacher_node"):
+                                event.get("metadata", {}).get("langgraph_node") in ["jlpt_question_explain_node", "jlpt_word_explain_node"]):
 
                             chunk_data = event.get("data", {})
                             if "chunk" in chunk_data and hasattr(chunk_data["chunk"], "content"):

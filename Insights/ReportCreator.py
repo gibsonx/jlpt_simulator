@@ -250,33 +250,26 @@ class QuestionResolver:
         resolved_prompt = self.prompt.invoke(input_vars)
 
         # Call the LLM (LangChain 1.x style)
-        msg = azure_mini_llm.invoke(resolved_prompt)
+        msg = azure_llm.invoke(resolved_prompt)
 
         return {
             "explanation": msg.content,
             "messages": messages + [AIMessage(content=msg.content)]
         }
 
-def report_writer(data):
-    """
-    生成 JLPT 分析报告 HTML
-    analysis = {
-        "sections": {...},
-        "overall": {...}
-    }
-    """
 
+def report_writer(data):
     sections = data["analysis"]["sections"]
     overall = data["analysis"]["overall"]
 
     # ===== 雷达图数据 =====
-    labels = list(sections.keys()) + ["総合"]
+    labels = list(sections.keys()) + ["综合"]
     values = [s["accuracy_rate"] for s in sections.values()] + [overall["total_accuracy"]]
 
     labels_json = json.dumps(labels, ensure_ascii=False)
     values_json = json.dumps(values)
 
-    # ===== 分项表格 HTML =====
+    # ===== 分项表格（不含 comments）=====
     rows = ""
     for name, s in sections.items():
         rows += f"""
@@ -290,126 +283,219 @@ def report_writer(data):
             <td>{s['target_score']}</td>
             <td class="{'pass' if s['pass'] else 'fail'}">{s['result']}</td>
         </tr>
-        <tr>
-            <td colspan="8" style="text-align:left; padding:8px;">{s.get('comments','')}</td>
-        </tr>
         """
 
-    # ===== HTML =====
+    # ===== 分项点评（原 comments，独立章节）=====
+    comments_html = ""
+    for name, s in sections.items():
+        comment = s.get("comments", "")
+        if comment:
+            comments_html += f"""
+            <div style="margin-bottom: 18px;">
+                <strong style="color:#2c3e50; font-size:15px;">{name}</strong>
+                <div style="
+                    margin-top: 6px;
+                    padding: 14px 18px;
+                    background: #f8f9fa;
+                    border-left: 4px solid #667eea;
+                    border-radius: 6px;
+                    line-height: 1.7;
+                    color: #555;
+                    font-size: 14.5px;
+                ">
+                    {comment}
+                </div>
+            </div>
+            """
+
+    # ===== HTML 模板 =====
     html = f"""
-    <!DOCTYPE html>
-    <html lang="zh">
-    <head>
-    <meta charset="UTF-8">
-    <title>JLPT 成绩分析报告</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-    body {{
-        font-family: Arial, sans-serif;
-        background: #f7f9fc;
-        margin: 40px;
-    }}
-    h1 {{ margin-bottom: 10px; text-align: center; }}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>JLPT成绩分析报告</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body {{
+    font-family: 'Microsoft YaHei', Arial, sans-serif;
+    background: #f7f9fc;
+    margin: 40px;
+    color: #333;
+}}
+h1 {{ 
+    margin-bottom: 25px; 
+    text-align: center;
+    color: #2c3e50;
+    font-size: 28px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eaeaea;
+}}
 
-    .card {{
-        background: #fff;
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 30px;
-    }}
+.dashboard-row {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}}
 
-    .radar-container {{
-        width: 400px;
-        margin: 0 auto;
-    }}
+.dashboard-card {{
+    flex: 1;
+    min-width: 300px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}}
 
-    table {{
-        border-collapse: collapse;
-        width: 100%;
-    }}
-    th, td {{
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: center;
-    }}
-    th {{
-        background: #f0f0f0;
-    }}
-    .pass {{ color: green; font-weight: bold; }}
-    .fail {{ color: red; font-weight: bold; }}
-    </style>
-    </head>
+.radar-card {{ flex: 1.2; }}
+.summary-card {{ flex: 0.8; }}
 
-    <body>
+.card {{
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+}}
 
-    <h1>JLPT 成绩分析报告</h1>
+.card h2 {{
+    color: #2c3e50;
+    margin-top: 0;
+    font-size: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+}}
 
-    <div class="card radar-container">
+table {{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}}
+
+th {{
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 12px;
+}}
+
+td {{
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}}
+
+.pass {{
+    color: #28a745;
+    font-weight: bold;
+    background: #d4edda;
+    padding: 4px 10px;
+    border-radius: 20px;
+}}
+
+.fail {{
+    color: #dc3545;
+    font-weight: bold;
+    background: #f8d7da;
+    padding: 4px 10px;
+    border-radius: 20px;
+}}
+</style>
+</head>
+
+<body>
+
+<h1>📈 JLPT 成绩分析报告</h1>
+
+<div class="dashboard-row">
+    <div class="dashboard-card radar-card">
         <h2>📊 分项正确率雷达图</h2>
-        <canvas id="radar"></canvas>
-    </div>
-    
-    <div class="card">
-        <h2>✅ 総合評価</h2>
-        <p>総合正答数：{overall['total_correct']} / {overall['total_questions']}</p>
-        <p>総合正答率：{overall['total_accuracy']}%</p>
-        <p>総合得点：{overall['total_score']} / {overall['total_max_score']}</p>
-        <p>目標得点：{overall['total_target_score']}</p>
-        <p>結果：<strong class="{'pass' if overall['overall_pass'] else 'fail'}">{overall['result']}</strong></p>
+        <canvas id="radar" style="height:320px;"></canvas>
     </div>
 
-    <div class="card">
-        <h2>📋 分项详细分析</h2>
+    <div class="dashboard-card summary-card">
+        <h2>✅ 综合评价</h2>
+        <p><strong>综合正答数：</strong>{overall['total_correct']} / {overall['total_questions']}</p>
+        <p><strong>综合正答率：</strong>{overall['total_accuracy']}%</p>
+        <p><strong>综合得点：</strong>{overall['total_score']} / {overall['total_max_score']}</p>
+        <p><strong>目标得点：</strong>{overall['total_target_score']}</p>
+        <p>
+            <strong>最终结果：</strong>
+            <span class="{'pass' if overall['overall_pass'] else 'fail'}">
+                {overall['result']}
+            </span>
+        </p>
+       <h2>📋 分项详细分析</h2>
         <table>
-            <tr>
-                <th>项目</th>
-                <th>正确数</th>
-                <th>题目数</th>
-                <th>正确率</th>
-                <th>预估得分</th>
-                <th>满分</th>
-                <th>目标分</th>
-                <th>结果</th>
-            </tr>
-            {rows}
+            <thead>
+                <tr>
+                    <th>项目</th>
+                    <th>正确数</th>
+                    <th>题目数</th>
+                    <th>正确率</th>
+                    <th>预估得分</th>
+                    <th>满分</th>
+                    <th>目标分</th>
+                    <th>结果</th>
+                </tr>
+            </thead>
+            <tbody>
+                {rows}
+            </tbody>
         </table>
     </div>
-    
-    <div class="card">
-    <h2>✅提升建议</h2>
-        <div>{overall.get('improves','')}</div>
-    </div>
+</div>
 
-    <script>
-    new Chart(document.getElementById("radar"), {{
-        type: "radar",
-        data: {{
-            labels: {labels_json},
-            datasets: [{{
-                label: "正确率 (%)",
-                data: {values_json},
-                fill: true,
-                backgroundColor: "rgba(54,162,235,0.2)",
-                borderColor: "rgb(54,162,235)"
-            }}]
-        }},
-        options: {{
-            scales: {{
-                r: {{
-                    suggestedMin: 0,
-                    suggestedMax: 100
-                }}
+
+<div class="card">
+    <h2>📝 分项点评</h2>
+    {comments_html}
+</div>
+
+<div class="card">
+    <h2>💡 提升建议</h2>
+    <div style="
+        line-height: 1.7;
+        padding: 20px;
+        background: #f8f9ff;
+        border-left: 5px solid #3498db;
+        border-radius: 8px;
+    ">
+        {overall.get('improves', '暂无具体建议')}
+    </div>
+</div>
+
+<script>
+new Chart(document.getElementById('radar'), {{
+    type: "radar",
+    data: {{
+        labels: {labels_json},
+        datasets: [{{
+            label: "正确率 (%)",
+            data: {values_json},
+            fill: true
+        }}]
+    }},
+    options: {{
+        responsive: true,
+        scales: {{
+            r: {{
+                min: 0,
+                max: 100
             }}
         }}
-    }});
-    </script>
+    }}
+}});
+</script>
 
-    </body>
-    </html>
-    """
+</body>
+</html>
+"""
 
     Path("jlpt_report.html").write_text(html, encoding="utf-8")
-    print("✅ 已生成 jlpt_report.html")
+    print("✅ 已生成 jlpt_report.html（comments 已独立为分项点评章节）")
+
+    return "jlpt_report.html"
 
 individual_prompt =  """
 你是一个资深的日语教师, 专门辅导中国学生 JLPT 考试, 请根据题目内容和学生答题结果, 指导学生，要求简洁明了。
@@ -456,7 +542,7 @@ summary_prompt = """
 要求如下：  
 1. 输出格式为 HTML，内容包含在一个 <div></div> 内, 由于内容会被插入Json中html必须在一行中避免换行。。  
 2. 学生指导必须包含以下2个部分，每个部分之间空一行：  
-   - 【优势分析】：指出学生答对的题目、已经掌握较好的题型与知识点给与肯定。  
+   - 【优势分析】：指出学生答对的题目、已经掌握较好的题型与知识点给与肯定
    - 【弱项分析】：指出学生答错的题目、知识点薄弱的需要加强的地方。
 3. 分析过程中要结合以下信息（JSON 对象中的字段）：  
                 - teacher_prompt: 这道题是如何出的, 这里会给出详细过程。
@@ -471,7 +557,8 @@ summary_prompt = """
                 - correct_answer：正确答案的选项
                 - user_answer: 学生答题的选项
                 - listen_questions：基于同一段多人物对话生成的多道题目列表，每一项包含该题的问题、选项以及正确答案编号。 
-4. 分析要简洁明了，条理清晰，每条指导应具体可操作，不笼统。
+4. 分析要简洁明了，条理清晰，每条指导应具体可操作，讲解知识点，不需要提出具体哪道题目。
+
 参考格式：
 <div style="background:#eef6ff;padding:12px;border-radius:6px;margin-bottom:12px;">
   <p>【优势分析】...</p>
@@ -483,7 +570,7 @@ training_prompt = """
 你是一位资深日语教师，专门辅导中国学生准备 JLPT 考试。
 你的任务是：根据给定的试题内容和学生答题结果，生成一份针对性的学习计划。
 输出格式为 HTML，内容包含在一个 <div></div> 内, 由于内容会被插入Json中html必须在一行中避免换行。。
-- 【复习 / 训练方法建议】：针对弱项给出具体的复习或训练方法，可包含例题、练习或记忆技巧。
+- 【复习 / 训练方法建议】：针对弱项给出具体的复习或训练方法，练习或记忆技巧。
 - 【下一阶段目标和计划】：给出可执行的下一步学习目标和建议计划，帮助学生持续提升。
 
 参考格式：
@@ -504,12 +591,11 @@ if __name__ == "__main__":
 
     # 2️⃣ Initialize processor for the desired JLPT level
     processor = JLPTProcessor(level="n1")
-
     # 3️⃣ Run the full processing pipeline
     # data = processor.add_user_answers_and_correctness(data)
-    data = processor.add_teacher_prompts_to_json(data)
-    data = processor.generate_explained_data(data)
-    data = processor.remove_teacher_prompts_from_json(data)
+    # data = processor.add_teacher_prompts_to_json(data)
+    # data = processor.generate_explained_data(data)
+    # data = processor.remove_teacher_prompts_from_json(data)
     data = processor.add_jlpt_analysis_to_json(data)
     data = processor.add_summary_data(data)
 
