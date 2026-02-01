@@ -433,7 +433,7 @@ individual_prompt =  """
     - 【选项难点解析】
     - 【错误原因分析】
     - 【改正/加强练习建议】
-    如果有html_article或者有男女对话conversation,background的, 提供文章的中文翻译作为一个补充点【文章翻译】放在【问题翻译】之后, 要求中文自然流畅, 不再显示日语原文。如果是表格则保留table样式,但是里面的内容需要中文翻译          
+    如果有html_article或者有男女对话conversation,background的, 提供文章的中文翻译作为一个补充点【文章翻译】放在【问题翻译】之后, 要求中文自然流畅, 不再显示日语原文。尽量保留格式、如果是表格必须保留table样式, 但是里面的内容需要中文翻译          
     格式参考:
     <div style="background:#eef6ff;padding:12px;border-radius:6px;margin-bottom:12px;">
       <h4>【问题翻译】</h4>
