@@ -2,12 +2,12 @@ import pandas as pd
 import time
 import requests
 import azure.cognitiveservices.speech as speechsdk
-from azure.storage.blob import BlobServiceClient
+from azure.storage.blob import BlobServiceClient, ContentSettings
 from libs.Logger import logger
 import os
 from pydub import AudioSegment
 from dotenv import load_dotenv
-import json
+
 load_dotenv()
 
 # Voice mappings
@@ -439,6 +439,7 @@ def _generate_express(content, type, seq, uid):
                 data=data,
                 overwrite=True,
                 timeout=300,
+                content_settings=ContentSettings(content_type="text/html")
             )
         logger.info(f"✅ Uploaded {target_file} as blob {blob_name}")
     except Exception as e:

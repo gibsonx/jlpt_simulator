@@ -6,6 +6,7 @@ import random
 import time
 import json
 from pathlib import Path
+from azure.storage.blob import BlobServiceClient
 
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -491,9 +492,34 @@ new Chart(document.getElementById('radar'), {{
 </body>
 </html>
 """
+    base_path = os.environ["PROJECT_PATH"]
+    report_output = os.path.join(base_path, f"output")
 
-    Path("jlpt_report.html").write_text(html, encoding="utf-8")
+    file_name = f"jlpt_report_{data['_id']}.html"
+
+    file_path = os.path.join(report_output, file_name)
+
+    Path(file_path).write_text(html, encoding="utf-8")
+
     print("✅ 已生成 jlpt_report.html（comments 已独立为分项点评章节）")
+
+    blob_service_client = BlobServiceClient.from_connection_string(os.getenv("AZURE_STORAGE_CONNECTION_STRING"))
+    container_client = blob_service_client.get_container_client(os.getenv("AZURE_REPORT_CONTAINER", "report"))
+
+    try:
+        with open(file_path, "rb") as data:
+            container_client.upload_blob(
+                name=file_name,
+                data=data,
+                overwrite=True,
+                timeout=300,
+            )
+        logger.info(f"✅ Uploaded {file_path} as blob {file_name}")
+    except Exception as e:
+        logger.info(f"Upload failed: {e}")
+
+    # UID-specific subfolders
+    report_output = os.path.join(base_path, "output")
 
     return "jlpt_report.html"
 

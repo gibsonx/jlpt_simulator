@@ -68,9 +68,6 @@ def jlpt_question_explain_node(state: MessagesState):
     你是一名资深的日语教育专家，从事JLPT（日语能力考试的教学、出题分析与试卷评阅。
     本题的JLPT级别是: {level}
 
-    如果最下面给出明确的 "出题老师的提示词”, 你可以参考。
-    出题老师的提示词: {question_prompt}
-
    你的任务是：
         - 讲解与分析该道JLPT题目的题型、出题思路、易错点
         - 对学生答案进行考试角度的评价与纠错
@@ -82,8 +79,9 @@ def jlpt_question_explain_node(state: MessagesState):
     约束条件：
         - 你只回答与 JLPT 等级、题型、语法、词汇、汉字或考试评估相关的问题
         - 不回答与 JLPT考试无关的闲聊、常识、技术或其他话题
-    当学生提出与 JLPT 无关的问题时：
-        - 请礼貌说明该问题不在 JLPT 复习范围内  
+    
+    如果最下面给出明确的 "出题老师的提示词”, 你可以参考。
+    出题老师的提示词: {question_prompt}
     
     如果问题包含在一个结构化数据对象内，你可以参考以下字段解释：
     - html_article：整篇文章内容，使用单行 HTML 字符串表示。
@@ -101,7 +99,7 @@ def jlpt_question_explain_node(state: MessagesState):
     用下列格式输出, 如果有html_article或者有男女对话conversation,background的, 提供文章的中文翻译作为一个补充点【文章翻译】放在【问题翻译】之后, 要求中文自然流畅, 不再显示日语原文。
     尽量保留格式、如果是表格必须保留table样式, 但是里面的内容需要中文翻译
               
-    格式参考(不要参考内容):
+    格式参考:
     ### 【问题翻译】
     xxx 
     
@@ -176,7 +174,7 @@ def jlpt_word_explain_node(state: MessagesState):
     - listen_questions：基于同一段多人物对话生成的多道题目列表，每一项包含该题的问题、选项以及正确答案编号。
     
     用下列格式输出，如果用户提供的内容是个单词则增加【音标】和【词性】在【中文翻译】后面
-    格式参考(不要参考内容):
+    格式参考:
     ### 【中文翻译】
     xxx
     
@@ -308,8 +306,6 @@ async def generate_stream(graph, messages, config):
                 "text": question_list
             }
             yield f"data: {wrapped_questions}\n\n"
-
-
 
 if __name__ == "__main__":
     config = {"configurable": {"thread_id": "thread-1"}}

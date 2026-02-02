@@ -220,9 +220,9 @@ class EvalTaskRunner:
 
         # 3️⃣ Run the full processing pipeline
         # data = processor.add_user_answers_and_correctness(data)
-        data = processor.add_teacher_prompts_to_json(data)
-        data = processor.generate_explained_data(data)
-        data = processor.remove_teacher_prompts_from_json(data)
+        # data = processor.add_teacher_prompts_to_json(data)
+        # data = processor.generate_explained_data(data)
+        # data = processor.remove_teacher_prompts_from_json(data)
         data = processor.add_jlpt_analysis_to_json(data)
         data = processor.add_summary_data(data)
 
@@ -238,8 +238,6 @@ class EvalTaskRunner:
             logger.info("Callback system API triggered successfully.")
         else:
             logger.warning("MongoDB insertion returned no document ID.")
-
-
 
         end_time = time.time()  # 记录结束时间
         total_time = end_time - start_time
