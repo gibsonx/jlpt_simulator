@@ -614,7 +614,6 @@ if __name__ == "__main__":
     with open(file_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-
     # 2️⃣ Initialize processor for the desired JLPT level
     processor = JLPTProcessor(level="n1")
     # 3️⃣ Run the full processing pipeline

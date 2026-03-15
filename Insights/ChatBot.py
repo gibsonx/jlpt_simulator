@@ -37,7 +37,6 @@ class MessagesState(TypedDict):
     question_type: str
     route: str
 
-
 class SuggestedQuestions(BaseModel):
     questions: List[str] = Field(
         ...,
@@ -65,11 +64,11 @@ def jlpt_question_explain_node(state: MessagesState):
             question_prompt =  re.sub(r"\{[^}]*\}", "", getattr(prompt_data, var_name)) # remove {} from the context as template looks it as a variable
 
     system_content = f"""
-    你是一名资深的日语教育专家，从事JLPT（日语能力考试的教学、出题分析与试卷评阅。
+    你是一名资深的日语教育专家，从事JLPT日语能力考试的教学。
     本题的JLPT级别是: {level}
 
    你的任务是：
-        - 讲解与分析该道JLPT题目的题型、出题思路、易错点
+        - 根据下面"学生给出的题目"进行讲解与分析该道JLPT题目的题型、出题思路、易错点
         - 对学生答案进行考试角度的评价与纠错
         - 按需提供备考建议与应试技巧
     回答规范：
@@ -80,8 +79,8 @@ def jlpt_question_explain_node(state: MessagesState):
         - 你只回答与 JLPT 等级、题型、语法、词汇、汉字或考试评估相关的问题
         - 不回答与 JLPT考试无关的闲聊、常识、技术或其他话题
     
-    如果最下面给出明确的 "出题老师的提示词”, 你可以参考。
-    出题老师的提示词: {question_prompt}
+    如果最下面给出明确的 "学生给出的题目”, 你可以参考。
+    学生给出的题目: {question_prompt}
     
     如果问题包含在一个结构化数据对象内，你可以参考以下字段解释：
     - html_article：整篇文章内容，使用单行 HTML 字符串表示。
@@ -145,11 +144,11 @@ def jlpt_word_explain_node(state: MessagesState):
     你是一名资深的日语教育专家，从事JLPT（日语能力考试的教学、出题分析与试卷评阅。
     本题的JLPT级别是: {level}
 
-    如果最下面给出明确的 "出题老师的提示词”, 你可以参考。
-    出题老师的提示词: {question_prompt}
+    如果最下面给出明确的 "学生给出的内容”, 你可以参考。
+    学生给出的内容: {question_prompt}
 
    你的任务是：
-        - 接收用户给出来的内容。这个是用户划词提供的。 结合本题的上下文，讲解与分析
+        - 根据“学生给出来的内容”, 结合本题的上下文，讲解与分析
     回答规范：
         - 回答内容应符合 JLPT 官方考试标准
         - 语言表达清晰简洁、结构化，适合以中文为母语的学生理解
@@ -183,7 +182,7 @@ def jlpt_word_explain_node(state: MessagesState):
     - xxx
     - xxx
 
-    ### 【例句】
+    ### 【JLPT例句】 
     - xxx
     - xxx
     - xxx
