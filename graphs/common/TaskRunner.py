@@ -7,7 +7,7 @@ from libs.Utils import render_to_html
 from libs.Logger import logger
 from graphs.common.Schema import ExamType
 from libs.CosmosMongoDB import CosmosMongoDB
-from Insights.ReportCreator import JLPTProcessor
+from Insights.ReportCreator import JLPTProcessor,report_writer
 import requests
 import time
 from dotenv import load_dotenv
@@ -225,6 +225,8 @@ class EvalTaskRunner:
         # data = processor.remove_teacher_prompts_from_json(data)
         data = processor.add_jlpt_analysis_to_json(data)
         data = processor.add_summary_data(data)
+
+        report_writer(data)
 
         logger.info(json.dumps(data, ensure_ascii=False, separators=(',', ':')))
 
