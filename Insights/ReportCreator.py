@@ -6,7 +6,7 @@ import random
 import time
 import json
 from pathlib import Path
-from azure.storage.blob import BlobServiceClient
+from azure.storage.blob import BlobServiceClient, ContentSettings
 
 from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -513,6 +513,7 @@ new Chart(document.getElementById('radar'), {{
                 data=data,
                 overwrite=True,
                 timeout=300,
+                content_settings=ContentSettings(content_type="text/html")
             )
         logger.info(f"✅ Uploaded {file_path} as blob {file_name}")
     except Exception as e:
@@ -521,7 +522,7 @@ new Chart(document.getElementById('radar'), {{
     # UID-specific subfolders
     report_output = os.path.join(base_path, "output")
 
-    return "jlpt_report.html"
+    return report_output
 
 individual_prompt =  """
 你是一个资深的日语教师, 专门辅导中国学生 JLPT 考试, 请根据题目内容和学生答题结果, 指导学生，要求简洁明了。
