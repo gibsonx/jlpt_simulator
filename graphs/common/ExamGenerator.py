@@ -93,6 +93,7 @@ class ExamGenerator:
                                 # Build arguments
                                 args = [
                                     question['topic'],
+                                    question['correct_answer_seq'],
                                     _extract_questions_qa_lines(live_results, 40)
                                 ]
 

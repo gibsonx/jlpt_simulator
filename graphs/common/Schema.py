@@ -83,6 +83,7 @@ class ListenImmediateQuestionOutput(TypedDict):
 class QuestionTopic(BaseModel):
     topic: str = Field(..., title="a vocabulary or topic hint for a question")
     grammar: str = Field(None, title="a grammar used for this question")
+    correct_answer_seq: str = Field(None, title="one or a list of correct answer split with comma per number of subquestion")
 
 class Subsection(BaseModel):
     subsection_title: str = Field(..., title="subsection English name in () from the Instruction. example: kanji_reading")
@@ -94,7 +95,7 @@ class Subsection(BaseModel):
     @property
     def as_str(self) -> str:
         question_topics_str = "\n".join(
-            f"- **{qt.topic}**{qt.grammar}" for qt in self.question_topics
+            f"- **{qt.topic}**{qt.grammar} - {qt.correct_answer_seq}" for qt in self.question_topics
         )
         return f"### {self.subsection_title}\n\n{self.description}\n\n{question_topics_str}".strip()
 

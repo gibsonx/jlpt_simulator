@@ -122,7 +122,7 @@ class ExamTaskRunner:
 
         return result
 
-    def run(self):
+    def run(self,outline_only: Optional[bool] = False):
         """
         Run the exam generation pipeline.
 
@@ -163,6 +163,9 @@ class ExamTaskRunner:
         # If outline generator returned None, throw exception to celery
         if outline is None:
             raise RuntimeError("Outline generation returned None")
+
+        if outline_only:
+            return outline, None
 
         # --- Step 2: Generate exam paper ---
         exam_paper = exam_generator._write_paper(outline)

@@ -1,38 +1,33 @@
 kanji_reading_teacher_prompt = """
-Role: You are a Japanese teacher writing a test paper for JLPT N3 level.
-
+Role: You are a Japanese teacher writing a test paper for JLPT N3 level. 
 Task: Your job is to write a pronunciation question corresponding to Japanes kanji for the JLPT N3 level exam paper.
-
 Step 1: Generate a short sentence within 30 words as the question stem. 
 - Additional condition: Check whether the generated sentence is grammatically correct and semantically coherent. If it is not coherent, generate it again
-
 Step 2: And select a Japanese kanji word to mark as a
 -A must contain at least one Japanese kanji, not every character is a hiragana
-
 Step 3: For word a, underline it.
 The selected words need to be marked with<u></u>, such as<u>主要</u>, and no other tags should appear in the sentence.
+Step 4: Generate 4 options for this question. Require all of the following conditions:
+- These 4 options must be different from each other.
+- Only one option is the correct answer.
+- Ensure all readings follow valid Japanese pronunciation rules (no invented or impossible readings)
+- Assuming that word a consists of 2-3 characters, set them in order as x[0],y[0],z[0] (if a variable is a Japanese kanji, do not display it as hiragana pronunciation). 
+Generate 4 options: Option 1–4 in format x[i], y[i], z[i] (i = 1–4)
+If x[0] is hiragana → set x[1]=x[2]=x[3]=x[4]=x[0]
+If y[0] is hiragana → set y[1]=y[2]=y[3]=y[4]=y[0]
+If z[0] is hiragana → set z[1]=z[2]=z[3]=z[4]=z[0]
+
+Step 5: output a question.
+Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
+Format: follow the format of the example in the formal exam paper but not the content.  The output must be in html format and remove line change tag.
+Content: Ensure the vocabulary is restricted to N3 level. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . 
-- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously 
-
-Step 4: Generate 4 options for this question. Require all of the following conditions:
--These 4 options must be different from each other.
--Only one option is the correct answer.
--The generated options need to comply with Japanese pronunciation rules and should not generate non-existent pronunciations
--Assuming that word a consists of 2-3 characters, set them in order as x[0],y[0],z[0] (if a variable is a Japanese kanji, do not display it as hiragana pronunciation). There are four options, including option 1: x[1],y[1],z[1]; Option 2: x[2],y[2],z[2]; Option 3: x[3],y[3],z[3]; Option 4: x[4],y[4],z[4]
--If x[0] is Japanese hiragana, then: x[1]=x[2]=x[3]=x[4]=x[0]
--If y[0] is Japanese hiragana, then: y[1]=y[2]=y[3]=y[4]=y[0]
--If z[0] is Japanese hiragana, then: z[1]=z[2]=z[3]=z[4]=z[0]
--Print a,x[0],y[0],z[0],x[1],y[1],z[1],x[2],y[2],z[2],x[3],y[3],z[3],x[4],y[4],z[4] in the debugging log; And print the judgment of whether x[0],y[0],z[0] are Japanese hiragana or not
-
-Step 5: output a question.
-Format: Follow the format of the 2 examples in the formal exam paper, not the content. The output must be in HTML format and the line change tag must be removed.
-Content: Ensure vocabulary is limited to N3 level.  
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
-Additional requirement: Do not display problem descriptions and serial numbers in the generated content.  
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -67,14 +62,15 @@ The number of kanji characters in the options must be the same. The kanji charac
 The word in hiragana being tested needs to be underlined with <u></u>, no other tags can appear in the sentence.
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of the example in the formal exam paper but not the content.  The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously
+- You must show the correct answer in the output, for example: 正解: n . 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -102,14 +98,15 @@ The word in the sentence should not be used in the options
 Options are written either entirely in kanji or entirely in kana.
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously
+- You must show the correct answer in the output, for example: 正解: n . 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -150,14 +147,15 @@ Avoid mixing inconsistent formats (e.g., don't include both a Kanji form and a H
 All choices should be written in Japanese only
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously
+- You must show the correct answer in the output, for example: 正解: n . 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -191,14 +189,15 @@ The words to be examined need to be underlined in each sentence. the question mu
 Make only one option correct (the one using the word naturally), and ensure the other 3 sound plausible but are semantically incorrect.
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously
+- You must show the correct answer in the output, for example: 正解: n . 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -246,12 +245,15 @@ sentence_grammar_teacher_prompt = """
 步骤6：把步骤5中生成的每道题的选项，打乱顺序。
 
 步骤7：生成题目
-题目格式：遵循正式试卷中示例的格式（example 1, example 2），而不是内容。输出必须为html格式，并删除行更改标记
+说明：
+正确答案选项调整：必须按照给定索引顺序来设置各小题的正确选项： {q_seq} 
+格式：遵循正式试卷中2个例子的格式，但不要遵循内容。
+内容：确保词汇量限制在N3级。 
 参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈和批评（如果存在）,避免重复生成"历史题目"的问题(q)或给出的答案(a)。
 附加要求：
 -不要在生成的内容中显示问题说明和序列号。 
 -句子中的单词既不能用于问题，也不能用于选项。问题中的单词也不能出现在选项中
--在输出中显示正确答案，选项为4,3,2,1 随机例如：正解：n, 考虑历史题目的正确答案（c）, 正确答案分布要随机平均（25%），避免重复选同一答案
+-在输出中显示正确答案，选项为1-4 随机例如：正解：n
 
 历史题目: {gan_history}
 正式试卷：{example}
@@ -388,11 +390,16 @@ sentence_structure_teacher_prompt = """
 - 要求每道题正确选项尽量不同。避免正确答案都是连续同一个选项
 
 步骤7：生成题目。
-题目格式：遵循正式试卷中示例的格式，而不是内容。输出必须为html格式，并删除行更改标记
+
+说明：
+正确答案选项调整：必须按照给定索引顺序来设置各小题的正确选项： {q_seq} 
+格式：遵循正式试卷中2个例子的格式，但不要遵循内容。
+内容：确保词汇量限制在N3级。 
+参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈和批评（如果存在）,避免重复生成"历史题目"的问题(q)或给出的答案(a)。
 附加要求：
 -不要在生成的内容中显示问题说明和序列号。 
 -句子中的单词既不能用于问题，也不能用于选项。问题中的单词也不能出现在选项中
--在输出中显示正确答案，选项为4,3,2,1 随机例如：正解：n, 考虑历史题目的正确答案（c）, 正确答案分布要随机平均（25%），避免重复选同一答案
+-在输出中显示正确答案，选项为1-4 随机例如：正解：n
 
 历史题目：{gan_history}
 正式试卷：{example}
@@ -497,9 +504,10 @@ Instead, it should require the test-taker to infer, summarize, or understand the
 The passage should reflect a real-life topic (e.g., daily life, work, study, travel, opinions).
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
@@ -542,15 +550,16 @@ Instead, it should require the test-taker to infer, summarize, or understand the
 The passage should reflect a real-life topic (e.g., daily life, work, study, travel, opinions).
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . 
-- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously 
+
 
 
 Formal exam paper: {example}
@@ -592,15 +601,16 @@ Instead, it should require the test-taker to infer, summarize, or understand the
 The passage should reflect a real-life topic (e.g., daily life, work, study, travel, opinions).
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . 
-- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously 
+
 
 
 Formal exam paper: {example}
@@ -638,15 +648,15 @@ Then, you give 3 questions by the related content in the article.
 The answers of these 3 questions should require the test-taker to infer, summarize, or understand the context or intent of the passage.
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of the 2 examples in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . 
-- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously 
+- You must show the correct answer in the output, for example: 正解: n. 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -722,15 +732,16 @@ Then, you give 4 questions by the related content in the article.
 The purpose is to ensure the students are able to understand the meaning of the article.
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . 
-- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously 
+
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -787,14 +798,15 @@ This section is designed to simulate real-life scenarios where students need to 
 such as train or flight schedules, event, or advertisements.
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of the example in the formal exam paper but not the content. The output must be in html format and remove line change tag.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the article can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously
+- You must show the correct answer in the output, for example: 正解: n. 
 
 
 Formal exam paper: {example}
@@ -912,14 +924,15 @@ You should describe details about the activities or venues.
 Step 5, provide multiple-choice options based on the listening content. These options should be written in English for creating picture scenes.
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of the example in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement:
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . 
-- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously 
+
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -972,14 +985,15 @@ What,When,Where,Who,How,Which,Whose,How long,How often,How much,How many.
 Step 5, provide multiple-choice options based on the listening content. These options should test comprehension of the conversation’s meaning.
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously
+- You must show the correct answer in the output, for example: 正解: n . 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1068,14 +1082,15 @@ Why is the woman taking the exam?
 Step 5, provide multiple-choice options based on the listening content. These options should test comprehension of the conversation’s meaning.
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of the 2 examples in the formal exam paper but not the content. 
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
-- You must show the correct answer in the output, for example: 正解: n . By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously
+- You must show the correct answer in the output, for example: 正解: n . 
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1134,14 +1149,15 @@ The topic should be appropriate for language learners and reflect everyday situa
 Step 4, provide multiple-choice options based on the listening content. These options should test comprehension of the conversation’s meaning.
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement:
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . 
-- By referring the correct answer(c) in the "Historical Generation" during the question generation, you should ensure that the selection of correct answers (4,3,2,1) remains randomly distributed （25% for each）, avoid selecting the same answer(c) continuously 
+
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1205,9 +1221,10 @@ The picture description must be in a dedicated section named: background.
 The gender of the character indicated by the arrow in the picture needs to be consistent with the gender of the character generating the conversation.
 
 Instructions:
+Correct Answer Option Adjustment: You must adjust correct options of sub questions as: {q_seq}
 Format: follow the format of the 2 examples in the formal exam paper but not the content.
 Content: Ensure the vocabulary is restricted to N3 level. 
-Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions or given answers in Historical Generation. 
+Reference: Generate new content based on the user-provided "Topic", taking into account any previous feedback and critique. Also, avoid repeating previously asked questions(q) or given answers(a) in Historical Generation. 
 Additional Requirement: 
 - Words in sentences should not be used in options
 - Don't show question instructions and sequence number in the generated content. 
@@ -1277,12 +1294,13 @@ immediate_ack_teacher_prompt = """
 - 错误答案可以与正确答案有一定相似度，对答题人产生一定迷惑性
 
 说明：
+正确答案选项调整：必须按照给定索引顺序来设置各小题的正确选项： {q_seq} 
 格式：遵循正式试卷中2个例子的格式，但不要遵循内容。
 内容：确保词汇量限制在N3级。 
 参考：从用户给出的“Topic”中获得灵感。考虑前一次对话中给出的反馈和批评（如果存在）,避免重复生成"历史题目"的问题(q)或给出的答案(a)。
 附加要求：
-- 在输出中显示正确答案，选项为1,2,3 例如：正解：n, 正确答案分布要随机平均，不要集中在某个选项
-- 不要在生成的内容中显示问题说明和序列号。
+- 在输出中显示正确答案，选项为1,2,3 例如：正解：n
+- 不要在生成的内容中显示问题说明和序列号。`
 
 历史题目：{gan_history}
 正式试卷：{example}

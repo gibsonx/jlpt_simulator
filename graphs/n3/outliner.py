@@ -12,15 +12,15 @@ Section 1: vocabulary
 Section 2: Grammar
 - 問題6 つぎの文の（　　　）に入れるのに最もよいものを、１・２・３・４から一つえらびなさい。(sentence_grammar) 13 questions in total: the first 1 is honorific speech, next 1 adverb, 1 auxiliary word, and other 10 different sentence structures
 - 問題7 つぎの文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。(sentence_sort) 5 questions in total.
-- 問題8 つぎの文章を読んで、文章全体の内容を考えて、文中の 19 から 22 の中に入る最もよいものを、1・2・3・4から一つえらびなさい (sentence_structure) 1 question
+- 問題8 つぎの文章を読んで、文章全体の内容を考えて、4つの小問（19・20・21・22）に入る最もよいものを、それぞれ1・2・3・4から一つずつえらびなさい (sentence_structure) 1 question
 
 Section 3: Reading Comprehension
-- 問題1-1 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_mail_read): 1 article
-- 問題1-2 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_notification_read): 1 article
-- 問題1-3 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_narrative_read): 2 articles
-- 問題2 つぎの(1)と(2)の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (midsize_passage_read): 2 articles
-- 問題3 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。(long_passage_read): 1 article
-- 問題4 これを読んで、下の質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい Information retrieval (info_retrieval): 1 article
+- 問題1-1 つぎの文章を読んで、質問に答えなさい。各問題には、それぞれ一つの小問があります。答えは、1・2・3・4から最もよいものを一つえらびなさい。(short_passage_mail_read): 1 article
+- 問題1-2 つぎの文章を読んで、質問に答えなさい。各問題には、それぞれ一つの小問があります。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (short_passage_notification_read): 1 article
+- 問題1-3 つぎの文章を読んで、質問に答えなさい。各問題には、それぞれ一つの小問があります。答えは、1・2・3・4から最もよいものを一つえらびなさい。(short_passage_narrative_read): 2 articles
+- 問題2 つぎの文章を読んで、質問に答えなさい。各問題には3つの小問があります。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (midsize_passage_read): 2 articles
+- 問題3 つぎの文章を読んで、質問に答えなさい。各問題には4つの小問があります。答えは、1・2・3・4から最もよいものを一つえらびなさい。(long_passage_read): 1 article
+- 問題4 つぎの文章を読んで、質問に答えなさい。各問題には2つの小問があります。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (info_retrieval): 1 article
 
 Section 4: Listening Comprehension
 - 問題1-1 では、まず質問を聞いてください。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (topic_understanding_img): 2 questions
@@ -54,6 +54,7 @@ full_exam_prompt = ChatPromptTemplate.from_messages(
                 "- Randomly choose topics from 'TopicList'.\n\n"
                 "Additionally Conditions for all Sections:\n"
                 "- Each topic word should be unique and must not be repeated in the outline.\n"
+                "- Randomly choose a correct_answer_seq for each question according to number of sub questions, the default is only one sub question if it doesn't give. Sometimes, the answer choice is recommandedly repeated."
                 "- Follow the provided exam instructions carefully to determine the number of questions and content for each section.\n"
                 "- Finally, write the full outline of the examination paper in Japanese, including question topics as per the instructions.\n\n"
                 f"Instruction: {full_exam_instruction}"
@@ -74,15 +75,15 @@ Section 1: vocabulary
 Section 2: Grammar
 - 問題6 つぎの文の（　　　）に入れるのに最もよいものを、１・２・３・４から一つえらびなさい。(sentence_grammar) 1 question in total
 - 問題7 つぎの文の ★ に入る最もよいものを、1・2・3・4から一つえらびなさい。(sentence_sort) 1 question in total
-- 問題8 つぎの文章を読んで、文章全体の内容を考えて、文中の 19 から 22 の中に入る最もよいものを、1・2・3・4から一つえらびなさい (sentence_structure) 1 question
+- 問題8 つぎの文章を読んで、文章全体の内容を考えて、4つの小問（19・20・21・22）に入る最もよいものを、それぞれ1・2・3・4から一つずつえらびなさい (sentence_structure) 1 question
 
 Section 3: Reading Comprehension
-- 問題1-1 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_mail_read): 1 article
-- 問題1-2 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_notification_read): 1 article
-- 問題1-3 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい (short_passage_narrative_read): 1 article
-- 問題2 つぎの(1)と(2)の文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (midsize_passage_read): 1 article
-- 問題3 つぎの文章を読んで、質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい。(long_passage_read): 1 article
-- 問題4 これを読んで、下の質問に答えなさい。答えは、1・2・3・4から最もよいものを一つえらびなさい Information retrieval (info_retrieval): 1 article
+- 問題1-1 つぎの文章を読んで、質問に答えなさい。各問題には、それぞれ一つの小問があります。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (short_passage_mail_read): 1 article
+- 問題1-2 つぎの文章を読んで、質問に答えなさい。各問題には、それぞれ一つの小問があります。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (short_passage_notification_read): 1 article
+- 問題1-3 つぎの文章を読んで、質問に答えなさい。各問題には、それぞれ一つの小問があります。答えは、1・2・3・4から最もよいものを一つえらびなさい。(short_passage_narrative_read): 1 article
+- 問題2 つぎの文章を読んで、質問に答えなさい。各問題には3つの小問があります。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (midsize_passage_read): 1 articles
+- 問題3 つぎの文章を読んで、質問に答えなさい。各問題には4つの小問があります。答えは、1・2・3・4から最もよいものを一つえらびなさい。(long_passage_read): 1 article
+- 問題4 つぎの文章を読んで、質問に答えなさい。各問題には2つの小問があります。答えは、1・2・3・4から最もよいものを一つえらびなさい。 (info_retrieval): 1 article
 
 Section 4: Listening Comprehension
 - 問題1-1 では、まず質問を聞いてください。それから話を聞いて、問題用紙の1から4の中から、最もよいものを一つえらんでください。 (topic_understanding_txt): 1 question

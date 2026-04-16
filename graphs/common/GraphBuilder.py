@@ -63,7 +63,7 @@ class GraphBuilder:
         return online_search
 
     # Nodes
-    def generation_node_builder(self, llm,  prompt_text, example, gan_history: Optional[str] = "", grammar: Optional[str] = None):
+    def generation_node_builder(self, llm,  prompt_text, example, q_seq, gan_history: Optional[str] = "", grammar: Optional[str] = None):
         def question_generator(state):
             """First LLM call to generate initial question"""
             logger.info("---Generator----")
@@ -82,6 +82,7 @@ class GraphBuilder:
                 "gan_history": gan_history,
                 "example": example,
                 "messages": state["messages"],
+                "q_seq": q_seq
             }
 
             if grammar:
@@ -126,10 +127,11 @@ class GraphBuilder:
             system_content = f"""
                You are a senior Japanese language educator reviewing a JLPT exam paper. Generate an English critique and recommendations for the Japanese teacher's submission.
                Please think deeply and give feedback on the following factors:
-                 - For content accuracy, you must verify that the questions are abide by the corresponding JLPT level exam requirements and appropriately challenging.
+                 - For content accuracy, you must verify that the questions are abide by corresponding JLPT level exam requirements and appropriately challenging according to the instruction provided in the conversation.
                  - Review the question and its answer options to ensure the question is clearly worded, grammatically correct, unambiguous, and that exactly one option is definitively the correct answer while all others are clearly incorrect. No duplicated answers in the options.
-                 - Take a comprehensive view of all the examination points, and avoid testing the same points in the same or different types of questions. For example, if multiple questions test the same vocabulary in vocabulary questions, or if multiple questions test the same grammatical points in grammar questions.
-                 - You must review the "Historical Generation" to ensure no previously asked questions(q) or given answers(a) in the current generation. For correct answer: Avoid selecting same options continuously.
+                 - You must review the "Historical Generation" to ensure no previously asked questions(q) or given answers(a) in the current generation. 
+                 Take a comprehensive view of all the examination points, and avoid testing the same points in the same or different types of questions. 
+                 For example, if multiple questions test the same vocabulary in different questions, or if multiple questions test the same grammatical points in grammar questions.
                  - You should also ensure the content is culturally appropriate and relevant to Japanese culture and native expression.\n\n
                  {reflection_prompt_text}
                However, Don't suggest to add any question instructions to the context. Don't suggest anything about html format. Do not suggest including instructions in the question such as whether it tests meaning, kanji, or context.     
@@ -225,13 +227,14 @@ class GraphBuilder:
 
         return builder.compile()
 
-    def build_agent(self, prompt_text: str, example: str, reflection_prompt: str, output_cls: Any, gan_history: Optional[str] = "", grammar: Optional[str] = None):
+    def build_agent(self, prompt_text: str, example: str, reflection_prompt: str, output_cls: Any, q_seq: Optional[str] = "", gan_history: Optional[str] = "", grammar: Optional[str] = None):
         self.nodes["online_search"] = self.online_search_node_builder()
         if grammar:
             self.nodes["generator"] = self.generation_node_builder(
                 llm=self.llm,
                 prompt_text=prompt_text,
                 example=example,
+                q_seq=q_seq,
                 gan_history=gan_history,
                 grammar=grammar,
             )
@@ -239,6 +242,7 @@ class GraphBuilder:
             self.nodes["generator"] = self.generation_node_builder(
                 llm=self.llm,
                 prompt_text=prompt_text,
+                q_seq=q_seq,
                 gan_history=gan_history,
                 example=example
             )

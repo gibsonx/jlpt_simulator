@@ -521,7 +521,7 @@ def _generate_comic_strip(obj, retry: int=10):
                 "Create a 4-panel black-and-white manga-style comic strip in a simple instructional illustration style. "
                 "Arrange the panels in a 2×2 grid. show sequence number on the left-up conner at each panel"
                 "The style should be minimal, with clean outlines and look like an educational test question picture."
-                "No text, no words, no signage."
+                "No text, no words, no signage. Each picture must depict a completely unique scene. No repetition in different panels"
                 f"You can refer to the style of uploaded pictures. The image should be easily and directly understood by user"
                 f"The image describes the following 4 scenes in order: \n\n" + ",".join(obj["choices"])
         ),
@@ -575,7 +575,7 @@ def _extract_questions_qa_lines(data, limit):
                 correct_answer = q.get("correct_answer", "")
                 output_lines.append(f"q:{question}")
                 output_lines.append(f"a:{choices}")
-                output_lines.append(f"c:{correct_answer}")
+                # output_lines.append(f"c:{correct_answer}")
 
         # Case 2: follow-up question
         elif "follow_up" in result:
@@ -584,7 +584,7 @@ def _extract_questions_qa_lines(data, limit):
             correct_answer = result.get("correct_answer", "")
             output_lines.append(f"q:{question}")
             output_lines.append(f"a:{choices}")
-            output_lines.append(f"c:{correct_answer}")
+            # output_lines.append(f"c:{correct_answer}")
 
         # Case 3: single question
         elif "html_question" in result:
@@ -593,7 +593,7 @@ def _extract_questions_qa_lines(data, limit):
             correct_answer = result.get("correct_answer", "")
             output_lines.append(f"q:{question}")
             output_lines.append(f"a:{choices}")
-            output_lines.append(f"c:{correct_answer}")
+            # output_lines.append(f"c:{correct_answer}")
 
     # Keep only the latest 20 QA pairs → 40 lines
     if len(output_lines) > limit:
