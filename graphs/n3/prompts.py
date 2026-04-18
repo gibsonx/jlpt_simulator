@@ -905,7 +905,7 @@ info_retrieval_example = """
 topic_understanding_img_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: Your job is to write a natural-sounding conversation between a man and a woman. 
+Task: Your job is to write a JLPT exam listening question of a natural-sounding conversation between a man and a woman. 
 
 Step 1, write a concise background about the dialogue introduction, which excludes the follow-up question and character names.
 
@@ -966,7 +966,7 @@ topic_understanding_img_example = """
 topic_understanding_txt_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: Your job is to write a natural-sounding conversation between a man and a woman. 
+Task: Your job is to write a JLPT exam listening question of a natural-sounding conversation between a man and a woman. 
 
 Step 1, write a concise background about the dialogue introduction, which exclude the follow-up question and character name.
 
@@ -1042,16 +1042,16 @@ topic_understanding_txt_example = """
 keypoint_understanding_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: Your job is either to write a natural-sounding conversation between a man and a woman or to write a personal monologue, ensuring it is logically clear and flows smoothly. 
+Task: Your job is either to write a JLPT exam listening question. of natural-sounding conversation between a man and a woman or to write a personal monologue, ensuring it is logically clear and flows smoothly. 
 The probability of dialogue and monologue appearing is 70% and 30%
 
 If it's a monologue:
 
 Step 1, write a personal monologue of approximately 400-550 words. The following requirements must be met:
--Ensure clear thinking, logical coherence, and no grammatical errors in the copy
--A monologue can be an introduction to an object, an advertisement, or an inner thought process. But they all require specific items or events to occur, and they are relatively close to daily life
-
+- Ensure clear thinking, logical coherence, and no grammatical errors in the copy
+- A monologue can be an introduction to an object, an advertisement, or an inner thought process. But they all require specific items or events to occur, and they are relatively close to daily life
 Step 2, ask a follow-up question after the monologue ends, focusing on understanding the motivation or reasoning behind it and encouraging students to think deeply.
+
 This question should prompt students to choose the best option that matches the entire conversation or the key points of the conversation, such as:
 What is the reason for this person joining this company?
 Why is this tourist attraction famous?
@@ -1064,6 +1064,7 @@ If it's a conversation:
 Step 1, write a concise background about the dialogue introduction, which exclude the follow-up question and character name.
 
 Step 2, Give characters names during the conversation. They should call each name during the conversation depending on their relationship, level of formality.
+
 Do not refer to them as Mr. or Miss in the conversation context. Be polite and culturally appropriate in how they address each other.
 女：conversation context
 男：conversation context
@@ -1137,7 +1138,7 @@ keypoint_understanding_example = """
 summary_understanding_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: Your job is either to write a natural-sounding conversation between a man and a woman or to write a personal monologue, ensuring it is logically clear and flows smoothly. The probability of dialogue and monologue appearing is 70% and 30%.
+Task: Your job is either to write a listening question of natural-sounding conversation between a man and a woman, ensuring it is logically clear and flows smoothly.
 
 Step 1, you should introduce the background of the dialogue.
 
@@ -1157,7 +1158,6 @@ Additional Requirement:
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . 
-
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1204,20 +1204,21 @@ summary_understanding_example = """
 actively_expression_teacher_prompt = """
 Role: You are a Japanese teacher writing an exam paper for the JLPT N3 level. 
 
-Task: Create an AI-friendly picture prompt that visually depicts a scene where a question is being asked. 
-Indicate clearly who speaks first: if a woman asks the question, a man should be shown answering, and if a man asks, a woman should answer. 
-The scene should be illustrated without any background text. And there is a black arrow pointing to the party who is going to talk next. The arrow must closely follow the party who is going to talk next.
+Task: Generate a JLPT exam listening question. 
 
-Generate Japanese language test questions similar to JLPT situational questions.
-For each question, describe a real-life situation in Japanese and then ask what the person should say in that situation. 
+Step 1: Create an AI-friendly picture prompt that visually depicts a scene where a question is being asked. 
+Indicate clearly who speaks first: if a woman asks the question, a man should be shown answering, and if a man asks, a woman should answer. 
+The scene should be illustrated without any background text. you should describe a black arrow pointing to the party who is going to talk next.
+The picture description must be in a dedicated section named: background.
+
+Step 2: describe a real-life situation in Japanese and then ask what the person should say in that situation. 
 Provide three possible answers in Japanese.
 only one of which is appropriate or most natural for the situation. 
-The correct answer must be highly relevant to the question and logical. The answer needs to maintain coherence with the previous question and not be too abrupt. For example, according to different scenarios, it is best to add a "あのう〜／へ〜／すみません／わ〜" connector as a buffer.
+The correct answer must be highly relevant to the question and logical. The answer needs to maintain coherence with the previous question and not be too abrupt. 
+For example, according to different scenarios, it is best to add a "あのう〜／へ〜／すみません／わ〜" connector as a buffer.
 The language used in the correct answer needs to match the identity of both interlocutors. 
 For example, students must use respectful language towards their teachers, and subordinates must also use respectful language towards their superiors.
 Keep the situations practical and relevant to everyday life in Japan. Do not mention or refer to blurred faces.
-
-The picture description must be in a dedicated section named: background.
 The gender of the character indicated by the arrow in the picture needs to be consistent with the gender of the character generating the conversation.
 
 Instructions:
@@ -1230,7 +1231,6 @@ Additional Requirement:
 - Don't show question instructions and sequence number in the generated content. 
 - The word in the sentence can neither be used in the question nor options.
 - You must show the correct answer in the output, for example: 正解: n . during the question generation, you should ensure that the selection of correct answers (1, 2, 3) remains randomly distributed.
-
 
 Formal exam paper: {example}
 Historical Generation : {gan_history}
@@ -1259,7 +1259,7 @@ There is a black arrow pointing towards the young person.
 --- example 2 ---
 <p class='background'>
 The scene takes place in a café or restaurant. 
-A woman is sitting at a table with drinks in front of her, speaking to a server who stands beside her table holding a tray with a glass. 
+A woman is sitting at a table with drinks in front of her, speaking to a waiter who stands beside her table holding a tray with a glass. 
 There are additional tables and chairs in the background, with drinks and utensils visible. 
 There is a black arrow pointing towards the woman.
 </p>
