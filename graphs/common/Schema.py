@@ -82,7 +82,7 @@ class ListenImmediateQuestionOutput(TypedDict):
 # ----------------------------
 class QuestionTopic(BaseModel):
     topic: str = Field(..., title="a vocabulary or topic hint for a question")
-    grammar: str = Field(None, title="a grammar used for this question")
+    grammar: str = Field(None, title="a grammar used for this question, For Section 2 - Grammar only")
     correct_answer_seq: str = Field(None, title="one or a list of correct answer split with comma per number of subquestion")
 
 class Subsection(BaseModel):

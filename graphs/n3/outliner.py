@@ -117,6 +117,7 @@ fast_exam_prompt = ChatPromptTemplate.from_messages(
                 "- Randomly choose topics from 'TopicList'.\n\n"
                 "Additionally Conditions for all Sections:\n"
                 "- Each topic word should be unique and must not be repeated in the outline.\n"
+                "- Randomly choose a correct_answer_seq for each question according to number of sub questions, the default is only one sub question if it doesn't give. Sometimes, the answer choice is recommandedly repeated."
                 "- Follow the provided exam instructions carefully to determine the number of questions and content for each section.\n"
                 "- Finally, write the full outline of the examination paper in Japanese, including question topics as per the instructions.\n\n"
                 f"Instruction: {fast_exam_instruction}"
