@@ -446,7 +446,7 @@ sentence_structure_example = """
   </p>
 </div>
 
-  <div class="follow-up">
+  <div class="follow_up">
     <a>54</a>
     <ul class="options">
       <li><ruby>このいちばん高<rt>たか</rt></ruby>い<ruby>富士山<rt>ふじさん</rt></ruby></li>
@@ -1208,7 +1208,7 @@ Task: Generate a JLPT exam listening question.
 
 Step 1: Create an AI-friendly picture prompt that visually depicts a scene where a question is being asked. 
 Indicate clearly who speaks first: if a woman asks the question, a man should be shown answering, and if a man asks, a woman should answer. 
-The scene should be illustrated without any background text. you should describe a black arrow pointing to the party who is going to talk next.
+The scene should be illustrated without any background text. you should describe a black arrow pointing to the header of the person who is going to talk next.
 The picture description must be in a dedicated section named: background.
 
 Step 2: describe a real-life situation in Japanese and then ask what the person should say in that situation. 
@@ -1240,16 +1240,16 @@ actively_expression_example = """
 --- example 1 ---
 <p class='background'>
 The scene shows a young person standing at the entrance of a house, holding a bag and facing three adults who are standing together inside the house. 
-The setting is indoors and feels polite and formal, as if the young person is greeting or saying goodbye to the adults. 
+The setting is indoors and feels polite and formal, the young person is saying goodbye to the adults. 
 Include a vase with flowers on a shelf or table near the entrance. 
-There is a black arrow pointing towards the young person.
+There is a black arrow pointing towards the young person's header.
 </p>
 
 <div class='conversation'>
 男: 休みの間、友達の家に泊めてもらいました。帰る時、友達の両親に挨拶します。何と言いますか？
 </div>
 
-<a class='follow_up'>休みの間、友達の家に泊めてもらいました。帰る時、友達の両親に挨拶します。何と言いますか？</a>
+<a class='follow-up'>休みの間、友達の家に泊めてもらいました。帰る時、友達の両親に挨拶します。何と言いますか？</a>
 <ul class='options'>
     <li>お世話になりました</li>     
     <li>お邪魔します</li>    
@@ -1261,14 +1261,14 @@ There is a black arrow pointing towards the young person.
 The scene takes place in a café or restaurant. 
 A woman is sitting at a table with drinks in front of her, speaking to a waiter who stands beside her table holding a tray with a glass. 
 There are additional tables and chairs in the background, with drinks and utensils visible. 
-There is a black arrow pointing towards the woman.
+There is a black arrow pointing towards the woman's header.
 </p>
 
 <div class='conversation'>
 女: カフェで窓側の席が空きました。席を変われるかどうか聞きたいです。店員に何と言いますか？
 </div>
 
-<a class='follow_up'>カフェで窓側の席が空きました。席を変われるかどうか聞きたいです。店員に何と言いますか？</a>
+<a class='follow-up'>カフェで窓側の席が空きました。席を変われるかどうか聞きたいです。店員に何と言いますか？</a>
 <ul class='options'>  
     <li>あの席に変わってもらえますか</li>    
     <li>窓側の席に座らないといけませんか</li>  
@@ -1308,7 +1308,7 @@ immediate_ack_teacher_prompt = """
 
 immediate_ack_example = """
 --- example 1 ---
-<a class='follow_up'> 女：足、痛そうだね。年後のテニスの練習、休んだら？</a>
+<a class='follow-up'> 女：足、痛そうだね。年後のテニスの練習、休んだら？</a>
 <ul class='options'>  
 　<li>そうです、今日は帰るね</li>
 　<li>今日は練習、ないんだね</li>
@@ -1316,7 +1316,7 @@ immediate_ack_example = """
 </ul> 
 
 --- example 2 ---
-<a class='follow_up'>男：町の花火大会、今年はやらないことになったそうだよ。</a>
+<a class='follow-up'>男：町の花火大会、今年はやらないことになったそうだよ。</a>
 <ul class='options'> 
 　<li>やらないもしれなかったね</li>
 　<li>え？なんて？楽しみにしていたのに…</li>
