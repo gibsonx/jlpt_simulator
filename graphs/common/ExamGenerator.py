@@ -166,7 +166,7 @@ class ExamGenerator:
 
         for attempt in range(1, max_retries + 1):
             try:
-                generate_outline = instruction | azure_llm.with_structured_output(Outline)
+                generate_outline = instruction | gen_outline_llm.with_structured_output(Outline)
                 outline = generate_outline.invoke({
                     "topic_list": self.topics,
                     "vocab_dict": self.vocab,

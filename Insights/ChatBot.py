@@ -201,7 +201,7 @@ def jlpt_word_explain_node(state: MessagesState):
         ]
     )
 
-    teacher_agent = prompt | azure_chat_llm
+    teacher_agent = prompt | chat_llm
     # explicit input mapping for clarity
     msg = teacher_agent.invoke(input={"messages": trimmed_messages })
 
@@ -240,7 +240,7 @@ def suggested_question_node(state: MessagesState):
         ]
     )  # ✅ structured output
 
-    question_agent = prompt | azure_chat_llm.with_structured_output(SuggestedQuestions)
+    question_agent = prompt | chat_llm.with_structured_output(SuggestedQuestions)
 
     structured_msg = question_agent.invoke(input={"messages": trimmed_messages })
 

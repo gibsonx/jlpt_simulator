@@ -22,9 +22,9 @@ load_dotenv()
 class GraphBuilder:
     def __init__(self, exam_uid):
         self.exam_uid = exam_uid
-        self.llm = azure_llm
-        self.ref_llm = azure_ref_llm
-        self.fmt_llm = azure_format_llm
+        self.llm = gen_llm
+        self.ref_llm = ref_llm
+        self.fmt_llm = format_llm
         self.nodes = {
             "online_search": None,
             "generator": None,
@@ -126,7 +126,7 @@ class GraphBuilder:
             # Use provided reflection prompt text if given, otherwise fall back to the original default.
             system_content = f"""
                You are a senior Japanese language educator reviewing a JLPT exam paper. Generate an English critique and recommendations for the Japanese teacher's submission.
-               Please think deeply and give feedback on the following factors:
+               Please think deeply and give clear and concise feedback on the following factors:
                  - For content accuracy, you must verify that the questions are abide by corresponding JLPT level exam requirements and appropriately challenging according to the instruction provided in the conversation.
                  - Review the question and its answer options to ensure the question is clearly worded, grammatically correct, unambiguous, and that exactly one option is definitively the correct answer while all others are clearly incorrect. No duplicated answers in the options.
                  - You must review the "Historical Generation" to ensure no previously asked questions(q) or given answers(a) in the current generation. 

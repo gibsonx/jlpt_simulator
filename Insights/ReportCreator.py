@@ -251,7 +251,7 @@ class QuestionResolver:
         resolved_prompt = self.prompt.invoke(input_vars)
 
         # Call the LLM (LangChain 1.x style)
-        msg = azure_llm.invoke(resolved_prompt)
+        msg = gen_llm.invoke(resolved_prompt)
 
         return {
             "explanation": msg.content,
